@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto&display=swap');
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	padding: 0px;
+	margin: 0px;
+}
+body {
+	font-family: 'Roboto', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Open Sans', sans-serif;
+}
+a {
+	outline: none !important;
+}
+
+/*-----Header & Banner Starts-------*/
+
+.banner {
+	background-attachment: fixed;
+	background-color: #FFFFFF;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: #2F4F4F;
+	cursor: default;
+	text-align: center;
+	width: 100%;
+	float: left;
+}
+.bg-overlay {
+	padding: 280px 0 220px;
+	background-color: RGBA(255, 252, 248, 0.84);
+}
+.banner-text h2 {
+	font-size: 50px;
+}
+.banner-text h2 span {
+	color: #EB233C;
+}
+.banner-text p {
+	font-size: 35px;
+}
+.button {
+  background-color: white;
+  border: 1px solid rgb(119,136,153, 0.18);
+  color: #778899;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 25px 25px 25px 25px;
+	font-size: 15px;
+	margin-top: 50px;
+  width:250px;
+  height:60px;
+  transition-duration: 0.6s;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #778899;
+  color: white;
+}
