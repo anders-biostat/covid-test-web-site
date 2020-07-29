@@ -1,3 +1,6 @@
+# Add this snippet into the appropriate "server" section in
+# one of the site config files in /etc/nginx/sites-available
+
 	location /covid-test {
 		alias /home/anders/w/repos/covid-test-web-site/static;
 		#     ^^^^^^^^^^^^^^^^^^^^^  <- replace with correct path
