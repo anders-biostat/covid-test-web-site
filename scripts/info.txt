@@ -1,8 +1,0 @@
-barcode:  752348
-Name:  Fereydoon
-Address:  Friedrich-Ebert-Anlage 46/1
-password:  yes
-barcode:  752348
-Name:  Simon
-Address:  INF 67
-password:  Hello
