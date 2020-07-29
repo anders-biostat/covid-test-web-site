@@ -1,0 +1,9 @@
+	location /covid-test {
+		alias /home/anders/w/repos/covid-test-web-site/static;
+		#     ^^^^^^^^^^^^^^^^^^^^^  <- replace with correct path
+		try_files $uri $uri/ =404;
+		location /covid-test/fcgi {
+			include fastcgi_params;
+			fastcgi_pass 127.0.0.1:31234;
+		}
+	}
