@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
 import sys, traceback, time
-from flup.server.fcgi import WSGIServer
-from cgi import parse_qs
-from Crypto.Hash import SHA256
+import cgi, flup.server.fcgi 
 
 PORT = 31234
 
@@ -11,7 +9,7 @@ SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 
 def app(environ, start_response):
     try:
-        fields = parse_qs(environ['QUERY_STRING'])
+        fields = cgi.parse_qs(environ['QUERY_STRING'])
         if fields['psw'][0] == fields['psw-repeat'][0]:
             with open( SUBJECT_DATA_FILENAME, "a" ) as f:
                 f.write( ",".join(( 
@@ -31,6 +29,6 @@ def app(environ, start_response):
         traceback.print_exc()
 
 if __name__ == '__main__':
-    WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
+    flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
 
 
