@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import sys, traceback, time
+import sys, traceback, time, hashlib
 import cgi, flup.server.fcgi 
 
 PORT = 31234
@@ -11,13 +11,15 @@ def app(environ, start_response):
     try:
         fields = cgi.parse_qs(environ['QUERY_STRING'])
         if fields['psw'][0] == fields['psw-repeat'][0]:
+            pw_hash = hashlib.sha3_256()
+            pw_hash.update( fields['psw'][0].encode() )
             with open( SUBJECT_DATA_FILENAME, "a" ) as f:
                 f.write( ",".join(( 
                     time.strftime('%Y-%m-%d,%H:%M:%S', time.localtime() ),
                     fields['bcode'][0],
                     fields['name'][0],
                     fields['address'][0],
-                    fields['psw'][0]
+                    pw_hash.hexdigest()
                 )) + "\n" ) 
             start_response('303 See other', [('Location','/covid-test/instruction.html')])
 
