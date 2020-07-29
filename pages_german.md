@@ -34,7 +34,7 @@ Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:
 
 Code auf dem Röhrchen: _______  [Next to this field, an image of a test tube with an arrow or a box highlighting the code]
 
-Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte [hier].
+Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte [hier] (Link to *No tube Page*).
 
 
 
