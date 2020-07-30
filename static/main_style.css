@@ -91,7 +91,7 @@ a {
   border-radius: 25px 25px 25px 25px;
 	font-size: 18px;
 	margin-top: 50px;
-  width:250px;
+  width: auto;
   height:60px;
   transition-duration: 0.6s;
   cursor: pointer;
@@ -122,8 +122,46 @@ a {
     text-align: left;
   }
 }
-textarea {
-  width: 240px;
-  height: 200px;
-  overflow-y: scroll;
+/* Header and banner ends */
+
+/* Scrollable consent form */
+article {
+	background-color: white;
+	padding: 40px;
+	display: block;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+.content {
+  padding: 100px 0;
+  margin: 50px auto 0 auto;
+  width: 60%;
+}
+
+.content > ul {
+  border-left: 5px solid red;
+  background-color: #f1f1f1;
+  list-style-type: none;
+  padding: 10px 20px;
+}
+
+.video-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.video-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
 }
