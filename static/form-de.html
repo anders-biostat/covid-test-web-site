@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title> Schnelltest der Universität Heidelberg auf das Covid-19-Coronavirus (SARS-CoV-2) </title>
+<meta charset="UTF-8">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box}
@@ -71,6 +74,7 @@ button:hover {
   }
 }
 </style>
+</head>
 <body>
 
 <form action="/covid-test/fcgi" style="border:1px solid #ccc">
@@ -96,7 +100,7 @@ button:hover {
 
     <p> Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie sich bitte ihren Code und geben Sie ein Passwort an: </p>
     <label for="psw"><b>Passwort:</b></label>
-    <input type="password" name="psw" minlength="6" required>
+    <input type="password" name="psw" required>
 
     <label for="psw-repeat"><b>dasselbe Passwort nochmal:</b></label>
     <input type="password" name="psw-repeat" minlength="6" required>
