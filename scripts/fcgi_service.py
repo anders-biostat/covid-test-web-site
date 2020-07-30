@@ -21,10 +21,10 @@ def app(environ, start_response):
                     fields['address'][0],
                     pw_hash.hexdigest()
                 )) + "\n" ) 
-            start_response('303 See other', [('Location','/covid-test/instruction.html')])
+            start_response('303 See other', [('Location','/covid-test/instruction-de.html')])
 
         else:
-            start_response('303 See other', [('Location','/covid-test/notok.html')])
+            start_response('303 See other', [('Location','/covid-test/from-de.html')])
 
         return []
     except:
