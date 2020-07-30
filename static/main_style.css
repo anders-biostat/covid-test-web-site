@@ -151,6 +151,23 @@ article {
   padding: 20px 30px;
 }
 
+.content ol ul {
+	list-style-type: none;
+	border-left: 0px none red;
+	background-color: white;
+	padding: 10px 20px;
+}
+
+.content ul li {
+	padding: 5px;
+}
+
+.content ol {
+	border-left: 0px none red;
+	background-color: white;
+	padding: 20px 30px;
+}
+
 .video-responsive{
     overflow:hidden;
     padding-bottom:56.25%;
