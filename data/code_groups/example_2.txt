@@ -1,0 +1,12 @@
+@@NAME
+Schultest Umland
+@@COMMENT
+Everything in a comment is ignored.
+@@RETURN
+Bitte gib die Probe am Mittwoch morgen deiner Klassenlehrerin oder deinem Klassenlehrer.
+@@CODES
+CBCDEF
+CBBCCD
+CCDEFG
+CAAADD
+CCCCCC
