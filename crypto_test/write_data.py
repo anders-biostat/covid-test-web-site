@@ -12,15 +12,14 @@ sample_data = {
 	"password": "ErikasPW" 
 }
 
-
 # Read public key for encryption of contact information
 with open( "public.pem", "rb" ) as f:
    public_key = Crypto.PublicKey.RSA.import_key( f.read() )
+rsa_instance = Crypto.Cipher.PKCS1_OAEP.new( public_key )
 
-# Generate session key and encrypt it with RSA, then use it with AES
-session_key = Crypto.Random.get_random_bytes( 16 )    # <- check: do we have enough entropy?
-pkcs1_instance = Crypto.Cipher.PKCS1_OAEP.new( public_key )
-encrypted_session_key = pkcs1_instance.encrypt( session_key )
+# Generate session key for use with AES and encrypt it with RSA
+session_key = Crypto.Random.get_random_bytes( 16 ) 
+encrypted_session_key = rsa_instance.encrypt( session_key )
 aes_instance = Crypto.Cipher.AES.new( session_key, Crypto.Cipher.AES.MODE_CBC )  
 
 # encode, pad, then encrypt subject data 
@@ -45,7 +44,7 @@ fields = [
    aes_instance.iv ]
 fields.extend( encrypted_subject_data )
 
-# Base64-endode everything exepct for password and time stamp
+# Base64-encode everything exepct for password and time stamp
 for i in range( 2, len(fields) ):
 	fields[i] = binascii.b2a_base64( fields[i], newline=False )
 
@@ -54,6 +53,3 @@ line = b",".join( fields )
 
 sys.stdout.buffer.write( line )
 print()
-
-###########
-

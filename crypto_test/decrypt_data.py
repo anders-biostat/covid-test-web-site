@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# Data decryption tool for LAMP data
+# Data decryption tool for LAMP-test regstration data
 
 PRIVATE_KEY_PEM_FILE = "private.pem"
 DATA_FILE = "test.csv"
@@ -29,7 +29,7 @@ except:
 	sys.stderr.write( "ERROR: Failed to use private key. Maybe the passphrase was wrong?\n\n")
 	sys.exit( 1 )
 
-pkcs1_instance = PKCS1_OAEP.new( private_key )
+rsa_instance = PKCS1_OAEP.new( private_key )
 
 with open( DATA_FILE ) as f:
 	for line in f:
@@ -47,7 +47,7 @@ with open( DATA_FILE ) as f:
 
 		# Decode session key for line, use it to instantiate AES decoder
 		aes_instance = AES.new( 
-			pkcs1_instance.decrypt( session_key ), 
+			rsa_instance.decrypt( session_key ), 
 			AES.MODE_CBC, 
 			iv=aes_iv )  
 
