@@ -27,7 +27,7 @@ else:
 
 	sha_instance = hashlib.sha256()
 	sha_instance.update( form_data["password"].encode( "utf-8" ) )
-	encoded_hash_from_form = binascii.b2a_base64( sha_instance.digest(), newline = False )
+	encoded_hash_from_form = binascii.b2a_base64( sha_instance.digest(), newline=False )
 	
 	if encoded_hash_from_form == list(hashes_found)[0].encode( "ascii" ):
 		print( "Password correct." )
