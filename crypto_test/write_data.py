@@ -1,8 +1,9 @@
-import sys, binascii, hashlib
+import sys, binascii, hashlib, time
 import Crypto.PublicKey.RSA, Crypto.Random, Crypto.Cipher.AES, Crypto.Cipher.PKCS1_OAEP
 
 # This file writes out a CSV line to store the folloing example user data,
-# that may have been entered in the web form. Write the output in a file 'test.csv'.
+# that may have been entered in the web form:
+
 sample_data = {
 	"barcode":  "ABCDEF",
 	"name":     "Erika Musterfrau",
@@ -38,13 +39,14 @@ password_hash = sha_instance.digest()
 # Make a line for the CSV file
 fields = [ 
    sample_data["barcode"].encode( "utf-8" ), 
+   time.strftime( '%Y-%m-%d %H:%M:%S', time.localtime() ).encode( "utf-8" ),
    password_hash,
    encrypted_session_key,
    aes_instance.iv ]
 fields.extend( encrypted_subject_data )
 
-# Base64-endode everything exepct for password
-for i in range( 1, len(fields) ):
+# Base64-endode everything exepct for password and time stamp
+for i in range( 2, len(fields) ):
 	fields[i] = binascii.b2a_base64( fields[i], newline=False )
 
 # Make line for file

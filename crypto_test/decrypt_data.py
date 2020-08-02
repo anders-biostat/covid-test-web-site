@@ -5,7 +5,6 @@
 PRIVATE_KEY_PEM_FILE = "private.pem"
 DATA_FILE = "test.csv"
 
-
 import sys, getpass, binascii
 
 from Crypto.PublicKey import RSA
@@ -37,13 +36,13 @@ with open( DATA_FILE ) as f:
 		# Get fields from line in CSV file
 		fields = line.split( ",",  )
 
-		# First field (barcode) is plain ASCII, remainder has to go through Base-64 decoding 
-		for i in range( 1, len(fields) ):
+		# First two fields (barcode and time stamp) is plain ASCII, remainder has to go through Base-64 decoding 
+		for i in range( 2, len(fields) ):
 		   fields[i] = binascii.a2b_base64( fields[i] )
 
 		# unpack line
-		sample_barcode, pw_hash, session_key, aes_iv = fields[:4] 
-		subject_data = fields[4:]   
+		sample_barcode, timestamp, pw_hash, session_key, aes_iv = fields[:5] 
+		subject_data = fields[5:]   
 
 		# Decode session key for line, use it to instantiate AES decoder
 		aes_instance = AES.new( 
@@ -55,7 +54,7 @@ with open( DATA_FILE ) as f:
 		for i in range( len(subject_data) ):
 			subject_data[i] = aes_instance.decrypt( subject_data[i] )
 
-		print( "\n" + sample_barcode + ":" )
+		print( "\n" + sample_barcode + ": " + timestamp )
 		for s in subject_data:
 			print( "  ", s.decode() )
 		#, aes_instance.decrypt( encrypted_subject_data ).decode() )

@@ -14,7 +14,7 @@ hashes_found = set()
 
 with open( "test.csv" ) as f:
 	for line in f: 
-		barcode, password_hash, remainder = line.split( ",", 2 )
+		barcode, timestamp, password_hash, remainder = line.split( ",", 3 )
 		if barcode == form_data["barcode"].upper():
 			hashes_found.add( password_hash )
 
