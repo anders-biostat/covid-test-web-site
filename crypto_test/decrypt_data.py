@@ -26,8 +26,8 @@ private_key = Crypto.PublicKey.RSA.import_key( protected_private_key, passphrase
 pkcs1_instance = Crypto.Cipher.PKCS1_OAEP.new( private_key )
 
 
-# TO DO: Find a way
-
+# TO DO: Find a way to check whetehr passphrase was correct.
+# At the moment, a wrong passphrase simply leads to an error further downstream.
 
 with open( DATA_FILE ) as f:
 	for line in f:
