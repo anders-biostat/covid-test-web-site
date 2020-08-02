@@ -5,7 +5,7 @@
 		alias /home/anders/w/repos/covid-test-web-site/static;
 		#     ^^^^^^^^^^^^^^^^^^^^^  <- replace with correct path
 		ssi on;
-		try_files $uri $uri/ =404;
+
 		location /covid-test/fcgi {
 			include fastcgi_params;
 			fastcgi_pass 127.0.0.1:31234;
