@@ -2,6 +2,10 @@ The data supplied by the users are stored in a CSV (comma-seperated values) file
 with one line for each form entry.
 
 
+For each record (i.e., each line of a file), a new AES session is instantiated, with
+randomly generated session key and initialization vector.
+
+
 The fields are as follows:
 
 
@@ -18,7 +22,20 @@ Field 1: hash of user password, encoded as follows:
   -> encode with Base64
 
 
-Field 2: the user's contact details, AES-encrypted as follows
+Field 2: the AES session key, RSA-encrypted as follows
+
+  -- 16 random bytes, randomly generated anew for each line, used as key for AES encryption 
+  -> encrypt with PKCS1/OAEP, using the 3072-bit RSA public key in 'public.pem'
+  -> encode with Base64
+
+
+Field 4: the IV of the AES cipher instance for Field 2
+
+   -- initialization vector (IV), randomly generated when instantiating AES encryption 
+   -> encode with Base-64
+
+
+Fields 5-7: the user's contact details, AES-encrypted as follows
 
   -- plain-text data as entered 
   -> encode in UTF-8 
@@ -26,16 +43,9 @@ Field 2: the user's contact details, AES-encrypted as follows
   -> encrypt with AES in mode CBC, using the session key stored in Field 3
   -> encode with Base64
 
+  the individual fields are:
 
-Field 3: the AES session key, RSA-encrypted as follows
+     Field 5: name
+     Field 6: home address
+     Field 7: contact (phone number or e-mail address ) 
 
-  -- 16 random bytes, randomly generated anew for each line, used as key for AES-encoding Field 2
-  -> encrypt with PKCS1/OAEP, using the 3072-bit RSA public key in public.pem
-  -> encode with Base64
-
-
-Field 4: the IV of the AES cipher instance for Field 2
-
-   -- initialization vector (IV), randomly generated when instantiating AES encoder for Field 2
-   -> encode with Base-64
-   

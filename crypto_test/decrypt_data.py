@@ -33,17 +33,27 @@ with open( DATA_FILE ) as f:
 	for line in f:
 
 		# Get fields from line in CSV file
-		fields = line.split( "," )
+		fields = line.split( ",",  )
 
-		# Barcode already is in first field, in plain ASCII, remainder has to go through Base-64 decoding 
-		sample_barcode = fields[0]
-		hashed_user_password, encrypted_subject_data, encrypted_session_key, aes_iv = \
-		   ( binascii.a2b_base64(x) for x in fields[1:] )
+		# First field (barcode) is plain ASCII, remainder has to go through Base-64 decoding 
+		for i in range( 1, len(fields) ):
+		   fields[i] = binascii.a2b_base64( fields[i] )
+
+		# unpack line
+		sample_barcode, pw_hash, session_key, aes_iv = fields[:4] 
+		subject_data = fields[4:]   
 
 		# Decode session key for line, use it to instantiate AES decoder
 		aes_instance = Crypto.Cipher.AES.new( 
-			pkcs1_instance.decrypt( encrypted_session_key ), 
+			pkcs1_instance.decrypt( session_key ), 
 			Crypto.Cipher.AES.MODE_CBC, 
-			iv=aes_iv )   
+			iv=aes_iv )  
 
-		print( sample_barcode + ":", aes_instance.decrypt( encrypted_subject_data ).decode() )
+		# Decrypt subject data
+		for i in range( len(subject_data) ):
+			subject_data[i] = aes_instance.decrypt( subject_data[i] )
+
+		print( "\n" + sample_barcode + ":" )
+		for s in subject_data:
+			print( "  ", s.decode() )
+		#, aes_instance.decrypt( encrypted_subject_data ).decode() )
