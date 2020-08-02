@@ -17,9 +17,9 @@ Field 0: sample barcode, encoded as follows:
 Field 1: time stamp (local time at data storing)
 
   -- YYYY-MM-DD hh:mm:ss, stored as plain text
-  
 
-Field 1: hash of user password, encoded as follows:
+
+Field 2: hash of user password, encoded as follows:
 
   -- plain-text password in unicode
   -> encode in UTF-8 
@@ -27,7 +27,7 @@ Field 1: hash of user password, encoded as follows:
   -> encode with Base64
 
 
-Field 2: the AES session key, RSA-encrypted as follows
+Field 3: the AES session key, RSA-encrypted as follows
 
   -- 16 random bytes, randomly generated anew for each line, used as key for AES encryption 
   -> encrypt with PKCS1/OAEP, using the 3072-bit RSA public key in 'public.pem'
