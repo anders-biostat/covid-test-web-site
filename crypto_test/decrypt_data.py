@@ -7,9 +7,9 @@ DATA_FILE = "test.csv"
 
 
 import sys, getpass, binascii
-import Crypto.PublicKey.RSA, Crypto.Random, Crypto.Cipher.AES, Crypto.Cipher.PKCS1_OAEP
 
-# Get private RSA key and initiate PKCS1 decoder
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import AES, PKCS1_OAEP
 
 # Load key file
 try:
@@ -20,10 +20,12 @@ except:
 	sys.stderr.write( str( sys.exc_info()[1] ) + "\n" )
 	sys.exit( 1 )
 
-# Get key passphrase
+# Get key passphrase, 
 passphrase = getpass.getpass( "Enter private-key passphrase: " )
-private_key = Crypto.PublicKey.RSA.import_key( protected_private_key, passphrase=passphrase )
-pkcs1_instance = Crypto.Cipher.PKCS1_OAEP.new( private_key )
+
+# instantiate RSA
+private_key = RSA.import_key( protected_private_key, passphrase=passphrase )
+pkcs1_instance = PKCS1_OAEP.new( private_key )
 
 
 # TO DO: Find a way to check whetehr passphrase was correct.
@@ -44,9 +46,9 @@ with open( DATA_FILE ) as f:
 		subject_data = fields[4:]   
 
 		# Decode session key for line, use it to instantiate AES decoder
-		aes_instance = Crypto.Cipher.AES.new( 
+		aes_instance = AES.new( 
 			pkcs1_instance.decrypt( session_key ), 
-			Crypto.Cipher.AES.MODE_CBC, 
+			AES.MODE_CBC, 
 			iv=aes_iv )  
 
 		# Decrypt subject data
