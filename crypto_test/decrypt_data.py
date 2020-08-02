@@ -23,12 +23,13 @@ except:
 passphrase = getpass.getpass( "Enter private-key passphrase: " )
 
 # instantiate RSA
-private_key = RSA.import_key( protected_private_key, passphrase=passphrase )
+try:
+	private_key = RSA.import_key( protected_private_key, passphrase=passphrase )
+except:
+	sys.stderr.write( "ERROR: Failed to use private key. Maybe the passphrase was wrong?\n\n")
+	sys.exit( 1 )
+
 pkcs1_instance = PKCS1_OAEP.new( private_key )
-
-
-# TO DO: Find a way to check whetehr passphrase was correct.
-# At the moment, a wrong passphrase simply leads to an error further downstream.
 
 with open( DATA_FILE ) as f:
 	for line in f:
@@ -57,4 +58,3 @@ with open( DATA_FILE ) as f:
 		print( "\n" + sample_barcode + ": " + timestamp )
 		for s in subject_data:
 			print( "  ", s.decode() )
-		#, aes_instance.decrypt( encrypted_subject_data ).decode() )
