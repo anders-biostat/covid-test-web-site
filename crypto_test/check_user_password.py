@@ -21,7 +21,7 @@ with open( "test.csv" ) as f:
 if len( hashes_found ) == 0:
 	print( "Barcode not found.")
 elif len( hashes_found ) > 1:
-	print( "Bardode has been entered several times with different passwords. Please contact the admins." )
+	print( "Barcode has been found several times, with different passwords. Please contact the admins." )
 else:
 	assert len( hashes_found ) == 1
 
