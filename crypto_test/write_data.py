@@ -21,14 +21,17 @@ pkcs1_instance = Crypto.Cipher.PKCS1_OAEP.new( public_key )
 encrypted_session_key = pkcs1_instance.encrypt( session_key )
 aes_instance = Crypto.Cipher.AES.new( session_key, Crypto.Cipher.AES.MODE_CBC )  
 
-# encocde, pad, then encrypt subject data
+# encode, pad, then encrypt subject data
 a = sample_data["subject"].encode( "utf-8" )
 a += b'\000' * ( len(a) % 16 )
 encrypted_subject_data = aes_instance.encrypt( a )
 
 # encode user password with SHA3
-sha_instance = hashlib.sha256()
+sha_instance = hashlib.sha3_384()
 sha_instance.update( sample_data["password"].encode( "utf-8" ) )
+
+
+# Make a line for the CSV file
 
 line = b",".join(( 
 	sample_data["barcode"].encode("utf-8"),

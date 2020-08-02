@@ -25,7 +25,7 @@ elif len( hashes_found ) > 1:
 else:
 	assert len( hashes_found ) == 1
 
-	sha_instance = hashlib.sha256()
+	sha_instance = hashlib.sha3_384()
 	sha_instance.update( form_data["password"].encode( "utf-8" ) )
 	encoded_hash_from_form = binascii.b2a_base64( sha_instance.digest(), newline=False )
 	
