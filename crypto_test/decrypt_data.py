@@ -87,4 +87,4 @@ with open( sys.argv[1] ) as f:
 		else:
 
 			print("  kann nicht entschlüsselt werden" )
-			print("  (benötigter Schlüssel:", fingerprint, ")" )
+			print("  benötigter Schlüssel:", fingerprint )

@@ -1,15 +1,21 @@
 #!/usr/bin/python3
 
-import sys, traceback, time, hashlib, binascii
+import sys, traceback, time, hashlib, binascii, signal
 import cgi, flup.server.fcgi 
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 
+#SOCKET = "../etc/fcgi.sock"
 PORT = 31234
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
 
+
 def load_data():
+    # This function loads all the data. It is called once at the beginning
+    # and also, when SIGHUP is issued to the process in order to trigger
+    # a reload.
+    # It sets the following global variables
     global rsa_instance
 
     # Read public key for encryption of contact information
@@ -21,7 +27,6 @@ def load_data():
     md5_instance = hashlib.md5()
     md5_instance.update( public_key.publickey().exportKey("DER") )
     rsa_instance.public_key_fingerprint = md5_instance.hexdigest().encode("ascii")
-
 
 
 def encode_subject_data( barcode, name, address, contact, password ):
@@ -70,18 +75,20 @@ def app( environ, start_response ):
 
         if fields['psw'][0] != fields['psw-repeat'][0]:
             ## INSERT HERE: Error message to user: PWs don't match
-            raise ValueError( "Passwords do not match" )
+            start_response('200 OK', [('Content-Type', 'text/html')])
+            yield "<html><body><h3>Passwords did not match.</h3>"
+            yield "Please go back and try again.</body></html>"
 
-        # MISSING HERE: Check that Code is sane
+        else:
 
-        line = encode_subject_data( fields['bcode'][0], fields['name'][0], fields['address'][0],
-            fields['contact'][0], fields['psw'][0] )
-        
-        with open( SUBJECT_DATA_FILENAME, "a" ) as f:
-            f.write( line ) 
-            start_response('303 See other', [('Location','/covid-test/instruction-de.html')])
+            # MISSING HERE: Check that Barcode is sane
 
-        return []
+            line = encode_subject_data( fields['bcode'][0], fields['name'][0], fields['address'][0],
+                fields['contact'][0], fields['psw'][0] )
+            
+            with open( SUBJECT_DATA_FILENAME, "a" ) as f:
+                f.write( line ) 
+                start_response('303 See other', [('Location','/covid-test/instruction-de.html')])
 
     except:
         # INSERT HERE: Display error page
@@ -89,8 +96,13 @@ def app( environ, start_response ):
 
 
 
-load_data()
+# BEGIN MAIN FUNCTION
 
-flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
-
+while True:
+    load_data()
+    a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
+    # a is True if WSGIServer returned due to a SIGHUP, and False, 
+    # if it was a SIGINT or SIGTERM
+    if not a:
+        break  # for a SIGHUP, reread config and restart, otherwise exit
 
