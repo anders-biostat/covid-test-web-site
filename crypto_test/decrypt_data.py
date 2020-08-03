@@ -3,12 +3,24 @@
 # Data decryption tool for LAMP-test regstration data
 
 PRIVATE_KEY_PEM_FILE = "private.pem"
-DATA_FILE = "test.csv"
 
 import sys, getpass, binascii
 
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
+
+
+# Check that data file can be opened:
+if len(sys.argv) != 2:
+	sys.stderr.write( "Usage: python decrypt_data.py <csv-file>\n\n")
+	sys.exit( 1 )
+
+try:
+	open( sys.argv[1] ).close()
+except:
+	sys.stderr.write( "ERROR: Failed to open data file.\n\n")
+	sys.stderr.write( str( sys.exc_info()[1] ) + "\n" )
+	sys.exit( 1 )
 
 # Load key file
 try:
@@ -31,7 +43,7 @@ except:
 
 rsa_instance = PKCS1_OAEP.new( private_key )
 
-with open( DATA_FILE ) as f:
+with open( sys.argv[1] ) as f:
 	for line in f:
 
 		# Get fields from line in CSV file
