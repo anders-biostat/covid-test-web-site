@@ -27,20 +27,28 @@ Field 2: hash of user password, encoded as follows:
   -> encode with Base64
 
 
-Field 3: the AES session key, RSA-encrypted as follows
+Field 3: fingerprint of the public RSA key
+
+  -- public RSA key
+  -> encode in DER format
+  -> hash with MD5
+  -> hex digest
+
+
+Field 4: the AES session key, RSA-encrypted as follows
 
   -- 16 random bytes, randomly generated anew for each line, used as key for AES encryption 
   -> encrypt with PKCS1/OAEP, using the 3072-bit RSA public key in 'public.pem'
   -> encode with Base64
 
 
-Field 4: the IV of the AES cipher instance for Field 2
+Field 5: the IV of the AES cipher instance for Field 2
 
    -- initialization vector (IV), randomly generated when instantiating AES encryption 
    -> encode with Base-64
 
 
-Fields 5-7: the user's contact details, AES-encrypted as follows
+Fields 6-8: the user's contact details, AES-encrypted as follows
 
   -- plain-text data as entered 
   -> encode in UTF-8 

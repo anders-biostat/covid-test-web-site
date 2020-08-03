@@ -4,7 +4,7 @@
 
 PRIVATE_KEY_PEM_FILE = "private.pem"
 
-import sys, getpass, binascii
+import sys, getpass, binascii, hashlib
 
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
@@ -40,8 +40,14 @@ try:
 except:
 	sys.stderr.write( "ERROR: Failed to use private key. Maybe the passphrase was wrong?\n\n")
 	sys.exit( 1 )
-
 rsa_instance = PKCS1_OAEP.new( private_key )
+
+# Get fingerprint
+md5_instance = hashlib.md5()
+md5_instance.update( private_key.publickey().exportKey("DER") )
+public_key_fingerprint = md5_instance.hexdigest()
+
+print( "privater Schlüssel geladen:", public_key_fingerprint )
 
 with open( sys.argv[1] ) as f:
 	for line in f:
@@ -49,24 +55,36 @@ with open( sys.argv[1] ) as f:
 		# Get fields from line in CSV file
 		fields = line.split( ",",  )
 
-		# First two fields (barcode and time stamp) is plain ASCII, remainder has to go through Base-64 decoding 
-		for i in range( 2, len(fields) ):
-		   fields[i] = binascii.a2b_base64( fields[i] )
+		# Three fields (barcode, time stamp, fingerprint) are plain ASCII, 
+		# the remainder has to go through Base-64 decoding 
+		for i in range( len(fields) ):
+			if i not in ( 0, 1, 3 ):
+				fields[i] = binascii.a2b_base64( fields[i] )
 
 		# unpack line
-		sample_barcode, timestamp, pw_hash, session_key, aes_iv = fields[:5] 
-		subject_data = fields[5:]   
+		sample_barcode, timestamp, pw_hash, fingerprint, session_key, aes_iv = fields[:6] 
+		subject_data = fields[6:]   
 
-		# Decode session key for line, use it to instantiate AES decoder
-		aes_instance = AES.new( 
-			rsa_instance.decrypt( session_key ), 
-			AES.MODE_CBC, 
-			iv=aes_iv )  
-
-		# Decrypt subject data
-		for i in range( len(subject_data) ):
-			subject_data[i] = aes_instance.decrypt( subject_data[i] )
-
+		# Print open information
 		print( "\n" + sample_barcode + ": " + timestamp )
-		for s in subject_data:
-			print( "  ", s.decode() )
+
+		#Check whether we have the right key
+		if fingerprint == public_key_fingerprint:
+
+			# Decode session key for line, use it to instantiate AES decoder
+			aes_instance = AES.new( 
+				rsa_instance.decrypt( session_key ), 
+				AES.MODE_CBC, 
+				iv=aes_iv )  
+
+			# Decrypt subject data
+			for i in range( len(subject_data) ):
+				subject_data[i] = aes_instance.decrypt( subject_data[i] )
+
+			for s in subject_data:
+				print( "  ", s.decode() )
+
+		else:
+
+			print("  kann nicht entschlüsselt werden" )
+			print("  (benötigter Schlüssel:", fingerprint, ")" )
