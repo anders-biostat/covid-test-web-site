@@ -74,6 +74,18 @@ button:hover {
   }
 }
 </style>
+
+<script type="text/javascript">
+
+  // polyfill for RegExp.escape
+  if(!RegExp.escape) {
+    RegExp.escape = function(s) {
+      return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+    };
+  }
+
+</script>
+
 </head>
 <body>
 
@@ -100,7 +112,7 @@ button:hover {
 
     <p> Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie sich bitte ihren Code und geben Sie ein Passwort an: </p>
     <label for="psw"><b>Passwort:</b></label>
-    <input type="password" name="psw" required>
+    <input type="password" name="psw" required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
 
     <label for="psw-repeat"><b>dasselbe Passwort nochmal:</b></label>
     <input type="password" name="psw-repeat" required>
