@@ -4,6 +4,8 @@ import sys, traceback, time, hashlib, binascii, signal
 import cgi, flup.server.fcgi 
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 
+import load_codes
+
 #SOCKET = "../etc/fcgi.sock"
 PORT = 31234
 
@@ -18,6 +20,7 @@ def load_data():
     # a reload.
     # It sets the following global variables
     global rsa_instance
+    global codes2events
 
     # Read public key for encryption of contact information
     with open( PUBLIC_KEY_FILENAME, "rb" ) as f:
@@ -28,6 +31,8 @@ def load_data():
     md5_instance = hashlib.md5()
     md5_instance.update( public_key.publickey().exportKey("DER") )
     rsa_instance.public_key_fingerprint = md5_instance.hexdigest().encode("ascii")
+
+    codes2events = load_codes.load_codes()
 
 
 def encode_subject_data( barcode, name, address, contact, password ):
@@ -73,6 +78,9 @@ def app_register( environ, start_response ):
 
     fields = cgi.parse_qs(environ['QUERY_STRING'])
 
+    barcode = fields['bcode'][0].upper()
+    print( barcode )
+
     if fields['psw'][0] != fields['psw-repeat'][0]:
         start_response('200 OK', [('Content-Type', 'text/html')])
         return[ 
@@ -81,24 +89,36 @@ def app_register( environ, start_response ):
            "<html><body><h3>Passwörter stimmen nicht überein.</h3>".encode("utf-8"),
            "Bitte gehen Sie zurück und versuchen Sie es noch einmal.</body></html>".encode("utf-8") ]
 
+    elif barcode not in codes2events:
+
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return[ s.encode("utf-8") for s in [
+           "<html><body><h3>Barcode unknown</h3>",
+           "The barcode you entered (%s) is unknown. " % barcode,
+           "Maybe you have types it wrongly? Please go back and try again.</body></html>",
+           "<html><body><h3>Barcode unbekannt.</h3>",
+           "Der Barcode, den Sie eingegeben haben (%s), ist unbekannt. " % barcode,
+           "Vielleicht haben Sie sich vertippt. ",
+           "Bitte gehen Sie zurück und versuchen Sie es noch einmal.</body></html>" ] ]
+        
     else:
 
-        # MISSING HERE: Check that Barcode is sane
-
-        line = encode_subject_data( fields['bcode'][0], fields['name'][0], fields['address'][0],
+        line = encode_subject_data( barcode, fields['name'][0], fields['address'][0],
             fields['contact'][0], fields['psw'][0] )
         
         with open( SUBJECT_DATA_FILENAME, "a" ) as f:
             f.write( line ) 
 
         start_response( '303 See other', [('Location', '/covid-test/fcgi-instructions?code=' + \
-            fields['bcode'][0] )] )
+            barcode )] )
         return []
         
 
 def app_instructions( environ, start_response ):
 
     fields = cgi.parse_qs(environ['QUERY_STRING'])
+    barcode = fields['code'][0]
+    print( codes2events[barcode] )
 
     start_response('200 OK', [('Content-Type', 'text/html')])
 
@@ -106,8 +126,9 @@ def app_instructions( environ, start_response ):
     with open( INSTRUCTIONS_HTML_FILENAME, "rb" ) as f:
         for line in f:
             if line.find( b"@@REPLACE_WITH_INSTRUCTIONS" ) >= 0:
-               lines.append( b"<p>INSTRUCTIONS GO HERE for CODE %s</p>" % 
-                  fields['code'][0].encode("utf-8") )
+               lines.append( codes2events[ barcode ].instructions.encode("utf-8") )
+               lines.append( ( "<p><small>[Code '%s' of Event '%s']</small></p>" % 
+                  ( barcode, codes2events[barcode].name ) ).encode("utf-8") ) 
             else:
                 lines.append( line )
     return lines
