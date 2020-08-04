@@ -1,9 +1,21 @@
 name: Test-Aktion COS (KW 32)
 instructions: |
    <p>Bitte geben Sie das Röhrchen <b>bis spätestens Donnerstag</b> (6.8.) 
-   <b>10 Uhr morgens</b> in Raum XXX im COS ab.</p>
+   <b>10 Uhr morgens</b> im COS ab.</p>
    <p>Please return the tube <b>until Thursday</b> (6 Aug) <b>10am</b>
-   to room XXX at COS.</p>
+   to COS.</p>
+batches:
+  - batch_A_3.lst
+  - batch_A_4.lst
+
+---
+
+name: Test-Aktion ZMBH (KW 32)
+instructions: |
+   <p>Bitte geben Sie das Röhrchen <b>bis spätestens Donnerstag</b> (6.8.)
+   <b>10 Uhr morgens</b> am Eingang des ZMBH ab.</p>
+   <p>Please return the tube <b>until Thursday</b> (6 Aug) <b>10am</b>
+   to ZMBH (entrance).</p>
 batches:
   - batch_A_1.lst
   - batch_A_2.lst
@@ -16,6 +28,11 @@ instructions: |
    Bitte kontaktieren Sie uns.</p>
    <p>This code should not haven been handed out yet. Something got mixed up. Please contact us.</p>
 batches:
-  - batch_A_3.lst
-  - batch_A_4.lst
+  - batch_A_5.lst
+  - batch_A_6.lst
+  - batch_A_7.lst
+  - batch_A_8.lst
+  - batch_A_9.lst
+  - batch_A_10.lst
+  - batch_A_unassigned.lst  
 
