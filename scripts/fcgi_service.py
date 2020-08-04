@@ -69,47 +69,67 @@ def encode_subject_data( barcode, name, address, contact, password ):
     return b",".join( fields ).decode("ascii") + "\n" 
 
 
+def app_register( environ, start_response ):
+
+    fields = cgi.parse_qs(environ['QUERY_STRING'])
+
+    if fields['psw'][0] != fields['psw-repeat'][0]:
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return[ 
+           b"<html><body><h3>Passwords did not match.</h3>",
+           b"Please go back and try again.</body></html>",
+           "<html><body><h3>Passwörter stimmen nicht überein.</h3>".encode("utf-8"),
+           "Bitte gehen Sie zurück und versuchen Sie es noch einmal.</body></html>".encode("utf-8") ]
+
+    else:
+
+        # MISSING HERE: Check that Barcode is sane
+
+        line = encode_subject_data( fields['bcode'][0], fields['name'][0], fields['address'][0],
+            fields['contact'][0], fields['psw'][0] )
+        
+        with open( SUBJECT_DATA_FILENAME, "a" ) as f:
+            f.write( line ) 
+
+        start_response( '303 See other', [('Location', '/covid-test/fcgi-instructions?code=' + \
+            fields['bcode'][0] )] )
+        return []
+        
+
+def app_instructions( environ, start_response ):
+
+    fields = cgi.parse_qs(environ['QUERY_STRING'])
+
+    start_response('200 OK', [('Content-Type', 'text/html')])
+
+    lines = []
+    with open( INSTRUCTIONS_HTML_FILENAME, "rb" ) as f:
+        for line in f:
+            if line.find( b"@@REPLACE_WITH_INSTRUCTIONS" ) >= 0:
+               lines.append( b"<p>INSTRUCTIONS GO HERE for CODE %s</p>" % 
+                  fields['code'][0].encode("utf-8") )
+            else:
+                lines.append( line )
+    return lines
+
+
 def app( environ, start_response ):
-    try:
-
-        fields = cgi.parse_qs(environ['QUERY_STRING'])
-
-        if fields['psw'][0] != fields['psw-repeat'][0]:
-            ## INSERT HERE: Error message to user: PWs don't match
-            start_response('200 OK', [('Content-Type', 'text/html')])
-            yield "<html><body><h3>Passwords did not match.</h3>"
-            yield "Please go back and try again.</body></html>"
-
-        else:
-
-            # MISSING HERE: Check that Barcode is sane
-
-            line = encode_subject_data( fields['bcode'][0], fields['name'][0], fields['address'][0],
-                fields['contact'][0], fields['psw'][0] )
-            
-            with open( SUBJECT_DATA_FILENAME, "a" ) as f:
-                f.write( line ) 
-            
-            start_response('200 OK', [('Content-Type', 'text/html')])
-
-            with open( INSTRUCTIONS_HTML_FILENAME, "rb" ) as f:
-                for line in f:
-                    if line.find( b"@@REPLACE_WITH_INSTRUCTIONS" ) >= 0:
-                        yield( "<p>INSTRUCTIONS GO HERE</p>" )
-                    else:
-                        yield line
-
-    except:
-        # INSERT HERE: Display error page
-        traceback.print_exc()
-
+    if environ['SCRIPT_NAME'].endswith( "register" ):
+        return app_register( environ, start_response ) 
+    elif environ['SCRIPT_NAME'].endswith( "instructions" ):
+        return app_instructions( environ, start_response ) 
+    else:
+        raise ValueError( "unknown script name")
 
 
 # BEGIN MAIN FUNCTION
 
 while True:
     load_data()
-    a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
+    try:
+        a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ), debug=True ).run()
+    except:
+        print( "ERROR" )
     # a is True if WSGIServer returned due to a SIGHUP, and False, 
     # if it was a SIGINT or SIGTERM
     if not a:
