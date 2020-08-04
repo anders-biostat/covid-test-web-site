@@ -77,12 +77,12 @@ button:hover {
 </head>
 <body>
 
-<form action="/covid-test/fcgi" style="border:1px solid #ccc">
+<form action="/covid-test/fcgi" method="post" style="border:1px solid #ccc">
   <div class="container">
     <h1>Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:</h1>
     <hr>
 
-    <label for="bcode"><b>Code auf dem Röhrchen</b></label>
+    <label for="bcode"><b>Code auf dem Röhrchen <p> <img src=media/barcode_img.jpg alt="barcode" width="100" height="40" style="float:right;"></p> </b></label>
     <input type="text" id="bcode" name="bcode" required>
     <p> Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte <a href="#">hier </a>. </p>
     <p> Falls wir das Virus in Ihrer Probe nachweisen sollten, muss das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre Kontakt-Daten an: </p>
