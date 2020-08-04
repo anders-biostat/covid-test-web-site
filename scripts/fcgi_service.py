@@ -76,12 +76,14 @@ def encode_subject_data( barcode, name, address, contact, password ):
 
 def app_register( environ, start_response ):
 
-    fields = cgi.parse_qs(environ['QUERY_STRING'])
+    # Read POST data
+    request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
+    request_body = environ['wsgi.input'].read(request_body_size)
+    fields = cgi.parse_qs(request_body)
+    fields = { k.decode("utf-8") : v[0].decode("utf-8") for (k,v) in fields.items() }
+    barcode = fields['bcode'].upper()
 
-    barcode = fields['bcode'][0].upper()
-    print( barcode )
-
-    if fields['psw'][0] != fields['psw-repeat'][0]:
+    if fields['psw'] != fields['psw-repeat']:
         start_response('200 OK', [('Content-Type', 'text/html')])
         return[ 
            b"<html><body><h3>Passwords did not match.</h3>",
@@ -103,8 +105,8 @@ def app_register( environ, start_response ):
         
     else:
 
-        line = encode_subject_data( barcode, fields['name'][0], fields['address'][0],
-            fields['contact'][0], fields['psw'][0] )
+        line = encode_subject_data( barcode, fields['name'], fields['address'],
+            fields['contact'], fields['psw'] )
         
         with open( SUBJECT_DATA_FILENAME, "a" ) as f:
             f.write( line ) 
@@ -116,9 +118,8 @@ def app_register( environ, start_response ):
 
 def app_instructions( environ, start_response ):
 
-    fields = cgi.parse_qs(environ['QUERY_STRING'])
+    fields = cgi.parse_qs( environ['QUERY_STRING'] )
     barcode = fields['code'][0]
-    print( codes2events[barcode] )
 
     start_response('200 OK', [('Content-Type', 'text/html')])
 
