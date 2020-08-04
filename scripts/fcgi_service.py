@@ -9,6 +9,7 @@ PORT = 31234
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
+INSTRUCTIONS_HTML_FILENAME = "../static/instruction-de.html"
 
 
 def load_data():
@@ -88,7 +89,15 @@ def app( environ, start_response ):
             
             with open( SUBJECT_DATA_FILENAME, "a" ) as f:
                 f.write( line ) 
-                start_response('303 See other', [('Location','/covid-test/instruction-de.html')])
+            
+            start_response('200 OK', [('Content-Type', 'text/html')])
+
+            with open( INSTRUCTIONS_HTML_FILENAME, "rb" ) as f:
+                for line in f:
+                    if line.find( b"@@REPLACE_WITH_INSTRUCTIONS" ) >= 0:
+                        yield( "<p>INSTRUCTIONS GO HERE</p>" )
+                    else:
+                        yield line
 
     except:
         # INSERT HERE: Display error page
