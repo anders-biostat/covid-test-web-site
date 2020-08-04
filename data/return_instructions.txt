@@ -1,0 +1,23 @@
+@@event
+@@name
+   Test-Aktion COS (KW 32)
+@@instruction
+   <p>Bitte geben Sie das Röhrchen <b>bis spätestens Donnerstag</b> (6.8.) 
+   <b>10 Uhr morgens</b> in Raum XXX im COS ab.</p>
+   <p>Please return the tube <b>until Thursday</b> (6 Aug) <b>10am</b>
+   to room XXX at COS.</p>
+@@codes
+   batch_1.lst
+   batch_2.lst
+
+@@event
+@@unassigned_batches
+   codes not yet assigned to a testing event
+@@instruction
+   <p>Dieser Code hätte noch nicht ausgegeben werden sollen. Hier ist etwas durcheinander gekommen. 
+   Bitte kontaktieren Sie uns.</p>
+   <p>This code should not haven been handed out yet. Something got mixed up. Please contact us.</p>
+@@codes
+   batch_3.lst
+   batch_4.lst
+
