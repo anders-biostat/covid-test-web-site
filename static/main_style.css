@@ -109,6 +109,11 @@ a {
   color: white;
 }
 
+.disabled {
+	opacity: 0.4;
+	pointer-events: none;
+}
+
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
