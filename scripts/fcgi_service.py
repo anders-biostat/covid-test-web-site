@@ -7,7 +7,7 @@ import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 import load_codes
 
 #SOCKET = "../etc/fcgi.sock"
-PORT = 31234
+PORT = 31299
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
@@ -111,7 +111,7 @@ def app_register( environ, start_response ):
         with open( SUBJECT_DATA_FILENAME, "a" ) as f:
             f.write( line ) 
 
-        start_response( '303 See other', [('Location', '/covid-test/fcgi-instructions?code=' + \
+        start_response( '303 See other', [('Location', 'fcgi-instructions?code=' + \
             barcode )] )
         return []
         
@@ -148,10 +148,7 @@ def app( environ, start_response ):
 
 while True:
     load_data()
-    try:
-        a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ), debug=True ).run()
-    except:
-        print( "ERROR" )
+    a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ), debug=True ).run()
     # a is True if WSGIServer returned due to a SIGHUP, and False, 
     # if it was a SIGINT or SIGTERM
     if not a:
