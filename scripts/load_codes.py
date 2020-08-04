@@ -47,7 +47,7 @@ if __name__ == "__main__":
 		codes2events = load_codes()
 	except:
 		sys.stderr.write( "Error reading codes files:\n" )
-		sys.stderr.write( sys.exc_info()[1] + "\n\n" )
+		sys.stderr.write( str(sys.exc_info()[1]) + "\n\n" )
 		sys.exit(1)
 
 	print( "Loaded %i codes assigned to %i events." % 
