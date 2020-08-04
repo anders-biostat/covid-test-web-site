@@ -13,6 +13,24 @@
 <link rel="stylesheet" type="text/css" href="Style/css/owl.theme.css"/>
 <link rel="stylesheet" type="text/css" href="Style/css/owl.transitions.css"/>
 
+<script>
+
+//JavaScript function that enables or disables a submit button depending
+//on whether a checkbox has been ticked or not.
+function EnableSubmit(termsCheckBox){
+    //If the checkbox has been checked
+    if(termsCheckBox.checked){
+        //Set the disabled property to FALSE and enable the button.
+        document.getElementById("submit_button").disabled = false;
+        document.getElementById("submit_button").classList.remove("disabled");
+    } else{
+        //Otherwise, disable the submit button.
+        document.getElementById("submit_button").disabled = true;
+        document.getElementById("submit_button").classList.add("disabled");
+    }
+}
+</script>
+
 </head>
 <body>
   <div class="main-header" id="main-header">
@@ -43,7 +61,17 @@
       <h3> Einwilligung </h3>
         <p> Wenn Sie sich durch diese Informationen ausreichend informiert fühlen und nur einverstanden sind, an der Studie teilzunehmen, klicken Sie bitte auf die folgende Schaltfläche: </p>
 
-      <a href="form-de.html" class="button">Ich bin einverstanden und möchte am Test teilnehmen</a>
+        <form method="post">
+            <div>
+                <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+                <label for="terms_and_conditions">Ich bin einverstanden und möchte am Test teilnehmen</label>
+            </div>
+            <div>
+                <button onclick="document.location='form-de.html'" type="submit" id="submit_button" class="button disabled" disabled>Go to the form</button>
+            </div>
+        </form>
+
+
 </div>
 
 
