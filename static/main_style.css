@@ -55,6 +55,7 @@ a {
 	padding-bottom: 13px;
 }
 
+
 .banner {
 	background-attachment: fixed;
 	background-color: white;
@@ -81,9 +82,9 @@ a {
 	font-size: 35px;
 }
 .button {
-  background-color: white;
+  background-color: #778899;
   border: 1px solid rgb(119,136,153, 0.18);
-  color: #778899;
+  color: white;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -92,12 +93,12 @@ a {
 	font-size: 18px;
 	margin-top: 50px;
   width: auto;
-  height:60px;
+  height:auto;
   transition-duration: 0.6s;
   cursor: pointer;
 }
 .button:hover {
-  background-color: #778899;
+  background-color: #EB233C;
 	text-decoration: none;
   color: white;
 }
@@ -147,7 +148,7 @@ article {
 
 .content ul {
   border-left: 0px solid red;
-  background-color: #f1f1f1;
+  background-color: white;
   padding: 20px 30px;
 }
 
