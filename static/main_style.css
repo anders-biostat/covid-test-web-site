@@ -62,14 +62,13 @@ a {
 	background-position: top center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	position: fixed;
+	position: absolute;
 	color: #2F4F4F;
 	cursor: default;
 	text-align: center;
 	width: 100%;
 	height: auto;
 	float: left;
-	min-width: 1024px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
