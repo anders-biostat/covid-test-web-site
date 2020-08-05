@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import sys, traceback, time, hashlib, binascii, signal
-import urllib.parse, flup.server.fcgi 
+import urllib.parse, flup.server.fcgi, cgi
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 
 import load_codes
 
 #SOCKET = "../etc/fcgi.sock"
-PORT = 31234
+PORT = 31299
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
