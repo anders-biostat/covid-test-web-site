@@ -47,7 +47,7 @@ a {
 	color: white;
 }
 .nav > li > a:focus, .nav > li > a:hover, .nav > li > a:focus, .nav > li.active > a {
-	color: #2F4F4F;
+	color: white;
 	border-bottom: 2px solid #B11024;
 }
 .navbar-nav > li > a {
@@ -62,14 +62,13 @@ a {
 	background-position: top center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	position: fixed;
+	position: absolute;
 	color: #2F4F4F;
 	cursor: default;
 	text-align: center;
 	width: 100%;
 	height: auto;
 	float: left;
-	min-width: 1024px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -114,7 +113,21 @@ a {
 	pointer-events: none;
 }
 
-@media screen and (max-width: 600px) {
+@media (min-width:0px) and (max-width: 600px) {
+	.bg-overlay {
+		padding: 180px 0 120px;
+	}
+	.banner-text h2 {
+		font-size: 35px;
+	}
+
+	nav > li > a:focus, .nav > li > a:hover, .nav > li > a:focus, .nav > li.active > a {
+		border-bottom: none;
+		;
+	}
+}
+
+/*@media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: right;
@@ -128,12 +141,15 @@ a {
     right: 0;
     top: 0;
   }
+
+	.topnav.responsive li {
+		float: left;
+	}
   .topnav.responsive a {
-    float: none;
     display: block;
     text-align: left;
   }
-}
+}*/
 /* Header and banner ends */
 
 /* Scrollable consent form */
