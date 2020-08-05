@@ -1,13 +1,14 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 
 import sys, traceback, time, hashlib, binascii, signal
-import cgi, flup.server.fcgi 
+import urllib.parse, flup.server.fcgi 
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 
 import load_codes
 
 #SOCKET = "../etc/fcgi.sock"
-PORT = 31299
+PORT = 31234
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
@@ -79,8 +80,8 @@ def app_register( environ, start_response ):
     # Read POST data
     request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
     request_body = environ['wsgi.input'].read(request_body_size)
-    fields = cgi.parse_qs(request_body)
-    fields = { k.decode("utf-8") : v[0].decode("utf-8") for (k,v) in fields.items() }
+    fields = urllib.parse.parse_qs( request_body.decode("ascii") )
+    fields = { k : v[0] for (k,v) in fields.items() }
     barcode = fields['bcode'].upper()
 
     if fields['psw'] != fields['psw-repeat']:
