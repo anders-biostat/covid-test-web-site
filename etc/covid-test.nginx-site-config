@@ -1,13 +1,13 @@
 # Add this snippet into the appropriate "server" section in
 # one of the site config files in /etc/nginx/sites-available
 
-	location /covid-test {
-		alias /home/anders/w/repos/covid-test-web-site/static;
+	location /corona {
+		alias /var/www/apps/corona-production/static;
 		#     ^^^^^^^^^^^^^^^^^^^^^  <- replace with correct path
 		ssi on;
 
-		location /covid-test/fcgi {
+		location /corona/fcgi {
 			include fastcgi_params;
-			fastcgi_pass 127.0.0.1:31234;
+			fastcgi_pass 127.0.0.1:31299;
 		}
 	}
