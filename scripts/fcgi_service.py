@@ -13,6 +13,7 @@ PORT = 31234
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
 INSTRUCTIONS_HTML_FILENAME = "../static/instruction-de.html"
+RESULTS_FILENAME = "../data/results.txt"
 
 
 def load_data():
@@ -137,8 +138,6 @@ def app_instructions( environ, start_response ):
 
 def app_result_query( environ, start_response ):
 
-	print( environ )
-
 	# Read POST data
 	request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
 	request_body = environ['wsgi.input'].read(request_body_size)
@@ -146,7 +145,7 @@ def app_result_query( environ, start_response ):
 	fields = { k : v[0] for (k,v) in fields.items() }
 
 	form_barcode = fields['bcode'].upper()
-	form_password = fields['psw'].upper()
+	form_password = fields['psw']
 
 	# Check if barcode exists
 	if form_barcode not in codes2events:
@@ -194,10 +193,6 @@ def app_result_query( environ, start_response ):
 	sha_instance = hashlib.sha3_384()
 	sha_instance.update( form_password.encode( "utf-8" ) )
 	encoded_hash_from_form = binascii.b2a_base64( sha_instance.digest(), newline=False )
-
-	print( form_password.encode( "utf-8" ) )
-	print( encoded_hash_from_form )
-	print( hashes_found )
 	
 	if encoded_hash_from_form != list(hashes_found)[0].encode( "ascii" ):
 		start_response('200 OK', [('Content-Type', 'text/html')])
@@ -210,6 +205,30 @@ def app_result_query( environ, start_response ):
 			"gewählt haben. Bitte gehen Sie zurück zur vorigen Sete und versuchen Sie es noch einmal." ]
 
 	# Check results
+	with open( RESULTS_FILENAME ) as f:
+		for line in f:
+			if line.find(",") >= 0:
+				barcode, remainder = line.rstrip().split( ",", 1 )
+			else:
+				barcode, remainder = line.rstrip(), ""
+			if barcode == form_barcode:
+				if remainder == "":
+					start_response('303 See Other', [('Location', 'test-result-negative-de.html')])
+					return []
+				elif remainder.lower().startswith( "pos" ):
+					start_response('303 See Other', [('Location', 'test-result-positive-de.html')])
+					return []
+				else:
+					start_response('200 OK', [('Content-Type', 'text/html')])
+					return [
+						"<h2>Internal error.</h2>",
+						"The encoding of your result is erroneous. ",
+						"Please contact us to inquire (s.anders@zmbh.uni-heidelberg.de).",
+						"<h2>Interer Fehler.</h2>",
+						"Das Ergebnis ihres Tests ist fehlerhaft gespeichert. ",
+						"Bitte kontaktieren Sie uns (s.anders@zmbh.uni-heidelberg.de)." ]
+
+	# no result found
 	start_response('200 OK', [('Content-Type', 'text/html')])
 	return [
 		"<h2>Result not ready yet.</h2>",
