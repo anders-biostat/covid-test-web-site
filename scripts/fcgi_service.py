@@ -172,7 +172,7 @@ def app_result_query( environ, start_response ):
 			"This barcode has not yet been registered. You have to fill out the ",
 			'<a href="consent-de.html">registration form</a> before you can check the result.',
 			"<h2>Unregistrierter Barcode.</h2>",
-			"Für diesen  Barcode wurden noch keine persönlichen Daten eingetragen. Sie müssen erst ",
+			"Für diesen Barcode wurden noch keine Kontakt-Daten eingetragen. Sie müssen erst ",
 			'<a href="constent-de.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
 			'das Ergebnis abfragen können.' ]
 
@@ -180,7 +180,7 @@ def app_result_query( environ, start_response ):
 		start_response('200 OK', [('Content-Type', 'text/html')])
 		return [
 			"<h2>Multiply registered barcode.</h2>",
-			"For this barcode, the registration form has been flled out multiple times, with ",
+			"For this barcode, the registration form has been filled out multiple times, with ",
 			"different passwords. Please contact us (s.anders@zmbh.uni-heidelberg.de) to sort this out."
 			"<h2>Mehrfach registrierter Barcode.</h2>",
 			"Für diesen Barcode wurde das Registrier-Formular mehrmals ausgefüllt, mit verschiedenen ",
@@ -198,11 +198,11 @@ def app_result_query( environ, start_response ):
 		start_response('200 OK', [('Content-Type', 'text/html')])
 		return [
 			"<h2>Wrong password.</h2>",
-			"The password you entered is not the same thatw as registered for this barcode. ",
+			"The password you entered is not the same as the one that you have set you registered this barcode. ",
 			"Please go back und try again. ",
 			"<h2>Passwort falsch</h2>",
 			"Das Passwort stimmt nicht mit dem überein, dass Sie beim Registrieren der Barcodes ",
-			"gewählt haben. Bitte gehen Sie zurück zur vorigen Sete und versuchen Sie es noch einmal." ]
+			"gewählt haben. Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es noch einmal." ]
 
 	# Check results
 	with open( RESULTS_FILENAME ) as f:
@@ -224,7 +224,7 @@ def app_result_query( environ, start_response ):
 						"<h2>Internal error.</h2>",
 						"The encoding of your result is erroneous. ",
 						"Please contact us to inquire (s.anders@zmbh.uni-heidelberg.de).",
-						"<h2>Interer Fehler.</h2>",
+						"<h2>Interner Fehler.</h2>",
 						"Das Ergebnis ihres Tests ist fehlerhaft gespeichert. ",
 						"Bitte kontaktieren Sie uns (s.anders@zmbh.uni-heidelberg.de)." ]
 
@@ -232,7 +232,7 @@ def app_result_query( environ, start_response ):
 	start_response('200 OK', [('Content-Type', 'text/html')])
 	return [
 		"<h2>Result not ready yet.</h2>",
-		"The result for this sample are not yet available. Please try again later or tomorrow. ",
+		"The result for this sample is not yet available. Please try again later or tomorrow. ",
 		"(If several days have already passed since you handed in your sample, it might have gotten ",
 		"lost. Please contact us (robinburk1411@googlemail.com) to inquire.)",
 		"<h2>Ergebnis liegt noch nicht vor</h2>",
