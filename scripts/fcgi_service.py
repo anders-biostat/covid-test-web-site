@@ -8,7 +8,7 @@ import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 import load_codes
 
 #SOCKET = "../etc/fcgi.sock"
-PORT = 31235
+PORT = 31299
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
@@ -239,101 +239,6 @@ def app_result_query( environ, start_response ):
 		"Für diese Probe liegt noch kein Ergebnis vor. Bitte versuchen Sie es später noch mal. ",
 		"(Falls es bereits einige Tage her ist, dass Sie die Probe abgegeben haben, ist sie vielleicht ",
 		"verloren gegangen. Fragen Sie bitte bei uns (robinburk1411@googlemail.com) nach." ]
-
-
-# a funtion to authenticate the passwords
-def app_authenticate( environ, start_response ):
-
-    request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
-    request_body = environ['wsgi.input'].read(request_body_size)
-    fields = urllib.parse.parse_qs( request_body.decode("ascii") )
-    fields = { k : v[0] for (k,v) in fields.items() }
-    barcode_form = fields['bcode'].upper()
-    password = fields['psw']
-
-    # Encode the give password
-    sha_instance = hashlib.sha3_384()
-    sha_instance.update( password.encode( "utf-8" ) )
-    password_hash_user = sha_instance.digest()
-    password_hash_user = binascii.b2a_base64( password_hash_user, newline=False )
-
-    # Making an empty list to check how many times a given barcode has been submitted
-    hashes_found = []
-    with open(SUBJECT_DATA_FILENAME, "r") as f:
-        for line in f:
-            barcode, timestamp, password_hash, remainder = line.split( ",", 3 )
-            if barcode == barcode_form:
-                hashes_found.append( password_hash )
-
-    # The barcode is not among the submitted ones or it is wrong
-    if len(hashes_found) == 0:
-
-        start_response('200 OK', [('Content-Type', 'text/html')])
-        return[ s.encode("utf-8") for s in [
-           "<html><head><meta charset=UTF-8></head><body><h3>Barcode unknown</h3>",
-           "The barcode you entered (%s) is unknown. " % barcode_form,
-           "Maybe you have types it wrongly? Please go back and try again.</body></html>",
-           "<html><body><h3>Barcode unbekannt.</h3>",
-           "Der Barcode, den Sie eingegeben haben (%s), ist unbekannt. " % barcode_form,
-           "Vielleicht haben Sie sich vertippt. ",
-           "Bitte gehen Sie zurück und versuchen Sie es noch einmal.</body></html>" ] ]
-
-    # The barcode has been found with multiple passwords
-    if len(hashes_found) > 1:
-
-        start_response('200 OK', [('Content-Type', 'text/html')])
-        return[ s.encode("utf-8") for s in [
-           "<html><head><meta charset=UTF-8></head><body><h3>Multiple passwords</h3>",
-           "The barcode you entered (%s) has been found with different passwords." % barcode_form,
-           "Please contact us.</body></html>",
-           "<html><body><h3>Mehrere Passwörter</h3>",
-           "Der Barcode (% s), den Sie eingegeben haben wurde mit unterschiedlichen Passwörtern gefunden." % barcode_form,
-           "Bitte kontaktieren Sie uns. </body></html>" ] ]
-
-    # Authenticate the submitted password
-    else:
-        assert len( hashes_found ) == 1
-
-    # Passwrod is correct and the function for checking the result will be called
-        if password_hash_user == list(hashes_found)[0].encode( "utf-8" ):
-            result = check_result(barcode_form)
-            
-            # Negative resutl
-            if result == "negative":
-                start_response('303 See other', [('Location','/corona-test/test-result-negative-de.html')])
-            # Positive result
-            elif result == "Barcode not found in the result file":
-                    start_response('303 See other', [('Location','/corona-test/no-result-de.html')])
-            # No result
-            else:
-                start_response('303 See other', [('Location','/corona-test/test-result-positive-de.html')])
-            
-            return[]
-    # Password is incorrect
-        else:
-            start_response('200 OK', [('Content-Type', 'text/html')])
-            return[
-               b"<html><head><meta charset=UTF-8></head><body><h3>Passwords did not match.</h3>",
-               b"Please go back and try again.</body></html>",
-               "<html><body><h3>Passwörter stimmen nicht überein.</h3>".encode("utf-8"),
-               "Bitte gehen Sie zurück und versuchen Sie es noch einmal.</body></html>".encode("utf-8") ]
-
-
-
-# Function to check the result
-def check_result( barcode ):
-# Reading the results file
-    with open(RESULTS_DATA_FILENAME, "r") as f:
-        for line in f:
-            if ',' in line:
-                code, result = line.split(",", 1)
-                if code == barcode:
-                    return result
-            elif barcode in line:
-                result = "negative"
-                return result
-    result = "Barcode not found in the result file"
-    return result
 
 
 
