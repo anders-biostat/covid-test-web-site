@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import sys, traceback, time, hashlib, binascii, signal
-import urllib.parse, flup.server.fcgi, cgi
+import sys, traceback, time, hashlib, binascii, signal, re
+import urllib.parse, flup.server.fcgi
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 
 import load_codes
 
 #SOCKET = "../etc/fcgi.sock"
-PORT = 31299
+PORT = 31234
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
-INSTRUCTIONS_HTML_FILENAME = "../static/instruction-de.html"
+HTML_DIRS = "../static/"
 RESULTS_FILENAME = "../data/results.txt"
 
 
@@ -76,6 +76,19 @@ def encode_subject_data( barcode, name, address, contact, password ):
 	return b",".join( fields ).decode("ascii") + "\n" 
 
 
+def serve_file( environ, start_response, filename, replacements ):
+
+	start_response('200 OK', [('Content-Type', 'text/html; charset=utf-8')])
+	lang = re.compile("(\w*)/fcgi").search( "/corona-test/de/fcgi-instructions" )[1]
+	lines = []
+	with open( HTML_DIRS + "/" + lang + "/" + filename, encoding="utf-8" ) as f:
+		for line in f:
+			for r in replacements:
+				line = line.replace( r, replacements[r] )
+			lines.append( line.encode( "utf-8" ) )
+	return lines
+
+
 def app_register( environ, start_response ):
 
 	# Read POST data
@@ -120,21 +133,16 @@ def app_register( environ, start_response ):
 
 def app_instructions( environ, start_response ):
 
-	fields = cgi.parse_qs( environ['QUERY_STRING'] )
+	fields = urllib.parse.parse_qs( environ['QUERY_STRING'] )
 	barcode = fields['code'][0]
 
-	start_response('200 OK', [('Content-Type', 'text/html')])
+	return serve_file( environ, start_response, 
+		"instructions.html", { "@@INSTRUCTIONS@@" :
+			"%s \n <p><small>[Code '%s' of Event '%s']</small></p>\n" % ( 
+				codes2events[ barcode ].instructions, 
+				barcode, 
+				codes2events[barcode].name ) } )
 
-	lines = []
-	with open( INSTRUCTIONS_HTML_FILENAME, "rb" ) as f:
-		for line in f:
-			if line.find( b"@@REPLACE_WITH_INSTRUCTIONS" ) >= 0:
-			   lines.append( codes2events[ barcode ].instructions.encode("utf-8") )
-			   lines.append( ( "<p><small>[Code '%s' of Event '%s']</small></p>" % 
-				  ( barcode, codes2events[barcode].name ) ).encode("utf-8") ) 
-			else:
-				lines.append( line )
-	return lines
 
 def app_result_query( environ, start_response ):
 
@@ -244,21 +252,25 @@ def app_result_query( environ, start_response ):
 
 
 def app( environ, start_response ):
-	if environ['SCRIPT_NAME'].endswith( "register" ):
-		return app_register( environ, start_response ) 
-	elif environ['SCRIPT_NAME'].endswith( "instructions" ):
-		return app_instructions( environ, start_response ) 
-	elif environ['SCRIPT_NAME'].endswith( "result-query" ):
-		return app_result_query( environ, start_response ) 
-	else:
-		raise ValueError( "unknown script name")
+	try:
+		if environ['SCRIPT_NAME'].endswith( "register" ):
+			return app_register( environ, start_response ) 
+		elif environ['SCRIPT_NAME'].endswith( "instructions" ):
+			return app_instructions( environ, start_response ) 
+		elif environ['SCRIPT_NAME'].endswith( "result-query" ):
+			return app_result_query( environ, start_response ) 
+		else:
+			raise ValueError( "unknown script name")
+	except:
+		traceback.print_exc()
+
 
 
 # BEGIN MAIN FUNCTION
 
 while True:
 	load_data()
-	a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ), debug=True ).run()
+	a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
 	# a is True if WSGIServer returned due to a SIGHUP, and False, 
 	# if it was a SIGINT or SIGTERM
 	if not a:

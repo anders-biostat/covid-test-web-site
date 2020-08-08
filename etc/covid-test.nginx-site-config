@@ -6,7 +6,8 @@
 		#     ^^^^^^^^^^^^^^^^^^^^^  <- replace with correct path
 		ssi on;
 
-		location /corona-test/fcgi {
+		# all URLs containing "fcgi" will be sent to the FastCGI script:
+		location ~ /fcgi {
 			include fastcgi_params;
 			fastcgi_pass 127.0.0.1:31234;
 		}
