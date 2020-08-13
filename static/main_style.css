@@ -21,13 +21,13 @@ a {
 /*-----Header & Banner Starts-------*/
 .index-header {
 	transition: all 0.8s ease-in;
-	background: white none repeat scroll 0% 0%;
+	background: white none repeat scroll 0% 0%;*/
 	padding-left: 30px;
 	font-family: 'Roboto', sans-serif;
 	color: black;
-	height: 350px;
+	height: 150px;
 	width: 100%;
-	line-height: 300px;
+	line-height: 100px;
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -54,11 +54,7 @@ a {
 
 .index-header a.uni-logo {
 	float: left;
-	color: black;
-	text-align: center;
-	text-decoration: none;
-	font-size: 14px;
-
+	padding: 20px 20px;
 }
 
 .index-header .dropdown-lang {
@@ -67,7 +63,6 @@ a {
 
 .banner {
 	background-attachment: fixed;
-	background-color: white;
 	background-position: top center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -88,14 +83,14 @@ a {
 	background-color: RGBA(255, 252, 248, 0.0);
 }
 .banner-text h2 {
-	font-size: 50px;
+	font-size: 30px;
 }
 .banner-text h2 span {
 	color: #EB233C;
 }
 .banner-text p {
 	padding: 30px;
-	font-size: 20px;
+	font-size: 15px;
 }
 .button {
   background-color: #778899;
@@ -109,7 +104,7 @@ a {
 	font-size: 18px;
 	margin-top: 50px;
   width: auto;
-  height:auto;
+  height: auto;
   transition-duration: 0.6s;
   cursor: pointer;
 }
@@ -129,17 +124,16 @@ a {
 		padding: 180px 0 120px;
 	}
 	.banner-text h2 {
-		font-size: 35px;
+		font-size: 20px;
 	}
-
+	.banner-text p {
+		font-size: 10px;
+	}
 	.index-header {
-		height: 250px;
-		line-height: 200px;
+		height: 50px;
+		line-height: 50px;
 	}
 
-	nav > li > a:focus, .nav > li > a:hover, .nav > li > a:focus, .nav > li.active > a {
-		border-bottom: none;
-	}
 }
 
 /* Scrollable consent form */
@@ -156,18 +150,19 @@ article {
 	bottom: 0;
 	color: white;
 	text-align: right;
-	background: #CC0130;
+	background-color: #CC0130;
 	margin-top: 20px;
 	position: fixed;
 }
 
 .footer a {
-	/* float: right; */
+	float: right;
 	color: white;
+	text-align: center;
+	border-radius: 4px;
 	width: auto;
 	font-size: 14px;
-	padding-top: 15px;
-	padding-bottom: 13px;
+	line-height: 25px;
 	padding-right: 100px;
 }
 
