@@ -15,46 +15,55 @@ h1, h2, h3, h4, h5, h6 {
 }
 a {
 	outline: none !important;
+	text-decoration: none;
 }
 
 /*-----Header & Banner Starts-------*/
-.navbar-brand {
-	font-family: 'Roboto', bold;
-	color: white;
-	font-size: 30px;
-}
-.navbar-brand:hover {
-	background-color: white;
-	color: #2F4F4F;
-	border-bottom: 2px solid #B11024;
-}
-.navbar-toggle {
-	background-color: #fff;
-}
-.navbar-toggle .icon-bar {
-	background-color: white;
-}
-.mynav {
+.index-header {
 	transition: all 0.8s ease-in;
-	background: #EB233C none repeat scroll 0% 0%;
-}
-.mynav li a {
+	background: white none repeat scroll 0% 0%;
+	padding-left: 30px;
 	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	font-weight: 400;
-}
-.nav > li > a:focus, .nav > li > a {
-	color: white;
-}
-.nav > li > a:focus, .nav > li > a:hover, .nav > li > a:focus, .nav > li.active > a {
-	color: white;
-	border-bottom: 2px solid #B11024;
-}
-.navbar-nav > li > a {
-	padding-top: 20px;
-	padding-bottom: 13px;
+	color: black;
+	height: 350px;
+	width: 100%;
+	line-height: 300px;
+	display: inline-block;
+	vertical-align: middle;
 }
 
+.dropdown-lang {
+	 position: relative;
+	 display: inline-block;
+}
+
+.content-lang {
+	display: none;
+	position: absolute;
+	background-color: #CC0130;
+	color: white;
+}
+
+.dropdown-lang:hover .content-lang {
+	display: block;
+}
+
+.content-lang a:hover {
+		background-color: #ad0028;
+}
+
+.index-header a.uni-logo {
+	float: left;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	font-size: 14px;
+
+}
+
+.index-header .dropdown-lang {
+	float: right;
+}
 
 .banner {
 	background-attachment: fixed;
@@ -73,6 +82,7 @@ a {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
 .bg-overlay {
 	padding: 280px 0 220px;
 	background-color: RGBA(255, 252, 248, 0.0);
@@ -84,7 +94,8 @@ a {
 	color: #EB233C;
 }
 .banner-text p {
-	font-size: 35px;
+	padding: 30px;
+	font-size: 20px;
 }
 .button {
   background-color: #778899;
@@ -121,36 +132,15 @@ a {
 		font-size: 35px;
 	}
 
+	.index-header {
+		height: 250px;
+		line-height: 200px;
+	}
+
 	nav > li > a:focus, .nav > li > a:hover, .nav > li > a:focus, .nav > li.active > a {
 		border-bottom: none;
-		;
 	}
 }
-
-/*@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-	.topnav.responsive li {
-		float: left;
-	}
-  .topnav.responsive a {
-    display: block;
-    text-align: left;
-  }
-}*/
-/* Header and banner ends */
 
 /* Scrollable consent form */
 article {
@@ -159,18 +149,37 @@ article {
 	display: block;
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  background-color: #f1f1f1;
+.footer {
+	font-family: 'Roboto', sans-serif;
+	padding: 20px;
+	width: 100%;
+	bottom: 0;
+	color: white;
+	text-align: right;
+	background: #CC0130;
+	margin-top: 20px;
+	position: fixed;
+}
+
+.footer a {
+	/* float: right; */
+	color: white;
+	width: auto;
+	font-size: 14px;
+	padding-top: 15px;
+	padding-bottom: 13px;
+	padding-right: 100px;
+}
+
+.footer a:hover {
+	background-color: #ad0028;
 }
 
 .content {
   padding: 100px 0;
   margin: 50px auto 0 auto;
   width: 60%;
+	position: fixed;
 }
 
 .content ul {
