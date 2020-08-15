@@ -25,11 +25,20 @@ a {
 	padding-left: 30px;
 	font-family: 'Roboto', sans-serif;
 	color: black;
-	height: 150px;
 	width: 100%;
+	height: auto;
 	line-height: 100px;
-	display: inline-block;
+	display: block;
 	vertical-align: middle;
+}
+
+.index-header img {
+	width: 200px;
+	height: auto;
+}
+
+.index-header h2 {
+	font-size: 20px;
 }
 
 .dropdown-lang {
@@ -54,7 +63,7 @@ a {
 
 .index-header a.uni-logo {
 	float: left;
-	padding: 20px 20px;
+	/*padding: 20px 20px;*/
 }
 
 .index-header .dropdown-lang {
@@ -93,7 +102,7 @@ a {
 	font-size: 15px;
 }
 .button {
-  background-color: #778899;
+  background-color: #CC0130;
   border: 1px solid rgb(119,136,153, 0.18);
   color: white;
   padding: 16px 32px;
@@ -109,7 +118,7 @@ a {
   cursor: pointer;
 }
 .button:hover {
-  background-color: #EB233C;
+  background-color: #ad0028;
 	text-decoration: none;
   color: white;
 }
@@ -127,6 +136,7 @@ a {
 		font-size: 20px;
 	}
 	.banner-text p {
+		padding: 20px;
 		font-size: 15px;
 	}
 	.index-header {
@@ -134,8 +144,13 @@ a {
 		line-height: 50px;
 	}
 
-	.index-header h3 {
+	.index-header h2 {
 		font-size: 15px;
+	}
+
+	.index-header img {
+		width: 80px;
+		height: auto;
 	}
 
 	.button {
@@ -163,14 +178,14 @@ article {
 	bottom: 0;
 	color: white;
 	text-align: right;
-	background-color: #CC0130;
+	background-color: #222222;
 	margin-top: 20px;
 	position: fixed;
 }
 
 .footer a {
 	float: right;
-	color: white;
+	color: #93969A;
 	text-align: center;
 	border-radius: 4px;
 	width: auto;
@@ -179,7 +194,8 @@ article {
 }
 
 .footer a:hover {
-	background-color: #ad0028;
+	color: #FFFFFF;
+	text-decoration: none;
 }
 
 .content {
