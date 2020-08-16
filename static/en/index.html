@@ -25,8 +25,8 @@
   <div class="banner" id="banner">
     <div class="bg-overlay">
             <div class="banner-text">
-              <h2>Rapid Test of the Heidelberg University for the detection of the  <br> <span>Covid-19-Coronavirus (SARS-CoV-2)</span></h2>
-              <button class="button" onclick="myFunction()"> Register my test kit </button>
+              <h2>Welcome to the <br> <span>Covid-19</span> rapid test website</h2>
+              <button class="button" onclick="OpenConsent()"> Register my test kit </button>
               <button class="button" onclick="myFunction()"> Enquire my test result </button>
               <button class="button" onclick="myFunction()"> Learn more about the test </button>
         <!--      <a href="consent.html" class="button">Register my test kit</a>
@@ -41,11 +41,53 @@
     </div>
   </div>
 
+ <div class="container2">
+   <div id="consent" class="modal">
+     <h2>Taking part in the SARS-CoV-2 test</h2>
+      Please read the following information and then confirm your consent.
+     <div class="scroll-box">
+     <!--# include file="information-text.html" -->
+   </div>
+   <form method="GET">
+       <div>
+           <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+           <label for="terms_and_conditions">I give my consent and agree to participate in the test</label>
+       </div>
+       <div>
+           <button onclick="window.location.href='form.html'" type="submit" id="showForm" class="button disabled" disabled>Go to the form</button>
+       </div>
+   </form>
+ </div>
+</div>
 
 
   <footer class="footer"> <div class="container"> <a href="impressum.html"> Impressum </a> </div> </footer>
 
+<script>
+  //JavaScript function that enables or disables a submit button depending
+  //on whether a checkbox has been ticked or not.
+  function EnableSubmit(termsCheckBox){
+      //If the checkbox has been checked
+      if(termsCheckBox.checked){
+          //Set the disabled property to FALSE and enable the button.
+          document.getElementById("showForm").disabled = false;
+          document.getElementById("showForm").classList.remove("disabled");
+      } else{
+          //Otherwise, disable the submit button.
+          document.getElementById("showForm").disabled = true;
+          document.getElementById("showForm").classList.add("disabled");
+      }
+  }
 
+  function OpenConsent() {
+    var x = document.getElementById("consent");
+    if (x.style.display === "none" || x.style.display === "") {
+      x.style.display = "inherit";
+    } else {
+      x.style.display = "none";
+      }
+  }
+  </script>
 
 </body>
 </html>
