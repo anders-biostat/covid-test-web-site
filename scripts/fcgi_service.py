@@ -79,7 +79,7 @@ def encode_subject_data( barcode, name, address, contact, password ):
 def serve_file( environ, start_response, filename, replacements ):
 
 	start_response('200 OK', [('Content-Type', 'text/html; charset=utf-8')])
-	lang = re.compile("(\w*)/fcgi").search( "/corona-test/de/fcgi-instructions" )[1]
+	lang = re.compile("(\\w*)/fcgi").search( "/corona-test/de/fcgi-instructions" )[1]
 	lines = []
 	with open( HTML_DIRS + "/" + lang + "/" + filename, encoding="utf-8" ) as f:
 		for line in f:
