@@ -18,7 +18,12 @@ a {
 	text-decoration: none;
 }
 
-/*-----Header & Banner Starts-------*/
+/*-----Header for the index page-------*/
+.navbar-brand {
+	font-size: 15px;
+	/*color: #ffffff;*/
+}
+
 .index-header {
 	transition: all 0.8s ease-in;
 	background: white none repeat scroll 0% 0%;*/
@@ -41,32 +46,88 @@ a {
 	font-size: 20px;
 }
 
-.dropdown-lang {
-	 position: relative;
-	 display: inline-block;
+.index-header a.uni-logo {
+	float: left;
+	/*padding: 20px 20px;*/
 }
 
+/*-----Header for inside pages------*/
+
+.page-header {
+	transition: all 0.8s ease-in;
+	background: #CC0130 none repeat scroll 0% 0%;
+	color: #ffffff;
+	height: 100px;
+	padding: 0;
+}
+
+.page-header li a {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.page-header img {
+	width: 80px;
+	height: auto;
+}
+
+.page-header .title {
+	font-weight: bolder;
+	font-size: 40px;
+}
+
+.material-icons {
+	font-size: 40px;
+}
+
+/*.page-header .uni-logo {
+	display: block;
+	text-indent: -9999px;
+	width: 150px;
+	height: 100px;
+	background: url(media/logo_mono.svg) no-repeat;
+}*/
+
+.dropdown-lang {
+	float:right;
+	position: relative;
+}
+.dropdown-lang .dropbtn{
+	font-size: 14px;
+	text-align: right;
+	border: none;
+	outline: none;
+	color: inherit;
+	padding: 15px 13px;
+	background-color: inherit;
+}
 .content-lang {
 	display: none;
 	position: absolute;
+	min-width: 150px;
 	background-color: #CC0130;
-	color: white;
+	color: #ffffff;
 }
 
 .dropdown-lang:hover .content-lang {
 	display: block;
 }
 
+.content-lang a {
+	float: none;
+	color: #ffffff;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: right;
+}
+
 .content-lang a:hover {
 		background-color: #ad0028;
 }
 
-.index-header a.uni-logo {
-	float: left;
-	/*padding: 20px 20px;*/
-}
-
-.index-header .dropdown-lang {
+.page-header .dropdown-lang {
 	float: right;
 }
 
@@ -252,16 +313,18 @@ article {
 }
 
 .content {
-  padding: 100px 0;
-  margin: 50px auto 0 auto;
-  width: 60%;
-	position: fixed;
+	position: relative;
+	padding: 100px 0;
+  margin-left: auto;
+	margin-right: auto;
+  width: 66%;
 }
 
 .content ul {
   border-left: 0px solid red;
   background-color: white;
-  padding: 20px 30px;
+  padding: 5px 10px;
+	list-style-position: inside;
 }
 
 .content ol ul {
@@ -278,7 +341,8 @@ article {
 .content ol {
 	border-left: 0px none red;
 	background-color: white;
-	padding: 20px 30px;
+	padding: 5px 10px;
+	list-style-position: inside;
 }
 
 .video-responsive{
@@ -296,6 +360,9 @@ article {
 }
 
 @media (min-width:0px) and (max-width: 780px) {
+	.title {
+		display: none;
+	}
 	.bg-overlay {
 		padding: 200px 0 120px;
 	}
