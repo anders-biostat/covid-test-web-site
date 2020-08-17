@@ -16,7 +16,7 @@
     <div class="container">
       <a href="https://www.uni-heidelberg.de/en" class="uni-logo"> <img src="../media/optimised.svg" alt="Heidelberg University" /></img></a>
     <!--  <a href="https://www.uni-heidelberg.de/en" class="uni-logo"><img src="../media/ZMBH_logo.jpg" alt="Heidelberg University" /></img></a> -->
-      <h2 style="float:right;"> Zentrum für Moleculare Biologie (ZMBH) </h2>
+      <h2> Zentrum für Moleculare Biologie (ZMBH) </h2>
      </div>
   </nav>
 </div>
@@ -26,12 +26,12 @@
     <div class="bg-overlay">
             <div class="banner-text">
               <h2>Welcome to the <br> <span>Covid-19</span> rapid test website</h2>
-              <button class="button" onclick="OpenConsent()"> Register my test kit </button>
+              <button class="button" onclick="openConsent()"> Register my test kit </button>
               <button class="button" onclick="myFunction()"> Enquire my test result </button>
-              <button class="button" onclick="myFunction()"> Learn more about the test </button>
-        <!--      <a href="consent.html" class="button">Register my test kit</a>
-              <a href="result-query.html" class="button">Enquire my test result</a>
-              <a href="information.html" class="button">learn more about the test</a> -->
+      <!--   <button class="button" onclick="myFunction()"> Learn more about the test </button>
+              <a href="consent.html" class="button">Register my test kit</a>
+              <a href="result-query.html" class="button">Enquire my test result</a> -->
+              <a href="information.html" class="button">learn more about the test</a>
               <p> This website is also available in: &nbsp;
                <a href="../de/index.html"> Deutsch </a> &nbsp;
                <a href="../de/index.html"> English </a> &nbsp;
@@ -42,7 +42,7 @@
   </div>
 
  <div class="container2">
-   <div id="consent" class="modal">
+   <div id="consent" class="modal modal-consent">
      <h2>Taking part in the SARS-CoV-2 test</h2>
       Please read the following information and then confirm your consent.
      <div class="scroll-box">
@@ -53,12 +53,62 @@
            <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
            <label for="terms_and_conditions">I give my consent and agree to participate in the test</label>
        </div>
-       <div>
-           <button onclick="window.location.href='form.html'" type="submit" id="showForm" class="button disabled" disabled>Go to the form</button>
-       </div>
    </form>
+   <div>
+       <button onclick="closeConsent()" type="button" id="closeconsent" class="button-small">Cancel</button>
+       <button onclick="openForm()" type="submit" id="showForm" class="button-small disabled" disabled>I agree</button>
+   </div>
  </div>
 </div>
+
+<form action="/covid-test/fcgi-register" method="post">
+  <div class="container2">
+    <div id="form" class="modal modal-form">
+    <h1>Please insert the code on your test tube:</h1>
+    <hr>
+    <div class="form-group">
+      <label for="bcode">Code on the tube</label>
+      <input type="text" class="form-control" id="bcode" name="bcode" placeholder="Enter your barcode" required>
+      <small id="bcodehelp" class="form-text text-muted">
+      If you did not receive a barcoded test tube, please click <a href="#">here </a>.
+      </small>
+    </div>
+
+      <p> In case you will be tested positive for SARS-CoV-2, the public health office (Gesundheitsamt) will need to contact you. Therefore, please sign in your contact details: </p>
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" class="form-control" name="name" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address (street, number, zip code, city)</label>
+        <input type="text" id="address" class="form-control" name="address" required>
+      </div>
+      <div class="form-group">
+        <label for="contact">phone number or E-mail address</label>
+        <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
+      </div>
+
+      <p> <small> Data protection information: Your name and contact details will be handled private and confidential. Only employees of the public health office will have access. </small> </p>
+
+      <p> To enquire your test result, please note down your sample code and enter a password: </p>
+      <div class="form-group"
+        <label for="psw">Password</label>
+        <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
+      </div>
+      <div class="form-group">
+        <label for="psw-repeat"><b>please repeat your password:</b></label>
+        <input type="password" class="form-control" name="psw-repeat" required>
+      </div>
+      <div>
+          <button onclick="closeForm()" type="button" id="closeform" class="button-small">Cancel</button>
+          <button type="submit" class="button-small">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
 
 
   <footer class="footer"> <div class="container"> <a href="impressum.html"> Impressum </a> </div> </footer>
@@ -79,13 +129,21 @@
       }
   }
 
-  function OpenConsent() {
-    var x = document.getElementById("consent");
-    if (x.style.display === "none" || x.style.display === "") {
-      x.style.display = "inherit";
-    } else {
-      x.style.display = "none";
-      }
+  function openConsent() {
+    document.getElementById("consent").style.display = "inherit";
+  }
+
+  function openForm() {
+    document.getElementById("consent").style.display = "none";
+    document.getElementById("form").style.display = "inherit";
+  }
+
+  function closeConsent() {
+    document.getElementById("consent").style.display = "none";
+  }
+
+  function closeForm() {
+    document.getElementById("form").style.display = "none";
   }
   </script>
 
