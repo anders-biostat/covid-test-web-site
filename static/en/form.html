@@ -1,79 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title> Rapid Test of the Heidelberg University for the detection of the CoVID-19-Coronavirus (SARS-CoV-2) </title>
-<meta charset="UTF-8">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box}
+<!--# include file="header-page.html" -->
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+<div id="form" class="modal modal-form" style="display:block">
+ <form action="fcgi-register" method="post">
+    <div class="content">
+    <h1>Please insert the code on your test tube:</h1>
+    <hr>
+    <div class="form-group bmd-form-group">
+      <label for="bcode" class="bmd-label-floating">Code on the tube</label>
+      <input type="text" class="form-control" id="bcode" name="bcode" required>
+      <small id="bcodehelp" class="form-text text-muted">
+      If you did not receive a barcoded test tube, please click <a href="#">here </a>.
+      </small>
+    </div>
 
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
+      <p> In case you will be tested positive for SARS-CoV-2, the public health office (Gesundheitsamt) will need to contact you. Therefore, please sign in your contact details: </p>
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+      <div class="form-group bmd-form-group">
+        <label for="name" class="bmd-label-floating">Full Name</label>
+        <input type="text" id="name" class="form-control" name="name" required>
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="address" class="bmd-label-floating">Address (street, number, zip code, city)</label>
+        <input type="text" id="address" class="form-control" name="address" required>
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="contact" class="bmd-label-floating">phone number or E-mail address</label>
+        <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
+      </div>
 
-button:hover {
-  opacity:1;
-}
+      <p> <small> Data protection information: Your name and contact details will be handled private and confidential. Only employees of the public health office will have access. </small> </p>
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .rgstrbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .rgstrbtn {
-     width: 100%;
-  }
-}
-</style>
+      <p> To enquire your test result, please note down your sample code and enter a password: </p>
+      <div class="form-group bmd-form-group">
+        <label for="psw" class="bmd-label-floating">Password</label>
+        <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="psw-repeat" class="bmd-label-floating"><b>please repeat your password:</b></label>
+        <input type="password" class="form-control" name="psw-repeat" required>
+      </div>
+      <div>
+          <button onclick="closeForm()" type="button" id="closeform" class="button-small">Cancel</button>
+          <button type="submit" class="button-small">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
 
 <script type="text/javascript">
 
@@ -85,45 +58,6 @@ button:hover {
   }
 
 </script>
-
-</head>
-<body>
-
-<form action="/covid-test/fcgi-register" method="post" style="border:1px solid #ccc">
-  <div class="container">
-    <h1>Please insert the code on your test tube:</h1>
-    <hr>
-
-    <label for="bcode"><b>Code on the tube <img src=media/barcode_img.jpg alt="barcode" width="100" height="40" style="float:right;"> </b></label>
-    <input type="text" id="bcode" name="bcode" required>
-    <p> If you did not receive a barcoded test tube, please click <a href="#">here </a>. </p>
-    <p> In case you will be tested positive for SARS-CoV-2, the public health office (Gesundheitsamt) will need to contact you. Therefore, please sign in your contact details: </p>
-
-    <label for="name"><b>Name</b></label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="address"><b>Address (street, number, zip code, city)</b></label>
-    <input type="text" id="address" name="address" rows="6" required>
-
-    <label for="contact"><b>phone number or E-mail address</b></label>
-    <input type="text" id="contact" name="contact" rows="4" required>
-
-    <p> <small> Data protection information: Your name and contact details will be handled private and confidential. Only employees of the public health office will have access. </small> </p>
-
-    <p> To query your test result, please note down your sample code and enter a password: </p>
-    <label for="psw"><b>Password:</b></label>
-    <input type="password" name="psw" required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
-
-    <label for="psw-repeat"><b>please repeat your password:</b></label>
-    <input type="password" name="psw-repeat" required>
-
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="rgstrbtn">Transmit data</button>
-    </div>
-  </div>
-</form>
 
 </body>
 </html>

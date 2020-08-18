@@ -48,8 +48,17 @@ a {
 	height: auto;
 }
 
-.index-header h2 {
-	font-size: 20px;
+.zmbh {
+	display: flex;
+	font-size: 15px;
+	line-height: 1.3rem;
+	text-decoration: none;
+	color: #333333;
+}
+
+.index-header a:hover {
+	text-decoration: none;
+	color: #ad0028;
 }
 
 .index-header a.uni-logo {
@@ -80,7 +89,7 @@ a {
 
 .page-header .title {
 	font-weight: bolder;
-	font-size: 40px;
+	font-size: 30px;
 }
 
 .material-icons {
@@ -347,7 +356,7 @@ article {
 
 .footer {
 	font-family: 'Roboto', sans-serif;
-	padding: 15px;
+	padding: 30px;
 	width: 100%;
 	bottom: 0;
 	color: white;
@@ -359,16 +368,16 @@ article {
 
 .footer a {
 	float: right;
-	color: #93969A;
+	color: #ffffff;
 	text-align: center;
 	border-radius: 4px;
 	width: auto;
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 25px;
 }
 
 .footer a:hover {
-	color: #FFFFFF;
+	color: #ad0028;
 	text-decoration: none;
 }
 
