@@ -5,8 +5,8 @@
     <div class="bg-overlay">
             <div class="banner-text">
               <h2>Welcome to the <br> <span>Covid-19</span> rapid test website</h2>
-              <button class="button" onclick="openConsent()"> Register my test kit </button>
-              <button class="button" onclick="myFunction()"> Enquire my test result </button>
+              <a href="consent.html" class="button"> Register my test kit </button>
+              <a href="result-query.html" class="button"> Enquire my test result </button>
               <a href="information.html" class="button">learn more about the test</a>
               <p> This website is also available in: &nbsp;
                <a href="../de/index.html"> Deutsch </a> &nbsp;
@@ -17,6 +17,12 @@
     </div>
   </div>
 
+<<<<<<< HEAD
+  <!--# include file="consent.html" -->
+
+
+  <!--# include file="form.html" -->
+=======
  <div class="container2">
    <div id="consent" class="modal modal-consent">
      <h2>Taking part in the SARS-CoV-2 test</h2>
@@ -49,46 +55,14 @@
       If you did not receive a barcoded test tube, please click <a href="#">here </a>.
       </small>
     </div>
-
-      <p> In case you will be tested positive for SARS-CoV-2, the public health office (Gesundheitsamt) will need to contact you. Therefore, please sign in your contact details: </p>
-
-      <div class="form-group bmd-form-group">
-        <label for="name" class="bmd-label-floating">Full Name</label>
-        <input type="text" id="name" class="form-control" name="name" required>
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="address" class="bmd-label-floating">Address (street, number, zip code, city)</label>
-        <input type="text" id="address" class="form-control" name="address" required>
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="contact" class="bmd-label-floating">phone number or E-mail address</label>
-        <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
-      </div>
-
-      <p> <small> Data protection information: Your name and contact details will be handled private and confidential. Only employees of the public health office will have access. </small> </p>
-
-      <p> To enquire your test result, please note down your sample code and enter a password: </p>
-      <div class="form-group bmd-form-group">
-        <label for="psw" class="bmd-label-floating">Password</label>
-        <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="psw-repeat" class="bmd-label-floating"><b>please repeat your password:</b></label>
-        <input type="password" class="form-control" name="psw-repeat" required>
-      </div>
-      <div>
-          <button onclick="closeForm()" type="button" id="closeform" class="button-small">Cancel</button>
-          <button type="submit" class="button-small">Submit</button>
-      </div>
-    </div>
-  </form>
-</div>
+>>>>>>> c1aefaf2aaad8c7f91b08fea68dee1853b4b2b7b
 
 
 
 
 
-  <footer class="footer"> <div class="container"> <a href="impressum.html"> Impressum </a> </div> </footer>
+
+  <!--# include file="footer.html" -->
 
 <script>
   //JavaScript function that enables or disables a submit button depending
@@ -115,6 +89,10 @@
     document.getElementById("form").style.display = "inherit";
   }
 
+  function openResult() {
+
+  }
+
   function closeConsent() {
     document.getElementById("consent").style.display = "none";
   }
@@ -124,10 +102,7 @@
   }
   </script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
 
 </body>
 </html>
