@@ -17,10 +17,45 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!--# include file="consent.html" -->
 
 
   <!--# include file="form.html" -->
+=======
+ <div class="container2">
+   <div id="consent" class="modal modal-consent">
+     <h2>Taking part in the SARS-CoV-2 test</h2>
+      Please read the following information and then confirm your consent.
+     <div class="scroll-box">
+     <!--# include file="information-text.html" -->
+     </div>
+    <form method="GET">
+       <div>
+           <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+           <label for="terms_and_conditions">I give my consent and agree to participate in the test</label>
+       </div>
+    </form>
+    <div>
+       <button onclick="closeConsent()" type="button" id="closeconsent" class="button-small">Cancel</button>
+       <button onclick="openForm()" type="submit" id="showForm" class="button-small disabled" disabled>I agree</button>
+    </div>
+ </div>
+</div>
+
+<div id="form" class="modal modal-form">
+ <form action="fcgi-register" method="post">
+    <div class="content">
+    <h1>Please insert the code on your test tube:</h1>
+    <hr>
+    <div class="form-group bmd-form-group">
+      <label for="bcode" class="bmd-label-floating">Code on the tube</label>
+      <input type="text" class="form-control" id="bcode" name="bcode" required>
+      <small id="bcodehelp" class="form-text text-muted">
+      If you did not receive a barcoded test tube, please click <a href="#">here </a>.
+      </small>
+    </div>
+>>>>>>> c1aefaf2aaad8c7f91b08fea68dee1853b4b2b7b
 
 
 
