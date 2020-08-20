@@ -63,6 +63,7 @@ footer {
 	line-height: 100px;
 	display: block;
 	vertical-align: middle;
+	z-index: 10;
 }
 
 .index-header img {
@@ -179,6 +180,7 @@ footer {
 	width: 100%;
 	height: auto;
 	transform: translate(-50%, -50%);
+	z-index: 100;
 }
 
 .bg-overlay {
