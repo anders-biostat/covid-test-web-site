@@ -109,9 +109,18 @@ footer {
 	height: auto;
 }
 
-.page-header .title {
+.title {
 	font-weight: bolder;
 	font-size: 30px;
+}
+
+.title a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.title a:hover {
+	border-bottom: 2px solid #f1f1f1;
 }
 
 .material-icons {
