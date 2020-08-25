@@ -29,6 +29,16 @@ footer {
 	width: 100%;
 	flex-shrink: 0;
 	line-height: 40px;
+	font-size: 15px;
+}
+
+footer a {
+	color: #ad0028;
+}
+
+footer a:hover {
+	color: #222222;
+	text-decoration: none;
 }
 
 .page {
@@ -188,7 +198,7 @@ footer {
 	background-color: RGBA(255, 252, 248, 0.0);
 }
 .banner-text h2 {
-	font-size: 45px;
+	font-size: 35px;
 }
 .banner-text h2 span {
 	color: #CC0130;
@@ -197,6 +207,12 @@ footer {
 	padding: 30px;
 	font-size: 15px;
 }
+
+.banner-text p + p {
+	margin-top: -20px;
+	padding: 0;
+}
+
 .button {
   background-color: #CC0130;
   border: 1px solid rgb(119,136,153, 0.18);
@@ -206,7 +222,7 @@ footer {
   text-decoration: none;
   display: inline-block;
   border-radius: 25px 25px 25px 25px;
-	font-size: 18px;
+	font-size: 15px;
 	margin-top: 20px;
   width: auto;
   height: auto;
@@ -387,7 +403,6 @@ article {
 	font-family: 'Roboto', sans-serif;
 	color: #ffffff;
 	background-color: #222222;
-	font-size: 1.6rem;
 }
 
 .page-footer a {
