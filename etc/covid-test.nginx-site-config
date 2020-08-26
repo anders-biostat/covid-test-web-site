@@ -2,13 +2,13 @@
 # one of the site config files in /etc/nginx/sites-available
 
 	location /corona-test {
-		alias /Users/fereydoon/corona-test/covid-test-web-site/static;
+		alias /var/www/apps/corona-test/static;
 
 		ssi on;
 
 		# all URLs containing "fcgi" will be sent to the FastCGI script:
 		location ~ /fcgi {
 			include fastcgi_params;
-			fastcgi_pass 127.0.0.1:8080;
+			fastcgi_pass 127.0.0.1:31234;
 		}
 	}
