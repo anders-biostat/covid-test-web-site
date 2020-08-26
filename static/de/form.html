@@ -1,14 +1,13 @@
 <!--# include file="header-page.html" -->
 
-
-<div id="form" class="modal modal-form" style="display:block">
- <form action="fcgi-register" method="post">
-    <div class="content">
+<main class="page-content">
+  <div id="form" class="container2 content">
+   <form action="fcgi-register" method="post">
     <h1>Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:</h1>
     <hr>
     <div class="form-group bmd-form-group">
       <label for="bcode" class="bmd-label-floating">Code auf dem Röhrchen</label>
-      <input type="text" class="form-control" id="bcode" name="bcode" required>
+      <input type="text" class="form-control col-5" id="bcode" name="bcode" required>
       <small id="bcodehelp" class="form-text text-muted">
       Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte <a href="#">hier </a>.
       </small>
@@ -21,8 +20,8 @@
         <input type="text" id="name" class="form-control" name="name" required>
       </div>
       <div class="form-group bmd-form-group">
-        <label for="address" class="bmd-label-floating">Anschrift (Strasse, Hausnummer, Wohnort)</label>
-        <input type="text" id="address" class="form-control" name="address" required>
+        <label for="address" class="bmd-label-floating">Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)</label>
+        <textarea type="text" id="address" class="form-control" name="address" rows="3" required></textarea>
       </div>
       <div class="form-group bmd-form-group">
         <label for="contact" class="bmd-label-floating">Telefonnummer oder E-Mail-Addresse</label>
@@ -41,14 +40,14 @@
         <input type="password" class="form-control" name="psw-repeat" required>
       </div>
       <div>
-          <a href="index.html" id="closeform" class="button-small">Abrechnen</a>
+          <a href="index.html" id="closeform" class="button-small">Abbrechen</a>
           <button type="submit" class="button-small">Daten abschicken</button>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</main>
 
-<!--# include file="footer.html" -->
+<!--# include file="footer-page.html" -->
 
 
 <script type="text/javascript">

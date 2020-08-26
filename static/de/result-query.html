@@ -1,16 +1,13 @@
 <!--# include file="header-page.html" -->
 
- <body>
-
-
-  <div id="form" class="modal modal-form" style="display:block">
+<main class="page-content">
+  <div id="form" class="container2 content">
     <form action="fcgi-result-query" method="post">
-      <div class="content">
 
         <h1>Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:</h1>
         <div class="form-group">
           <label for="bcode">Ihr Code: </label>
-          <input type="text" name="bcode" class="form-control" required>
+          <input type="text" name="bcode" class="form-control col-5" required>
           <small id="bcodehelp" class="form-text text-muted">
           wie er auf Ihrem Röhrchen aufgedruckt war
           </small>
@@ -18,21 +15,21 @@
 
         <div class="form-group">
           <label for="psw">Ihr Passwort:</label>
-          <input type="password" name="psw" class="form-control" required>
+          <input type="password" name="psw" class="form-control col-5" required>
           <small id="passwordhelp" class="form-text text-muted">
           wie Sie es bei der Eingabe Ihrer Daten gewählt haben
           </small>
         </div>
 
       <div>
-          <a href="index.html" id="closeform" class="button-small">Cancel</a>
+          <a href="index.html" id="closeform" class="button-small">Zurück</a>
           <button type="submit" class="button-small">Ergebnis anzeigen</button>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</main>
 
-<!--# include file="footer.html" -->
+<!--# include file="footer-page.html" -->
 
 
 

@@ -1,52 +1,52 @@
 <!--# include file="header-page.html" -->
 
-
-<div id="form" class="modal modal-form" style="display:block">
- <form action="fcgi-register" method="post">
-    <div class="content">
-    <h1>Please insert the code on your test tube:</h1>
-    <hr>
-    <div class="form-group bmd-form-group">
-      <label for="bcode" class="bmd-label-floating">Code on the tube</label>
-      <input type="text" class="form-control" id="bcode" name="bcode" required>
-      <small id="bcodehelp" class="form-text text-muted">
-      If you did not receive a barcoded test tube, please click <a href="#">here </a>.
-      </small>
-    </div>
-
-      <p> In case you will be tested positive for SARS-CoV-2, the public health office (Gesundheitsamt) will need to contact you. Therefore, please sign in your contact details: </p>
-
+<main class="page-content">
+  <div id="form" class="container2 content">
+   <form action="fcgi-register" method="post">
+      <h1>Please insert the code on your test tube:</h1>
+      <hr>
       <div class="form-group bmd-form-group">
-        <label for="name" class="bmd-label-floating">Full Name</label>
-        <input type="text" id="name" class="form-control" name="name" required>
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="address" class="bmd-label-floating">Address (street, number, zip code, city)</label>
-        <input type="text" id="address" class="form-control" name="address" required>
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="contact" class="bmd-label-floating">phone number or E-mail address</label>
-        <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
+        <label for="bcode" class="bmd-label-floating">Code on the tube</label>
+        <input type="text" class="form-control col-5" id="bcode" name="bcode" required>
+        <small id="bcodehelp" class="form-text text-muted">
+        If you did not receive a barcoded test tube, please click <a href="no-tube.html">here </a>.
+        </small>
       </div>
 
-      <p> <small> Data protection information: Your name and contact details will be handled private and confidential. Only employees of the public health office will have access. </small> </p>
+        <p> In case you will be tested positive for SARS-CoV-2, the public health office (Gesundheitsamt) will need to contact you. Therefore, please sign in your contact details: </p>
 
-      <p> To enquire your test result, please note down your sample code and enter a password: </p>
-      <div class="form-group bmd-form-group">
-        <label for="psw" class="bmd-label-floating">Password</label>
-        <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="psw-repeat" class="bmd-label-floating"><b>please repeat your password:</b></label>
-        <input type="password" class="form-control" name="psw-repeat" required>
-      </div>
-      <div>
-          <a href="index.html" id="closeform" class="button-small">Cancel</a>
-          <button type="submit" class="button-small">Submit</button>
-      </div>
-    </div>
-  </form>
-</div>
+        <div class="form-group bmd-form-group">
+          <label for="name" class="bmd-label-floating">Full Name</label>
+          <input type="text" id="name" class="form-control" name="name" required>
+        </div>
+        <div class="form-group bmd-form-group">
+          <label for="address" class="bmd-label-floating">Address (street, number, zip code, city)</label>
+          <textarea type="text" id="address" class="form-control" name="address" rows="3" required></textarea>
+        </div>
+        <div class="form-group bmd-form-group">
+          <label for="contact" class="bmd-label-floating">phone number or E-mail address</label>
+          <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
+        </div>
+
+        <p> <small> Data protection information: Your name and contact details will be handled private and confidential. Only employees of the public health office will have access. </small> </p>
+
+        <p> To enquire your test result, please note down your sample code and enter a password: </p>
+        <div class="form-group bmd-form-group">
+          <label for="psw" class="bmd-label-floating">Password</label>
+          <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
+        </div>
+        <div class="form-group bmd-form-group">
+          <label for="psw-repeat" class="bmd-label-floating"><b>please repeat your password:</b></label>
+          <input type="password" class="form-control" name="psw-repeat" required>
+        </div>
+        <div>
+            <a href="index.html" id="closeform" class="button-small">Cancel</a>
+            <button type="submit" class="button-small">Submit</button>
+        </div>
+    </form>
+  </div>
+</main>
+<!--# include file="footer-page.html" -->
 
 <script type="text/javascript">
 
@@ -58,7 +58,6 @@
   }
 
 </script>
-<!--# include file="header-page.html" -->
 
 </body>
 </html>

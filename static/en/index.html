@@ -1,44 +1,20 @@
 <!--# include file="header-index.html" -->
 
-
+<main class="page-content">
   <div class="banner" id="banner">
-    <div class="bg-overlay">
             <div class="banner-text">
-              <h2>Welcome to the <br> <span>Covid-19</span> rapid test website</h2>
+              <h2>Welcome to the <span>Covid-19</span> rapid test website</h2>
               <a href="consent.html" class="button"> Register my test kit </a>
               <a href="result-query.html" class="button"> Enquire my test result </a>
-              <a href="information.html" class="button">learn more about the test</a>
-              <p> This website is also available in: &nbsp;
+              <a href="information.html" class="button">Learn more about the test</a>
+              <p> This website is available in: &nbsp;
                <a href="../de/index.html"> Deutsch </a> &nbsp;
-               <a href="../de/index.html"> English </a> &nbsp;
-               <a href="../de/index.html"> Türkçe </a>
-              </p>
+             </p>
+             <p> In case of technical problems, please contact <a href="mailto:s.sanders@zmbh.uni-heidelberg.de"> Simon Anders </a>. </p>
         </div>
     </div>
-  </div>
-
-
-  <!--# include file="footer.html" -->
-
-<script>
-  //JavaScript function that enables or disables a submit button depending
-  //on whether a checkbox has been ticked or not.
-  function EnableSubmit(termsCheckBox){
-      //If the checkbox has been checked
-      if(termsCheckBox.checked){
-          //Set the disabled property to FALSE and enable the button.
-          document.getElementById("showForm").disabled = false;
-          document.getElementById("showForm").classList.remove("disabled");
-      } else{
-          //Otherwise, disable the submit button.
-          document.getElementById("showForm").disabled = true;
-          document.getElementById("showForm").classList.add("disabled");
-      }
-  }
-
-  </script>
-
-
+</main>
+  <!--# include file="footer-index.html" -->
 
 </body>
 </html>
