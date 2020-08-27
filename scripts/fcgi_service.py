@@ -8,7 +8,7 @@ import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 import load_codes
 
 #SOCKET = "../etc/fcgi.sock"
-PORT = 8080
+PORT = 31234
 
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
