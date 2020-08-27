@@ -1,4 +1,24 @@
-<!--# include file="header.html" -->
+<!--# include file="header-page.html" -->
+
+<div class="container2">
+  	  <h2>Teilnahme am Coronavirus-Test</h2>
+        <div class="scroll-box">
+          <!--# include file="information-text.html" -->
+    </div>
+    <form method="GET">
+      <div>
+          <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+          <label for="terms_and_conditions">Ich bin einverstanden und möchte am Test teilnehmen.</label>
+      </div>
+    </form>
+    <div>
+      <a href="index.html" id="closeform" class="button-small">Zurück</a>
+      <a href="form.html" type="submit" id="showForm" class="button-small disabled" disabled>Weiter</a>
+    </div>
+  </div>
+
+<!--# include file="footer-page.html" -->
+
 
 <script>
 
@@ -8,34 +28,15 @@ function EnableSubmit(termsCheckBox){
     //If the checkbox has been checked
     if(termsCheckBox.checked){
         //Set the disabled property to FALSE and enable the button.
-        document.getElementById("submit_button").disabled = false;
-        document.getElementById("submit_button").classList.remove("disabled");
+        document.getElementById("showForm").disabled = false;
+        document.getElementById("showForm").classList.remove("disabled");
     } else{
         //Otherwise, disable the submit button.
-        document.getElementById("submit_button").disabled = true;
-        document.getElementById("submit_button").classList.add("disabled");
+        document.getElementById("showForm").disabled = true;
+        document.getElementById("showForm").classList.add("disabled");
     }
 }
+
 </script>
-
-
-  <div class="content">
-
-  	  <h2>Teilnahme am Coronavirus-Test</h2>
-
-	  <span style="color:darkred"><u>Bitte lesen Sie sich diese Informationen durch und bestätigen Sie dann Ihr Einverständnis, in dem Sie auf die Schaltfläche <b>am Ende dieser Seite</b> klicken.</u></span>
-
-<!--# include file="information-text.html" -->
-
-
-      <h3> Einwilligung </h3>
-        <p> Wenn Sie sich durch diese Informationen ausreichend informiert fühlen und nur einverstanden sind, an der Studie teilzunehmen, klicken Sie bitte auf die folgende Schaltfläche: </p>
-
-	<a href="form.html" class="button">Ich bin einverstanden und möchte am Test teilnehmen</a>
-
-
-</div>
-
-
- </body>
- </html>
+</body>
+</html>

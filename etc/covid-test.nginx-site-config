@@ -2,8 +2,8 @@
 # one of the site config files in /etc/nginx/sites-available
 
 	location /corona-test {
-		alias /home/anders/w/repos/covid-test-web-site/static;
-		#     ^^^^^^^^^^^^^^^^^^^^^  <- replace with correct path
+		alias /var/www/apps/corona-test/static;
+
 		ssi on;
 
 		# all URLs containing "fcgi" will be sent to the FastCGI script:

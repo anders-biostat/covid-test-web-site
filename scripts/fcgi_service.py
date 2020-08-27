@@ -79,7 +79,7 @@ def encode_subject_data( barcode, name, address, contact, password ):
 def serve_file( environ, start_response, filename, replacements ):
 
 	start_response('200 OK', [('Content-Type', 'text/html; charset=utf-8')])
-	lang = re.compile("(\\w*)/fcgi").search( "/corona-test/de/fcgi-instructions" )[1]
+	lang = re.compile("(\\w*)/fcgi").search( environ.get('SCRIPT_NAME', 0) )[1]
 	lines = []
 	with open( HTML_DIRS + "/" + lang + "/" + filename, encoding="utf-8" ) as f:
 		for line in f:
@@ -178,10 +178,10 @@ def app_result_query( environ, start_response ):
 		return [
 			"<h2>Unregistered barcode.</h2>",
 			"This barcode has not yet been registered. You have to fill out the ",
-			'<a href="consent-de.html">registration form</a> before you can check the result.',
+			'<a href="consent.html">registration form</a> before you can check the result.',
 			"<h2>Unregistrierter Barcode.</h2>",
 			"Für diesen Barcode wurden noch keine Kontakt-Daten eingetragen. Sie müssen erst ",
-			'<a href="constent-de.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
+			'<a href="constent.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
 			'das Ergebnis abfragen können.' ]
 
 	if len( hashes_found ) > 1:
@@ -221,10 +221,10 @@ def app_result_query( environ, start_response ):
 				barcode, remainder = line.rstrip(), ""
 			if barcode == form_barcode:
 				if remainder == "":
-					start_response('303 See Other', [('Location', 'test-result-negative-de.html')])
+					start_response('303 See Other', [('Location', 'test-result-negative.html')])
 					return []
 				elif remainder.lower().startswith( "pos" ):
-					start_response('303 See Other', [('Location', 'test-result-positive-de.html')])
+					start_response('303 See Other', [('Location', 'test-result-positive.html')])
 					return []
 				else:
 					start_response('200 OK', [('Content-Type', 'text/html')])

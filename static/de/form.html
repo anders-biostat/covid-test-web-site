@@ -1,79 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title> Schnelltest der Universität Heidelberg auf das Covid-19-Coronavirus (SARS-CoV-2) </title>
-<meta charset="UTF-8">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box}
+<!--# include file="header-page.html" -->
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
+<main class="page-content">
+  <div id="form" class="container2 content">
+   <form action="fcgi-register" method="post">
+    <h1>Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:</h1>
+    <hr>
+    <div class="form-group bmd-form-group">
+      <label for="bcode" class="bmd-label-floating">Code auf dem Röhrchen</label>
+      <input type="text" class="form-control col-5" id="bcode" name="bcode" required>
+      <small id="bcodehelp" class="form-text text-muted">
+      Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte <a href="#">hier </a>.
+      </small>
+    </div>
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+      <p> Falls wir das Virus in Ihrer Probe nachweisen sollten, muss das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre Kontakt-Daten an: </p>
 
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
+      <div class="form-group bmd-form-group">
+        <label for="name" class="bmd-label-floating">Name</label>
+        <input type="text" id="name" class="form-control" name="name" required>
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="address" class="bmd-label-floating">Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)</label>
+        <textarea type="text" id="address" class="form-control" name="address" rows="3" required></textarea>
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="contact" class="bmd-label-floating">Telefonnummer oder E-Mail-Addresse</label>
+        <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
+      </div>
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+      <p> <small> Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf Zugriff. </small> </p>
 
-button:hover {
-  opacity:1;
-}
+      <p> Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie sich bitte ihren Code und geben Sie ein Passwort an: </p>
+      <div class="form-group bmd-form-group">
+        <label for="psw" class="bmd-label-floating">Passwort:</label>
+        <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="psw-repeat" class="bmd-label-floating"><b>dasselbe Passwort nochmal:</b></label>
+        <input type="password" class="form-control" name="psw-repeat" required>
+      </div>
+      <div>
+          <a href="index.html" id="closeform" class="button-small">Abbrechen</a>
+          <button type="submit" class="button-small">Daten abschicken</button>
+      </div>
+    </form>
+  </div>
+</main>
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
+<!--# include file="footer-page.html" -->
 
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .rgstrbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .rgstrbtn {
-     width: 100%;
-  }
-}
-</style>
 
 <script type="text/javascript">
 
@@ -85,47 +60,6 @@ button:hover {
   }
 
 </script>
-
-</head>
-<body>
-
-<form action="fcgi-register" method="post" style="border:1px solid #ccc">
-  <div class="container">
-    <h1>Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:</h1>
-    <hr>
-
-    <label for="bcode"><b>Code auf dem Röhrchen <img src=media/barcode_img.jpg alt="barcode" width="100" height="40" style="float:right;"> </b></label>
-    <input type="text" id="bcode" name="bcode" required>
-    <p> Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte <a href="#">hier </a>. </p>
-    <p> Falls wir das Virus in Ihrer Probe nachweisen sollten, muss das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre Kontakt-Daten an: </p>
-
-    <label for="name"><b>Name</b></label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="address"><b>Anschrift (Strasse, Hausnummer, Wohnort)</b></label>
-    <input type="text" id="address" name="address" rows="6" required>
-
-    <label for="contact"><b>Telefonnummer oder E-Mail-Addresse</b></label>
-    <input type="text" id="contact" name="contact" rows="4" required>
-
-    <p> <small> Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf Zugriff. </small> </p>
-
-    <p> Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie sich bitte ihren Code und geben Sie ein Passwort an: </p>
-    <label for="psw"><b>Passwort:</b></label>
-    <input type="password" name="psw" required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
-
-    <label for="psw-repeat"><b>dasselbe Passwort nochmal:</b></label>
-    <input type="password" name="psw-repeat" required>
-
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Abrechnen</button>
-      <button type="submit" class="rgstrbtn">Daten abschicken</button>
-    </div>
-
-    <p>Falls Sie Probleme mit dieser Webseite haben, geben Sie uns bitte Bescheid: s.anders@zmbh.uni-heidelberg.de</p>
-  </div>
-</form>
 
 </body>
 </html>
