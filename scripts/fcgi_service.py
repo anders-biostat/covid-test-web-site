@@ -7,13 +7,12 @@ import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 
 import load_codes
 
-#SOCKET = "../etc/fcgi.sock"
-PORT = 31234
-
+# file names
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
 PUBLIC_KEY_FILENAME = "../data/public.pem"
 HTML_DIRS = "../static/"
 RESULTS_FILENAME = "../data/results.txt"
+NGINX_CONF_FILENAME = "../etc/covid-test.nginx-site-config"
 
 
 def load_data():
@@ -267,6 +266,18 @@ def app( environ, start_response ):
 
 
 # BEGIN MAIN FUNCTION
+
+# Search port number in nginx cofig file:
+with open( NGINX_CONF_FILENAME ) as f:
+	for l in f:
+		m = re.search( r"fastcgi_pass\s+127.0.0.1\s*:\s*(\d+)", l )
+		if m:
+			port = int(m.group(1))
+			break
+if port is None:
+	sys.stderr.write( "Cannot determine port number.\n" )
+	sys.exit(1)
+print( "Listening on port", port )
 
 while True:
 	load_data()
