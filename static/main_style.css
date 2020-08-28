@@ -263,12 +263,14 @@ footer a:hover {
   transition-duration: 0.6s;
   cursor: pointer;
 	vertical-align: middle;
+	-webkit-appearance:none;
 }
 
 .button-small:hover {
   background-color: #ad0028;
 	text-decoration: none;
 	color: #ffffff;
+	-webkit-appearance:none;
 }
 
 .disabled {
