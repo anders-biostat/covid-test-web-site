@@ -274,6 +274,7 @@ footer a:hover {
 .disabled {
 	opacity: 0.65;
 	pointer-events: none;
+	-webkit-appearance:none;
 }
 
 /* bluring effect for consent page */
