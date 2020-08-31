@@ -1,6 +1,7 @@
 We need a second set of web page for a related activity, namely tests distributed
 to infected patients currently in home quarantine. This here is what we need:
 
+----
 
 Welcome page
 ============
@@ -41,6 +42,7 @@ Schritt 4: Sagen Sie uns, wann und wo wir das Röhrchen abholen können.
 [ Button: Weiter zu Schritt 1 ]
 
 
+----
 
 Consent page
 ============
@@ -76,9 +78,9 @@ Ihre Adresse: ________________________________
 Wann können wir das Röhrchen abholen? Bitte klicken Sie an, wann
 es Ihnen passt:
 
-[ ] Di, 3.9., 10-12 Uhr
-[ ] Mi, 3.9., 14-17 Uhr
-[ ] ......
+- [ ] Di, 3.9., 10-12 Uhr
+- [ ] Mi, 3.9., 14-17 Uhr
+- [ ] ......
 
 Dürfen wir Sie anrufen, kurz bevor wir vorbei kommen? 
 
@@ -88,6 +90,7 @@ Ihre Telefonnummer: _________________________
 
 Note: This data is stored *unencrypted*, and there is no password this time.
 
+----
 
 Thank you page
 ==============
@@ -95,7 +98,7 @@ Thank you page
 Vielen Dank! Bitte nehmen Sie morgen früh wie gezeigt Ihre Speichel-Probe ab, und
 wir holen Sie dann zum vereinbarten Termin ab.
 
-
+----
 
 Video content
 =============
@@ -119,6 +122,8 @@ My suggestion for the video:
   und wieder in Ihre Wohnung zurück gehen. Bitte halten Sie abstand zu unserem Mitarbeiter. 
   Wenn Sie wieder in Ihrer Wohnung sind, nimmt er die Schachtel dann mit.
 
+
+----
 
 Not clear yet
 =============
