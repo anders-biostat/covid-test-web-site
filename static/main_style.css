@@ -142,8 +142,10 @@ footer a:hover {
 	border-bottom: 2px solid #f1f1f1;
 }
 
-.material-icons {
-	font-size: 30px;
+.material-icons.md-36 {
+	font-size: 36px !important;
+	height: 36px !important;
+	width: 36px !important;
 }
 
 .dropdown-lang {
@@ -327,7 +329,7 @@ footer a:hover {
 	width: 600px;
 	height: 800px;
 }
-/*@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .modal {
     -webkit-backdrop-filter: blur(40px);
     backdrop-filter: blur(40px);
@@ -336,7 +338,7 @@ footer a:hover {
   .warning {
     display: none;
   }
-}*/
+}
 
 /* Scrollable consent form */
 
@@ -425,6 +427,10 @@ article {
 	color: #ad0028;
 	text-decoration: none;
 }
+
+#interactive.viewport {position: relative; width: 100%; height: auto; overflow: hidden; text-align: center;}
+#interactive.viewport > canvas, #interactive.viewport > video {max-width: 100%;width: 100%;}
+canvas.drawing, canvas.drawingBuffer {position: absolute; left: 0; top: 0;}
 
 @media (min-width:0px) and (max-width: 780px) {
 	.title {
