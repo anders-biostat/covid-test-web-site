@@ -43,7 +43,7 @@ with open( sys.argv[1] ) as f:
         md5_instance.update( private_key.publickey().exportKey("DER") )
         private_key_fingerprint = md5_instance.hexdigest()
 
-        print( "privater Schlüssel geladen:", private_key_fingerprint )
+        print( "key fingerprint:", private_key_fingerprint )
 
     elif "PUBLIC" in line:
         f.close()
@@ -66,4 +66,4 @@ with open( sys.argv[1] ) as f:
         md5_instance_public.update( public_key.publickey().exportKey("DER") )
         public_key_fingerprint = md5_instance_public.hexdigest()
 
-        print( "public Schlüssel geladen:", public_key_fingerprint )
+        print( "key fingerprint:", public_key_fingerprint )
