@@ -3,11 +3,11 @@
 import sys, getpass, hashlib
 import Crypto.PublicKey.RSA
 
-passphrase = getpass.getpass( "Enter a passphrase to protect secret key: " )
-passphrase_repeat = getpass.getpass( "Enter passphrase again: " )
+passphrase = getpass.getpass( "Enter a passphrase to protect the secret key: " )
+passphrase_repeat = getpass.getpass( "Enter the passphrase again: " )
 
 if passphrase != passphrase_repeat:
-	sys.stderr.write( "Passphrases differ. Aborting." )
+	sys.stderr.write( "The passphrases differ. Aborting." )
 	sys.exit( 1 )
 
 print( "Generating key pair." )
