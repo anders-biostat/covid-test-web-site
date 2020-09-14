@@ -1,22 +1,32 @@
 #!/usr/bin/python3
 
-import sys, getpass
+import sys, getpass, hashlib
 import Crypto.PublicKey.RSA
 
-passphrase = getpass.getpass( "Enter passphrase to protect secret key: " )
+passphrase = getpass.getpass( "Enter a passphrase to protect secret key: " )
 passphrase_repeat = getpass.getpass( "Enter passphrase again: " )
 
 if passphrase != passphrase_repeat:
 	sys.stderr.write( "Passphrases differ. Aborting." )
 	sys.exit( 1 )
 
-sys.stderr.write( "Generating key pair.\n" )
+print( "Generating key pair." )
 key = Crypto.PublicKey.RSA.generate( 3072 )
 
-with open( "private.pem", "wb" ) as f:
+# Get fingerprint
+md5_instance = hashlib.md5()
+md5_instance.update( key.publickey().exportKey("DER") )
+public_key_fingerprint = md5_instance.hexdigest()
+
+print( "Key pair generated. Key fingerprint: %s." % public_key_fingerprint )
+
+filename = "private_%s.pem" % public_key_fingerprint[:6]
+with open( filename, "wb" ) as f:
    f.write( key.export_key( passphrase=passphrase ) )
+   print( "Saved keypair as %s. Keep this file secret." % filename )
 
-with open( "public.pem", "wb" ) as f:
-	f.write( key.publickey().export_key() )
+filename = "public_%s.pem" % public_key_fingerprint[:6]
+with open( filename, "wb" ) as f:
+   f.write( key.publickey().export_key() )
+   print( "Saved public ket as %s. Use this file for encryption on web server." % filename )
 
-sys.stderr.write( "Key pair generated and saved in 'public.pem' and 'private.pem'.\n" )
