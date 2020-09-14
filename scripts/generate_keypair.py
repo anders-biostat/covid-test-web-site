@@ -28,5 +28,5 @@ with open( filename, "wb" ) as f:
 filename = "public_%s.pem" % public_key_fingerprint[:6]
 with open( filename, "wb" ) as f:
    f.write( key.publickey().export_key() )
-   print( "Saved public ket as %s. Use this file for encryption on web server." % filename )
+   print( "Saved public key as %s. Use this file for encryption on web server." % filename )
 
