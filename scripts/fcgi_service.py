@@ -180,7 +180,7 @@ def app_result_query( environ, start_response ):
 			'<a href="consent.html">registration form</a> before you can check the result.',
 			"<h2>Unregistrierter Barcode.</h2>",
 			"Für diesen Barcode wurden noch keine Kontakt-Daten eingetragen. Sie müssen erst ",
-			'<a href="constent.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
+			'<a href="consent.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
 			'das Ergebnis abfragen können.' ]
 
 	if len( hashes_found ) > 1:
