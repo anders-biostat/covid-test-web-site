@@ -14,7 +14,7 @@ body {
 }
 
 b, strong {
-    font-weight: 700;
+	font-weight: 700;
 }
 
 span {
@@ -23,6 +23,7 @@ span {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Open Sans', sans-serif;
+	font-weight: normal;
 }
 
 a {
@@ -129,7 +130,6 @@ footer a:hover {
 }
 
 .title {
-	font-weight: bolder;
 	font-size: 30px;
 }
 
@@ -293,6 +293,15 @@ footer a:hover {
 	margin: auto;
 }
 
+.container2 h1,
+.container2 h2,
+.container2 h3,
+.container2 h4,
+.container2 h5,
+.container2 h6 {
+	font-weight: 700;
+}
+
 .modal-consent {
   background-color: #ffffff;
   color: #222222;
@@ -329,11 +338,12 @@ footer a:hover {
 	width: 600px;
 	height: 800px;
 }
+
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .modal {
-    -webkit-backdrop-filter: blur(40px);
-    backdrop-filter: blur(40px);
-    background-color: rgba(0, 0, 19, 0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 19, 0);
   }
   .warning {
     display: none;
@@ -350,6 +360,15 @@ footer a:hover {
   height: 66.3%;
   margin-top: 0.8rem;
 	margin-bottom: 0.8rem;
+}
+
+.scroll-box h1,
+.scroll-box h2,
+.scroll-box h3,
+.scroll-box h4,
+.scroll-box h5,
+.scroll-box h6 {
+	font-weight: 700;
 }
 
 .scroll-box ol, .scroll-box ul {
@@ -399,17 +418,17 @@ article {
 }
 
 .video-responsive{
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
+	overflow:hidden;
+	padding-bottom:56.25%;
+	position:relative;
+	height:0;
 }
 .video-responsive iframe{
-    left:0;
-    top:0;
-    height:100%;
-    width:100%;
-    position:absolute;
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
+	position:absolute;
 }
 
 .page-footer {
@@ -428,9 +447,24 @@ article {
 	text-decoration: none;
 }
 
-#interactive.viewport {position: relative; width: 100%; height: auto; overflow: hidden; text-align: center;}
-#interactive.viewport > canvas, #interactive.viewport > video {max-width: 100%;width: 100%;}
-canvas.drawing, canvas.drawingBuffer {position: absolute; left: 0; top: 0;}
+/*#interactive.viewport {
+	position: relative;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	text-align: center;
+}
+
+#interactive.viewport > canvas, #interactive.viewport > video {
+	max-width: 100%;
+	width: 100%;
+}
+
+canvas.drawing, canvas.drawingBuffer {
+	position: absolute;
+	left: 0;
+	top: 0;
+}*/
 
 @media (min-width:0px) and (max-width: 780px) {
 	.title {
