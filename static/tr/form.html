@@ -8,7 +8,7 @@
     <div class="form-group bmd-form-group">
       <label for="bcode" class="bmd-label-floating">Barkod:</label>
       <div class="input-group">
-        <input type="text" class="form-control col-5" placeholder="Barkodu taramak için düğmeye tıklayın" id="bcode" name="bcode" required>
+        <input type="text" class="form-control col-5" placeholder="Barkodu taramak için düğmeye tıklayın" id="bcode" name="bcode" autocomplete="on" required>
         <span class="input-group-btn input-group-append">
             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#livestream_scanner">
               <i class="material-icons">qr_code_scanner</i>
@@ -24,15 +24,15 @@
 
         <div class="form-group bmd-form-group">
           <label for="name" class="bmd-label-floating">Ad Soyad</label>
-          <input type="text" id="name" class="form-control" name="name" required>
+          <input type="text" id="name" class="form-control" name="name" autocomplete="name" required>
         </div>
         <div class="form-group bmd-form-group">
           <label for="address" class="bmd-label-floating">Adres (sokak, numara, posta kodu, şehir)</label>
-          <textarea type="text" id="address" class="form-control" name="address" rows="3" required></textarea>
+          <textarea type="text" id="address" class="form-control" name="address" autocomplete="street-address" rows="3" required></textarea>
         </div>
         <div class="form-group bmd-form-group">
           <label for="contact" class="bmd-label-floating">Telefon numarası veya E-posta adresi</label>
-          <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
+          <input type="text" id="contact" class="form-control" name="contact" autocomplete="tel" required>
         </div>
 
         <p> <small> Kişisel verilerin korunmasına ilişkin not: Adınız ve iletişim bilgileriniz kesinlikle gizli tutulacaktır. Yalnızca halk sağlığı ofisi çalışanları erişime sahip olacaktır. </small> </p>
@@ -40,7 +40,7 @@
         <p> Test sonucunuza erişmek için tüpünüze bir barkod ve bir şifre girmeniz gerekecektir. Lütfen şimdi şifreyi seçin: </p>
         <div class="form-group bmd-form-group">
           <label for="psw" class="bmd-label-floating">Şifre</label>
-          <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
+          <input type="password" class="form-control" name="psw" autocomplete="new-password" required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
         </div>
         <div class="form-group bmd-form-group">
           <label for="psw-repeat" class="bmd-label-floating"><b>Lütfen şifrenizi tekrar yazın:</b></label>
