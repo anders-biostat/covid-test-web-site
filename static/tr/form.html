@@ -3,12 +3,12 @@
 <main class="page-content">
   <div id="form" class="container content">
    <form action="fcgi-register" method="post">
-    <h3>Please enter the code printed on your test tube:</h3>
+    <h3>Lütfen test tüpünüzün üzerinde basılı olan kodu girin:</h3>
     <hr>
     <div class="form-group bmd-form-group">
-      <label for="bcode" class="bmd-label-floating">Code on the tube</label>
+      <label for="bcode" class="bmd-label-floating">Barkod:</label>
       <div class="input-group">
-        <input type="text" class="form-control col-5" placeholder="Click the button to scan the barcode" id="bcode" autocomplete="on" name="bcode" required>
+        <input type="text" class="form-control col-5" placeholder="Barkodu taramak için düğmeye tıklayın" id="bcode" name="bcode" autocomplete="on" required>
         <span class="input-group-btn input-group-append">
             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#livestream_scanner">
               <i class="material-icons">qr_code_scanner</i>
@@ -16,39 +16,39 @@
           </span>
        </div>
       <small id="bcodehelp" class="form-text text-muted">
-      If you did not receive a test tube, please see <a href="no-tube.html">here </a>.
+      Bir test tüpü almadıysanız, lütfen <a href="no-tube.html">buraya</a> bakın.
       </small>
     </div>
 
-        <p> If your sample should turn out to be positive, the public health office (Gesundheitsamt) will need to contact you. Therefore, please provide your contact details: </p>
+        <p> Örneğinizin pozitif çıkması durumunda, halk sağlığı ofisinin (Gesundheitsamt) sizinle iletişime geçmesi gerekecektir. Bu nedenle, lütfen iletişim bilgilerinizi sağlayın: </p>
 
         <div class="form-group bmd-form-group">
-          <label for="name" class="bmd-label-floating">Full Name</label>
+          <label for="name" class="bmd-label-floating">Ad Soyad</label>
           <input type="text" id="name" class="form-control" name="name" autocomplete="name" required>
         </div>
         <div class="form-group bmd-form-group">
-          <label for="address" class="bmd-label-floating">Address (street, number, city)</label>
+          <label for="address" class="bmd-label-floating">Adres (sokak, numara, posta kodu, şehir)</label>
           <textarea type="text" id="address" class="form-control" name="address" autocomplete="street-address" rows="3" required></textarea>
         </div>
         <div class="form-group bmd-form-group">
-          <label for="contact" class="bmd-label-floating">Phone number or Email address</label>
+          <label for="contact" class="bmd-label-floating">Telefon numarası veya E-posta adresi</label>
           <input type="text" id="contact" class="form-control" name="contact" autocomplete="tel" required>
         </div>
 
-        <p> <small> Note regarding protection of personal data: Your name and your contact details will be kept strictly confidential. Only employees of the public health office will have access. </small> </p>
+        <p> <small> Kişisel verilerin korunmasına ilişkin not: Adınız ve iletişim bilgileriniz kesinlikle gizli tutulacaktır. Yalnızca halk sağlığı ofisi çalışanları erişime sahip olacaktır. </small> </p>
 
-        <p> To access your test result, you will need to enter a the barcode on your tube and a password. Please choose the password now: </p>
+        <p> Test sonucunuza erişmek için tüpünüze bir barkod ve bir şifre girmeniz gerekecektir. Lütfen şimdi şifreyi seçin: </p>
         <div class="form-group bmd-form-group">
-          <label for="psw" class="bmd-label-floating">Password</label>
+          <label for="psw" class="bmd-label-floating">Şifre</label>
           <input type="password" class="form-control" name="psw" autocomplete="new-password" required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
         </div>
         <div class="form-group bmd-form-group">
-          <label for="psw-repeat" class="bmd-label-floating"><b>Please type your password again:</b></label>
+          <label for="psw-repeat" class="bmd-label-floating"><b>Lütfen şifrenizi tekrar yazın:</b></label>
           <input type="password" class="form-control" name="psw-repeat" required>
         </div>
         <div>
-            <a href="index.html" id="closeform" class="button-small">Cancel</a>
-            <button type="submit" class="button-small">Submit</button>
+            <a href="index.html" id="closeform" class="button-small">İptal</a>
+            <button type="submit" class="button-small">Gönder</button>
         </div>
     </form>
   </div>
@@ -59,14 +59,14 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Please place the barcode on your tube in the frame:</h4>
+        <h4 class="modal-title">Lütfen barkodu çerçevedeki tüpünüzün üzerine yerleştirin:</h4>
       </div>
       <div class="modal-body" style="position: static">
         <div id="interactive" class="viewport"></div>
         <div class="error"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="button-small" data-dismiss="modal">Close</button>
+        <button type="button" class="button-small" data-dismiss="modal">Kapat</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -31,7 +31,7 @@ except:
 	sys.stderr.write( str( sys.exc_info()[1] ) + "\n" )
 	sys.exit( 1 )
 
-# Get key passphrase, 
+# Get key passphrase,
 passphrase = getpass.getpass( "Enter private-key passphrase: " )
 
 # instantiate RSA
@@ -55,15 +55,15 @@ with open( sys.argv[1] ) as f:
 		# Get fields from line in CSV file
 		fields = line.split( ",",  )
 
-		# Three fields (barcode, time stamp, fingerprint) are plain ASCII, 
-		# the remainder has to go through Base-64 decoding 
+		# Three fields (barcode, time stamp, fingerprint) are plain ASCII,
+		# the remainder has to go through Base-64 decoding
 		for i in range( len(fields) ):
 			if i not in ( 0, 1, 3 ):
 				fields[i] = binascii.a2b_base64( fields[i] )
 
 		# unpack line
-		sample_barcode, timestamp, pw_hash, fingerprint, session_key, aes_iv = fields[:6] 
-		subject_data = fields[6:]   
+		sample_barcode, timestamp, pw_hash, fingerprint, session_key, aes_iv = fields[:6]
+		subject_data = fields[6:]
 
 		# Print open information
 		print( "\n" + sample_barcode + ": " + timestamp )
@@ -72,10 +72,10 @@ with open( sys.argv[1] ) as f:
 		if fingerprint == public_key_fingerprint:
 
 			# Decode session key for line, use it to instantiate AES decoder
-			aes_instance = AES.new( 
-				rsa_instance.decrypt( session_key ), 
-				AES.MODE_CBC, 
-				iv=aes_iv )  
+			aes_instance = AES.new(
+				rsa_instance.decrypt( session_key ),
+				AES.MODE_CBC,
+				iv=aes_iv )
 
 			# Decrypt subject data
 			for i in range( len(subject_data) ):
