@@ -17,7 +17,10 @@ def dammDigit(sequence):
     row = 0
     for digit in str(sequence):
         row = _matrix[row][int(digit)]
-    return row
+    for damm in range(0,10):
+        if _matrix[row][damm] == 0:
+            break
+    return damm
 
 #Damm table
 _matrix = (
@@ -126,4 +129,5 @@ batch_file = open("Codes/micronic_batches/micronic_A_%i.lst" %batch_number, "w+"
 for bc in barcode:
     batch_file.write(bc+"\n")
 batch_file.close()
+print(check_digit)
 print("A batch file is created")
