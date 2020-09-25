@@ -39,11 +39,11 @@ def load_data():
 def encode_subject_data( barcode, name, address, contact, password ):
 
 	# Generate session key for use with AES and encrypt it with RSA
-	session_key = Crypto.Random.get_random_bytes( 16 ) 
+	session_key = Crypto.Random.get_random_bytes( 16 )
 	encrypted_session_key = rsa_instance.encrypt( session_key )
-	aes_instance = Crypto.Cipher.AES.new( session_key, Crypto.Cipher.AES.MODE_CBC )  
+	aes_instance = Crypto.Cipher.AES.new( session_key, Crypto.Cipher.AES.MODE_CBC )
 
-	# encode, pad, then encrypt subject data 
+	# encode, pad, then encrypt subject data
 	encrypted_subject_data = []
 	for s in [ name, address, contact ]:
 		s = s.encode( "utf-8" )
@@ -57,8 +57,8 @@ def encode_subject_data( barcode, name, address, contact, password ):
 	password_hash = sha_instance.digest()
 
 	# Make a line for the CSV file
-	fields = [ 
-	   barcode.encode( "utf-8" ), 
+	fields = [
+	   barcode.encode( "utf-8" ),
 	   time.strftime( '%Y-%m-%d %H:%M:%S', time.localtime() ).encode( "utf-8" ),
 	   password_hash,
 	   rsa_instance.public_key_fingerprint,
@@ -72,7 +72,7 @@ def encode_subject_data( barcode, name, address, contact, password ):
 			fields[i] = binascii.b2a_base64( fields[i], newline=False )
 
 	# Make line for file and return it
-	return b",".join( fields ).decode("ascii") + "\n" 
+	return b",".join( fields ).decode("ascii") + "\n"
 
 
 def serve_file( environ, start_response, filename, replacements ):
@@ -99,7 +99,7 @@ def app_register( environ, start_response ):
 
 	if fields['psw'] != fields['psw-repeat']:
 		start_response('200 OK', [('Content-Type', 'text/html')])
-		return[ 
+		return[
 		   b"<html><body><h3>Passwords did not match.</h3>",
 		   b"Please go back and try again.</body></html>",
 		   "<html><body><h3>Passwörter stimmen nicht überein.</h3>".encode("utf-8"),
@@ -116,30 +116,30 @@ def app_register( environ, start_response ):
 		   "Der Barcode, den Sie eingegeben haben (%s), ist unbekannt. " % barcode,
 		   "Vielleicht haben Sie sich vertippt. ",
 		   "Bitte gehen Sie zurück und versuchen Sie es noch einmal.</body></html>" ] ]
-		
+
 	else:
 
 		line = encode_subject_data( barcode, fields['name'], fields['address'],
 			fields['contact'], fields['psw'] )
-		
+
 		with open( SUBJECT_DATA_FILENAME, "a" ) as f:
-			f.write( line ) 
+			f.write( line )
 
 		start_response( '303 See other', [('Location', 'fcgi-instructions?code=' + \
 			barcode )] )
 		return []
-		
+
 
 def app_instructions( environ, start_response ):
 
 	fields = urllib.parse.parse_qs( environ['QUERY_STRING'] )
 	barcode = fields['code'][0]
 
-	return serve_file( environ, start_response, 
+	return serve_file( environ, start_response,
 		"instructions.html", { "@@INSTRUCTIONS@@" :
-			"%s \n <p><small>[Code '%s' of Event '%s']</small></p>\n" % ( 
-				codes2events[ barcode ].instructions, 
-				barcode, 
+			"%s \n <p><small>[Code '%s' of Event '%s']</small></p>\n" % (
+				codes2events[ barcode ].instructions,
+				barcode,
 				codes2events[barcode].name ) } )
 
 
@@ -163,11 +163,11 @@ def app_result_query( environ, start_response ):
 			"<h2>Unbekannter Barcode</h2>",
 			"Dieser Barcode existiert nicht. Vielleicht haben Sie sich vertippt?"
 		]
-   
+
 	# Find barcode registration
 	hashes_found = set()
 	with open( SUBJECT_DATA_FILENAME ) as f:
-		for line in f: 
+		for line in f:
 			barcode, timestamp, password_hash, remainder = line.split( ",", 3 )
 			if barcode == form_barcode.upper():
 				hashes_found.add( password_hash )
@@ -180,7 +180,7 @@ def app_result_query( environ, start_response ):
 			'<a href="consent.html">registration form</a> before you can check the result.',
 			"<h2>Unregistrierter Barcode.</h2>",
 			"Für diesen Barcode wurden noch keine Kontakt-Daten eingetragen. Sie müssen erst ",
-			'<a href="constent.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
+			'<a href="consent.html">das Registrierungs-Formular</a> ausfüllen, bevor Sie ',
 			'das Ergebnis abfragen können.' ]
 
 	if len( hashes_found ) > 1:
@@ -200,7 +200,7 @@ def app_result_query( environ, start_response ):
 	sha_instance = hashlib.sha3_384()
 	sha_instance.update( form_password.encode( "utf-8" ) )
 	encoded_hash_from_form = binascii.b2a_base64( sha_instance.digest(), newline=False )
-	
+
 	if encoded_hash_from_form != list(hashes_found)[0].encode( "ascii" ):
 		start_response('200 OK', [('Content-Type', 'text/html')])
 		return [
@@ -224,6 +224,9 @@ def app_result_query( environ, start_response ):
 					return []
 				elif remainder.lower().startswith( "pos" ):
 					start_response('303 See Other', [('Location', 'test-result-positive.html')])
+					return []
+				elif remainder.lower().startswith( "inc" ):
+					start_response('303 See Other', [('Location', 'to-be-determined.html')])
 					return []
 				else:
 					start_response('200 OK', [('Content-Type', 'text/html')])
@@ -253,11 +256,11 @@ def app_result_query( environ, start_response ):
 def app( environ, start_response ):
 	try:
 		if environ['SCRIPT_NAME'].endswith( "register" ):
-			return app_register( environ, start_response ) 
+			return app_register( environ, start_response )
 		elif environ['SCRIPT_NAME'].endswith( "instructions" ):
-			return app_instructions( environ, start_response ) 
+			return app_instructions( environ, start_response )
 		elif environ['SCRIPT_NAME'].endswith( "result-query" ):
-			return app_result_query( environ, start_response ) 
+			return app_result_query( environ, start_response )
 		else:
 			raise ValueError( "unknown script name")
 	except:
@@ -281,9 +284,8 @@ print( "Listening on port", port )
 
 while True:
 	load_data()
-	a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
-	# a is True if WSGIServer returned due to a SIGHUP, and False, 
+	a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", port ) ).run()
+	# a is True if WSGIServer returned due to a SIGHUP, and False,
 	# if it was a SIGINT or SIGTERM
 	if not a:
 		break  # for a SIGHUP, reread config and restart, otherwise exit
-
