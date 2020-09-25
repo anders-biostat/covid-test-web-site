@@ -228,6 +228,9 @@ def app_result_query( environ, start_response ):
 				elif remainder.lower().startswith( "inc" ):
 					start_response('303 See Other', [('Location', 'to-be-determined.html')])
 					return []
+				elif remainder.lower().startswith( "failed" ):
+					start_response('303 See Other', [('Location', 'test-failed.html')])
+					return []
 				else:
 					start_response('200 OK', [('Content-Type', 'text/html')])
 					return [
