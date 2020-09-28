@@ -284,7 +284,7 @@ print( "Listening on port", port )
 
 while True:
 	load_data()
-	a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", PORT ) ).run()
+	a = flup.server.fcgi.WSGIServer( app, bindAddress = ( "127.0.0.1", port ) ).run()
 	# a is True if WSGIServer returned due to a SIGHUP, and False,
 	# if it was a SIGINT or SIGTERM
 	if not a:
