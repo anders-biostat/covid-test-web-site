@@ -32,6 +32,19 @@ a {
 	text-decoration: none;
 }
 
+.technical-problem {
+	text-align: center;
+}
+
+.technical-problem a {
+	color: #ad0028;
+}
+
+.technical-problem a:hover {
+	color: #ad0028;
+	text-decoration: underline;
+}
+
 footer {
 	display: block;
 	margin-top: auto;
@@ -47,8 +60,8 @@ footer a {
 }
 
 footer a:hover {
-	color: #222222;
-	text-decoration: none;
+	color: #ad0028;
+	text-decoration: underline;
 }
 
 .page {
@@ -128,6 +141,14 @@ footer a:hover {
 .page-header img {
 	width: 80px;
 	height: auto;
+}
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+  width: 150px;
+  height: 82px;
+	pointer-events: none;
 }
 
 .title {
