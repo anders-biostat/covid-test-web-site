@@ -8,3 +8,16 @@ pycrypto==2.6.1
 pycryptodome==3.9.8
 PyYAML==5.3.1
 Werkzeug==1.0.1
+Babel==2.8.0
+click==7.1.2
+Flask==1.1.2
+Flask-Babel==2.0.0
+flup==1.0.3
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+pycrypto==2.6.1
+pycryptodome==3.9.8
+pytz==2020.1
+PyYAML==5.3.1
+Werkzeug==1.0.1
