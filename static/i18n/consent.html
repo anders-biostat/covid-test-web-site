@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container2">
+    <h2>{% trans %}Teilnahme am Coronavirus-Test{% endtrans %}</h2>
+    <div class="scroll-box">
+      {% include 'information-text.html' %}
+    </div>
+    <form method="GET">
+      <div>
+        <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+        <label for="terms_and_conditions">{% trans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endtrans %}</label>
+      </div>
+    </form>
+    <div>
+      <a href="{{ url_for('site.index') }}" id="closeform" class="button-small">{% trans %}Zurück{% endtrans %}</a>
+      <a href="{{ url_for('site.register') }}" type="submit" id="showForm" class="button-small disabled" disabled>{% trans %}Weiter{% endtrans %}</a>
+    </div>
+  </div>
+  <script>
+  //JavaScript function that enables or disables a submit button depending
+  //on whether a checkbox has been ticked or not.
+  function EnableSubmit(termsCheckBox){
+  //If the checkbox has been checked
+  if(termsCheckBox.checked){
+  //Set the disabled property to FALSE and enable the button.
+  document.getElementById("showForm").disabled = false;
+  document.getElementById("showForm").classList.remove("disabled");
+  } else{
+  //Otherwise, disable the submit button.
+  document.getElementById("showForm").disabled = true;
+  document.getElementById("showForm").classList.add("disabled");
+  }
+  }
+  </script>
+{% endblock %}

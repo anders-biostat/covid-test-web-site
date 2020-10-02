@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="content container">
+		<div class="alert alert-danger">
+			<h3>{% trans %}Interner Fehler{% endtrans %}</h3>
+			<p class="lead">{% trans %}Das Ergebnis ihres Tests ist fehlerhaft gespeichert.{% endtrans %}</p>
+			<p class="lead">{% trans %}Bitte kontaktieren Sie uns:{% endtrans %} <a href="mailto:s.anders@zmbh.uni-heidelberg.de" class="alert-link">{% trans %}E-Mail (s.anders@zmbh.uni-heidelberg.de){% endtrans %}</a>.</p>
+		</div>
+	</div>
+{% endblock %}

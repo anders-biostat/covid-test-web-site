@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="page-content">
+    <div id="form" class="container content">
+      <form action="{{ url_for('site.register') }}" method="post">
+        {{ form.csrf_token }}
+      <h3>{% trans %}Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:{% endtrans %}</h3>
+      <hr>
+      <div class="form-group bmd-form-group">
+        <label for="bcode" class="bmd-label-floating">{% trans %}Code auf dem Röhrchen{% endtrans %}</label>
+        <div class="input-group">
+        <input type="text" class="form-control col-5" placeholder="{% trans %}Klicken Sie auf die Schaltfläche, um den Barcode zu scannen{% endtrans %}" id="bcode" name="bcode" autocomplete="on" required>
+        {% for error in form.bcode.errors %}
+          <small class="text-danger">{{ error }}</small>
+        {% endfor %}
+        <span class="input-group-btn input-group-append">
+          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#livestream_scanner">
+          <i class="material-icons">qr_code_scanner</i>
+          </button>
+        </span>
+      </div>
+      <small id="bcodehelp" class="form-text text-muted">
+      {% trans %}Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte {% endtrans %}<a href="{{ url_for('site.pages', page='no-tube.html') }}">{% trans %}hier{% endtrans %}</a>.
+      </small>
+    </div>
+    <p>{% trans %}Falls wir das Virus in Ihrer Probe nachweisen sollten, muss das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre Kontakt-Daten an: {% endtrans %}</p>
+    <div class="form-group bmd-form-group">
+      <label for="name" class="bmd-label-floating">{% trans %}Name{% endtrans %}</label>
+      <input type="text" id="name" class="form-control" name="name" autocomplete="name" required>
+      {% for error in form.name.errors %}
+        <small class="text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <div class="form-group bmd-form-group">
+      <label for="address" class="bmd-label-floating">{% trans %}Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort){% endtrans %}</label>
+      <textarea type="text" id="address" class="form-control" name="address" rows="3" autocomplete="street-address" required></textarea>
+    </div>
+    <div class="form-group bmd-form-group">
+      <label for="contact" class="bmd-label-floating">{% trans %}Telefonnummer oder E-Mail-Addresse{% endtrans %}</label>
+      <input type="text" id="contact" class="form-control" name="contact" rows="4" autocomplete="tel" required>
+      {% for error in form.contact.errors %}
+        <small class="text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <p> <small>{% trans %}Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf Zugriff.{% endtrans %}</small> </p>
+    <p>{% trans %}Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie sich bitte ihren Code und geben Sie ein Passwort an:{% endtrans %}</p>
+    <div class="form-group bmd-form-group">
+      <label for="psw" class="bmd-label-floating">{% trans %}Passwort:{% endtrans %}</label>
+      <input type="password" class="form-control" name="psw" autocomplete="new-password" required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
+      {% for error in form.psw.errors %}
+        <small class="text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <div class="form-group bmd-form-group">
+      <label for="psw-repeat" class="bmd-label-floating"><b>{% trans %}dasselbe Passwort nochmal:{% endtrans %}</b></label>
+      <input type="password" class="form-control" name="psw_repeat" required>
+      {% for error in form.psw_repeat.errors %}
+        <small class="text-danger">{{ error }}</small>
+      {% endfor %}
+    </div>
+    <div>
+      <a href="{{ url_for('site.index') }}" id="closeform" class="button-small">{% trans %}Abbrechen{% endtrans %}</a>
+    <button type="submit" class="button-small">{% trans %}Daten abschicken{% endtrans %}</button>
+  </div>
+</form>
+</div>
+<div class="modal" id="livestream_scanner">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+    <h4 class="modal-title">{% trans %}Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen im Rahmen:{% endtrans %}</h4>
+  </div>
+  <div class="modal-body" style="position: static">
+    <div id="interactive" class="viewport"></div>
+    <div class="error"></div>
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="button-small" data-dismiss="modal">{% trans %}Schließen{% endtrans %}</button>
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<!--# include file="footer-page.html" -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+<style>
+#interactive.viewport {position: relative; width: 100%; height: auto; overflow: hidden; text-align: center;}
+#interactive.viewport > canvas, #interactive.viewport > video {max-width: 100%;width: 100%;}
+canvas.drawing, canvas.drawingBuffer {position: absolute; left: 0; top: 0;}
+</style>
+<script src="{{ url_for('static', filename='style/js/barcode_scanner.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+// polyfill for RegExp.escape
+if(!RegExp.escape) {
+RegExp.escape = function(s) {
+return String(s).replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+};
+}
+</script>
+{% endblock %}

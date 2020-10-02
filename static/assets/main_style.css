@@ -313,6 +313,7 @@ footer a:hover {
   height: 80%;
   width: 80%;
 	margin: auto;
+  padding-top: 40px;
 }
 
 .container2 h1,
@@ -379,7 +380,10 @@ footer a:hover {
 	border: 2px solid #222222;
 	padding: 30px;
   width: 50%;
+  /*
   height: 66.3%;
+  */
+  height: 300px;
   margin-top: 0.8rem;
 	margin-bottom: 0.8rem;
 }

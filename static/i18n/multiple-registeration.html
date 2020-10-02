@@ -1,0 +1,8 @@
+{% extends "base-page.html" %}
+{% block content %}
+	<div class="container content">
+		<h3>{% trans %}Mehrfach registrierter Barcode{% endtans %}</h3>
+		<p>{% trans %}Für diesen Barcode wurde das Registrier-Formular mehrmals ausgefüllt, mit verschiedenen Passwörtern.{% endtrans %}</p>
+		<p class="lead">{% trans %}Bitte kontaktieren Sie uns{% endtrans%}: <a href="mailto:s.anders@zmbh.uni-heidelberg.de" class="alert-link">{% trans %}E-Mail (s.anders@zmbh.uni-heidelberg.de){% endtrans %}</a></p>
+	</div>
+{% endblock %}
