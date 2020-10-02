@@ -6,6 +6,7 @@ import urllib.parse, flup.server.fcgi
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 from urllib.parse import urljoin
 import click, glob, polib
+from envparse import env
 
 from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session
 from flask_wtf.csrf import CSRFProtect
@@ -14,6 +15,9 @@ from config import LANGUAGES
 
 from forms import RegistrationForm, ResultsQueryForm
 import load_codes
+
+# Reading the Environemt-Variables from .env file
+env.read_envfile()
 
 # file names
 SUBJECT_DATA_FILENAME = "../data/subjects.csv"
@@ -93,7 +97,7 @@ load_data()
 
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
-app.config['SECRET_KEY'] = 'ty4425hk54a21eee5719b9s9df7sdfklx'
+app.config['SECRET_KEY'] = env("SECRET_KEY", cast=str, default="secret")
 
 csrf = CSRFProtect()
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = TRANSLATIONS_DIR
@@ -304,7 +308,9 @@ def init(lang):
     os.remove('messages.pot')
 
 if __name__ == '__main__':
-    app.jinja_env.auto_reload = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    debug = env("DEBUG", cast=bool, default=False)
+    if debug:
+        app.jinja_env.auto_reload = True
+        app.config['TEMPLATES_AUTO_RELOAD'] = True
     csrf.init_app(app)
-    app.run(debug = True)
+    app.run(debug=debug)
