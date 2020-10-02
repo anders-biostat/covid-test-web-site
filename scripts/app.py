@@ -20,15 +20,17 @@ import load_codes
 env.read_envfile()
 
 # file names
-SUBJECT_DATA_FILENAME = "../data/subjects.csv"
-PUBLIC_KEY_FILENAME = "../data/public.pem"
-HTML_DIRS = "../static/"
-RESULTS_FILENAME = "../data/results.txt"
-NGINX_CONF_FILENAME = "../etc/covid-test.nginx-site-config"
+dir = os.path.dirname(__file__)
 
-TEMPLATE_DIR = "../static/i18n/"
-STATIC_DIR = "../static/assets/"
-TRANSLATIONS_DIR = "../translations/"
+SUBJECT_DATA_FILENAME = os.path.join(dir, "../data/subjects.csv")
+PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/public.pem")
+HTML_DIRS = os.path.join(dir, "../static/")
+RESULTS_FILENAME = os.path.join(dir, "../data/results.txt")
+NGINX_CONF_FILENAME = os.path.join(dir, "../etc/covid-test.nginx-site-config")
+
+TEMPLATE_DIR = os.path.join(dir, "../static/i18n/")
+STATIC_DIR = os.path.join(dir, "../static/assets/")
+TRANSLATIONS_DIR = os.path.join(dir, "../translations/")
 
 LANGUAGES = {
 	'de': 'German',
