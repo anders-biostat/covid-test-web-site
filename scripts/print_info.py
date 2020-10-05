@@ -2,10 +2,13 @@ import requests
 import os
 import sys, getpass, binascii, hashlib
 
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import AES, PKCS1_OAEP
+
 # Main function to decrypt the data
 def decrypt(fields, file):
 
-    fingerprint_from_file = load_key(file)
+    fingerprint_from_file, rsa_instance = load_key(file)
     # Three fields (barcode, time stamp, fingerprint) are plain ASCII,
     # the remainder has to go through Base-64 decoding
     for i in range( len(fields) ):
@@ -37,6 +40,7 @@ def decrypt(fields, file):
 
 # Function to load the key finger print
 def load_key(filename):
+    print("Loading key \n")
     try:
         with open( filename , "rb") as f:
             protected_private_key = f.read()
@@ -60,15 +64,15 @@ def load_key(filename):
     md5_instance = hashlib.md5()
     md5_instance.update( private_key.publickey().exportKey("DER") )
     public_key_fingerprint = md5_instance.hexdigest()
-
-    return public_key_fingerprint
+    key = [public_key_fingerprint, rsa_instance]
+    return key
 
 
 # End of functions declaration
 
 # Start of the main function
 
-print("Decrypting contact data from positive cases \n \n \n")
+print("Decrypting contact data from positive cases \n \n")
 
 # An boolean set by the user to get the information
 retrieve_contact = "YES"
@@ -85,12 +89,12 @@ for file in os.listdir("."):
     if file.endswith(".pem") and file.startswith("private"):
 
         # Extracting the fingerpring of the file
-        file_fingerprint = file[6:-4]
+        file_fingerprint = file[8:-4]
         # Adding the file as the key and its finger print as the value in the dictionary
         key_files[file] = file_fingerprint
-    else:
-        print("There is no key files in your directory!")
-        retrieve_contact = "NO"
+if not key_files:
+    print("There is no key files in your directory! \n")
+    retrieve_contact = "NO"
 
 while(retrieve_contact.upper() == "YES"):
 
@@ -99,7 +103,7 @@ while(retrieve_contact.upper() == "YES"):
     # An empty dictionary to store the key fingerprints of the given barcode
     key_dictionary = {}
     # Post request to get the information of the given barcode
-    r = requests.post("https://papagei.bioquant.uni-heidelberg.de/corona/fcgi-decrypt", data={"code": code})
+    r = requests.post("https://papagei.bioquant.uni-heidelberg.de/corona-test/fcgi-decrypt", data={"code": code})
     # Check if the response code is ok
     if r.status_code == 200:
         #Unpacking the response in a dictionary from the corresponding json object
@@ -109,11 +113,11 @@ while(retrieve_contact.upper() == "YES"):
 
         # Iterating over the stored data
         for i in range(len(result[code])):
-            subject_data = result[code][i].strip(',')
+            subject_data = result[code][i].split(',')
             barcode = subject_data[0]
             if barcode!=code:
                 print("Response invalid")
-                break
+                exit(1)
             else:
                 # Fingerprint of the encoding key for the line i
                 key = subject_data[3]
@@ -125,13 +129,16 @@ while(retrieve_contact.upper() == "YES"):
         # Iterating over the existing key files in the directory
         for private_key_file in key_files.keys():
             k = key_files[private_key_file]
+            print(k + "\n")
             if k in key_fingerprint:
+                print("I am inside\n")
                 # Decrypting the contact info
                 decrypt(key_dictionary[k], private_key_file)
                 print("\n")
                 retrieve_contact = input("Do you want to have another positive case: (please answer with yes or no)")
             else:
                 print("The appropriate key is not available to decrypt the data \n")
+                break
 
     else:
         print("Request failed with the status code: ", r.status_code)
