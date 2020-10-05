@@ -4,6 +4,7 @@
 import sys, traceback, time, hashlib, binascii, signal, re
 import urllib.parse, flup.server.fcgi
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
+import json
 
 import load_codes
 
@@ -202,6 +203,25 @@ def app_result_query( environ, start_response ):
 	start_response('303 See Other', [('Location', 'no-result.html')])
 	return []
 
+def app_decrypt( environ, start_response ):
+	try:
+		request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
+	except(ValueError):
+		request_body_size = 0
+
+	request_body = environ['wsgi.input'].read(request_body_size)
+	fields = urllib.parse.parse_qs( request_body.decode("ascii") )
+	fields = { k : v[0] for (k,v) in fields.items() }
+	barcode = fields["code"].upper()
+	lines = []
+	subject = {}
+	with open(SUBJECT_DATA_FILENAME) as f:
+		for line in f:
+			if barcode in line:
+				lines.append(line)
+	subject[barcode] = lines
+	start_response('200 OK', [('Content-type','application/json')])
+	return[json.dumps(subject)]
 
 
 
@@ -213,6 +233,8 @@ def app( environ, start_response ):
 			return app_instructions( environ, start_response )
 		elif environ['SCRIPT_NAME'].endswith( "result-query" ):
 			return app_result_query( environ, start_response )
+		elif environ['SCRIPT_NAME'].endswith( "decrypt" ):
+			return app_decrypt( environ, start_response )
 		else:
 			raise ValueError( "unknown script name")
 	except:
