@@ -72,7 +72,7 @@ def load_key(filename):
 
 # Start of the main function
 
-print("Decrypting contact data from positive cases \n \n")
+print("Decrypting contact data for positive cases \n \n")
 
 # An boolean set by the user to get the information
 retrieve_contact = "YES"
@@ -98,12 +98,12 @@ if not key_files:
 
 while(retrieve_contact.upper() == "YES"):
 
-    code = input("Please enter the barcode:")
+    code = input("Please enter the barcode:").upper()
 
     # An empty dictionary to store the key fingerprints of the given barcode
     key_dictionary = {}
     # Post request to get the information of the given barcode
-    r = requests.post("https://papagei.bioquant.uni-heidelberg.de/corona-test/fcgi-decrypt", data={"code": code})
+    r = requests.post("https://papagei.bioquant.uni-heidelberg.de/corona/fcgi-decrypt", data={"code": code})
     # Check if the response code is ok
     if r.status_code == 200:
         #Unpacking the response in a dictionary from the corresponding json object
