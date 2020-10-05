@@ -4,7 +4,6 @@
 import sys, traceback, time, hashlib, binascii, signal, re
 import urllib.parse, flup.server.fcgi
 import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
-import json
 
 import load_codes
 
@@ -104,7 +103,7 @@ def app_register( environ, start_response ):
 
 	elif barcode not in codes2events:
 		return serve_file( environ, start_response,
-			"barcode-unknown.html", { "@@BARCODE@@" : "<b>%i</b>" % (barcode) } )
+			"barcode-unknown.html", { "@@BARCODE@@" : "<b>%s</b>" % (barcode) } )
 
 	else:
 
@@ -146,7 +145,7 @@ def app_result_query( environ, start_response ):
 	# Check if barcode exists
 	if form_barcode not in codes2events:
 		return serve_file( environ, start_response,
-			"barcode-unknown.html", { "@@BARCODE@@" : "%i" % (barcode) } )
+			"barcode-unknown.html", { "@@BARCODE@@" : "%s" % (barcode) } )
 
 	# Find barcode registration
 	hashes_found = set()
@@ -158,11 +157,11 @@ def app_result_query( environ, start_response ):
 
 	if len( hashes_found ) == 0:
 		return serve_file( environ, start_response,
-			"barcode-not-registered.html", { "@@BARCODE@@" : "%i" % (barcode) } )
+			"barcode-not-registered.html", { "@@BARCODE@@" : "%s" % (barcode) } )
 
 	if len( hashes_found ) > 1:
 		return serve_file( environ, start_response,
-			"multiple-registeration.html", { "@@BARCODE@@" : "%i" % (barcode) } )
+			"multiple-registeration.html", { "@@BARCODE@@" : "%s" % (barcode) } )
 
 	assert len( hashes_found ) == 1
 
