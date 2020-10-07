@@ -1,0 +1,416 @@
+# Portuguese translations for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-10-07 17:04+0200\n"
+"PO-Revision-Date: 2020-10-07 17:04+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: pt\n"
+"Language-Team: pt <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: ../src/forms.py:14
+msgid "Passwords must match"
+msgstr ""
+
+#: ../static/i18n/base.html:4
+msgid ""
+"Schnelltest der Universität Heidelberg auf das Covid-19-Coronavirus "
+"(SARS-CoV-2)"
+msgstr ""
+
+#: ../static/i18n/base.html:22
+msgid "Schnelltest auf das Covid-19"
+msgstr ""
+
+#: ../static/i18n/consent.html:4
+msgid "Teilnahme am Coronavirus-Test"
+msgstr ""
+
+#: ../static/i18n/consent.html:11
+msgid "Ich bin einverstanden und möchte am Test teilnehmen."
+msgstr ""
+
+#: ../static/i18n/consent.html:15
+msgid "Zurück"
+msgstr ""
+
+#: ../static/i18n/consent.html:16
+msgid "Weiter"
+msgstr ""
+
+#: ../static/i18n/index.html:9
+msgid "Schnelltest der Universität Heidelberg auf das"
+msgstr ""
+
+#: ../static/i18n/index.html:9
+msgid "Covid-19-Coronavirus (SARS-CoV-2)"
+msgstr ""
+
+#: ../static/i18n/index.html:10
+msgid "Ich habe ein Test-Kit erhalten"
+msgstr ""
+
+#: ../static/i18n/index.html:11
+msgid "Mein Test-Ergebnis abfragen"
+msgstr ""
+
+#: ../static/i18n/index.html:12
+msgid "Mehr über den Test erfahren"
+msgstr ""
+
+#: ../static/i18n/index.html:13
+msgid "Diese Seite ist verfügbar in:"
+msgstr ""
+
+#: ../static/i18n/index.html:18
+msgid "Bei technischen Problemen wenden Sie sich bitte an"
+msgstr ""
+
+#: ../static/i18n/information.html:4
+msgid "Erprobung eines LAMP-basierten Tests auf das Coronavirus SARS-CoV-2"
+msgstr ""
+
+#: ../static/i18n/instructions.html:4
+msgid ""
+"Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren, was Sie"
+" nun machen müssen."
+msgstr ""
+
+#: ../static/i18n/instructions.html:11
+msgid ""
+"Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten Sie uns"
+" das Röhrchen bitte wie folgt zu"
+msgstr ""
+
+#: ../static/i18n/instructions.html:19
+msgid "Vielen Dank für Ihre Teilnahme."
+msgstr ""
+
+#: ../static/i18n/instructions.html:20
+msgid ""
+"Morgen oder übermorgen können Sie Ihr Ergebnis unter folgendem Link "
+"abfragen:"
+msgstr ""
+
+#: ../static/i18n/instructions.html:22
+msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
+msgstr ""
+
+#: ../static/i18n/internal-error.html:5
+#: ../static/i18n/pages/internal-error.html:5
+msgid "Interner Fehler"
+msgstr ""
+
+#: ../static/i18n/internal-error.html:6
+#: ../static/i18n/pages/internal-error.html:6
+msgid "Das Ergebnis ihres Tests ist fehlerhaft gespeichert."
+msgstr ""
+
+#: ../static/i18n/internal-error.html:7
+msgid "Bitte kontaktieren Sie uns"
+msgstr ""
+
+#: ../static/i18n/internal-error.html:7
+#: ../static/i18n/pages/internal-error.html:7
+msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
+msgstr ""
+
+#: ../static/i18n/register.html:7
+msgid "Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:"
+msgstr ""
+
+#: ../static/i18n/register.html:10 ../static/i18n/result-query.html:8
+msgid "Code auf dem Röhrchen"
+msgstr ""
+
+#: ../static/i18n/register.html:12
+msgid "Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
+msgstr ""
+
+#: ../static/i18n/register.html:23
+msgid "Falls Sie kein Röhrchen mit Code erhalten haben, klicken Sie bitte "
+msgstr ""
+
+#: ../static/i18n/register.html:23
+msgid "hier"
+msgstr ""
+
+#: ../static/i18n/register.html:26
+msgid ""
+"Falls wir das Virus in Ihrer Probe nachweisen sollten, muss das "
+"Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre Kontakt-"
+"Daten an: "
+msgstr ""
+
+#: ../static/i18n/register.html:28
+msgid "Name"
+msgstr ""
+
+#: ../static/i18n/register.html:35
+msgid "Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)"
+msgstr ""
+
+#: ../static/i18n/register.html:39
+msgid "Telefonnummer oder E-Mail-Addresse"
+msgstr ""
+
+#: ../static/i18n/register.html:45
+msgid ""
+"Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
+"vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben "
+"darauf Zugriff."
+msgstr ""
+
+#: ../static/i18n/register.html:46
+msgid ""
+"Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie sich bitte "
+"ihren Code und geben Sie ein Passwort an:"
+msgstr ""
+
+#: ../static/i18n/register.html:48
+msgid "Passwort:"
+msgstr ""
+
+#: ../static/i18n/register.html:55
+msgid "dasselbe Passwort nochmal:"
+msgstr ""
+
+#: ../static/i18n/register.html:62
+msgid "Abbrechen"
+msgstr ""
+
+#: ../static/i18n/register.html:63
+msgid "Daten abschicken"
+msgstr ""
+
+#: ../static/i18n/register.html:71 ../static/i18n/result-query.html:44
+msgid "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen im Rahmen:"
+msgstr ""
+
+#: ../static/i18n/register.html:78 ../static/i18n/result-query.html:51
+msgid "Schließen"
+msgstr ""
+
+#: ../static/i18n/result-query.html:6
+msgid "Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:"
+msgstr ""
+
+#: ../static/i18n/result-query.html:21
+msgid "wie er auf Ihrem Röhrchen aufgedruckt war"
+msgstr ""
+
+#: ../static/i18n/result-query.html:25
+msgid "Ihr Passwort:"
+msgstr ""
+
+#: ../static/i18n/result-query.html:31
+msgid "wie Sie es bei der Eingabe Ihrer Daten gewählt haben"
+msgstr ""
+
+#: ../static/i18n/result-query.html:36
+msgid "Ergebnis anzeigen"
+msgstr ""
+
+#: ../static/i18n/pages/barcode-not-registered.html:4
+msgid "Unregistrierter Barcode"
+msgstr ""
+
+#: ../static/i18n/pages/barcode-not-registered.html:5
+msgid ""
+"Für diesen Barcode (%(barcode)) wurden noch keine Kontakt-Daten "
+"eingetragen."
+msgstr ""
+
+#: ../static/i18n/pages/barcode-not-registered.html:6
+msgid ""
+"Bitte das folgende Registrierungs-Formular ausfüllen, bevor Sie das "
+"Ergebnis abfragen können:"
+msgstr ""
+
+#: ../static/i18n/pages/barcode-not-registered.html:6
+msgid "Registrierungs-Formular"
+msgstr ""
+
+#: ../static/i18n/pages/barcode-unknown.html:4
+msgid "Barcode unbekannt"
+msgstr ""
+
+#: ../static/i18n/pages/barcode-unknown.html:5
+msgid "Der Barcode, den Sie eingegeben haben ist unbekannt."
+msgstr ""
+
+#: ../static/i18n/pages/barcode-unknown.html:6
+#, python-format
+msgid "Barcode: %(barcode)s"
+msgstr ""
+
+#: ../static/i18n/pages/barcode-unknown.html:7
+msgid "Vielleicht haben Sie sich vertippt."
+msgstr ""
+
+#: ../static/i18n/pages/barcode-unknown.html:8
+msgid "Bitte gehen Sie zurück und versuchen Sie es noch einmal."
+msgstr ""
+
+#: ../static/i18n/pages/internal-error.html:7
+msgid "Bitte kontaktieren Sie uns:"
+msgstr ""
+
+#: ../static/i18n/pages/no-result.html:5
+msgid "Ergebnis liegt noch nicht vor"
+msgstr ""
+
+#: ../static/i18n/pages/no-result.html:6
+msgid ""
+"Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte versuchen Sie "
+"es später oder morgen noch einmal."
+msgstr ""
+
+#: ../static/i18n/pages/no-tube.html:4
+msgid ""
+"Unsere Test-Kits bestehen aus einem größeren Röhrchen mit salzigem "
+"Wasser, einem kleinen Röhrchen mit aufgedrucktem Code, und einer Plastik-"
+"Pipette."
+msgstr ""
+
+#: ../static/i18n/pages/no-tube.html:5
+msgid ""
+"Wir verteilen diese Kits im Rahmen von Test-Aktionen, z.B. an alle "
+"Mitarbeiter einer Einrichtung. Nur wer auf solchem Wege ein Test-Kit "
+"erhalten hat, kann teilnehmen."
+msgstr ""
+
+#: ../static/i18n/pages/no-tube.html:6
+msgid ""
+"Bitte verstehen Sie, dass sich der Aufwand einer Test-Aktion nur lohnt, "
+"wenn wir dadurch eine größere Zahl Personen testen können. Für Einzel-"
+"Personen können wir den test leider nicht anbieten. Wenn Sie uns aber "
+"helfen möchten, und für eine größere Gruppe die verteilung von test-Kits "
+"organisieren möchten, wenden Sie sich doch mit einem Vorschlag an uns."
+msgstr ""
+
+#: ../static/i18n/pages/password-not-matched.html:4
+msgid "Passwörter stimmen nicht überein"
+msgstr ""
+
+#: ../static/i18n/pages/password-not-matched.html:5
+#: ../static/i18n/pages/wrong-password.html:6
+msgid "Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es noch einmal."
+msgstr ""
+
+#: ../static/i18n/pages/test-failed.html:4
+msgid "Test fehlgeschlagen"
+msgstr ""
+
+#: ../static/i18n/pages/test-failed.html:5
+msgid ""
+"Bei der Analyse Ihrer Probe ist ein technisches Problem aufgetreten. Wir "
+"konnten Ihre Probe daher nicht auswerten und können Ihnen kein Ergebnis "
+"mitteilen. Tut uns leid."
+msgstr ""
+
+#: ../static/i18n/pages/test-failed.html:6
+msgid ""
+"Bitte geben Sie bei nächster Gelegenheit eine neue Probe ab. Derartige "
+"Probleme sind die Ausnahme, und das nächste Mal klappt es bestimmt."
+msgstr ""
+
+#: ../static/i18n/pages/test-result-negative.html:4
+msgid ""
+"In Ihrer Probe konnte das Coronavirus SARS-CoV-2 <strong> nicht </strong>"
+" nachgewiesen werden. Vermutlich sind Sie also nicht mit Covid-19 "
+"infiziert."
+msgstr ""
+
+#: ../static/i18n/pages/test-result-negative.html:5
+msgid "Bedenken Sie aber:"
+msgstr ""
+
+#: ../static/i18n/pages/test-result-negative.html:7
+msgid ""
+"Unser Test ist nicht perfekt und nicht so genau wie der \"offizielle\" "
+"PCR-Test. Daher kommt es vor, dass der Test Infektionen übersieht."
+msgstr ""
+
+#: ../static/i18n/pages/test-result-negative.html:9
+msgid ""
+"Selbst, wenn Ihre Probe wirklich keinen Virus enthielt: Vielleicht war "
+"das Virus nicht in Ihrem Speichel, aber anderswo im Körper. Oder Sie "
+"haben sich in den letzten Tagen angesteckt, erst nachdem Sie die Probe "
+"abgegeben haben. Oder Sie treffen morgen jemanden, der Sie ansteckt."
+msgstr ""
+
+#: ../static/i18n/pages/test-result-negative.html:11
+msgid ""
+"<b>Daher:</b> Seien Sie weiterhin vorsichtig. Halten Sie Abstand zu "
+"anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten Sie "
+"weiterhin alle Regelungen zur vermeidung von Ansteckungen."
+msgstr ""
+
+#: ../static/i18n/pages/test-result-positive.html:4
+msgid ""
+"<strong>Ihre Probe war <span>positiv</span>. Das heisst, das in Ihrer "
+"Probe das Coronavirus SARS-CoV-2 nachgewiesen wurde und Sie sich "
+"wahrscheinlich mit Covid-19 angesteckt haben.</strong>"
+msgstr ""
+
+#: ../static/i18n/pages/test-result-positive.html:5
+msgid ""
+"Bitte bleiben Sie zu Hause und vermeiden Sie jeglichen Kontakt zu "
+"anderen. Wenn Sie ärztlichen Rat wünschen, wenden Sie sich bitte (per "
+"Telefon!) an Ihren Hausarzt. "
+msgstr ""
+
+#: ../static/i18n/pages/test-result-positive.html:6
+msgid ""
+"Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit Ihnen in"
+" Verbindung setzen und das weitere Vorgehen mit Ihnen besprechen. Sie "
+"können auch selbst die Corona-Hotline des Gesundheitsamtes anrufen: 06221"
+" 522-1881. "
+msgstr ""
+
+#: ../static/i18n/pages/to-be-determined.html:4
+msgid "Ooops, das Ergebnis liegt noch nicht vor... "
+msgstr ""
+
+#: ../static/i18n/pages/to-be-determined.html:5
+msgid ""
+"Das tut uns sehr leid! Leider haben wir immer einen kleinen Bruchteil der"
+" Proben mit nicht eindeutigen Ergebnissen."
+msgstr ""
+
+#: ../static/i18n/pages/to-be-determined.html:6
+msgid ""
+"Dies sind meist falsch-positive Ergebnisse. Um dies zu überprüfen, "
+"analysieren wir diese Proben erneut mittels RT-qPCR, um ein eindeutiges "
+"Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie die "
+"Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe "
+"abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu "
+"denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
+"Ergebnis zu erhalten."
+msgstr ""
+
+#: ../static/i18n/pages/to-be-determined.html:7
+msgid "Bleiben Sie dran, wir tun unser Bestes."
+msgstr ""
+
+#: ../static/i18n/pages/wrong-password.html:4
+msgid "Passwort falsch"
+msgstr ""
+
+#: ../static/i18n/pages/wrong-password.html:5
+msgid ""
+"Das Passwort stimmt nicht mit dem überein, dass Sie beim Registrieren der"
+" Barcodes gewählt haben."
+msgstr ""
+
