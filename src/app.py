@@ -7,6 +7,8 @@ import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
 from urllib.parse import urljoin
 import click, glob, polib
 from envparse import env
+from pymongo import MongoClient
+import arrow
 
 from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session
 from flask_wtf.csrf import CSRFProtect
@@ -14,10 +16,21 @@ from flask_babel import Babel, _
 from config import LANGUAGES
 
 from forms import RegistrationForm, ResultsQueryForm
-import load_codes
+import scripts.load_codes as load_codes
 
 # Reading the Environemt-Variables from .env file
 env.read_envfile()
+
+# Check if MongoDB
+
+MONGODB = env("MONGODB", cast=bool, default=False)
+
+if MONGODB:
+    from pymongo import MongoClient
+    client = MongoClient()
+
+    DATABASE = env("DATABASE", cast=str, default="covidtest-test")
+    db = client[DATABASE]
 
 # file names
 dir = os.path.dirname(__file__)
@@ -33,11 +46,11 @@ STATIC_DIR = os.path.join(dir, "../static/assets/")
 TRANSLATIONS_DIR = os.path.join(dir, "../translations/")
 
 LANGUAGES = {
-	'de': 'German',
+    'de': 'German',
     'en': 'English'
 }
 
-def load_data():
+def load_data(reread_files=False):
     # This function loads all the data. It is called once at the beginning
     # and also, when SIGHUP is issued to the process in order to trigger
     # a reload.
@@ -57,7 +70,22 @@ def load_data():
 
     codes2events = load_codes.load_codes()
 
-def encode_subject_data( barcode, name, address, contact, password ):
+    if (MONGODB and 'events' not in db.list_collection_names()) or reread_files:
+        print("No events collection found. Reading events ...")
+        for barcode, event in codes2events.items():
+            event_name, event_instructions = event
+
+            doc = {
+                '_id': barcode,
+                'barcode': barcode,
+                'event_name': event_name,
+                'event_instructions': event_instructions,
+            }
+
+            db['events'].update_one({'_id': barcode}, {'$set': doc}, upsert=True)
+
+
+def encode_subject_data(barcode, name, address, contact, password, return_dict=False):
 
     # Generate session key for use with AES and encrypt it with RSA
     session_key = Crypto.Random.get_random_bytes( 16 )
@@ -70,7 +98,7 @@ def encode_subject_data( barcode, name, address, contact, password ):
         s = s.encode( "utf-8" )
         if len(s) % 16 != 0:
             s += b'\000' * ( 16 - len(s) % 16 )
-        encrypted_subject_data.append( aes_instance.encrypt( s ) )
+        encrypted_subject_data.append(aes_instance.encrypt(s))
 
     # encode user password with SHA3
     sha_instance = hashlib.sha3_384()
@@ -91,6 +119,19 @@ def encode_subject_data( barcode, name, address, contact, password ):
     for i in range( len(fields) ):
         if i not in ( 0, 1, 3 ):
             fields[i] = binascii.b2a_base64( fields[i], newline=False )
+
+    if return_dict is True:
+        return {
+            'barcode': barcode.encode( "utf-8" ),
+            'time': arrow.now(),
+            'password_hash': password_hash,
+            'public_key_fingerprint': rsa_instance.public_key_fingerprint,
+            'encrypted_session_key': encrypted_session_key,
+            'aes_instance_iv': aes_instance.iv,
+            'name_encrypted': encrypted_subject_data[0],
+            'address_encrypted': encrypted_subject_data[1],
+            'contact_encrypted': encrypted_subject_data[2],
+        }
 
     # Make line for file and return it
     return b",".join( fields ).decode("ascii") + "\n"
@@ -116,10 +157,15 @@ def pull_lang_code(endpoint, values):
 
 @babel.localeselector
 def get_locale():
-	return g.lang_code
+    return g.lang_code
 
 @bp.route('/', methods=['GET'])
 def index():
+    barcode = request.args.get('barcode')
+    if barcode is not None:
+        session['barcode'] = barcode.upper()
+        return redirect(url_for('site.consent'))
+
     return render_template('index.html')
 
 @bp.route('/favicon.ico', methods=['GET'])
@@ -146,24 +192,20 @@ def instructions():
         barcode = None
     return render_template('instructions.html', instructions_file=instructions_file, event_name=event_name, barcode=barcode)
 
-@bp.route('/consent', methods=['GET'])
+@bp.route('/consent', methods=['GET', 'POST'])
 def consent():
-    return render_template('consent.html')
+    if request.method == 'POST':
+        if request.form.get('terms') == '1':
+            session['consent'] = True
+            return redirect(url_for('site.register'))
+        else:
+            return render_template('consent.html')
+    else:
+        return render_template('consent.html')
 
 @bp.route('/results', methods=['GET', 'POST'])
 def results_query():
-    if "barcode" in session:
-        barcode = session.get('barcode')
-    else:
-        barcode = request.args.get('barcode')
-
-    if barcode is not None:
-        session["barcode"] = barcode.upper()
-
-    if session.get("consent") != True:
-        return redirect(url_for('site.consent'))
-
-    form = ResultsQueryForm(field_args={"bcode": barcode})
+    form = ResultsQueryForm()
     if request.method == 'POST':
         if form.validate_on_submit():
             form_barcode = form.bcode.data.upper()
@@ -225,6 +267,16 @@ def information():
 
 @bp.route('/registration', methods=['GET', 'POST'])
 def register():
+    if "barcode" in session:
+        barcode = session.get('barcode')
+    else:
+        barcode = request.args.get('barcode')
+
+    if session.get("consent") != True:
+        return redirect(url_for('site.consent'))
+
+    session["barcode"] = None
+
     form = RegistrationForm()
     if request.method == 'POST': # POST
         if form.validate_on_submit():
@@ -236,7 +288,7 @@ def register():
             psw_repeat = form.psw_repeat.data
 
             if bcode not in codes2events:
-                return render_template("pages/barcode-unknown.html")
+                return render_template("pages/barcode-unknown.html", barcode=bcode)
             else:
                 try:
                     instructions_file =  codes2events[bcode].instructions
@@ -253,12 +305,23 @@ def register():
                 with open(SUBJECT_DATA_FILENAME, "a") as f:
                     f.write(line)
 
+                if MONGODB:
+                    doc = encode_subject_data(bcode, name, address, contact, psw, return_dict=True)
+                    db['registrations'].update_one(
+                        {'_id': bcode}, 
+                        {
+                            '$setOnInsert': {'_id': bcode, 'registrations': []},
+                            '$push': {'registrations': doc},
+                        },
+                        upsert=True
+                    )
+
                 return redirect(url_for('site.instructions'))
         else: # Form invalid
             return render_template('register.html', form=form)
         
     else: # GET
-        return render_template('register.html', form=form)
+        return render_template('register.html', form=form, barcode=barcode)
 
 @bp.route('/sites/<string:page>', methods=['GET'])
 def pages(page):
@@ -268,6 +331,17 @@ def pages(page):
 # Variant A: https://example.com/index for "de" else https://example.com/en/index
 app.register_blueprint(bp, url_defaults={'lang': 'de'})
 app.register_blueprint(bp, url_prefix='/<lang>')
+
+@app.cli.group()
+def read():
+    """Reading data commands."""
+    pass
+
+@read.command()
+def events():
+    """Reading Events to Database"""
+    load_data(reread_files=True)
+
 
 @app.cli.group()
 def translate():
@@ -294,7 +368,7 @@ def update():
                 print("---")
             except:
                 print("Error parsing ", directory)
-                pass 
+                pass
     except:
         print("Error parsing translation directory")
         pass

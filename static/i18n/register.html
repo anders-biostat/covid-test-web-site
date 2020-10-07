@@ -9,7 +9,7 @@
       <div class="form-group bmd-form-group">
         <label for="bcode" class="bmd-label-floating">{% trans %}Code auf dem Röhrchen{% endtrans %}</label>
         <div class="input-group">
-        <input type="text" class="form-control col-5" placeholder="{% trans %}Klicken Sie auf die Schaltfläche, um den Barcode zu scannen{% endtrans %}" id="bcode" name="bcode" autocomplete="on" required>
+        <input type="text" class="form-control col-5" placeholder="{% trans %}Klicken Sie auf die Schaltfläche, um den Barcode zu scannen{% endtrans %}" id="bcode" name="bcode" value="{% if barcode %}{{ barcode }}{% endif %}" autocomplete="on" required>
         {% for error in form.bcode.errors %}
           <small class="text-danger">{{ error }}</small>
         {% endfor %}
@@ -59,7 +59,7 @@
       {% endfor %}
     </div>
     <div>
-      <a href="{{ url_for('site.index') }}" id="closeform" class="button-small">{% trans %}Abbrechen{% endtrans %}</a>
+      <a href="{{ url_for('site.index') }}" id="closeform" class="button-small" style="margin-left: 0;">{% trans %}Abbrechen{% endtrans %}</a>
     <button type="submit" class="button-small">{% trans %}Daten abschicken{% endtrans %}</button>
   </div>
 </form>

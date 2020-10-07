@@ -5,16 +5,17 @@
     <div class="scroll-box">
       {% include 'information-text.html' %}
     </div>
-    <form method="GET">
+    <form action="{{ url_for('site.consent') }}" method="POST">
       <div>
-        <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+        <input name="terms" type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
         <label for="terms_and_conditions">{% trans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endtrans %}</label>
       </div>
-    </form>
-    <div>
+
+    <div style="text-align: center;">
       <a href="{{ url_for('site.index') }}" id="closeform" class="button-small">{% trans %}Zurück{% endtrans %}</a>
-      <a href="{{ url_for('site.register') }}" type="submit" id="showForm" class="button-small disabled" disabled>{% trans %}Weiter{% endtrans %}</a>
+      <button type="submit" id="showForm" class="button-small disabled" disabled>{% trans %}Weiter{% endtrans %}</button>
     </div>
+      </form>
   </div>
   <script>
   //JavaScript function that enables or disables a submit button depending
