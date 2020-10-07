@@ -152,10 +152,18 @@ def consent():
 
 @bp.route('/results', methods=['GET', 'POST'])
 def results_query():
-    if session.get("consent") != True:
-        return redirect(url_for('site.instructions', ))
+    if "barcode" in session:
+        barcode = session.get('barcode')
+    else:
+        barcode = request.args.get('barcode')
 
-    form = ResultsQueryForm()
+    if barcode is not None:
+        session["barcode"] = barcode.upper()
+
+    if session.get("consent") != True:
+        return redirect(url_for('site.consent'))
+
+    form = ResultsQueryForm(field_args={"bcode": barcode})
     if request.method == 'POST':
         if form.validate_on_submit():
             form_barcode = form.bcode.data.upper()

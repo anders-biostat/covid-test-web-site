@@ -52,7 +52,7 @@ batch_number = new_extension("Codes/micronic_batches/micronic_A.lst")
 printer_setting = "CT~~CD,~CC^~CT~ \n ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA\
 ^PR2,2~SD20^JUS^LRN^CI0^XZ \n \
 ^XA \n \
-^MMT^PW609^LL0959^LS0"
+^MMT^PW609^LL1159^LS0^LH0,150"
 
 title = "^FT77,64^A0N,51,38^FB480,1,0,C^FH\^FDUniversit\84t Heidelberg^FS\
 ^FT77,128^A0N,51,38^FB480,1,0,C^FH\^FDCOVID-19 Test via LAMP^FS\

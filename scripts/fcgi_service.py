@@ -103,7 +103,7 @@ def app_register( environ, start_response ):
 
 	elif barcode not in codes2events:
 		return serve_file( environ, start_response,
-			"barcode-unknown.html", { "@@BARCODE@@" : "<b>%i</b>" % (barcode) } )
+			"barcode-unknown.html", { "@@BARCODE@@" : "<b>%s</b>" % (barcode) } )
 
 	else:
 
@@ -145,7 +145,7 @@ def app_result_query( environ, start_response ):
 	# Check if barcode exists
 	if form_barcode not in codes2events:
 		return serve_file( environ, start_response,
-			"barcode-unknown.html", { "@@BARCODE@@" : "%i" % (barcode) } )
+			"barcode-unknown.html", { "@@BARCODE@@" : "%s" % (barcode) } )
 
 	# Find barcode registration
 	hashes_found = set()
@@ -157,11 +157,11 @@ def app_result_query( environ, start_response ):
 
 	if len( hashes_found ) == 0:
 		return serve_file( environ, start_response,
-			"barcode-not-registered.html", { "@@BARCODE@@" : "%i" % (barcode) } )
+			"barcode-not-registered.html", { "@@BARCODE@@" : "%s" % (barcode) } )
 
 	if len( hashes_found ) > 1:
 		return serve_file( environ, start_response,
-			"multiple-registeration.html", { "@@BARCODE@@" : "%i" % (barcode) } )
+			"multiple-registeration.html", { "@@BARCODE@@" : "%s" % (barcode) } )
 
 	assert len( hashes_found ) == 1
 
@@ -202,6 +202,23 @@ def app_result_query( environ, start_response ):
 	start_response('303 See Other', [('Location', 'no-result.html')])
 	return []
 
+def app_get_line( environ, start_response ):
+	try:
+		request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
+	except(ValueError):
+		request_body_size = 0
+
+	request_body = environ['wsgi.input'].read(request_body_size)
+	fields = urllib.parse.parse_qs( request_body.decode("ascii") )
+	fields = { k : v[0] for (k,v) in fields.items() }
+	barcode = fields["code"].upper()
+	lines = []
+	with open(SUBJECT_DATA_FILENAME) as f:
+		for line in f:
+			if line.startswith(barcode+","):
+				lines.append(line)
+	start_response('200 OK', [('Content-type','text/plain')])
+	return lines
 
 
 
@@ -213,6 +230,8 @@ def app( environ, start_response ):
 			return app_instructions( environ, start_response )
 		elif environ['SCRIPT_NAME'].endswith( "result-query" ):
 			return app_result_query( environ, start_response )
+		elif environ['SCRIPT_NAME'].endswith( "get-line" ):
+			return app_get_line( environ, start_response )
 		else:
 			raise ValueError( "unknown script name")
 	except:
