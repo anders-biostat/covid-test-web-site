@@ -122,15 +122,15 @@ def encode_subject_data(barcode, name, address, contact, password, return_dict=F
 
     if return_dict is True:
         return {
-            'barcode': barcode.encode( "utf-8" ),
-            'time': arrow.now(),
+            'barcode': barcode.encode( "utf-8" ).decode("ascii").strip(),
+            'time': arrow.now().datetime,
             'password_hash': password_hash,
-            'public_key_fingerprint': rsa_instance.public_key_fingerprint,
-            'encrypted_session_key': encrypted_session_key,
-            'aes_instance_iv': aes_instance.iv,
-            'name_encrypted': encrypted_subject_data[0],
-            'address_encrypted': encrypted_subject_data[1],
-            'contact_encrypted': encrypted_subject_data[2],
+            'public_key_fingerprint': rsa_instance.public_key_fingerprint.decode("ascii"),
+            'encrypted_session_key': binascii.b2a_base64(encrypted_session_key, newline=False).decode("ascii"),
+            'aes_instance_iv': binascii.b2a_base64(aes_instance.iv, newline=False).decode("ascii"),
+            'name_encrypted': binascii.b2a_base64(encrypted_subject_data[0], newline=False).decode("ascii"),
+            'address_encrypted': binascii.b2a_base64(encrypted_subject_data[1], newline=False).decode("ascii"),
+            'contact_encrypted': binascii.b2a_base64(encrypted_subject_data[2], newline=False).decode("ascii"),
         }
 
     # Make line for file and return it
@@ -311,6 +311,12 @@ def register():
                         {'_id': bcode}, 
                         {
                             '$setOnInsert': {'_id': bcode, 'registrations': []},
+                        },
+                        upsert=True
+                    )
+                    db['registrations'].update_one(
+                        {'_id': bcode},
+                        {
                             '$push': {'registrations': doc},
                         },
                         upsert=True
