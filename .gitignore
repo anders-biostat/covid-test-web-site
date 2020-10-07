@@ -5,7 +5,8 @@
 .DS_Store
 
 # Python
-*/__pycache__
+__pycache__/
+
 
 # Pybabel
 messages.pot
@@ -16,3 +17,9 @@ messages.pot
 
 # Virtualenv
 /venv
+
+# Data
+subjects.csv
+
+# Editor
+.idea/
