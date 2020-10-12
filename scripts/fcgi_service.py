@@ -220,6 +220,9 @@ def app_get_line( environ, start_response ):
 		for line in f:
 			if line.startswith(barcode+","):
 				lines.append(line)
+	batch_info = load_codes.batch_finder(barcode)
+	for record in batch_info[barcode]:
+		lines.append(record.name, record.batch_file)
 	start_response('200 OK', [('Content-type','text/plain')])
 	return lines
 
