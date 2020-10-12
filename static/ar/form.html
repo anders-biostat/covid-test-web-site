@@ -3,10 +3,10 @@
 <main class="page-content">
   <div id="form" class="container content">
    <form action="fcgi-register" method="post">
-    <h3>Please enter the code printed on your test tube:</h3>
+    <h3>الرجاء إدخال الرمز المطبوع على أنبوب الاختبار الخاص بك:</h3>
     <hr>
     <div class="form-group bmd-form-group">
-      <label for="bcode" class="bmd-label-floating">Code on the tube</label>
+      <label for="bcode" class="bmd-label-floating">يقع الرمز على الأنبوب</label>
       <div class="input-group">
         <input type="text" class="form-control col-5" placeholder="Click the button to scan the barcode" id="bcode" name="bcode" required>
         <span class="input-group-btn input-group-append">
@@ -16,39 +16,39 @@
           </span>
        </div>
       <small id="bcodehelp" class="form-text text-muted">
-      If you did not receive a test tube, please see <a href="no-tube.html">here </a>.
+      إذا لم تحصل على أنبوب اختبار ، من فضلك انظر <a href="no-tube.html">هنا </a>.
       </small>
     </div>
 
-        <p> If your sample should turn out to be positive, the public health office (Gesundheitsamt) will need to contact you. Therefore, please provide your contact details: </p>
+        <p> إذا كانت عينتك إيجابية ، فسيحتاج مكتب الصحة العامة (Gesundheitsamt) إلى الاتصال بك لذلك ، يرجى تقديم تفاصيل الاتصال الخاصة بك: </p>
 
         <div class="form-group bmd-form-group">
-          <label for="name" class="bmd-label-floating">Full Name</label>
+          <label for="name" class="bmd-label-floating">الاسم الكامل</label>
           <input type="text" id="name" class="form-control" name="name" required>
         </div>
         <div class="form-group bmd-form-group">
-          <label for="address" class="bmd-label-floating">Address (street, number, city)</label>
+          <label for="address" class="bmd-label-floating">العنوان (الشارع ، رقم الشارع ، الرمز البريدي ، المدينة)</label>
           <textarea type="text" id="address" class="form-control" name="address" rows="3" required></textarea>
         </div>
         <div class="form-group bmd-form-group">
-          <label for="contact" class="bmd-label-floating">Phone number or Email address</label>
+          <label for="contact" class="bmd-label-floating">رقم الهاتف أو عنوان البريد الإلكتروني</label>
           <input type="text" id="contact" class="form-control" name="contact" rows="4" required>
         </div>
 
-        <p> <small> Note regarding protection of personal data: Your name and your contact details will be kept strictly confidential. Only employees of the public health office will have access. </small> </p>
+        <p> <small>ملاحظة بخصوص حماية البيانات الشخصية: سيتم الاحتفاظ بسرية تامة باسمك وبيانات الاتصال الخاصة بك. سيتمكن فقط موظفو مكتب الصحة العامة من الوصول إلى البيانات. </small> </p>
 
-        <p> To access your test result, you will need to enter a the barcode on your tube and a password. Please choose the password now: </p>
+        <p> للوصول إلى نتيجة الاختبار ، ستحتاج إلى إدخال الرمز الشريطي الظاهر  على الأنبوب وكلمة المرور. الرجاء اختيار كلمة المرور الآن. </p>
         <div class="form-group bmd-form-group">
-          <label for="psw" class="bmd-label-floating">Password</label>
+          <label for="psw" class="bmd-label-floating">كلمة المرور</label>
           <input type="password" class="form-control" name="psw"  required onchange="form.psw-repeat.pattern = RegExp.escape(this.value);">
         </div>
         <div class="form-group bmd-form-group">
-          <label for="psw-repeat" class="bmd-label-floating"><b>Please type your password again:</b></label>
+          <label for="psw-repeat" class="bmd-label-floating"><b>الرجاء إدخال  كلمة المرور الخاصة بك مرة أخرى</b></label>
           <input type="password" class="form-control" name="psw-repeat" required>
         </div>
         <div>
-            <a href="index.html" id="closeform" class="button-small">Cancel</a>
-            <button type="submit" class="button-small">Submit</button>
+            <a href="index.html" id="closeform" class="button-small">إلغاء</a>
+            <button type="submit" class="button-small">إرسال</button>
         </div>
     </form>
   </div>

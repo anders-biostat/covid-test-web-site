@@ -194,6 +194,9 @@ def app_result_query( environ, start_response ):
 				elif remainder.lower().startswith( "failed" ):
 					start_response('303 See Other', [('Location', 'test-failed.html')])
 					return []
+				elif remainder.lower().startswith( "noresult" ):
+					start_response('303 See Other', [('Location', 'test-result-not-ready.html')])
+					return []
 				else:
 					start_response('303 See Other', [('Location', 'internal-error.html')])
 					return []
