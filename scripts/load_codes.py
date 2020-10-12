@@ -5,6 +5,8 @@ import yaml
 
 Event = collections.namedtuple( "Event", [ "name", "instructions" ] )
 
+Batch = collections.namedtuple("Batch", ["name", "batch_file"])
+
 def load_codes():
 
 	# read yaml
@@ -12,7 +14,7 @@ def load_codes():
 		yaml_content = list( yaml.safe_load_all( f.read() ) )
 
 	# Check data
-	expected_keys = ( 'name', 'instructions', 'batches' ) 
+	expected_keys = ( 'name', 'instructions', 'batches' )
 	errors = []
 	for i in range(len(yaml_content)):
 		for key in expected_keys:
@@ -40,6 +42,26 @@ def load_codes():
 
 	return( codes2events )
 
+def batch_finder(bcode):
+	code2batch = {}
+	btch=[]
+	with open("../data/events.yaml") as f:
+		yaml_content = list( yaml.safe_load_all( f.read() ) )
+
+	for record in yaml_content:
+		for batch in record["batches"]:
+			with ( open("../data/code_batches/" + batch ) ) as f:
+				for line in f:
+					if bcode in line:
+						btch.append(Batch( racord["name"], batch))
+	code2batch[bcode] = btch
+
+	if len(btch) > 1:
+		print("Warning! there are %i batches assigned to the barcode" %i)
+	elif len(btch) == 0:
+		print("No batch is assigned to this barcode")
+	return( code2batch )			
+
 
 if __name__ == "__main__":
 
@@ -50,5 +72,5 @@ if __name__ == "__main__":
 		sys.stderr.write( str(sys.exc_info()[1]) + "\n\n" )
 		sys.exit(1)
 
-	print( "Loaded %i codes assigned to %i events." % 
+	print( "Loaded %i codes assigned to %i events." %
 		( len( codes2events ), len(set( codes2events.values() )) ) )

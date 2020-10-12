@@ -1,9 +1,11 @@
 import requests
 import os
-import sys, getpass, binascii, hashlib
+import getpass, binascii, hashlib
 
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
+
+import load_codes
 
 # Main function to decrypt the data
 def decrypt(fields, file):
@@ -57,7 +59,6 @@ def load_key(filename):
     	private_key = RSA.import_key( protected_private_key, passphrase=passphrase )
     except:
     	sys.stderr.write( "ERROR: Failed to use private key. Maybe the passphrase was wrong?\n\n")
-    	sys.exit( 1 )
     rsa_instance = PKCS1_OAEP.new( private_key )
 
     # Get fingerprint
@@ -98,8 +99,12 @@ if not key_files:
 
 while(retrieve_contact.upper() == "YES"):
 
-    code = input("Please enter the barcode:")
+    code = input("Please enter the barcode:").upper()
 
+    # Print the batch file number and assigned event
+    batch_info = loadfiles.batch_finder(code)
+    for record in batch_info[code]:
+        print("Code %s of Event %s from batch file %s" %(code, record.name, record.batch_file))
     # An empty dictionary to store the key fingerprints of the given barcode
     key_dictionary = {}
     # Post request to get the information of the given barcode
@@ -135,9 +140,8 @@ while(retrieve_contact.upper() == "YES"):
             # Iterating over the existing key files in the directory
             for private_key_file in key_files.keys():
                 k = key_files[private_key_file]
-                print(k + "\n")
+                print("Key fingerpring starts with: " + k + "\n")
                 if k in key_fingerprint:
-                    print("I am inside\n")
                     # Decrypting the contact info
                     decrypt(key_dictionary[k], private_key_file)
                     print("\n")
