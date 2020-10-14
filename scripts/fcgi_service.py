@@ -183,19 +183,19 @@ def app_result_query( environ, start_response ):
 				barcode, remainder = line.rstrip(), ""
 			if barcode == form_barcode:
 				if remainder == "":
-					start_response('303 See Other', [('Location', 'test-result-negative.html')])
+					start_response('303 See Other', [('Location', 'result-neg.html')])
 					return []
 				elif remainder.lower().startswith( "pos" ):
-					start_response('303 See Other', [('Location', 'test-result-positive.html')])
+					start_response('303 See Other', [('Location', 'result-pos.html')])
 					return []
 				elif remainder.lower().startswith( "inc" ):
-					start_response('303 See Other', [('Location', 'to-be-determined.html')])
+					start_response('303 See Other', [('Location', 'result-inconcl.html')])
 					return []
-				elif remainder.lower().startswith( "failed" ):
-					start_response('303 See Other', [('Location', 'test-failed.html')])
+				elif remainder.lower().startswith( "wait" ):
+					start_response('303 See Other', [('Location', 'result-wait.html')])
 					return []
 				elif remainder.lower().startswith( "noresult" ):
-					start_response('303 See Other', [('Location', 'test-result-not-ready.html')])
+					start_response('303 See Other', [('Location', 'test-failed.html')])
 					return []
 				else:
 					start_response('303 See Other', [('Location', 'internal-error.html')])
