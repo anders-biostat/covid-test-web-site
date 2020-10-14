@@ -1,8 +1,10 @@
 # Add this snippet into the appropriate "server" section in
 # one of the site config files in /etc/nginx/sites-available
 
+	limit_req_zone $binary_remote_addr zone=one:10m rate=30r/m;
+
 	location /corona-test {
-		alias /var/www/apps/corona-test/static;
+		alias /Users/fereydoon/corona-test/covid-test-web-site/static;
 
 		ssi on;
 
@@ -10,5 +12,6 @@
 		location ~ /fcgi {
 			include fastcgi_params;
 			fastcgi_pass 127.0.0.1:31234;
+			limit_req zone=one;
 		}
 	}
