@@ -23,3 +23,7 @@ subjects.csv
 
 # Editor
 .idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
