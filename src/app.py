@@ -9,6 +9,7 @@ import click, glob, polib
 from envparse import env
 from pymongo import MongoClient
 import arrow
+from termcolor import colored
 
 from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session
 from flask_wtf.csrf import CSRFProtect
@@ -369,10 +370,22 @@ def update():
         for directory in translation_directories:
             try:
                 po = polib.pofile(os.path.join(directory, "LC_MESSAGES/messages.po"))
-                print("Directory: ", directory)
-                print("Percentage translated: " + str(po.percent_translated()) + "%")
+                percentage_translated = po.percent_translated()
+                color = 'blue'
+
+                if percentage_translated == 100:
+                    color = 'green'
+                if percentage_translated < 100:
+                    color = 'yellow'
+                if percentage_translated <= 90:
+                    color = 'red'
+
+                print(colored(("Language: %s" % directory.split("/")[-2]), color))
+                print(colored(("Directory: %s" % directory), color))
+                print(colored("Percentage translated: %s" % str(percentage_translated), color))
                 print("---")
-            except:
+            except Exception as e:
+                print(e)
                 print("Error parsing ", directory)
                 pass
     except:
