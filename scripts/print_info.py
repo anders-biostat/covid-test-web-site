@@ -102,21 +102,20 @@ while(retrieve_contact.upper() == "YES"):
     code = input("Please enter the barcode:").upper()
 
     # Print the batch file number and assigned event
-    batch_info = loadfiles.batch_finder(code)
-    for record in batch_info[code]:
-        print("Code %s of Event %s from batch file %s" %(code, record.name, record.batch_file))
+    #batch_info = load_codes.batch_finder(code)
+    #for record in batch_info[code]:
+    #    print("Code %s of Event %s from batch file %s" %(code, record.name, record.batch_file))
     # An empty dictionary to store the key fingerprints of the given barcode
     key_dictionary = {}
     # Post request to get the information of the given barcode
-    r = requests.post("https://papagei.bioquant.uni-heidelberg.de/corona-test/fcgi-get-line", data={"code": code})
+    r = requests.post("https://papagei.bioquant.uni-heidelberg.de/corona/fcgi-get-line", data={"code": code})
     # Check if the response code is ok
     if r.status_code == 200:
-        #Unpacking the response in a dictionary from the corresponding json object
+        #Unpacking the response in a dictionary from the corresponding list
         result = r.text.splitlines()
 
         if not result:
-            print("There is no record available with this barcode.\
-             Please check if you typed the barcode correctly. \n")
+            print("There is no record available with this barcode. Please check if you typed the barcode correctly.")
 
         else:
             # A list to store all the fingerprints corresponding to the given barcode
@@ -140,15 +139,14 @@ while(retrieve_contact.upper() == "YES"):
             # Iterating over the existing key files in the directory
             for private_key_file in key_files.keys():
                 k = key_files[private_key_file]
-                print("Key fingerpring starts with: " + k + "\n")
+                print("Key fingerprint starts with: " + k + "\n")
                 if k in key_fingerprint:
                     # Decrypting the contact info
                     decrypt(key_dictionary[k], private_key_file)
                     print("\n")
-                    retrieve_contact = input("Do you want to have another positive case: (please answer with yes or no)")
                 else:
                     print("The appropriate key is not available to decrypt the data \n")
-                    break
+            retrieve_contact = input("Do you have another positive case: (please answer with yes or no)")
 
     else:
         print("Request failed with the status code: ", r.status_code)
