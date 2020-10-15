@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap')
+@import url('http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css')
+
 @charset "utf-8";
 /* CSS Document */
 
@@ -13,6 +15,10 @@ body {
 	background-color: #ffffff;
 }
 
+html[dir='rtl'] body {
+	font-family: 'vazir', sans-serif;
+}
+
 b, strong {
 	font-weight: 700;
 }
@@ -22,7 +28,7 @@ span {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans', 'vazir', sans-serif;
 	font-weight: normal;
 	margin-bottom: 1rem;
 }
@@ -174,6 +180,11 @@ footer a:hover {
 	float:right;
 	position: relative;
 }
+
+.dropdown-lang[dir='rtl'] {
+	float: left;
+}
+
 .dropdown-lang .dropbtn {
 	font-size: 14px;
 	text-align: right;
@@ -183,6 +194,11 @@ footer a:hover {
 	padding: 15px 13px;
 	background-color: inherit;
 }
+
+.dropdown-lang .dropbtn[dir='rtl'] {
+	text-align: left;
+}
+
 .content-lang {
 	display: none;
 	position: absolute;
@@ -206,10 +222,6 @@ footer a:hover {
 
 .content-lang a:hover {
 		background-color: #ad0028;
-}
-
-.page-header .dropdown-lang {
-	float: right;
 }
 
 .banner {
@@ -416,6 +428,7 @@ article {
   margin-left: auto;
 	margin-right: auto;
   width: 66%;
+	text-align: justify;
 }
 
 .content ul {
@@ -423,6 +436,10 @@ article {
   background-color: white;
   padding: 5px 10px;
 	list-style-position: inside;
+}
+
+html[dir='rtl'] .content ol {
+	list-style: arabic-indic;
 }
 
 .content ol ul {
