@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-15 15:39+0200\n"
+"POT-Creation-Date: 2020-10-16 00:17+0200\n"
 "PO-Revision-Date: 2020-10-15 15:36+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -18,31 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: ../src/forms.py:7 ../src/forms.py:18
+#: ../src/forms.py:8
+msgid "Einverständnis"
+msgstr ""
+
+#: ../src/forms.py:12 ../src/forms.py:24
 msgid "Barcode"
 msgstr "Barcode"
 
-#: ../src/forms.py:8 ../static/i18n/register.html:28
+#: ../src/forms.py:13 ../static/i18n/register.html:28
 msgid "Name"
 msgstr "Full Name"
 
-#: ../src/forms.py:9
+#: ../src/forms.py:14
 msgid "Addresse"
 msgstr "Address"
 
-#: ../src/forms.py:11
+#: ../src/forms.py:16
 msgid "Kontaktinformationen"
 msgstr "Contact information"
 
-#: ../src/forms.py:13 ../src/forms.py:19
+#: ../src/forms.py:18 ../src/forms.py:25
 msgid "Passwort"
 msgstr "Password"
 
-#: ../src/forms.py:14
+#: ../src/forms.py:19
 msgid "Passwort wiederholen"
 msgstr "Repeat password"
 
-#: ../src/forms.py:14
+#: ../src/forms.py:19
 msgid "Passwörter müssen übereinstimmen"
 msgstr "Passwords must match"
 
@@ -60,15 +64,15 @@ msgstr "Rapid Covid-19 Test"
 msgid "Teilnahme am Coronavirus-Test"
 msgstr "Participating in COVID-19 test"
 
-#: ../static/i18n/consent.html:11
+#: ../static/i18n/consent.html:12
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr "I give my consent and agree to participate in the test."
 
-#: ../static/i18n/consent.html:15
+#: ../static/i18n/consent.html:16
 msgid "Zurück"
 msgstr "Back"
 
-#: ../static/i18n/consent.html:16
+#: ../static/i18n/consent.html:17
 msgid "Weiter"
 msgstr "I agree"
 
@@ -782,6 +786,7 @@ msgstr "Pleas contact us to inquire"
 
 #: ../static/i18n/internal-error.html:7
 #: ../static/i18n/pages/internal-error.html:7
+#: ../static/i18n/pages/multiple-registeration.html:6
 msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 msgstr "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 
@@ -995,20 +1000,19 @@ msgstr ""
 "page."
 
 #: ../static/i18n/pages/internal-error.html:7
+#: ../static/i18n/pages/multiple-registeration.html:6
 msgid "Bitte kontaktieren Sie uns:"
 msgstr "Please contact us:"
 
-#: ../static/i18n/pages/no-result.html:5
-msgid "Ergebnis liegt noch nicht vor"
-msgstr "Result is not ready"
-
-#: ../static/i18n/pages/no-result.html:6
-msgid ""
-"Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte versuchen Sie "
-"es später oder morgen noch einmal."
+#: ../static/i18n/pages/multiple-registeration.html:4
+msgid "Mehrfach registrierter Barcode"
 msgstr ""
-"The result for your sample is not yet available. Please try again later "
-"or tomorrow."
+
+#: ../static/i18n/pages/multiple-registeration.html:5
+msgid ""
+"Für diesen Barcode wurde das Registrier-Formular mehrmals ausgefüllt, mit"
+" verschiedenen Passwörtten. "
+msgstr ""
 
 #: ../static/i18n/pages/no-tube.html:4
 msgid ""
@@ -1051,6 +1055,38 @@ msgstr "Passwords did not match"
 #: ../static/i18n/pages/wrong-password.html:6
 msgid "Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es noch einmal."
 msgstr "Please go back and try again."
+
+#: ../static/i18n/pages/test-being-checked.html:4
+msgid "Ooops, das Ergebnis liegt noch nicht vor... "
+msgstr "Ooops, something went wrong..."
+
+#: ../static/i18n/pages/test-being-checked.html:5
+msgid ""
+"Das tut uns sehr leid! Leider haben wir immer einen kleinen Bruchteil der"
+" Proben mit nicht eindeutigen Ergebnissen."
+msgstr ""
+"We are very sorry for this! Unfortunately, we always have a small "
+"fraction of samples with inconclusive results."
+
+#: ../static/i18n/pages/test-being-checked.html:6
+msgid ""
+"Dies sind meist falsch-positive Ergebnisse. Um dies zu überprüfen, "
+"analysieren wir diese Proben erneut mittels RT-qPCR, um ein eindeutiges "
+"Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie die "
+"Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe "
+"abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu "
+"denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
+"Ergebnis zu erhalten."
+msgstr ""
+"These are mostly false positives. We are reanalysing these samples by RT-"
+"qPCR in order to obtain a conclusive result. This process takes maximum "
+"24 hours. Since you have reached this page, it means that your sample is "
+"among the ones that are being retested in order to obtain a conclusive "
+"result."
+
+#: ../static/i18n/pages/test-being-checked.html:7
+msgid "Bleiben Sie dran, wir tun unser Bestes."
+msgstr "Stay tuned, we are doing our best."
 
 #: ../static/i18n/pages/test-failed.html:4
 msgid "Test fehlgeschlagen"
@@ -1147,37 +1183,17 @@ msgstr ""
 "call the Corona hotline of the Heidelberg public health office yourself: "
 "06221 522-1881."
 
-#: ../static/i18n/pages/to-be-determined.html:4
-msgid "Ooops, das Ergebnis liegt noch nicht vor... "
-msgstr "Ooops, something went wrong..."
+#: ../static/i18n/pages/test-to-be-determined.html:5
+msgid "Ergebnis liegt noch nicht vor"
+msgstr "Result is not ready"
 
-#: ../static/i18n/pages/to-be-determined.html:5
+#: ../static/i18n/pages/test-to-be-determined.html:6
 msgid ""
-"Das tut uns sehr leid! Leider haben wir immer einen kleinen Bruchteil der"
-" Proben mit nicht eindeutigen Ergebnissen."
+"Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte versuchen Sie "
+"es später oder morgen noch einmal."
 msgstr ""
-"We are very sorry for this! Unfortunately, we always have a small "
-"fraction of samples with inconclusive results."
-
-#: ../static/i18n/pages/to-be-determined.html:6
-msgid ""
-"Dies sind meist falsch-positive Ergebnisse. Um dies zu überprüfen, "
-"analysieren wir diese Proben erneut mittels RT-qPCR, um ein eindeutiges "
-"Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie die "
-"Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe "
-"abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu "
-"denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
-"Ergebnis zu erhalten."
-msgstr ""
-"These are mostly false positives. We are reanalysing these samples by RT-"
-"qPCR in order to obtain a conclusive result. This process takes maximum "
-"24 hours. Since you have reached this page, it means that your sample is "
-"among the ones that are being retested in order to obtain a conclusive "
-"result."
-
-#: ../static/i18n/pages/to-be-determined.html:7
-msgid "Bleiben Sie dran, wir tun unser Bestes."
-msgstr "Stay tuned, we are doing our best."
+"The result for your sample is not yet available. Please try again later "
+"or tomorrow."
 
 #: ../static/i18n/pages/wrong-password.html:4
 msgid "Passwort falsch"

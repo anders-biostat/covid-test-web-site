@@ -6,6 +6,7 @@
       {% include 'information-text.html' %}
     </div>
     <form action="{{ url_for('site.consent') }}" method="POST">
+      {{ form.csrf_token }}
       <div>
         <input name="terms" type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
         <label for="terms_and_conditions">{% trans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endtrans %}</label>

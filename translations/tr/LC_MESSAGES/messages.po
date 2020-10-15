@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-15 15:39+0200\n"
+"POT-Creation-Date: 2020-10-16 00:17+0200\n"
 "PO-Revision-Date: 2020-10-07 17:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -18,31 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: ../src/forms.py:7 ../src/forms.py:18
+#: ../src/forms.py:8
+msgid "Einverständnis"
+msgstr ""
+
+#: ../src/forms.py:12 ../src/forms.py:24
 msgid "Barcode"
 msgstr ""
 
-#: ../src/forms.py:8 ../static/i18n/register.html:28
+#: ../src/forms.py:13 ../static/i18n/register.html:28
 msgid "Name"
 msgstr ""
 
-#: ../src/forms.py:9
+#: ../src/forms.py:14
 msgid "Addresse"
 msgstr ""
 
-#: ../src/forms.py:11
+#: ../src/forms.py:16
 msgid "Kontaktinformationen"
 msgstr ""
 
-#: ../src/forms.py:13 ../src/forms.py:19
+#: ../src/forms.py:18 ../src/forms.py:25
 msgid "Passwort"
 msgstr ""
 
-#: ../src/forms.py:14
+#: ../src/forms.py:19
 msgid "Passwort wiederholen"
 msgstr ""
 
-#: ../src/forms.py:14
+#: ../src/forms.py:19
 msgid "Passwörter müssen übereinstimmen"
 msgstr ""
 
@@ -60,15 +64,15 @@ msgstr ""
 msgid "Teilnahme am Coronavirus-Test"
 msgstr ""
 
-#: ../static/i18n/consent.html:11
+#: ../static/i18n/consent.html:12
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr ""
 
-#: ../static/i18n/consent.html:15
+#: ../static/i18n/consent.html:16
 msgid "Zurück"
 msgstr ""
 
-#: ../static/i18n/consent.html:16
+#: ../static/i18n/consent.html:17
 msgid "Weiter"
 msgstr ""
 
@@ -507,6 +511,7 @@ msgstr ""
 
 #: ../static/i18n/internal-error.html:7
 #: ../static/i18n/pages/internal-error.html:7
+#: ../static/i18n/pages/multiple-registeration.html:6
 msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 msgstr ""
 
@@ -699,17 +704,18 @@ msgid ""
 msgstr ""
 
 #: ../static/i18n/pages/internal-error.html:7
+#: ../static/i18n/pages/multiple-registeration.html:6
 msgid "Bitte kontaktieren Sie uns:"
 msgstr ""
 
-#: ../static/i18n/pages/no-result.html:5
-msgid "Ergebnis liegt noch nicht vor"
+#: ../static/i18n/pages/multiple-registeration.html:4
+msgid "Mehrfach registrierter Barcode"
 msgstr ""
 
-#: ../static/i18n/pages/no-result.html:6
+#: ../static/i18n/pages/multiple-registeration.html:5
 msgid ""
-"Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte versuchen Sie "
-"es später oder morgen noch einmal."
+"Für diesen Barcode wurde das Registrier-Formular mehrmals ausgefüllt, mit"
+" verschiedenen Passwörtten. "
 msgstr ""
 
 #: ../static/i18n/pages/no-tube.html:4
@@ -742,6 +748,31 @@ msgstr ""
 #: ../static/i18n/pages/password-not-matched.html:5
 #: ../static/i18n/pages/wrong-password.html:6
 msgid "Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es noch einmal."
+msgstr ""
+
+#: ../static/i18n/pages/test-being-checked.html:4
+msgid "Ooops, das Ergebnis liegt noch nicht vor... "
+msgstr ""
+
+#: ../static/i18n/pages/test-being-checked.html:5
+msgid ""
+"Das tut uns sehr leid! Leider haben wir immer einen kleinen Bruchteil der"
+" Proben mit nicht eindeutigen Ergebnissen."
+msgstr ""
+
+#: ../static/i18n/pages/test-being-checked.html:6
+msgid ""
+"Dies sind meist falsch-positive Ergebnisse. Um dies zu überprüfen, "
+"analysieren wir diese Proben erneut mittels RT-qPCR, um ein eindeutiges "
+"Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie die "
+"Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe "
+"abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu "
+"denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
+"Ergebnis zu erhalten."
+msgstr ""
+
+#: ../static/i18n/pages/test-being-checked.html:7
+msgid "Bleiben Sie dran, wir tun unser Bestes."
 msgstr ""
 
 #: ../static/i18n/pages/test-failed.html:4
@@ -815,29 +846,14 @@ msgid ""
 " 522-1881. "
 msgstr ""
 
-#: ../static/i18n/pages/to-be-determined.html:4
-msgid "Ooops, das Ergebnis liegt noch nicht vor... "
+#: ../static/i18n/pages/test-to-be-determined.html:5
+msgid "Ergebnis liegt noch nicht vor"
 msgstr ""
 
-#: ../static/i18n/pages/to-be-determined.html:5
+#: ../static/i18n/pages/test-to-be-determined.html:6
 msgid ""
-"Das tut uns sehr leid! Leider haben wir immer einen kleinen Bruchteil der"
-" Proben mit nicht eindeutigen Ergebnissen."
-msgstr ""
-
-#: ../static/i18n/pages/to-be-determined.html:6
-msgid ""
-"Dies sind meist falsch-positive Ergebnisse. Um dies zu überprüfen, "
-"analysieren wir diese Proben erneut mittels RT-qPCR, um ein eindeutiges "
-"Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie die "
-"Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe "
-"abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu "
-"denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
-"Ergebnis zu erhalten."
-msgstr ""
-
-#: ../static/i18n/pages/to-be-determined.html:7
-msgid "Bleiben Sie dran, wir tun unser Bestes."
+"Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte versuchen Sie "
+"es später oder morgen noch einmal."
 msgstr ""
 
 #: ../static/i18n/pages/wrong-password.html:4
