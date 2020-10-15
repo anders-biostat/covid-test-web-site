@@ -1,40 +1,32 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import sys, traceback, time, hashlib, binascii, signal, re, os
-import urllib.parse, flup.server.fcgi
-import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
+import hashlib, binascii, os
 from urllib.parse import urljoin
 import click, glob, polib
 from envparse import env
-from pymongo import MongoClient
-import arrow
 from termcolor import colored
+from pymongo import MongoClient
 
 from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session
 from flask_wtf.csrf import CSRFProtect
 from flask_babel import Babel, _
-from config import LANGUAGES
 
 from forms import RegistrationForm, ResultsQueryForm
-import scripts.load_codes as load_codes
+import scripts.encryption_helper as encryption_helper
 
 # Reading the Environemt-Variables from .env file
 env.read_envfile()
 
-# Check if MongoDB
+client = MongoClient()
+DATABASE = env("DATABASE", cast=str, default="covidtest-test")
+db = client[DATABASE]
 
-MONGODB = env("MONGODB", cast=bool, default=False)
-
-if MONGODB:
-    from pymongo import MongoClient
-    client = MongoClient()
-
-    DATABASE = env("DATABASE", cast=str, default="covidtest-test")
-    db = client[DATABASE]
+# Creating RSA Instance for encryption
+rsa_instance = encryption_helper.rsa_instance()
 
 # file names
-dir = os.path.dirname(__file__)
+dir = os.path.abspath('')
 
 SUBJECT_DATA_FILENAME = os.path.join(dir, "../data/subjects.csv")
 PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/public.pem")
@@ -46,100 +38,6 @@ TEMPLATE_DIR = os.path.join(dir, "../static/i18n/")
 STATIC_DIR = os.path.join(dir, "../static/assets/")
 TRANSLATIONS_DIR = os.path.join(dir, "../translations/")
 
-LANGUAGES = {
-    'de': 'German',
-    'en': 'English'
-}
-
-def load_data(reread_files=False):
-    # This function loads all the data. It is called once at the beginning
-    # and also, when SIGHUP is issued to the process in order to trigger
-    # a reload.
-    # It sets the following global variables
-    global rsa_instance
-    global codes2events
-
-    # Read public key for encryption of contact information
-    with open( PUBLIC_KEY_FILENAME, "rb" ) as f:
-       public_key = Crypto.PublicKey.RSA.import_key( f.read() )
-    rsa_instance = Crypto.Cipher.PKCS1_OAEP.new( public_key )
-
-    # Get fingerprint of public key
-    md5_instance = hashlib.md5()
-    md5_instance.update( public_key.publickey().exportKey("DER") )
-    rsa_instance.public_key_fingerprint = md5_instance.hexdigest().encode("ascii")
-
-    codes2events = load_codes.load_codes()
-
-    if (MONGODB and 'events' not in db.list_collection_names()) or reread_files:
-        print("No events collection found. Reading events ...")
-        for barcode, event in codes2events.items():
-            event_name, event_instructions = event
-
-            doc = {
-                '_id': barcode,
-                'barcode': barcode,
-                'event_name': event_name,
-                'event_instructions': event_instructions,
-            }
-
-            db['events'].update_one({'_id': barcode}, {'$set': doc}, upsert=True)
-
-
-def encode_subject_data(barcode, name, address, contact, password, return_dict=False):
-
-    # Generate session key for use with AES and encrypt it with RSA
-    session_key = Crypto.Random.get_random_bytes( 16 )
-    encrypted_session_key = rsa_instance.encrypt( session_key )
-    aes_instance = Crypto.Cipher.AES.new( session_key, Crypto.Cipher.AES.MODE_CBC )
-
-    # encode, pad, then encrypt subject data
-    encrypted_subject_data = []
-    for s in [ name, address, contact ]:
-        s = s.encode( "utf-8" )
-        if len(s) % 16 != 0:
-            s += b'\000' * ( 16 - len(s) % 16 )
-        encrypted_subject_data.append(aes_instance.encrypt(s))
-
-    # encode user password with SHA3
-    sha_instance = hashlib.sha3_384()
-    sha_instance.update( password.encode( "utf-8" ) )
-    password_hash = sha_instance.digest()
-
-    # Make a line for the CSV file
-    fields = [
-       barcode.encode( "utf-8" ),
-       time.strftime( '%Y-%m-%d %H:%M:%S', time.localtime() ).encode( "utf-8" ),
-       password_hash,
-       rsa_instance.public_key_fingerprint,
-       encrypted_session_key,
-       aes_instance.iv ]
-    fields.extend( encrypted_subject_data )
-
-    # Base64-encode everything excepct for password, time stamp and public key fingerprint
-    for i in range( len(fields) ):
-        if i not in ( 0, 1, 3 ):
-            fields[i] = binascii.b2a_base64( fields[i], newline=False )
-
-    if return_dict is True:
-        return {
-            'barcode': barcode.encode( "utf-8" ).decode("ascii").strip(),
-            'time': arrow.now().datetime,
-            'password_hash': password_hash,
-            'public_key_fingerprint': rsa_instance.public_key_fingerprint.decode("ascii"),
-            'encrypted_session_key': binascii.b2a_base64(encrypted_session_key, newline=False).decode("ascii"),
-            'aes_instance_iv': binascii.b2a_base64(aes_instance.iv, newline=False).decode("ascii"),
-            'name_encrypted': binascii.b2a_base64(encrypted_subject_data[0], newline=False).decode("ascii"),
-            'address_encrypted': binascii.b2a_base64(encrypted_subject_data[1], newline=False).decode("ascii"),
-            'contact_encrypted': binascii.b2a_base64(encrypted_subject_data[2], newline=False).decode("ascii"),
-        }
-
-    # Make line for file and return it
-    return b",".join( fields ).decode("ascii") + "\n"
-
-load_data()
-
-
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.config['SECRET_KEY'] = env("SECRET_KEY", cast=str, default="secret")
 
@@ -148,17 +46,21 @@ app.config['BABEL_TRANSLATION_DIRECTORIES'] = TRANSLATIONS_DIR
 babel = Babel(app)
 bp = Blueprint('site', __name__)
 
+
 @bp.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang', g.lang_code)
+
 
 @bp.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.lang_code = values.pop('lang')
 
+
 @babel.localeselector
 def get_locale():
     return g.lang_code
+
 
 @bp.route('/', methods=['GET'])
 def index():
@@ -166,19 +68,20 @@ def index():
     if barcode is not None:
         session['barcode'] = barcode.upper()
         return redirect(url_for('site.consent'))
-
     return render_template('index.html')
+
 
 @bp.route('/favicon.ico', methods=['GET'])
 def favicon():
     return ""
+
 
 @bp.route('/instructions', methods=['GET'])
 def instructions():
     if 'instructions_file' in session:
         instructions_file = "instructions/" + session.get('instructions_file')
         if not os.path.exists(urljoin(TEMPLATE_DIR, instructions_file)):
-            instructions_file = None  
+            instructions_file = None
     else:
         instructions_file = None
 
@@ -191,7 +94,9 @@ def instructions():
         barcode = session.get("barcode")
     else:
         barcode = None
-    return render_template('instructions.html', instructions_file=instructions_file, event_name=event_name, barcode=barcode)
+    return render_template('instructions.html', instructions_file=instructions_file, event_name=event_name,
+                           barcode=barcode)
+
 
 @bp.route('/consent', methods=['GET', 'POST'])
 def consent():
@@ -204,6 +109,7 @@ def consent():
     else:
         return render_template('consent.html')
 
+
 @bp.route('/results', methods=['GET', 'POST'])
 def results_query():
     form = ResultsQueryForm()
@@ -213,7 +119,8 @@ def results_query():
             form_password = form.psw.data
 
             # Check if barcode exists
-            if form_barcode not in codes2events:
+            sample = db['samples'].find_one({'_id': bcode})
+            if sample is None:
                 return render_template("pages/barcode-unknown.html", barcode=form_barcode)
 
             # Find barcode registration
@@ -244,17 +151,17 @@ def results_query():
             with open(RESULTS_FILENAME) as f:
                 for line in f:
                     if line.find(",") >= 0:
-                        barcode, remainder = line.rstrip().split( ",", 1 )
+                        barcode, remainder = line.rstrip().split(",", 1)
                     else:
                         barcode, remainder = line.rstrip(), ""
                     if barcode == form_barcode:
                         if remainder == "":
                             return render_template("test-result-negative.html")
-                        elif remainder.lower().startswith( "pos" ):
+                        elif remainder.lower().startswith("pos"):
                             return render_template("test-result-positive.html")
-                        elif remainder.lower().startswith( "inc" ):
+                        elif remainder.lower().startswith("inc"):
                             return render_template("to-be-determined.html")
-                        elif remainder.lower().startswith( "failed" ):
+                        elif remainder.lower().startswith("failed"):
                             return render_template("to-failed.html")
                         else:
                             return render_template("internal-error.html")
@@ -262,9 +169,11 @@ def results_query():
     else:
         return render_template('result-query.html', form=form)
 
+
 @bp.route('/information', methods=['GET'])
 def information():
     return render_template('information.html')
+
 
 @bp.route('/registration', methods=['GET', 'POST'])
 def register():
@@ -279,7 +188,7 @@ def register():
     session["barcode"] = None
 
     form = RegistrationForm()
-    if request.method == 'POST': # POST
+    if request.method == 'POST':  # POST
         if form.validate_on_submit():
             bcode = form.bcode.data.upper()
             name = form.name.data
@@ -288,12 +197,14 @@ def register():
             psw = form.psw.data
             psw_repeat = form.psw_repeat.data
 
-            if bcode not in codes2events:
+            sample = db['samples'].find_one({'_id': bcode})
+
+            if sample is None:
                 return render_template("pages/barcode-unknown.html", barcode=bcode)
             else:
                 try:
-                    instructions_file =  codes2events[bcode].instructions
-                    event_name =  codes2events[bcode].name
+                    instructions_file = sample.event_instructions
+                    event_name = sample.event_name
                     session['instructions_file'] = instructions_file
                     session['event_name'] = event_name
                 except:
@@ -301,34 +212,30 @@ def register():
 
                 session["barcode"] = bcode
 
-                line = encode_subject_data(bcode, name, address, contact, psw)
+                doc = encryption_helper.encode_subject_data(rsa_instance, bcode, name, address, contact, psw)
 
-                with open(SUBJECT_DATA_FILENAME, "a") as f:
-                    f.write(line)
-
-                if MONGODB:
-                    doc = encode_subject_data(bcode, name, address, contact, psw, return_dict=True)
-                    db['registrations'].update_one(
-                        {'_id': bcode}, 
-                        {
-                            '$setOnInsert': {'_id': bcode, 'registrations': []},
-                        },
-                        upsert=True
-                    )
-                    db['registrations'].update_one(
-                        {'_id': bcode},
-                        {
-                            '$push': {'registrations': doc},
-                        },
-                        upsert=True
-                    )
+                db['samples'].update_one(
+                    {'_id': bcode},
+                    {
+                        '$setOnInsert': {'_id': bcode, 'registrations': []},
+                    },
+                    upsert=True
+                )
+                db['samples'].update_one(
+                    {'_id': bcode},
+                    {
+                        '$push': {'registrations': doc},
+                    },
+                    upsert=True
+                )
 
                 return redirect(url_for('site.instructions'))
-        else: # Form invalid
+        else:
             return render_template('register.html', form=form)
-        
-    else: # GET
+
+    else:  # GET
         return render_template('register.html', form=form, barcode=barcode)
+
 
 @bp.route('/sites/<string:page>', methods=['GET'])
 def pages(page):
@@ -339,21 +246,12 @@ def pages(page):
 app.register_blueprint(bp, url_defaults={'lang': 'de'})
 app.register_blueprint(bp, url_prefix='/<lang>')
 
-@app.cli.group()
-def read():
-    """Reading data commands."""
-    pass
-
-@read.command()
-def events():
-    """Reading Events to Database"""
-    load_data(reread_files=True)
-
 
 @app.cli.group()
 def translate():
     """Translation and localization commands."""
     pass
+
 
 @translate.command()
 def update():
@@ -363,7 +261,7 @@ def update():
     if os.system('pybabel update -i messages.pot -d ../translations'):
         raise RuntimeError('update command failed')
     try:
-        print("="*40)
+        print("=" * 40)
         print("Translation Percentages: ")
         print("---")
         translation_directories = glob.glob(TRANSLATIONS_DIR + "/*/")
@@ -393,11 +291,13 @@ def update():
         pass
     os.remove('messages.pot')
 
+
 @translate.command()
 def compile():
     """Compile all languages."""
     if os.system('pybabel compile -d ../translations'):
         raise RuntimeError('compile command failed')
+
 
 @translate.command()
 @click.argument('lang')
@@ -409,6 +309,7 @@ def init(lang):
             'pybabel init -i messages.pot -d ../translations -l ' + lang):
         raise RuntimeError('init command failed')
     os.remove('messages.pot')
+
 
 if __name__ == '__main__':
     debug = env("DEBUG", cast=bool, default=False)
