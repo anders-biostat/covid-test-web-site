@@ -12,7 +12,7 @@ from flask import Flask, request, render_template, Blueprint, g, redirect, url_f
 from flask_wtf.csrf import CSRFProtect
 from flask_babel import Babel, _
 
-from forms import RegistrationForm, ResultsQueryForm
+from forms import RegistrationForm, ResultsQueryForm, ConsentForm
 import scripts.encryption_helper as encryption_helper
 
 # Reading the Environemt-Variables from .env file
@@ -100,14 +100,15 @@ def instructions():
 
 @bp.route('/consent', methods=['GET', 'POST'])
 def consent():
+    form = ConsentForm()
     if request.method == 'POST':
         if request.form.get('terms') == '1':
             session['consent'] = True
             return redirect(url_for('site.register'))
         else:
-            return render_template('consent.html')
+            return render_template('consent.html', form=form)
     else:
-        return render_template('consent.html')
+        return render_template('consent.html', form=form)
 
 
 @bp.route('/results', methods=['GET', 'POST'])
@@ -118,54 +119,48 @@ def results_query():
             form_barcode = form.bcode.data.upper()
             form_password = form.psw.data
 
-            # Check if barcode exists
-            sample = db['samples'].find_one({'_id': bcode})
-            if sample is None:
-                return render_template("pages/barcode-unknown.html", barcode=form_barcode)
-
-            # Find barcode registration
-            hashes_found = set()
-            with open(SUBJECT_DATA_FILENAME) as f:
-                for line in f:
-                    barcode, timestamp, password_hash, remainder = line.split(",", 3)
-                    if barcode == form_barcode:
-                        hashes_found.add(password_hash)
-
-            if len(hashes_found) == 0:
-                return render_template("barcode-not-registered.html", barcode=form_barcode)
-
-            if len(hashes_found) > 1:
-                return render_template("multiple-registeration.html", barcode=form_barcode)
-
-            assert len(hashes_found) == 1
-
             # Hash entered password
             sha_instance = hashlib.sha3_384()
             sha_instance.update(form_password.encode("utf-8"))
-            encoded_hash_from_form = binascii.b2a_base64(sha_instance.digest(), newline=False)
+            form_password_hashed = binascii.b2a_base64(sha_instance.digest(), newline=False).decode("ascii")
 
-            if encoded_hash_from_form != list(hashes_found)[0].encode("ascii"):
-                return render_template("wrong-password.html")
+            print(form_password)
+            print(form_password_hashed)
 
-            # Check results
-            with open(RESULTS_FILENAME) as f:
-                for line in f:
-                    if line.find(",") >= 0:
-                        barcode, remainder = line.rstrip().split(",", 1)
+            # Check if barcode exists
+            sample = db['samples'].find_one({'_id': form_barcode})
+            if sample is None:
+                return render_template("pages/barcode-unknown.html", barcode=form_barcode)
+            else:
+                if 'registrations' not in sample:
+                    return render_template("barcode-not-registered.html", barcode=form_barcode)
+                else:  # Barcode found
+                    registration_count = len(sample['registrations'])
+                    if registration_count > 1:
+                        return render_template("pages/multiple-registeration.html", barcode=form_barcode)
+                    if registration_count < 1:
+                        return render_template("pages/barcode-not-registered.html", barcode=form_barcode)
                     else:
-                        barcode, remainder = line.rstrip(), ""
-                    if barcode == form_barcode:
-                        if remainder == "":
-                            return render_template("test-result-negative.html")
-                        elif remainder.lower().startswith("pos"):
-                            return render_template("test-result-positive.html")
-                        elif remainder.lower().startswith("inc"):
-                            return render_template("to-be-determined.html")
-                        elif remainder.lower().startswith("failed"):
-                            return render_template("to-failed.html")
+                        if form_password_hashed != sample['registrations'][0]['password_hash']:  # Wrong password
+                            return render_template("pages/wrong-password.html")
                         else:
-                            return render_template("internal-error.html")
-            return render_template("no-result.html")
+                            if 'results' in sample and len(sample['results']) > 0:
+                                results = sample['results']
+                                latest_result = results[-1]
+                                if latest_result['status'] == 'positive':
+                                    return render_template("pages/test-result-positive.html")
+                                if latest_result['status'] == 'negative':
+                                    return render_template("pages/test-result-negative.html")
+                                if latest_result['status'] == 'rechecking':
+                                    return render_template("pages/test-being-checked.html")
+                                if latest_result['status'] == 'failed':
+                                    return render_template("pages/to-failed.html")
+                                if latest_result['status'] == 'tbd':
+                                    return render_template("pages/test-to-be-determined.html")
+                                else:
+                                    return render_template("pages/internal-error.html")
+                            else:
+                                return render_template("pages/test-to-be-determined.html")
     else:
         return render_template('result-query.html', form=form)
 
