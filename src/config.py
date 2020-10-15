@@ -2,6 +2,6 @@
 
 # available languages
 LANGUAGES = {
-	'en': 'English',
-	'de': 'German'
+    'en': 'English',
+    'de': 'German'
 }

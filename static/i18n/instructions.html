@@ -1,24 +1,40 @@
-{% extends "base.html" %}
-{% block content %}
-  <div class="content">
-  <h4>{% trans %}Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren, was Sie nun machen müssen.{% endtrans %}</h4>
+{% extends "base.html" %} {% block content %}
+<div class="content">
+  <h4>
+    {% trans %}Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,
+    was Sie nun machen müssen.{% endtrans %}
+  </h4>
   <div class="video-responsive">
     <!-- <iframe width="560" height="315" src="media/sample.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
     <!-- <iframe src="https://player.vimeo.com/video/418715192?title=0&byline=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`-->
-    <iframe width="420" height="315" src="https://www.youtube.com/embed/hVniPRMuCjo"> </iframe>
+    <iframe
+      width="420"
+      height="315"
+      src="https://www.youtube.com/embed/hVniPRMuCjo"
+    >
+    </iframe>
   </div>
-  <br><br>
-  <p>{% trans %}Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten Sie uns das Röhrchen bitte wie folgt zu{% endtrans %}</p>
+  <br /><br />
+  <p>
+    {% trans %}Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten
+    Sie uns das Röhrchen bitte wie folgt zu{% endtrans %}
+  </p>
   <div id="return">
-    {% if instructions_file  %}
-      {% include instructions_file %}
-    {% else %}
-      {% include 'instructions/default.html' %}
-    {% endif %}
+    {% if instructions_file %} {% include instructions_file %} {% else %} {%
+    include 'instructions/default.html' %} {% endif %}
   </div>
   <p>{% trans %}Vielen Dank für Ihre Teilnahme.{% endtrans %}</p>
-  <p>{% trans %}Morgen oder übermorgen können Sie Ihr Ergebnis unter folgendem Link abfragen:{% endtrans %}
-    <p><a href="{{ url_for('site.results_query') }}">{{ url_for('site.results_query') }}</a></p>
-  <p>{% trans %}Notieren Sie sich dazu Ihren Code und Ihr Passwort.{% endtrans %}</p>
+  <p>
+    {% trans %}Morgen oder übermorgen können Sie Ihr Ergebnis unter folgendem
+    Link abfragen:{% endtrans %}
+  </p>
+  <p>
+    <a href="{{ url_for('site.results_query') }}"
+      >{{ url_for('site.results_query') }}</a
+    >
+  </p>
+  <p>
+    {% trans %}Notieren Sie sich dazu Ihren Code und Ihr Passwort.{% endtrans %}
+  </p>
 </div>
 {% endblock %}

@@ -1,47 +1,68 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <title> {% trans %}Schnelltest der Universität Heidelberg auf das Covid-19-Coronavirus (SARS-CoV-2){% endtrans %}</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% trans %}Schnelltest der Universität Heidelberg auf das
+      Covid-19-Coronavirus (SARS-CoV-2){% endtrans %}
+    </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% if g.lang_code == 'ar' %}
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/css/bootstrap-rtl.min.css') }}"/>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style/css/bootstrap-rtl.min.css') }}"
+    />
     {% else %}
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/css/bootstrap.min.css') }}"/>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style/css/bootstrap.min.css') }}"
+    />
     {% endif %}
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main_style.css') }}">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='main_style.css') }}"
+    />
   </head>
   <body class="page">
     {% block header %}
-      <div class="page-header sticky-top" id="page-header">
-        <div class="container navbar">
-          <div class="navbar-brand">
-            <a href="https://www.uni-heidelberg.de/en"> <img src="{{ url_for('static', filename='media/logo_uni_white.svg') }}" class="d-inline-block align-top" alt="Heidelberg University"/></img></a>
-          </div>
-          <!--  <div class="navbar-brand">
+    <div class="page-header sticky-top" id="page-header">
+      <div class="container navbar">
+        <div class="navbar-brand">
+          <a href="https://www.uni-heidelberg.de/en">
+            <img
+              src="{{ url_for('static', filename='media/logo_uni_white.svg') }}"
+              class="d-inline-block align-top"
+              alt="Heidelberg University"
+          /></a>
+        </div>
+        <!--  <div class="navbar-brand">
             Zentrum für Moleculare <br> Biologie (ZMBH)
           </div> -->
-          <div class="title">
-            <a href="{{ url_for('site.index') }}">{% trans %}Schnelltest auf das Covid-19{% endtrans %}</a>
-          </div>
-          <div class="dropdown-lang">
-            <button class="dropbtn"> <i class="material-icons md-36">language</i>
-            </button>
-            <div class="content-lang dropdown-menu-right">
-              <a href="/en/">English</a>
-              <a href="/tr/">Türkçe</a>
-            </div>
+        <div class="title">
+          <a href="{{ url_for('site.index') }}"
+            >{% trans %}Schnelltest auf das Covid-19{% endtrans %}</a
+          >
+        </div>
+        <div class="dropdown-lang">
+          <button class="dropbtn">
+            <i class="material-icons md-36">language</i>
+          </button>
+          <div class="content-lang dropdown-menu-right">
+            <a href="/en/">English</a>
+            <a href="/tr/">Türkçe</a>
           </div>
         </div>
       </div>
+    </div>
     {% endblock %}
-    <main class="page-content">
-      {% block content %}
-      {% endblock %}
-    </main>
-    {% block footer %}
-      {% include 'footer-page.html' %}
-    {% endblock%}
+    <main class="page-content">{% block content %} {% endblock %}</main>
+    {% block footer %} {% include 'footer-page.html' %} {% endblock%}
   </body>
 </html>
