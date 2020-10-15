@@ -4,16 +4,16 @@ from wtforms.validators import DataRequired, Email, EqualTo
 from flask_babel import _
 
 class RegistrationForm(FlaskForm):
-    bcode = StringField('Barcode', validators=[DataRequired()])
-    name = StringField('Name', validators=[DataRequired()])
-    address = StringField('Address', validators=[DataRequired()])
+    bcode = StringField(_('Barcode'), validators=[DataRequired()])
+    name = StringField(_('Name'), validators=[DataRequired()])
+    address = StringField(_('Addresse'), validators=[DataRequired()])
 
-    contact = StringField('Contact information', validators=[DataRequired()])
+    contact = StringField(_('Kontaktinformationen'), validators=[DataRequired()])
 
-    psw = PasswordField('Password', validators=[DataRequired()])
-    psw_repeat = PasswordField('Password repeat', validators=[DataRequired(), EqualTo('psw', message=_('Passwords must match'))])
+    psw = PasswordField(_('Passwort'), validators=[DataRequired()])
+    psw_repeat = PasswordField(_('Passwort wiederholen'), validators=[DataRequired(), EqualTo('psw', message=_('Passwörter müssen übereinstimmen'))])
 
 
 class ResultsQueryForm(FlaskForm):
-	bcode = StringField('Barcode', validators=[DataRequired()])
-	psw = PasswordField('Password', validators=[DataRequired()])
+	bcode = StringField(_('Barcode'), validators=[DataRequired()])
+	psw = PasswordField(_('Passwort'), validators=[DataRequired()])
