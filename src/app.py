@@ -167,7 +167,7 @@ def results_query():
 
 @bp.route('/information', methods=['GET'])
 def information():
-    return render_template('information.html')
+    return render_template('pages/information.html')
 
 
 @bp.route('/registration', methods=['GET', 'POST'])
