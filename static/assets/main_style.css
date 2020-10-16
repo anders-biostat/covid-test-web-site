@@ -282,6 +282,10 @@ button i.material-icons {
 		background-color: #ad0028;
 }
 
+div.alert{
+    margin: 20px 20px 0 20px;
+}
+
 .banner {
 	color: #222222;
 	position: fixed;

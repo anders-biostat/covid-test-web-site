@@ -8,7 +8,7 @@ from envparse import env
 from termcolor import colored
 from pymongo import MongoClient
 
-from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session
+from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session, flash
 from flask_wtf.csrf import CSRFProtect
 from flask_babel import Babel, _
 
@@ -78,24 +78,11 @@ def favicon():
 
 @bp.route('/instructions', methods=['GET'])
 def instructions():
-    if 'instructions_file' in session:
-        instructions_file = "instructions/" + session.get('instructions_file')
-        if not os.path.exists(urljoin(TEMPLATE_DIR, instructions_file)):
-            instructions_file = None
-    else:
-        instructions_file = None
-
-    if 'event_name' in session:
-        event_name = session.get('event_name')
-    else:
-        event_name = None
-
     if 'barcode' in session:
         barcode = session.get("barcode")
     else:
         barcode = None
-    return render_template('instructions.html', instructions_file=instructions_file, event_name=event_name,
-                           barcode=barcode)
+    return render_template('instructions.html', barcode=barcode)
 
 
 @bp.route('/consent', methods=['GET', 'POST'])
@@ -106,6 +93,7 @@ def consent():
             session['consent'] = True
             return redirect(url_for('site.register'))
         else:
+            flash(_('Sie müssen erst der Teilnahme zustimmen, um fortzufahren'))
             return render_template('consent.html', form=form)
     else:
         return render_template('consent.html', form=form)
@@ -124,13 +112,11 @@ def results_query():
             sha_instance.update(form_password.encode("utf-8"))
             form_password_hashed = binascii.b2a_base64(sha_instance.digest(), newline=False).decode("ascii")
 
-            print(form_password)
-            print(form_password_hashed)
-
             # Check if barcode exists
             sample = db['samples'].find_one({'_id': form_barcode})
             if sample is None:
-                return render_template("pages/barcode-unknown.html", barcode=form_barcode)
+                flash(_('Der Barcode ist unbekannt. Bitte erneut versuchen.'), 'alert-danger')
+                return redirect(url_for('site.results_query'))
             else:
                 if 'registrations' not in sample:
                     return render_template("barcode-not-registered.html", barcode=form_barcode)
@@ -195,7 +181,8 @@ def register():
             sample = db['samples'].find_one({'_id': bcode})
 
             if sample is None:
-                return render_template("pages/barcode-unknown.html", barcode=bcode)
+                flash(_('Der Barcode ist unbekannt. Bitte erneut versuchen.'), 'alert-danger')
+                return render_template('register.html', form=form)
             else:
                 try:
                     instructions_file = sample.event_instructions

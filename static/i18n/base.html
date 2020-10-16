@@ -86,8 +86,32 @@
       </div>
     </div>
     {% endblock %}
+
+
+
     {% block consent %} {% endblock %}
-    <main class="page-content">{% block content %} {% endblock %}</main>
+    <main class="page-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class=flashes>
+          {% for category, message in messages %}
+            <div class="alert {{ category }}" role="alert">
+              {% if category == 'alert-danger' %}
+                <strong>{% trans %}Fehler:{% endtrans%}</strong>
+              {% endif %}
+              {% if category == 'alert-warning' %}
+                <strong>{% trans %}Warnung:{% endtrans%}</strong>
+              {% endif %}
+              {{ message }}
+            </div>
+          {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+
+      {% block content %} {% endblock %}
+    </main>
     {% block footer %} {% include 'footer-page.html' %} {% endblock%}
   </body>
 </html>

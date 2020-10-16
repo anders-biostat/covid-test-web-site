@@ -23,7 +23,7 @@
         <input
           type="text"
           class="form-control col-8"
-          placeholder="Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
+          placeholder="{% trans %}Bitte geben Sie den Barcode des Probenröhrchens ein{% endtrans%}"
           id="bcode"
           name="bcode"
           required
@@ -31,16 +31,6 @@
         {% for error in form.bcode.errors %}
         <small class="text-danger">{{ error }}</small>
         {% endfor %}
-        <span class="input-group-btn input-group-append">
-          <button
-            class="btn btn-default"
-            type="button"
-            data-toggle="modal"
-            data-target="#livestream_scanner"
-          >
-            <i class="material-icons">qr_code_scanner</i>
-          </button>
-        </span>
       </div>
       <small id="bcodehelp" class="form-text text-muted">
         {% trans %}wie er auf Ihrem Röhrchen aufgedruckt war{% endtrans %}
