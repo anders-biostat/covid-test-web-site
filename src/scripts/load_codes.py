@@ -51,8 +51,8 @@ def load_codes():
             sys.stderr.write( e + "\n" )
         raise ValueError( "YAML syntax error." )
 
-    for record in yaml_content[:1]:
-        for batch in record["batches"][:1]:
+    for record in yaml_content:
+        for batch in record["batches"]:
             batch_record = db['batches'].find_one({'_id': batch})
             if batch_record is None:
                 read_batch("../../data/code_batches/" + batch, batch, record)
