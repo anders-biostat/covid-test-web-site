@@ -148,7 +148,7 @@ footer.footer-index-page a{
 }
 
 div.title {
-    margin-left: -100px; /* Set this to the half width of .index-header img */
+    margin-left: -50px; /* Set this to the half width of .index-header img */
 }
 
 
@@ -216,6 +216,18 @@ div.title a {
 	font-size: 36px !important;
 	height: 36px !important;
 	width: 36px !important;
+}
+
+button i.material-icons {
+    vertical-align: middle;
+    padding-right: 5px;
+    margin-right: 5px;
+}
+
+#lang-dropdown{
+    color: #fff;
+    vertical-align: middle;
+    font-size: 20px;
 }
 
 .dropdown-lang {
