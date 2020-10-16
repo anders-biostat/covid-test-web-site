@@ -44,7 +44,7 @@
         <div class="navbar-brand">
           <a href="https://www.uni-heidelberg.de/en">
             <img
-              src="{{ url_for('static', filename='media/logo_uni_white.svg') }}"
+              src="{{ url_for('static', filename='media/logo_uni_mono_text.svg') }}"
               class="d-inline-block align-top"
               alt="Heidelberg University"
           /></a>
@@ -57,15 +57,30 @@
             >{% trans %}Schnelltest auf das Covid-19 Coronavirus{% endtrans %}</a
           >
         </div>
-        <div class="dropdown-lang">
+
+        <div class="dropdown show">
+  <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="material-icons md-30">language</i> Language
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/de/">Deutsch</a>
+    <a class="dropdown-item" href="/en/">English</a>
+  </div>
+</div>
+
+        <!--
+        <div class="dropdown-lang show">
           <button class="dropbtn">
             <i class="material-icons md-36">language</i>
           </button>
           <div class="content-lang dropdown-menu-right">
-            <a href="/de/">Deutsch</a>
-            <a href="/en/">English</a>
+            <a class="dropdown-item" href="/de/">Deutsch</a>
+            <a class="dropdown-item" href="/en/">English</a>
           </div>
         </div>
+        -->
+
       </div>
     </div>
     {% endblock %}

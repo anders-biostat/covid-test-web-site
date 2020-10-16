@@ -7,6 +7,13 @@
         {% trans %}Bitte registrieren Sie ihr Testkit:{% endtrans %}
       </h3>
       <hr />
+
+      <p>
+        {% trans %}
+          Die Registrierung ist notwendig, damit Sie im Falle eines positiven Testergebnisses kontaktiert werden können.
+        {% endtrans %}
+      </p>
+
       <div class="form-group bmd-form-group">
         <label for="bcode" class="bmd-label-floating"
           >{% trans %}Code auf dem Probenröhrchen (im Testkit erhalten):{% endtrans %}</label
@@ -51,7 +58,7 @@
       </p>
       <div class="form-group bmd-form-group">
         <label for="name" class="bmd-label-floating"
-          >{% trans %}Name{% endtrans %}</label
+          >{% trans %}Name (Nachname, Vorname){% endtrans %}</label
         >
         <input
           type="text"
@@ -68,8 +75,10 @@
       <div class="form-group bmd-form-group">
         <label for="address" class="bmd-label-floating"
           >{% trans %}Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort){%
-          endtrans %}</label
-        >
+          endtrans %}</label>
+        <p>
+          {% trans %}Bitte geben Sie nach Möglichkeit ihre Wohnanschrift an.{% endtrans%}
+        </p>
         <textarea
           type="text"
           id="address"
@@ -104,10 +113,12 @@
           haben darauf Zugriff.{% endtrans %}</small
         >
       </p>
-      <p>
+      <div class="alert alert-primary" role="alert">
+        <b>
         {% trans %}Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie
         sich bitte ihren Code und geben Sie ein Passwort an:{% endtrans %}
-      </p>
+        </b>
+      </div>
       <div class="form-group bmd-form-group">
         <label for="psw" class="bmd-label-floating"
           >{% trans %}Passwort:{% endtrans %}</label

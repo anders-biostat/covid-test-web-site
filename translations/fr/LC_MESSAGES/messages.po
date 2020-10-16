@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-16 16:16+0200\n"
+"POT-Creation-Date: 2020-10-16 21:18+0200\n"
 "PO-Revision-Date: 2020-10-07 17:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Barcode"
 msgstr ""
 
-#: ../src/forms.py:13 ../static/i18n/register.html:54
+#: ../src/forms.py:13
 msgid "Name"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr ""
 
-#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:53
+#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:62
 msgid "Zurück"
 msgstr ""
 
@@ -76,13 +76,14 @@ msgstr ""
 msgid "Weiter"
 msgstr ""
 
-#: ../static/i18n/footer-index.html:9 ../static/i18n/pages/impressum.html:3
-msgid "Impressum"
-msgstr ""
-
-#: ../static/i18n/footer-index.html:11 ../static/i18n/footer-page.html:5
+#: ../static/i18n/footer-index.html:9 ../static/i18n/footer-page.html:5
 #: ../static/i18n/pages/contact.html:3
 msgid "Kontakt"
+msgstr ""
+
+#: ../static/i18n/footer-index.html:12 ../static/i18n/footer-page.html:7
+#: ../static/i18n/pages/impressum.html:3
+msgid "Impressum"
 msgstr ""
 
 #: ../static/i18n/index.html:7
@@ -552,24 +553,32 @@ msgid "Bitte registrieren Sie ihr Testkit:"
 msgstr ""
 
 #: ../static/i18n/register.html:12
+msgid ""
+"\n"
+"          Die Registrierung ist notwendig, damit Sie im Falle eines "
+"positiven Testergebnisses kontaktiert werden können.\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/register.html:19
 msgid "Code auf dem Probenröhrchen (im Testkit erhalten):"
 msgstr ""
 
-#: ../static/i18n/register.html:18
+#: ../static/i18n/register.html:25
 msgid "Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
 msgstr ""
 
-#: ../static/i18n/register.html:40
+#: ../static/i18n/register.html:47
 msgid ""
 "Falls Sie kein Röhrchen mit Code erhalten haben, klicken\n"
 "          Sie bitte "
 msgstr ""
 
-#: ../static/i18n/register.html:43
+#: ../static/i18n/register.html:50
 msgid "hier"
 msgstr ""
 
-#: ../static/i18n/register.html:48
+#: ../static/i18n/register.html:55
 msgid ""
 "Falls wir das Virus in Ihrer Probe nachweisen sollten, muss\n"
 "        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte "
@@ -577,15 +586,23 @@ msgid ""
 "        Kontakt-Daten an: "
 msgstr ""
 
-#: ../static/i18n/register.html:70
+#: ../static/i18n/register.html:61
+msgid "Name (Nachname, Vorname)"
+msgstr ""
+
+#: ../static/i18n/register.html:77
 msgid "Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)"
 msgstr ""
 
-#: ../static/i18n/register.html:85
+#: ../static/i18n/register.html:80
+msgid "Bitte geben Sie nach Möglichkeit ihre Wohnanschrift an."
+msgstr ""
+
+#: ../static/i18n/register.html:94
 msgid "Telefonnummer oder E-Mail-Addresse"
 msgstr ""
 
-#: ../static/i18n/register.html:102
+#: ../static/i18n/register.html:111
 msgid ""
 "Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden\n"
 "          streng vertraulich behandelt. Nur die Mitarbeiter des "
@@ -593,35 +610,35 @@ msgid ""
 "          haben darauf Zugriff."
 msgstr ""
 
-#: ../static/i18n/register.html:108
+#: ../static/i18n/register.html:118
 msgid ""
 "Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
 "        sich bitte ihren Code und geben Sie ein Passwort an:"
 msgstr ""
 
-#: ../static/i18n/register.html:113
+#: ../static/i18n/register.html:124
 msgid "Passwort:"
 msgstr ""
 
-#: ../static/i18n/register.html:129
+#: ../static/i18n/register.html:140
 msgid "dasselbe Passwort nochmal:"
 msgstr ""
 
-#: ../static/i18n/register.html:147
+#: ../static/i18n/register.html:158
 msgid "Abbrechen"
 msgstr ""
 
-#: ../static/i18n/register.html:150
+#: ../static/i18n/register.html:161
 msgid "Daten abschicken"
 msgstr ""
 
-#: ../static/i18n/register.html:160
+#: ../static/i18n/register.html:171
 msgid ""
 "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen\n"
 "            im Rahmen:"
 msgstr ""
 
-#: ../static/i18n/register.html:170 ../static/i18n/result-query.html:76
+#: ../static/i18n/register.html:181 ../static/i18n/result-query.html:85
 msgid "Schließen"
 msgstr ""
 
@@ -630,26 +647,39 @@ msgid "Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:"
 msgstr ""
 
 #: ../static/i18n/result-query.html:11
+msgid ""
+"\n"
+"          Um das Ergebnis abrufen zu können, muss der Test vorher "
+"registriert worden sein. <br>\n"
+"          Das Testkit können Sie unter folgendem Link registrieren:\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/result-query.html:15
+msgid "Registrieren"
+msgstr ""
+
+#: ../static/i18n/result-query.html:20
 msgid "Code auf dem Röhrchen"
 msgstr ""
 
-#: ../static/i18n/result-query.html:37
+#: ../static/i18n/result-query.html:46
 msgid "wie er auf Ihrem Röhrchen aufgedruckt war"
 msgstr ""
 
-#: ../static/i18n/result-query.html:41
+#: ../static/i18n/result-query.html:50
 msgid "Ihr Passwort:"
 msgstr ""
 
-#: ../static/i18n/result-query.html:47
+#: ../static/i18n/result-query.html:56
 msgid "wie Sie es bei der Eingabe Ihrer Daten gewählt haben"
 msgstr ""
 
-#: ../static/i18n/result-query.html:56
+#: ../static/i18n/result-query.html:65
 msgid "Ergebnis anzeigen"
 msgstr ""
 
-#: ../static/i18n/result-query.html:66
+#: ../static/i18n/result-query.html:75
 msgid ""
 "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen im\n"
 "          Rahmen:"

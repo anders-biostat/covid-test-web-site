@@ -87,7 +87,7 @@ footer a:hover {
 	text-decoration: underline;
 }
 
-footer.footer-index-page{
+footer {
     color: rgba(0,0,0,.6);
 }
 
@@ -109,6 +109,10 @@ footer.footer-index-page a{
   flex: 1 0 auto;
 }
 
+.container.navbar{
+    padding-left: 0;
+}
+
 .navbar {
 	box-shadow: none !important;
 	z-index: 0;
@@ -117,8 +121,10 @@ footer.footer-index-page a{
 /*-----Header for the index page-------*/
 .navbar-brand {
 	font-size: 15px;
-	/*color: #ffffff;*/
+	padding: 0;
+	color: #ffffff;
 }
+
 
 .index-header {
 	transition: all 0.8s ease-in;
@@ -141,12 +147,17 @@ footer.footer-index-page a{
 	height: auto;
 }
 
+div.title {
+    margin-left: -100px; /* Set this to the half width of .index-header img */
+}
+
+
 .zmbh {
 	display: flex;
 	font-size: 15px;
-	line-height: 1.3rem;
+	line-height: 1.35rem;
 	text-decoration: none;
-	color: #333333;
+	color: #444444;
 }
 
 .index-header a:hover {
@@ -163,10 +174,9 @@ footer.footer-index-page a{
 
 .page-header {
 	transition: all 0.8s ease-in;
-	background: #CC0130 none repeat scroll 0% 0%;
+	background: #CC0130 none repeat scroll 0% 0%; /* #CC0130 */
 	color: #ffffff;
-	height: 100px;
-	padding: 0;
+	padding: 0px;
 }
 
 .page-header li a {
@@ -176,7 +186,7 @@ footer.footer-index-page a{
 }
 
 .page-header img {
-	width: 80px;
+	width: 170px;
 	height: auto;
 }
 
@@ -222,7 +232,7 @@ div.title a {
 	text-align: right;
 	border: none;
 	outline: none;
-	color: inherit;
+	color: #fff;
 	padding: 15px 13px;
 	background-color: inherit;
 }
@@ -231,13 +241,15 @@ div.title a {
 	text-align: left;
 }
 
+#dropdownMenuLink{
+    color: #fff;
+}
+
 .content-lang {
 	display: none;
 	position: absolute;
 	min-width: 150px;
-	/*
 	background-color: #CC0130;
-	*/
 	color: #ffffff;
 }
 
@@ -651,4 +663,15 @@ canvas.drawing, canvas.drawingBuffer {
 	.page-footer {
 		font-size: 10px;
 	}
+}
+
+
+
+.bmd-label-floating {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.form-group{
+    margin: 10px 0 10px 0;
 }

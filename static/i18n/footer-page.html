@@ -1,15 +1,16 @@
 <footer class="pt-2 footer-container">
   <div class="container-fluid container">
     <div class="row footer-row">
-      <div class="col footer-col text-md-left">
-        <a href="{{ url_for('site.pages', page='contact.html') }}">{% trans %}Kontakt{% endtrans %}</a>
+      <div style="" class="col footer-col text-md-left">
+        <a href="{{ url_for('site.pages', page='contact.html') }}">{% trans %}Kontakt{% endtrans %}</a> /
+        <a href="{{ url_for('site.pages', page='impressum.html') }}"
+          >{% trans %}Impressum{% endtrans %}</a>
       </div>
       <div class="col footer-col text-center">
-        © 2020 Simon Anders
+        <!--© 2020 Simon Anders-->
       </div>
       <div class="col footer-col text-md-right">
-        <a href="{{ url_for('site.pages', page='impressum.html') }}"
-          >Impressum</a>
+
       </div>
     </div>
   </div>

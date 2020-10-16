@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-16 16:16+0200\n"
-"PO-Revision-Date: 2020-10-16 16:16+0200\n"
+"POT-Creation-Date: 2020-10-16 21:18+0200\n"
+"PO-Revision-Date: 2020-10-16 21:18+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Consent"
 msgid "Barcode"
 msgstr "Barcode"
 
-#: ../src/forms.py:13 ../static/i18n/register.html:54
+#: ../src/forms.py:13
 msgid "Name"
 msgstr "Full Name"
 
@@ -68,7 +68,7 @@ msgstr "Participating in COVID-19 test"
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr "I give my consent and agree to participate in the test."
 
-#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:53
+#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:62
 msgid "Zurück"
 msgstr "Back"
 
@@ -76,14 +76,15 @@ msgstr "Back"
 msgid "Weiter"
 msgstr "I agree"
 
-#: ../static/i18n/footer-index.html:9 ../static/i18n/pages/impressum.html:3
-msgid "Impressum"
-msgstr "Imprint"
-
-#: ../static/i18n/footer-index.html:11 ../static/i18n/footer-page.html:5
+#: ../static/i18n/footer-index.html:9 ../static/i18n/footer-page.html:5
 #: ../static/i18n/pages/contact.html:3
 msgid "Kontakt"
 msgstr "Contact"
+
+#: ../static/i18n/footer-index.html:12 ../static/i18n/footer-page.html:7
+#: ../static/i18n/pages/impressum.html:3
+msgid "Impressum"
+msgstr "Imprint"
 
 #: ../static/i18n/index.html:7
 msgid "Schnelltest der Universität Heidelberg auf das"
@@ -838,24 +839,34 @@ msgid "Bitte registrieren Sie ihr Testkit:"
 msgstr "Please register your test kit:"
 
 #: ../static/i18n/register.html:12
+msgid ""
+"\n"
+"          Die Registrierung ist notwendig, damit Sie im Falle eines "
+"positiven Testergebnisses kontaktiert werden können.\n"
+"        "
+msgstr ""
+"Registration is necessary so that you can be contacted in case of a "
+"positive test result."
+
+#: ../static/i18n/register.html:19
 msgid "Code auf dem Probenröhrchen (im Testkit erhalten):"
 msgstr "Code on your test tube (contained in test kit):"
 
-#: ../static/i18n/register.html:18
+#: ../static/i18n/register.html:25
 msgid "Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
 msgstr "Click the button to scan the barcode"
 
-#: ../static/i18n/register.html:40
+#: ../static/i18n/register.html:47
 msgid ""
 "Falls Sie kein Röhrchen mit Code erhalten haben, klicken\n"
 "          Sie bitte "
 msgstr "If you did not receive a test tube, please see "
 
-#: ../static/i18n/register.html:43
+#: ../static/i18n/register.html:50
 msgid "hier"
 msgstr "here"
 
-#: ../static/i18n/register.html:48
+#: ../static/i18n/register.html:55
 msgid ""
 "Falls wir das Virus in Ihrer Probe nachweisen sollten, muss\n"
 "        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte "
@@ -866,15 +877,23 @@ msgstr ""
 "(Gesundheitsamt) will need to contact you. Therefore, please provide your"
 " contact details: "
 
-#: ../static/i18n/register.html:70
+#: ../static/i18n/register.html:61
+msgid "Name (Nachname, Vorname)"
+msgstr "Name (last name, first name)"
+
+#: ../static/i18n/register.html:77
 msgid "Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)"
 msgstr "Address (street, number, city)"
 
-#: ../static/i18n/register.html:85
+#: ../static/i18n/register.html:80
+msgid "Bitte geben Sie nach Möglichkeit ihre Wohnanschrift an."
+msgstr "If possible, please provide your home address."
+
+#: ../static/i18n/register.html:94
 msgid "Telefonnummer oder E-Mail-Addresse"
 msgstr "Phone number or Email address"
 
-#: ../static/i18n/register.html:102
+#: ../static/i18n/register.html:111
 msgid ""
 "Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden\n"
 "          streng vertraulich behandelt. Nur die Mitarbeiter des "
@@ -885,7 +904,7 @@ msgstr ""
 "details will be kept strictly confidential. Only employees of the public "
 "health office will have access."
 
-#: ../static/i18n/register.html:108
+#: ../static/i18n/register.html:118
 msgid ""
 "Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
 "        sich bitte ihren Code und geben Sie ein Passwort an:"
@@ -893,29 +912,29 @@ msgstr ""
 "To access your test result, you will need to enter a the barcode on your "
 "tube and a password. Please choose the password now:"
 
-#: ../static/i18n/register.html:113
+#: ../static/i18n/register.html:124
 msgid "Passwort:"
 msgstr "Password:"
 
-#: ../static/i18n/register.html:129
+#: ../static/i18n/register.html:140
 msgid "dasselbe Passwort nochmal:"
 msgstr "Please type your password again:"
 
-#: ../static/i18n/register.html:147
+#: ../static/i18n/register.html:158
 msgid "Abbrechen"
 msgstr "Cancel"
 
-#: ../static/i18n/register.html:150
+#: ../static/i18n/register.html:161
 msgid "Daten abschicken"
 msgstr "Submit"
 
-#: ../static/i18n/register.html:160
+#: ../static/i18n/register.html:171
 msgid ""
 "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen\n"
 "            im Rahmen:"
 msgstr "Please place the barcode on your test tube in the frame:"
 
-#: ../static/i18n/register.html:170 ../static/i18n/result-query.html:76
+#: ../static/i18n/register.html:181 ../static/i18n/result-query.html:85
 msgid "Schließen"
 msgstr "Close"
 
@@ -924,26 +943,41 @@ msgid "Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:"
 msgstr "Here, you can check the result of your Covid-19 test:"
 
 #: ../static/i18n/result-query.html:11
+msgid ""
+"\n"
+"          Um das Ergebnis abrufen zu können, muss der Test vorher "
+"registriert worden sein. <br>\n"
+"          Das Testkit können Sie unter folgendem Link registrieren:\n"
+"        "
+msgstr ""
+"To receive the Results the test needs to be registered first. <br>\n"
+"The test kit can be registered here:"
+
+#: ../static/i18n/result-query.html:15
+msgid "Registrieren"
+msgstr "Register"
+
+#: ../static/i18n/result-query.html:20
 msgid "Code auf dem Röhrchen"
 msgstr "Code on the tube"
 
-#: ../static/i18n/result-query.html:37
+#: ../static/i18n/result-query.html:46
 msgid "wie er auf Ihrem Röhrchen aufgedruckt war"
 msgstr "as it was printed on the label of your tube"
 
-#: ../static/i18n/result-query.html:41
+#: ../static/i18n/result-query.html:50
 msgid "Ihr Passwort:"
 msgstr "Your password:"
 
-#: ../static/i18n/result-query.html:47
+#: ../static/i18n/result-query.html:56
 msgid "wie Sie es bei der Eingabe Ihrer Daten gewählt haben"
 msgstr "that you have set when you registered you sample"
 
-#: ../static/i18n/result-query.html:56
+#: ../static/i18n/result-query.html:65
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: ../static/i18n/result-query.html:66
+#: ../static/i18n/result-query.html:75
 msgid ""
 "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen im\n"
 "          Rahmen:"
