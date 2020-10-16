@@ -5,7 +5,7 @@ import getpass, binascii, hashlib
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
 
-import load_codes
+#import load_codes
 
 # Main function to decrypt the data
 def decrypt(fields, file):
