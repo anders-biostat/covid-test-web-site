@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-16 15:18+0200\n"
+"POT-Creation-Date: 2020-10-16 16:16+0200\n"
 "PO-Revision-Date: 2020-10-07 17:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt\n"
@@ -68,12 +68,21 @@ msgstr ""
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr ""
 
-#: ../static/i18n/consent.html:23
+#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:53
 msgid "Zurück"
 msgstr ""
 
 #: ../static/i18n/consent.html:31
 msgid "Weiter"
+msgstr ""
+
+#: ../static/i18n/footer-index.html:9 ../static/i18n/pages/impressum.html:3
+msgid "Impressum"
+msgstr ""
+
+#: ../static/i18n/footer-index.html:11 ../static/i18n/footer-page.html:5
+#: ../static/i18n/pages/contact.html:3
+msgid "Kontakt"
 msgstr ""
 
 #: ../static/i18n/index.html:7
@@ -98,10 +107,6 @@ msgstr ""
 
 #: ../static/i18n/index.html:21
 msgid "Diese Seite ist verfügbar in:"
-msgstr ""
-
-#: ../static/i18n/index.html:26
-msgid "Bei technischen Problemen wenden Sie sich bitte an"
 msgstr ""
 
 #: ../static/i18n/information-text.html:1
@@ -691,15 +696,11 @@ msgstr ""
 msgid "Bitte gehen Sie zurück und versuchen Sie es noch einmal."
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:3
-msgid "Impressum"
-msgstr ""
-
-#: ../static/i18n/pages/impressum.html:4
+#: ../static/i18n/pages/contact.html:4 ../static/i18n/pages/impressum.html:4
 msgid "Diese Studie wird organisert vom "
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:7
+#: ../static/i18n/pages/contact.html:7 ../static/i18n/pages/impressum.html:7
 msgid ""
 "<strong\n"
 "        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) "
@@ -709,11 +710,11 @@ msgid ""
 "      >"
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:14
+#: ../static/i18n/pages/contact.html:14 ../static/i18n/pages/impressum.html:14
 msgid "in Zusammenarbeit mit dem"
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:17
+#: ../static/i18n/pages/contact.html:17 ../static/i18n/pages/impressum.html:17
 msgid ""
 "<strong\n"
 "        >Gesundheitsamt Rhein-Neckar-Kreis <br />\n"
@@ -722,17 +723,17 @@ msgid ""
 "      >"
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:24
+#: ../static/i18n/pages/contact.html:24 ../static/i18n/pages/impressum.html:24
 msgid "Für Anfragen wenden Sie sich bitte an"
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:28
+#: ../static/i18n/pages/contact.html:28 ../static/i18n/pages/impressum.html:28
 msgid ""
 ",\n"
 "      oder "
 msgstr ""
 
-#: ../static/i18n/pages/impressum.html:33
+#: ../static/i18n/pages/contact.html:33 ../static/i18n/pages/impressum.html:33
 msgid ""
 ",\n"
 "      beide am ZMBH "
@@ -1840,5 +1841,8 @@ msgstr ""
 #~ "\n"
 #~ "      Covid-19 angesteckt haben.</strong\n"
 #~ "    >"
+#~ msgstr ""
+
+#~ msgid "Bei technischen Problemen wenden Sie sich bitte an"
 #~ msgstr ""
 

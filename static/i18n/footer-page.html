@@ -1,13 +1,17 @@
-<footer class="pt-2">
-  <div class="container-fluid container text-center text-md-right">
-    <div class="row">
-      <div class="col-md-9 mt-md-1 mt-1 mb-1 flex-left"></div>
-      <div class="col-md-3 mt-md-1 mt-1 mb-1 text-center">
+<footer class="pt-2 footer-container">
+  <div class="container-fluid container">
+    <div class="row footer-row">
+      <div class="col footer-col text-md-left">
+        <a href="{{ url_for('site.pages', page='contact.html') }}">{% trans %}Kontakt{% endtrans %}</a>
+      </div>
+      <div class="col footer-col text-center">
+        © 2020 Simon Anders
+      </div>
+      <div class="col footer-col text-md-right">
         <a href="{{ url_for('site.pages', page='impressum.html') }}"
-          >Impressum</a
-        >
+          >Impressum</a>
       </div>
     </div>
   </div>
-  <div class="footer-copyright text-center py-1">© 2020 Simon Anders</div>
+  <div class="footer-copyright text-center py-1"></div>
 </footer>

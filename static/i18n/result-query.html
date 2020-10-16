@@ -49,8 +49,8 @@
       </small>
     </div>
     <div>
-      <a href="{{ url_for('site.index') }}" id="closeform" class="button-small"
-        >Zurück</a
+      <a style="margin-left: 0" href="{{ url_for('site.index') }}" id="closeform" class="button-small"
+        >{% trans %}Zurück{% endtrans %}</a
       >
       <button type="submit" class="button-small">
         {% trans %}Ergebnis anzeigen{% endtrans %}

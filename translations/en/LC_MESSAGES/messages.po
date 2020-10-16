@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-16 15:18+0200\n"
-"PO-Revision-Date: 2020-10-16 15:18+0200\n"
+"POT-Creation-Date: 2020-10-16 16:16+0200\n"
+"PO-Revision-Date: 2020-10-16 16:16+0200\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -68,13 +68,22 @@ msgstr "Participating in COVID-19 test"
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr "I give my consent and agree to participate in the test."
 
-#: ../static/i18n/consent.html:23
+#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:53
 msgid "Zurück"
 msgstr "Back"
 
 #: ../static/i18n/consent.html:31
 msgid "Weiter"
 msgstr "I agree"
+
+#: ../static/i18n/footer-index.html:9 ../static/i18n/pages/impressum.html:3
+msgid "Impressum"
+msgstr "Imprint"
+
+#: ../static/i18n/footer-index.html:11 ../static/i18n/footer-page.html:5
+#: ../static/i18n/pages/contact.html:3
+msgid "Kontakt"
+msgstr "Contact"
 
 #: ../static/i18n/index.html:7
 msgid "Schnelltest der Universität Heidelberg auf das"
@@ -99,10 +108,6 @@ msgstr "Learn more about the test"
 #: ../static/i18n/index.html:21
 msgid "Diese Seite ist verfügbar in:"
 msgstr "This website is available in:"
-
-#: ../static/i18n/index.html:26
-msgid "Bei technischen Problemen wenden Sie sich bitte an"
-msgstr "In case of technical problems, please contact"
 
 #: ../static/i18n/information-text.html:1
 msgid "Informationen für Teilnehmer/innen"
@@ -987,15 +992,11 @@ msgstr "Maybe you have typed it wrongly?"
 msgid "Bitte gehen Sie zurück und versuchen Sie es noch einmal."
 msgstr "Please go back and try again."
 
-#: ../static/i18n/pages/impressum.html:3
-msgid "Impressum"
-msgstr "Imprint"
-
-#: ../static/i18n/pages/impressum.html:4
+#: ../static/i18n/pages/contact.html:4 ../static/i18n/pages/impressum.html:4
 msgid "Diese Studie wird organisert vom "
 msgstr "This study is organized by the "
 
-#: ../static/i18n/pages/impressum.html:7
+#: ../static/i18n/pages/contact.html:7 ../static/i18n/pages/impressum.html:7
 msgid ""
 "<strong\n"
 "        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) "
@@ -1011,11 +1012,11 @@ msgstr ""
 "        69120 Heidelberg </strong\n"
 "      >"
 
-#: ../static/i18n/pages/impressum.html:14
+#: ../static/i18n/pages/contact.html:14 ../static/i18n/pages/impressum.html:14
 msgid "in Zusammenarbeit mit dem"
 msgstr "in cooperation with the"
 
-#: ../static/i18n/pages/impressum.html:17
+#: ../static/i18n/pages/contact.html:17 ../static/i18n/pages/impressum.html:17
 msgid ""
 "<strong\n"
 "        >Gesundheitsamt Rhein-Neckar-Kreis <br />\n"
@@ -1029,17 +1030,17 @@ msgstr ""
 "        69115 Heidelberg </strong\n"
 "      >"
 
-#: ../static/i18n/pages/impressum.html:24
+#: ../static/i18n/pages/contact.html:24 ../static/i18n/pages/impressum.html:24
 msgid "Für Anfragen wenden Sie sich bitte an"
 msgstr "For inquiries, please contact"
 
-#: ../static/i18n/pages/impressum.html:28
+#: ../static/i18n/pages/contact.html:28 ../static/i18n/pages/impressum.html:28
 msgid ""
 ",\n"
 "      oder "
 msgstr ", or "
 
-#: ../static/i18n/pages/impressum.html:33
+#: ../static/i18n/pages/contact.html:33 ../static/i18n/pages/impressum.html:33
 msgid ""
 ",\n"
 "      beide am ZMBH "
@@ -2769,4 +2770,7 @@ msgstr ""
 #~ " This means that SARS-CoV-2 was "
 #~ "detected in your sample and you "
 #~ "are most likely infected."
+
+#~ msgid "Bei technischen Problemen wenden Sie sich bitte an"
+#~ msgstr "In case of technical problems, please contact"
 

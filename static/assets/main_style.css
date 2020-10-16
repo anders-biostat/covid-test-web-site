@@ -12,7 +12,7 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	background-color: #ffffff;
+	background-color: #ecf0f1;
 }
 
 html[dir='rtl'] body {
@@ -36,6 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
 	outline: none !important;
 	text-decoration: none;
+	color: #ad0028;
 }
 
 .technical-problem {
@@ -56,19 +57,47 @@ footer {
 	margin-top: auto;
 	bottom: 0;
 	width: 100%;
+	padding-bottom: 60px;
 	flex-shrink: 0;
 	line-height: 40px;
 	font-size: 15px;
 }
 
+.footer-container {
+    padding: 40px 0px 40px 0px;
+    border-top: 0px #7f8c8d solid;
+    background-color: rgba(0,0,0,.05);
+}
+
+.footer-row {
+    padding-top: 20px;
+}
+
+.footer-col {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 footer a {
-	color: #ad0028;
+	color: #7f8c8d;
 }
 
 footer a:hover {
 	color: #ad0028;
 	text-decoration: underline;
 }
+
+footer.footer-index-page{
+    color: rgba(0,0,0,.6);
+}
+
+footer.footer-index-page a{
+    color: rgba(0,0,0,.4);
+}
+
+
+
+
 
 .page {
 	display: flex;
@@ -93,7 +122,9 @@ footer a:hover {
 
 .index-header {
 	transition: all 0.8s ease-in;
-	background: white none repeat scroll 0% 0%;*/
+	/*
+	background: white none repeat scroll 0% 0%;
+	*/
 	padding-left: 30px;
 	font-family: 'Roboto', sans-serif;
 	color: black;
@@ -161,13 +192,14 @@ footer a:hover {
 	font-size: 30px;
 }
 
-.title a {
+div.title a {
 	color: #ffffff;
 	text-decoration: none;
 }
 
 .title a:hover {
-	border-bottom: 2px solid #f1f1f1;
+	/*border-bottom: 2px solid #f1f1f1;*/
+	text-decoration: none;
 }
 
 .material-icons.md-36 {
@@ -203,7 +235,9 @@ footer a:hover {
 	display: none;
 	position: absolute;
 	min-width: 150px;
+	/*
 	background-color: #CC0130;
+	*/
 	color: #ffffff;
 }
 
@@ -388,6 +422,7 @@ footer a:hover {
 /* Scrollable consent form */
 
 .scroll-box {
+  background-color: #fff;
   overflow-y: scroll;
 	border: 2px solid #222222;
 	padding: 30px;
@@ -413,7 +448,9 @@ footer a:hover {
 
 
 article {
+    /*
 	background-color: white;
+	*/
 	padding: 40px;
 	display: block;
 }
@@ -430,7 +467,9 @@ article {
 
 .content ul {
   border-left: 0px solid red;
+  /*
   background-color: white;
+  */
   padding: 5px 10px;
 	list-style-position: inside;
 }
@@ -442,7 +481,9 @@ html[dir='rtl'] .content ol {
 .content ol ul {
 	list-style-type: none;
 	border-left: 0px none red;
+	/*
 	background-color: white;
+	*/
 	padding: 10px 20px;
 }
 
@@ -452,7 +493,9 @@ html[dir='rtl'] .content ol {
 
 .content ol {
 	border-left: 0px none red;
+	/*
 	background-color: white;
+	*/
 	padding: 5px 10px;
 	list-style-position: inside;
 }
