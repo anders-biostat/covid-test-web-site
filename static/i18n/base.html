@@ -24,6 +24,13 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <!--
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style/style.css') }}"
+    />
+    -->
     <link
       rel="stylesheet"
       type="text/css"
@@ -47,7 +54,7 @@
           </div> -->
         <div class="title">
           <a href="{{ url_for('site.index') }}"
-            >{% trans %}Schnelltest auf das Covid-19{% endtrans %}</a
+            >{% trans %}Schnelltest auf das Covid-19 Coronavirus{% endtrans %}</a
           >
         </div>
         <div class="dropdown-lang">
@@ -62,6 +69,7 @@
       </div>
     </div>
     {% endblock %}
+    {% block consent %} {% endblock %}
     <main class="page-content">{% block content %} {% endblock %}</main>
     {% block footer %} {% include 'footer-page.html' %} {% endblock%}
   </body>

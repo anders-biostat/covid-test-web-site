@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-16 00:36+0200\n"
+"POT-Creation-Date: 2020-10-16 15:18+0200\n"
 "PO-Revision-Date: 2020-10-02 14:52+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ar\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Barcode"
 msgstr ""
 
-#: ../src/forms.py:13 ../static/i18n/register.html:55
+#: ../src/forms.py:13 ../static/i18n/register.html:54
 msgid "Name"
 msgstr ""
 
@@ -57,8 +57,8 @@ msgid ""
 "      Covid-19-Coronavirus (SARS-CoV-2)"
 msgstr ""
 
-#: ../static/i18n/base.html:50
-msgid "Schnelltest auf das Covid-19"
+#: ../static/i18n/base.html:57
+msgid "Schnelltest auf das Covid-19 Coronavirus"
 msgstr ""
 
 #: ../static/i18n/consent.html:3
@@ -517,12 +517,6 @@ msgid ""
 "zur Verfügung. </p>\n"
 msgstr ""
 
-#: ../static/i18n/information.html:4
-msgid ""
-"Erprobung eines LAMP-basierten Tests auf das Coronavirus\n"
-"    SARS-CoV-2"
-msgstr ""
-
 #: ../static/i18n/instructions.html:4
 msgid ""
 "Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,\n"
@@ -549,49 +543,29 @@ msgstr ""
 msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
 msgstr ""
 
-#: ../static/i18n/internal-error.html:4
-#: ../static/i18n/pages/internal-error.html:4
-msgid "Interner Fehler"
-msgstr ""
-
-#: ../static/i18n/internal-error.html:6
-#: ../static/i18n/pages/internal-error.html:6
-msgid "Das Ergebnis ihres Tests ist fehlerhaft gespeichert."
-msgstr ""
-
-#: ../static/i18n/internal-error.html:10
-msgid "Bitte kontaktieren Sie uns"
-msgstr ""
-
-#: ../static/i18n/internal-error.html:12
-#: ../static/i18n/pages/internal-error.html:12
-#: ../static/i18n/pages/multiple-registeration.html:11
-msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
-msgstr ""
-
 #: ../static/i18n/register.html:7
-msgid "Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:"
+msgid "Bitte registrieren Sie ihr Testkit:"
 msgstr ""
 
-#: ../static/i18n/register.html:13 ../static/i18n/result-query.html:11
-msgid "Code auf dem Röhrchen"
+#: ../static/i18n/register.html:12
+msgid "Code auf dem Probenröhrchen (im Testkit erhalten):"
 msgstr ""
 
-#: ../static/i18n/register.html:19
+#: ../static/i18n/register.html:18
 msgid "Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
 msgstr ""
 
-#: ../static/i18n/register.html:41
+#: ../static/i18n/register.html:40
 msgid ""
 "Falls Sie kein Röhrchen mit Code erhalten haben, klicken\n"
 "          Sie bitte "
 msgstr ""
 
-#: ../static/i18n/register.html:44
+#: ../static/i18n/register.html:43
 msgid "hier"
 msgstr ""
 
-#: ../static/i18n/register.html:49
+#: ../static/i18n/register.html:48
 msgid ""
 "Falls wir das Virus in Ihrer Probe nachweisen sollten, muss\n"
 "        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte "
@@ -599,15 +573,15 @@ msgid ""
 "        Kontakt-Daten an: "
 msgstr ""
 
-#: ../static/i18n/register.html:71
+#: ../static/i18n/register.html:70
 msgid "Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)"
 msgstr ""
 
-#: ../static/i18n/register.html:86
+#: ../static/i18n/register.html:85
 msgid "Telefonnummer oder E-Mail-Addresse"
 msgstr ""
 
-#: ../static/i18n/register.html:103
+#: ../static/i18n/register.html:102
 msgid ""
 "Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden\n"
 "          streng vertraulich behandelt. Nur die Mitarbeiter des "
@@ -615,40 +589,44 @@ msgid ""
 "          haben darauf Zugriff."
 msgstr ""
 
-#: ../static/i18n/register.html:109
+#: ../static/i18n/register.html:108
 msgid ""
 "Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
 "        sich bitte ihren Code und geben Sie ein Passwort an:"
 msgstr ""
 
-#: ../static/i18n/register.html:114
+#: ../static/i18n/register.html:113
 msgid "Passwort:"
 msgstr ""
 
-#: ../static/i18n/register.html:130
+#: ../static/i18n/register.html:129
 msgid "dasselbe Passwort nochmal:"
 msgstr ""
 
-#: ../static/i18n/register.html:148
+#: ../static/i18n/register.html:147
 msgid "Abbrechen"
 msgstr ""
 
-#: ../static/i18n/register.html:151
+#: ../static/i18n/register.html:150
 msgid "Daten abschicken"
 msgstr ""
 
-#: ../static/i18n/register.html:161
+#: ../static/i18n/register.html:160
 msgid ""
 "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen\n"
 "            im Rahmen:"
 msgstr ""
 
-#: ../static/i18n/register.html:171 ../static/i18n/result-query.html:76
+#: ../static/i18n/register.html:170 ../static/i18n/result-query.html:76
 msgid "Schließen"
 msgstr ""
 
 #: ../static/i18n/result-query.html:6
 msgid "Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:"
+msgstr ""
+
+#: ../static/i18n/result-query.html:11
+msgid "Code auf dem Röhrchen"
 msgstr ""
 
 #: ../static/i18n/result-query.html:37
@@ -782,9 +760,28 @@ msgid ""
 "    Sie im nachfolgenden Informationstext."
 msgstr ""
 
+#: ../static/i18n/pages/information.html:4
+msgid ""
+"Erprobung eines LAMP-basierten Tests auf das Coronavirus\n"
+"    SARS-CoV-2"
+msgstr ""
+
+#: ../static/i18n/pages/internal-error.html:4
+msgid "Interner Fehler"
+msgstr ""
+
+#: ../static/i18n/pages/internal-error.html:6
+msgid "Das Ergebnis ihres Tests ist fehlerhaft gespeichert."
+msgstr ""
+
 #: ../static/i18n/pages/internal-error.html:10
 #: ../static/i18n/pages/multiple-registeration.html:9
 msgid "Bitte kontaktieren Sie uns:"
+msgstr ""
+
+#: ../static/i18n/pages/internal-error.html:12
+#: ../static/i18n/pages/multiple-registeration.html:11
+msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 msgstr ""
 
 #: ../static/i18n/pages/multiple-registeration.html:3
@@ -925,16 +922,15 @@ msgstr ""
 
 #: ../static/i18n/pages/test-result-positive.html:4
 msgid ""
-"<strong\n"
-"      >Ihre Probe war <span>positiv</span>. Das heisst, das in Ihrer "
-"Probe das\n"
+"\n"
+"    <strong>Ihre Probe war <span>positiv</span>. Das heisst, das in Ihrer"
+" Probe das\n"
 "      Coronavirus SARS-CoV-2 nachgewiesen wurde und Sie sich "
 "wahrscheinlich mit\n"
-"      Covid-19 angesteckt haben.</strong\n"
-"    >"
+"      Covid-19 angesteckt haben.</strong>"
 msgstr ""
 
-#: ../static/i18n/pages/test-result-positive.html:11
+#: ../static/i18n/pages/test-result-positive.html:10
 msgid ""
 "Bitte bleiben Sie zu Hause und vermeiden Sie jeglichen Kontakt zu\n"
 "    anderen. Wenn Sie ärztlichen Rat wünschen, wenden Sie sich bitte (per"
@@ -942,7 +938,7 @@ msgid ""
 "    Telefon!) an Ihren Hausarzt. "
 msgstr ""
 
-#: ../static/i18n/pages/test-result-positive.html:16
+#: ../static/i18n/pages/test-result-positive.html:15
 msgid ""
 "Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit\n"
 "    Ihnen in Verbindung setzen und das weitere Vorgehen mit Ihnen "
@@ -1379,7 +1375,9 @@ msgstr ""
 #~ " \"Freibrief\" geben, die Abstands- und "
 #~ "Hygieneregeln nun weniger ernst zu "
 #~ "nehmen, denn der Test kann eine "
-#~ "Infektion nicht sicher ausschließen. </p>\n\n"
+#~ "Infektion nicht sicher ausschließen. </p>\n"
+#~ ""
+#~ "\n"
 #~ msgstr ""
 
 #~ msgid ""
@@ -1822,5 +1820,26 @@ msgstr ""
 #~ "Das Passwort stimmt nicht mit dem "
 #~ "überein, dass Sie beim Registrieren der"
 #~ " Barcodes gewählt haben."
+#~ msgstr ""
+
+#~ msgid "Schnelltest auf das Covid-19"
+#~ msgstr ""
+
+#~ msgid "Bitte kontaktieren Sie uns"
+#~ msgstr ""
+
+#~ msgid "Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "<strong\n"
+#~ "      >Ihre Probe war <span>positiv</span>."
+#~ " Das heisst, das in Ihrer Probe "
+#~ "das\n"
+#~ "      Coronavirus SARS-CoV-2 nachgewiesen "
+#~ "wurde und Sie sich wahrscheinlich mit"
+#~ "\n"
+#~ "      Covid-19 angesteckt haben.</strong\n"
+#~ "    >"
 #~ msgstr ""
 

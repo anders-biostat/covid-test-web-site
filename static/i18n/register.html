@@ -4,13 +4,12 @@
     <form action="{{ url_for('site.register') }}" method="post">
       {{ form.csrf_token }}
       <h3>
-        {% trans %}Bitte geben Sie den Code auf Ihrem Proben-Röhrchen an:{%
-        endtrans %}
+        {% trans %}Bitte registrieren Sie ihr Testkit:{% endtrans %}
       </h3>
       <hr />
       <div class="form-group bmd-form-group">
         <label for="bcode" class="bmd-label-floating"
-          >{% trans %}Code auf dem Röhrchen{% endtrans %}</label
+          >{% trans %}Code auf dem Probenröhrchen (im Testkit erhalten):{% endtrans %}</label
         >
         <div class="input-group">
           <input
