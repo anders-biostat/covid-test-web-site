@@ -7,8 +7,9 @@ import click, glob, polib
 from envparse import env
 from termcolor import colored
 from pymongo import MongoClient
+from bson.json_util import dumps
 
-from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session, flash
+from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session, flash, jsonify, Response
 from flask_wtf.csrf import CSRFProtect
 from flask_babel import Babel, _
 
@@ -98,6 +99,17 @@ def consent():
     else:
         return render_template('consent.html', form=form)
 
+@bp.route('/extern/query/<string:barcode>', methods=['GET'])
+def query_dataset(barcode):
+    resp = Response(response="{}",status=200,mimetype="application/json")
+    if barcode is not None:
+        sample = db['samples'].find_one({'_id': barcode})
+        if sample is not None:
+            return Response(response=dumps(sample),status=200,mimetype="application/json")
+        else:
+            return resp
+    else:
+        return resp
 
 @bp.route('/results', methods=['GET', 'POST'])
 def results_query():
@@ -119,13 +131,18 @@ def results_query():
                 return redirect(url_for('site.results_query'))
             else:
                 if 'registrations' not in sample:
-                    return render_template("barcode-not-registered.html", barcode=form_barcode)
+                    flash(_('Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode vorher'),
+                          'alert-warning')
+                    session['barcode'] = form_barcode
+                    return redirect(url_for('site.register'))
                 else:  # Barcode found
                     registration_count = len(sample['registrations'])
                     if registration_count > 1:
                         return render_template("pages/multiple-registeration.html", barcode=form_barcode)
                     if registration_count < 1:
-                        return render_template("pages/barcode-not-registered.html", barcode=form_barcode)
+                        flash(_('Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode vorher'), 'alert-warning')
+                        session['barcode'] = form_barcode
+                        return redirect(url_for('site.register'))
                     else:
                         if form_password_hashed != sample['registrations'][0]['password_hash']:  # Wrong password
                             return render_template("pages/wrong-password.html")

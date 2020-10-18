@@ -23,10 +23,7 @@ def read_batch(filepath, batch, record):
             barcode = line.strip()
             sample = {
                 'barcode': barcode.strip(),
-                'batch_filename': batch.strip(),
                 'batch': batch.strip().replace("batch_", "").replace(".lst", ""),
-                'event_name': record["name"].strip(),
-                'event_instructions': record["instructions"].strip(),
             }
             db['samples'].update_one({'_id': barcode}, {'$set': sample}, upsert=True)
 
@@ -53,16 +50,17 @@ def load_codes():
 
     for record in yaml_content:
         for batch in record["batches"]:
-            batch_record = db['batches'].find_one({'_id': batch})
+            batch_id = batch.strip().replace("batch_", "").replace(".lst", "")
+            batch_record = db['batches'].find_one({'_id': batch_id})
             if batch_record is None:
                 read_batch("../../data/code_batches/" + batch, batch, record)
-                db['batches'].update_one({'_id': batch}, {'$set': {'read': True}}, upsert=True)
+                db['batches'].update_one({'_id': batch_id}, {'$set': {'read': True}}, upsert=True)
             else:
                 if 'read' in batch_record and batch_record['read'] == True:
                     pass
                 else:
                     read_batch("../../data/code_batches/" + batch, batch, record)
-                    db['batches'].update_one({'_id': batch}, {'$set': {'read': True}}, upsert=True)
+                    db['batches'].update_one({'_id': batch_id}, {'$set': {'read': True}}, upsert=True)
 
 
 if __name__ == "__main__":

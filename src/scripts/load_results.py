@@ -15,11 +15,15 @@ DATABASE = env("DATABASE", cast=str, default="covidtest-test")
 db = client[DATABASE]
 
 STATUS_DICT = {
-    'POS': 'positive',
-    'NEG': 'negative',
-    'INC': 'rechecking',
-    'FAIL': 'failed',
-    '': 'tbd',
+    'PRINTED': 'PRINTED',
+    'WAIT': 'WAIT',
+    'LAMPPOS': 'LAMPPOS',
+    'LAMPINC': 'LAMPINC',
+    'NEG': 'NEG',
+    'PCRPOS': 'PCRPOS',
+    'PCRNEG': 'PCRNEG',
+    'UNDEF': 'UNDEF',
+    '': 'WAIT',
 }
 
 
@@ -59,7 +63,7 @@ def read_results(filepath):
 
                     status_doc = {
                         'status': STATUS_DICT[status],
-                        'time': arrow.get().datetime,
+                        'updated_time': arrow.get().datetime,
                     }
 
                     if update:
