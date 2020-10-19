@@ -3,7 +3,7 @@
   <form action="{{ url_for('site.results_query') }}" method="post">
     {{ form.csrf_token }}
     <h3>
-      {% trans %}Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:{%
+      {% trans %}Hier können Sie das Ergebnis Ihres COVID-19 Tests abfragen:{%
       endtrans %}
     </h3>
 
@@ -117,5 +117,4 @@
     top: 0;
   }
 </style>
-<script src="../Style/js/barcode_scanner.js" type="text/javascript"></script>
 {% endblock %}

@@ -42,10 +42,15 @@
               alt="Heidelberg University"
           /></a>
         </div>
-        <div class="title">
-          <a href="{{ url_for('site.index') }}"
-            >{% trans %}Schnelltest auf das Covid-19 Coronavirus{% endtrans %}</a
-          >
+        <div class="titlebox">
+          <a href="{{ url_for('site.index') }}">
+            <div class="title" style="font-size: 28px;">
+              {% trans %}COVID-19 Schnelltest{% endtrans %}
+            </div>
+            <div style="font-size: 18px;" class="subtitle">
+              {% trans %}LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2{% endtrans %}
+            </div>
+          </a>
         </div>
 
 

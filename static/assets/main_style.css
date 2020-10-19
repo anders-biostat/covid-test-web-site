@@ -65,9 +65,14 @@ footer {
 }
 
 .footer-container {
-    padding: 40px 0px 40px 0px;
+    margin-top: 30px;
+    padding: 20px 0px 20px 0px;
     border-top: 0px #7f8c8d solid;
     background-color: rgba(0,0,0,.05);
+}
+
+.footer-left a{
+    padding-left: 30px;
 }
 
 .footer-row {
@@ -126,6 +131,12 @@ footer.footer-index-page a{
 	color: #ffffff;
 }
 
+@media screen and (max-width: 1200px) {
+  .navbar-brand {
+    display: none;
+  }
+}
+
 
 .index-header {
 	transition: all 0.8s ease-in;
@@ -148,9 +159,49 @@ footer.footer-index-page a{
 	height: auto;
 }
 
-div.title {
-    margin-left: -50px; /* Set this to the half width of .index-header img */
+div.titlebox {
+    padding-left: 20px;
     font-weight: 500;
+}
+
+@media (max-width: 550px) {
+  div.titlebox {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 550px) {
+  #lang-dropdown {
+    display: none;
+  }
+  #dropdownMenuLink i {
+    height: 10px;
+    margin-left: 20px;
+  }
+  .material-icons.md-36 {
+	font-size: 20px !important;
+	height: 20px !important;
+	width: 20px !important;
+  }
+
+  button i.material-icons {
+    vertical-align: middle;
+    padding-right: 0px;
+    margin-right: 0px !important;
+  }
+
+  #dropdownMenuLink{
+    padding: 3px;
+  }
+
+  div.titlebox div.title{
+    border-bottom: 4px rgba(0,0,0,0.1) solid;
+  }
+
+  div.titlebox div.subtitle {
+    display: none;
+  }
+
 }
 
 
@@ -200,24 +251,24 @@ div.title {
 	pointer-events: none;
 }
 
-.title {
+.titlebox {
 	font-size: 30px;
 }
 
-div.title a {
+div.titlebox a {
 	color: #ffffff;
 	text-decoration: none;
 }
 
-.title a:hover {
+.titlebox a:hover {
 	/*border-bottom: 2px solid #f1f1f1;*/
 	text-decoration: none;
 }
 
 .material-icons.md-36 {
-	font-size: 36px !important;
-	height: 36px !important;
-	width: 36px !important;
+	font-size: 36px;
+	height: 36px;
+	width: 36px;
 }
 
 button i.material-icons {
@@ -289,15 +340,12 @@ div.alert{
 }
 
 .banner {
+    margin: 0 auto;
 	color: #222222;
-	position: fixed;
-	top: 50%;
-	left: 50%;
 	cursor: default;
 	text-align: center;
 	width: 80%;
 	height: auto;
-	transform: translate(-50%, -50%);
 	z-index: 100;
 }
 
@@ -389,7 +437,7 @@ div.alert{
   height: 80%;
   width: 80%;
 	margin: auto;
-  padding-top: 0px;
+  padding-top: 20px;
 }
 
 .container2 h1,
@@ -458,6 +506,7 @@ div.alert{
 	padding: 30px;
   width: 50%;
   height: 66.3%;
+  max-height: 500px;
   margin-top: 0.8rem;
 	margin-bottom: 0.8rem;
 }
@@ -580,8 +629,9 @@ canvas.drawing, canvas.drawingBuffer {
 }*/
 
 @media (min-width:0px) and (max-width: 780px) {
-	.title {
-		display: none;
+
+	.titlebox {
+		/*display: none;*/
 	}
 
 	.bg-overlay {

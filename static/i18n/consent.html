@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block consent %}
+{% extends "base.html" %} {% block content %}
 <div class="container2">
     <h2>{% trans %}Teilnahme am Coronavirus-Test{% endtrans %}</h2>
     <div class="scroll-box">{% include 'information-text.html' %}</div>
@@ -48,7 +48,5 @@
       document.getElementById("showForm").classList.add("disabled");
     }
   }
-
-
 </script>
 {% endblock %}
