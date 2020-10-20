@@ -1,101 +1,97 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+<head>
     <title>
-      {% trans %}Schnelltest der Universität Heidelberg auf das
-      Covid-19-Coronavirus (SARS-CoV-2){% endtrans %}
+        {% trans %}Schnelltest der Universität Heidelberg auf das
+        Covid-19-Coronavirus (SARS-CoV-2){% endtrans %}
     </title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% if g.lang_code == 'ar' %}
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='style/css/bootstrap-rtl.min.css') }}"
-    />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {% if g.lang_code == '--' %}
     {% else %}
     <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='style/css/bootstrap.min.css') }}"
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='style/semantic-ui/semantic.min.css') }}"
     />
+    <script src="{{ url_for('static', filename='style/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='style/semantic-ui/semantic.min.js') }}"></script>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css'>
+
     {% endif %}
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='main_style.css') }}"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='main_style.css') }}"
-    />
-  </head>
-  <body class="page">
-    {% block header %}
-    <div class="page-header sticky-top" id="page-header">
-      <div class="container navbar">
-        <div class="navbar-brand">
-          <a href="https://www.uni-heidelberg.de/en">
-            <img
-              src="{{ url_for('static', filename='media/logo_uni_mono_text.svg') }}"
-              class="d-inline-block align-top"
-              alt="Heidelberg University"
-          /></a>
-        </div>
-        <div class="titlebox">
-          <a href="{{ url_for('site.index') }}">
-            <div class="title" style="font-size: 28px;">
-              {% trans %}COVID-19 Schnelltest{% endtrans %}
+</head>
+<body class="page">
+
+{% block header %}
+
+<div class="ui top stackable menu page">
+    <div class="logo item">
+        <img class="logo" src="{{ url_for('static', filename='media/logo_uni_mono_text.svg') }}">
+    </div>
+
+    <div class="header item">
+        <a href="{{ url_for('site.index') }}">
+            <h2 class="ui header menubar">
+                {% trans %}Schnelltest auf COVID-19{% endtrans %}
+                <div class="sub header">{% trans %}LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2{% endtrans
+                    %}
+                </div>
+            </h2>
+        </a>
+    </div>
+
+    <div class="right menu">
+        <div class="ui simple dropdown item language">
+            <i class="globe icon"></i>
+            Language <i class="dropdown icon"></i>
+            <div class="menu">
+                <a href="/" class="item">Deutsch</a>
+                <a href="/en/" class="item">English</a>
             </div>
-            <div style="font-size: 18px;" class="subtitle">
-              {% trans %}LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2{% endtrans %}
-            </div>
-          </a>
         </div>
+    </div>
+</div>
+{% endblock %}
 
 
-        <div class="dropdown show">
-  <button class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="material-icons md-36" aria-hidden="true">language</i>
-    <span id="lang-dropdown">Language</span>
-  </button>
+{% block consent %} {% endblock %}
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="/de/">Deutsch</a>
-    <a class="dropdown-item" href="/en/">English</a>
-  </div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class=flashes>
+    {% for category, message in messages %}
+    <div class="ui {{ category }} message">
+            {% if category == 'error' %}
+                <strong>{% trans %}Fehler:{% endtrans%}</strong>
+            {% endif %}
+            {% if category == 'warning' %}
+            <strong>{% trans %}Warnung:{% endtrans%}</strong>
+            {% endif %}
+            {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="ui centered stackable grid">
+    <div style="min-height: 60vh;" class="twelve wide column">
+        <div class="ui content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <div style="" class="four column centered footer row">
+            {% block footer %} {% include 'footer.html' %} {% endblock%}
+    </div>
 </div>
 
 
-      </div>
-    </div>
-    {% endblock %}
 
-
-
-    {% block consent %} {% endblock %}
-    <main class="page-content">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          <div class=flashes>
-          {% for category, message in messages %}
-            <div class="alert {{ category }}" role="alert">
-              {% if category == 'alert-danger' %}
-                <strong>{% trans %}Fehler:{% endtrans%}</strong>
-              {% endif %}
-              {% if category == 'alert-warning' %}
-                <strong>{% trans %}Warnung:{% endtrans%}</strong>
-              {% endif %}
-              {{ message }}
-            </div>
-          {% endfor %}
-          </div>
-        {% endif %}
-      {% endwith %}
-
-
-      {% block content %} {% endblock %}
-    </main>
-    {% block footer %} {% include 'footer-page.html' %} {% endblock%}
-  </body>
+</body>
 </html>

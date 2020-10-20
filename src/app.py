@@ -71,6 +71,17 @@ def index():
         return redirect(url_for('site.consent'))
     return render_template('index.html')
 
+@bp.route('/dashboard', methods=['GET'])
+def dashboard():
+    overall_count = db['samples'].count({})
+    negative = db['samples'].count({'$expr': {'$eq': [{'$last': "$results.status"}, "negative"]}})
+    positive = db['samples'].count({ '$expr': { '$eq': [{ '$last': "$results.status" }, "positive"] } })
+    stats = {
+        'overall_count': overall_count,
+        'negative': negative,
+        'positive': positive
+    }
+    return render_template('pages/dashboard.html', stats=stats)
 
 @bp.route('/favicon.ico', methods=['GET'])
 def favicon():
@@ -127,12 +138,12 @@ def results_query():
             # Check if barcode exists
             sample = db['samples'].find_one({'_id': form_barcode})
             if sample is None:
-                flash(_('Der Barcode ist unbekannt. Bitte erneut versuchen.'), 'alert-danger')
+                flash(_('Der Barcode ist unbekannt. Bitte erneut versuchen.'), 'error')
                 return redirect(url_for('site.results_query'))
             else:
                 if 'registrations' not in sample:
                     flash(_('Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode vorher'),
-                          'alert-warning')
+                          'warning')
                     session['barcode'] = form_barcode
                     return redirect(url_for('site.register'))
                 else:  # Barcode found
@@ -140,12 +151,13 @@ def results_query():
                     if registration_count > 1:
                         return render_template("pages/multiple-registeration.html", barcode=form_barcode)
                     if registration_count < 1:
-                        flash(_('Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode vorher'), 'alert-warning')
+                        flash(_('Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode vorher'), 'warning')
                         session['barcode'] = form_barcode
                         return redirect(url_for('site.register'))
                     else:
                         if form_password_hashed != sample['registrations'][0]['password_hash']:  # Wrong password
-                            return render_template("pages/wrong-password.html")
+                            flash(_('Das Passwort stimmt nicht mit dem überein, dass Sie beim Registrieren der Barcodes gewählt haben. Bitte versuchen Sie es noch einmal.'),'error')
+                            return redirect(url_for('site.results_query'))
                         else:
                             if 'results' in sample and len(sample['results']) > 0:
                                 results = sample['results']
@@ -198,7 +210,7 @@ def register():
             sample = db['samples'].find_one({'_id': bcode})
 
             if sample is None:
-                flash(_('Der Barcode ist unbekannt. Bitte erneut versuchen.'), 'alert-danger')
+                flash(_('Der Barcode ist unbekannt. Bitte erneut versuchen.'), 'error')
                 return render_template('register.html', form=form)
             else:
                 try:

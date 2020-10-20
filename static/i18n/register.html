@@ -1,176 +1,181 @@
 {% extends "base.html" %} {% block content %}
-<main class="page-content">
-  <div id="form" class="container content">
-    <form action="{{ url_for('site.register') }}" method="post">
-      {{ form.csrf_token }}
-      <h3>
-        {% trans %}Bitte registrieren Sie ihr Testkit:{% endtrans %}
-      </h3>
-      <hr />
 
-      <p>
+<form class="ui form" action="{{ url_for('site.register') }}" method="post">
+    {{ form.csrf_token }}
+    <h1 class="ui header">
+        {% trans %}Bitte registrieren Sie ihr Testkit:{% endtrans %}
+    </h1>
+
+
+    <p>
         {% trans %}
-          Die Registrierung ist notwendig, damit Sie im Falle eines positiven Testergebnisses kontaktiert werden können.
+        Die Registrierung ist notwendig, damit Sie im Falle eines positiven Testergebnisses kontaktiert werden
+        können.
         {% endtrans %}
         {% trans %}Falls wir das Virus in Ihrer Probe nachweisen sollten, muss
         das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre
         Kontakt-Daten an: {% endtrans %}
-      </p>
+    </p>
 
-      <div class="form-group bmd-form-group">
-        <label for="bcode" class="bmd-label-floating"
-          >{% trans %}Code auf dem Probenröhrchen (im Testkit erhalten):{% endtrans %}</label
+    <div class="required field">
+        <label for="bcode"
+        >{% trans %}Code auf dem Probenröhrchen (im Testkit erhalten):{% endtrans %}</label
         >
         <div class="input-group">
-          <input
-            type="text"
-            class="form-control col-5"
-            placeholder="{% trans %}Geben sie bitte den Barcode des Teströhrchens an{% endtrans %}"
-            id="bcode"
-            name="bcode"
-            value="{% if barcode %}{{ barcode }}{% endif %}"
-            autocomplete="on"
-            required
-          />
-          {% for error in form.bcode.errors %}
-          <small class="text-danger">{{ error }}</small>
-          {% endfor %}
+            <input
+                    type="text"
+                    class="form-control col-5"
+                    placeholder="{% trans %}Barcode des Teströhrchens{% endtrans %}"
+                    id="bcode"
+                    name="bcode"
+                    value="{% if barcode %}{{ barcode }}{% endif %}"
+                    autocomplete="on"
+                    required
+            />
+            {% for error in form.bcode.errors %}
+            <small class="text-danger">{{ error }}</small>
+            {% endfor %}
         </div>
         <small id="bcodehelp" class="form-text text-muted">
-          {% trans %}Falls Sie kein Röhrchen mit Code erhalten haben, klicken
-          Sie bitte {% endtrans %}
-          <a href="{{ url_for('site.pages', page='no-tube.html') }}"
+            {% trans %}Falls Sie kein Röhrchen mit Code erhalten haben, klicken
+            Sie bitte {% endtrans %}
+            <a href="{{ url_for('site.pages', page='no-tube.html') }}"
             >{% trans %}hier{% endtrans %}</a
-          >.
+            >.
         </small>
-      </div>
+    </div>
 
-      <div class="form-group bmd-form-group">
-        <label for="name" class="bmd-label-floating"
-          >{% trans %}Name (Nachname, Vorname){% endtrans %}</label
+    <div class="required field">
+        <label for="name"
+        >{% trans %}Name (Nachname, Vorname){% endtrans %}</label
         >
         <input
-          type="text"
-          id="name"
-          class="form-control"
-          name="name"
-          autocomplete="name"
-          required
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                autocomplete="name"
+                placeholder="{% trans %}Nachname, Vorname{% endtrans %}"
+                required
         />
         {% for error in form.name.errors %}
         <small class="text-danger">{{ error }}</small>
         {% endfor %}
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="address" class="bmd-label-floating"
-          >{% trans %}Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort){%
-          endtrans %}</label>
+    </div>
+
+
+    <div class="required field">
+        <label for="address"
+        >{% trans %}Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort){%
+            endtrans %}</label>
         <p>
-          {% trans %}Bitte geben Sie nach Möglichkeit ihre Wohnanschrift an.{% endtrans%}
+            {% trans %}Bitte geben Sie nach Möglichkeit ihre Wohnanschrift an.{% endtrans%}
         </p>
         <textarea
-          type="text"
-          id="address"
-          class="form-control"
-          name="address"
-          rows="3"
-          autocomplete="street-address"
-          required
+                type="text"
+                id="address"
+                class="form-control"
+                name="address"
+                rows="3"
+                autocomplete="street-address"
+                placeholder="{% trans %}Straße, Hausnummer, Postleitzahl, Wohnort{% endtrans %}"
+                required
         ></textarea>
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="contact" class="bmd-label-floating"
-          >{% trans %}Telefonnummer{% endtrans %}</label
+    </div>
+    <div class="required field">
+        <label for="contact"
+        >{% trans %}Telefonnummer{% endtrans %}</label
         >
         <input
-          type="text"
-          id="contact"
-          class="form-control"
-          name="contact"
-          rows="4"
-          autocomplete="tel"
-          required
+                type="text"
+                id="contact"
+                class="form-control"
+                name="contact"
+                rows="4"
+                autocomplete="tel"
+                placeholder="{% trans %}Telefonnummer{% endtrans %}"
+                required
         />
         {% for error in form.contact.errors %}
         <small class="text-danger">{{ error }}</small>
         {% endfor %}
-      </div>
-      <p>
+        <br>
         <small
-          >{% trans %}Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden
-          streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts
-          haben darauf Zugriff.{% endtrans %}</small
+        >{% trans %}Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden
+            streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts
+            haben darauf Zugriff.{% endtrans %}</small
         >
-      </p>
-      <div class="alert alert-primary" role="alert">
-        <b>
-        {% trans %}Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie
-        sich bitte ihren Code und geben Sie ein Passwort an:{% endtrans %}
-        </b>
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="psw" class="bmd-label-floating"
-          >{% trans %}Passwort:{% endtrans %}</label
+    </div>
+
+    <div class="ui info message">
+        <b>{% trans %}Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie
+            sich bitte ihren Code und geben Sie ein Passwort an:{% endtrans %}</b>
+    </div>
+
+    <div class="required field">
+        <label for="psw"
+        >{% trans %}Passwort:{% endtrans %}</label
         >
         <input
-          type="password"
-          class="form-control"
-          name="psw"
-          autocomplete="new-password"
-          required
-          onchange="form.psw-repeat.pattern = RegExp.escape(this.value);"
+                type="password"
+                class="form-control"
+                name="psw"
+                autocomplete="new-password"
+                placeholder="{% trans %}Passwort{% endtrans %}"
+                required
+                onchange="form.psw-repeat.pattern = RegExp.escape(this.value);"
         />
         {% for error in form.psw.errors %}
         <small class="text-danger">{{ error }}</small>
         {% endfor %}
-      </div>
-      <div class="form-group bmd-form-group">
-        <label for="psw-repeat" class="bmd-label-floating"
-          ><b>{% trans %}Passwort wiederholen:{% endtrans %}</b></label
+    </div>
+    <div class="required field">
+        <label for="psw-repeat"
+        ><b>{% trans %}Passwort wiederholen:{% endtrans %}</b></label
         >
         <input
-          type="password"
-          class="form-control"
-          name="psw_repeat"
-          required
+                type="password"
+                class="form-control"
+                name="psw_repeat"
+                placeholder="{% trans %}Passwort wiederholen{% endtrans %}"
+                required
         />
         {% for error in form.psw_repeat.errors %}
         <small class="text-danger">{{ error }}</small>
         {% endfor %}
-      </div>
-      <div>
+    </div>
+    <div>
         <a
-          href="{{ url_for('site.index') }}"
-          id="closeform"
-          class="button-small"
-          style="margin-left: 0"
-          >{% trans %}Abbrechen{% endtrans %}</a
+                href="{{ url_for('site.index') }}"
+                id="closeform"
+                class="ui primary button"
+                style="margin-left: 0"
+        >{% trans %}Abbrechen{% endtrans %}</a
         >
-        <button type="submit" class="button-small">
-          {% trans %}Daten abschicken{% endtrans %}
+        <button type="submit" class="ui primary button">
+            {% trans %}Daten abschicken{% endtrans %}
         </button>
-      </div>
-    </form>
-  </div>
+    </div>
+</form>
 
 
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
-    <style>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+></script>
+<script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+<style>
       #interactive.viewport {
         position: relative;
         width: 100%;
@@ -189,8 +194,11 @@
         left: 0;
         top: 0;
       }
-    </style>
 
-    {% endblock %}
-  </div>
-</main>
+
+
+
+
+
+</style>
+{% endblock %}

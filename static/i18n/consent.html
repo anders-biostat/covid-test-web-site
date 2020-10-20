@@ -1,10 +1,16 @@
 {% extends "base.html" %} {% block content %}
-<div class="container2">
-    <h2>{% trans %}Teilnahme am Coronavirus-Test{% endtrans %}</h2>
-    <div class="scroll-box">{% include 'information-text.html' %}</div>
-    <form action="{{ url_for('site.consent') }}" method="POST">
-        {{ form.csrf_token }}
-        <div>
+
+
+<h1 class="ui header centered">{% trans %}Teilnahme am Coronavirus-Test{% endtrans %}</h1>
+<div class="consent-box">
+    {% include 'information-text.html' %}
+</div>
+
+<form class="ui form" action="{{ url_for('site.consent') }}" method="POST">
+    {{ form.csrf_token }}
+
+    <div style="text-align: center;" class="field">
+        <div class="ui checkbox">
             <input
                     name="terms"
                     type="checkbox"
@@ -12,27 +18,25 @@
                     value="1"
                     onclick="EnableSubmit(this)"
             />
-            <label for="terms_and_conditions"
-            >{% trans %}Ich bin einverstanden und möchte am Test teilnehmen.{%
-                endtrans %}</label
-            >
+            <label>{% trans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endtrans %}</label>
         </div>
+    </div>
 
-        <div style="text-align: center">
-            <a href="{{ url_for('site.index') }}" id="closeform" class="button-small"
-            >{% trans %}Zurück{% endtrans %}</a
-            >
-            <button
-                    type="submit"
-                    id="showForm"
-                    class="button-small disabled"
-                    disabled
-            >
-                {% trans %}Weiter{% endtrans %}
-            </button>
-        </div>
-    </form>
-</div>
+    <div class="field" style="text-align: center">
+        <a href="{{ url_for('site.index') }}" id="closeform" class="ui primary button"
+        >{% trans %}Zurück{% endtrans %}</a
+        >
+        <button
+                type="submit"
+                id="showForm"
+                class="ui primary button"
+                disabled
+        >
+            {% trans %}Weiter{% endtrans %}
+        </button>
+    </div>
+</form>
+
 <script>
   //JavaScript function that enables or disables a submit button depending
   //on whether a checkbox has been ticked or not.
@@ -48,5 +52,6 @@
       document.getElementById("showForm").classList.add("disabled");
     }
   }
+
 </script>
 {% endblock %}
