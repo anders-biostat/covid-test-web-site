@@ -259,7 +259,8 @@ div.ui.horizontal.small.divided.link.list > a{
 }
 
 div.item a.zmbh{
-    color: #000;
+    font-family: 'Helvetica' sans-serif;
+    color: rgba(0,0,0,0.6);
     font-size: 12pt;
 }
 
