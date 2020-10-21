@@ -63,7 +63,7 @@ def read_results(filepath):
 
                     status_doc = {
                         'status': STATUS_DICT[status],
-                        'updated_time': arrow.get().datetime,
+                        'updated_time': arrow.now().datetime,
                     }
 
                     if update:

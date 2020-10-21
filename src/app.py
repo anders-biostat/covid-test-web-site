@@ -8,13 +8,16 @@ from envparse import env
 from termcolor import colored
 from pymongo import MongoClient
 from bson.json_util import dumps
+from bson.codec_options import CodecOptions
+import pytz
 
 from flask import Flask, request, render_template, Blueprint, g, redirect, url_for, session, flash, jsonify, Response
 from flask_wtf.csrf import CSRFProtect
 from flask_babel import Babel, _
 
-from forms import RegistrationForm, ResultsQueryForm, ConsentForm
+from forms import RegistrationForm, ResultsQueryForm, ConsentForm, LabQueryForm, LabCheckInForm
 import scripts.encryption_helper as encryption_helper
+import scripts.database_actions as database_actions
 
 # Reading the Environemt-Variables from .env file
 env.read_envfile()
@@ -38,6 +41,7 @@ NGINX_CONF_FILENAME = os.path.join(dir, "../etc/covid-test.nginx-site-config")
 TEMPLATE_DIR = os.path.join(dir, "../static/i18n/")
 STATIC_DIR = os.path.join(dir, "../static/assets/")
 TRANSLATIONS_DIR = os.path.join(dir, "../translations/")
+timezone = pytz.timezone('Europe/Berlin')
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.config['SECRET_KEY'] = env("SECRET_KEY", cast=str, default="secret")
@@ -46,7 +50,6 @@ csrf = CSRFProtect()
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = TRANSLATIONS_DIR
 babel = Babel(app)
 bp = Blueprint('site', __name__)
-
 
 @bp.url_defaults
 def add_language_code(endpoint, values):
@@ -83,8 +86,45 @@ def dashboard():
     }
     return render_template('pages/dashboard.html', stats=stats)
 
+@bp.route('/labview', methods=['GET'])
+def labview_home():
+    return render_template('labviews/home.html')
+
+@bp.route('/labview/check_in', methods=['GET', 'POST'])
+def probe_check_in():
+    form = LabCheckInForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            barcode = form.barcode.data.upper().strip()
+            rack = form.rack.data.upper().strip()
+
+            sample = database_actions.update_status(db, barcode, 'WAIT', rack=rack)
+            if sample is None:
+                flash(_('Barcode nicht in Datenbank'), 'error')
+            else:
+                flash(_('Probe erfolgreich eingetragen'), 'positive')
+            return render_template('labviews/probe_check_in.html', form=form, sample=sample, rack=rack)
+    return render_template('labviews/probe_check_in.html', form=form, display_sample=False)
+
+@bp.route('/labview/query', methods=['GET', 'POST'])
+def probe_query():
+    form = LabQueryForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
+
+            search = form.search.data.upper().strip()
+            sample = samples.find_one({'_id': search})
+            return render_template('labviews/probe_query.html', form=form, sample=sample, search=search)
+    return render_template('labviews/probe_query.html', form=form)
+
+
 @bp.route('/favicon.ico', methods=['GET'])
 def favicon():
+    return ""
+
+@bp.route('/apple-touch-icon/', methods=['GET'])
+def touch_icon():
     return ""
 
 

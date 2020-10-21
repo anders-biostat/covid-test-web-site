@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content %}
+<div class="ui segment content">
+    <h1 class="ui header centered">{% trans %}Lab Interface - Query{% endtrans %}</h1>
+    <p>
+        {% trans %}
+        Hier können Barcodes gesucht werden:
+        {% endtrans%}
+    </p>
+
+    <form style="margin-bottom: 20px;" action="{{ url_for('site.probe_query') }}" method="post" class="ui form">
+        {{ form.csrf_token }}
+        <div class="ui search">
+            <div class="ui icon input">
+                <input name="search" class="prompt" type="text"
+                       placeholder="{% trans %}Search Barcode...{% endtrans%}" autofocus>
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+    </form>
+
+    <p>{% trans %}Ergebnis für: {% endtrans %} {{ search }}</p>
+
+
+    {% if sample %}
+
+    <div class="ui card">
+        <div class="content">
+            <div class="header">{{ sample._id }}</div>
+            <div class="meta">
+                Registrations: {{ sample.registrations | count }}<br>
+                Batch: {{ sample.batch }}
+            </div>
+
+
+            <h4 class="ui sub header">{% trans %}Historie{% endtrans %}</h4>
+            <div class="extra content">
+                <div class="ui small feed">
+                    {% for result in sample.results %}
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                {{ result.updated_time.strftime('%Y-%m-%d %H:%M:%S') }}
+                                <span>{{ result.status }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    {% else %}
+    <div class="ui warning message">
+        <p>{% trans %}Keine Probe mit diesem Barcode gefunden.{% endtrans %}</p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

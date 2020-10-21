@@ -23,3 +23,10 @@ class RegistrationForm(FlaskForm):
 class ResultsQueryForm(FlaskForm):
     bcode = StringField(_('Barcode'), validators=[DataRequired()])
     psw = PasswordField(_('Passwort'), validators=[DataRequired()])
+
+class LabQueryForm(FlaskForm):
+    search = StringField(_('Barcode'), validators=[DataRequired()])
+
+class LabCheckInForm(FlaskForm):
+    barcode = StringField(_('Barcode'), validators=[DataRequired()])
+    rack = StringField(_('Batch'), validators=[DataRequired()])

@@ -146,6 +146,7 @@ div.field small {
 
 .ui.segment.content {
     padding: 30px;
+    margin: 0 auto;
     max-width: 1000px;
 }
 
