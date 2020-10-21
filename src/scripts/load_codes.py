@@ -24,6 +24,9 @@ def read_batch(filepath, batch, record):
             sample = {
                 'barcode': barcode.strip(),
                 'batch': batch.strip().replace("batch_", "").replace(".lst", ""),
+                'rack': None,
+                'results': [],
+                'registrations': [],
             }
             db['samples'].update_one({'_id': barcode}, {'$set': sample}, upsert=True)
 

@@ -15,7 +15,7 @@ from flask import Flask, request, render_template, Blueprint, g, redirect, url_f
 from flask_wtf.csrf import CSRFProtect
 from flask_babel import Babel, _
 
-from forms import RegistrationForm, ResultsQueryForm, ConsentForm, LabQueryForm, LabCheckInForm
+from forms import RegistrationForm, ResultsQueryForm, ConsentForm, LabQueryForm, LabCheckInForm, LabRackResultsForm, LabProbeEditForm
 import scripts.encryption_helper as encryption_helper
 import scripts.database_actions as database_actions
 
@@ -106,18 +106,65 @@ def probe_check_in():
             return render_template('labviews/probe_check_in.html', form=form, sample=sample, rack=rack)
     return render_template('labviews/probe_check_in.html', form=form, display_sample=False)
 
+@bp.route('/labview/rack', methods=['GET', 'POST'])
+def probe_rack():
+    form = LabRackResultsForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            rack = form.rack.data.upper().strip()
+
+            lamp_positive = form.lamp_positive.data.replace(',', '\n').replace(';', '\n')
+            lamp_inconclusive = form.lamp_inconclusive.data.replace(',', '\n').replace(';', '\n')
+
+            lamp_positive = [x.strip() for x in lamp_positive.split()]
+            lamp_inconclusive = [x.strip() for x in lamp_inconclusive.split()]
+
+            wrong_status_sequence = database_actions.rack_results(db, rack, lamp_positive, lamp_inconclusive)
+            if wrong_status_sequence is None:
+                flash(_('Keine Barcodes zu Rack gefunden'), 'error')
+            else:
+                for barcode in wrong_status_sequence:
+                    flash(_('Falsche Statusfolge: ') + str(barcode), 'warning')
+            return render_template('labviews/probe_rack_results.html', form=form)
+    return render_template('labviews/probe_rack_results.html', form=form)
+
 @bp.route('/labview/query', methods=['GET', 'POST'])
 def probe_query():
     form = LabQueryForm()
+    edit_form = LabProbeEditForm()
     if request.method == 'POST':
-        if form.validate_on_submit():
-            samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
+        if 'search' in request.form:
+            print('search 123123')
+            if form.validate_on_submit():
+                samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
+                search = form.search.data.upper().strip()
+                sample = samples.find_one({'_id': search})
+                return render_template('labviews/probe_query.html', form=form, edit_form=edit_form, sample=sample, search=search)
+        if 'edit' in request.form:
+            print('edit 123123')
+            if edit_form.validate_on_submit():
+                samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
+                barcode = edit_form.barcode.data.upper().strip()
+                status = edit_form.status.data.upper().strip()
+                rack = edit_form.rack.data.upper().strip()
 
-            search = form.search.data.upper().strip()
-            sample = samples.find_one({'_id': search})
-            return render_template('labviews/probe_query.html', form=form, sample=sample, search=search)
-    return render_template('labviews/probe_query.html', form=form)
+                sample = samples.find_one({'_id': barcode})
+                if sample is None:
+                    flash(_('Sample nicht gefunden'), 'error')
+                else:
+                    if rack != sample['rack']:
+                        samples.update_one({'_id': sample['_id']}, {'$set': {'rack': rack}}, upsert=True)
+                        flash(_('Sample rack geupdated'), 'positive')
 
+                    if status != '-':
+                        new_sample = database_actions.update_status(db, sample['_id'], status, rack=None)
+                        if new_sample is not None:
+                            flash(_('Status geupdated'), 'positive')
+                    else:
+                        new_sample = sample
+                return render_template('labviews/probe_query.html', form=form, edit_form=edit_form, sample=new_sample)
+
+    return render_template('labviews/probe_query.html', form=form, edit_form=edit_form)
 
 @bp.route('/favicon.ico', methods=['GET'])
 def favicon():

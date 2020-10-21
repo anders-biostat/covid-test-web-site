@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
+{% include 'labviews/menu.html' %}
+
 <script>
     $(window).ready(function() {
         if ($("input[name=rack]").val() == ""){

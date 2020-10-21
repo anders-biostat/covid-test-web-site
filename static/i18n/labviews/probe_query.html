@@ -1,4 +1,8 @@
 {% extends 'base.html' %} {% block content %}
+
+{% include 'labviews/menu.html' %}
+
+
 <div class="ui segment content">
     <h1 class="ui header centered">{% trans %}Lab Interface - Query{% endtrans %}</h1>
     <p>
@@ -19,42 +23,14 @@
         </div>
     </form>
 
-    <p>{% trans %}Ergebnis für: {% endtrans %} {{ search }}</p>
+    {% if search %}
+        <p>{% trans %}Ergebnis für: {% endtrans %} {{ search }}</p>
+    {% endif %}
 
 
     {% if sample %}
-
-    <div class="ui card">
-        <div class="content">
-            <div class="header">{{ sample._id }}</div>
-            <div class="meta">
-                Registrations: {{ sample.registrations | count }}<br>
-                Batch: {{ sample.batch }}
-            </div>
-
-
-            <h4 class="ui sub header">{% trans %}Historie{% endtrans %}</h4>
-            <div class="extra content">
-                <div class="ui small feed">
-                    {% for result in sample.results %}
-                    <div class="event">
-                        <div class="content">
-                            <div class="summary">
-                                {{ result.updated_time.strftime('%Y-%m-%d %H:%M:%S') }}
-                                <span>{{ result.status }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    {% else %}
+        {% include 'labviews/probe.html' %}
+    {% elif search %}
     <div class="ui warning message">
         <p>{% trans %}Keine Probe mit diesem Barcode gefunden.{% endtrans %}</p>
     </div>
