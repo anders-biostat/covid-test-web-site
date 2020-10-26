@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-16 21:18+0200\n"
+"POT-Creation-Date: 2020-10-26 14:31+0100\n"
 "PO-Revision-Date: 2020-10-07 17:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -18,11 +18,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
+#: ../src/app.py:103
+msgid "Barcode nicht in Datenbank"
+msgstr ""
+
+#: ../src/app.py:105
+msgid "Probe erfolgreich eingetragen"
+msgstr ""
+
+#: ../src/app.py:124
+msgid "Keine Barcodes zu Rack gefunden"
+msgstr ""
+
+#: ../src/app.py:127
+msgid "Falsche Statusfolge: "
+msgstr ""
+
+#: ../src/app.py:153
+msgid "Sample nicht gefunden"
+msgstr ""
+
+#: ../src/app.py:157
+msgid "Sample rack geupdated"
+msgstr ""
+
+#: ../src/app.py:162
+msgid "Status geupdated"
+msgstr ""
+
+#: ../src/app.py:195
+msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
+msgstr ""
+
+#: ../src/app.py:228 ../src/app.py:300
+msgid "Der Barcode ist unbekannt. Bitte erneut versuchen."
+msgstr ""
+
+#: ../src/app.py:232 ../src/app.py:241
+msgid ""
+"Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode "
+"vorher"
+msgstr ""
+
+#: ../src/app.py:246
+msgid ""
+"Das Passwort stimmt nicht mit dem überein, dass Sie beim Registrieren der"
+" Barcodes gewählt haben. Bitte versuchen Sie es noch einmal."
+msgstr ""
+
 #: ../src/forms.py:8
 msgid "Einverständnis"
 msgstr ""
 
-#: ../src/forms.py:12 ../src/forms.py:24
+#: ../src/forms.py:12 ../src/forms.py:24 ../src/forms.py:28 ../src/forms.py:31
+#: ../src/forms.py:41
 msgid "Barcode"
 msgstr ""
 
@@ -38,11 +87,11 @@ msgstr ""
 msgid "Kontaktinformationen"
 msgstr ""
 
-#: ../src/forms.py:18 ../src/forms.py:25
+#: ../src/forms.py:18 ../src/forms.py:25 ../static/i18n/register.html:141
 msgid "Passwort"
 msgstr ""
 
-#: ../src/forms.py:19
+#: ../src/forms.py:19 ../static/i18n/register.html:157
 msgid "Passwort wiederholen"
 msgstr ""
 
@@ -50,63 +99,93 @@ msgstr ""
 msgid "Passwörter müssen übereinstimmen"
 msgstr ""
 
+#: ../src/forms.py:32 ../src/forms.py:35 ../src/forms.py:42
+#: ../static/i18n/labviews/probe.html:42
+msgid "Rack"
+msgstr ""
+
+#: ../src/forms.py:37
+msgid "LAMP positiv"
+msgstr ""
+
+#: ../src/forms.py:38
+msgid "LAMP unklares Ergebnis"
+msgstr ""
+
+#: ../src/forms.py:44
+msgid "Probenstatus"
+msgstr ""
+
 #: ../static/i18n/base.html:5
 msgid ""
 "Schnelltest der Universität Heidelberg auf das\n"
-"      Covid-19-Coronavirus (SARS-CoV-2)"
+"        Covid-19-Coronavirus (SARS-CoV-2)"
 msgstr ""
 
-#: ../static/i18n/base.html:57
-msgid "Schnelltest auf das Covid-19 Coronavirus"
+#: ../static/i18n/base.html:40
+msgid "Schnelltest auf COVID-19"
 msgstr ""
 
-#: ../static/i18n/consent.html:3
+#: ../static/i18n/base.html:41
+msgid "LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2"
+msgstr ""
+
+#: ../static/i18n/base.html:73
+msgid "Fehler:"
+msgstr ""
+
+#: ../static/i18n/base.html:76
+msgid "Warnung:"
+msgstr ""
+
+#: ../static/i18n/consent.html:4
 msgid "Teilnahme am Coronavirus-Test"
 msgstr ""
 
-#: ../static/i18n/consent.html:16
+#: ../static/i18n/consent.html:21
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr ""
 
-#: ../static/i18n/consent.html:23 ../static/i18n/result-query.html:62
+#: ../static/i18n/consent.html:27
+#: ../static/i18n/labviews/probe_rack_results.html:73
+#: ../static/i18n/result-query.html:51
 msgid "Zurück"
 msgstr ""
 
-#: ../static/i18n/consent.html:31
+#: ../static/i18n/consent.html:35
 msgid "Weiter"
 msgstr ""
 
-#: ../static/i18n/footer-index.html:9 ../static/i18n/footer-page.html:5
-#: ../static/i18n/pages/contact.html:3
+#: ../static/i18n/footer.html:4 ../static/i18n/pages/contact.html:3
+#: ../static/i18n/pages/no-tube.html:21
 msgid "Kontakt"
 msgstr ""
 
-#: ../static/i18n/footer-index.html:12 ../static/i18n/footer-page.html:7
-#: ../static/i18n/pages/impressum.html:3
+#: ../static/i18n/footer.html:6 ../static/i18n/pages/impressum.html:3
 msgid "Impressum"
 msgstr ""
 
-#: ../static/i18n/index.html:7
+#: ../static/i18n/index.html:6
 msgid "Schnelltest der Universität Heidelberg auf das"
 msgstr ""
 
-#: ../static/i18n/index.html:9
+#: ../static/i18n/index.html:8
 msgid "Covid-19-Coronavirus (SARS-CoV-2)"
 msgstr ""
 
-#: ../static/i18n/index.html:12
+#: ../static/i18n/index.html:11
 msgid "Ich habe ein Test-Kit erhalten"
 msgstr ""
 
-#: ../static/i18n/index.html:15
+#: ../static/i18n/index.html:14
 msgid "Mein Test-Ergebnis abfragen"
 msgstr ""
 
-#: ../static/i18n/index.html:18
+#: ../static/i18n/index.html:17
 msgid "Mehr über den Test erfahren"
 msgstr ""
 
-#: ../static/i18n/index.html:21
+#: ../static/i18n/index.html:20
 msgid "Diese Seite ist verfügbar in:"
 msgstr ""
 
@@ -117,7 +196,7 @@ msgstr ""
 #: ../static/i18n/information-text.html:2
 msgid ""
 "\n"
-"<h5> Worum geht es bei dieser Studie? </h5>\n"
+"<h3 class=\"ui header\"> Worum geht es bei dieser Studie? </h3>\n"
 "<p> Das neuartige Coronavirus, wissenschaftlich SARS-CoV-2 genannt, hält "
 "uns alle in Atem. Um die Covid19-Pandemie in\n"
 "    den Griff zu bekommen, mussten wir uns alle in den letzten Monaten "
@@ -133,7 +212,8 @@ msgstr ""
 #: ../static/i18n/information-text.html:10
 msgid ""
 "\n"
-"<h5> Wie wird normalerweise auf das Virus getestet? </h5>\n"
+"<h3 class=\"ui header\"> Wie wird normalerweise auf das Virus getestet? "
+"</h3>\n"
 "<p> Personen, die sich mit dem Coronavirus infiziert haben könnten, "
 "werden üblicherweise vom Gesundheitsamt oder ihrem\n"
 "    Hausarzt zu einem Rachenabstrich gebeten. Dabei führt eine "
@@ -148,11 +228,11 @@ msgstr ""
 #: ../static/i18n/information-text.html:18
 msgid ""
 "\n"
-"<h5> Was möchten wir anders machen? </h5>\n"
+"<h3 class=\"ui header\"> Was möchten wir anders machen? </h3>\n"
 "<p> Die Methode, die wir erproben möchten, unterscheidet sich in zwei "
 "Punkten:</p>\n"
 "<p>\n"
-"<ol>\n"
+"<ol class=\"ui list\">\n"
 "    <li> Wir möchten Speichel statt Rachenabstrich verwenden. Das hat "
 "mehrere Vorteile:\n"
 "        <ul>\n"
@@ -180,11 +260,12 @@ msgstr ""
 #: ../static/i18n/information-text.html:39
 msgid ""
 "\n"
-"<h5> Ist unser Test genauso so gut wie der \"offizielle\" Test? </h5>\n"
+"<h3 class=\"ui header\"> Ist unser Test genauso so gut wie der "
+"\"offizielle\" Test? </h3>\n"
 "<p> Das können wir noch nicht abschließend sagen; daher wollen wir die "
 "Methode ja erproben. Bisher können wir folgendes\n"
 "    sagen:\n"
-"<ul>\n"
+"<ul class=\"ui list\">\n"
 "    <li> In den letzten Monaten haben Studien mehrere Forschungsgruppen "
 "ergeben, dass das Coronavirus in Speichel ebenso\n"
 "        gut nachweisbar ist wie in Rachenabstrich. Es spricht vieles "
@@ -216,8 +297,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<h5> Wie läuft die Teilnahme ab? </h5>\n"
-"<ol>\n"
+"<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
+"<ol class=\"ui list\">\n"
 "    <li> Sie sollten ein Teströhrchen (kleiner Plastikbecher mit "
 "Schraubverschluss) erhalten haben. Es enthält etwas\n"
 "        salziges Wasser. (5 ml reines Wasser mit 0.9%% Kochsalz.)\n"
@@ -257,8 +338,8 @@ msgstr ""
 #: ../static/i18n/information-text.html:86
 msgid ""
 "\n"
-"<h5> Was geschieht, wenn wir in Ihrer Probe das Coronavirus nachweisen "
-"können? </h5>\n"
+"<h3 class=\"ui header\"> Was geschieht, wenn wir in Ihrer Probe das "
+"Coronavirus nachweisen können? </h3>\n"
 "<p> Wenn wir mit unserem LAMP-Verfahren das Virus in einer Probe "
 "nachweisen können (positives Resultat), dann teilen wir\n"
 "    dem Gesundheitsamt den Code auf dem Aufkleber des Teströhrchens mit. "
@@ -280,7 +361,8 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"<h5> Was bedeutet es, wenn wir in Ihrer Probe kein Virus finden? </h5>\n"
+"<h3 class=\"ui header\"> Was bedeutet es, wenn wir in Ihrer Probe kein "
+"Virus finden? </h3>\n"
 "<p> Sie können das Ergebnis auch selbst auf nachfolgender Webseite "
 "abfragen. Auch wenn es negativ sein sollte (kein\n"
 "    Virus nachgewiesen), ist das aber keine völlige Entwarnung! Bedenken "
@@ -304,7 +386,8 @@ msgstr ""
 #: ../static/i18n/information-text.html:109
 msgid ""
 "\n"
-"<h5> Wenn die Studie erfolgreich ist, was nutzt das uns allen? </h5>\n"
+"<h3 class=\"ui header\"> Wenn die Studie erfolgreich ist, was nutzt das "
+"uns allen? </h3>\n"
 "<p> Sicherlich haben Sie in den Nachrichten über Stadtviertel, Regionen "
 "oder Betriebe gehört, in denen das Virus\n"
 "    unerwartet wieder aufgeflammt ist. Nachdem einige Personen Symptome "
@@ -333,7 +416,8 @@ msgstr ""
 #: ../static/i18n/information-text.html:124
 msgid ""
 "\n"
-"<h5> Wer führt die Studie durch und wer finanziert sie? </h5>\n"
+"<h3 class=\"ui header\"> Wer führt die Studie durch und wer finanziert "
+"sie? </h3>\n"
 "<p> Die Studie wird von einem Team der Universität Heidelberg "
 "durchgeführt. Eine Liste der beteiligten Wissenschaftler\n"
 "    finden Sie hier: [Link einfügen]. Außerdem werden wir von den "
@@ -350,7 +434,7 @@ msgstr ""
 #: ../static/i18n/information-text.html:133
 msgid ""
 "\n"
-"<h5> Was nutzt die Teilnahme Ihnen selbst? </h5>\n"
+"<h3 class=\"ui header\"> Was nutzt die Teilnahme Ihnen selbst? </h3>\n"
 "<p> Falls Sie tatsächlich mit dem Coronavirus infiziert sind, besteht "
 "eine gute Chance (aber leider keine Sicherheit),\n"
 "    dass der Test dies auch feststellt. Wenn Sie wissen, dass Sie "
@@ -368,7 +452,7 @@ msgstr ""
 #: ../static/i18n/information-text.html:142
 msgid ""
 "\n"
-"<h5> Birgt die Teilnahme Risiken für Sie? </h5>\n"
+"<h3 class=\"ui header\"> Birgt die Teilnahme Risiken für Sie? </h3>\n"
 "<p> Die Abgabe eine Speichelprobe birgt keinerlei körperliche Risiken für"
 " sie. Das Probengefäß ist mit steriler\n"
 "    Kochsalzlösung gefüllt, sein Inhalt ist also ungefährlich. </p>\n"
@@ -377,7 +461,7 @@ msgstr ""
 #: ../static/i18n/information-text.html:147
 msgid ""
 "\n"
-"<h5> Wer soll teilnehmen? </h5>\n"
+"<h3 class=\"ui header\"> Wer soll teilnehmen? </h3>\n"
 "<p> Jeder, dem ein Teströhrchen ausgehändigt wird, ist gebeten, an der "
 "Studie teilzunehmen. Die Verteilung der\n"
 "    Teströhrchen wird typischerweise durch das Gesundheitsamt "
@@ -391,7 +475,8 @@ msgstr ""
 #: ../static/i18n/information-text.html:154
 msgid ""
 "\n"
-"<h5> Wie gewährleisten wir den Schutz Ihrer Daten? </h5>\n"
+"<h3 class=\"ui header\"> Wie gewährleisten wir den Schutz Ihrer Daten? "
+"</h3>\n"
 "<p> Wir (das Team der Universität Heidelberg) arbeiten nur mit den "
 "Teströhrchen und identifizieren Sie, die Probanden,\n"
 "    nur über die auf den Teströhrchen aufgeklebten Codes. Das nennt man "
@@ -425,7 +510,7 @@ msgstr ""
 #: ../static/i18n/information-text.html:172
 msgid ""
 "\n"
-"<h5> Weitere Informationen zum Datenschutz </h5>\n"
+"<h3 class=\"ui header\"> Weitere Informationen zum Datenschutz </h3>\n"
 "<p> Alle datenschutzrechtlichen Bestimmungen werden eingehalten, ebenso "
 "die Regelungen zur medizinischen\n"
 "    Schweigepflicht, im Kontext des Infektionsschutzgesetzes. Während der"
@@ -459,7 +544,7 @@ msgid ""
 "datenschutzrechtlichen Anforderungen können Sie sich an\n"
 "    den Datenschutzbeauftragten des Gesundheits- oder Landratsamts "
 "wenden. Für Test-Aktionen, die über das\n"
-"    Gesundheitsamt des Rhein_Neckar-Kreises organisiert werden, ist dies:"
+"    Gesundheitsamt des Rhein-Neckar-Kreises organisiert werden, ist dies:"
 " </p>\n"
 "<ul style=\"list-style-type:none;\">\n"
 "    <li> Der behördliche Datenschutzbeauftragter <br>\n"
@@ -489,8 +574,8 @@ msgstr ""
 #: ../static/i18n/information-text.html:214
 msgid ""
 "\n"
-"<h5> Ist die Teilnahme freiwillig? Können Sie Ihre Zustimmung widerrufen?"
-" </h5>\n"
+"<h3 class=\"ui header\"> Ist die Teilnahme freiwillig? Können Sie Ihre "
+"Zustimmung widerrufen? </h3>\n"
 "<p> Die Teilnahme ist freiwillig. Wenn Sie nicht teilnehmen möchten, "
 "füllen Sie einfach das Webformular nicht aus und\n"
 "    werfen Sie das Teströhrchen weg oder geben Sie es jemand anderem der "
@@ -513,7 +598,7 @@ msgstr ""
 #: ../static/i18n/information-text.html:226
 msgid ""
 "\n"
-"<h5> Haben Sie noch Fragen? </h5>\n"
+"<h3 class=\"ui header\"> Haben Sie noch Fragen? </h3>\n"
 "<p> Für weitere Informationen sowie für Auskünfte über allgemeine "
 "Ergebnisse und den Ausgang der Studie steht Ihnen als\n"
 "    Leiter der Studie Herr Prof. Michael Knop (m.knop@zmbh.uni-"
@@ -523,62 +608,55 @@ msgid ""
 msgstr ""
 
 #: ../static/i18n/instructions.html:4
+msgid "Anleitung Probenname"
+msgstr ""
+
+#: ../static/i18n/instructions.html:7
 msgid ""
 "Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,\n"
-"    was Sie nun machen müssen."
+"        was Sie nun machen müssen."
 msgstr ""
 
-#: ../static/i18n/instructions.html:19
-msgid ""
-"Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten\n"
-"    Sie uns das Röhrchen bitte wie folgt zu"
-msgstr ""
-
-#: ../static/i18n/instructions.html:26
-msgid "Vielen Dank für Ihre Teilnahme."
-msgstr ""
-
-#: ../static/i18n/instructions.html:28
-msgid ""
-"Morgen oder übermorgen können Sie Ihr Ergebnis unter folgendem\n"
-"    Link abfragen:"
-msgstr ""
-
-#: ../static/i18n/instructions.html:37
-msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
-msgstr ""
-
-#: ../static/i18n/register.html:7
-msgid "Bitte registrieren Sie ihr Testkit:"
-msgstr ""
-
-#: ../static/i18n/register.html:12
+#: ../static/i18n/instructions.html:24
 msgid ""
 "\n"
-"          Die Registrierung ist notwendig, damit Sie im Falle eines "
-"positiven Testergebnisses kontaktiert werden können.\n"
+"        Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten"
+" Sie uns das Röhrchen bitte zu.\n"
 "        "
 msgstr ""
 
-#: ../static/i18n/register.html:19
-msgid "Code auf dem Probenröhrchen (im Testkit erhalten):"
+#: ../static/i18n/instructions.html:31
+msgid "Vielen Dank für Ihre Teilnahme."
 msgstr ""
 
-#: ../static/i18n/register.html:25
-msgid "Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
-msgstr ""
-
-#: ../static/i18n/register.html:47
+#: ../static/i18n/instructions.html:33
 msgid ""
-"Falls Sie kein Röhrchen mit Code erhalten haben, klicken\n"
-"          Sie bitte "
+"Morgen oder übermorgen können Sie Ihr Ergebnis unter folgendem\n"
+"        Link abfragen:"
 msgstr ""
 
-#: ../static/i18n/register.html:50
-msgid "hier"
+#: ../static/i18n/instructions.html:41
+msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
 msgstr ""
 
-#: ../static/i18n/register.html:55
+#: ../static/i18n/register.html:8
+msgid "Fehler"
+msgstr ""
+
+#: ../static/i18n/register.html:24
+msgid "Bitte registrieren Sie ihr Testkit:"
+msgstr ""
+
+#: ../static/i18n/register.html:28
+msgid ""
+"\n"
+"        Die Registrierung ist notwendig, damit Sie im Falle eines "
+"positiven Testergebnisses kontaktiert werden\n"
+"        können.\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/register.html:32
 msgid ""
 "Falls wir das Virus in Ihrer Probe nachweisen sollten, muss\n"
 "        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte "
@@ -586,123 +664,271 @@ msgid ""
 "        Kontakt-Daten an: "
 msgstr ""
 
-#: ../static/i18n/register.html:61
+#: ../static/i18n/register.html:39
+msgid "Code auf dem Probenröhrchen (im Testkit erhalten):"
+msgstr ""
+
+#: ../static/i18n/register.html:45
+msgid "Barcode des Teströhrchens"
+msgstr ""
+
+#: ../static/i18n/register.html:57
+msgid ""
+"Falls Sie kein Röhrchen mit Code erhalten haben, klicken\n"
+"            Sie bitte "
+msgstr ""
+
+#: ../static/i18n/register.html:60
+msgid "hier"
+msgstr ""
+
+#: ../static/i18n/register.html:67
 msgid "Name (Nachname, Vorname)"
 msgstr ""
 
-#: ../static/i18n/register.html:77
-msgid "Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)"
+#: ../static/i18n/register.html:75
+msgid "Nachname, Vorname"
 msgstr ""
 
-#: ../static/i18n/register.html:80
+#: ../static/i18n/register.html:86
+msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort)"
+msgstr ""
+
+#: ../static/i18n/register.html:89
 msgid "Bitte geben Sie nach Möglichkeit ihre Wohnanschrift an."
 msgstr ""
 
-#: ../static/i18n/register.html:94
-msgid "Telefonnummer oder E-Mail-Addresse"
+#: ../static/i18n/register.html:98
+msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
 msgstr ""
 
-#: ../static/i18n/register.html:111
+#: ../static/i18n/register.html:104 ../static/i18n/register.html:113
+msgid "Telefonnummer"
+msgstr ""
+
+#: ../static/i18n/register.html:121
 msgid ""
 "Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden\n"
-"          streng vertraulich behandelt. Nur die Mitarbeiter des "
+"            streng vertraulich behandelt. Nur die Mitarbeiter des "
 "Gesundheitsamts\n"
-"          haben darauf Zugriff."
+"            haben darauf Zugriff."
 msgstr ""
 
-#: ../static/i18n/register.html:118
+#: ../static/i18n/register.html:128
 msgid ""
 "Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
-"        sich bitte ihren Code und geben Sie ein Passwort an:"
+"            sich bitte ihren Code und geben Sie ein Passwort an:"
 msgstr ""
 
-#: ../static/i18n/register.html:124
+#: ../static/i18n/register.html:134
 msgid "Passwort:"
 msgstr ""
 
-#: ../static/i18n/register.html:140
-msgid "dasselbe Passwort nochmal:"
+#: ../static/i18n/register.html:151
+msgid "Passwort wiederholen:"
 msgstr ""
 
-#: ../static/i18n/register.html:158
+#: ../static/i18n/register.html:170
 msgid "Abbrechen"
 msgstr ""
 
-#: ../static/i18n/register.html:161
+#: ../static/i18n/register.html:173
 msgid "Daten abschicken"
 msgstr ""
 
-#: ../static/i18n/register.html:171
-msgid ""
-"Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen\n"
-"            im Rahmen:"
+#: ../static/i18n/result-query.html:5
+msgid "Ergebnis Ihres COVID-19 Tests abfragen:"
 msgstr ""
 
-#: ../static/i18n/register.html:181 ../static/i18n/result-query.html:85
-msgid "Schließen"
-msgstr ""
-
-#: ../static/i18n/result-query.html:6
-msgid "Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:"
-msgstr ""
-
-#: ../static/i18n/result-query.html:11
+#: ../static/i18n/result-query.html:10
 msgid ""
 "\n"
-"          Um das Ergebnis abrufen zu können, muss der Test vorher "
+"        Um das Ergebnis abrufen zu können, muss der Test vorher "
 "registriert worden sein. <br>\n"
-"          Das Testkit können Sie unter folgendem Link registrieren:\n"
+"        Das Testkit können Sie unter folgendem Link registrieren:\n"
 "        "
 msgstr ""
 
-#: ../static/i18n/result-query.html:15
+#: ../static/i18n/result-query.html:14
 msgid "Registrieren"
 msgstr ""
 
-#: ../static/i18n/result-query.html:20
+#: ../static/i18n/result-query.html:19
 msgid "Code auf dem Röhrchen"
 msgstr ""
 
-#: ../static/i18n/result-query.html:46
+#: ../static/i18n/result-query.html:25
+msgid "Bitte geben Sie den Barcode des Probenröhrchens ein"
+msgstr ""
+
+#: ../static/i18n/result-query.html:35
 msgid "wie er auf Ihrem Röhrchen aufgedruckt war"
 msgstr ""
 
-#: ../static/i18n/result-query.html:50
+#: ../static/i18n/result-query.html:39
 msgid "Ihr Passwort:"
 msgstr ""
 
-#: ../static/i18n/result-query.html:56
+#: ../static/i18n/result-query.html:45
 msgid "wie Sie es bei der Eingabe Ihrer Daten gewählt haben"
 msgstr ""
 
-#: ../static/i18n/result-query.html:65
+#: ../static/i18n/result-query.html:54
 msgid "Ergebnis anzeigen"
 msgstr ""
 
-#: ../static/i18n/result-query.html:75
+#: ../static/i18n/labviews/home.html:6
+msgid "Lab Interface - Home"
+msgstr ""
+
+#: ../static/i18n/labviews/home.html:8
 msgid ""
-"Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen im\n"
-"          Rahmen:"
+"\n"
+"        Dies ist das Laborinterface, um Datensätze der Testungen zu "
+"editieren. Folgende Prozesse stehen zur Verfügung:\n"
+"        "
 msgstr ""
 
-#: ../static/i18n/pages/barcode-not-registered.html:3
-msgid "Unregistrierter Barcode"
+#: ../static/i18n/labviews/home.html:14 ../static/i18n/labviews/menu.html:9
+msgid "Probeneingang"
 msgstr ""
 
-#: ../static/i18n/pages/barcode-not-registered.html:5
+#: ../static/i18n/labviews/home.html:17
 msgid ""
-"Für diesen Barcode (%(barcode)) wurden noch keine Kontakt-Daten\n"
-"    eingetragen."
+"\n"
+"            Hier werden nach dem Empfang der Probe die Probenröhrchen den"
+"\n"
+"            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der"
+" Barcode des Racks eingescannt werden\n"
+"            und nachfolgend alle Probenröhrchen dieses Racks eingescannt "
+"werden.\n"
+"        "
 msgstr ""
 
-#: ../static/i18n/pages/barcode-not-registered.html:9
+#: ../static/i18n/labviews/home.html:25 ../static/i18n/labviews/menu.html:13
+msgid "Rack editieren"
+msgstr ""
+
+#: ../static/i18n/labviews/home.html:28
 msgid ""
-"Bitte das folgende Registrierungs-Formular ausfüllen, bevor Sie\n"
-"    das Ergebnis abfragen können:"
+"\n"
+"            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu"
+" wird das Rack eingescannt und danach\n"
+"            jeweils die positiven und unklaren Probenröhrchen "
+"eingescannt. Alle nicht eingescannten Proben\n"
+"            des Racks werden automatisch als negativ gewertet. Die Listen"
+" der positiven/unklaren Proben werden\n"
+"            einfach zeilenweise eingefügt (Barcode-Scanner).\n"
+"        "
 msgstr ""
 
-#: ../static/i18n/pages/barcode-not-registered.html:12
-msgid "Registrierungs-Formular"
+#: ../static/i18n/labviews/home.html:37 ../static/i18n/labviews/menu.html:17
+msgid "Probe suchen"
+msgstr ""
+
+#: ../static/i18n/labviews/home.html:40
+msgid ""
+"\n"
+"            Hier können einzelne Proberöhrchen gesucht werden und der "
+"Status sowie das Rack manuell gesetzt werden.\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/labviews/probe.html:3
+msgid "Barcode: "
+msgstr ""
+
+#: ../static/i18n/labviews/probe.html:11
+#: ../static/i18n/labviews/probe_check_in.html:106
+msgid "Historie"
+msgstr ""
+
+#: ../static/i18n/labviews/probe.html:38
+msgid "Status der Probe"
+msgstr ""
+
+#: ../static/i18n/labviews/probe.html:47
+msgid "Speichern"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_check_in.html:61
+msgid "Lab Interface - Proben registrieren"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_check_in.html:63
+msgid ""
+"\n"
+"        Hier können Barcodes als eingegangen markiert werden:\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/labviews/probe_check_in.html:95
+#: ../static/i18n/labviews/probe_query.html:27
+msgid "Ergebnis für: "
+msgstr ""
+
+#: ../static/i18n/labviews/probe_check_in.html:129
+#: ../static/i18n/labviews/probe_rack_results.html:81
+msgid "Barcode nicht gefunden."
+msgstr ""
+
+#: ../static/i18n/labviews/probe_query.html:7
+msgid "Lab Interface - Query"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_query.html:9
+msgid ""
+"\n"
+"        Hier können Barcodes gesucht werden:\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/labviews/probe_query.html:19
+msgid "Search Barcode..."
+msgstr ""
+
+#: ../static/i18n/labviews/probe_query.html:35
+msgid "Keine Probe mit diesem Barcode gefunden."
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:35
+msgid "Lab Interface - Testergebnisse registrieren (Rack)"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:37
+msgid ""
+"\n"
+"        Hier können die Testergebnisse registriert werden. Der Normalfall"
+" ist ein negatives Ergebnis. Positive\n"
+"        und unklare Proben werden (zeilenweise) in die entsprechenden "
+"Felder eingegeben.\n"
+"        "
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:55
+msgid ""
+"Nachfolgend die Barcodes der jeweils positiven / unklaren Proben "
+"(zeilenweise separiert)"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:59
+msgid "Positive LAMP Proben (Barcodes)"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:60
+msgid "Positive Proben (Barcodes)"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:66
+msgid "Unklare LAMP Proben (Barcodes)"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:67
+msgid "Unklare Proben (Barcodes)"
+msgstr ""
+
+#: ../static/i18n/labviews/probe_rack_results.html:74
+msgid "Abschicken"
 msgstr ""
 
 #: ../static/i18n/pages/barcode-unknown.html:3
@@ -796,20 +1022,20 @@ msgid ""
 "    SARS-CoV-2"
 msgstr ""
 
-#: ../static/i18n/pages/internal-error.html:4
+#: ../static/i18n/pages/internal-error.html:3
 msgid "Interner Fehler"
 msgstr ""
 
-#: ../static/i18n/pages/internal-error.html:6
+#: ../static/i18n/pages/internal-error.html:5
 msgid "Das Ergebnis ihres Tests ist fehlerhaft gespeichert."
 msgstr ""
 
-#: ../static/i18n/pages/internal-error.html:10
+#: ../static/i18n/pages/internal-error.html:9
 #: ../static/i18n/pages/multiple-registeration.html:9
 msgid "Bitte kontaktieren Sie uns:"
 msgstr ""
 
-#: ../static/i18n/pages/internal-error.html:12
+#: ../static/i18n/pages/internal-error.html:11
 #: ../static/i18n/pages/multiple-registeration.html:11
 msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 msgstr ""
@@ -827,29 +1053,30 @@ msgstr ""
 #: ../static/i18n/pages/no-tube.html:4
 msgid ""
 "Unsere Test-Kits bestehen aus einem größeren Röhrchen mit\n"
-"    salzigem Wasser, einem kleinen Röhrchen mit aufgedrucktem Code, und "
-"einer\n"
-"    Plastik-Pipette."
+"        salzigem Wasser, einem kleinen Röhrchen mit aufgedrucktem Code, "
+"und einer\n"
+"        Plastik-Pipette."
 msgstr ""
 
 #: ../static/i18n/pages/no-tube.html:9
 msgid ""
 "Wir verteilen diese Kits im Rahmen von Test-Aktionen, z.B. an\n"
-"    alle Mitarbeiter einer Einrichtung. Nur wer auf solchem Wege ein "
+"        alle Mitarbeiter einer Einrichtung. Nur wer auf solchem Wege ein "
 "Test-Kit\n"
-"    erhalten hat, kann teilnehmen."
+"        erhalten hat, kann teilnehmen."
 msgstr ""
 
 #: ../static/i18n/pages/no-tube.html:14
 msgid ""
 "Bitte verstehen Sie, dass sich der Aufwand einer Test-Aktion nur\n"
-"    lohnt, wenn wir dadurch eine größere Zahl Personen testen können. Für"
-"\n"
-"    Einzel-Personen können wir den test leider nicht anbieten. Wenn Sie "
-"uns aber\n"
-"    helfen möchten, und für eine größere Gruppe die verteilung von test-"
-"Kits\n"
-"    organisieren möchten, wenden Sie sich doch mit einem Vorschlag an uns."
+"        lohnt, wenn wir dadurch eine größere Zahl Personen testen können."
+" Für\n"
+"        Einzel-Personen können wir den test leider nicht anbieten. Wenn "
+"Sie uns aber\n"
+"        helfen möchten, und für eine größere Gruppe die verteilung von "
+"test-Kits\n"
+"        organisieren möchten, wenden Sie sich doch mit einem Vorschlag an"
+" uns."
 msgstr ""
 
 #: ../static/i18n/pages/password-not-matched.html:3
@@ -857,7 +1084,6 @@ msgid "Passwörter stimmen nicht überein"
 msgstr ""
 
 #: ../static/i18n/pages/password-not-matched.html:5
-#: ../static/i18n/pages/wrong-password.html:9
 msgid ""
 "Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es\n"
 "    noch einmal."
@@ -978,24 +1204,14 @@ msgid ""
 "    06221 522-1881. "
 msgstr ""
 
-#: ../static/i18n/pages/test-to-be-determined.html:4
+#: ../static/i18n/pages/test-to-be-determined.html:3
 msgid "Ergebnis liegt noch nicht vor"
 msgstr ""
 
-#: ../static/i18n/pages/test-to-be-determined.html:6
+#: ../static/i18n/pages/test-to-be-determined.html:5
 msgid ""
 "Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte\n"
-"      versuchen Sie es später oder morgen noch einmal."
-msgstr ""
-
-#: ../static/i18n/pages/wrong-password.html:3
-msgid "Passwort falsch"
-msgstr ""
-
-#: ../static/i18n/pages/wrong-password.html:5
-msgid ""
-"Das Passwort stimmt nicht mit dem überein, dass Sie beim\n"
-"    Registrieren der Barcodes gewählt haben."
+"        versuchen Sie es später oder morgen noch einmal."
 msgstr ""
 
 #~ msgid "Passwords must match"
@@ -1874,5 +2090,748 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Bei technischen Problemen wenden Sie sich bitte an"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Schnelltest der Universität Heidelberg auf das\n"
+#~ "      Covid-19-Coronavirus (SARS-CoV-2)"
+#~ msgstr ""
+
+#~ msgid "Schnelltest auf das Covid-19 Coronavirus"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Worum geht es bei dieser Studie? </h5>\n"
+#~ "<p> Das neuartige Coronavirus, "
+#~ "wissenschaftlich SARS-CoV-2 genannt, hält "
+#~ "uns alle in Atem. Um die "
+#~ "Covid19-Pandemie in\n"
+#~ "    den Griff zu bekommen, mussten "
+#~ "wir uns alle in den letzten "
+#~ "Monaten stark einschränken. Nun wird das"
+#~ " öffentliche\n"
+#~ "    Leben wieder geöffnet. Damit wir "
+#~ "das Virus dabei unter Kontrolle halten"
+#~ " können, müssen wir rechtzeitig erkennen,"
+#~ "\n"
+#~ "    wenn irgendwo wieder gehäuft "
+#~ "Infektionen auftreten. Dazu müssen wir "
+#~ "möglichst viele Personen möglichst "
+#~ "unkompliziert\n"
+#~ "    auf das Virus testen zu "
+#~ "können. Wir erproben ein Verfahren "
+#~ "hierzu, und möchten Sie um Ihre "
+#~ "Mithilfe bitten. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Wie wird normalerweise auf das Virus getestet? </h5>\n"
+#~ "<p> Personen, die sich mit dem "
+#~ "Coronavirus infiziert haben könnten, werden"
+#~ " üblicherweise vom Gesundheitsamt oder "
+#~ "ihrem\n"
+#~ "    Hausarzt zu einem Rachenabstrich "
+#~ "gebeten. Dabei führt eine medizinische "
+#~ "Fachkraft ein Abstrichstäbchens (eine Art\n"
+#~ ""
+#~ "    langes Wattestäbchen) durch den Mund"
+#~ " oder die Nase zur Rückwand des "
+#~ "Rachens und streicht dort Material "
+#~ "(Sekret und\n"
+#~ "    Zellen) ab. In einem medizinischen"
+#~ " Labor wird die Probe dann auf "
+#~ "Vorhandensein von RNA des SARS-"
+#~ "Coronavirus 2\n"
+#~ "    getestet. Die dabei verwendete "
+#~ "Labortechnik nennt man \"qPCR\". </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Was möchten wir anders machen? </h5>\n"
+#~ "<p> Die Methode, die wir erproben "
+#~ "möchten, unterscheidet sich in zwei "
+#~ "Punkten:</p>\n"
+#~ "<p>\n"
+#~ "<ol>\n"
+#~ "    <li> Wir möchten Speichel statt "
+#~ "Rachenabstrich verwenden. Das hat mehrere "
+#~ "Vorteile:\n"
+#~ "        <ul>\n"
+#~ "            <li> Ein Rachenabstrich ist "
+#~ "ziemlich unangenehm. In ein kleines "
+#~ "Gefäß zu spucken ist viel einfacher "
+#~ "und\n"
+#~ "                angenehmer.\n"
+#~ "            </li>\n"
+#~ "            <li> Den Rachenabstrich muss "
+#~ "eine medizinische Fachkraft durchführen, und"
+#~ " Sie müssen dazu in eine Arztpraxis"
+#~ "\n"
+#~ "                oder zu einer Teststation "
+#~ "kommen. Eine Speichelprobe können Sie "
+#~ "ganz einfach zu Hause selbst\n"
+#~ "                durchführen. In einem Video"
+#~ " erklären wir Ihnen, was Sie machen"
+#~ " sollen.\n"
+#~ "            </li>\n"
+#~ "        </ul>\n"
+#~ "    <li> Im Labor möchten wir ein"
+#~ " anderes Analyse-Verfahren verwenden. Statt"
+#~ " des üblichen \"qPCR\"-Verfahrens erproben "
+#~ "wir\n"
+#~ "        eine Alternative, die weniger "
+#~ "technischen Aufwand erfordert, und \"LAMP\""
+#~ " genannt wird.\n"
+#~ "    </li>\n"
+#~ "</ol>\n"
+#~ "</p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Ist unser Test genauso so gut wie der \"offizielle\" Test? </h5>\n"
+#~ "<p> Das können wir noch nicht "
+#~ "abschließend sagen; daher wollen wir die"
+#~ " Methode ja erproben. Bisher können "
+#~ "wir folgendes\n"
+#~ "    sagen:\n"
+#~ "<ul>\n"
+#~ "    <li> In den letzten Monaten "
+#~ "haben Studien mehrere Forschungsgruppen "
+#~ "ergeben, dass das Coronavirus in "
+#~ "Speichel ebenso\n"
+#~ "        gut nachweisbar ist wie in "
+#~ "Rachenabstrich. Es spricht vieles dafür, "
+#~ "dass der doch sehr unangenehme\n"
+#~ "        Rachenabstrich durch eine Untersuchung"
+#~ " von Speichel ersetzt werden kann. "
+#~ "Wie genau man den Speichel am "
+#~ "besten\n"
+#~ "        sammeln sollte, ist aber noch nicht ganz klar (siehe unten).\n"
+#~ "    </li>\n"
+#~ "    <li> Beide Laborverfahren, qPCR und"
+#~ " LAMP, sind nicht perfekt: Wenn die"
+#~ " Probe nur wenige Viren enthalten, "
+#~ "können sie\n"
+#~ "        eine Infektion übersehen. Die "
+#~ "etablierte qPCR-Methode ist aber ganz"
+#~ " klar besser darin, Proben mit sehr"
+#~ " wenigen\n"
+#~ "        Viren als infiziert zu erkennen,"
+#~ " als die LAMP-Methode, die wir "
+#~ "erproben möchten. Wenn unser Test bei"
+#~ " Ihnen keine\n"
+#~ "        Viren findet, ist dies also "
+#~ "ein weniger verlässliches Resultat als "
+#~ "wenn der etablierte qPCR-Test keine "
+#~ "Viren\n"
+#~ "        findet.\n"
+#~ "    </li>\n"
+#~ "    <li> Andererseits ist der LAMP-"
+#~ "Test aber technisch deutlich einfacher. "
+#~ "Mit derselben Labor-Kapazität und "
+#~ "derselben\n"
+#~ "        Anzahl an Labortechniker/innen können"
+#~ " wir sehr viel mehr Personen testen,"
+#~ " als mit dem qPCR-Test möglich "
+#~ "wäre.\n"
+#~ "    </li>\n"
+#~ "</ul>\n"
+#~ "</p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Wie läuft die Teilnahme ab? </h5>\n"
+#~ "<ol>\n"
+#~ "    <li> Sie sollten ein Teströhrchen"
+#~ " (kleiner Plastikbecher mit Schraubverschluss)"
+#~ " erhalten haben. Es enthält etwas\n"
+#~ "        salziges Wasser. (5 ml reines Wasser mit 0.9%% Kochsalz.)\n"
+#~ "    </li>\n"
+#~ "    <li> Zunächst sollten Sie nun "
+#~ "diese Informationen hier lesen und, wenn"
+#~ " Sie mit allem einverstanden sind, am"
+#~ " Ende der\n"
+#~ "        Seite mit einem Mausklick "
+#~ "bestätigen, dass Sie teilnehmen möchten.\n"
+#~ ""
+#~ "    </li>\n"
+#~ "    <li> Auf der nächsten Seite "
+#~ "werden wir Sie dann bitten, Ihre "
+#~ "Kontaktdaten anzugeben (damit das "
+#~ "Gesundheitsamt Sie\n"
+#~ "        erreichen kann, falls Sie "
+#~ "infiziert sein sollten), sowie den Code,"
+#~ " der auf Ihrem Teströhrchen aufgeklebt "
+#~ "ist.\n"
+#~ "        Ihr Name und Ihre Kontaktdaten"
+#~ " werden verschlüsselt so abgespeichert, "
+#~ "dass sie uns (dem Team der "
+#~ "Universität\n"
+#~ "        Heidelberg) nicht zugänglich sind, "
+#~ "sondern nur dem Gesundheitsamt, das den"
+#~ " Versuch mit betreut.\n"
+#~ "    </li>\n"
+#~ "    <li> Dann sehen Sie sich bitte"
+#~ " <a href=\"https://www.youtube.com/watch?v=hVniPRMuCjo\">ein"
+#~ " kurzes Video</a> an, dass\n"
+#~ "        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
+#~ "    </li>\n"
+#~ "    <li> Nun spucken Sie in das"
+#~ " Teströhrchen, genau wie im Video "
+#~ "gezeigt.</li>\n"
+#~ "    <li> Schließlich senden Sie uns "
+#~ "das Röhrchen per Post zu oder "
+#~ "geben es an einer Sammelstelle ab. "
+#~ "Instruktionen\n"
+#~ "        finden Sie auf der Webseite.\n"
+#~ "    </li>\n"
+#~ "</ol>\n"
+#~ "<p><b> Zeitaufwand: </b> Insgesamt sollte "
+#~ "Sie das in etwa 15-25 Minuten "
+#~ "Ihrer Zeit kosten. (Wenn Sie das "
+#~ "Video schon\n"
+#~ "    kennen, etwas weniger, und wenn "
+#~ "ihr nächste Briefkasten ein weiter Weg"
+#~ " ist, etwas mehr.) </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Was geschieht, wenn wir in "
+#~ "Ihrer Probe das Coronavirus nachweisen "
+#~ "können? </h5>\n"
+#~ "<p> Wenn wir mit unserem LAMP-"
+#~ "Verfahren das Virus in einer Probe "
+#~ "nachweisen können (positives Resultat), dann"
+#~ " teilen wir\n"
+#~ "    dem Gesundheitsamt den Code auf "
+#~ "dem Aufkleber des Teströhrchens mit. "
+#~ "Außerdem werden wir das Resultat auch"
+#~ " mit der\n"
+#~ "    etablierten qPCR-Methode nochmals "
+#~ "überprüfen, damit wir keinen falschen "
+#~ "Alarm schlagen. </p>\n"
+#~ "<p> Das Gesundheitsamt kontaktiert Sie "
+#~ "dann, und informiert Sie. Typischerweise "
+#~ "wird das Gesundheitsamt Sie auffordern,\n"
+#~ ""
+#~ "    sich in häusliche Quarantäne zu "
+#~ "begeben, Sie beraten, und versuchen, mit"
+#~ " Ihnen zusammen die Personen zu "
+#~ "ermitteln,\n"
+#~ "    die Sie angesteckt haben könnten,"
+#~ " damit die Übertragung des Virus "
+#~ "gestoppt werden kann. </p>\n"
+#~ "<p> Wir (das Team der Universität) "
+#~ "werden Ihre Identität nicht erfahren: "
+#~ "nur das Gesundheitsamt hat Zugriff auf"
+#~ " die\n"
+#~ "    Zuordnung von Codes zu Namen und Kontaktdaten. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Was bedeutet es, wenn wir in"
+#~ " Ihrer Probe kein Virus finden? </h5>"
+#~ "\n"
+#~ "<p> Sie können das Ergebnis auch "
+#~ "selbst auf nachfolgender Webseite abfragen."
+#~ " Auch wenn es negativ sein sollte "
+#~ "(kein\n"
+#~ "    Virus nachgewiesen), ist das aber"
+#~ " keine völlige Entwarnung! Bedenken Sie "
+#~ "bitte, dass unser Test nicht perfekt "
+#~ "ist\n"
+#~ "    und vielleicht (grob geschätzt) nur"
+#~ " 60-80%% der Infektionen erkennt. Außerdem:"
+#~ " auch wenn Sie im Moment der\n"
+#~ "    Speichelprobe nicht infiziert waren, "
+#~ "heißt das nicht, dass Sie sich "
+#~ "nicht vielleicht schon kurze Zeit später"
+#~ "\n"
+#~ "    infiziert haben könnten. Oder Sie"
+#~ " hatten sich bereits kurz vorher "
+#~ "infiziert, aber das Virus hatte sich "
+#~ "noch nicht\n"
+#~ "    hinreichend vermehrt, um in ihrem"
+#~ " Speichel nachweisbar zu sein. </p>\n"
+#~ "<p> Solange das Virus im Umlauf "
+#~ "ist, müssen wir alle stets vorsichtig"
+#~ " sein, und alle Hygiene- und "
+#~ "Abstandsregeln\n"
+#~ "    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Wenn die Studie erfolgreich ist, was nutzt das uns allen? </h5>\n"
+#~ "<p> Sicherlich haben Sie in den "
+#~ "Nachrichten über Stadtviertel, Regionen oder"
+#~ " Betriebe gehört, in denen das Virus"
+#~ "\n"
+#~ "    unerwartet wieder aufgeflammt ist. "
+#~ "Nachdem einige Personen Symptome zeigten, "
+#~ "wurde ihr Umfeld getestet (mit qPCR),"
+#~ "\n"
+#~ "    und dann festgestellt, dass bereits"
+#~ " sehr viele Personen infiziert sind. "
+#~ "Daher mussten sich dann eine große "
+#~ "Anzahl\n"
+#~ "    Personen in Quarantäne begeben, und"
+#~ " in ganzen Orten oder Landkreisen "
+#~ "wurden die Kontaktbeschränkungen wieder\n"
+#~ "    verschärft. Um dies zu verhindern,"
+#~ " müssen wir engmaschiger testen: Zum "
+#~ "Beispiel könnten man in einem Ort "
+#~ "regelmäßig\n"
+#~ "    einen Teil der Bewohner (jede "
+#~ "Woche einen anderen Teil) bitten, eine"
+#~ " Speichelprobe abzugeben, und je öfter "
+#~ "dies\n"
+#~ "    gemacht wird, und je mehr "
+#~ "Personen teilnehmen, desto größer ist "
+#~ "die Chance, einen Ausbruch zu entdecken,"
+#~ " solange nur\n"
+#~ "    sehr wenige Personen betroffen sind."
+#~ " Ein solches Vorgehen möchten wir "
+#~ "hier erproben. </p>\n"
+#~ "<p> Hier müssen wir abwägen: Sollte "
+#~ "man möglichst viele Tests durchführen, "
+#~ "auch wenn die einzelnen Tests nicht "
+#~ "so genau\n"
+#~ "    wie möglich sind, oder sollte "
+#~ "man die genauest-möglichen Tests "
+#~ "verwenden, auch wenn man dann deutlich"
+#~ " weniger Tests\n"
+#~ "    machen kann? Falls ersteres die "
+#~ "bessere Strategie ist, wird unsere "
+#~ "Studie erproben, wie man dies in "
+#~ "großem Stil,\n"
+#~ "    vielleicht gar für ganz Deutschland, bewerkstelligen könnte. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Wer führt die Studie durch und wer finanziert sie? </h5>\n"
+#~ "<p> Die Studie wird von einem Team"
+#~ " der Universität Heidelberg durchgeführt. "
+#~ "Eine Liste der beteiligten Wissenschaftler"
+#~ "\n"
+#~ "    finden Sie hier: [Link einfügen]."
+#~ " Außerdem werden wir von den "
+#~ "örtlichen Gesundheitsämtern unterstützt. Diese\n"
+#~ ""
+#~ "    erhalten die Kontaktdaten und die"
+#~ " Ergebnisse und informieren Personen mit"
+#~ " positivem Testergebnis.</p>\n"
+#~ "<p> Die Studie wird finanziert aus "
+#~ "Mitteln des baden-württembergischen "
+#~ "Ministeriums für Wissenschaft und Kunst, "
+#~ "und aus\n"
+#~ "    Mitteln der Universität Heidelberg "
+#~ "(also somit indirekt von Ihnen allen,"
+#~ " den steuerzahlenden Bürgern des Landes"
+#~ "\n"
+#~ "    Baden-Württemberg. Vielen Dank.) </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Was nutzt die Teilnahme Ihnen selbst? </h5>\n"
+#~ "<p> Falls Sie tatsächlich mit dem "
+#~ "Coronavirus infiziert sind, besteht eine "
+#~ "gute Chance (aber leider keine "
+#~ "Sicherheit),\n"
+#~ "    dass der Test dies auch "
+#~ "feststellt. Wenn Sie wissen, dass Sie"
+#~ " infiziert sind, können Sie sich in"
+#~ " häusliche\n"
+#~ "    Quarantäne begeben, und so Ihre "
+#~ "Familie, ihre Freunde, Kollegen und "
+#~ "Mitmenschen vor Ansteckung schützen. Außerdem"
+#~ "\n"
+#~ "    wissen Sie vielleicht etwas früher"
+#~ " als sonst, was Ihnen fehlt, falls"
+#~ " die Krankheit schwerer verlaufen sollte."
+#~ " </p>\n"
+#~ "<p> Wenn das Testergebnis negativ ist,"
+#~ " kann Ihnen dies aber leider keinen"
+#~ " \"Freibrief\" geben, die Abstands- und"
+#~ "\n"
+#~ "    Hygieneregeln nun weniger ernst zu"
+#~ " nehmen, denn der Test kann eine "
+#~ "Infektion nicht sicher ausschließen. </p>\n"
+#~ ""
+#~ "\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Birgt die Teilnahme Risiken für Sie? </h5>\n"
+#~ "<p> Die Abgabe eine Speichelprobe birgt"
+#~ " keinerlei körperliche Risiken für sie. "
+#~ "Das Probengefäß ist mit steriler\n"
+#~ "    Kochsalzlösung gefüllt, sein Inhalt ist also ungefährlich. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Wer soll teilnehmen? </h5>\n"
+#~ "<p> Jeder, dem ein Teströhrchen "
+#~ "ausgehändigt wird, ist gebeten, an der"
+#~ " Studie teilzunehmen. Die Verteilung der"
+#~ "\n"
+#~ "    Teströhrchen wird typischerweise durch "
+#~ "das Gesundheitsamt organisiert, bzw. an "
+#~ "eine Abgabestelle delegiert.\n"
+#~ "    Voraussetzung für die Teilnahme ist"
+#~ " auch, dass Sie erklären, dass Sie"
+#~ " sich durch die hier vorliegenden "
+#~ "Erläuterungen\n"
+#~ "    ausreichend informiert fühlen, und "
+#~ "mit dem beschriebenen Vorgehen einverstanden"
+#~ " sind. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Wie gewährleisten wir den Schutz Ihrer Daten? </h5>\n"
+#~ "<p> Wir (das Team der Universität "
+#~ "Heidelberg) arbeiten nur mit den "
+#~ "Teströhrchen und identifizieren Sie, die "
+#~ "Probanden,\n"
+#~ "    nur über die auf den "
+#~ "Teströhrchen aufgeklebten Codes. Das nennt "
+#~ "man Pseudonymisieren. Pseudonymisierung bedeutet,"
+#~ "\n"
+#~ "    dass die erhobenen Daten anstatt "
+#~ "des Namens/Geburtsdatums etc. mit einem "
+#~ "Nummern-/Buchstabencode gekennzeichnet\n"
+#~ "    werden. Das Gesundheitsamt hingegen "
+#~ "hat Zugriff auf die Daten, die Sie"
+#~ " auf der Webseite eingeben (Ihr Name,"
+#~ " Ihre\n"
+#~ "    Adresse, Ihre Telefonnummer und/oder "
+#~ "Ihre eMail-Adresse), und kann diese "
+#~ "Daten dem Code ihres Teströhrchens\n"
+#~ "    zuordnen. Das ist erforderlich, da"
+#~ " Covid19 eine meldepflichtige Krankheit "
+#~ "ist: das Gesundheitsamt muss über die"
+#~ "\n"
+#~ "    Identität Infizierter informiert werden."
+#~ " Daher teilen wir dem Gesundheitsamt "
+#~ "die Codes aller positiven Proben mit,"
+#~ "\n"
+#~ "    so dass es dann die "
+#~ "Infizierten kontaktieren und weitere Maßnahmen"
+#~ " einleiten kann. </p>\n"
+#~ "<p> Der Webserver, auf dem Sie "
+#~ "Ihre Daten eingeben, ist so aufgesetzt,"
+#~ " dass nur klar bestimmte Mitarbeiter "
+#~ "des\n"
+#~ "    Gesundheitsamtes, nicht aber wir "
+#~ "(die Wissenschaftler der Universität "
+#~ "Heidelberg) Zugriff auf Namen und "
+#~ "Kontaktdaten\n"
+#~ "    der Probanden haben. </p>\n"
+#~ "<p> Die Stelle, die Teströhrchen "
+#~ "ausgibt, darf nicht nach ihrem Namen "
+#~ "fragen und darf keine Aufzeichnungen "
+#~ "anfertigen,\n"
+#~ "    die die Codes auf den "
+#~ "Teströhrchen mit den Namen der Probanden"
+#~ " verknüpft. Wenn Sie den Verdacht "
+#~ "haben, dass sich die\n"
+#~ "    ausgebende Stelle den Code Ihres "
+#~ "Teströhrchens und Ihren Namen notiert "
+#~ "haben, informieren Sie uns bitte\n"
+#~ "    unbedingt. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Weitere Informationen zum Datenschutz </h5>\n"
+#~ "<p> Alle datenschutzrechtlichen Bestimmungen "
+#~ "werden eingehalten, ebenso die Regelungen "
+#~ "zur medizinischen\n"
+#~ "    Schweigepflicht, im Kontext des "
+#~ "Infektionsschutzgesetzes. Während der Studie "
+#~ "werden keine medizinischen Befunde und\n"
+#~ "    nur der Code Ihres Teströhrchens "
+#~ "sowie die Angabe der Kontaktanschrift "
+#~ "von Ihnen erhoben. Diese werden in "
+#~ "einer\n"
+#~ "    Datenbank, die nur dem "
+#~ "Gesundheitsamt zugänglich ist, gespeichert. "
+#~ "Zusätzlich werden Informationen erhoben, die"
+#~ " mit\n"
+#~ "    dem ausgegebenen Code auf dem "
+#~ "Teströhrchen verknüpft sind. Diese sind: "
+#~ "Ausgabeort des Teströhrchens und Ausgabedatum"
+#~ "\n"
+#~ "    des Teströhrchens. </p>\n"
+#~ "<p> Für die Studie wichtigen "
+#~ "statistischen Daten werden vom Gesundheitsamt"
+#~ " anonymisiert und an die Organisatoren "
+#~ "der\n"
+#~ "    Studie weitergegeben. Die Studienleitung"
+#~ " wird alle angemessenen Schritte "
+#~ "unternehmen, um den Schutz Ihrer Daten"
+#~ "\n"
+#~ "    gemäß den Datenschutzstandards der "
+#~ "Europäischen Union zu gewährleisten. Die "
+#~ "Daten sind gegen unbefugten Zugriff\n"
+#~ "    gesichert. Eine Entschlüsselung erfolgt"
+#~ " nur durch das Gesundheitsamt. Die "
+#~ "während der Studie erhobenen Daten "
+#~ "werden\n"
+#~ "    nach Studienabschluss vernichtet. </p>\n"
+#~ "<p> Sie haben das Recht, vom "
+#~ "Verantwortlichen (s.u.) Auskunft über die "
+#~ "von Ihnen gespeicherten personenbezogenen "
+#~ "Daten\n"
+#~ "    zu verlangen. Ebenfalls können Sie"
+#~ " die Berichtigung unzutreffender Daten "
+#~ "sowie die Löschung der Daten oder\n"
+#~ ""
+#~ "    Einschränkung deren Verarbeitung verlangen. </p>\n"
+#~ "<p> Verantwortlich für die studienbedingte "
+#~ "Erhebung personenbezogener Daten ist das "
+#~ "Gesundheitsamt, sowie wir,\n"
+#~ "    das Team der Universität Heidelberg;"
+#~ " hier spezifisch Dr. Simon Anders.</p>\n"
+#~ ""
+#~ "<p> Bei Anliegen zur Datenverarbeitung "
+#~ "und zur Einhaltung der datenschutzrechtlichen"
+#~ " Anforderungen können Sie sich an\n"
+#~ "    den Datenschutzbeauftragten des "
+#~ "Gesundheits- oder Landratsamts wenden. Für "
+#~ "Test-Aktionen, die über das\n"
+#~ "    Gesundheitsamt des Rhein_Neckar-Kreises"
+#~ " organisiert werden, ist dies: </p>\n"
+#~ "<ul style=\"list-style-type:none;\">\n"
+#~ "    <li> Der behördliche Datenschutzbeauftragter <br>\n"
+#~ "        des Landratsamtes Rhein-Neckar-Kreis <br>\n"
+#~ "        Kurfürsten-Anlage 38-40, 69115 Heidelberg <br>\n"
+#~ "        Tel. 06221 522-1314 <br>\n"
+#~ "        E-Mail: behoerdlicherdatenschutzbeauftragter"
+#~ "@rhein-neckar-kreis.de\n"
+#~ "    </li>\n"
+#~ "</ul>\n"
+#~ "<p> Im Falle einer rechtswidrigen "
+#~ "Datenverarbeitung haben Sie das Recht, "
+#~ "sich bei folgender Aufsichtsbehörde zu\n"
+#~ "    beschweren:</p>\n"
+#~ "<ul style=\"list-style-type:none;\">\n"
+#~ "    <li> Der Landesbeauftragte für den"
+#~ " Datenschutz und die Informationsfreiheit "
+#~ "Baden-Württemberg <br>\n"
+#~ "        Postfach 10 29 32, 70025 Stuttgart <br>\n"
+#~ "        Königstraße 10a, 70173 Stuttgart <br>\n"
+#~ "        Tel.: 0711 61 55 41 - 0 <br>\n"
+#~ "        Fax: 0711 61 55 41 - 15 <br>\n"
+#~ "        E-Mail: poststelle@lfdi.bwl.de <br>\n"
+#~ "        Internet: http://www.baden-wuerttemberg.datenschutz.de\n"
+#~ "    </li>\n"
+#~ "</ul>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Ist die Teilnahme freiwillig? "
+#~ "Können Sie Ihre Zustimmung widerrufen? "
+#~ "</h5>\n"
+#~ "<p> Die Teilnahme ist freiwillig. Wenn"
+#~ " Sie nicht teilnehmen möchten, füllen "
+#~ "Sie einfach das Webformular nicht aus"
+#~ " und\n"
+#~ "    werfen Sie das Teströhrchen weg "
+#~ "oder geben Sie es jemand anderem "
+#~ "der sich testen lassen möchte. Eine "
+#~ "Teilnahme ist\n"
+#~ "    gratis. Wenn Sie bereits Ihre "
+#~ "Einwilligung gegeben haben und auch das"
+#~ " Teströhrchen abgegeben haben und jetzt "
+#~ "Ihre\n"
+#~ "    widerrufen möchten, wenden Sie sich"
+#~ " bitte an die Studienleitung. Eine "
+#~ "Kontaktemail finden Sie auf der "
+#~ "Webseite. Bei\n"
+#~ "    einem Widerruf werden Ihre "
+#~ "persönlichen Daten gelöscht, so dass das"
+#~ " Ergebnis Ihrer Probe Ihnen nicht "
+#~ "mehr zugeordnet\n"
+#~ "    werden kann. Bei Rücktritt von "
+#~ "der Studie kann auf Wunsch bereits "
+#~ "gewonnenes Material vernichtet werden. Sollte"
+#~ " Ihre\n"
+#~ "    Probe aber bereits analysiert worden"
+#~ " sein, z.B. weil Sie sich zu "
+#~ "spät gemeldet haben, und der Test "
+#~ "sollte sich als\n"
+#~ "    positiv erweisen, werden wir den "
+#~ "Code der Probe dennoch an das "
+#~ "Gesundheitsamt übermitteln, da wir aufgrund"
+#~ " der\n"
+#~ "    Meldepflicht dazu verpflichtet sind. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h5> Haben Sie noch Fragen? </h5>\n"
+#~ "<p> Für weitere Informationen sowie für"
+#~ " Auskünfte über allgemeine Ergebnisse und"
+#~ " den Ausgang der Studie steht Ihnen"
+#~ " als\n"
+#~ "    Leiter der Studie Herr Prof. "
+#~ "Michael Knop (m.knop@zmbh.uni-heidelberg.de, "
+#~ "Tel. 06221 54-6800) oder auch Herr "
+#~ "Dr.\n"
+#~ "    Simon Anders (s.anders@zmbh.uni-"
+#~ "heidelberg.de, Tel. 06221 54-6800) zur "
+#~ "Verfügung. </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,\n"
+#~ "    was Sie nun machen müssen."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten\n"
+#~ "    Sie uns das Röhrchen bitte wie folgt zu"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Morgen oder übermorgen können Sie Ihr Ergebnis unter folgendem\n"
+#~ "    Link abfragen:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "          Die Registrierung ist notwendig, "
+#~ "damit Sie im Falle eines positiven "
+#~ "Testergebnisses kontaktiert werden können.\n"
+#~ "        "
+#~ msgstr ""
+
+#~ msgid "Klicken Sie auf die Schaltfläche, um den Barcode zu scannen"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Falls Sie kein Röhrchen mit Code erhalten haben, klicken\n"
+#~ "          Sie bitte "
+#~ msgstr ""
+
+#~ msgid "Anschrift (Strasse, Hausnummer, Postleitzahl, Wohnort)"
+#~ msgstr ""
+
+#~ msgid "Telefonnummer oder E-Mail-Addresse"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden\n"
+#~ "          streng vertraulich behandelt. Nur"
+#~ " die Mitarbeiter des Gesundheitsamts\n"
+#~ "          haben darauf Zugriff."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
+#~ "        sich bitte ihren Code und geben Sie ein Passwort an:"
+#~ msgstr ""
+
+#~ msgid "dasselbe Passwort nochmal:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen\n"
+#~ "            im Rahmen:"
+#~ msgstr ""
+
+#~ msgid "Schließen"
+#~ msgstr ""
+
+#~ msgid "Hier können Sie das Ergebnis Ihres Covid19-Tests abfragen:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "          Um das Ergebnis abrufen zu "
+#~ "können, muss der Test vorher registriert"
+#~ " worden sein. <br>\n"
+#~ "          Das Testkit können Sie unter folgendem Link registrieren:\n"
+#~ "        "
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bitte platzieren Sie den Code auf Ihrem Proben-Röhrchen im\n"
+#~ "          Rahmen:"
+#~ msgstr ""
+
+#~ msgid "Unregistrierter Barcode"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Für diesen Barcode (%(barcode)) wurden noch keine Kontakt-Daten\n"
+#~ "    eingetragen."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bitte das folgende Registrierungs-Formular ausfüllen, bevor Sie\n"
+#~ "    das Ergebnis abfragen können:"
+#~ msgstr ""
+
+#~ msgid "Registrierungs-Formular"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Unsere Test-Kits bestehen aus einem größeren Röhrchen mit\n"
+#~ "    salzigem Wasser, einem kleinen "
+#~ "Röhrchen mit aufgedrucktem Code, und "
+#~ "einer\n"
+#~ "    Plastik-Pipette."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Wir verteilen diese Kits im Rahmen von Test-Aktionen, z.B. an\n"
+#~ "    alle Mitarbeiter einer Einrichtung. "
+#~ "Nur wer auf solchem Wege ein "
+#~ "Test-Kit\n"
+#~ "    erhalten hat, kann teilnehmen."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Bitte verstehen Sie, dass sich der Aufwand einer Test-Aktion nur\n"
+#~ "    lohnt, wenn wir dadurch eine "
+#~ "größere Zahl Personen testen können. Für"
+#~ "\n"
+#~ "    Einzel-Personen können wir den "
+#~ "test leider nicht anbieten. Wenn Sie "
+#~ "uns aber\n"
+#~ "    helfen möchten, und für eine "
+#~ "größere Gruppe die verteilung von "
+#~ "test-Kits\n"
+#~ "    organisieren möchten, wenden Sie "
+#~ "sich doch mit einem Vorschlag an "
+#~ "uns."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte\n"
+#~ "      versuchen Sie es später oder morgen noch einmal."
+#~ msgstr ""
+
+#~ msgid "Passwort falsch"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Das Passwort stimmt nicht mit dem überein, dass Sie beim\n"
+#~ "    Registrieren der Barcodes gewählt haben."
 #~ msgstr ""
 
