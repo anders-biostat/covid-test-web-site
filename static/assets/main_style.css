@@ -212,6 +212,10 @@ body > div.ui.two.column.centered.grid > div.column {
      }
  }
 
+ small.text-danger{
+    color: #ff0000;
+ }
+
 
 /************************************
  Footer

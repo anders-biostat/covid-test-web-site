@@ -17,8 +17,8 @@
     <script src="{{ url_for('static', filename='style/js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='style/semantic-ui/semantic.min.js') }}"></script>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css'>
-
     {% endif %}
+
     <link
             rel="stylesheet"
             type="text/css"
@@ -61,6 +61,8 @@
 
 {% block consent %} {% endblock %}
 
+
+{% block messages %} {% endblock %}
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}

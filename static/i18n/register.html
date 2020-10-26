@@ -1,5 +1,23 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
 
+{% block messages %}
+
+{% if form.errors|length > 0 %}
+<div class="ui negative message">
+    <div class="header">
+        {% trans %}Fehler{% endtrans %}
+  </div>
+    <ul>
+        {% for field, messages in form.errors.items() %}
+        <li>{{ ', '.join(messages) }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
 <form class="ui form" action="{{ url_for('site.register') }}" method="post">
     {{ form.csrf_token }}
     <h1 class="ui header">
@@ -193,5 +211,8 @@
         left: 0;
         top: 0;
       }
+
+
+
 </style>
 {% endblock %}
