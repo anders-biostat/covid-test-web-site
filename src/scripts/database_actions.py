@@ -6,7 +6,6 @@ from .statuses import SampleStatus
 timezone = pytz.timezone('Europe/Berlin')
 
 def update_status(db, barcode, status, rack=None):
-    status = status.upper().strip()
     sample = db['samples'].find_one({'_id': barcode})
     if sample is None:
         return None
