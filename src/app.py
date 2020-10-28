@@ -18,12 +18,10 @@ from flask_babel import Babel, _
 from forms import RegistrationForm, ResultsQueryForm, ConsentForm, LabQueryForm, LabCheckInForm, LabRackResultsForm, LabProbeEditForm
 import scripts.encryption_helper as encryption_helper
 import scripts.database_actions as database_actions
-
-# Reading the Environemt-Variables from .env file
-env.read_envfile()
+from scripts.statuses import SampleStatus
 
 client = MongoClient()
-DATABASE = env("DATABASE", cast=str, default="covidtest-test")
+DATABASE = 'covidtest'
 db = client[DATABASE]
 
 # Creating RSA Instance for encryption
@@ -32,11 +30,7 @@ rsa_instance = encryption_helper.rsa_instance()
 # file names
 dir = os.path.abspath('')
 
-SUBJECT_DATA_FILENAME = os.path.join(dir, "../data/subjects.csv")
-PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/public.pem")
-HTML_DIRS = os.path.join(dir, "../static/")
 RESULTS_FILENAME = os.path.join(dir, "../data/results.txt")
-NGINX_CONF_FILENAME = os.path.join(dir, "../etc/covid-test.nginx-site-config")
 
 TEMPLATE_DIR = os.path.join(dir, "../static/i18n/")
 STATIC_DIR = os.path.join(dir, "../static/assets/")
@@ -247,20 +241,24 @@ def results_query():
                             if 'results' in sample and len(sample['results']) > 0:
                                 results = sample['results']
                                 latest_result = results[-1]
-                                if latest_result['status'] == 'positive':
-                                    return render_template("pages/test-result-positive.html")
-                                if latest_result['status'] == 'negative':
-                                    return render_template("pages/test-result-negative.html")
-                                if latest_result['status'] == 'rechecking':
-                                    return render_template("pages/test-being-checked.html")
-                                if latest_result['status'] == 'failed':
-                                    return render_template("pages/to-failed.html")
-                                if latest_result['status'] == 'tbd':
-                                    return render_template("pages/test-to-be-determined.html")
+                                if latest_result['status'] == SampleStatus.PCRPOS.value:
+                                    return render_template("pages/test-PCRPOS.html")
+                                if latest_result['status'] == SampleStatus.PCRNEG.value:
+                                    return render_template("pages/test-PCRNEG.html")
+                                if latest_result['status'] == SampleStatus.LAMPPOS.value:
+                                    return render_template("pages/test-LAMPPOS.html")
+                                if latest_result['status'] == SampleStatus.LAMPNEG.value:
+                                    return render_template("pages/test-LAMPNEG.html")
+                                if latest_result['status'] == SampleStatus.LAMPINC.value:
+                                    return render_template("pages/test-LAMPINC.html")
+                                if latest_result['status'] == SampleStatus.UNDEF.value:
+                                    return render_template("pages/test-UNDEF.html")
+                                if latest_result['status'] == SampleStatus.WAIT.value:
+                                    return render_template("pages/test-WAIT.html")
                                 else:
-                                    return render_template("pages/internal-error.html")
+                                    return render_template("pages/test-UNDEF.html")
                             else:
-                                return render_template("pages/test-to-be-determined.html")
+                                return render_template("pages/test-UNDEF.html")
     else:
         return render_template('result-query.html', form=form)
 
