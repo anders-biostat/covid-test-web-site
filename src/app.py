@@ -24,8 +24,11 @@ client = MongoClient()
 DATABASE = 'covidtest'
 db = client[DATABASE]
 
+
 # Creating RSA Instance for encryption
-rsa_instance = encryption_helper.rsa_instance()
+rsa_public_filename = env("RSA_PUBLIC_FILENAME", cast=str, default="public.pem")
+PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/", rsa_public_filename)
+rsa_instance = encryption_helper.rsa_instance(PUBLIC_KEY_FILENAME)
 
 # file names
 dir = os.path.abspath('')
@@ -36,6 +39,8 @@ TEMPLATE_DIR = os.path.join(dir, "../static/i18n/")
 STATIC_DIR = os.path.join(dir, "../static/assets/")
 TRANSLATIONS_DIR = os.path.join(dir, "../translations/")
 timezone = pytz.timezone('Europe/Berlin')
+
+
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.config['SECRET_KEY'] = env("SECRET_KEY", cast=str, default="secret")
@@ -92,7 +97,7 @@ def probe_check_in():
             barcode = form.barcode.data.upper().strip()
             rack = form.rack.data.upper().strip()
 
-            sample = database_actions.update_status(db, barcode, 'WAIT', rack=rack)
+            sample = database_actions.update_status(db, barcode, SampleStatus.WAIT, rack=rack)
             if sample is None:
                 flash(_('Barcode nicht in Datenbank'), 'error')
             else:
@@ -149,6 +154,7 @@ def probe_query():
                         flash(_('Sample rack geupdated'), 'positive')
 
                     if status != '-':
+                        status = SampleStatus[status]
                         new_sample = database_actions.update_status(db, sample['_id'], status, rack=None)
                         if new_sample is not None:
                             flash(_('Status geupdated'), 'positive')
@@ -241,24 +247,28 @@ def results_query():
                             if 'results' in sample and len(sample['results']) > 0:
                                 results = sample['results']
                                 latest_result = results[-1]
-                                if latest_result['status'] == SampleStatus.PCRPOS.value:
+                                latest_status = SampleStatus[latest_result['status']]
+
+                                print(latest_status)
+
+                                if latest_status == SampleStatus.PCRPOS:
                                     return render_template("pages/test-PCRPOS.html")
-                                if latest_result['status'] == SampleStatus.PCRNEG.value:
+                                if latest_status == SampleStatus.PCRNEG:
                                     return render_template("pages/test-PCRNEG.html")
-                                if latest_result['status'] == SampleStatus.LAMPPOS.value:
+                                if latest_status == SampleStatus.LAMPPOS:
                                     return render_template("pages/test-LAMPPOS.html")
-                                if latest_result['status'] == SampleStatus.LAMPNEG.value:
+                                if latest_status == SampleStatus.LAMPNEG:
                                     return render_template("pages/test-LAMPNEG.html")
-                                if latest_result['status'] == SampleStatus.LAMPINC.value:
+                                if latest_status == SampleStatus.LAMPINC:
                                     return render_template("pages/test-LAMPINC.html")
-                                if latest_result['status'] == SampleStatus.UNDEF.value:
+                                if latest_status == SampleStatus.UNDEF:
                                     return render_template("pages/test-UNDEF.html")
-                                if latest_result['status'] == SampleStatus.WAIT.value:
+                                if latest_status == SampleStatus.WAIT:
                                     return render_template("pages/test-WAIT.html")
                                 else:
                                     return render_template("pages/test-UNDEF.html")
-                            else:
-                                return render_template("pages/test-UNDEF.html")
+                            else: # No results list
+                                return render_template("pages/test-WAIT.html")
     else:
         return render_template('result-query.html', form=form)
 
