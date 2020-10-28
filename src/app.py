@@ -24,14 +24,13 @@ client = MongoClient()
 DATABASE = 'covidtest'
 db = client[DATABASE]
 
+# file names
+dir = os.path.abspath('')
 
 # Creating RSA Instance for encryption
 rsa_public_filename = env("RSA_PUBLIC_FILENAME", cast=str, default="public.pem")
 PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/", rsa_public_filename)
 rsa_instance = encryption_helper.rsa_instance(PUBLIC_KEY_FILENAME)
-
-# file names
-dir = os.path.abspath('')
 
 RESULTS_FILENAME = os.path.join(dir, "../data/results.txt")
 
