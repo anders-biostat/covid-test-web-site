@@ -12,23 +12,23 @@ env.read_envfile()
 # public key for encryption
 dir = os.path.abspath('')
 
-rsa_public_filename = env("RSA_PUBLIC_FILENAME", cast=str, default="public.pem")
-PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/", rsa_public_filename)
 
-def rsa_instance():
+def rsa_instance(public_key_file):
     # Read public key for encryption of contact information
-    with open(PUBLIC_KEY_FILENAME, "rb" ) as f:
-        public_key = Crypto.PublicKey.RSA.import_key( f.read() )
-    rsa_instance = Crypto.Cipher.PKCS1_OAEP.new( public_key )
+    with open(public_key_file, "rb") as f:
+        public_key = Crypto.PublicKey.RSA.import_key(f.read())
+    rsa_instance = Crypto.Cipher.PKCS1_OAEP.new(public_key)
 
     # Get fingerprint of public key
     md5_instance = hashlib.md5()
-    md5_instance.update( public_key.publickey().exportKey("DER") )
+    md5_instance.update(public_key.publickey().exportKey("DER"))
     rsa_instance.public_key_fingerprint = md5_instance.hexdigest().encode("ascii")
     return rsa_instance
 
+
 def binary_to_ascii(binary):
     return binascii.b2a_base64(binary, newline=False).decode('ascii')
+
 
 def encrypt_string(string, aes_instance, fmt=str):
     bytes_string = string.encode('utf-8')
@@ -43,6 +43,7 @@ def encrypt_string(string, aes_instance, fmt=str):
     else:
         return encrypted_string
 
+
 def decrypt_string(string, aes_instance, fmt=str):
     decoded = binascii.a2b_base64(string)
     decrypted_bytes = aes_instance.decrypt(decoded)
@@ -54,9 +55,10 @@ def decrypt_string(string, aes_instance, fmt=str):
     else:
         return decrypted_string
 
+
 def encode_subject_data(rsa_instance, barcode, name, address, contact, password):
     # Generate session key for use with AES and encrypt it with RSA
-    session_key = Crypto.Random.get_random_bytes( 16 )
+    session_key = Crypto.Random.get_random_bytes(16)
     encrypted_session_key = rsa_instance.encrypt(session_key)
     aes_instance = Crypto.Cipher.AES.new(session_key, Crypto.Cipher.AES.MODE_CBC)
 
@@ -68,7 +70,7 @@ def encode_subject_data(rsa_instance, barcode, name, address, contact, password)
     name_encrypted = encrypt_string(name, aes_instance)
     address_encrypted = encrypt_string(address, aes_instance)
     contact_encrypted = encrypt_string(contact, aes_instance)
-            
+
     return {
         'barcode': barcode.strip(),
         'time': arrow.now().datetime,
@@ -76,7 +78,7 @@ def encode_subject_data(rsa_instance, barcode, name, address, contact, password)
         'address_encrypted': address_encrypted,
         'contact_encrypted': contact_encrypted,
         'password_hash': binary_to_ascii(password_hash),
-        'key_information' : {
+        'key_information': {
             'public_key_fingerprint': rsa_instance.public_key_fingerprint.decode("ascii"),
             'session_key_encrypted': binary_to_ascii(encrypted_session_key),
             'aes_instance_iv': binary_to_ascii(aes_instance.iv)
