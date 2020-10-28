@@ -1,20 +1,9 @@
 import arrow
 from bson.codec_options import CodecOptions
 import pytz
+from .statuses import SampleStatus
 
 timezone = pytz.timezone('Europe/Berlin')
-
-STATUS_DICT = {
-    'PRINTED': 'PRINTED',
-    'WAIT': 'WAIT',
-    'LAMPPOS': 'LAMPPOS',
-    'LAMPINC': 'LAMPINC',
-    'NEG': 'NEG',
-    'PCRPOS': 'PCRPOS',
-    'PCRNEG': 'PCRNEG',
-    'UNDEF': 'UNDEF',
-    '': 'WAIT',
-}
 
 def update_status(db, barcode, status, rack=None):
     status = status.upper().strip()
@@ -44,11 +33,11 @@ def update_status(db, barcode, status, rack=None):
         results = sample['results']
         if len(results) > 0:
             last_result = results[-1]
-            if 'status' in last_result and last_result['status'] == STATUS_DICT[status]:
+            if 'status' in last_result and last_result['status'] == status.value:
                 update = False
 
     status_doc = {
-        'status': STATUS_DICT[status],
+        'status': status.value,
         'updated_time': arrow.now().datetime,
     }
 
@@ -77,11 +66,11 @@ def rack_results(db, rack, lamp_positive, lamp_inconclusive):
 
     if rack_samples is not None:
         for sample in rack_samples:
-            sample_status_new = "negative"
+            sample_status_new = SampleStatus.LAMPPOS.value
             if sample['_id'] in lamp_inconclusive:
-                sample_status_new = "lampinc"
+                sample_status_new = SampleStatus.LAMPINC.value
             if sample['_id'] in lamp_positive:
-                sample_status_new = "lamppos"
+                sample_status_new = SampleStatus.LAMPPOS.value
 
             update_items = {
                 '$setOnInsert': {'_id': sample['_id'], 'results': []},
@@ -98,7 +87,7 @@ def rack_results(db, rack, lamp_positive, lamp_inconclusive):
             results = sample['results']
             if len(results) > 0:
                 last_result = results[-1]
-                if last_result['status'] != "wait":
+                if last_result['status'] != SampleStatus.WAIT.value:
                     wrong_status_sequence.append(sample['_id'])
                 if 'status' in last_result and last_result['status'] == sample_status_new:
                     update = False
