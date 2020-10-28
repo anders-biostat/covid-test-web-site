@@ -34,7 +34,7 @@
         Link abfragen:{% endtrans %}
     </p>
     <p>
-        <code class="url"><a href="{{ request.url_root + url_for('site.results_query', _external=True) }}"
+        <code class="url"><a href="{{ url_for('site.results_query', _external=True) }}"
         >{{ url_for('site.results_query', _external=True) }}</a></code>
     </p>
     <p>
