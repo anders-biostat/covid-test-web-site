@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block content %}
+<div class="ui segment content">
+  <p>
+    {% trans %}In Ihrer Probe konnte das Coronavirus SARS-CoV-2
+    <strong> nicht </strong> nachgewiesen werden. Vermutlich sind Sie also nicht
+    mit Covid-19 infiziert.{% endtrans %}
+  </p>
+  <p><strong>{% trans %}Bedenken Sie aber:{% endtrans %}</strong></p>
+  <ul>
+    <li>
+      {% trans %}Selbst, wenn Ihre Probe wirklich keinen Virus enthielt:
+      Vielleicht war das Virus nicht in Ihrem Speichel, aber anderswo im Körper.
+      Oder Sie haben sich in den letzten Tagen angesteckt, erst nachdem Sie die
+      Probe abgegeben haben. Oder Sie treffen morgen jemanden, der Sie
+      ansteckt.{% endtrans %}
+    </li>
+  </ul>
+  <p>
+    {% trans %}<b>Daher:</b> Seien Sie weiterhin vorsichtig. Halten Sie Abstand
+    zu anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten Sie
+    weiterhin alle Regelungen zur vermeidung von Ansteckungen.{% endtrans %}
+  </p>
+</div>
+{% endblock %}
