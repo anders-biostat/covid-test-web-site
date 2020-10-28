@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 
-{% include 'labviews/menu.html' %}
+{% include 'lab/menu.html' %}
 
 
 <div class="ui segment content">
-    <h1 class="ui header centered">{% trans %}Lab Interface - Query{% endtrans %}</h1>
+    <h1 class="ui header">{% trans %}Lab Interface - Suche{% endtrans %}</h1>
     <p>
         {% trans %}
         Hier können Barcodes gesucht werden:
@@ -29,7 +29,7 @@
 
 
     {% if sample %}
-        {% include 'labviews/probe.html' %}
+        {% include 'lab/probe.html' %}
     {% elif search %}
     <div class="ui warning message">
         <p>{% trans %}Keine Probe mit diesem Barcode gefunden.{% endtrans %}</p>

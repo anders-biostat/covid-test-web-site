@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-26 14:31+0100\n"
+"POT-Creation-Date: 2020-10-28 13:00+0100\n"
 "PO-Revision-Date: 2020-10-07 17:01+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
@@ -100,7 +100,7 @@ msgid "Passwörter müssen übereinstimmen"
 msgstr ""
 
 #: ../src/forms.py:32 ../src/forms.py:35 ../src/forms.py:42
-#: ../static/i18n/labviews/probe.html:42
+#: ../static/i18n/lab/probe.html:42
 msgid "Rack"
 msgstr ""
 
@@ -146,8 +146,7 @@ msgstr ""
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr ""
 
-#: ../static/i18n/consent.html:27
-#: ../static/i18n/labviews/probe_rack_results.html:73
+#: ../static/i18n/consent.html:27 ../static/i18n/lab/probe_rack_results.html:73
 #: ../static/i18n/result-query.html:51
 msgid "Zurück"
 msgstr ""
@@ -777,11 +776,11 @@ msgstr ""
 msgid "Ergebnis anzeigen"
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:6
+#: ../static/i18n/lab/home.html:6
 msgid "Lab Interface - Home"
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:8
+#: ../static/i18n/lab/home.html:8
 msgid ""
 "\n"
 "        Dies ist das Laborinterface, um Datensätze der Testungen zu "
@@ -789,11 +788,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:14 ../static/i18n/labviews/menu.html:9
+#: ../static/i18n/lab/home.html:14 ../static/i18n/lab/menu.html:9
 msgid "Probeneingang"
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:17
+#: ../static/i18n/lab/home.html:17
 msgid ""
 "\n"
 "            Hier werden nach dem Empfang der Probe die Probenröhrchen den"
@@ -805,11 +804,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:25 ../static/i18n/labviews/menu.html:13
+#: ../static/i18n/lab/home.html:25 ../static/i18n/lab/menu.html:13
 msgid "Rack editieren"
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:28
+#: ../static/i18n/lab/home.html:28
 msgid ""
 "\n"
 "            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu"
@@ -822,11 +821,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:37 ../static/i18n/labviews/menu.html:17
+#: ../static/i18n/lab/home.html:37 ../static/i18n/lab/menu.html:17
 msgid "Probe suchen"
 msgstr ""
 
-#: ../static/i18n/labviews/home.html:40
+#: ../static/i18n/lab/home.html:40
 msgid ""
 "\n"
 "            Hier können einzelne Proberöhrchen gesucht werden und der "
@@ -834,68 +833,67 @@ msgid ""
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/probe.html:3
+#: ../static/i18n/lab/probe.html:3
 msgid "Barcode: "
 msgstr ""
 
-#: ../static/i18n/labviews/probe.html:11
-#: ../static/i18n/labviews/probe_check_in.html:106
+#: ../static/i18n/lab/probe.html:11 ../static/i18n/lab/probe_check_in.html:106
 msgid "Historie"
 msgstr ""
 
-#: ../static/i18n/labviews/probe.html:38
+#: ../static/i18n/lab/probe.html:38
 msgid "Status der Probe"
 msgstr ""
 
-#: ../static/i18n/labviews/probe.html:47
+#: ../static/i18n/lab/probe.html:47
 msgid "Speichern"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_check_in.html:61
+#: ../static/i18n/lab/probe_check_in.html:61
 msgid "Lab Interface - Proben registrieren"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_check_in.html:63
+#: ../static/i18n/lab/probe_check_in.html:63
 msgid ""
 "\n"
 "        Hier können Barcodes als eingegangen markiert werden:\n"
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/probe_check_in.html:95
-#: ../static/i18n/labviews/probe_query.html:27
+#: ../static/i18n/lab/probe_check_in.html:95
+#: ../static/i18n/lab/probe_query.html:27
 msgid "Ergebnis für: "
 msgstr ""
 
-#: ../static/i18n/labviews/probe_check_in.html:129
-#: ../static/i18n/labviews/probe_rack_results.html:81
+#: ../static/i18n/lab/probe_check_in.html:129
+#: ../static/i18n/lab/probe_rack_results.html:81
 msgid "Barcode nicht gefunden."
 msgstr ""
 
-#: ../static/i18n/labviews/probe_query.html:7
+#: ../static/i18n/lab/probe_query.html:7
 msgid "Lab Interface - Query"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_query.html:9
+#: ../static/i18n/lab/probe_query.html:9
 msgid ""
 "\n"
 "        Hier können Barcodes gesucht werden:\n"
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/probe_query.html:19
+#: ../static/i18n/lab/probe_query.html:19
 msgid "Search Barcode..."
 msgstr ""
 
-#: ../static/i18n/labviews/probe_query.html:35
+#: ../static/i18n/lab/probe_query.html:35
 msgid "Keine Probe mit diesem Barcode gefunden."
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:35
+#: ../static/i18n/lab/probe_rack_results.html:35
 msgid "Lab Interface - Testergebnisse registrieren (Rack)"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:37
+#: ../static/i18n/lab/probe_rack_results.html:37
 msgid ""
 "\n"
 "        Hier können die Testergebnisse registriert werden. Der Normalfall"
@@ -905,29 +903,29 @@ msgid ""
 "        "
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:55
+#: ../static/i18n/lab/probe_rack_results.html:55
 msgid ""
 "Nachfolgend die Barcodes der jeweils positiven / unklaren Proben "
 "(zeilenweise separiert)"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:59
+#: ../static/i18n/lab/probe_rack_results.html:59
 msgid "Positive LAMP Proben (Barcodes)"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:60
+#: ../static/i18n/lab/probe_rack_results.html:60
 msgid "Positive Proben (Barcodes)"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:66
+#: ../static/i18n/lab/probe_rack_results.html:66
 msgid "Unklare LAMP Proben (Barcodes)"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:67
+#: ../static/i18n/lab/probe_rack_results.html:67
 msgid "Unklare Proben (Barcodes)"
 msgstr ""
 
-#: ../static/i18n/labviews/probe_rack_results.html:74
+#: ../static/i18n/lab/probe_rack_results.html:74
 msgid "Abschicken"
 msgstr ""
 
@@ -2833,5 +2831,185 @@ msgstr ""
 #~ msgid ""
 #~ "Das Passwort stimmt nicht mit dem überein, dass Sie beim\n"
 #~ "    Registrieren der Barcodes gewählt haben."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
+#~ "<ol class=\"ui list\">\n"
+#~ "    <li> Sie sollten ein Teströhrchen"
+#~ " (kleiner Plastikbecher mit Schraubverschluss)"
+#~ " erhalten haben. Es enthält etwas\n"
+#~ "        salziges Wasser. (5 ml reines Wasser mit 0.9%% Kochsalz.)\n"
+#~ "    </li>\n"
+#~ "    <li> Zunächst sollten Sie nun "
+#~ "diese Informationen hier lesen und, wenn"
+#~ " Sie mit allem einverstanden sind, am"
+#~ " Ende der\n"
+#~ "        Seite mit einem Mausklick "
+#~ "bestätigen, dass Sie teilnehmen möchten.\n"
+#~ ""
+#~ "    </li>\n"
+#~ "    <li> Auf der nächsten Seite "
+#~ "werden wir Sie dann bitten, Ihre "
+#~ "Kontaktdaten anzugeben (damit das "
+#~ "Gesundheitsamt Sie\n"
+#~ "        erreichen kann, falls Sie "
+#~ "infiziert sein sollten), sowie den Code,"
+#~ " der auf Ihrem Teströhrchen aufgeklebt "
+#~ "ist.\n"
+#~ "        Ihr Name und Ihre Kontaktdaten"
+#~ " werden verschlüsselt so abgespeichert, "
+#~ "dass sie uns (dem Team der "
+#~ "Universität\n"
+#~ "        Heidelberg) nicht zugänglich sind, "
+#~ "sondern nur dem Gesundheitsamt, das den"
+#~ " Versuch mit betreut.\n"
+#~ "    </li>\n"
+#~ "    <li> Dann sehen Sie sich bitte"
+#~ " <a href=\"https://www.youtube.com/watch?v=hVniPRMuCjo\">ein"
+#~ " kurzes Video</a> an, dass\n"
+#~ "        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
+#~ "    </li>\n"
+#~ "    <li> Nun spucken Sie in das"
+#~ " Teströhrchen, genau wie im Video "
+#~ "gezeigt.</li>\n"
+#~ "    <li> Schließlich senden Sie uns "
+#~ "das Röhrchen per Post zu oder "
+#~ "geben es an einer Sammelstelle ab. "
+#~ "Instruktionen\n"
+#~ "        finden Sie auf der Webseite.\n"
+#~ "    </li>\n"
+#~ "</ol>\n"
+#~ "<p><b> Zeitaufwand: </b> Insgesamt sollte "
+#~ "Sie das in etwa 15-25 Minuten "
+#~ "Ihrer Zeit kosten. (Wenn Sie das "
+#~ "Video schon\n"
+#~ "    kennen, etwas weniger, und wenn "
+#~ "ihr nächste Briefkasten ein weiter Weg"
+#~ " ist, etwas mehr.) </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
+#~ "<ol class=\"ui list\">\n"
+#~ "    <li> Sie sollten ein Teströhrchen"
+#~ " (kleiner Plastikbecher mit Schraubverschluss)"
+#~ " erhalten haben. Es enthält etwas\n"
+#~ "        salziges Wasser. (5 ml reines Wasser mit 0.9% Kochsalz.)\n"
+#~ "    </li>\n"
+#~ "    <li> Zunächst sollten Sie nun "
+#~ "diese Informationen hier lesen und, wenn"
+#~ " Sie mit allem einverstanden sind, am"
+#~ " Ende der\n"
+#~ "        Seite mit einem Mausklick "
+#~ "bestätigen, dass Sie teilnehmen möchten.\n"
+#~ ""
+#~ "    </li>\n"
+#~ "    <li> Auf der nächsten Seite "
+#~ "werden wir Sie dann bitten, Ihre "
+#~ "Kontaktdaten anzugeben (damit das "
+#~ "Gesundheitsamt Sie\n"
+#~ "        erreichen kann, falls Sie "
+#~ "infiziert sein sollten), sowie den Code,"
+#~ " der auf Ihrem Teströhrchen aufgeklebt "
+#~ "ist.\n"
+#~ "        Ihr Name und Ihre Kontaktdaten"
+#~ " werden verschlüsselt so abgespeichert, "
+#~ "dass sie uns (dem Team der "
+#~ "Universität\n"
+#~ "        Heidelberg) nicht zugänglich sind, "
+#~ "sondern nur dem Gesundheitsamt, das den"
+#~ " Versuch mit betreut.\n"
+#~ "    </li>\n"
+#~ "    <li> Dann sehen Sie sich bitte"
+#~ " <a href=\"https://www.youtube.com/watch?v=hVniPRMuCjo\">ein"
+#~ " kurzes Video</a> an, dass\n"
+#~ "        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
+#~ "    </li>\n"
+#~ "    <li> Nun spucken Sie in das"
+#~ " Teströhrchen, genau wie im Video "
+#~ "gezeigt.</li>\n"
+#~ "    <li> Schließlich senden Sie uns "
+#~ "das Röhrchen per Post zu oder "
+#~ "geben es an einer Sammelstelle ab. "
+#~ "Instruktionen\n"
+#~ "        finden Sie auf der Webseite.\n"
+#~ "    </li>\n"
+#~ "</ol>\n"
+#~ "<p><b> Zeitaufwand: </b> Insgesamt sollte "
+#~ "Sie das in etwa 15-25 Minuten "
+#~ "Ihrer Zeit kosten. (Wenn Sie das "
+#~ "Video schon\n"
+#~ "    kennen, etwas weniger, und wenn "
+#~ "ihr nächste Briefkasten ein weiter Weg"
+#~ " ist, etwas mehr.) </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h3 class=\"ui header\"> Was bedeutet "
+#~ "es, wenn wir in Ihrer Probe kein"
+#~ " Virus finden? </h3>\n"
+#~ "<p> Sie können das Ergebnis auch "
+#~ "selbst auf nachfolgender Webseite abfragen."
+#~ " Auch wenn es negativ sein sollte "
+#~ "(kein\n"
+#~ "    Virus nachgewiesen), ist das aber"
+#~ " keine völlige Entwarnung! Bedenken Sie "
+#~ "bitte, dass unser Test nicht perfekt "
+#~ "ist\n"
+#~ "    und vielleicht (grob geschätzt) nur"
+#~ " 60-80%% der Infektionen erkennt. Außerdem:"
+#~ " auch wenn Sie im Moment der\n"
+#~ "    Speichelprobe nicht infiziert waren, "
+#~ "heißt das nicht, dass Sie sich "
+#~ "nicht vielleicht schon kurze Zeit später"
+#~ "\n"
+#~ "    infiziert haben könnten. Oder Sie"
+#~ " hatten sich bereits kurz vorher "
+#~ "infiziert, aber das Virus hatte sich "
+#~ "noch nicht\n"
+#~ "    hinreichend vermehrt, um in ihrem"
+#~ " Speichel nachweisbar zu sein. </p>\n"
+#~ "<p> Solange das Virus im Umlauf "
+#~ "ist, müssen wir alle stets vorsichtig"
+#~ " sein, und alle Hygiene- und "
+#~ "Abstandsregeln\n"
+#~ "    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "<h3 class=\"ui header\"> Was bedeutet "
+#~ "es, wenn wir in Ihrer Probe kein"
+#~ " Virus finden? </h3>\n"
+#~ "<p> Sie können das Ergebnis auch "
+#~ "selbst auf nachfolgender Webseite abfragen."
+#~ " Auch wenn es negativ sein sollte "
+#~ "(kein\n"
+#~ "    Virus nachgewiesen), ist das aber"
+#~ " keine völlige Entwarnung! Bedenken Sie "
+#~ "bitte, dass unser Test nicht perfekt "
+#~ "ist\n"
+#~ "    und vielleicht (grob geschätzt) nur"
+#~ " 60-80% der Infektionen erkennt. Außerdem:"
+#~ " auch wenn Sie im Moment der\n"
+#~ "    Speichelprobe nicht infiziert waren, "
+#~ "heißt das nicht, dass Sie sich "
+#~ "nicht vielleicht schon kurze Zeit später"
+#~ "\n"
+#~ "    infiziert haben könnten. Oder Sie"
+#~ " hatten sich bereits kurz vorher "
+#~ "infiziert, aber das Virus hatte sich "
+#~ "noch nicht\n"
+#~ "    hinreichend vermehrt, um in ihrem"
+#~ " Speichel nachweisbar zu sein. </p>\n"
+#~ "<p> Solange das Virus im Umlauf "
+#~ "ist, müssen wir alle stets vorsichtig"
+#~ " sein, und alle Hygiene- und "
+#~ "Abstandsregeln\n"
+#~ "    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
 #~ msgstr ""
 

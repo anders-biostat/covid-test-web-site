@@ -86,11 +86,11 @@ def dashboard():
     }
     return render_template('pages/dashboard.html', stats=stats)
 
-@bp.route('/labview', methods=['GET'])
+@bp.route('/lab', methods=['GET'])
 def labview_home():
-    return render_template('labviews/home.html')
+    return render_template('lab/home.html')
 
-@bp.route('/labview/check_in', methods=['GET', 'POST'])
+@bp.route('/lab/check_in', methods=['GET', 'POST'])
 def probe_check_in():
     form = LabCheckInForm()
     if request.method == 'POST':
@@ -103,10 +103,10 @@ def probe_check_in():
                 flash(_('Barcode nicht in Datenbank'), 'error')
             else:
                 flash(_('Probe erfolgreich eingetragen'), 'positive')
-            return render_template('labviews/probe_check_in.html', form=form, sample=sample, rack=rack)
-    return render_template('labviews/probe_check_in.html', form=form, display_sample=False)
+            return render_template('lab/probe_check_in.html', form=form, sample=sample, rack=rack)
+    return render_template('lab/probe_check_in.html', form=form, display_sample=False)
 
-@bp.route('/labview/rack', methods=['GET', 'POST'])
+@bp.route('/lab/rack', methods=['GET', 'POST'])
 def probe_rack():
     form = LabRackResultsForm()
     if request.method == 'POST':
@@ -125,23 +125,21 @@ def probe_rack():
             else:
                 for barcode in wrong_status_sequence:
                     flash(_('Falsche Statusfolge: ') + str(barcode), 'warning')
-            return render_template('labviews/probe_rack_results.html', form=form)
-    return render_template('labviews/probe_rack_results.html', form=form)
+            return render_template('lab/probe_rack_results.html', form=form)
+    return render_template('lab/probe_rack_results.html', form=form)
 
-@bp.route('/labview/query', methods=['GET', 'POST'])
+@bp.route('/lab/query', methods=['GET', 'POST'])
 def probe_query():
     form = LabQueryForm()
     edit_form = LabProbeEditForm()
     if request.method == 'POST':
         if 'search' in request.form:
-            print('search 123123')
             if form.validate_on_submit():
                 samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
                 search = form.search.data.upper().strip()
                 sample = samples.find_one({'_id': search})
-                return render_template('labviews/probe_query.html', form=form, edit_form=edit_form, sample=sample, search=search)
+                return render_template('lab/probe_query.html', form=form, edit_form=edit_form, sample=sample, search=search)
         if 'edit' in request.form:
-            print('edit 123123')
             if edit_form.validate_on_submit():
                 samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
                 barcode = edit_form.barcode.data.upper().strip()
@@ -162,9 +160,9 @@ def probe_query():
                             flash(_('Status geupdated'), 'positive')
                     else:
                         new_sample = sample
-                return render_template('labviews/probe_query.html', form=form, edit_form=edit_form, sample=new_sample)
+                return render_template('lab/probe_query.html', form=form, edit_form=edit_form, sample=new_sample)
 
-    return render_template('labviews/probe_query.html', form=form, edit_form=edit_form)
+    return render_template('lab/probe_query.html', form=form, edit_form=edit_form)
 
 @bp.route('/favicon.ico', methods=['GET'])
 def favicon():
