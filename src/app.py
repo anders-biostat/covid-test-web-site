@@ -163,14 +163,6 @@ def probe_query():
 
     return render_template('lab/probe_query.html', form=form, edit_form=edit_form)
 
-@bp.route('/favicon.ico', methods=['GET'])
-def favicon():
-    return ""
-
-@bp.route('/apple-touch-icon/', methods=['GET'])
-def touch_icon():
-    return ""
-
 
 @bp.route('/instructions', methods=['GET'])
 def instructions():
