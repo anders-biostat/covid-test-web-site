@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'lab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'covidtest',
+        'NAME': 'covidtest-django',
     }
 }
 
