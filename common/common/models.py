@@ -3,12 +3,6 @@ import datetime
 
 mongoengine.connect('covidtest')
 
-class KeyInformation(mongoengine.Document):
-    public_key_fingerprint = mongoengine.StringField(null=True)
-    session_key_encrypted = mongoengine.StringField(null=True)
-    aes_instance_iv = mongoengine.StringField(null=True)
-
-
 class Registration(mongoengine.EmbeddedDocument):
     barcode = mongoengine.StringField(null=True)
     time = mongoengine.DateTimeField(null=True)
@@ -16,7 +10,9 @@ class Registration(mongoengine.EmbeddedDocument):
     address_encrypted = mongoengine.StringField(null=True)
     contact_encrypted = mongoengine.StringField(null=True)
     password_hash = mongoengine.StringField(null=True)
-    key_information = mongoengine.ReferenceField(KeyInformation, reverse_delete_rule=mongoengine.DO_NOTHING)
+    public_key_fingerprint = mongoengine.StringField(null=True)
+    session_key_encrypted = mongoengine.StringField(null=True)
+    aes_instance_iv = mongoengine.StringField(null=True)
 
 
 class Event(mongoengine.EmbeddedDocument):
