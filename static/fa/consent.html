@@ -1,0 +1,37 @@
+<!--# include file="header-page.html" -->
+  <div class="container2">
+      <h2>شرکت در آزمایش سریع تشخیص کروناویروس ۲</h2>
+      <div class="scroll-box">
+      <!--# include file="information-text.html" -->
+      </div>
+     <form method="GET">
+        <div>
+            <input type="checkbox" id="TOC" value="1" onclick="EnableSubmit(this)" />
+            <label for="terms_and_conditions">من اطلاعاتی که در بالا آمده‌است را خوانده‌ام و علاقه‌مندم که در این آزمایش شرکت کنم‫.‬</label>
+        </div>
+     </form>
+     <div>
+        <a href="index.html" id="closeform" class="button-small">بازگشت</a>
+        <a href="form.html" type="submit" id="showForm" class="button-small disabled" disabled>ادامه</a>
+     </div>
+   </div>
+   <!--# include file="footer-page.html" -->
+
+
+   <script>
+     function EnableSubmit(termsCheckBox){
+         //If the checkbox has been checked
+         if(termsCheckBox.checked){
+             //Set the disabled property to FALSE and enable the button.
+             document.getElementById("showForm").disabled = false;
+             document.getElementById("showForm").classList.remove("disabled");
+         } else{
+             //Otherwise, disable the submit button.
+             document.getElementById("showForm").disabled = true;
+             document.getElementById("showForm").classList.add("disabled");
+         }
+     }
+   </script>
+
+  </body>
+</html>
