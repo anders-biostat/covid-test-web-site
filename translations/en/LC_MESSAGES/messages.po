@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-28 13:00+0100\n"
+"POT-Creation-Date: 2020-10-29 23:19+0100\n"
 "PO-Revision-Date: 2020-10-28 13:00+0100\n"
 "Last-Translator: \n"
 "Language: en\n"
@@ -18,62 +18,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: ../src/app.py:103
+#: ../lab/labview/forms.py:7 ../lab/labview/forms.py:11
+#: ../lab/labview/forms.py:25 ../src/forms.py:12 ../src/forms.py:24
+#: ../src/forms.py:28 ../src/forms.py:31 ../src/forms.py:41
+msgid "Barcode"
+msgstr "Barcode"
+
+#: ../lab/labview/forms.py:13 ../lab/labview/forms.py:17
+#: ../lab/labview/forms.py:26 ../src/forms.py:32 ../src/forms.py:35
+#: ../src/forms.py:42 ../static/i18n/lab/probe.html:42
+msgid "Rack"
+msgstr "Rack"
+
+#: ../lab/labview/forms.py:19 ../src/forms.py:37
+msgid "LAMP positiv"
+msgstr "LAMP positive"
+
+#: ../lab/labview/forms.py:20 ../src/forms.py:38
+msgid "LAMP unklares Ergebnis"
+msgstr "LAMP inconclusive result"
+
+#: ../lab/labview/forms.py:28 ../src/forms.py:44
+msgid "Probenstatus"
+msgstr "Probe status"
+
+#: ../lab/labview/views.py:28
 msgid "Barcode nicht in Datenbank"
 msgstr "Barcode not in database"
 
-#: ../src/app.py:105
-msgid "Probe erfolgreich eingetragen"
-msgstr "Sample added successfully"
+#: ../lab/labview/views.py:32
+msgid "Rack erfolgreich eingetragen"
+msgstr ""
 
-#: ../src/app.py:124
-msgid "Keine Barcodes zu Rack gefunden"
-msgstr "No barcodes found for rack"
+#: ../lab/labview/views.py:35
+msgid "Event erfolgreich hinzugefügt"
+msgstr ""
 
-#: ../src/app.py:127
-msgid "Falsche Statusfolge: "
-msgstr "Incorrect status sequence: "
+#: ../lab/labview/views.py:69
+msgid "Status konnte nicht gesetzt werden: "
+msgstr ""
 
-#: ../src/app.py:153
-msgid "Sample nicht gefunden"
-msgstr "Sample not found"
+#: ../lab/labview/views.py:72
+msgid "Ergebnisse hinzugefügt: "
+msgstr ""
 
-#: ../src/app.py:157
+#: ../lab/labview/views.py:74
+msgid "Keine Proben zu Rack gefunden"
+msgstr ""
+
+#: ../lab/labview/views.py:97
+msgid "Sample nicht gefunde"
+msgstr ""
+
+#: ../lab/labview/views.py:101
 msgid "Sample rack geupdated"
 msgstr "Sample rack updated"
 
-#: ../src/app.py:162
+#: ../lab/labview/views.py:109
 msgid "Status geupdated"
 msgstr "Status updated"
 
-#: ../src/app.py:195
+#: ../src/app.py:86
 msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
 msgstr "You must first agree to participate in order to continue"
 
-#: ../src/app.py:228 ../src/app.py:300
+#: ../src/app.py:122 ../src/app.py:196
 msgid "Der Barcode ist unbekannt. Bitte erneut versuchen."
 msgstr "This barcode is unknown. Please try again."
 
-#: ../src/app.py:232 ../src/app.py:241
+#: ../src/app.py:129
 msgid ""
 "Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode "
 "vorher"
 msgstr "This barcode is not registered. Please register the barcode."
 
-#: ../src/app.py:246
+#: ../src/app.py:135
 msgid ""
 "Das Passwort stimmt nicht mit dem überein, dass Sie beim Registrieren der"
 " Barcodes gewählt haben. Bitte versuchen Sie es noch einmal."
 msgstr "Passwords did not match. Please try again."
 
+#: ../src/app.py:217
+msgid "Erfolgreich registriert"
+msgstr ""
+
 #: ../src/forms.py:8
 msgid "Einverständnis"
 msgstr "Consent"
-
-#: ../src/forms.py:12 ../src/forms.py:24 ../src/forms.py:28 ../src/forms.py:31
-#: ../src/forms.py:41
-msgid "Barcode"
-msgstr "Barcode"
 
 #: ../src/forms.py:13
 msgid "Name"
@@ -98,23 +129,6 @@ msgstr "Repeat password"
 #: ../src/forms.py:19
 msgid "Passwörter müssen übereinstimmen"
 msgstr "Passwords must match"
-
-#: ../src/forms.py:32 ../src/forms.py:35 ../src/forms.py:42
-#: ../static/i18n/lab/probe.html:42
-msgid "Rack"
-msgstr "Rack"
-
-#: ../src/forms.py:37
-msgid "LAMP positiv"
-msgstr "LAMP positive"
-
-#: ../src/forms.py:38
-msgid "LAMP unklares Ergebnis"
-msgstr "LAMP inconclusive result"
-
-#: ../src/forms.py:44
-msgid "Probenstatus"
-msgstr "Probe status"
 
 #: ../static/i18n/base.html:5
 msgid ""
@@ -1193,8 +1207,8 @@ msgid "Barcode nicht gefunden."
 msgstr "Barcode not found."
 
 #: ../static/i18n/lab/probe_query.html:7
-msgid "Lab Interface - Query"
-msgstr "Lab Interface - Query"
+msgid "Lab Interface - Suche"
+msgstr ""
 
 #: ../static/i18n/lab/probe_query.html:9
 msgid ""
@@ -1446,11 +1460,11 @@ msgid ""
 "    noch einmal."
 msgstr "Please go back and try again."
 
-#: ../static/i18n/pages/test-being-checked.html:3
+#: ../static/i18n/pages/test-LAMPINC.html:3
 msgid "Ooops, das Ergebnis liegt noch nicht vor... "
 msgstr "Ooops, something went wrong... "
 
-#: ../static/i18n/pages/test-being-checked.html:5
+#: ../static/i18n/pages/test-LAMPINC.html:5
 msgid ""
 "Das tut uns sehr leid! Leider haben wir immer einen kleinen\n"
 "    Bruchteil der Proben mit nicht eindeutigen Ergebnissen."
@@ -1458,7 +1472,7 @@ msgstr ""
 "We are very sorry for this! Unfortunately, we always have a small "
 "fraction of samples with inconclusive results."
 
-#: ../static/i18n/pages/test-being-checked.html:9
+#: ../static/i18n/pages/test-LAMPINC.html:9
 msgid ""
 "Dies sind meist falsch-positive Ergebnisse. Um dies zu\n"
 "    überprüfen, analysieren wir diese Proben erneut mittels RT-qPCR, um "
@@ -1478,34 +1492,12 @@ msgstr ""
 "among the ones that are being retested in order to obtain a conclusive "
 "result."
 
-#: ../static/i18n/pages/test-being-checked.html:18
+#: ../static/i18n/pages/test-LAMPINC.html:18
 msgid "Bleiben Sie dran, wir tun unser Bestes."
 msgstr "Stay tuned, we are doing our best."
 
-#: ../static/i18n/pages/test-failed.html:3
-msgid "Test fehlgeschlagen"
-msgstr "Test Failed"
-
-#: ../static/i18n/pages/test-failed.html:5
-msgid ""
-"Bei der Analyse Ihrer Probe ist ein technisches Problem\n"
-"    aufgetreten. Wir konnten Ihre Probe daher nicht auswerten und können "
-"Ihnen\n"
-"    kein Ergebnis mitteilen. Tut uns leid."
-msgstr ""
-"Due to a technical problem, we could not complete the analysis of your "
-"sample, and hence, we cannot report a result. We are sorry."
-
-#: ../static/i18n/pages/test-failed.html:10
-msgid ""
-"Bitte geben Sie bei nächster Gelegenheit eine neue Probe ab.\n"
-"    Derartige Probleme sind die Ausnahme, und das nächste Mal klappt es\n"
-"    bestimmt."
-msgstr ""
-"Please hand in a new sample at the enxt opportunity. Technical problems "
-"are rare, and we are confident that it will work out next time."
-
-#: ../static/i18n/pages/test-result-negative.html:4
+#: ../static/i18n/pages/test-LAMPNEG.html:4
+#: ../static/i18n/pages/test-PCRNEG.html:4
 msgid ""
 "In Ihrer Probe konnte das Coronavirus SARS-CoV-2\n"
 "    <strong> nicht </strong> nachgewiesen werden. Vermutlich sind Sie "
@@ -1515,11 +1507,12 @@ msgstr ""
 "The CoVID-19 coronavirus SARS-CoV-2 was <strong> not </strong> detected "
 "in your sample. You are most likely not infected."
 
-#: ../static/i18n/pages/test-result-negative.html:8
+#: ../static/i18n/pages/test-LAMPNEG.html:8
+#: ../static/i18n/pages/test-PCRNEG.html:8
 msgid "Bedenken Sie aber:"
 msgstr "<strong> However </strong>, please keep in mind:"
 
-#: ../static/i18n/pages/test-result-negative.html:11
+#: ../static/i18n/pages/test-LAMPNEG.html:11
 msgid ""
 "Unser Test ist nicht perfekt und nicht so genau wie der\n"
 "      \"offizielle\" PCR-Test. Daher kommt es vor, dass der Test "
@@ -1529,7 +1522,8 @@ msgstr ""
 "Our test is not perfect and not as sensitive as the “official” PCR test. "
 "It might miss some infections."
 
-#: ../static/i18n/pages/test-result-negative.html:17
+#: ../static/i18n/pages/test-LAMPNEG.html:17
+#: ../static/i18n/pages/test-PCRNEG.html:11
 msgid ""
 "Selbst, wenn Ihre Probe wirklich keinen Virus enthielt:\n"
 "      Vielleicht war das Virus nicht in Ihrem Speichel, aber anderswo im "
@@ -1542,7 +1536,8 @@ msgstr ""
 "The virus might not have been detected in your saliva, but may reside "
 "somewhere else in your body."
 
-#: ../static/i18n/pages/test-result-negative.html:25
+#: ../static/i18n/pages/test-LAMPNEG.html:25
+#: ../static/i18n/pages/test-PCRNEG.html:19
 msgid ""
 "<b>Daher:</b> Seien Sie weiterhin vorsichtig. Halten Sie Abstand\n"
 "    zu anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten"
@@ -1553,7 +1548,7 @@ msgstr ""
 "mask in public spaces and continue to observe all rules and regulations "
 "to minimize the risk of infection."
 
-#: ../static/i18n/pages/test-result-positive.html:4
+#: ../static/i18n/pages/test-PCRPOS.html:4
 msgid ""
 "\n"
 "    <strong>Ihre Probe war <span>positiv</span>. Das heisst, das in Ihrer"
@@ -1567,7 +1562,7 @@ msgstr ""
 "SARS-CoV-2 was detected in your sample and you are most likely "
 "infected.</strong>"
 
-#: ../static/i18n/pages/test-result-positive.html:10
+#: ../static/i18n/pages/test-PCRPOS.html:10
 msgid ""
 "Bitte bleiben Sie zu Hause und vermeiden Sie jeglichen Kontakt zu\n"
 "    anderen. Wenn Sie ärztlichen Rat wünschen, wenden Sie sich bitte (per"
@@ -1577,7 +1572,7 @@ msgstr ""
 "Please stay at home and avoid contact with others. If you want to seek "
 "medical advice, please call your GP by phone. "
 
-#: ../static/i18n/pages/test-result-positive.html:15
+#: ../static/i18n/pages/test-PCRPOS.html:15
 msgid ""
 "Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit\n"
 "    Ihnen in Verbindung setzen und das weitere Vorgehen mit Ihnen "
@@ -1591,11 +1586,34 @@ msgstr ""
 "call the Corona hotline of the Heidelberg public health office yourself: "
 "06221 522-1881. "
 
-#: ../static/i18n/pages/test-to-be-determined.html:3
+#: ../static/i18n/pages/test-UNDEF.html:3
+msgid "Test fehlgeschlagen"
+msgstr "Test Failed"
+
+#: ../static/i18n/pages/test-UNDEF.html:5
+msgid ""
+"Bei der Analyse Ihrer Probe ist ein technisches Problem\n"
+"    aufgetreten. Wir konnten Ihre Probe daher nicht auswerten und können "
+"Ihnen\n"
+"    kein Ergebnis mitteilen. Tut uns leid."
+msgstr ""
+"Due to a technical problem, we could not complete the analysis of your "
+"sample, and hence, we cannot report a result. We are sorry."
+
+#: ../static/i18n/pages/test-UNDEF.html:10
+msgid ""
+"Bitte geben Sie bei nächster Gelegenheit eine neue Probe ab.\n"
+"    Derartige Probleme sind die Ausnahme, und das nächste Mal klappt es\n"
+"    bestimmt."
+msgstr ""
+"Please hand in a new sample at the enxt opportunity. Technical problems "
+"are rare, and we are confident that it will work out next time."
+
+#: ../static/i18n/pages/test-WAIT.html:3
 msgid "Ergebnis liegt noch nicht vor"
 msgstr "Result is not ready"
 
-#: ../static/i18n/pages/test-to-be-determined.html:5
+#: ../static/i18n/pages/test-WAIT.html:5
 msgid ""
 "Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte\n"
 "        versuchen Sie es später oder morgen noch einmal."
@@ -4584,4 +4602,19 @@ msgstr ""
 #~ "Abstandsregeln\n"
 #~ "    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
 #~ msgstr ""
+
+#~ msgid "Probe erfolgreich eingetragen"
+#~ msgstr "Sample added successfully"
+
+#~ msgid "Keine Barcodes zu Rack gefunden"
+#~ msgstr "No barcodes found for rack"
+
+#~ msgid "Falsche Statusfolge: "
+#~ msgstr "Incorrect status sequence: "
+
+#~ msgid "Sample nicht gefunden"
+#~ msgstr "Sample not found"
+
+#~ msgid "Lab Interface - Query"
+#~ msgstr "Lab Interface - Query"
 
