@@ -1,5 +1,6 @@
 import mongoengine
 import datetime
+from .statuses import SampleStatus
 
 mongoengine.connect('covidtest')
 
@@ -18,7 +19,7 @@ class Registration(mongoengine.EmbeddedDocument):
 class Event(mongoengine.EmbeddedDocument):
     status = mongoengine.StringField(required=True)
     comment = mongoengine.StringField(null=True)
-    updated_on = mongoengine.DateTimeField(default=datetime.datetime.utcnow)
+    updated_on = mongoengine.DateTimeField(default=datetime.datetime.now)
     updated_by = mongoengine.StringField(null=True)
 
 
@@ -30,8 +31,15 @@ class Sample(mongoengine.Document):
     events = mongoengine.ListField(mongoengine.EmbeddedDocumentField(Event))
     meta = {'collection': 'Samples'}
 
-    def set_status(self, status):
-        pass
+    def set_status(self, status, author=None):
+        if type(status) == SampleStatus:
+            status = status.value
+        event = Event(
+            status=status,
+            updated_by=author
+        )
+        status_updated = self.modify(push__events=event)
+        return status_updated
 
     def get_statuses(self):
         events = self.events
