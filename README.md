@@ -13,12 +13,14 @@ sample.
 
 ## Documentation
 
-- [Status](/doc/status/status.md)
+- [Status](/doc/status/README.md)
+- [Translation](/doc/translation/README.md)
+- [Virtual Environment](/doc/virtualenv/README.md)
 
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the prerequisites from the 
-`src/requirements.txt` file. Using Virtualenv is recommended.
+`src/requirements.txt` file. Using Virtualenv is recommended. See [Virtual Environment](/doc/virtualenv/README.md).
 
 ```bash
 $ cd src
