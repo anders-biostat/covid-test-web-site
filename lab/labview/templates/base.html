@@ -15,18 +15,15 @@
             margin: 10px;
             padding: 20px;
         }
-
-
-
     </style>
 </head>
 {% include 'snippets/menubar.html' %}
 {% if messages %}
-    {% for message in messages %}
-        <div style="margin: 10px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
-             {{ message }}
-        </div>
-    {% endfor %}
+{% for message in messages %}
+<div style="margin: 10px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
+    {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 <div class="ui segment">
     {% block content %}{% endblock %}
