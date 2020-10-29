@@ -1,0 +1,26 @@
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'COVID19-LAB' %}</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <style>
+        body {
+            background-color: #ecf0f1;
+        }
+        .ui.segment{
+            margin: 10px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'snippets/menubar.html' %}
+    <div class="ui segment">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

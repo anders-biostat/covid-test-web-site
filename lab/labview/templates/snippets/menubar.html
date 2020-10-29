@@ -1,0 +1,31 @@
+{% load i18n %}
+<div style="margin: 10px;" class="ui top large menu">
+    <div class="header item">
+        <i class="flask icon"></i> {% trans 'LABVIEW' %}
+    </div>
+    <a href="{% url 'labview:index' %}" class="item">
+        {% trans 'Home' %}
+    </a>
+    <a href="{% url 'labview:checkin'  %}" class="item">
+        {% trans 'Probeneingang' %}
+    </a>
+    <a href="{% url 'labview:index'  %}" class="item">
+        {% trans 'Rack editieren' %}
+    </a>
+    <a href="{% url 'labview:index'  %}" class="item">
+        {% trans 'Probe suchen' %}
+    </a>
+    <div class="right menu">
+        <div class="ui right simple dropdown item">
+            Languages
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item">Deutsch</div>
+                <div class="item">English</div>
+            </div>
+        </div>
+        <a class="ui item">
+            Login
+        </a>
+    </div>
+</div>
