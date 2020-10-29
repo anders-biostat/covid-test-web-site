@@ -24,8 +24,11 @@
                 <div class="item">English</div>
             </div>
         </div>
-        <a class="ui item">
-            Login
-        </a>
+        {% if user.is_authenticated %}
+        <div class="ui item">logged in as {{ user.username }}</div>
+          <a class="ui item" href="{% url 'admin:logout' %}">Log Out</a>
+        {% else %}
+          <a class="ui item" href="{% url 'admin:login' %}">Log In</a>
+        {% endif %}
     </div>
 </div>

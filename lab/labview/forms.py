@@ -14,10 +14,10 @@ class LabCheckInForm(forms.Form):
 
 
 class LabRackResultsForm(forms.Form):
-    rack = forms.CharField(label=_('Rack'), max_length=100)
+    rack = forms.CharField(label=_('Rack'), max_length=100, required=False)
 
-    lamp_positive = forms.CharField(label=_('LAMP positiv'))
-    lamp_inconclusive = forms.CharField(label=_('LAMP unklares Ergebnis'))
+    lamp_positive = forms.CharField(label=_('LAMP positiv'), required=False)
+    lamp_inconclusive = forms.CharField(label=_('LAMP unklares Ergebnis'), required=False)
 
 status_choices = [('-', '-')] + [(status.value, status.value) for status in SampleStatus]
 

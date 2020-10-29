@@ -12,12 +12,12 @@
         <h3 class="ui header">{% blocktrans %}Historie{% endblocktrans %}</h3>
         <div class="extra content">
             <div class="ui small feed">
-                {% for result in sample.results %}
+                {% for event in sample.events %}
                 <div class="event">
                     <div class="content">
                         <div class="summary">
-                            {{ result.updated_time }}
-                            <span>{{ result.status }}</span>
+                            {{ event.updated_on|date:"Y-m-d H:i:s" }}
+                            - <span style="color: #ff0000">{{ event.status }}</span>
                         </div>
                     </div>
                 </div>

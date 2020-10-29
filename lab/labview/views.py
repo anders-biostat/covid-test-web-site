@@ -44,23 +44,36 @@ def probe_check_in(request):
 def probe_edit_rack(request):
     form = LabRackResultsForm()
     if request.method == 'POST':
+        form = LabRackResultsForm(request.POST)
         if form.is_valid():
-            rack = form.rack.data.upper().strip()
+            print(request.POST)
+            rack = form.cleaned_data['rack'].upper().strip()
 
-            lamp_positive = form.lamp_positive.data.replace(',', '\n').replace(';', '\n')
-            lamp_inconclusive = form.lamp_inconclusive.data.replace(',', '\n').replace(';', '\n')
+            lamp_positive = form.data['lamp_positive'].split()
+            lamp_inconclusive = form.data['lamp_inconclusive'].split()
+            lamp_positive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_positive]
+            lamp_inconclusive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_inconclusive]
 
-            lamp_positive = [x.strip() for x in lamp_positive.split()]
-            lamp_inconclusive = [x.strip() for x in lamp_inconclusive.split()]
+            rack_samples = Sample.objects.filter(rack=rack)
+            if len(rack_samples) > 0:
+                for sample in rack_samples:
+                    status = SampleStatus.LAMPNEG
+                    if sample.barcode in lamp_positive:
+                        status = SampleStatus.LAMPPOS
+                    if sample.barcode in lamp_inconclusive:
+                        status = SampleStatus.LAMPINC
 
-            wrong_status_sequence = database_actions.rack_results(db, rack, lamp_positive, lamp_inconclusive)
-            if wrong_status_sequence is None:
-                flash(_('Keine Barcodes zu Rack gefunden'), 'error')
+                    set_status = sample.set_status(status, author=request.user.get_username())
+                    barcodes_status_set = []
+                    if not set_status:
+                        messages.add_message(request, messages.ERROR, _('Status konnte nicht gesetzt werden: ') + str(sample.barcode))
+                    else:
+                        barcodes_status_set.append(sample.barcode)
+                messages.add_message(request, messages.SUCCESS, _('Ergebnisse hinzugefügt: ') + ", ".join(barcodes_status_set))
             else:
-                for barcode in wrong_status_sequence:
-                    flash(_('Falsche Statusfolge: ') + str(barcode), 'warning')
-            return render_template('probe_rack_results.html', form=form)
-    return render_template('probe_rack_results.html', form=form)
+                messages.add_message(request, messages.ERROR, _('Keine Proben zu Rack gefunden'))
+
+    return render(request, 'probe_rack_results.html', {'form': form})
 
 
 def probe_query(request):
@@ -76,12 +89,9 @@ def probe_query(request):
         if 'edit' in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
             if edit_form.is_valid():
-                print("Hello 1")
                 barcode = edit_form.cleaned_data['barcode'].upper().strip()
                 status = edit_form.cleaned_data['status'].upper().strip()
                 rack = edit_form.cleaned_data['rack'].upper().strip()
-                print(repr(barcode))
-                print(repr(status))
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
                     messages.add_message(request, messages.ERROR, _('Sample nicht gefunde'))
