@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
+from common.statuses import SampleStatus
 
 
 class LabQueryForm(forms.Form):
@@ -17,3 +18,13 @@ class LabRackResultsForm(forms.Form):
 
     lamp_positive = forms.CharField(label=_('LAMP positiv'))
     lamp_inconclusive = forms.CharField(label=_('LAMP unklares Ergebnis'))
+
+status_choices = [('-', '-')] + [(status.value, status.value) for status in SampleStatus]
+
+class LabProbeEditForm(forms.Form):
+    barcode = forms.CharField(label=_('Barcode'))
+    rack = forms.CharField(label=_('Rack'))
+    status = forms.ChoiceField(
+        label=_('Probenstatus'),
+        choices = status_choices,
+    )
