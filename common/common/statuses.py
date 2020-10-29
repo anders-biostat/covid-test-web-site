@@ -6,6 +6,6 @@ class SampleStatus(Enum):
     LAMPPOS = 'LAMPPOS'
     LAMPINC = 'LAMPINC'
     LAMPNEG = 'LAMPNEG'
-    PRCPOS = 'PCRPOS'
+    PCRPOS = 'PCRPOS'
     PCRNEG = 'PCRNEG'
     UNDEF = 'UNDEF'
