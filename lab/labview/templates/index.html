@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div>
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans  %}</h1>
+    <p>
+        {% blocktrans %}
+        Dies ist das Laborinterface, um Datensätze der Testungen zu editieren. Folgende Prozesse stehen zur Verfügung:
+        {% endblocktrans %}
+     </p>
+
+    <h3 class="ui header">
+        {% blocktrans %}Probeneingang{% endblocktrans %}
+    </h3>
+    <p>
+        {% blocktrans %}
+            Hier werden nach dem Empfang der Probe die Probenröhrchen den
+            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der Barcode des Racks eingescannt werden
+            und nachfolgend alle Probenröhrchen dieses Racks eingescannt werden.
+        {% endblocktrans %}
+    </p>
+
+    <h3 class="ui header">
+        {% blocktrans %}Rack editieren{% endblocktrans %}
+    </h3>
+    <p>
+        {% blocktrans %}
+            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu wird das Rack eingescannt und danach
+            jeweils die positiven und unklaren Probenröhrchen eingescannt. Alle nicht eingescannten Proben
+            des Racks werden automatisch als negativ gewertet. Die Listen der positiven/unklaren Proben werden
+            einfach zeilenweise eingefügt (Barcode-Scanner).
+        {% endblocktrans %}
+    </p>
+
+    <h3 class="ui header">
+        {% blocktrans %}Probe suchen{% endblocktrans %}
+    </h3>
+    <p>
+        {% blocktrans %}
+            Hier können einzelne Proberöhrchen gesucht werden und der Status sowie das Rack manuell gesetzt werden.
+        {% endblocktrans %}
+    </p>
+</div>
+{% endblock %}

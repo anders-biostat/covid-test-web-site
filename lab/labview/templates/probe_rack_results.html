@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<script>
+    $(window).ready(function() {
+        if ($("input[name=rack]").val() == ""){
+            var input = $("input[name=rack]");
+            input.focus();
+            input.select();
+        }
+        $("input[name=rack]").on("keypress", function (event) {
+            var keyPressed = event.keyCode || event.which;
+            if (keyPressed === 13) {
+                event.preventDefault();
+                var input = $("input[name=barcode]");
+                input.focus();
+                input.select();
+                return false;
+            }
+        });
+    });
+
+
+</script>
+
+<style>
+    .ui.dimmer {
+        background-color: rgba(0,255,0,0.7);
+    }
+</style>
+
+
+<div class="ui segment content">
+    <h1 class="ui header">{% trans %}Lab Interface - Testergebnisse registrieren (Rack){% endtrans %}</h1>
+    <p>
+        {% trans %}
+        Hier können die Testergebnisse registriert werden. Der Normalfall ist ein negatives Ergebnis. Positive
+        und unklare Proben werden (zeilenweise) in die entsprechenden Felder eingegeben.
+        {% endtrans%}
+    </p>
+
+    <form style="margin-bottom: 20px;" action="{{ url_for('site.probe_rack') }}" method="post" class="ui form">
+        {{ form.csrf_token }}
+        <div class="ui large form">
+            <div class="two fields">
+                <div class="required field">
+                    <label>Rack (Barcode)</label>
+                    <input name="rack" value="{{ rack }}" placeholder="Rack barcode" type="text">
+                    {% for error in form.rack.errors %}
+                    <small style="color: red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+            </div>
+            <p>{% trans %}Nachfolgend die Barcodes der jeweils positiven / unklaren Proben (zeilenweise separiert){%
+                endtrans %}</p>
+            <div class="two fields">
+
+                <div class="field">
+                    <label>{% trans %}Positive LAMP Proben (Barcodes){% endtrans %}</label>
+                    <textarea name="rack" value="{{ rack }}"
+                              placeholder="{% trans %}Positive Proben (Barcodes){% endtrans %}" type="text"></textarea>
+                    {% for error in form.lamp_positive.errors %}
+                    <small style="color: red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <label>{% trans %}Unklare LAMP Proben (Barcodes){% endtrans %}</label>
+                    <textarea name="rack" value="{{ rack }}"
+                              placeholder="{% trans %}Unklare Proben (Barcodes){% endtrans %}" type="text"></textarea>
+                    {% for error in form.lamp_inconclusive.errors %}
+                    <small style="color: red;">{{ error }}</small>
+                    {% endfor %}
+                </div>
+            </div>
+            <a class="ui button" href="{{ url_for('site.labview_home') }}">{% trans %}Zurück{% endtrans %}</a>
+            <button class="ui button" type="submit">{% trans %}Abschicken{% endtrans %}</button>
+        </div>
+    </form>
+
+    {% if wrong_status_sequence and wrong_status_sequence != [] %}
+    {% for barcode in wrong_status_sequence %}
+    <div class="ui warning message">
+        <p>{% trans %}Barcode nicht gefunden.{% endtrans %}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

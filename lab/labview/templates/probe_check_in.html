@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<script>
+    $(window).ready(function() {
+        if ($("input[name=rack]").val() == ""){
+            var input = $("input[name=rack]");
+            input.focus();
+            input.select();
+        }
+        $("input[name=rack]").on("keypress", function (event) {
+            var keyPressed = event.keyCode || event.which;
+            if (keyPressed === 13) {
+                event.preventDefault();
+                var input = $("input[name=barcode]");
+                input.focus();
+                input.select();
+                return false;
+            }
+        });
+    });
+
+
+    $('.ui.positive.message')
+    .modal({
+        onShow: function () {
+          $(".ui.dimmer").css("background-color","rgba(0,255,0,0.8)");
+        },
+    })
+    .modal('show')
+    .delay(400)
+    .queue(function() {
+        $(this).modal('hide').dequeue();
+    });
+
+    $('.ui.error.message')
+    .modal({
+        onShow: function () {
+          $(".ui.dimmer").css("background-color","rgba(255,0,0,0.8)");
+        }
+    })
+    .modal('show')
+    .delay(1000)
+    .queue(function() {
+        $(this).modal('hide').dequeue();
+    });
+
+
+
+
+
+</script>
+
+<style>
+    .ui.dimmer {
+        background-color: rgba(0,255,0,0.7);
+    }
+
+
+</style>
+
+
+<div>
+
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Proben registrieren{% endblocktrans %}</h1>
+    <p>
+        {% blocktrans %}
+        Hier können Barcodes als eingegangen markiert werden:
+        {% endblocktrans%}
+    </p>
+
+    <form style="margin-bottom: 20px;" action="{% url 'labview:checkin' %}" method="post" class="ui form">
+        {% csrf_token %}
+
+
+        <div class="ui large form">
+            <div class="two fields">
+                <div class="required field">
+                    <label>Barcode</label>
+                    {{ form.barcode }}
+                    {% if form.barcode.errors %}
+                    <ol>
+                        {% for error in form.barcode.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ol>
+                    {% endif %}
+                </div>
+                <div class="required field">
+                    <label>Rack (Barcode)</label>
+                    {{ form.rack }}
+                    {% if form.rack.errors %}
+                    <ol>
+                        {% for error in form.rack.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ol>
+                    {% endif %}
+                </div>
+            </div>
+            <input type="submit" style="visibility: hidden;"/>
+        </div>
+    </form>
+
+    {% if sample %}
+
+    <p>{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</p>
+
+    <div class="ui card">
+        <div class="content">
+            <div class="header"></div>
+            <div class="meta">
+                Registrations: {{ sample.registrations }}<br>
+                Batch: {{ sample.batch }}
+            </div>
+
+
+            <h4 class="ui sub header">{% blocktrans %}Historie{% endblocktrans %}</h4>
+            <div class="extra content">
+                <div class="ui small feed">
+                    {% for result in sample.results %}
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                {{ result.updated_time }}
+                                <span>{{ result.status }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    {% elif display_sample != False %}
+    <div class="ui error message">
+        <p>{% blocktrans %}Barcode nicht gefunden.{% endblocktrans %}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

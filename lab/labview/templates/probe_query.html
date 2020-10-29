@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+    <h1 class="ui header">{% trans %}Lab Interface - Suche{% endtrans %}</h1>
+    <p>
+        {% trans %}
+        Hier können Barcodes gesucht werden:
+        {% endtrans%}
+    </p>
+
+    <form style="margin-bottom: 20px;" action="{{ url_for('site.probe_query') }}" method="post" class="ui form">
+        {{ form.csrf_token }}
+        <div class="ui search">
+            <div class="ui icon input">
+                <input name="search" class="prompt" type="text"
+                       placeholder="{% trans %}Search Barcode...{% endtrans%}" autofocus>
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+    </form>
+
+    {% if search %}
+    <p>{% trans %}Ergebnis für: {% endtrans %} {{ search }}</p>
+    {% endif %}
+
+
+    {% if sample %}
+    {% include 'lab/probe.html' %}
+    {% elif search %}
+    <div class="ui warning message">
+        <p>{% trans %}Keine Probe mit diesem Barcode gefunden.{% endtrans %}</p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
