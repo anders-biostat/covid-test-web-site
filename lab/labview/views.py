@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
-from common.models import Sample, Event, Registration, KeyInformation
+from common.models import Sample, Event, Registration
 from common.statuses import SampleStatus
 
-from .forms import LabCheckInForm
+from .forms import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm
 
 def index(request):
     return render(request, "index.html")
@@ -41,10 +41,10 @@ def probe_check_in(request):
     return render(request, 'probe_check_in.html', {"form": form, "display_sample": False})
 
 
-def probe_edit_rack():
+def probe_edit_rack(request):
     form = LabRackResultsForm()
     if request.method == 'POST':
-        if form.validate_on_submit():
+        if form.is_valid():
             rack = form.rack.data.upper().strip()
 
             lamp_positive = form.lamp_positive.data.replace(',', '\n').replace(';', '\n')
@@ -59,43 +59,44 @@ def probe_edit_rack():
             else:
                 for barcode in wrong_status_sequence:
                     flash(_('Falsche Statusfolge: ') + str(barcode), 'warning')
-            return render_template('lab/probe_rack_results.html', form=form)
-    return render_template('lab/probe_rack_results.html', form=form)
+            return render_template('probe_rack_results.html', form=form)
+    return render_template('probe_rack_results.html', form=form)
 
-"""
-def probe_query():
+
+def probe_query(request):
     form = LabQueryForm()
     edit_form = LabProbeEditForm()
     if request.method == 'POST':
-        if 'search' in request.form:
-            if form.validate_on_submit():
-                samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
-                search = form.search.data.upper().strip()
-                sample = samples.find_one({'_id': search})
-                return render_template('lab/probe_query.html', form=form, edit_form=edit_form, sample=sample, search=search)
-        if 'edit' in request.form:
-            if edit_form.validate_on_submit():
-                samples = db['samples'].with_options(codec_options=CodecOptions(tz_aware=True, tzinfo=timezone))
-                barcode = edit_form.barcode.data.upper().strip()
-                status = edit_form.status.data.upper().strip()
-                rack = edit_form.rack.data.upper().strip()
-
-                sample = samples.find_one({'_id': barcode})
+        if 'search' in request.POST.keys():
+            form = LabQueryForm(request.POST)
+            if form.is_valid():
+                search = form.cleaned_data['search'].upper().strip()
+                sample = Sample.objects.filter(barcode=search).first()
+                return render(request, 'probe_query.html', {'form':form, 'edit_form':edit_form, 'sample':sample, 'search':search})
+        if 'edit' in request.POST.keys():
+            edit_form = LabProbeEditForm(request.POST)
+            if edit_form.is_valid():
+                print("Hello 1")
+                barcode = edit_form.cleaned_data['barcode'].upper().strip()
+                status = edit_form.cleaned_data['status'].upper().strip()
+                rack = edit_form.cleaned_data['rack'].upper().strip()
+                print(repr(barcode))
+                print(repr(status))
+                sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
-                    flash(_('Sample nicht gefunden'), 'error')
+                    messages.add_message(request, messages.ERROR, _('Sample nicht gefunde'))
                 else:
-                    if rack != sample['rack']:
-                        samples.update_one({'_id': sample['_id']}, {'$set': {'rack': rack}}, upsert=True)
-                        flash(_('Sample rack geupdated'), 'positive')
-
+                    rack_changed = sample.modify(rack=rack)
+                    if rack_changed:
+                        messages.add_message(request, messages.SUCCESS, _('Sample rack geupdated'))
                     if status != '-':
                         status = SampleStatus[status]
-                        new_sample = database_actions.update_status(db, sample['_id'], status, rack=None)
-                        if new_sample is not None:
-                            flash(_('Status geupdated'), 'positive')
-                    else:
-                        new_sample = sample
-                return render_template('lab/probe_query.html', form=form, edit_form=edit_form, sample=new_sample)
+                        event = Event(
+                            status=status.value,
+                        )
+                        event_added = sample.modify(push__events=event)
+                        if event_added:
+                            messages.add_message(request, messages.SUCCESS, _('Status geupdated'))
+                return render(request, 'probe_query.html', {'form': form, 'edit_form': edit_form, 'sample': sample})
 
-    return render_template('lab/probe_query.html', form=form, edit_form=edit_form)
-"""
+    return render(request, 'probe_query.html', {'form': form, 'edit_form':edit_form})
