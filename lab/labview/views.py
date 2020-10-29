@@ -1,16 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+import sys
+from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
-from pymongo import MongoClient
+from common.models import Sample, Event, Registration, KeyInformation
+from common.statuses import SampleStatus
 
-from .models import Sample
 from .forms import LabCheckInForm
-
-
-client = MongoClient()
-DATABASE = 'covidtest'
-db = client[DATABASE]
 
 def index(request):
     return render(request, "index.html")
@@ -23,26 +19,29 @@ def probe_check_in(request):
             barcode = form.cleaned_data['barcode']
             rack = form.cleaned_data['rack']
 
-            sample = Sample.objects.filter(barcode=barcode).first()
+            sample = Sample.objects.get(barcode=barcode)
+            event = Event(
+                status=SampleStatus.WAIT.value,
+            )
 
-            sample = None #database_actions.update_status(db, barcode, SampleStatus.WAIT, rack=rack)
             if sample is None:
                 messages.add_message(request, messages.ERROR, _('Barcode nicht in Datenbank'))
             else:
-                messages.add_message(request, messages.SUCCESS, _('Probe erfolgreich eingetragen'))
-            print("1: ", rack)
+                modified_rack = sample.modify(rack=rack)
+                if modified_rack:
+                    messages.add_message(request, messages.SUCCESS, _('Rack erfolgreich eingetragen'))
+                modified_events = sample.modify(push__events=event)
+                if modified_events:
+                    messages.add_message(request, messages.SUCCESS, _('Event erfolgreich hinzugefügt'))
+
             form.fields['rack'].initial = rack
             return render(request, 'probe_check_in.html', {"form": form, "sample": sample})
-        else:
-            print("Invalid")
-            print(form.errors)
     else:
         form = LabCheckInForm()
     return render(request, 'probe_check_in.html', {"form": form, "display_sample": False})
 
 
-"""
-def probe_rack():
+def probe_edit_rack():
     form = LabRackResultsForm()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -63,6 +62,7 @@ def probe_rack():
             return render_template('lab/probe_rack_results.html', form=form)
     return render_template('lab/probe_rack_results.html', form=form)
 
+"""
 def probe_query():
     form = LabQueryForm()
     edit_form = LabProbeEditForm()
