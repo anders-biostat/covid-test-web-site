@@ -1,10 +1,7 @@
 {% load i18n %}
 <div style="margin: 10px;" class="ui top large menu">
-    <div class="header item">
+    <a class="header item" href="{% url 'labview:index' %}">
         <i class="flask icon"></i> COVID19-LAB
-    </div>
-    <a href="{% url 'labview:index' %}" class="item">
-        {% trans 'Home' %}
     </a>
     <a href="{% url 'labview:checkin'  %}" class="item">
         {% trans 'Probeneingang' %}

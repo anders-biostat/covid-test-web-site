@@ -1,18 +1,42 @@
-import sys
+import sys, random, string
 from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from django.contrib.auth.decorators import login_required, permission_required
 
 from common.models import Sample, Event, Registration
 from common.statuses import SampleStatus
 
 from .forms import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm
 
+@login_required
 def index(request):
     return render(request, "index.html")
 
+def random_barcode(length=6):
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
 
-def probe_check_in(request):
+def random_accesscode(length=9):
+    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
+
+@login_required
+def generate_barcodes(request):
+    if request.method == 'POST':
+        for i in range(50):
+            count = 1
+            while count == 1:
+                barcode = random_barcode(length=6)
+                count = Sample.objects.filter(barcode=barcode).count()
+
+            count = 1
+            while count == 1:
+                accesscode = random_accesscode(length=9)
+                count = Sample.objects.filter(barcode=barcode).count()
+
+    return render(request, "generate_barcodes.html")
+
+@login_required
+def sample_check_in(request):
     if request.method == 'POST':
         form = LabCheckInForm(request.POST)
         if form.is_valid():
@@ -35,20 +59,18 @@ def probe_check_in(request):
                     messages.add_message(request, messages.SUCCESS, _('Event erfolgreich hinzugefügt'))
 
             form.fields['rack'].initial = rack
-            return render(request, 'probe_check_in.html', {"form": form, "sample": sample})
+            return render(request, 'sample_check_in.html', {"form": form, "sample": sample})
     else:
         form = LabCheckInForm()
-    return render(request, 'probe_check_in.html', {"form": form, "display_sample": False})
+    return render(request, 'sample_check_in.html', {"form": form, "display_sample": False})
 
-
-def probe_edit_rack(request):
+@login_required
+def sample_edit_rack(request):
     form = LabRackResultsForm()
     if request.method == 'POST':
         form = LabRackResultsForm(request.POST)
         if form.is_valid():
-            print(request.POST)
             rack = form.cleaned_data['rack'].upper().strip()
-
             lamp_positive = form.data['lamp_positive'].split()
             lamp_inconclusive = form.data['lamp_inconclusive'].split()
             lamp_positive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_positive]
@@ -66,17 +88,19 @@ def probe_edit_rack(request):
                     set_status = sample.set_status(status, author=request.user.get_username())
                     barcodes_status_set = []
                     if not set_status:
-                        messages.add_message(request, messages.ERROR, _('Status konnte nicht gesetzt werden: ') + str(sample.barcode))
+                        messages.add_message(request, messages.ERROR,
+                                             _('Status konnte nicht gesetzt werden: ') + str(sample.barcode))
                     else:
                         barcodes_status_set.append(sample.barcode)
-                messages.add_message(request, messages.SUCCESS, _('Ergebnisse hinzugefügt: ') + ", ".join(barcodes_status_set))
+                messages.add_message(request, messages.SUCCESS,
+                                     _('Ergebnisse hinzugefügt: ') + ", ".join(barcodes_status_set))
             else:
                 messages.add_message(request, messages.ERROR, _('Keine Proben zu Rack gefunden'))
 
-    return render(request, 'probe_rack_results.html', {'form': form})
+    return render(request, 'sample_rack_results.html', {'form': form})
 
-
-def probe_query(request):
+@login_required
+def sample_query(request):
     form = LabQueryForm()
     edit_form = LabProbeEditForm()
     if request.method == 'POST':
@@ -85,7 +109,8 @@ def probe_query(request):
             if form.is_valid():
                 search = form.cleaned_data['search'].upper().strip()
                 sample = Sample.objects.filter(barcode=search).first()
-                return render(request, 'probe_query.html', {'form':form, 'edit_form':edit_form, 'sample':sample, 'search':search})
+                return render(request, 'probe_query.html',
+                              {'form': form, 'edit_form': edit_form, 'sample': sample, 'search': search})
         if 'edit' in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
             if edit_form.is_valid():
@@ -107,6 +132,6 @@ def probe_query(request):
                         event_added = sample.modify(push__events=event)
                         if event_added:
                             messages.add_message(request, messages.SUCCESS, _('Status geupdated'))
-                return render(request, 'probe_query.html', {'form': form, 'edit_form': edit_form, 'sample': sample})
+                return render(request, 'sample_query.html', {'form': form, 'edit_form': edit_form, 'sample': sample})
 
-    return render(request, 'probe_query.html', {'form': form, 'edit_form':edit_form})
+    return render(request, 'sample_query.html', {'form': form, 'edit_form': edit_form})

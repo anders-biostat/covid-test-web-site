@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-29 23:19+0100\n"
-"PO-Revision-Date: 2020-10-28 13:00+0100\n"
+"POT-Creation-Date: 2020-10-30 14:39+0100\n"
+"PO-Revision-Date: 2020-10-30 14:38+0100\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Barcode"
 
 #: ../lab/labview/forms.py:13 ../lab/labview/forms.py:17
 #: ../lab/labview/forms.py:26 ../src/forms.py:32 ../src/forms.py:35
-#: ../src/forms.py:42 ../static/i18n/lab/probe.html:42
+#: ../src/forms.py:42
 msgid "Rack"
 msgstr "Rack"
 
@@ -42,39 +42,39 @@ msgstr "LAMP inconclusive result"
 msgid "Probenstatus"
 msgstr "Probe status"
 
-#: ../lab/labview/views.py:28
+#: ../lab/labview/views.py:52
 msgid "Barcode nicht in Datenbank"
 msgstr "Barcode not in database"
 
-#: ../lab/labview/views.py:32
+#: ../lab/labview/views.py:56
 msgid "Rack erfolgreich eingetragen"
-msgstr ""
+msgstr "Edited rack successfully"
 
-#: ../lab/labview/views.py:35
+#: ../lab/labview/views.py:59
 msgid "Event erfolgreich hinzugefügt"
-msgstr ""
+msgstr "Event added successfully"
 
-#: ../lab/labview/views.py:69
+#: ../lab/labview/views.py:92
 msgid "Status konnte nicht gesetzt werden: "
-msgstr ""
+msgstr "Status could not be set: "
 
-#: ../lab/labview/views.py:72
+#: ../lab/labview/views.py:96
 msgid "Ergebnisse hinzugefügt: "
-msgstr ""
+msgstr "Added results: "
 
-#: ../lab/labview/views.py:74
+#: ../lab/labview/views.py:98
 msgid "Keine Proben zu Rack gefunden"
-msgstr ""
+msgstr "So samples found for given rack"
 
-#: ../lab/labview/views.py:97
+#: ../lab/labview/views.py:122
 msgid "Sample nicht gefunde"
-msgstr ""
+msgstr "Sample not found"
 
-#: ../lab/labview/views.py:101
+#: ../lab/labview/views.py:126
 msgid "Sample rack geupdated"
 msgstr "Sample rack updated"
 
-#: ../lab/labview/views.py:109
+#: ../lab/labview/views.py:134
 msgid "Status geupdated"
 msgstr "Status updated"
 
@@ -100,7 +100,7 @@ msgstr "Passwords did not match. Please try again."
 
 #: ../src/app.py:217
 msgid "Erfolgreich registriert"
-msgstr ""
+msgstr "Registered successfully"
 
 #: ../src/forms.py:8
 msgid "Einverständnis"
@@ -160,8 +160,7 @@ msgstr "Participating in COVID-19 test"
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
 msgstr "I give my consent and agree to participate in the test."
 
-#: ../static/i18n/consent.html:27 ../static/i18n/lab/probe_rack_results.html:73
-#: ../static/i18n/result-query.html:51
+#: ../static/i18n/consent.html:27 ../static/i18n/result-query.html:51
 msgid "Zurück"
 msgstr "Back"
 
@@ -368,14 +367,13 @@ msgstr ""
 "              </ul>\n"
 
 #: ../static/i18n/information-text.html:61
-#, python-format
 msgid ""
 "\n"
 "<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
 "<ol class=\"ui list\">\n"
 "    <li> Sie sollten ein Teströhrchen (kleiner Plastikbecher mit "
 "Schraubverschluss) erhalten haben. Es enthält etwas\n"
-"        salziges Wasser. (5 ml reines Wasser mit 0.9%% Kochsalz.)\n"
+"        salziges Wasser. (5 ml reines Wasser mit 0.9&#37; Kochsalz.)\n"
 "    </li>\n"
 "    <li> Zunächst sollten Sie nun diese Informationen hier lesen und, "
 "wenn Sie mit allem einverstanden sind, am Ende der\n"
@@ -409,12 +407,12 @@ msgid ""
 "Weg ist, etwas mehr.) </p>\n"
 msgstr ""
 "\n"
-" <h5> How do I participate? </h5>\n"
+"<h5> How do I participate? </h5>\n"
 "\n"
 "            <ol>\n"
 "              <li>  You should have received a small tube (a little tube "
 "with a screw cap). It contains some salty water (5 mL clean water with "
-"0.9%% salt). </li>\n"
+"0.9&#37; salt). </li>\n"
 "              <li>  First, you should read these information here and, if"
 " you agree with everything, confirm at the end of this page by a mouse "
 "click that you are willing to participate. </li>\n"
@@ -478,7 +476,6 @@ msgstr ""
 "information. </p>\n"
 
 #: ../static/i18n/information-text.html:97
-#, python-format
 msgid ""
 "\n"
 "<h3 class=\"ui header\"> Was bedeutet es, wenn wir in Ihrer Probe kein "
@@ -487,8 +484,8 @@ msgid ""
 "abfragen. Auch wenn es negativ sein sollte (kein\n"
 "    Virus nachgewiesen), ist das aber keine völlige Entwarnung! Bedenken "
 "Sie bitte, dass unser Test nicht perfekt ist\n"
-"    und vielleicht (grob geschätzt) nur 60-80%% der Infektionen erkennt. "
-"Außerdem: auch wenn Sie im Moment der\n"
+"    und vielleicht (grob geschätzt) nur 60-80&#37; der Infektionen "
+"erkennt. Außerdem: auch wenn Sie im Moment der\n"
 "    Speichelprobe nicht infiziert waren, heißt das nicht, dass Sie sich "
 "nicht vielleicht schon kurze Zeit später\n"
 "    infiziert haben könnten. Oder Sie hatten sich bereits kurz vorher "
@@ -499,16 +496,17 @@ msgid ""
 "    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
 msgstr ""
 "\n"
-"<h5> What does it mean, if we don’t find the virus in your sample? </h5>\n"
+" <h5> What does it mean, if we don’t find the virus in your sample? </h5>"
+"\n"
 "          <p> You can inquire your test result yourself <a href=“result-"
 "query.html”>here</a>. Even if it is negative (the virus has not been "
 "detected), it does not mean an all-clear signal! Please keep in mind that"
-" our test is not perfect and may only detect 60-80%% of all infections by"
-" a rough estimation. Moreover, even if the virus should not be detected "
-"in your saliva sample, you might have gotten infected soon after taking "
-"the sample. Or you might have been infected just before taking the sample"
-" and there were not enough virus particles produced to be detected in "
-"your saliva. </p>\n"
+" our test is not perfect and may only detect 60-80&#37;  of all "
+"infections by a rough estimation. Moreover, even if the virus should not "
+"be detected in your saliva sample, you might have gotten infected soon "
+"after taking the sample. Or you might have been infected just before "
+"taking the sample and there were not enough virus particles produced to "
+"be detected in your saliva. </p>\n"
 "          <p> As long as the virus is in circulation, we all must be "
 "careful and observe all hygiene and distance regulations. A negative test"
 " result should not change this! </p>\n"
@@ -1094,206 +1092,6 @@ msgstr "that you have set when you registered you sample"
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: ../static/i18n/lab/home.html:6
-msgid "Lab Interface - Home"
-msgstr "Lab Interface - Home"
-
-#: ../static/i18n/lab/home.html:8
-msgid ""
-"\n"
-"        Dies ist das Laborinterface, um Datensätze der Testungen zu "
-"editieren. Folgende Prozesse stehen zur Verfügung:\n"
-"        "
-msgstr ""
-"\n"
-"This is the laboratory interface to edit the test sample data. The "
-"following processes are available:"
-
-#: ../static/i18n/lab/home.html:14 ../static/i18n/lab/menu.html:9
-msgid "Probeneingang"
-msgstr "Probe arrival"
-
-#: ../static/i18n/lab/home.html:17
-msgid ""
-"\n"
-"            Hier werden nach dem Empfang der Probe die Probenröhrchen den"
-"\n"
-"            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der"
-" Barcode des Racks eingescannt werden\n"
-"            und nachfolgend alle Probenröhrchen dieses Racks eingescannt "
-"werden.\n"
-"        "
-msgstr ""
-"\n"
-"After the arrival of the sample the sample is assigned to a plate/rack. "
-"For this the barcode of the rack needs to be scanned.\n"
-"After this all samples of the rack needs to be scanned."
-
-#: ../static/i18n/lab/home.html:25 ../static/i18n/lab/menu.html:13
-msgid "Rack editieren"
-msgstr "Edit rack"
-
-#: ../static/i18n/lab/home.html:28
-msgid ""
-"\n"
-"            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu"
-" wird das Rack eingescannt und danach\n"
-"            jeweils die positiven und unklaren Probenröhrchen "
-"eingescannt. Alle nicht eingescannten Proben\n"
-"            des Racks werden automatisch als negativ gewertet. Die Listen"
-" der positiven/unklaren Proben werden\n"
-"            einfach zeilenweise eingefügt (Barcode-Scanner).\n"
-"        "
-msgstr ""
-"\n"
-"Here all results for the LAMP-Stage are submitted. For this the rack is "
-"scanned and all positive and inconclusive samples are scanned "
-"individually. All \n"
-"samples that have not been scanned count as negative samples. The lists "
-"of positive/inconclusive samples are inserted line-wise (you can use a "
-"normal barcode scanner)."
-
-#: ../static/i18n/lab/home.html:37 ../static/i18n/lab/menu.html:17
-msgid "Probe suchen"
-msgstr "Query sample"
-
-#: ../static/i18n/lab/home.html:40
-msgid ""
-"\n"
-"            Hier können einzelne Proberöhrchen gesucht werden und der "
-"Status sowie das Rack manuell gesetzt werden.\n"
-"        "
-msgstr ""
-"\n"
-"Here samples can be looked up and the status and rack can be set manually."
-
-#: ../static/i18n/lab/probe.html:3
-msgid "Barcode: "
-msgstr "Barcode: "
-
-#: ../static/i18n/lab/probe.html:11 ../static/i18n/lab/probe_check_in.html:106
-msgid "Historie"
-msgstr "History"
-
-#: ../static/i18n/lab/probe.html:38
-msgid "Status der Probe"
-msgstr "Sample status"
-
-#: ../static/i18n/lab/probe.html:47
-msgid "Speichern"
-msgstr "Save"
-
-#: ../static/i18n/lab/probe_check_in.html:61
-msgid "Lab Interface - Proben registrieren"
-msgstr "Lab Interface - Register Samples"
-
-#: ../static/i18n/lab/probe_check_in.html:63
-msgid ""
-"\n"
-"        Hier können Barcodes als eingegangen markiert werden:\n"
-"        "
-msgstr ""
-"\n"
-"Mark Barcodes as arrived here:"
-
-#: ../static/i18n/lab/probe_check_in.html:95
-#: ../static/i18n/lab/probe_query.html:27
-msgid "Ergebnis für: "
-msgstr "Result for: "
-
-#: ../static/i18n/lab/probe_check_in.html:129
-#: ../static/i18n/lab/probe_rack_results.html:81
-msgid "Barcode nicht gefunden."
-msgstr "Barcode not found."
-
-#: ../static/i18n/lab/probe_query.html:7
-msgid "Lab Interface - Suche"
-msgstr ""
-
-#: ../static/i18n/lab/probe_query.html:9
-msgid ""
-"\n"
-"        Hier können Barcodes gesucht werden:\n"
-"        "
-msgstr ""
-"\n"
-"Here barcodes can be looked up"
-
-#: ../static/i18n/lab/probe_query.html:19
-msgid "Search Barcode..."
-msgstr "Query barcode…"
-
-#: ../static/i18n/lab/probe_query.html:35
-msgid "Keine Probe mit diesem Barcode gefunden."
-msgstr "No sample for barcode found."
-
-#: ../static/i18n/lab/probe_rack_results.html:35
-msgid "Lab Interface - Testergebnisse registrieren (Rack)"
-msgstr "Lab Interface - Register test results (Rack)"
-
-#: ../static/i18n/lab/probe_rack_results.html:37
-msgid ""
-"\n"
-"        Hier können die Testergebnisse registriert werden. Der Normalfall"
-" ist ein negatives Ergebnis. Positive\n"
-"        und unklare Proben werden (zeilenweise) in die entsprechenden "
-"Felder eingegeben.\n"
-"        "
-msgstr ""
-"\n"
-"Here test results can be registered. The normal case is a negative "
-"result. Positive and inconclusive results are inserted likewise in the "
-"different fields."
-
-#: ../static/i18n/lab/probe_rack_results.html:55
-msgid ""
-"Nachfolgend die Barcodes der jeweils positiven / unklaren Proben "
-"(zeilenweise separiert)"
-msgstr ""
-"Following the barcodes of the positive/inconclusive samples (linewise "
-"separated)"
-
-#: ../static/i18n/lab/probe_rack_results.html:59
-msgid "Positive LAMP Proben (Barcodes)"
-msgstr "Positive LAMP samples (barcodes)"
-
-#: ../static/i18n/lab/probe_rack_results.html:60
-msgid "Positive Proben (Barcodes)"
-msgstr "Positive samples (barcodes)"
-
-#: ../static/i18n/lab/probe_rack_results.html:66
-msgid "Unklare LAMP Proben (Barcodes)"
-msgstr "Inconclusive LAMP samples (barcodes)"
-
-#: ../static/i18n/lab/probe_rack_results.html:67
-msgid "Unklare Proben (Barcodes)"
-msgstr "Inconclusive samples (barcodes)"
-
-#: ../static/i18n/lab/probe_rack_results.html:74
-msgid "Abschicken"
-msgstr "Submit"
-
-#: ../static/i18n/pages/barcode-unknown.html:3
-msgid "Barcode unbekannt"
-msgstr "Barcode is unknown"
-
-#: ../static/i18n/pages/barcode-unknown.html:5
-msgid "Der Barcode, den Sie eingegeben haben ist unbekannt."
-msgstr "The submitted barcode is unknown."
-
-#: ../static/i18n/pages/barcode-unknown.html:6
-#, python-format
-msgid "Barcode: %(barcode)s"
-msgstr "Barcode: %(barcode)s"
-
-#: ../static/i18n/pages/barcode-unknown.html:8
-msgid "Vielleicht haben Sie sich vertippt."
-msgstr "Maybe you have typed it wrongly?"
-
-#: ../static/i18n/pages/barcode-unknown.html:10
-msgid "Bitte gehen Sie zurück und versuchen Sie es noch einmal."
-msgstr "Please go back and try again."
-
 #: ../static/i18n/pages/contact.html:4 ../static/i18n/pages/impressum.html:4
 msgid "Diese Studie wird organisert vom "
 msgstr "This study is organized by the "
@@ -1382,22 +1180,8 @@ msgid ""
 msgstr "Trial of a LAMP-based test for the detection of SARS-CoV-2"
 
 #: ../static/i18n/pages/internal-error.html:3
-msgid "Interner Fehler"
-msgstr "Internal Error"
-
-#: ../static/i18n/pages/internal-error.html:5
-msgid "Das Ergebnis ihres Tests ist fehlerhaft gespeichert."
-msgstr "The encoding of your result is erroneous."
-
-#: ../static/i18n/pages/internal-error.html:9
-#: ../static/i18n/pages/multiple-registeration.html:9
-msgid "Bitte kontaktieren Sie uns:"
-msgstr "Please contact us:"
-
-#: ../static/i18n/pages/internal-error.html:11
-#: ../static/i18n/pages/multiple-registeration.html:11
-msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
-msgstr "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
+msgid "Überschrift"
+msgstr "Headline"
 
 #: ../static/i18n/pages/multiple-registeration.html:3
 msgid "Mehrfach registrierter Barcode"
@@ -1410,6 +1194,14 @@ msgid ""
 msgstr ""
 "For this barcode, the registration form has been filled out multiple "
 "times, with different passwords. "
+
+#: ../static/i18n/pages/multiple-registeration.html:9
+msgid "Bitte kontaktieren Sie uns:"
+msgstr "Please contact us:"
+
+#: ../static/i18n/pages/multiple-registeration.html:11
+msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
+msgstr "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 
 #: ../static/i18n/pages/no-tube.html:4
 msgid ""
@@ -1609,10 +1401,12 @@ msgstr ""
 "Please hand in a new sample at the enxt opportunity. Technical problems "
 "are rare, and we are confident that it will work out next time."
 
+#: ../static/i18n/pages/test-WAIT-LONG.html:3
 #: ../static/i18n/pages/test-WAIT.html:3
 msgid "Ergebnis liegt noch nicht vor"
 msgstr "Result is not ready"
 
+#: ../static/i18n/pages/test-WAIT-LONG.html:5
 #: ../static/i18n/pages/test-WAIT.html:5
 msgid ""
 "Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte\n"
@@ -4399,7 +4193,7 @@ msgstr ""
 #~ " ist, etwas mehr.) </p>\n"
 #~ msgstr ""
 #~ "\n"
-#~ "<h5> How do I participate? </h5>\n"
+#~ " <h5> How do I participate? </h5>\n"
 #~ "\n"
 #~ "            <ol>\n"
 #~ "              <li>  You should have "
@@ -4454,63 +4248,6 @@ msgstr ""
 
 #~ msgid ""
 #~ "\n"
-#~ "<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
-#~ "<ol class=\"ui list\">\n"
-#~ "    <li> Sie sollten ein Teströhrchen"
-#~ " (kleiner Plastikbecher mit Schraubverschluss)"
-#~ " erhalten haben. Es enthält etwas\n"
-#~ "        salziges Wasser. (5 ml reines Wasser mit 0.9% Kochsalz.)\n"
-#~ "    </li>\n"
-#~ "    <li> Zunächst sollten Sie nun "
-#~ "diese Informationen hier lesen und, wenn"
-#~ " Sie mit allem einverstanden sind, am"
-#~ " Ende der\n"
-#~ "        Seite mit einem Mausklick "
-#~ "bestätigen, dass Sie teilnehmen möchten.\n"
-#~ ""
-#~ "    </li>\n"
-#~ "    <li> Auf der nächsten Seite "
-#~ "werden wir Sie dann bitten, Ihre "
-#~ "Kontaktdaten anzugeben (damit das "
-#~ "Gesundheitsamt Sie\n"
-#~ "        erreichen kann, falls Sie "
-#~ "infiziert sein sollten), sowie den Code,"
-#~ " der auf Ihrem Teströhrchen aufgeklebt "
-#~ "ist.\n"
-#~ "        Ihr Name und Ihre Kontaktdaten"
-#~ " werden verschlüsselt so abgespeichert, "
-#~ "dass sie uns (dem Team der "
-#~ "Universität\n"
-#~ "        Heidelberg) nicht zugänglich sind, "
-#~ "sondern nur dem Gesundheitsamt, das den"
-#~ " Versuch mit betreut.\n"
-#~ "    </li>\n"
-#~ "    <li> Dann sehen Sie sich bitte"
-#~ " <a href=\"https://www.youtube.com/watch?v=hVniPRMuCjo\">ein"
-#~ " kurzes Video</a> an, dass\n"
-#~ "        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
-#~ "    </li>\n"
-#~ "    <li> Nun spucken Sie in das"
-#~ " Teströhrchen, genau wie im Video "
-#~ "gezeigt.</li>\n"
-#~ "    <li> Schließlich senden Sie uns "
-#~ "das Röhrchen per Post zu oder "
-#~ "geben es an einer Sammelstelle ab. "
-#~ "Instruktionen\n"
-#~ "        finden Sie auf der Webseite.\n"
-#~ "    </li>\n"
-#~ "</ol>\n"
-#~ "<p><b> Zeitaufwand: </b> Insgesamt sollte "
-#~ "Sie das in etwa 15-25 Minuten "
-#~ "Ihrer Zeit kosten. (Wenn Sie das "
-#~ "Video schon\n"
-#~ "    kennen, etwas weniger, und wenn "
-#~ "ihr nächste Briefkasten ein weiter Weg"
-#~ " ist, etwas mehr.) </p>\n"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "\n"
 #~ "<h3 class=\"ui header\"> Was bedeutet "
 #~ "es, wenn wir in Ihrer Probe kein"
 #~ " Virus finden? </h3>\n"
@@ -4552,56 +4289,23 @@ msgstr ""
 #~ "detected), it does not mean an "
 #~ "all-clear signal! Please keep in mind"
 #~ " that our test is not perfect "
-#~ "and may only detect 60%% to 80%%"
-#~ " of all infections by a rough "
-#~ "estimation. Moreover, even if the virus"
-#~ " should not be detected in your "
-#~ "saliva sample, you might have gotten "
-#~ "infected soon after taking the sample."
-#~ " Or you might have been infected "
-#~ "just before taking the sample and "
-#~ "there were not enough virus particles"
-#~ " produced to be detected in your "
-#~ "saliva. </p>\n"
+#~ "and may only detect 60-80%% of all"
+#~ " infections by a rough estimation. "
+#~ "Moreover, even if the virus should "
+#~ "not be detected in your saliva "
+#~ "sample, you might have gotten infected"
+#~ " soon after taking the sample. Or "
+#~ "you might have been infected just "
+#~ "before taking the sample and there "
+#~ "were not enough virus particles produced"
+#~ " to be detected in your saliva. "
+#~ "</p>\n"
 #~ "          <p> As long as the virus"
 #~ " is in circulation, we all must "
 #~ "be careful and observe all hygiene "
 #~ "and distance regulations. A negative "
 #~ "test result should not change this! "
 #~ "</p>\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "<h3 class=\"ui header\"> Was bedeutet "
-#~ "es, wenn wir in Ihrer Probe kein"
-#~ " Virus finden? </h3>\n"
-#~ "<p> Sie können das Ergebnis auch "
-#~ "selbst auf nachfolgender Webseite abfragen."
-#~ " Auch wenn es negativ sein sollte "
-#~ "(kein\n"
-#~ "    Virus nachgewiesen), ist das aber"
-#~ " keine völlige Entwarnung! Bedenken Sie "
-#~ "bitte, dass unser Test nicht perfekt "
-#~ "ist\n"
-#~ "    und vielleicht (grob geschätzt) nur"
-#~ " 60-80% der Infektionen erkennt. Außerdem:"
-#~ " auch wenn Sie im Moment der\n"
-#~ "    Speichelprobe nicht infiziert waren, "
-#~ "heißt das nicht, dass Sie sich "
-#~ "nicht vielleicht schon kurze Zeit später"
-#~ "\n"
-#~ "    infiziert haben könnten. Oder Sie"
-#~ " hatten sich bereits kurz vorher "
-#~ "infiziert, aber das Virus hatte sich "
-#~ "noch nicht\n"
-#~ "    hinreichend vermehrt, um in ihrem"
-#~ " Speichel nachweisbar zu sein. </p>\n"
-#~ "<p> Solange das Virus im Umlauf "
-#~ "ist, müssen wir alle stets vorsichtig"
-#~ " sein, und alle Hygiene- und "
-#~ "Abstandsregeln\n"
-#~ "    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
-#~ msgstr ""
 
 #~ msgid "Probe erfolgreich eingetragen"
 #~ msgstr "Sample added successfully"
@@ -4617,4 +4321,193 @@ msgstr ""
 
 #~ msgid "Lab Interface - Query"
 #~ msgstr "Lab Interface - Query"
+
+#~ msgid "Lab Interface - Home"
+#~ msgstr "Lab Interface - Home"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Dies ist das Laborinterface, um"
+#~ " Datensätze der Testungen zu editieren. "
+#~ "Folgende Prozesse stehen zur Verfügung:\n"
+#~ ""
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "This is the laboratory interface to "
+#~ "edit the test sample data. The "
+#~ "following processes are available:"
+
+#~ msgid "Probeneingang"
+#~ msgstr "Probe arrival"
+
+#~ msgid ""
+#~ "\n"
+#~ "            Hier werden nach dem Empfang"
+#~ " der Probe die Probenröhrchen den\n"
+#~ "            jeweiligen Test-Racks/Plates "
+#~ "zugeordnet. Hier muss zuerst der Barcode"
+#~ " des Racks eingescannt werden\n"
+#~ "            und nachfolgend alle "
+#~ "Probenröhrchen dieses Racks eingescannt "
+#~ "werden.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "After the arrival of the sample "
+#~ "the sample is assigned to a "
+#~ "plate/rack. For this the barcode of "
+#~ "the rack needs to be scanned.\n"
+#~ "After this all samples of the rack needs to be scanned."
+
+#~ msgid "Rack editieren"
+#~ msgstr "Edit rack"
+
+#~ msgid ""
+#~ "\n"
+#~ "            Hier werden die Ergebnisse "
+#~ "des LAMP-Tests eingetragen. Hierzu wird"
+#~ " das Rack eingescannt und danach\n"
+#~ "            jeweils die positiven und "
+#~ "unklaren Probenröhrchen eingescannt. Alle "
+#~ "nicht eingescannten Proben\n"
+#~ "            des Racks werden automatisch "
+#~ "als negativ gewertet. Die Listen der "
+#~ "positiven/unklaren Proben werden\n"
+#~ "            einfach zeilenweise eingefügt (Barcode-Scanner).\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "Here all results for the LAMP-"
+#~ "Stage are submitted. For this the "
+#~ "rack is scanned and all positive "
+#~ "and inconclusive samples are scanned "
+#~ "individually. All \n"
+#~ "samples that have not been scanned "
+#~ "count as negative samples. The lists "
+#~ "of positive/inconclusive samples are inserted"
+#~ " line-wise (you can use a "
+#~ "normal barcode scanner)."
+
+#~ msgid "Probe suchen"
+#~ msgstr "Query sample"
+
+#~ msgid ""
+#~ "\n"
+#~ "            Hier können einzelne Proberöhrchen"
+#~ " gesucht werden und der Status sowie"
+#~ " das Rack manuell gesetzt werden.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "Here samples can be looked up and"
+#~ " the status and rack can be set"
+#~ " manually."
+
+#~ msgid "Barcode: "
+#~ msgstr "Barcode: "
+
+#~ msgid "Historie"
+#~ msgstr "History"
+
+#~ msgid "Status der Probe"
+#~ msgstr "Sample status"
+
+#~ msgid "Speichern"
+#~ msgstr "Save"
+
+#~ msgid "Lab Interface - Proben registrieren"
+#~ msgstr "Lab Interface - Register Samples"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Hier können Barcodes als eingegangen markiert werden:\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "Mark Barcodes as arrived here:"
+
+#~ msgid "Ergebnis für: "
+#~ msgstr "Result for: "
+
+#~ msgid "Barcode nicht gefunden."
+#~ msgstr "Barcode not found."
+
+#~ msgid ""
+#~ "\n"
+#~ "        Hier können Barcodes gesucht werden:\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "Here barcodes can be looked up"
+
+#~ msgid "Search Barcode..."
+#~ msgstr "Query barcode…"
+
+#~ msgid "Keine Probe mit diesem Barcode gefunden."
+#~ msgstr "No sample for barcode found."
+
+#~ msgid "Lab Interface - Testergebnisse registrieren (Rack)"
+#~ msgstr "Lab Interface - Register test results (Rack)"
+
+#~ msgid ""
+#~ "\n"
+#~ "        Hier können die Testergebnisse "
+#~ "registriert werden. Der Normalfall ist "
+#~ "ein negatives Ergebnis. Positive\n"
+#~ "        und unklare Proben werden "
+#~ "(zeilenweise) in die entsprechenden Felder "
+#~ "eingegeben.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "Here test results can be registered. "
+#~ "The normal case is a negative "
+#~ "result. Positive and inconclusive results "
+#~ "are inserted likewise in the different"
+#~ " fields."
+
+#~ msgid ""
+#~ "Nachfolgend die Barcodes der jeweils "
+#~ "positiven / unklaren Proben (zeilenweise "
+#~ "separiert)"
+#~ msgstr ""
+#~ "Following the barcodes of the "
+#~ "positive/inconclusive samples (linewise separated)"
+
+#~ msgid "Positive LAMP Proben (Barcodes)"
+#~ msgstr "Positive LAMP samples (barcodes)"
+
+#~ msgid "Positive Proben (Barcodes)"
+#~ msgstr "Positive samples (barcodes)"
+
+#~ msgid "Unklare LAMP Proben (Barcodes)"
+#~ msgstr "Inconclusive LAMP samples (barcodes)"
+
+#~ msgid "Unklare Proben (Barcodes)"
+#~ msgstr "Inconclusive samples (barcodes)"
+
+#~ msgid "Abschicken"
+#~ msgstr "Submit"
+
+#~ msgid "Barcode unbekannt"
+#~ msgstr "Barcode is unknown"
+
+#~ msgid "Der Barcode, den Sie eingegeben haben ist unbekannt."
+#~ msgstr "The submitted barcode is unknown."
+
+#~ msgid "Barcode: %(barcode)s"
+#~ msgstr "Barcode: %(barcode)s"
+
+#~ msgid "Vielleicht haben Sie sich vertippt."
+#~ msgstr "Maybe you have typed it wrongly?"
+
+#~ msgid "Bitte gehen Sie zurück und versuchen Sie es noch einmal."
+#~ msgstr "Please go back and try again."
+
+#~ msgid "Interner Fehler"
+#~ msgstr "Internal Error"
+
+#~ msgid "Das Ergebnis ihres Tests ist fehlerhaft gespeichert."
+#~ msgstr "The encoding of your result is erroneous."
 
