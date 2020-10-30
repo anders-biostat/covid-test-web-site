@@ -50,12 +50,14 @@
 
 
 
+
 </script>
 
 <style>
     .ui.dimmer {
         background-color: rgba(0,255,0,0.7);
     }
+
 
 
 </style>
@@ -80,70 +82,35 @@
         <div class="ui large form">
             <div class="two fields">
                 <div class="required field">
-                    <label>Barcode</label>
-                    {{ form.barcode }}
-                    {% if form.barcode.errors %}
-                    <ol>
-                        {% for error in form.barcode.errors %}
-                        <li><strong>{{ error|escape }}</strong></li>
-                        {% endfor %}
-                    </ol>
-                    {% endif %}
+                    <label>{{ form.barcodes.label }}</label>
+                    {{ form.barcodes }}
                 </div>
                 <div class="required field">
-                    <label>Rack (Barcode)</label>
+                    <label>{{ form.rack.label }}</label>
                     {{ form.rack }}
-                    {% if form.rack.errors %}
-                    <ol>
-                        {% for error in form.rack.errors %}
-                        <li><strong>{{ error|escape }}</strong></li>
-                        {% endfor %}
-                    </ol>
-                    {% endif %}
                 </div>
             </div>
-            <input type="submit" style="visibility: hidden;"/>
+            <button class="ui button" type="submit">{% blocktrans %}Abschicken{% endblocktrans %}</button>
         </div>
     </form>
+    {% if no_success %}
+    <div class="ui segment">
 
-    {% if sample %}
+        {% blocktrans %}Proben nicht erfolgreich eingetragen:{% endblocktrans %}
+        <ul>
+            <li>
+                {% blocktrans %}Barcode nicht in db: {% endblocktrans %}{{ barcodes_not_in_db|join:", "}}
+            </li>
+            <li>
+                {% blocktrans %}Status konnte nicht gesetzt werden: {% endblocktrans %}{{ status_not_set|join:", " }}
+            </li>
+            <li>
+                {% blocktrans %}Rack konnte nicht gesetzt werden: {% endblocktrans %}{{ rack_not_set|join:", " }}
+            </li>
+        </ul>
 
-    <p>{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</p>
-
-    <div class="ui card">
-        <div class="content">
-            <div class="header"></div>
-            <div class="meta">
-                Registrations: {{ sample.registrations }}<br>
-                Batch: {{ sample.batch }}
-            </div>
-
-
-            <h4 class="ui sub header">{% blocktrans %}Historie{% endblocktrans %}</h4>
-            <div class="extra content">
-                <div class="ui small feed">
-                    {% for result in sample.results %}
-                    <div class="event">
-                        <div class="content">
-                            <div class="summary">
-                                {{ result.updated_time }}
-                                <span>{{ result.status }}</span>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    {% elif display_sample != False %}
-    <div class="ui error message">
-        <p>{% blocktrans %}Barcode nicht gefunden.{% endblocktrans %}</p>
     </div>
     {% endif %}
+
 </div>
 {% endblock %}

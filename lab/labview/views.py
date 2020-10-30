@@ -3,66 +3,98 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required, permission_required
+from django.http import HttpResponse
 
 from common.models import Sample, Event, Registration
 from common.statuses import SampleStatus
 
-from .forms import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm
+from .forms import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm, LabGenerateBarcodeForm
+
 
 @login_required
 def index(request):
     return render(request, "index.html")
 
+
 def random_barcode(length=6):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
+
 
 def random_accesscode(length=9):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
 
+
 @login_required
 def generate_barcodes(request):
+    form = LabGenerateBarcodeForm()
     if request.method == 'POST':
-        for i in range(50):
-            count = 1
-            while count == 1:
-                barcode = random_barcode(length=6)
-                count = Sample.objects.filter(barcode=barcode).count()
+        form = LabGenerateBarcodeForm(request.POST)
+        if form.is_valid():
+            for j in range(form.cleaned_data['count']):
+                batch_barcodes = []
+                for i in range(50):
+                    count = 1
+                    while count == 1:
+                        barcode = random_barcode(length=6)
+                        count = Sample.objects.filter(barcode=barcode).count()
 
-            count = 1
-            while count == 1:
-                accesscode = random_accesscode(length=9)
-                count = Sample.objects.filter(barcode=barcode).count()
+                    count = 1
+                    while count == 1:
+                        accesscode = random_accesscode(length=9)
+                        count = Sample.objects.filter(barcode=barcode).count()
 
-    return render(request, "generate_barcodes.html")
+                    batch_barcodes.append((barcode, accesscode))
+        response = HttpResponse(content_type='text/txt')
+        response['Content-Disposition'] = 'attachment; filename="batch.txt"'
+        for barcode, accesscode in batch_barcodes:
+            response.write("%s\n" % barcode)
+        return response
+
+    return render(request, "generate_barcodes.html", {"form": form})
+
 
 @login_required
 def sample_check_in(request):
     if request.method == 'POST':
         form = LabCheckInForm(request.POST)
         if form.is_valid():
-            barcode = form.cleaned_data['barcode']
-            rack = form.cleaned_data['rack']
+            barcodes = [x.strip().upper() for x in form.data['barcodes'].split()]
+            rack = form.cleaned_data['rack'].strip().upper()
 
-            sample = Sample.objects.get(barcode=barcode)
-            event = Event(
-                status=SampleStatus.WAIT.value,
-            )
+            barcodes_not_in_db = []
+            status_not_set = []
+            rack_not_set = []
 
-            if sample is None:
-                messages.add_message(request, messages.ERROR, _('Barcode nicht in Datenbank'))
-            else:
-                modified_rack = sample.modify(rack=rack)
-                if modified_rack:
-                    messages.add_message(request, messages.SUCCESS, _('Rack erfolgreich eingetragen'))
-                modified_events = sample.modify(push__events=event)
-                if modified_events:
-                    messages.add_message(request, messages.SUCCESS, _('Event erfolgreich hinzugefügt'))
+            for barcode in barcodes:
+                sample = Sample.objects.filter(barcode=barcode).first()
+                if not sample:
+                    barcodes_not_in_db.append(barcode)
+                else:
+                    set_rack = sample.modify(rack=rack)
+                    set_status = sample.set_status(SampleStatus.WAIT)
+                    if not set_rack:
+                        rack_not_set.append(barcode)
+                    if not set_status:
+                        status_not_set.append(barcode)
 
-            form.fields['rack'].initial = rack
-            return render(request, 'sample_check_in.html', {"form": form, "sample": sample})
+            if len(barcodes_not_in_db) > 0:
+                messages.add_message(request, messages.ERROR, _('Einige Barcodes waren nicht in der Datenbank'))
+            if len(status_not_set) > 0:
+                messages.add_message(request, messages.ERROR, _('Einige status konnten nicht gesetzt werden'))
+            if len(rack_not_set) > 0:
+                messages.add_message(request, messages.ERROR, _('Einige racks konnten nicht gesetzt werden'))
+            no_success = True
+            if len(rack_not_set) == 0 and len(status_not_set) == 0 and len(barcodes_not_in_db) == 0:
+                no_success = False
+                messages.add_message(request, messages.SUCCESS, _('Proben erfolgreich eingetragen'))
+
+            return render(request, 'sample_check_in.html',
+                          {"form": form, "sample": sample, "barcodes_not_in_db": barcodes_not_in_db,
+                           "rack_not_set": rack_not_set, "status_not_set": status_not_set, "no_success": no_success})
     else:
         form = LabCheckInForm()
     return render(request, 'sample_check_in.html', {"form": form, "display_sample": False})
+
 
 @login_required
 def sample_edit_rack(request):
@@ -99,6 +131,7 @@ def sample_edit_rack(request):
 
     return render(request, 'sample_rack_results.html', {'form': form})
 
+
 @login_required
 def sample_query(request):
     form = LabQueryForm()
@@ -109,7 +142,9 @@ def sample_query(request):
             if form.is_valid():
                 search = form.cleaned_data['search'].upper().strip()
                 sample = Sample.objects.filter(barcode=search).first()
-                return render(request, 'probe_query.html',
+                if sample:
+                    edit_form = LabProbeEditForm(initial={'rack': sample.rack})
+                return render(request, 'sample_query.html',
                               {'form': form, 'edit_form': edit_form, 'sample': sample, 'search': search})
         if 'edit' in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)

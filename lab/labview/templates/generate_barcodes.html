@@ -10,30 +10,21 @@
         {% endblocktrans %}
     </p>
 
-    <form style="margin-bottom: 20px;" action="{% url 'labview:query' %}" method="post" class="ui form">
+    <form style="margin-bottom: 20px;" action="{% url 'labview:barcodes' %}" method="post" class="ui form">
         {% csrf_token %}
-        <div class="ui search">
-            <div class="ui icon input">
-                <input name="search" class="prompt" type="text"
-                       placeholder="{% blocktrans %}Search Barcode...{% endblocktrans %}" autofocus>
-                <i class="search icon"></i>
-            </div>
-            <div class="results"></div>
+
+        <div class="form field">
+        <label>{{ form.count.label }}</label>
+        {{ form.count }}
         </div>
+
+        <div class="form field">
+        <label>{{ form.key.label }}</label>
+        {{ form.key }}
+        </div>
+
+        <button class="ui button" name="generate" type="submit">Generieren</button>
     </form>
 
-    {% if search %}
-    <p>{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</p>
-    {% endif %}
-
-
-    {% if sample %}
-    {% include 'snippets/probe.html' %}
-    {% elif search %}
-    <div class="ui warning message">
-        <p>{% blocktrans %}Keine Probe mit diesem Barcode gefunden.{% endblocktrans %}</p>
-    </div>
-    {% endif %}
-</div>
 </div>
 {% endblock %}

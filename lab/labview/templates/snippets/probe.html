@@ -3,7 +3,7 @@
     <div class="content">
         <h2 class="ui header">{% blocktrans %}Barcode: {% endblocktrans %}{{ sample.barcode }}</h2>
         <div class="meta">
-            <b>Registrations:</b> {{ sample.registrations.count }}<br>
+            <b>Registrations:</b> {{ sample.registrations|length }}<br>
             <b>Batch:</b> {{ sample.batch }}<br>
             <b>Rack:</b> {{ sample.rack }}
         </div>
@@ -29,20 +29,16 @@
 </div>
 
 
-
-
 <div class="ui bottom attached message">
     <form action="{% url 'labview:query' %}" class="ui form" method="post">
         {% csrf_token %}
-        <div class="two fields">
-            <div class="field">
-                <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>
-                {{ edit_form.status }}
-            </div>
-            <div class="field">
-                <label>{% blocktrans %}Rack{% endblocktrans %}</label>
-                {{ edit_form.rack }}
-            </div>
+        <div class="field">
+            <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>
+            {{ edit_form.status }}
+        </div>
+        <div class="field">
+            <label>{% blocktrans %}Rack{% endblocktrans %}</label>
+            {{ edit_form.rack }}
         </div>
         <input name="barcode" value="{{ sample.barcode }}" hidden>
         <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
