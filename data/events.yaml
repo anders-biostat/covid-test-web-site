@@ -24,9 +24,10 @@ batches:
 
 name: codes not yet assigned to a testing event
 instructions: |
-   <p>Dieser Code hätte noch nicht ausgegeben werden sollen. Hier ist etwas durcheinander gekommen. 
-   Bitte kontaktieren Sie uns.</p>
-   <p>This code should not haven been handed out yet. Something got mixed up. Please contact us.</p>
+     <p>(Hinweise zur Proben-Rückgabe nicht verfügbar. Bitte wenden Sie sich an die ausgebende
+     Stelle, falls Sie nicht wissen, wo Sie das Röhrchen abgeben sollen.)</p>
+     <p>(Instructions for sample return not available. Please ask at the place where you got the test
+     kit if you do not know where to return the sample to.)</p>  
 batches:
   - batch_A_5.lst
   - batch_A_6.lst
@@ -34,5 +35,252 @@ batches:
   - batch_A_8.lst
   - batch_A_9.lst
   - batch_A_10.lst
-  - batch_A_unassigned.lst  
+  - batch_A_unassigned.lst
+  - batch_A_old.lst 
 
+---
+
+name: test codes
+instructions: |
+   This is a code to be used only for testing purposes.
+batches:
+  - test_codes.lst
+
+---
+
+name: Test-Aktion ZMBH (KW 36)
+instructions: Please return the sample on Thursday before 10am.
+batches:
+  - M1_MicronicBatch1.txt
+  - batch_A_20.lst
+  - batch_A_21.lst
+  - batch_A_23.lst
+  - batch_A_26.lst
+  - batch_A_28.lst
+
+---
+
+name: Test-Aktion INF345(ZMBH)
+instructions: Please return your smaples before 9:45am to the first floor room 138 at INF 345.
+batches:
+  - batch_A_46.lst      
+  - batch_A_53.lst
+  - batch_A_54.lst
+  - batch_A_67.lst
+  - batch_A_66.lst
+  - batch_A_72.lst
+  - batch_A_91.lst
+  - batch_A_89.lst
+  - batch_A_78.lst
+  - batch_A_75.lst
+  - batch_A_94.lst
+
+---
+
+name: Test-Aktion Knoplab
+instructions: Please follow the instructions from Michael
+batches:
+  - batch_A_50.lst
+  - batch_A_55.lst
+  - batch_A_56.lst
+  - batch_A_59.lst
+  - batch_A_92.lst
+  - batch_A_79.lst
+  - batch_A_107.lst
+
+---
+
+name: Test-Aktion COS
+instructions: Please return the sample before 9:45am to doorman's office in the COS building.
+batches:
+  - M2_MicronicBatch2.txt
+  - batch_A_15.lst
+  - batch_A_22.lst
+  - batch_A_24.lst
+  - batch_A_25.lst
+  - batch_A_27.lst
+  - batch_A_44.lst
+  - batch_A_45.lst
+  - batch_A_47.lst
+  - batch_A_48.lst
+  - batch_A_51.lst
+  - batch_A_52.lst
+  - batch_A_57.lst
+  - batch_A_62.lst
+  - batch_A_71.lst
+  - batch_A_73.lst
+  - batch_A_69.lst
+  - batch_A_70.lst
+  - batch_A_87.lst
+  - batch_A_41.lst
+  - batch_A_42.lst
+  - batch_A_43.lst
+  - batch_A_115.lst
+
+---
+
+name: Physicalisch-Chemisches Institut
+instructions: Please return your samples on Tuesday before 10am 
+batches:
+  - batch_A_58.lst
+  - batch_A_74.lst
+
+---
+
+name: Micronic tubes, not yet assigned
+instructions: [tubes not assigned to testing event yet] 
+batches:
+  - M3_MicronicBatch3.txt
+  - M4_MicronicBatch4.txt
+
+---
+
+name: Test
+instructions: return it to Fereydoon
+batches:
+        - test_code.txt
+
+---
+
+name: Torpenmedizin
+instructions: Please return your samples befor 10am.
+batches:
+  - batch_A_49.lst
+  - batch_A_68.lst
+
+---
+
+name: AG Brügger
+instructions: Please return your samples before 10am.
+batches:
+  - batch_A_61.lst
+
+---
+
+name: AG Liu
+instructions: Please return your samples before 10am.
+batches:
+  - batch_A_64.lst
+    
+---
+
+name: Connectival
+instructions: Please follow the instructions in the email.
+batches:
+  - batch_A_65.lst
+  - special_simon_1.lst
+
+---
+
+name: Test-Aktion EMBL
+instructions: Drop your sample in the collection boxes installed in front of the first aid rooms 1C-302B in the main building or in the ATC in room 10-205 from Monday 09:00am until Tuesday mornings at 09:30am.
+batches:
+  - batch_A_40.lst
+  - batch_A_36.lst
+  - batch_A_37.lst
+  - batch_A_38.lst
+  - batch_A_39.lst
+  - batch_A_31.lst
+  - batch_A_32.lst
+  - batch_A_33.lst
+  - batch_A_34.lst
+  - batch_A_35.lst
+  - batch_A_155.lst
+  - batch_A_148.lst
+  - batch_A_149.lst
+  - batch_A_150.lst
+  - batch_A_151.lst
+  - batch_A_152.lst
+
+
+
+---
+
+name: B-FAST
+instructions: Please return your samples before 10am.
+batches:
+  - batch_A_60.lst
+  - batch_A_95.lst
+
+---
+
+name: IPMB
+instructions: Please return the sample before 10am.
+batches:
+  - batch_A_93.lst
+  - batch_A_84.lst
+
+---
+
+name: IZN-Neurobiologie INF 366
+instructions: Please return the sample before 10am.
+batches:
+  - batch_A_80.lst
+  - batch_A_113.lst
+
+---
+
+name: CIID
+instructions: Please return your sample before 10am 
+batches:
+  - batch_A_90.lst
+
+---
+
+name: Clayton
+instructions: Please return your sample before 10am 
+batches:
+  - batch_A_108.lst
+  - batch_A_133.lst
+
+---
+
+name: COS/Rektorat
+instructions: Please return your sample before 9:45am 
+batches:
+  - batch_A_88.lst
+
+---
+
+name: Robin
+instructions: Please return your sample before 9:45am 
+batches:
+  - batch_A_86.lst
+
+---
+
+name: Bioquant
+instructions: Please return your sample before 9:45am.
+batches:
+  - batch_A_77.lst
+  - batch_A_116.lst
+  - batch_A_124.lst
+  - batch_A_135.lst
+
+---
+
+name: Contact tracing
+instructions: Please return your sample.
+batches:
+  - batch_A_82.lst
+  - batch_A_111.lst
+  - batch_A_112.lst
+
+---
+
+name: GV2
+instructions: Please return your sample.
+batches:
+  - batch_A_85.lst
+  - batch_A_114.lst
+
+
+
+
+
+
+
+
+
+  
+   

@@ -231,9 +231,9 @@ def app_result_query( environ, start_response ):
 				elif remainder.lower().startswith( "failed" ):
 					start_response('303 See Other', [('Location', 'test-failed.html')])
 					return []
-                                elif remainder.lower().startswith( "probpos" ):
-                                        start_response('303 See Other', [('Location', 'test-result-probpos.html')])
-                                        return []
+				elif remainder.lower().startswith( "probpos" ):
+					start_response('303 See Other', [('Location', 'test-result-probpos.html')])
+					return []
 				else:
 					start_response('200 OK', [('Content-Type', 'text/html')])
 					return [
@@ -256,7 +256,25 @@ def app_result_query( environ, start_response ):
 		"(Falls es bereits einige Tage her ist, dass Sie die Probe abgegeben haben, ist sie vielleicht ",
 		"verloren gegangen. Fragen Sie bitte bei uns (robinburk1411@googlemail.com) nach." ]
 
+def app_decrypt( environ, start_response ):
+	try:
+		request_body_size = int( environ.get('CONTENT_LENGTH', 0) )
+	except(ValueError):
+		request_body_size = 0
 
+	request_body = environ['wsgi.input'].read(request_body_size)
+	fields = urllib.parse.parse_qs( request_body.decode("ascii") )
+	fields = { k : v[0] for (k,v) in fields.items() }
+	barcode = fields['bcode'].upper()
+	lines = []
+	subject = {}
+	with open(SUBJECT_DATA_FILENAME) as f:
+		for line in f:
+			if barcode in line:
+				lines.append(line)
+	subject[barcode] = lines
+	start_response('200 OK', [('Content-type','text/plain')])
+	return[subject]
 
 
 def app( environ, start_response ):

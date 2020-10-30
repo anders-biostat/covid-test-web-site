@@ -1,8 +1,8 @@
 # Add this snippet into the appropriate "server" section in
 # one of the site config files in /etc/nginx/sites-available
 
-	location /corona-test {
-		alias /var/www/apps/corona-test/static;
+	location /corona {
+		alias /var/www/apps/corona-production/static;
 
 		ssi on;
 
