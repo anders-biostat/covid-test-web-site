@@ -28,3 +28,6 @@ db.sqlite3
 # Jupyter Notebook
 .ipynb_checkpoints/
 *.ipynb
+
+# Logs
+logs
