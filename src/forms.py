@@ -16,7 +16,7 @@ class RegistrationForm(FlaskForm):
     contact = StringField(_('Kontaktinformationen'), validators=[DataRequired()])
 
     psw = PasswordField(_('Passwort'), validators=[DataRequired()])
-    psw_repeat = PasswordField(_('Passwort wiederholen'), validators=[DataRequired(), EqualTo('psw', message=_(
+    psw_repeat = PasswordField(_('Passwort wiederholen'), validators=[DataRequired(), EqualTo('password', message=_(
         'Passwörter müssen übereinstimmen'))])
 
 

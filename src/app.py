@@ -24,7 +24,7 @@ dir = os.path.abspath('')
 # Creating RSA Instance for encryption
 rsa_public_filename = env("RSA_PUBLIC_FILENAME", cast=str, default="public.pem")
 PUBLIC_KEY_FILENAME = os.path.join(dir, "../data/", rsa_public_filename)
-rsa_instance = encryption_helper.rsa_instance(PUBLIC_KEY_FILENAME)
+rsa_instance = encryption_helper.rsa_instance_from_key(PUBLIC_KEY_FILENAME)
 
 RESULTS_FILENAME = os.path.join(dir, "../data/results.txt")
 
@@ -108,8 +108,8 @@ def results_query():
     form = ResultsQueryForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            barcode = form.bcode.data.upper()
-            form_password = form.psw.data
+            barcode = form.barcode.data.upper()
+            form_password = form.password.data
 
             # Hash entered password
             sha_instance = hashlib.sha3_384()
@@ -183,12 +183,12 @@ def register():
     form = RegistrationForm()
     if request.method == 'POST':  # POST
         if form.validate_on_submit():
-            barcode = form.bcode.data.upper().strip()
+            barcode = form.barcode.data.upper().strip()
             name = form.name.data
             address = form.address.data
             contact = form.contact.data
-            psw = form.psw.data
-            psw_repeat = form.psw_repeat.data
+            psw = form.password.data
+            psw_repeat = form.password_repeat.data
 
             sample = Sample.objects.get(barcode=barcode)
 
@@ -198,7 +198,7 @@ def register():
             else:
                 session["barcode"] = barcode
 
-                doc = encryption_helper.encode_subject_data(rsa_instance, barcode, name, address, contact, psw)
+                doc = encryption_helper.encrypt_subject_data(rsa_instance, barcode, name, address, contact, psw)
 
                 registration = Registration(
                     barcode=doc['barcode'],

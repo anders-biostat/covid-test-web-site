@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 
 from .forms_lab import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm, LabGenerateBarcodeForm
+from .models import Sample, Key, Registration, Event
 from .statuses import SampleStatus
 
 @login_required

@@ -1,10 +1,18 @@
-import Crypto.PublicKey.RSA, Crypto.Cipher.PKCS1_OAEP
+import Crypto.PublicKey.RSA
+import Crypto.Cipher.PKCS1_OAEP
 import hashlib, binascii
 
 
-def rsa_instance(public_key_txt):
-    # Read public key for encryption of contact information
-    public_key = Crypto.PublicKey.RSA.import_key(public_key_txt)
+def rsa_instance_from_key(public_key_string: str):
+    """Receive a rsa_instance for encryption by submitting a RSA public key
+
+    Args:
+        public_key_string (str): RSA-Public-Key as String
+    Returns:
+        rsa_instance
+
+    """
+    public_key = Crypto.PublicKey.RSA.import_key(public_key_string)
     rsa_instance = Crypto.Cipher.PKCS1_OAEP.new(public_key)
 
     # Get fingerprint of public key
@@ -18,7 +26,7 @@ def binary_to_ascii(binary):
     return binascii.b2a_base64(binary, newline=False).decode('ascii')
 
 
-def encrypt_string(string, aes_instance, fmt=str):
+def encrypt_string(string: str, aes_instance, fmt=str):
     bytes_string = string.encode('utf-8')
     if len(bytes_string) % 16 != 0:
         bytes_string += b'\000' * (16 - len(bytes_string) % 16)
@@ -28,8 +36,7 @@ def encrypt_string(string, aes_instance, fmt=str):
         return encrypted_string
     if fmt == bytes:
         return encrypted_bytes
-    else:
-        return encrypted_string
+    return encrypted_string
 
 
 def decrypt_string(string, aes_instance, fmt=str):
@@ -40,11 +47,24 @@ def decrypt_string(string, aes_instance, fmt=str):
         return decrypted_string
     if fmt == bytes:
         return decrypted_bytes
-    else:
-        return decrypted_string
+    return decrypted_string
 
 
-def encode_subject_data(rsa_instance, name, address, contact, password):
+def encrypt_subject_data(rsa_instance, name, address, contact, password):
+    """Encrypts and hashes the personal data
+
+    Args:
+        rsa_instance: RSA-instance for encryption (name, address, contact)
+        name (str): Name to be encrypted
+        address: Address to be encrypted
+        contact: Contact to be encrypted
+        password: Password to be hashed
+
+    Returns:
+        Dictionary of encrypted/hashed data and key information (fingerprint, session_key,
+        initialization vector)
+
+    """
     # Generate session key for use with AES and encrypt it with RSA
     session_key = Crypto.Random.get_random_bytes(16)
     encrypted_session_key = rsa_instance.encrypt(session_key)
