@@ -1,0 +1,12 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <h2 class="ui header">
+    {% blocktrans %}Erprobung eines LAMP-basierten Tests auf das Coronavirus
+    SARS-CoV-2{% endblocktrans %}
+  </h2>
+  {% include "public/information-text.html" %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <h2>{% blocktrans %}Kontakt{% endblocktrans %}</h2>
+  <p>{% blocktrans %}Diese Studie wird organisert vom {% endblocktrans %}</p>
+  <ul style="list-style-type: none">
+    <li>
+      {% blocktrans %}<strong
+        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) <br />
+        Im Neuenheimer Feld 282 <br />
+        69120 Heidelberg </strong
+      >{% endblocktrans %}
+    </li>
+  </ul>
+  <p>{% blocktrans %}in Zusammenarbeit mit dem{% endblocktrans %}</p>
+  <ul style="list-style-type: none">
+    <li>
+      {% blocktrans %}<strong
+        >Gesundheitsamt Rhein-Neckar-Kreis <br />
+        Kurfürsten-Anlage 38-40 <br />
+        69115 Heidelberg </strong
+      >{% endblocktrans %}
+    </li>
+  </ul>
+  <p>{% blocktrans %}Für Anfragen wenden Sie sich bitte an{% endblocktrans %}</p>
+  <ul>
+    <li>
+      Prof. Michael Knop
+      <a href="mailto:m.knop@zmbh.uni-heidelberg.de">[Email]</a>{% blocktrans %},
+      oder {% endblocktrans %}
+    </li>
+    <li>
+      Dr. Simon Anders
+      <a href="mailto:s.anders@zmbh.uni-heidelberg.de">[Email]</a>{% blocktrans %},
+      beide am ZMBH {% endblocktrans %}
+    </li>
+  </ul>
+</div>
+{% endblock %}

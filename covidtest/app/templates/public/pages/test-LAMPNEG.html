@@ -1,0 +1,33 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <p>
+    {% blocktrans %}In Ihrer Probe konnte das Coronavirus SARS-CoV-2
+    <strong> nicht </strong> nachgewiesen werden. Vermutlich sind Sie also nicht
+    mit Covid-19 infiziert.{% endblocktrans %}
+  </p>
+  <p><strong>{% blocktrans %}Bedenken Sie aber:{% endblocktrans %}</strong></p>
+  <ul>
+    <li>
+      {% blocktrans %}Unser Test ist nicht perfekt und nicht so genau wie der
+      "offizielle" PCR-Test. Daher kommt es vor, dass der Test Infektionen
+      übersieht.{% endblocktrans %}
+    </li>
+    <br />
+    <li>
+      {% blocktrans %}Selbst, wenn Ihre Probe wirklich keinen Virus enthielt:
+      Vielleicht war das Virus nicht in Ihrem Speichel, aber anderswo im Körper.
+      Oder Sie haben sich in den letzten Tagen angesteckt, erst nachdem Sie die
+      Probe abgegeben haben. Oder Sie treffen morgen jemanden, der Sie
+      ansteckt.{% endblocktrans %}
+    </li>
+  </ul>
+  <p>
+    {% blocktrans %}<b>Daher:</b> Seien Sie weiterhin vorsichtig. Halten Sie Abstand
+    zu anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten Sie
+    weiterhin alle Regelungen zur vermeidung von Ansteckungen.{% endblocktrans %}
+  </p>
+</div>
+{% endblock %}

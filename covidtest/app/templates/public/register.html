@@ -1,0 +1,84 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load semanticui %}
+
+{% block content %}
+<form class="ui form" action="{% url 'app:register' %}" method="post">
+    {% csrf_token %}
+
+    <h1 class="ui header">
+        {% blocktrans %}Bitte registrieren Sie ihr Testkit:{% endblocktrans %}
+    </h1>
+
+    <p>
+        {% blocktrans %}
+        Die Registrierung ist notwendig, damit Sie im Falle eines positiven Testergebnisses kontaktiert werden
+        können.
+        {% endblocktrans %}
+        {% blocktrans %}Falls wir das Virus in Ihrer Probe nachweisen sollten, muss
+        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre
+        Kontakt-Daten an: {% endblocktrans %}
+    </p>
+
+    {% render_form form _help=1 %}
+
+
+    <div class="ui info message">
+        <b>{% blocktrans %}Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie
+            sich bitte ihren Zugangscode und geben Sie ein Passwort an.{% endblocktrans %}</b>
+    </div>
+
+
+    <div>
+        <a
+                href="{% url 'app:index' %}"
+                id="closeform"
+                class="ui primary button"
+                style="margin-left: 0"
+        >{% blocktrans %}Abbrechen{% endblocktrans %}</a
+        >
+        <button type="submit" class="ui primary button">
+            {% blocktrans %}Daten abschicken{% endblocktrans %}
+        </button>
+    </div>
+</form>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+></script>
+<script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+<style>
+      #interactive.viewport {
+        position: relative;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        text-align: center;
+      }
+      #interactive.viewport > canvas,
+      #interactive.viewport > video {
+        max-width: 100%;
+        width: 100%;
+      }
+      canvas.drawing,
+      canvas.drawingBuffer {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+</style>
+{% endblock %}

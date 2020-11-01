@@ -1,0 +1,24 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <h3 class="ui header">{% blocktrans %}Ooops, das Ergebnis liegt noch nicht vor... {% endblocktrans %}</h3>
+  <p class="lead">
+    {% blocktrans %}Das tut uns sehr leid! Leider haben wir immer einen kleinen
+    Bruchteil der Proben mit nicht eindeutigen Ergebnissen.{% endblocktrans %}
+  </p>
+  <p class="lead">
+    {% blocktrans %}Dies sind meist falsch-positive Ergebnisse. Um dies zu
+    überprüfen, analysieren wir diese Proben erneut mittels RT-qPCR, um ein
+    eindeutiges Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie
+    die Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe
+    abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu
+    denjenigen gehört, die erneut getestet werden, um ein schlüssiges Ergebnis
+    zu erhalten.{% endblocktrans %}
+  </p>
+  <p class="lead">
+    {% blocktrans %}Bleiben Sie dran, wir tun unser Bestes.{% endblocktrans %}
+  </p>
+</div>
+{% endblock %}

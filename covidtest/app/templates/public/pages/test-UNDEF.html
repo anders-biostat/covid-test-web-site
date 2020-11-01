@@ -1,0 +1,18 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <h3 class="ui header">{% blocktrans %}Test fehlgeschlagen{% endblocktrans %}</h3>
+  <p>
+    {% blocktrans %}Bei der Analyse Ihrer Probe ist ein technisches Problem
+    aufgetreten. Wir konnten Ihre Probe daher nicht auswerten und können Ihnen
+    kein Ergebnis mitteilen. Tut uns leid.{% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans %}Bitte geben Sie bei nächster Gelegenheit eine neue Probe ab.
+    Derartige Probleme sind die Ausnahme, und das nächste Mal klappt es
+    bestimmt.{% endblocktrans %}
+  </p>
+</div>
+{% endblock %}

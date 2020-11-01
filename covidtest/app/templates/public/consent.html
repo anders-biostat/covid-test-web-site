@@ -1,0 +1,59 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<h1 class="ui header centered">{% blocktrans %}Teilnahme am Coronavirus-Test{% endblocktrans %}</h1>
+<div class="consent-box">
+    {% include 'public/information-text.html' %}
+</div>
+
+<form class="ui form" action="{% url 'app:consent' %}" method="POST">
+    {% csrf_token %}
+
+    <div style="text-align: center;" class="field">
+        <div class="ui checkbox">
+            <input
+                    name="terms"
+                    type="checkbox"
+                    id="TOC"
+                    value="1"
+                    onclick="EnableSubmit(this)"
+            />
+            <label>{% blocktrans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endblocktrans %}</label>
+        </div>
+    </div>
+
+    <div class="field" style="text-align: center">
+        <a href="{% url 'app:index' %}" id="closeform" class="ui primary button"
+        >{% blocktrans %}Zurück{% endblocktrans %}</a
+        >
+        <button
+                type="submit"
+                id="showForm"
+                class="ui primary button"
+                disabled
+        >
+            {% blocktrans %}Weiter{% endblocktrans %}
+        </button>
+    </div>
+</form>
+
+<script>
+  //JavaScript function that enables or disables a submit button depending
+  //on whether a checkbox has been ticked or not.
+  function EnableSubmit(termsCheckBox) {
+    //If the checkbox has been checked
+    if (termsCheckBox.checked) {
+      //Set the disabled property to FALSE and enable the button.
+      document.getElementById("showForm").disabled = false;
+      document.getElementById("showForm").classList.remove("disabled");
+    } else {
+      //Otherwise, disable the submit button.
+      document.getElementById("showForm").disabled = true;
+      document.getElementById("showForm").classList.add("disabled");
+    }
+  }
+
+</script>
+{% endblock %}

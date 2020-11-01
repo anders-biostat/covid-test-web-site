@@ -23,34 +23,3 @@ class RegistrationForm(FlaskForm):
 class ResultsQueryForm(FlaskForm):
     bcode = StringField(_('Barcode'), validators=[DataRequired()])
     psw = PasswordField(_('Passwort'), validators=[DataRequired()])
-
-class LabQueryForm(FlaskForm):
-    search = StringField(_('Barcode'), validators=[DataRequired()])
-
-class LabCheckInForm(FlaskForm):
-    barcode = StringField(_('Barcode'), validators=[DataRequired()])
-    rack = StringField(_('Rack'), validators=[DataRequired()])
-
-class LabRackResultsForm(FlaskForm):
-    rack = StringField(_('Rack'), validators=[DataRequired()])
-
-    lamp_positive = StringField(_('LAMP positiv'))
-    lamp_inconclusive = StringField(_('LAMP unklares Ergebnis'))
-
-class LabProbeEditForm(FlaskForm):
-    barcode = StringField(_('Barcode'))
-    rack = StringField(_('Rack'))
-    status = SelectField(
-        _('Probenstatus'),
-        choices=[
-            ('-', '-'),
-            ('printed', 'Printed'),
-            ('wait', 'Waiting'),
-            ('negative', 'LAMP negative'),
-            ('lamppos', 'LAMP positive'),
-            ('lampinc', 'LAMP inconclusive'),
-            ('pcrpos', 'PCR positive'),
-            ('pcrneg', 'PCR negative'),
-            ('undef', 'Undefined'),
-        ]
-    )

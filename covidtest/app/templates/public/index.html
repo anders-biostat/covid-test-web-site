@@ -1,0 +1,27 @@
+{% extends 'public/base.html' %}
+{% load i18n %}
+
+{% block header %} {% include "public/header-index.html" %}
+{% endblock %} {% block content %}
+<div class="banner" id="banner">
+    <div class="banner-text">
+        <h2>
+            {% blocktrans %}Schnelltest der Universität Heidelberg auf das{% endblocktrans %}<br/>
+            <span>{% blocktrans %}Covid-19-Coronavirus (SARS-CoV-2){% endblocktrans %}</span>
+        </h2>
+        <a class="ui banner button" href="{% url 'app:consent' %}"
+        >{% blocktrans %}Ich habe ein Test-Kit erhalten{% endblocktrans %}</a
+        >
+        <a class="ui banner button" href="{% url 'app:results_query' %}"
+        >{% blocktrans %}Mein Test-Ergebnis abfragen{% endblocktrans %}</a
+        >
+        <a class="ui banner button" href="{% url 'app:information' %}"
+        >{% blocktrans %}Mehr über den Test erfahren{% endblocktrans %}</a
+        >
+        <p>
+            {% blocktrans %}Diese Seite ist verfügbar in:{% endblocktrans %} &nbsp;
+            <a href="/de/"> Deutsch </a> &nbsp; <a href="/en/"> English </a>
+        </p>
+    </div>
+</div>
+{% endblock %} {% block footer %} {% include "public/footer.html" %} {% endblock %}

@@ -1,0 +1,84 @@
+{% load i18n %}
+{% load static %}
+
+<html lang="de">
+<head>
+    <title>
+        {% blocktrans %}Schnelltest der Universität Heidelberg auf das
+        Covid-19-Coronavirus (SARS-CoV-2){% endblocktrans %}
+    </title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {% if g.lang_code == '--' %}
+    {% else %}
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'style/semantic-ui/semantic.min.css' %}"
+    />
+    <script src="{% static 'style/js/jquery.min.js' %}"></script>
+    <script src="{% static 'style/semantic-ui/semantic.min.js' %}"></script>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css'>
+    {% endif %}
+
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'main_style.css' %}"
+    />
+</head>
+<body class="page">
+
+{% block header %}
+
+<div class="ui top stackable menu page">
+    <div class="logo item">
+        <img class="logo" src="{% static 'media/logo_uni_mono_text.svg' %}">
+    </div>
+
+    <div class="header item">
+        <a href="{% url 'app:index' %}">
+            <h2 class="ui header menubar">
+                {% blocktrans %}Schnelltest auf COVID-19{% endblocktrans %}
+                <div class="sub header">{% blocktrans %}LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2{% endblocktrans %}
+                </div>
+            </h2>
+        </a>
+    </div>
+
+    <div class="right menu">
+        <div class="ui simple dropdown item language">
+            <i class="globe icon"></i>
+            Language <i class="dropdown icon"></i>
+            <div class="menu">
+                <a href="/" class="item">Deutsch</a>
+                <a href="/en/" class="item">English</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% if messages %}
+{% for message in messages %}
+<div style="margin: 10px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="ui centered stackable grid">
+    <div style="min-height: 60vh;" class="twelve wide column">
+        <div class="ui content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <div style="" class="four column centered footer row">
+        {% block footer %} {% include 'public/footer.html' %} {% endblock%}
+    </div>
+</div>
+
+
+</body>
+</html>
