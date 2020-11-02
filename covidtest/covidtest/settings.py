@@ -140,3 +140,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Login
+#
+
+LOGIN_URL = '/admin/login/'
