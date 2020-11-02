@@ -1,4 +1,5 @@
 # Website for COVID-19 testing
+![build-test-workflow](https://github.com/anders-biostat/covid-test-web-site/workflows/build-test-workflow/badge.svg?branch=master)
 
 This application is used for COVID-19 tests. Test subjects
 can register their test sample and receive the results of the
