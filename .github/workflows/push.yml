@@ -8,6 +8,9 @@ jobs:
       - name: Build the stack
         run: |
           cp example.env .env
-          docker-compose up -d
+          docker-compose build
       - name: Test
-        run: docker run --network container:covidtest_nginx appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8000/
+        env:
+          DJANGO_SETTINGS_MODULE: covidtest.settings
+        run: docker-compose --no-deps --rm web covidtest/manage.py test;
+        
