@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from .statuses import SampleStatus
 
@@ -12,6 +13,7 @@ class Key(models.Model):
 
 class Sample(models.Model):
     barcode = models.CharField(max_length=50)
+    access_code = models.CharField(max_length=50)
     batch = models.CharField(max_length=50)
     rack = models.CharField(max_length=50)
     key = models.ForeignKey(Key, on_delete=models.DO_NOTHING, related_name='samples')
@@ -19,12 +21,11 @@ class Sample(models.Model):
     def set_status(self, status, author=None):
         if type(status) == SampleStatus:
             status = status.value
-        event = Event(
+
+        self.events.create(
             status=status,
-            updated_by=author
+            updated_by=author,
         )
-        status_updated = self.modify(push__events=event)
-        return status_updated
 
     def get_statuses(self):
         events = self.events
@@ -44,7 +45,7 @@ class Registration(models.Model):
     name_encrypted = models.CharField(max_length=200)
     address_encrypted = models.CharField(max_length=200)
     contact_encrypted = models.CharField(max_length=200)
-    password_hash = models.CharField(max_length=200)
+    password_hash = models.CharField(max_length=200, blank=True)
     public_key_fingerprint = models.CharField(max_length=200)
     session_key_encrypted = models.CharField(max_length=1000)
     aes_instance_iv = models.CharField(max_length=200)
@@ -52,5 +53,6 @@ class Registration(models.Model):
 class Event(models.Model):
     sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name='events')
     status = models.CharField(max_length=50)
-    comment = models.TextField()
+    comment = models.TextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True)
+    updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)

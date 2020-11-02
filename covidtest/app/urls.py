@@ -21,11 +21,12 @@ urlpatterns = [
     path('register', views_public.register, name='register'),
     path('pages/<str:page>', views_public.pages, name='pages'),
 
-    path('checkin', views_lab.sample_check_in, name='checkin'),
-    path('rack', views_lab.sample_edit_rack, name='edit_rack'),
-    path('lab_query', views_lab.sample_query, name='query'),
-    path('barcodes', views_lab.generate_barcodes, name='barcodes'),
-    path('dashboard', views_lab.dashboard, name='dashboard'),
+    path('lab', views_lab.index, name='lab_index'),
+    path('lab/checkin', views_lab.sample_check_in, name='checkin'),
+    path('lab/rack', views_lab.sample_edit_rack, name='edit_rack'),
+    path('lab/lab_query', views_lab.sample_query, name='query'),
+    path('lab/barcodes', views_lab.generate_barcodes, name='barcodes'),
+    path('lab/dashboard', views_lab.dashboard, name='dashboard'),
 
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
