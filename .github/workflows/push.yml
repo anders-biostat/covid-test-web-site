@@ -12,5 +12,5 @@ jobs:
       - name: Test
         run: |
           docker container ls  
-          docker exec -it covidtest_app python manage.py test
+          docker exec covidtest_app python manage.py test
         
