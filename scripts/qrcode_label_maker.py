@@ -45,7 +45,7 @@ barcode = []
 #I think it is better to a path that cannot be modified by the user
 #since we need to always save the generated batches to the same directory to
 #keep the track of our current batches
-batch_number = new_extension("Codes/micronic_batches/micronic_A.lst")
+batch_number = new_extension("/User/fereydoon/ZMBH/Codes/micronic_batches/micronic_A.lst")
 
 #Block to make the full printing printCommand
 #It can be replaced by a template file later
@@ -58,10 +58,10 @@ title = "^FT77,64^A0N,51,38^FB480,1,0,C^FH\^FDUniversit\84t Heidelberg^FS\
 ^FT77,128^A0N,51,38^FB480,1,0,C^FH\^FDCOVID-19 Test via LAMP^FS\
 ^FT38,208^A0N,39,31^FH\^FDBitte scannen Sie diesen QR-Code:^FS"
 
-qr_setting = "^FT165,563^BQN,2,6^FH\^FDHA,https://coronatest.zmbh.uni-heidelberg.de/register?code="
+qr_setting = "^FT165,563^BQN,2,6^FH\^FDHA,https://covidtest-hd.de/?barcode="
 
 web_string = "^FT46,614^A0N,34,33^FH\^FDoder gehen Sie zu unserer Webseite^FS\
-^FT46,656^A0N,34,33^FH\^FDcoronatest.zmbh.uni-heidelberg.de^FS\
+^FT46,656^A0N,34,33^FH\^FDwww.covidtest-19.de^FS\
 ^FT46,698^A0N,34,33^FH\^FDund geben Sie diesen Code ein: ^FS"
 
 rect = "^FO155,733^GB289,74,4^FS\
@@ -110,7 +110,7 @@ while len(barcode) < batch_size:
             f.close()
 
     #Printing the label
-            printCommand = "lpr -P Zebra_Technologies_ZTC_GK420t -o raw tmp_print_file.prn"
+            printCommand = "lpr -P Zebra_Technologies_ZTC_ZD420_203dpi_ZPL -o raw tmp_print_file.prn"
             printProcess = subprocess.Popen(printCommand.split(), stdout=subprocess.PIPE)
             output, error = printProcess.communicate()
 
@@ -125,7 +125,7 @@ removeProcess = subprocess.Popen(removeCommand.split(), stdout=subprocess.PIPE)
 output, error = removeProcess.communicate()
 
 #Writing the scanned barcodes to a file
-batch_file = open("Codes/micronic_batches/micronic_A_%i.lst" %batch_number, "w+")
+batch_file = open("/User/fereydoon/ZMBH/Codes/micronic_batches/micronic_A_%i.lst" %batch_number, "w+")
 for bc in barcode:
     batch_file.write(bc+"\n")
 batch_file.close()
