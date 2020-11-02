@@ -16,6 +16,7 @@ class Sample(models.Model):
     access_code = models.CharField(max_length=50)
     batch = models.CharField(max_length=50)
     rack = models.CharField(max_length=50)
+    password_hash = models.CharField(max_length=200, blank=True, null=True)
     key = models.ForeignKey(Key, on_delete=models.DO_NOTHING, related_name='samples')
 
     def set_status(self, status, author=None):
@@ -45,7 +46,6 @@ class Registration(models.Model):
     name_encrypted = models.CharField(max_length=200)
     address_encrypted = models.CharField(max_length=200)
     contact_encrypted = models.CharField(max_length=200)
-    password_hash = models.CharField(max_length=200, blank=True)
     public_key_fingerprint = models.CharField(max_length=200)
     session_key_encrypted = models.CharField(max_length=1000)
     aes_instance_iv = models.CharField(max_length=200)

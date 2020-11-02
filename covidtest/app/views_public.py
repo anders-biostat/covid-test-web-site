@@ -2,29 +2,29 @@ import hashlib, binascii
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils.translation import gettext as _
-from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm
-from .models import Sample, Registration, Event
+from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy
+from .models import Sample, Registration, Event, Key
 from .statuses import SampleStatus
 from .encryption_helper import rsa_instance_from_key, encrypt_subject_data
 
 
 def index(request):
-    barcode = None
-    if 'barcode' in request.GET:
-        barcode = request.GET['barcode']
-    if barcode is not None:
-        request.session['barcode'] = barcode
+    access_code = None
+    if 'access_code' in request.GET:
+        access_code = request.GET['access_code']
+    if access_code is not None:
+        request.session['access_code'] = access_code
         return redirect('consent')
     return render(request, 'public/index.html')
 
 
 def instructions(request):
-    barcode = None
-    if 'barcode' in request.session:
-        barcode = request.session.get('barcode')
-    if 'barcode' in request.GET:
-        barcode = request.GET['barcode']
-    return render(request, 'public/instructions.html', {'barcode': barcode})
+    access_code = None
+    if 'access_code' in request.session:
+        access_code = request.session.get('access_code')
+    if 'access_code' in request.GET:
+        access_code = request.GET['access_code']
+    return render(request, 'public/instructions.html')
 
 
 def consent(request):
@@ -41,69 +41,78 @@ def consent(request):
     return render(request, 'public/consent.html', {'form': form})
 
 
+def render_status(request, status):
+    if status is not None:
+        status = SampleStatus[status['status']]
+        if status == SampleStatus.PCRPOS:
+            return render(request, "public/pages/test-PCRPOS.html")
+        if status == SampleStatus.PCRNEG:
+            return render(request, "public/pages/test-PCRNEG.html")
+        if status == SampleStatus.LAMPPOS:
+            return render(request, "public/pages/test-LAMPPOS.html")
+        if status == SampleStatus.LAMPNEG:
+            return render(request, "public/pages/test-LAMPNEG.html")
+        if status == SampleStatus.LAMPINC:
+            return render(request, "public/pages/test-LAMPINC.html")
+        if status == SampleStatus.UNDEF:
+            return render(request, "public/pages/test-UNDEF.html")
+        if status == SampleStatus.WAIT:
+            return render(request, "public/pages/test-WAIT.html")
+        return render(request, "public/pages/test-UNDEF.html")
+
+
 def results_query(request):
     form = ResultsQueryForm()
     if request.method == 'POST':
         form = ResultsQueryForm(request.POST)
         if form.is_valid():
-            barcode = form.cleaned_data['barcode']
-            form_password = form.cleaned_data['password']
+            access_code = form.cleaned_data['access_code']
 
-            # Hash entered password
-            sha_instance = hashlib.sha3_384()
-            sha_instance.update(form_password.encode("utf-8"))
-            form_password_hashed = binascii.b2a_base64(sha_instance.digest(), newline=False).decode("ascii")
+            # Check if access_code exists
+            sample = Sample.objects.filter(access_code=access_code).first()
 
-            # Check if barcode exists
-            sample = Sample.objects.filter(barcode=barcode).first()
-
-            # No sample found for barcode
+            # No sample found for access_code
             if sample is None:
-                messages.add_message(request, messages.ERROR, _('Der Barcode ist unbekannt. Bitte erneut versuchen.'))
+                messages.add_message(request, messages.ERROR,
+                                     _('Der Zugangscode ist unbekannt. Bitte erneut versuchen.'))
                 return redirect('app:results_query')
 
-            # Checking the count of registrations
-            #
-
-            # More than one registration -> not showing result
-            registration_count = sample.registrations.count()
-            if registration_count > 1:
-                return render(request, "pages/multiple-registeration.html", {'barcode': barcode})
-
             # No registration -> redirection to registration
+            registration_count = sample.registrations.count()
             if registration_count < 1:
                 messages.add_message(request, messages.WARNING,
                                      _(
-                                         'Der Barcode wurde nicht registriert. Bitte registrieren Sie den Barcode vorher.'))
-                request.session['barcode'] = barcode
+                                         'Der Zugangscode wurde nicht registriert. Bitte registrieren Sie sich vorher.'))
+                request.session['access_code'] = access_code
                 return redirect('app:register')
 
-            # Wrong password
-            if form_password_hashed != sample['registrations'][0]['password_hash']:
-                messages.add_message(request, messages.ERROR,
-                                     _(
-                                         'Das Passwort stimmt nicht mit dem überein, dass Sie beim Registrieren der Barcodes gewählt haben. Bitte versuchen Sie es noch einmal.'))
-                return redirect('app:results_query')
+            # Legacy code for old samples with password registrations
+
+
+            # Registered and password exists
+            if sample.password_hash is not None:
+                form = ResultsQueryFormLegacy(request.POST)
+
+                # Check if form is legacy
+                if 'password' not in request.POST.keys():
+                    return render('public/result-query.html', {'form': form})
+
+                if form.is_valid():
+                    password = form.cleaned_data['password']
+                    sha_instance = hashlib.sha3_384()
+                    sha_instance.update(password.encode("utf-8"))
+                    password_hashed = binascii.b2a_base64(sha_instance.digest(), newline=False).decode("ascii")
+                    if password_hashed != sample.password_hash:
+                        messages.add_message(request, messages.ERROR,
+                                             _(
+                                                 'Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal.'))
+                        request.session['access_code'] = access_code
+                        return render('public/result-query.html', {'form': form})
 
             # Checking the status of the sample
             status = sample.get_status()
-            if status is not None:
-                status = SampleStatus[status['status']]
-                if status == SampleStatus.PCRPOS:
-                    return render(request, "public/pages/test-PCRPOS.html")
-                if status == SampleStatus.PCRNEG:
-                    return render(request, "public/pages/test-PCRNEG.html")
-                if status == SampleStatus.LAMPPOS:
-                    return render(request, "public/pages/test-LAMPPOS.html")
-                if status == SampleStatus.LAMPNEG:
-                    return render(request, "public/pages/test-LAMPNEG.html")
-                if status == SampleStatus.LAMPINC:
-                    return render(request, "public/pages/test-LAMPINC.html")
-                if status == SampleStatus.UNDEF:
-                    return render(request, "public/pages/test-UNDEF.html")
-                if status == SampleStatus.WAIT:
-                    return render(request, "public/pages/test-WAIT.html")
-                return render(request, "public/pages/test-UNDEF.html")
+            return render_status(request, status)
+
     return render(request, 'public/result-query.html', {'form': form})
 
 
@@ -112,53 +121,50 @@ def information(request):
 
 
 def register(request):
-    barcode = None
+    access_code = None
 
-    if 'barcode' in request.session:
-        barcode = request.session.get('barcode')
-    if 'barcode' in request.GET:
-        barcode = request.GET['barcode']
+    if 'access_code' in request.session:
+        access_code = request.session.get('access_code')
+    if 'access_code' in request.GET:
+        access_code = request.GET['access_code']
 
     if request.session.get("consent") != True:
         return redirect('app:consent')
 
-    request.session["barcode"] = None
+    request.session["access_code"] = None
 
-    form = RegistrationForm(initial={'barcode': barcode})
+    form = RegistrationForm(initial={'access_code': access_code})
     if request.method == 'POST':  # POST
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            barcode = form.cleaned_data['barcode'].upper().strip()
-
+            access_code = form.cleaned_data['access_code'].upper().strip()
             name = form.cleaned_data['name']
             address = form.cleaned_data['address']
             contact = form.cleaned_data['contact']
-            password = form.cleaned_data['password']
-            password_repeat = form.cleaned_data['password_repeat']
 
-            sample = Sample.objects.filter(barcode=barcode).first()
+            sample = Sample.objects.filter(access_code=access_code).first()
 
             if sample is None:
-                messages.add_message(request, messages.ERROR, _('Der Barcode ist unbekannt. Bitte erneut versuchen.'))
+                messages.add_message(request, messages.ERROR,
+                                     _('Der Zugangscode ist unbekannt. Bitte erneut versuchen.'))
                 return render(request, 'register.html', {'form': form})
 
-            request.session["barcode"] = barcode
+            request.session["access_code"] = access_code
 
             rsa_inst = rsa_instance_from_key(sample.key.public_key)
-            doc = encrypt_subject_data(rsa_inst, name, address, contact, password)
+            doc = encrypt_subject_data(rsa_inst, name, address, contact)
 
             sample.registrations.create(
                 name_encrypted=doc['name_encrypted'],
                 address_encrypted=doc['address_encrypted'],
                 contact_encrypted=doc['contact_encrypted'],
-                password_hash=doc['password_hash'],
                 public_key_fingerprint=doc['public_key_fingerprint'],
                 session_key_encrypted=doc['session_key_encrypted'],
                 aes_instance_iv=doc['aes_instance_iv'],
             )
             messages.add_message(request, messages.SUCCESS, _('Erfolgreich registriert'))
             return redirect('app:instructions')
-    return render(request, 'public/register.html', {'form': form, 'barcode': barcode})
+    return render(request, 'public/register.html', {'form': form})
 
 
 def pages(request, page):

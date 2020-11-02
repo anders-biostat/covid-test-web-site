@@ -50,7 +50,7 @@ def decrypt_string(string, aes_instance, fmt=str):
     return decrypted_string
 
 
-def encrypt_subject_data(rsa_instance, name, address, contact, password):
+def encrypt_subject_data(rsa_instance, name, address, contact):
     """Encrypts and hashes the personal data
 
     Args:
@@ -70,11 +70,6 @@ def encrypt_subject_data(rsa_instance, name, address, contact, password):
     encrypted_session_key = rsa_instance.encrypt(session_key)
     aes_instance = Crypto.Cipher.AES.new(session_key, Crypto.Cipher.AES.MODE_CBC)
 
-    # encode user password with SHA3
-    sha_instance = hashlib.sha3_384()
-    sha_instance.update(password.encode("utf-8"))
-    password_hash = sha_instance.digest()
-
     name_encrypted = encrypt_string(name, aes_instance)
     address_encrypted = encrypt_string(address, aes_instance)
     contact_encrypted = encrypt_string(contact, aes_instance)
@@ -83,7 +78,6 @@ def encrypt_subject_data(rsa_instance, name, address, contact, password):
         'name_encrypted': name_encrypted,
         'address_encrypted': address_encrypted,
         'contact_encrypted': contact_encrypted,
-        'password_hash': binary_to_ascii(password_hash),
         'public_key_fingerprint': rsa_instance.public_key_fingerprint.decode("ascii"),
         'session_key_encrypted': binary_to_ascii(encrypted_session_key),
         'aes_instance_iv': binary_to_ascii(aes_instance.iv),
