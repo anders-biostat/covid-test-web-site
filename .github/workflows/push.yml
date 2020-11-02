@@ -10,7 +10,5 @@ jobs:
           cp example.env .env
           docker-compose build
       - name: Test
-        env:
-          DJANGO_SETTINGS_MODULE: covidtest.settings
-        run: docker-compose --no-deps --rm web covidtest/manage.py test;
+        run: docker exec -it covidtest_app python manage.py test
         
