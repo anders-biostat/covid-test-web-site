@@ -176,4 +176,9 @@ def sample_query(request):
 
 @login_required
 def dashboard(request):
-     return render(request, "lab/index.html")
+
+    dashboard_values = {
+        "count_Samples" : Sample.objects.filter().count(),
+    }
+
+    return render(request, "lab/dashboard.html", {'dashboard_values' : dashboard_values})
