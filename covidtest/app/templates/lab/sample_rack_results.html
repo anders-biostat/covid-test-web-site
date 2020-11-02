@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'lab/base.html' %}
 {% load i18n %}
 
 {% block content %}
@@ -40,7 +40,7 @@
         {% endblocktrans %}
     </p>
 
-    <form style="margin-bottom: 20px;" action="{% url 'labview:edit_rack' %}" method="post" class="ui form">
+    <form style="margin-bottom: 20px;" action="{% url 'app:edit_rack' %}" method="post" class="ui form">
         {% csrf_token %}
         <div class="ui large form">
             <div class="two fields">
@@ -73,7 +73,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <a class="ui button" href="{% url 'labview:index' %}">{% blocktrans %}Zurück{% endblocktrans %}</a>
+            <a class="ui button" href="{% url 'app:index' %}">{% blocktrans %}Zurück{% endblocktrans %}</a>
             <button class="ui button" type="submit">{% blocktrans %}Abschicken{% endblocktrans %}</button>
         </div>
     </form>

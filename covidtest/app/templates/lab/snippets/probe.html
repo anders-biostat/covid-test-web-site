@@ -30,7 +30,7 @@
 
 
 <div class="ui bottom attached message">
-    <form action="{% url 'labview:query' %}" class="ui form" method="post">
+    <form action="{% url 'app:query' %}" class="ui form" method="post">
         {% csrf_token %}
         <div class="field">
             <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>

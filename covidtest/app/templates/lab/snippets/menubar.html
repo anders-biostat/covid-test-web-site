@@ -1,21 +1,21 @@
 {% load i18n %}
 <div style="margin: 10px;" class="ui top large menu">
-    <a class="header item" href="{% url 'labview:index' %}">
+    <a class="header item" href="{% url 'app:index' %}">
         <i class="flask icon"></i> COVID19-LAB
     </a>
-    <a href="{% url 'labview:checkin'  %}" class="item">
+    <a href="{% url 'app:checkin'  %}" class="item">
         {% trans 'Probeneingang' %}
     </a>
-    <a href="{% url 'labview:edit_rack'  %}" class="item">
+    <a href="{% url 'app:edit_rack'  %}" class="item">
         {% trans 'Rack editieren' %}
     </a>
-    <a href="{% url 'labview:query'  %}" class="item">
+    <a href="{% url 'app:query'  %}" class="item">
         {% trans 'Probe suchen' %}
     </a>
-    <a href="{% url 'labview:barcodes'  %}" class="item">
+    <a href="{% url 'app:barcodes'  %}" class="item">
         {% trans 'Generate barcodes' %}
     </a>
-    <a href="{% url 'admin:index'  %}" class="item">
+    <a href="{% url 'app:index'  %}" class="item">
         {% trans 'Admin' %}
     </a>
     <div class="right menu">

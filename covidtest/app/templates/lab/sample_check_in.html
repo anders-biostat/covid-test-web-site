@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'lab/base.html' %}
 {% load i18n %}
 
 {% block content %}
@@ -75,7 +75,7 @@
         {% endblocktrans%}
     </p>
 
-    <form style="margin-bottom: 20px;" action="{% url 'labview:checkin' %}" method="post" class="ui form">
+    <form style="margin-bottom: 20px;" action="{% url 'app:checkin' %}" method="post" class="ui form">
         {% csrf_token %}
 
 

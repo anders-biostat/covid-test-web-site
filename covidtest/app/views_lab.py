@@ -15,7 +15,7 @@ from .statuses import SampleStatus
 
 @login_required
 def index(request):
-    return render(request, "index.html")
+    return render(request, "lab/index.html")
 
 
 def random_barcode(length=6):
@@ -52,7 +52,7 @@ def generate_barcodes(request):
             response.write("%s\n" % barcode)
         return response
 
-    return render(request, "generate_barcodes.html", {"form": form})
+    return render(request, "lab/generate_barcodes.html", {"form": form})
 
 
 @login_required
@@ -90,12 +90,12 @@ def sample_check_in(request):
                 no_success = False
                 messages.add_message(request, messages.SUCCESS, _('Proben erfolgreich eingetragen'))
 
-            return render(request, 'sample_check_in.html',
+            return render(request, 'lab/sample_check_in.html',
                           {"form": form, "sample": sample, "barcodes_not_in_db": barcodes_not_in_db,
                            "rack_not_set": rack_not_set, "status_not_set": status_not_set, "no_success": no_success})
     else:
         form = LabCheckInForm()
-    return render(request, 'sample_check_in.html', {"form": form, "display_sample": False})
+    return render(request, 'lab/sample_check_in.html', {"form": form, "display_sample": False})
 
 
 @login_required
@@ -131,7 +131,7 @@ def sample_edit_rack(request):
             else:
                 messages.add_message(request, messages.ERROR, _('Keine Proben zu Rack gefunden'))
 
-    return render(request, 'sample_rack_results.html', {'form': form})
+    return render(request, 'lab/sample_rack_results.html', {'form': form})
 
 
 @login_required
@@ -146,7 +146,7 @@ def sample_query(request):
                 sample = Sample.objects.filter(barcode=search).first()
                 if sample:
                     edit_form = LabProbeEditForm(initial={'rack': sample.rack})
-                return render(request, 'sample_query.html',
+                return render(request, 'lab/sample_query.html',
                               {'form': form, 'edit_form': edit_form, 'sample': sample, 'search': search})
         if 'edit' in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
@@ -169,6 +169,11 @@ def sample_query(request):
                         event_added = sample.modify(push__events=event)
                         if event_added:
                             messages.add_message(request, messages.SUCCESS, _('Status geupdated'))
-                return render(request, 'sample_query.html', {'form': form, 'edit_form': edit_form, 'sample': sample})
+                return render(request, 'lab/sample_query.html', {'form': form, 'edit_form': edit_form, 'sample': sample})
 
-    return render(request, 'sample_query.html', {'form': form, 'edit_form': edit_form})
+    return render(request, 'lab/sample_query.html', {'form': form, 'edit_form': edit_form})
+
+
+@login_required
+def dashboard(request):
+     return render(request, "lab/index.html")

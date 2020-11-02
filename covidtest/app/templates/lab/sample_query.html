@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'lab/base.html' %}
 {% load i18n %}
 
 {% block content %}
@@ -10,7 +10,7 @@
         {% endblocktrans %}
     </p>
 
-    <form style="margin-bottom: 20px;" action="{% url 'labview:query' %}" method="post" class="ui form">
+    <form style="margin-bottom: 20px;" action="{% url 'app:query' %}" method="post" class="ui form">
         {% csrf_token %}
         <div class="ui search">
             <div class="ui icon input">
@@ -28,7 +28,7 @@
 
 
     {% if sample %}
-    {% include 'snippets/probe.html' %}
+    {% include 'lab/snippets/probe.html' %}
     {% elif search %}
     <div class="ui warning message">
         <p>{% blocktrans %}Keine Probe mit diesem Barcode gefunden.{% endblocktrans %}</p>

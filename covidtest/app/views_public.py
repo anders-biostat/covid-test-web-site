@@ -13,7 +13,7 @@ def index(request):
     if 'barcode' in request.GET:
         barcode = request.GET['barcode']
     if barcode is not None:
-        request.session['barcode'] = barcode.upper()
+        request.session['barcode'] = barcode
         return redirect('consent')
     return render(request, 'public/index.html')
 
@@ -21,9 +21,9 @@ def index(request):
 def instructions(request):
     barcode = None
     if 'barcode' in request.session:
-        barcode = request.session.get('barcode').upper()
+        barcode = request.session.get('barcode')
     if 'barcode' in request.GET:
-        barcode = request.GET['barcode'].upper()
+        barcode = request.GET['barcode']
     return render(request, 'public/instructions.html', {'barcode': barcode})
 
 
@@ -46,7 +46,7 @@ def results_query(request):
     if request.method == 'POST':
         form = ResultsQueryForm(request.POST)
         if form.is_valid():
-            barcode = form.cleaned_data['barcode'].upper()
+            barcode = form.cleaned_data['barcode']
             form_password = form.cleaned_data['password']
 
             # Hash entered password
@@ -112,10 +112,12 @@ def information(request):
 
 
 def register(request):
+    barcode = None
+
     if 'barcode' in request.session:
-        barcode = request.session.get('barcode').upper()
+        barcode = request.session.get('barcode')
     if 'barcode' in request.GET:
-        barcode = request.GET['barcode'].upper()
+        barcode = request.GET['barcode']
 
     if request.session.get("consent") != True:
         return redirect('app:consent')
