@@ -4,12 +4,14 @@ This application is used for COVID-19 tests. Test subjects
 can register their test sample and receive the results of the
 sample.
 
-## Directory structure
+![](/doc/media/screenshot.png)
 
-- **static**: contains all static assets and templates
-- **src**: contains the web application and helping scripts
-- **data**: contains key for encryption and test data
-- **etc**: config files to be put elsewhere in production
+### Build with
+- [Django](https://github.com/django/django) (Webapplication Framework)
+- [django-rest-framework](https://github.com/encode/django-rest-framework) (REST Framework)
+- [Gunicorn](https://github.com/benoitc/gunicorn) (Python WSGI HTTP Server)
+- [Semantic UI](https://github.com/Semantic-Org/Semantic-UI) (UI Framework)
+- [PostgreSQL](https://github.com/postgres/postgres) (Database)
 
 ## Documentation
 
@@ -28,7 +30,7 @@ $ pip install -r requirements.txt
 ```
 
 Create a `.env` file containing the environment variables in 
-the `src` directory. You can copy the `example.env` 
+the root directory. You can copy the `example.env` 
 (make sure you update the secret key):
 
 ```bash
@@ -38,14 +40,28 @@ $ cp example.env .env
 
 ## Usage
 
-For testing the application can be started with the command `flask run`:
+For testing the application can be started with the command `python manage.py runserver`:
 ```bash
-$ flask run
-* Environment: production
-   WARNING: This is a development server. Do not use it in a production deployment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+$ cd covidtest
+$ python manage.py runserver
+System check identified no issues (0 silenced).
+November 02, 2020 - 00:01:23
+Django version 3.1.2, using settings 'covidtest.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
 ```
 
 For deployment use a appropiate webserver (e.g. Gunicorn).
+
+## Docker
+
+This application can be started in Docker-Containers.
+A setup with Docker, Gunicorn, Nginx and Postgres can be composed with the docker-compose.yml configuration.
+
+```bash
+$ sudo docker-compose up
+Starting backend_postgres ... done
+Starting covidtest_app    ... done
+Starting covidtest_nginx  ... done
+Attaching to covidtest_postgres, covidtest_app, covidtest_nginx
+```

@@ -23,7 +23,7 @@ services:
   postgres:
     restart: always
     image: postgres:10
-    container_name: backend_postgres
+    container_name: covidtest_postgres
     env_file: .env
     networks:
       main:
