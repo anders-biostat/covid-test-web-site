@@ -25,7 +25,6 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the pre
 `src/requirements.txt` file. Using Virtualenv is recommended. See [Virtual Environment](/doc/virtualenv/README.md).
 
 ```bash
-$ cd src
 $ pip install -r requirements.txt
 ```
 
@@ -34,7 +33,6 @@ the root directory. You can copy the `example.env`
 (make sure you update the secret key):
 
 ```bash
-$ cd src
 $ cp example.env .env
 ```
 
