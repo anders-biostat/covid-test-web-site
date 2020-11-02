@@ -1,4 +1,4 @@
-name: docker-compose-actions-workflow
+name: build-test-workflow
 on: push
 jobs:
   test:
@@ -11,6 +11,6 @@ jobs:
           docker-compose up -d
       - name: Test
         run: |
-          docker container ls  
+          docker container ls
           docker exec covidtest_app python manage.py test
-        
+          
