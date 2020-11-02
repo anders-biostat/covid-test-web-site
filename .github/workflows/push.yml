@@ -8,10 +8,9 @@ jobs:
       - name: Build the stack
         run: |
           cp example.env .env
-          docker-compose build
+          docker-compose up -d
       - name: Test
         run: |
           docker container ls  
-          docker start covidtest_app
           docker exec -it covidtest_app python manage.py test
         
