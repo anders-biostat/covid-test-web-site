@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Key, Sample, Event, Registration
+from .models import RSAKey, Sample, Event, Registration
 
 
 class KeySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Key
+        model = RSAKey
         fields = ['key_name', 'comment', 'public_key']
 
 
@@ -33,5 +33,5 @@ class SampleSerializer(serializers.ModelSerializer):
 class KeySamplesSerializers(serializers.ModelSerializer):
     samples = SampleSerializer(many=True, read_only=True)
     class Meta:
-        model = Key
+        model = RSAKey
         fields = ['id', 'key_name', 'samples']
