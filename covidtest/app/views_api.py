@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 
 from .serializers import SampleSerializer, KeySerializer, RegistrationSerializer, EventSerializer, KeySamplesSerializers
-from .models import Sample, Key, Registration, Event
+from .models import Sample, RSAKey, Registration, Event
 
 
 class SampleViewSet(viewsets.ModelViewSet):
@@ -12,7 +12,7 @@ class SampleViewSet(viewsets.ModelViewSet):
 
 
 class KeyViewSet(viewsets.ModelViewSet):
-    queryset = Key.objects.all()
+    queryset = RSAKey.objects.all()
     serializer_class = KeySerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -30,6 +30,6 @@ class EventViewSet(viewsets.ModelViewSet):
 
 
 class KeySamplesViewSet(viewsets.ModelViewSet):
-    queryset = Key.objects.all()
+    queryset = RSAKey.objects.all()
     serializer_class = KeySamplesSerializers
     permission_classes = [permissions.IsAuthenticated]

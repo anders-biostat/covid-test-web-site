@@ -10,7 +10,7 @@ from rest_framework import permissions
 
 from .serializers import SampleSerializer
 from .forms_lab import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm, LabGenerateBarcodeForm
-from .models import Sample, Key, Registration, Event
+from .models import Sample, RSAKey, Registration, Event
 from .statuses import SampleStatus
 
 @login_required

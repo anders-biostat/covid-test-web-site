@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy
-from .models import Sample, Registration, Event, Key
+from .models import Sample, Registration, Event, RSAKey
 from .statuses import SampleStatus
 from .encryption_helper import rsa_instance_from_key, encrypt_subject_data
 

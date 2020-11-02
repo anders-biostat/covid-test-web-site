@@ -18,7 +18,7 @@ md5_instance = hashlib.md5()
 md5_instance.update( key.publickey().exportKey("DER") )
 public_key_fingerprint = md5_instance.hexdigest()
 
-print( "Key pair generated. Key fingerprint: %s." % public_key_fingerprint )
+print( "RSAKey pair generated. RSAKey fingerprint: %s." % public_key_fingerprint )
 
 filename = "private_%s.pem" % public_key_fingerprint[:6]
 with open( filename, "wb" ) as f:
