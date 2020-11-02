@@ -53,6 +53,6 @@ class Registration(models.Model):
 class Event(models.Model):
     sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name='events')
     status = models.CharField(max_length=50)
-    comment = models.TextField()
+    comment = models.TextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True)
     updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
