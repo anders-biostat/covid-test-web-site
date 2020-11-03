@@ -10,7 +10,7 @@ from rest_framework import permissions
 
 from .serializers import SampleSerializer
 from .forms_lab import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm, LabGenerateBarcodeForm
-from .models import Sample, Key, Registration, Event
+from .models import Sample, RSAKey, Registration, Event
 from .statuses import SampleStatus
 
 @login_required
@@ -24,35 +24,6 @@ def random_barcode(length=6):
 
 def random_accesscode(length=9):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
-
-
-@login_required
-def generate_barcodes(request):
-    form = LabGenerateBarcodeForm()
-    if request.method == 'POST':
-        form = LabGenerateBarcodeForm(request.POST)
-        if form.is_valid():
-            for j in range(form.cleaned_data['count']):
-                batch_barcodes = []
-                for i in range(50):
-                    count = 1
-                    while count == 1:
-                        barcode = random_barcode(length=6)
-                        count = Sample.objects.filter(barcode=barcode).count()
-
-                    count = 1
-                    while count == 1:
-                        accesscode = random_accesscode(length=9)
-                        count = Sample.objects.filter(barcode=barcode).count()
-
-                    batch_barcodes.append((barcode, accesscode))
-        response = HttpResponse(content_type='text/txt')
-        response['Content-Disposition'] = 'attachment; filename="batch.txt"'
-        for barcode, accesscode in batch_barcodes:
-            response.write("%s\n" % barcode)
-        return response
-
-    return render(request, "lab/generate_barcodes.html", {"form": form})
 
 
 @login_required

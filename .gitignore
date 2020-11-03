@@ -21,6 +21,7 @@ messages.pot
 # Data
 subjects.csv
 db.sqlite3
+postgres-data
 
 # Editor
 .idea/
@@ -31,3 +32,8 @@ db.sqlite3
 
 # Logs
 logs
+
+# Testing
+.coverage
+coverage.xml
+.pytest_cache

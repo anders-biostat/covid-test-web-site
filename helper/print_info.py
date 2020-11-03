@@ -84,7 +84,7 @@ key_files = {}
 
 # Looking for the private.pem files in the current directory
 # Listing all the files in the current directory
-for file in os.listdir("."):
+for file in os.listdir("../src/scripts"):
     # Checking if the private.pem file exists
     if file.endswith(".pem") and file.startswith("private"):
         # Extracting the fingerpring of the file

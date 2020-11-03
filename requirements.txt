@@ -1,7 +1,9 @@
 asgiref==3.2.10
 astroid==2.4.1
+attrs==20.2.0
 certifi==2020.6.20
 chardet==3.0.4
+coverage==5.3
 Django==3.1.2
 django-absoluteuri==1.3.0
 django-filter==2.4.0
@@ -12,12 +14,16 @@ flake8==3.8.4
 flake8-polyfill==1.0.2
 gunicorn==20.0.4
 idna==2.10
+iniconfig==1.1.1
 isort==4.3.21
 lazy-object-proxy==1.4.3
 Markdown==3.3.3
 mccabe==0.6.1
+packaging==20.4
 pep8-naming==0.10.0
+pluggy==0.13.1
 prospector==1.3.1
+py==1.9.0
 pycodestyle==2.6.0
 pycryptodome==3.9.8
 pydocstyle==5.1.1
@@ -27,6 +33,10 @@ pylint-celery==0.3
 pylint-django==2.1.0
 pylint-flask==0.6
 pylint-plugin-utils==0.6
+pyparsing==2.4.7
+pytest==6.1.2
+pytest-cov==2.10.1
+pytest-django==4.1.0
 pytz==2020.1
 PyYAML==5.3.1
 requests==2.24.0

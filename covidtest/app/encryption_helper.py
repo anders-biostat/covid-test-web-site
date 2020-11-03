@@ -7,7 +7,7 @@ def rsa_instance_from_key(public_key_string: str):
     """Receive a rsa_instance for encryption by submitting a RSA public key
 
     Args:
-        public_key_string (str): RSA-Public-Key as String
+        public_key_string (str): RSA-Public-RSAKey as String
     Returns:
         rsa_instance
 

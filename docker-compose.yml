@@ -25,6 +25,8 @@ services:
     image: postgres:10
     container_name: covidtest_postgres
     env_file: .env
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     networks:
       main:
         aliases:
