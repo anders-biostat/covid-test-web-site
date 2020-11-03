@@ -12,5 +12,5 @@ jobs:
       - name: Test
         run: |
           docker container ls
-          docker exec covidtest_app python manage.py test
+          docker exec covidtest_app pytest --cov-report=xml
           

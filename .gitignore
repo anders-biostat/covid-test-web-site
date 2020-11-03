@@ -31,3 +31,8 @@ db.sqlite3
 
 # Logs
 logs
+
+# Testing
+.coverage
+coverage.xml
+.pytest_cache
