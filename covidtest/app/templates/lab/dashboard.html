@@ -1,0 +1,190 @@
+{% extends "lab/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<style>
+    .ui.statistic {
+        border-radius: 20px;
+        width: 250px;
+        padding: 25px;
+        background-color: rgba(255, 255, 255, 0.1);
+        margin: 30px;
+    }
+</style>
+<div class="ui segment content">
+
+
+    <div class="ui four column grid">
+        <div class="row">
+            <div class="column">
+                <div class="ui statistic">
+                    <div class="value">
+                        {{ dashboard_values.count_Samples }}
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Anzahl nicht registrierter Proben
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Anzahl Proben in Bearbeitung
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Anzahl abgeschlossener Proben
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="ui horizontal divider">
+        {% blocktrans %}
+        Registriert in System
+        {% endblocktrans %}
+    </h4>
+    <div class="ui four column grid">
+        <div class="row">
+            <div class="column">
+                <div class="ui statistic">
+                    <div class="value">
+                        {{ dashboard_values.count_wait }}
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Anzahl noch nicht bearbeiteter Proben "WAIT"
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="ui horizontal divider">
+        {% blocktrans %}
+        LAMP Test
+        {% endblocktrans %}
+    </h4>
+    <div class="ui four column grid">
+        <div class="row">
+            <div class="column">
+                <div class="ui statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        positiver LAMP Test 
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        unschlüssiger LAMP Test 
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui green statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        negativer  LAMP Test 
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui green statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        fehlerhafter LAMP Test 
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="ui horizontal divider">
+        {% blocktrans %}
+        PCR Test
+        {% endblocktrans %}
+    </h4>
+    <div class="ui four column grid">
+        <div class="row">
+            <div class="column">
+                <div class="ui green statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Positiver PCR Test
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui green statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Negativer PCR Test
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                <div class="ui green statistic">
+                    <div class="value">
+                        nan
+                    </div>
+                    <div class="label">
+                        {% blocktrans %}
+                        Undefiniert
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+{% endblock %}
