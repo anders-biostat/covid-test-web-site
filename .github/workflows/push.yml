@@ -13,4 +13,3 @@ jobs:
         run: |
           docker container ls
           docker exec covidtest_app pytest --cov=.
-          

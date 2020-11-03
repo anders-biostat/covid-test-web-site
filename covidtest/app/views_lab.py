@@ -27,35 +27,6 @@ def random_accesscode(length=9):
 
 
 @login_required
-def generate_barcodes(request):
-    form = LabGenerateBarcodeForm()
-    if request.method == 'POST':
-        form = LabGenerateBarcodeForm(request.POST)
-        if form.is_valid():
-            for j in range(form.cleaned_data['count']):
-                batch_barcodes = []
-                for i in range(50):
-                    count = 1
-                    while count == 1:
-                        barcode = random_barcode(length=6)
-                        count = Sample.objects.filter(barcode=barcode).count()
-
-                    count = 1
-                    while count == 1:
-                        accesscode = random_accesscode(length=9)
-                        count = Sample.objects.filter(barcode=barcode).count()
-
-                    batch_barcodes.append((barcode, accesscode))
-        response = HttpResponse(content_type='text/txt')
-        response['Content-Disposition'] = 'attachment; filename="batch.txt"'
-        for barcode, accesscode in batch_barcodes:
-            response.write("%s\n" % barcode)
-        return response
-
-    return render(request, "lab/generate_barcodes.html", {"form": form})
-
-
-@login_required
 def sample_check_in(request):
     if request.method == 'POST':
         form = LabCheckInForm(request.POST)
