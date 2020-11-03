@@ -33,7 +33,7 @@ class BagViewSet(viewsets.ModelViewSet):
     serializer_class = BagSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-#class KeySamplesViewSet(viewsets.ModelViewSet):
-#    queryset = RSAKey.objects.all()
-#    serializer_class = KeySamplesSerializers
-#    permission_classes = [permissions.IsAuthenticated]
+class KeySamplesViewSet(viewsets.ModelViewSet):
+    queryset = RSAKey.objects.all()
+    serializer_class = KeySamplesSerializers
+    permission_classes = [permissions.IsAuthenticated]

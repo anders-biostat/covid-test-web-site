@@ -29,6 +29,7 @@ class SampleSerializer(serializers.ModelSerializer):
         model = Sample
         fields = ['id', 'barcode', 'access_code', 'bag', 'rack', 'password_hash', 'registrations', 'events']
 
+
 class BagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bag
@@ -36,8 +37,8 @@ class BagSerializer(serializers.ModelSerializer):
 
 
 
-#class KeySamplesSerializers(serializers.ModelSerializer):
-#    samples = SampleSerializer(many=True, read_only=True)
-#    class Meta:
-#        model = RSAKey
-#        fields = ['id', 'key_name', 'samples']
+class KeySamplesSerializers(serializers.ModelSerializer):
+    samples = SampleSerializer(many=True, read_only=True)
+    class Meta:
+        model = RSAKey
+        fields = ['id', 'key_name', 'samples']
