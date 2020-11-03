@@ -15,7 +15,7 @@ class Sample(models.Model):
     barcode = models.CharField(max_length=50)
     access_code = models.CharField(max_length=50)
     batch = models.CharField(max_length=50)
-    rack = models.CharField(max_length=50)
+    rack = models.CharField(max_length=50, null=True)
     password_hash = models.CharField(max_length=200, blank=True, null=True)
     key = models.ForeignKey(Key, on_delete=models.DO_NOTHING, related_name='samples')
 
