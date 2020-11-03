@@ -1,0 +1,15 @@
+name: build-test-workflow
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: |
+          cp example.env .env
+          docker-compose up -d
+      - name: Test
+        run: |
+          docker container ls
+          docker exec covidtest_app pytest --cov=.

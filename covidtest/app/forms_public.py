@@ -9,7 +9,7 @@ class ConsentForm(forms.Form):
 class RegistrationForm(forms.Form):
     class Meta:
         layout = [
-            ("Field", "barcode"),
+            ("Field", "access_code"),
 
             ("Text", _("<h3 class=\"ui dividing header\">Persönliche Daten</h3>")),
             ("Text", _(
@@ -17,38 +17,27 @@ class RegistrationForm(forms.Form):
             ("Field", "name"),
             ("Field", "address"),
             ("Field", "contact"),
-
-            ("Two Fields",
-             ("Field", "password"),
-             ("Field", "password_repeat"),
-             ),
         ]
 
-    barcode = forms.CharField(label=_('Code auf dem Probenröhrchen (im Testkit erhalten):'),
+    access_code = forms.CharField(label=_('Zugangscode (beiliegender Zettel):'),
                               widget=forms.TextInput(
-                                attrs={"placeholder": _("Barcode des Teströhrchens"), "help": "Hallo"}))
+                                attrs={"placeholder": _("Zugangscode"), "help": "Hallo"}))
     name = forms.CharField(label=_('Name (Nachname, Vorname):'),
                            widget=forms.TextInput(attrs={"placeholder": _("Nachname, Vorname")}))
     address = forms.CharField(label=_('Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):'),
-                              widget=forms.TextInput(
+                              widget=forms.Textarea(
                                   attrs={"placeholder": _("Straße, Hausnummer, Postleitzahl, Wohnort")}))
     contact = forms.CharField(label=_('Telefonnummer:'),
                               widget=forms.TextInput(attrs={"placeholder": _("Telefonnummer")}))
 
-    password = forms.CharField(label=_('Passwort:'),
-                               widget=forms.PasswordInput(attrs={"placeholder": _("Passwort")}))
-    password_repeat = forms.CharField(label=_('Passwort wiederholen:'),
-                                      widget=forms.PasswordInput(attrs={"placeholder": _("Passwort wiederholen")}))
-
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("password_repeat")
-
-        if password != confirm_password:
-            raise forms.ValidationError(_("Passwörter müssen übereinstimmen"))
+        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().strip()
 
 
 class ResultsQueryForm(forms.Form):
-    barcode = forms.CharField(label=_('Barcode'), widget=forms.TextInput(attrs={"placeholder": _("Barcode")}))
-    password = forms.CharField(label=_('Passwort'), widget=forms.PasswordInput(attrs={"placeholder": _("Passwort")}))
+    access_code = forms.CharField(label=_('Zugangscode'), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")}))
+
+class ResultsQueryFormLegacy(forms.Form):
+    access_code = forms.CharField(label=_('Zugangscode'), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")}))
+    password = forms.CharField(label=_("Passwort"), widget=forms.PasswordInput(attrs={'placeholder': _('Passwort')}))

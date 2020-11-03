@@ -25,7 +25,6 @@ urlpatterns = [
     path('lab/checkin', views_lab.sample_check_in, name='checkin'),
     path('lab/rack', views_lab.sample_edit_rack, name='edit_rack'),
     path('lab/lab_query', views_lab.sample_query, name='query'),
-    path('lab/barcodes', views_lab.generate_barcodes, name='barcodes'),
     path('lab/dashboard', views_lab.dashboard, name='dashboard'),
 
     path('api/', include(router.urls)),

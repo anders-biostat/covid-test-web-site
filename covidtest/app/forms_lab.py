@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext as _
 
-from .models import Key
+from .models import RSAKey
 from .statuses import SampleStatus
 
 class LabQueryForm(forms.Form):
@@ -32,4 +32,4 @@ class LabProbeEditForm(forms.Form):
 
 class LabGenerateBarcodeForm(forms.Form):
     count = forms.IntegerField(label=_('Anzahl der batches'))
-    key = forms.ModelChoiceField(Key.objects.all(), label=_('Schlüssel'))
+    key = forms.ModelChoiceField(RSAKey.objects.all(), label=_('Schlüssel'))
