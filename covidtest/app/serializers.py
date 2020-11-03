@@ -17,7 +17,7 @@ class EventSerializer(serializers.ModelSerializer):
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Registration
-        fields = ['sample', 'time', 'name_encrypted', 'address_encrypted', 'contact_encrypted', 'password_hash',
+        fields = ['sample', 'time', 'name_encrypted', 'address_encrypted', 'contact_encrypted', 
                   'public_key_fingerprint', 'session_key_encrypted', 'aes_instance_iv']
 
 
@@ -28,7 +28,7 @@ class SampleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sample
-        fields = ['id', 'barcode', 'batch', 'rack', 'key', 'registrations', 'events']
+        fields = ['id', 'barcode', 'access_code', 'bag', 'rack', 'password_hash', 'registrations', 'events']
 
 class KeySamplesSerializers(serializers.ModelSerializer):
     samples = SampleSerializer(many=True, read_only=True)
