@@ -21,6 +21,7 @@ messages.pot
 # Data
 subjects.csv
 db.sqlite3
+postgres-data
 
 # Editor
 .idea/
