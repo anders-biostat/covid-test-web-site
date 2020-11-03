@@ -39,7 +39,3 @@ class KeySamplesViewSet(viewsets.ModelViewSet):
     queryset = RSAKey.objects.all()
     serializer_class = KeySamplesSerializers
     permission_classes = [permissions.IsAuthenticated]
-
-
-class SimonTest():
-    pass
