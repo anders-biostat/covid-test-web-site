@@ -1,0 +1,1182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-03 03:19+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/forms_lab.py:8 app/forms_lab.py:25
+msgid "Barcode"
+msgstr ""
+
+#: app/forms_lab.py:11
+msgid "Barcodes"
+msgstr ""
+
+#: app/forms_lab.py:13 app/forms_lab.py:17
+msgid "Rack (Barcode)"
+msgstr ""
+
+#: app/forms_lab.py:19
+msgid "LAMP positiv"
+msgstr ""
+
+#: app/forms_lab.py:20
+msgid "LAMP unklares Ergebnis"
+msgstr ""
+
+#: app/forms_lab.py:26 app/templates/lab/snippets/probe.html:40
+msgid "Rack"
+msgstr ""
+
+#: app/forms_lab.py:28
+msgid "Probenstatus"
+msgstr ""
+
+#: app/forms_lab.py:34
+msgid "Anzahl der batches"
+msgstr ""
+
+#: app/forms_lab.py:35
+msgid "Schlüssel"
+msgstr ""
+
+#: app/forms_public.py:6
+msgid "Einverständnis"
+msgstr ""
+
+#: app/forms_public.py:14
+msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
+msgstr ""
+
+#: app/forms_public.py:16
+msgid ""
+"<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
+"vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf "
+"Zugriff.</p>"
+msgstr ""
+
+#: app/forms_public.py:22
+msgid "Zugangscode (beiliegender Zettel):"
+msgstr ""
+
+#: app/forms_public.py:24 app/forms_public.py:39 app/forms_public.py:42
+msgid "Zugangscode"
+msgstr ""
+
+#: app/forms_public.py:25
+msgid "Name (Nachname, Vorname):"
+msgstr ""
+
+#: app/forms_public.py:26
+msgid "Nachname, Vorname"
+msgstr ""
+
+#: app/forms_public.py:27
+msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"
+msgstr ""
+
+#: app/forms_public.py:29
+msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
+msgstr ""
+
+#: app/forms_public.py:30
+msgid "Telefonnummer:"
+msgstr ""
+
+#: app/forms_public.py:31
+msgid "Telefonnummer"
+msgstr ""
+
+#: app/forms_public.py:43
+msgid "Passwort"
+msgstr ""
+
+#: app/templates/lab/base.html:5
+msgid "COVID19-LAB"
+msgstr ""
+
+#: app/templates/lab/generate_barcodes.html:6
+msgid "Lab Interface - Generate Barcodes"
+msgstr ""
+
+#: app/templates/lab/generate_barcodes.html:8
+msgid ""
+"\n"
+"        Hier können Barcodes generiert werden:\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/index.html:5
+msgid "Lab Interface - Home"
+msgstr ""
+
+#: app/templates/lab/index.html:7
+msgid ""
+"\n"
+"        Dies ist das Laborinterface, um Datensätze der Testungen zu "
+"editieren. Folgende Prozesse stehen zur Verfügung:\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/index.html:13 app/templates/lab/snippets/menubar.html:7
+msgid "Probeneingang"
+msgstr ""
+
+#: app/templates/lab/index.html:16
+msgid ""
+"\n"
+"            Hier werden nach dem Empfang der Probe die Probenröhrchen den\n"
+"            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der "
+"Barcode des Racks eingescannt werden\n"
+"            und nachfolgend alle Probenröhrchen dieses Racks eingescannt "
+"werden.\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/index.html:24 app/templates/lab/snippets/menubar.html:10
+msgid "Rack editieren"
+msgstr ""
+
+#: app/templates/lab/index.html:27
+msgid ""
+"\n"
+"            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu "
+"wird das Rack eingescannt und danach\n"
+"            jeweils die positiven und unklaren Probenröhrchen eingescannt. "
+"Alle nicht eingescannten Proben\n"
+"            des Racks werden automatisch als negativ gewertet. Die Listen "
+"der positiven/unklaren Proben werden\n"
+"            einfach zeilenweise eingefügt (Barcode-Scanner).\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/index.html:36 app/templates/lab/snippets/menubar.html:13
+msgid "Probe suchen"
+msgstr ""
+
+#: app/templates/lab/index.html:39
+msgid ""
+"\n"
+"            Hier können einzelne Proberöhrchen gesucht werden und der Status "
+"sowie das Rack manuell gesetzt werden.\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:71
+msgid "Lab Interface - Proben registrieren"
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:73
+msgid ""
+"\n"
+"        Hier können Barcodes als eingegangen markiert werden:\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:93
+#: app/templates/lab/sample_rack_results.html:77
+msgid "Abschicken"
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:99
+msgid "Proben nicht erfolgreich eingetragen:"
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:102
+msgid "Barcode nicht in db: "
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:97
+msgid "Status konnte nicht gesetzt werden: "
+msgstr ""
+
+#: app/templates/lab/sample_check_in.html:108
+msgid "Rack konnte nicht gesetzt werden: "
+msgstr ""
+
+#: app/templates/lab/sample_query.html:6
+msgid "Lab Interface - Suche"
+msgstr ""
+
+#: app/templates/lab/sample_query.html:8
+msgid ""
+"\n"
+"        Hier können Barcodes gesucht werden:\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/sample_query.html:18
+msgid "Search Barcode..."
+msgstr ""
+
+#: app/templates/lab/sample_query.html:26
+msgid "Ergebnis für: "
+msgstr ""
+
+#: app/templates/lab/sample_query.html:34
+msgid "Keine Probe mit diesem Barcode gefunden."
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:35
+msgid "Lab Interface - Testergebnisse registrieren (Rack)"
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:37
+msgid ""
+"\n"
+"        Hier können die Testergebnisse registriert werden. Der Normalfall "
+"ist ein negatives Ergebnis. Positive\n"
+"        und unklare Proben werden (zeilenweise) in die entsprechenden Felder "
+"eingegeben.\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:55
+msgid ""
+"Nachfolgend die Barcodes der jeweils positiven / unklaren Proben "
+"(zeilenweise separiert)\n"
+"                "
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:60
+msgid "Positive LAMP Proben (Barcodes)"
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:62
+msgid "Positive Proben (Barcodes)"
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:68
+msgid "Unklare LAMP Proben (Barcodes)"
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:70
+msgid "Unklare Proben (Barcodes)"
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:76
+#: app/templates/public/consent.html:29
+#: app/templates/public/result-query.html:24
+msgid "Zurück"
+msgstr ""
+
+#: app/templates/lab/sample_rack_results.html:84
+msgid "Barcode nicht gefunden."
+msgstr ""
+
+#: app/templates/lab/snippets/menubar.html:16
+msgid "Generate barcodes"
+msgstr ""
+
+#: app/templates/lab/snippets/menubar.html:19
+msgid "Admin"
+msgstr ""
+
+#: app/templates/lab/snippets/probe.html:4
+msgid "Barcode: "
+msgstr ""
+
+#: app/templates/lab/snippets/probe.html:12
+msgid "Historie"
+msgstr ""
+
+#: app/templates/lab/snippets/probe.html:36
+msgid "Status der Probe"
+msgstr ""
+
+#: app/templates/lab/snippets/probe.html:44
+msgid "Speichern"
+msgstr ""
+
+#: app/templates/public/base.html:7
+msgid ""
+"Schnelltest der Universität Heidelberg auf das\n"
+"        Covid-19-Coronavirus (SARS-CoV-2)"
+msgstr ""
+
+#: app/templates/public/base.html:43
+msgid "Schnelltest auf COVID-19"
+msgstr ""
+
+#: app/templates/public/base.html:44
+msgid "LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2"
+msgstr ""
+
+#: app/templates/public/consent.html:6
+msgid "Teilnahme am Coronavirus-Test"
+msgstr ""
+
+#: app/templates/public/consent.html:23
+msgid "Ich bin einverstanden und möchte am Test teilnehmen."
+msgstr ""
+
+#: app/templates/public/consent.html:37
+msgid "Weiter"
+msgstr ""
+
+#: app/templates/public/footer.html:5 app/templates/public/pages/contact.html:6
+#: app/templates/public/pages/no-tube.html:24
+msgid "Kontakt"
+msgstr ""
+
+#: app/templates/public/footer.html:7
+#: app/templates/public/pages/impressum.html:6
+msgid "Impressum"
+msgstr ""
+
+#: app/templates/public/index.html:9
+msgid "Schnelltest der Universität Heidelberg auf das"
+msgstr ""
+
+#: app/templates/public/index.html:10
+msgid "Covid-19-Coronavirus (SARS-CoV-2)"
+msgstr ""
+
+#: app/templates/public/index.html:13
+msgid "Ich habe ein Test-Kit erhalten"
+msgstr ""
+
+#: app/templates/public/index.html:16
+msgid "Mein Test-Ergebnis abfragen"
+msgstr ""
+
+#: app/templates/public/index.html:19
+msgid "Mehr über den Test erfahren"
+msgstr ""
+
+#: app/templates/public/index.html:22
+msgid "Diese Seite ist verfügbar in:"
+msgstr ""
+
+#: app/templates/public/information-text.html:3
+msgid "Informationen für Teilnehmer/innen"
+msgstr ""
+
+#: app/templates/public/information-text.html:4
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Worum geht es bei dieser Studie? </h3>\n"
+"<p> Das neuartige Coronavirus, wissenschaftlich SARS-CoV-2 genannt, hält uns "
+"alle in Atem. Um die Covid19-Pandemie in\n"
+"    den Griff zu bekommen, mussten wir uns alle in den letzten Monaten stark "
+"einschränken. Nun wird das öffentliche\n"
+"    Leben wieder geöffnet. Damit wir das Virus dabei unter Kontrolle halten "
+"können, müssen wir rechtzeitig erkennen,\n"
+"    wenn irgendwo wieder gehäuft Infektionen auftreten. Dazu müssen wir "
+"möglichst viele Personen möglichst unkompliziert\n"
+"    auf das Virus testen zu können. Wir erproben ein Verfahren hierzu, und "
+"möchten Sie um Ihre Mithilfe bitten. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:12
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Wie wird normalerweise auf das Virus getestet? </"
+"h3>\n"
+"<p> Personen, die sich mit dem Coronavirus infiziert haben könnten, werden "
+"üblicherweise vom Gesundheitsamt oder ihrem\n"
+"    Hausarzt zu einem Rachenabstrich gebeten. Dabei führt eine medizinische "
+"Fachkraft ein Abstrichstäbchens (eine Art\n"
+"    langes Wattestäbchen) durch den Mund oder die Nase zur Rückwand des "
+"Rachens und streicht dort Material (Sekret und\n"
+"    Zellen) ab. In einem medizinischen Labor wird die Probe dann auf "
+"Vorhandensein von RNA des SARS-Coronavirus 2\n"
+"    getestet. Die dabei verwendete Labortechnik nennt man \"qPCR\". </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:20
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Was möchten wir anders machen? </h3>\n"
+"<p> Die Methode, die wir erproben möchten, unterscheidet sich in zwei "
+"Punkten:</p>\n"
+"<p>\n"
+"<ol class=\"ui list\">\n"
+"    <li> Wir möchten Speichel statt Rachenabstrich verwenden. Das hat "
+"mehrere Vorteile:\n"
+"        <ul>\n"
+"            <li> Ein Rachenabstrich ist ziemlich unangenehm. In ein kleines "
+"Gefäß zu spucken ist viel einfacher und\n"
+"                angenehmer.\n"
+"            </li>\n"
+"            <li> Den Rachenabstrich muss eine medizinische Fachkraft "
+"durchführen, und Sie müssen dazu in eine Arztpraxis\n"
+"                oder zu einer Teststation kommen. Eine Speichelprobe können "
+"Sie ganz einfach zu Hause selbst\n"
+"                durchführen. In einem Video erklären wir Ihnen, was Sie "
+"machen sollen.\n"
+"            </li>\n"
+"        </ul>\n"
+"    <li> Im Labor möchten wir ein anderes Analyse-Verfahren verwenden. Statt "
+"des üblichen \"qPCR\"-Verfahrens erproben wir\n"
+"        eine Alternative, die weniger technischen Aufwand erfordert, und "
+"\"LAMP\" genannt wird.\n"
+"    </li>\n"
+"</ol>\n"
+"</p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:41
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Ist unser Test genauso so gut wie der \"offizielle"
+"\" Test? </h3>\n"
+"<p> Das können wir noch nicht abschließend sagen; daher wollen wir die "
+"Methode ja erproben. Bisher können wir folgendes\n"
+"    sagen:\n"
+"<ul class=\"ui list\">\n"
+"    <li> In den letzten Monaten haben Studien mehrere Forschungsgruppen "
+"ergeben, dass das Coronavirus in Speichel ebenso\n"
+"        gut nachweisbar ist wie in Rachenabstrich. Es spricht vieles dafür, "
+"dass der doch sehr unangenehme\n"
+"        Rachenabstrich durch eine Untersuchung von Speichel ersetzt werden "
+"kann. Wie genau man den Speichel am besten\n"
+"        sammeln sollte, ist aber noch nicht ganz klar (siehe unten).\n"
+"    </li>\n"
+"    <li> Beide Laborverfahren, qPCR und LAMP, sind nicht perfekt: Wenn die "
+"Probe nur wenige Viren enthalten, können sie\n"
+"        eine Infektion übersehen. Die etablierte qPCR-Methode ist aber ganz "
+"klar besser darin, Proben mit sehr wenigen\n"
+"        Viren als infiziert zu erkennen, als die LAMP-Methode, die wir "
+"erproben möchten. Wenn unser Test bei Ihnen keine\n"
+"        Viren findet, ist dies also ein weniger verlässliches Resultat als "
+"wenn der etablierte qPCR-Test keine Viren\n"
+"        findet.\n"
+"    </li>\n"
+"    <li> Andererseits ist der LAMP-Test aber technisch deutlich einfacher. "
+"Mit derselben Labor-Kapazität und derselben\n"
+"        Anzahl an Labortechniker/innen können wir sehr viel mehr Personen "
+"testen, als mit dem qPCR-Test möglich wäre.\n"
+"    </li>\n"
+"</ul>\n"
+"</p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:63
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
+"<ol class=\"ui list\">\n"
+"    <li> Sie sollten ein Teströhrchen (kleiner Plastikbecher mit "
+"Schraubverschluss) erhalten haben. Es enthält etwas\n"
+"        salziges Wasser. (5 ml reines Wasser mit 0.9&#37; Kochsalz.)\n"
+"    </li>\n"
+"    <li> Zunächst sollten Sie nun diese Informationen hier lesen und, wenn "
+"Sie mit allem einverstanden sind, am Ende der\n"
+"        Seite mit einem Mausklick bestätigen, dass Sie teilnehmen möchten.\n"
+"    </li>\n"
+"    <li> Auf der nächsten Seite werden wir Sie dann bitten, Ihre "
+"Kontaktdaten anzugeben (damit das Gesundheitsamt Sie\n"
+"        erreichen kann, falls Sie infiziert sein sollten), sowie den Code, "
+"der auf Ihrem Teströhrchen aufgeklebt ist.\n"
+"        Ihr Name und Ihre Kontaktdaten werden verschlüsselt so "
+"abgespeichert, dass sie uns (dem Team der Universität\n"
+"        Heidelberg) nicht zugänglich sind, sondern nur dem Gesundheitsamt, "
+"das den Versuch mit betreut.\n"
+"    </li>\n"
+"    <li> Dann sehen Sie sich bitte <a href=\"https://www.youtube.com/watch?"
+"v=hVniPRMuCjo\">ein kurzes Video</a> an, dass\n"
+"        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
+"    </li>\n"
+"    <li> Nun spucken Sie in das Teströhrchen, genau wie im Video gezeigt.</"
+"li>\n"
+"    <li> Schließlich senden Sie uns das Röhrchen per Post zu oder geben es "
+"an einer Sammelstelle ab. Instruktionen\n"
+"        finden Sie auf der Webseite.\n"
+"    </li>\n"
+"</ol>\n"
+"<p><b> Zeitaufwand: </b> Insgesamt sollte Sie das in etwa 15-25 Minuten "
+"Ihrer Zeit kosten. (Wenn Sie das Video schon\n"
+"    kennen, etwas weniger, und wenn ihr nächste Briefkasten ein weiter Weg "
+"ist, etwas mehr.) </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:88
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Was geschieht, wenn wir in Ihrer Probe das "
+"Coronavirus nachweisen können? </h3>\n"
+"<p> Wenn wir mit unserem LAMP-Verfahren das Virus in einer Probe nachweisen "
+"können (positives Resultat), dann teilen wir\n"
+"    dem Gesundheitsamt den Code auf dem Aufkleber des Teströhrchens mit. "
+"Außerdem werden wir das Resultat auch mit der\n"
+"    etablierten qPCR-Methode nochmals überprüfen, damit wir keinen falschen "
+"Alarm schlagen. </p>\n"
+"<p> Das Gesundheitsamt kontaktiert Sie dann, und informiert Sie. "
+"Typischerweise wird das Gesundheitsamt Sie auffordern,\n"
+"    sich in häusliche Quarantäne zu begeben, Sie beraten, und versuchen, mit "
+"Ihnen zusammen die Personen zu ermitteln,\n"
+"    die Sie angesteckt haben könnten, damit die Übertragung des Virus "
+"gestoppt werden kann. </p>\n"
+"<p> Wir (das Team der Universität) werden Ihre Identität nicht erfahren: nur "
+"das Gesundheitsamt hat Zugriff auf die\n"
+"    Zuordnung von Codes zu Namen und Kontaktdaten. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:99
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Was bedeutet es, wenn wir in Ihrer Probe kein Virus "
+"finden? </h3>\n"
+"<p> Sie können das Ergebnis auch selbst auf nachfolgender Webseite abfragen. "
+"Auch wenn es negativ sein sollte (kein\n"
+"    Virus nachgewiesen), ist das aber keine völlige Entwarnung! Bedenken Sie "
+"bitte, dass unser Test nicht perfekt ist\n"
+"    und vielleicht (grob geschätzt) nur 60-80&#37; der Infektionen erkennt. "
+"Außerdem: auch wenn Sie im Moment der\n"
+"    Speichelprobe nicht infiziert waren, heißt das nicht, dass Sie sich "
+"nicht vielleicht schon kurze Zeit später\n"
+"    infiziert haben könnten. Oder Sie hatten sich bereits kurz vorher "
+"infiziert, aber das Virus hatte sich noch nicht\n"
+"    hinreichend vermehrt, um in ihrem Speichel nachweisbar zu sein. </p>\n"
+"<p> Solange das Virus im Umlauf ist, müssen wir alle stets vorsichtig sein, "
+"und alle Hygiene- und Abstandsregeln\n"
+"    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:110
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Wenn die Studie erfolgreich ist, was nutzt das uns "
+"allen? </h3>\n"
+"<p> Sicherlich haben Sie in den Nachrichten über Stadtviertel, Regionen oder "
+"Betriebe gehört, in denen das Virus\n"
+"    unerwartet wieder aufgeflammt ist. Nachdem einige Personen Symptome "
+"zeigten, wurde ihr Umfeld getestet (mit qPCR),\n"
+"    und dann festgestellt, dass bereits sehr viele Personen infiziert sind. "
+"Daher mussten sich dann eine große Anzahl\n"
+"    Personen in Quarantäne begeben, und in ganzen Orten oder Landkreisen "
+"wurden die Kontaktbeschränkungen wieder\n"
+"    verschärft. Um dies zu verhindern, müssen wir engmaschiger testen: Zum "
+"Beispiel könnten man in einem Ort regelmäßig\n"
+"    einen Teil der Bewohner (jede Woche einen anderen Teil) bitten, eine "
+"Speichelprobe abzugeben, und je öfter dies\n"
+"    gemacht wird, und je mehr Personen teilnehmen, desto größer ist die "
+"Chance, einen Ausbruch zu entdecken, solange nur\n"
+"    sehr wenige Personen betroffen sind. Ein solches Vorgehen möchten wir "
+"hier erproben. </p>\n"
+"<p> Hier müssen wir abwägen: Sollte man möglichst viele Tests durchführen, "
+"auch wenn die einzelnen Tests nicht so genau\n"
+"    wie möglich sind, oder sollte man die genauest-möglichen Tests "
+"verwenden, auch wenn man dann deutlich weniger Tests\n"
+"    machen kann? Falls ersteres die bessere Strategie ist, wird unsere "
+"Studie erproben, wie man dies in großem Stil,\n"
+"    vielleicht gar für ganz Deutschland, bewerkstelligen könnte. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:125
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Wer führt die Studie durch und wer finanziert sie? "
+"</h3>\n"
+"<p> Die Studie wird von einem Team der Universität Heidelberg durchgeführt. "
+"Eine Liste der beteiligten Wissenschaftler\n"
+"    finden Sie hier: [Link einfügen]. Außerdem werden wir von den örtlichen "
+"Gesundheitsämtern unterstützt. Diese\n"
+"    erhalten die Kontaktdaten und die Ergebnisse und informieren Personen "
+"mit positivem Testergebnis.</p>\n"
+"<p> Die Studie wird finanziert aus Mitteln des baden-württembergischen "
+"Ministeriums für Wissenschaft und Kunst, und aus\n"
+"    Mitteln der Universität Heidelberg (also somit indirekt von Ihnen allen, "
+"den steuerzahlenden Bürgern des Landes\n"
+"    Baden-Württemberg. Vielen Dank.) </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:134
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Was nutzt die Teilnahme Ihnen selbst? </h3>\n"
+"<p> Falls Sie tatsächlich mit dem Coronavirus infiziert sind, besteht eine "
+"gute Chance (aber leider keine Sicherheit),\n"
+"    dass der Test dies auch feststellt. Wenn Sie wissen, dass Sie infiziert "
+"sind, können Sie sich in häusliche\n"
+"    Quarantäne begeben, und so Ihre Familie, ihre Freunde, Kollegen und "
+"Mitmenschen vor Ansteckung schützen. Außerdem\n"
+"    wissen Sie vielleicht etwas früher als sonst, was Ihnen fehlt, falls die "
+"Krankheit schwerer verlaufen sollte. </p>\n"
+"<p> Wenn das Testergebnis negativ ist, kann Ihnen dies aber leider keinen "
+"\"Freibrief\" geben, die Abstands- und\n"
+"    Hygieneregeln nun weniger ernst zu nehmen, denn der Test kann eine "
+"Infektion nicht sicher ausschließen. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:143
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Birgt die Teilnahme Risiken für Sie? </h3>\n"
+"<p> Die Abgabe eine Speichelprobe birgt keinerlei körperliche Risiken für "
+"sie. Das Probengefäß ist mit steriler\n"
+"    Kochsalzlösung gefüllt, sein Inhalt ist also ungefährlich. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:148
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Wer soll teilnehmen? </h3>\n"
+"<p> Jeder, dem ein Teströhrchen ausgehändigt wird, ist gebeten, an der "
+"Studie teilzunehmen. Die Verteilung der\n"
+"    Teströhrchen wird typischerweise durch das Gesundheitsamt organisiert, "
+"bzw. an eine Abgabestelle delegiert.\n"
+"    Voraussetzung für die Teilnahme ist auch, dass Sie erklären, dass Sie "
+"sich durch die hier vorliegenden Erläuterungen\n"
+"    ausreichend informiert fühlen, und mit dem beschriebenen Vorgehen "
+"einverstanden sind. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:155
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Wie gewährleisten wir den Schutz Ihrer Daten? </"
+"h3>\n"
+"<p> Wir (das Team der Universität Heidelberg) arbeiten nur mit den "
+"Teströhrchen und identifizieren Sie, die Probanden,\n"
+"    nur über die auf den Teströhrchen aufgeklebten Codes. Das nennt man "
+"Pseudonymisieren. Pseudonymisierung bedeutet,\n"
+"    dass die erhobenen Daten anstatt des Namens/Geburtsdatums etc. mit einem "
+"Nummern-/Buchstabencode gekennzeichnet\n"
+"    werden. Das Gesundheitsamt hingegen hat Zugriff auf die Daten, die Sie "
+"auf der Webseite eingeben (Ihr Name, Ihre\n"
+"    Adresse, Ihre Telefonnummer und/oder Ihre eMail-Adresse), und kann diese "
+"Daten dem Code ihres Teströhrchens\n"
+"    zuordnen. Das ist erforderlich, da Covid19 eine meldepflichtige "
+"Krankheit ist: das Gesundheitsamt muss über die\n"
+"    Identität Infizierter informiert werden. Daher teilen wir dem "
+"Gesundheitsamt die Codes aller positiven Proben mit,\n"
+"    so dass es dann die Infizierten kontaktieren und weitere Maßnahmen "
+"einleiten kann. </p>\n"
+"<p> Der Webserver, auf dem Sie Ihre Daten eingeben, ist so aufgesetzt, dass "
+"nur klar bestimmte Mitarbeiter des\n"
+"    Gesundheitsamtes, nicht aber wir (die Wissenschaftler der Universität "
+"Heidelberg) Zugriff auf Namen und Kontaktdaten\n"
+"    der Probanden haben. </p>\n"
+"<p> Die Stelle, die Teströhrchen ausgibt, darf nicht nach ihrem Namen fragen "
+"und darf keine Aufzeichnungen anfertigen,\n"
+"    die die Codes auf den Teströhrchen mit den Namen der Probanden "
+"verknüpft. Wenn Sie den Verdacht haben, dass sich die\n"
+"    ausgebende Stelle den Code Ihres Teströhrchens und Ihren Namen notiert "
+"haben, informieren Sie uns bitte\n"
+"    unbedingt. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:173
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Weitere Informationen zum Datenschutz </h3>\n"
+"<p> Alle datenschutzrechtlichen Bestimmungen werden eingehalten, ebenso die "
+"Regelungen zur medizinischen\n"
+"    Schweigepflicht, im Kontext des Infektionsschutzgesetzes. Während der "
+"Studie werden keine medizinischen Befunde und\n"
+"    nur der Code Ihres Teströhrchens sowie die Angabe der Kontaktanschrift "
+"von Ihnen erhoben. Diese werden in einer\n"
+"    Datenbank, die nur dem Gesundheitsamt zugänglich ist, gespeichert. "
+"Zusätzlich werden Informationen erhoben, die mit\n"
+"    dem ausgegebenen Code auf dem Teströhrchen verknüpft sind. Diese sind: "
+"Ausgabeort des Teströhrchens und Ausgabedatum\n"
+"    des Teströhrchens. </p>\n"
+"<p> Für die Studie wichtigen statistischen Daten werden vom Gesundheitsamt "
+"anonymisiert und an die Organisatoren der\n"
+"    Studie weitergegeben. Die Studienleitung wird alle angemessenen Schritte "
+"unternehmen, um den Schutz Ihrer Daten\n"
+"    gemäß den Datenschutzstandards der Europäischen Union zu gewährleisten. "
+"Die Daten sind gegen unbefugten Zugriff\n"
+"    gesichert. Eine Entschlüsselung erfolgt nur durch das Gesundheitsamt. "
+"Die während der Studie erhobenen Daten werden\n"
+"    nach Studienabschluss vernichtet. </p>\n"
+"<p> Sie haben das Recht, vom Verantwortlichen (s.u.) Auskunft über die von "
+"Ihnen gespeicherten personenbezogenen Daten\n"
+"    zu verlangen. Ebenfalls können Sie die Berichtigung unzutreffender Daten "
+"sowie die Löschung der Daten oder\n"
+"    Einschränkung deren Verarbeitung verlangen. </p>\n"
+"<p> Verantwortlich für die studienbedingte Erhebung personenbezogener Daten "
+"ist das Gesundheitsamt, sowie wir,\n"
+"    das Team der Universität Heidelberg; hier spezifisch Dr. Simon Anders.</"
+"p>\n"
+"<p> Bei Anliegen zur Datenverarbeitung und zur Einhaltung der "
+"datenschutzrechtlichen Anforderungen können Sie sich an\n"
+"    den Datenschutzbeauftragten des Gesundheits- oder Landratsamts wenden. "
+"Für Test-Aktionen, die über das\n"
+"    Gesundheitsamt des Rhein-Neckar-Kreises organisiert werden, ist dies: </"
+"p>\n"
+"<ul style=\"list-style-type:none;\">\n"
+"    <li> Der behördliche Datenschutzbeauftragter <br>\n"
+"        des Landratsamtes Rhein-Neckar-Kreis <br>\n"
+"        Kurfürsten-Anlage 38-40, 69115 Heidelberg <br>\n"
+"        Tel. 06221 522-1314 <br>\n"
+"        E-Mail: behoerdlicherdatenschutzbeauftragter@rhein-neckar-kreis.de\n"
+"    </li>\n"
+"</ul>\n"
+"<p> Im Falle einer rechtswidrigen Datenverarbeitung haben Sie das Recht, "
+"sich bei folgender Aufsichtsbehörde zu\n"
+"    beschweren:</p>\n"
+"<ul style=\"list-style-type:none;\">\n"
+"    <li> Der Landesbeauftragte für den Datenschutz und die "
+"Informationsfreiheit Baden-Württemberg <br>\n"
+"        Postfach 10 29 32, 70025 Stuttgart <br>\n"
+"        Königstraße 10a, 70173 Stuttgart <br>\n"
+"        Tel.: 0711 61 55 41 - 0 <br>\n"
+"        Fax: 0711 61 55 41 - 15 <br>\n"
+"        E-Mail: poststelle@lfdi.bwl.de <br>\n"
+"        Internet: http://www.baden-wuerttemberg.datenschutz.de\n"
+"    </li>\n"
+"</ul>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:215
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Ist die Teilnahme freiwillig? Können Sie Ihre "
+"Zustimmung widerrufen? </h3>\n"
+"<p> Die Teilnahme ist freiwillig. Wenn Sie nicht teilnehmen möchten, füllen "
+"Sie einfach das Webformular nicht aus und\n"
+"    werfen Sie das Teströhrchen weg oder geben Sie es jemand anderem der "
+"sich testen lassen möchte. Eine Teilnahme ist\n"
+"    gratis. Wenn Sie bereits Ihre Einwilligung gegeben haben und auch das "
+"Teströhrchen abgegeben haben und jetzt Ihre\n"
+"    widerrufen möchten, wenden Sie sich bitte an die Studienleitung. Eine "
+"Kontaktemail finden Sie auf der Webseite. Bei\n"
+"    einem Widerruf werden Ihre persönlichen Daten gelöscht, so dass das "
+"Ergebnis Ihrer Probe Ihnen nicht mehr zugeordnet\n"
+"    werden kann. Bei Rücktritt von der Studie kann auf Wunsch bereits "
+"gewonnenes Material vernichtet werden. Sollte Ihre\n"
+"    Probe aber bereits analysiert worden sein, z.B. weil Sie sich zu spät "
+"gemeldet haben, und der Test sollte sich als\n"
+"    positiv erweisen, werden wir den Code der Probe dennoch an das "
+"Gesundheitsamt übermitteln, da wir aufgrund der\n"
+"    Meldepflicht dazu verpflichtet sind. </p>\n"
+msgstr ""
+
+#: app/templates/public/information-text.html:227
+msgid ""
+"\n"
+"<h3 class=\"ui header\"> Haben Sie noch Fragen? </h3>\n"
+"<p> Für weitere Informationen sowie für Auskünfte über allgemeine Ergebnisse "
+"und den Ausgang der Studie steht Ihnen als\n"
+"    Leiter der Studie Herr Prof. Michael Knop (m.knop@zmbh.uni-heidelberg."
+"de, Tel. 06221 54-6800) oder auch Herr Dr.\n"
+"    Simon Anders (s.anders@zmbh.uni-heidelberg.de, Tel. 06221 54-6800) zur "
+"Verfügung. </p>\n"
+msgstr ""
+
+#: app/templates/public/instructions.html:7
+msgid "Anleitung Probenname"
+msgstr ""
+
+#: app/templates/public/instructions.html:10
+msgid ""
+"Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,\n"
+"        was Sie nun machen müssen."
+msgstr ""
+
+#: app/templates/public/instructions.html:27
+msgid ""
+"\n"
+"        Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten "
+"Sie uns das Röhrchen bitte zu.\n"
+"        "
+msgstr ""
+
+#: app/templates/public/instructions.html:34
+msgid "Vielen Dank für Ihre Teilnahme."
+msgstr ""
+
+#: app/templates/public/instructions.html:36
+msgid ""
+"Morgen oder übermorgen können Sie Ihr Ergebnis auf dieser Seite abfragen."
+msgstr ""
+
+#: app/templates/public/instructions.html:43
+msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
+msgstr ""
+
+#: app/templates/public/pages/contact.html:7
+#: app/templates/public/pages/impressum.html:7
+msgid "Diese Studie wird organisert vom "
+msgstr ""
+
+#: app/templates/public/pages/contact.html:10
+#: app/templates/public/pages/impressum.html:10
+msgid ""
+"<strong\n"
+"        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) "
+"<br />\n"
+"        Im Neuenheimer Feld 282 <br />\n"
+"        69120 Heidelberg </strong\n"
+"      >"
+msgstr ""
+
+#: app/templates/public/pages/contact.html:17
+#: app/templates/public/pages/impressum.html:17
+msgid "in Zusammenarbeit mit dem"
+msgstr ""
+
+#: app/templates/public/pages/contact.html:20
+#: app/templates/public/pages/impressum.html:20
+msgid ""
+"<strong\n"
+"        >Gesundheitsamt Rhein-Neckar-Kreis <br />\n"
+"        Kurfürsten-Anlage 38-40 <br />\n"
+"        69115 Heidelberg </strong\n"
+"      >"
+msgstr ""
+
+#: app/templates/public/pages/contact.html:27
+#: app/templates/public/pages/impressum.html:27
+msgid "Für Anfragen wenden Sie sich bitte an"
+msgstr ""
+
+#: app/templates/public/pages/contact.html:31
+#: app/templates/public/pages/impressum.html:31
+msgid ""
+",\n"
+"      oder "
+msgstr ""
+
+#: app/templates/public/pages/contact.html:36
+#: app/templates/public/pages/impressum.html:36
+msgid ""
+",\n"
+"      beide am ZMBH "
+msgstr ""
+
+#: app/templates/public/pages/impressum.html:41
+msgid ""
+"Für detaillierte Informationen zur Studie, lesen Sie bitte\n"
+"    unseren Informationstext."
+msgstr ""
+
+#: app/templates/public/pages/impressum.html:46
+#: app/templates/public/pages/impressum.html:57
+msgid "Informationstext"
+msgstr ""
+
+#: app/templates/public/pages/impressum.html:50
+msgid ""
+"Verantwortlicher Leiter der Studie ist Prof. Knop. Verantwortlich\n"
+"    für die Webseite ist Dr. Anders. Die Studie wurde von der Ethikkomission "
+"der\n"
+"    Universität Heidelberg befürwortet. Hinweise zum <b>Datenschutz</b> "
+"finden\n"
+"    Sie im nachfolgenden Informationstext."
+msgstr ""
+
+#: app/templates/public/pages/information.html:7
+msgid ""
+"Erprobung eines LAMP-basierten Tests auf das Coronavirus\n"
+"    SARS-CoV-2"
+msgstr ""
+
+#: app/templates/public/pages/internal-error.html:6
+msgid "Überschrift"
+msgstr ""
+
+#: app/templates/public/pages/multiple-registeration.html:6
+msgid "Mehrfach registrierter Barcode"
+msgstr ""
+
+#: app/templates/public/pages/multiple-registeration.html:8
+msgid ""
+"Für diesen Barcode wurde das Registrier-Formular mehrmals\n"
+"    ausgefüllt, mit verschiedenen Passwörtten. "
+msgstr ""
+
+#: app/templates/public/pages/multiple-registeration.html:12
+msgid "Bitte kontaktieren Sie uns:"
+msgstr ""
+
+#: app/templates/public/pages/multiple-registeration.html:14
+msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
+msgstr ""
+
+#: app/templates/public/pages/no-tube.html:7
+msgid ""
+"Unsere Test-Kits bestehen aus einem größeren Röhrchen mit\n"
+"        salzigem Wasser, einem kleinen Röhrchen mit aufgedrucktem Code, und "
+"einer\n"
+"        Plastik-Pipette."
+msgstr ""
+
+#: app/templates/public/pages/no-tube.html:12
+msgid ""
+"Wir verteilen diese Kits im Rahmen von Test-Aktionen, z.B. an\n"
+"        alle Mitarbeiter einer Einrichtung. Nur wer auf solchem Wege ein "
+"Test-Kit\n"
+"        erhalten hat, kann teilnehmen."
+msgstr ""
+
+#: app/templates/public/pages/no-tube.html:17
+msgid ""
+"Bitte verstehen Sie, dass sich der Aufwand einer Test-Aktion nur\n"
+"        lohnt, wenn wir dadurch eine größere Zahl Personen testen können. "
+"Für\n"
+"        Einzel-Personen können wir den test leider nicht anbieten. Wenn Sie "
+"uns aber\n"
+"        helfen möchten, und für eine größere Gruppe die verteilung von test-"
+"Kits\n"
+"        organisieren möchten, wenden Sie sich doch mit einem Vorschlag an "
+"uns.\n"
+"        "
+msgstr ""
+
+#: app/templates/public/pages/password-not-matched.html:6
+msgid "Passwörter stimmen nicht überein"
+msgstr ""
+
+#: app/templates/public/pages/password-not-matched.html:8
+msgid ""
+"Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es\n"
+"    noch einmal."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPINC.html:6
+msgid "Ooops, das Ergebnis liegt noch nicht vor... "
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPINC.html:8
+msgid ""
+"Das tut uns sehr leid! Leider haben wir immer einen kleinen\n"
+"    Bruchteil der Proben mit nicht eindeutigen Ergebnissen."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPINC.html:12
+msgid ""
+"Dies sind meist falsch-positive Ergebnisse. Um dies zu\n"
+"    überprüfen, analysieren wir diese Proben erneut mittels RT-qPCR, um ein\n"
+"    eindeutiges Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls "
+"Sie\n"
+"    die Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die "
+"Probe\n"
+"    abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu\n"
+"    denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
+"Ergebnis\n"
+"    zu erhalten."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPINC.html:21
+msgid "Bleiben Sie dran, wir tun unser Bestes."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPNEG.html:7
+#: app/templates/public/pages/test-PCRNEG.html:7
+msgid ""
+"In Ihrer Probe konnte das Coronavirus SARS-CoV-2\n"
+"    <strong> nicht </strong> nachgewiesen werden. Vermutlich sind Sie also "
+"nicht\n"
+"    mit Covid-19 infiziert."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPNEG.html:11
+#: app/templates/public/pages/test-PCRNEG.html:11
+msgid "Bedenken Sie aber:"
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPNEG.html:14
+msgid ""
+"Unser Test ist nicht perfekt und nicht so genau wie der\n"
+"      \"offizielle\" PCR-Test. Daher kommt es vor, dass der Test "
+"Infektionen\n"
+"      übersieht."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPNEG.html:20
+#: app/templates/public/pages/test-PCRNEG.html:14
+msgid ""
+"Selbst, wenn Ihre Probe wirklich keinen Virus enthielt:\n"
+"      Vielleicht war das Virus nicht in Ihrem Speichel, aber anderswo im "
+"Körper.\n"
+"      Oder Sie haben sich in den letzten Tagen angesteckt, erst nachdem Sie "
+"die\n"
+"      Probe abgegeben haben. Oder Sie treffen morgen jemanden, der Sie\n"
+"      ansteckt."
+msgstr ""
+
+#: app/templates/public/pages/test-LAMPNEG.html:28
+#: app/templates/public/pages/test-PCRNEG.html:22
+msgid ""
+"<b>Daher:</b> Seien Sie weiterhin vorsichtig. Halten Sie Abstand\n"
+"    zu anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten "
+"Sie\n"
+"    weiterhin alle Regelungen zur vermeidung von Ansteckungen."
+msgstr ""
+
+#: app/templates/public/pages/test-PCRPOS.html:7
+msgid ""
+"\n"
+"    <strong>Ihre Probe war <span>positiv</span>. Das heisst, das in Ihrer "
+"Probe das\n"
+"      Coronavirus SARS-CoV-2 nachgewiesen wurde und Sie sich wahrscheinlich "
+"mit\n"
+"      Covid-19 angesteckt haben.</strong>"
+msgstr ""
+
+#: app/templates/public/pages/test-PCRPOS.html:13
+msgid ""
+"Bitte bleiben Sie zu Hause und vermeiden Sie jeglichen Kontakt zu\n"
+"    anderen. Wenn Sie ärztlichen Rat wünschen, wenden Sie sich bitte (per\n"
+"    Telefon!) an Ihren Hausarzt. "
+msgstr ""
+
+#: app/templates/public/pages/test-PCRPOS.html:18
+msgid ""
+"Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit\n"
+"    Ihnen in Verbindung setzen und das weitere Vorgehen mit Ihnen "
+"besprechen.\n"
+"    Sie können auch selbst die Corona-Hotline des Gesundheitsamtes anrufen:\n"
+"    06221 522-1881. "
+msgstr ""
+
+#: app/templates/public/pages/test-UNDEF.html:6
+msgid "Test fehlgeschlagen"
+msgstr ""
+
+#: app/templates/public/pages/test-UNDEF.html:8
+msgid ""
+"Bei der Analyse Ihrer Probe ist ein technisches Problem\n"
+"    aufgetreten. Wir konnten Ihre Probe daher nicht auswerten und können "
+"Ihnen\n"
+"    kein Ergebnis mitteilen. Tut uns leid."
+msgstr ""
+
+#: app/templates/public/pages/test-UNDEF.html:13
+msgid ""
+"Bitte geben Sie bei nächster Gelegenheit eine neue Probe ab.\n"
+"    Derartige Probleme sind die Ausnahme, und das nächste Mal klappt es\n"
+"    bestimmt."
+msgstr ""
+
+#: app/templates/public/pages/test-WAIT-LONG.html:6
+#: app/templates/public/pages/test-WAIT.html:6
+msgid "Ergebnis liegt noch nicht vor"
+msgstr ""
+
+#: app/templates/public/pages/test-WAIT-LONG.html:8
+#: app/templates/public/pages/test-WAIT.html:8
+msgid ""
+"Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte\n"
+"        versuchen Sie es später oder morgen noch einmal."
+msgstr ""
+
+#: app/templates/public/register.html:10
+msgid "Bitte registrieren Sie ihr Testkit:"
+msgstr ""
+
+#: app/templates/public/register.html:14
+msgid ""
+"\n"
+"        Die Registrierung ist notwendig, damit Sie im Falle eines positiven "
+"Testergebnisses kontaktiert werden\n"
+"        können.\n"
+"        "
+msgstr ""
+
+#: app/templates/public/register.html:18
+msgid ""
+"Falls wir das Virus in Ihrer Probe nachweisen sollten, muss\n"
+"        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre\n"
+"        Kontakt-Daten an: "
+msgstr ""
+
+#: app/templates/public/register.html:27
+msgid ""
+"Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
+"            sich bitte ihren Zugangscode und geben Sie ein Passwort an."
+msgstr ""
+
+#: app/templates/public/register.html:38
+msgid "Abbrechen"
+msgstr ""
+
+#: app/templates/public/register.html:41
+msgid "Daten abschicken"
+msgstr ""
+
+#: app/templates/public/result-query.html:9
+msgid "Ergebnis Ihres COVID-19 Tests abfragen:"
+msgstr ""
+
+#: app/templates/public/result-query.html:13
+msgid ""
+"\n"
+"        Um das Ergebnis abrufen zu können, muss der Test vorher registriert "
+"worden sein. <br>\n"
+"        Das Testkit können Sie unter folgendem Link registrieren:\n"
+"        "
+msgstr ""
+
+#: app/templates/public/result-query.html:17
+msgid "Registrieren"
+msgstr ""
+
+#: app/templates/public/result-query.html:27
+msgid "Ergebnis anzeigen"
+msgstr ""
+
+#: app/views_lab.py:54
+msgid "Einige Barcodes waren nicht in der Datenbank"
+msgstr ""
+
+#: app/views_lab.py:56
+msgid "Einige status konnten nicht gesetzt werden"
+msgstr ""
+
+#: app/views_lab.py:58
+msgid "Einige racks konnten nicht gesetzt werden"
+msgstr ""
+
+#: app/views_lab.py:62
+msgid "Proben erfolgreich eingetragen"
+msgstr ""
+
+#: app/views_lab.py:101
+msgid "Ergebnisse hinzugefügt: "
+msgstr ""
+
+#: app/views_lab.py:103
+msgid "Keine Proben zu Rack gefunden"
+msgstr ""
+
+#: app/views_lab.py:130
+msgid "Sample nicht gefunde"
+msgstr ""
+
+#: app/views_lab.py:134
+msgid "Sample rack geupdated"
+msgstr ""
+
+#: app/views_lab.py:142
+msgid "Status geupdated"
+msgstr ""
+
+#: app/views_public.py:39
+msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
+msgstr ""
+
+#: app/views_public.py:77 app/views_public.py:149
+msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
+msgstr ""
+
+#: app/views_public.py:85
+msgid ""
+"Der Zugangscode wurde nicht registriert. Bitte registrieren Sie sich vorher."
+msgstr ""
+
+#: app/views_public.py:108
+msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
+msgstr ""
+
+#: app/views_public.py:165
+msgid "Erfolgreich registriert"
+msgstr ""
