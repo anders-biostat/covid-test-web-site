@@ -7,7 +7,6 @@
 # Python
 __pycache__/
 
-
 # Pybabel
 messages.pot
 *.mo
