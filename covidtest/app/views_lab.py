@@ -177,8 +177,11 @@ def sample_query(request):
 @login_required
 def dashboard(request):
 
+    count_wait = Event.objects.filter(status="PRINTED").count()
+
     dashboard_values = {
         "count_Samples" : Sample.objects.filter().count(),
+        "count_wait" : count_wait
     }
 
     return render(request, "lab/dashboard.html", {'dashboard_values' : dashboard_values})
