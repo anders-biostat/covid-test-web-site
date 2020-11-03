@@ -7,8 +7,9 @@ app_name = 'app'
 router = routers.DefaultRouter()
 router.register(r'samples', views_api.SampleViewSet)
 router.register(r'events', views_api.EventViewSet)
-router.register(r'keys', views_api.KeyViewSet)
+router.register(r'rsakeys', views_api.RSAKeyViewSet)
 router.register(r'registrations', views_api.RegistrationViewSet)
+router.register(r'bags', views_api.BagViewSet)
 router.register(r'keysamples', views_api.KeySamplesViewSet)
 
 
