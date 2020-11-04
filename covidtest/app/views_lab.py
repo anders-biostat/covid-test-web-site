@@ -1,4 +1,4 @@
-import sys, random, string
+import os
 from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -17,14 +17,30 @@ from .statuses import SampleStatus
 def index(request):
     return render(request, "lab/index.html")
 
+@login_required
+def version(request):
+    # Checking where the .git directory is
+    if os.path.isdir('../.git'):
+        git_dir = '../.git'
+    elif os.path.isdir('.git'):
+        git_dir = '.git'
+    else:
+        return HttpResponse('No .git directory found')
 
-def random_barcode(length=6):
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
+    with open(git_dir + '/HEAD', 'r') as head:
+        ref = head.readline().split(' ')[-1].strip()
+        branch_name = ref.split('/')[-1]
+    with open(git_dir + '/' + ref, 'r') as git_hash:
+        commit_hash = git_hash.readline().strip()
 
-
-def random_accesscode(length=9):
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
-
+    version_str = """
+    <code>
+    Branch: <a href='https://github.com/anders-biostat/covid-test-web-site/tree/%s'>%s</a><br>
+    Commit: <a href='https://github.com/anders-biostat/covid-test-web-site/commit/%s'>%s</a><br>
+    Short: %s <br>
+    </code>
+    """
+    return HttpResponse(version_str % (branch_name, branch_name, commit_hash, commit_hash, commit_hash[:7]))
 
 @login_required
 def sample_check_in(request):

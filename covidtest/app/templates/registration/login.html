@@ -1,0 +1,33 @@
+{% extends 'lab/base.html' %}
+{% block content %}
+<h1>Login</h1>
+
+<form class="ui form" id="login-form" method="post"
+      action="{% url 'app:login' %}">
+    {% csrf_token %}
+
+    <div class="field">
+        <label for="id_username">Username</label>
+        <input id="id_username" name="username"
+               type="text" class="form-control">
+    </div>
+
+    <div class="field">
+        <label for="id_password">Password</label>
+        <input id="id_password" name="password"
+               type="password" class="form-control">
+    </div>
+
+    {% if form.errors %}
+    <p class=" label label-danger">
+        Your username and password didn't match.
+        Please try again.
+    </p>
+    {% endif %}
+
+    <input type="submit" value="Login"
+           class="ui button"/>
+    <input type="hidden" name="next" value="{% url 'app:lab_index' %}"/>
+</form>
+
+{% endblock content %}
