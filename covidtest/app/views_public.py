@@ -151,7 +151,7 @@ def register(request):
 
             request.session["access_code"] = access_code
 
-            rsa_inst = rsa_instance_from_key(sample.key.public_key)
+            rsa_inst = rsa_instance_from_key(sample.bag.rsa_key.public_key)
             doc = encrypt_subject_data(rsa_inst, name, address, contact)
 
             sample.registrations.create(
@@ -162,6 +162,11 @@ def register(request):
                 session_key_encrypted=doc['session_key_encrypted'],
                 aes_instance_iv=doc['aes_instance_iv'],
             )
+            sample.events.create(
+                status="INFO",
+                comment="sample registered"
+            )
+
             messages.add_message(request, messages.SUCCESS, _('Erfolgreich registriert'))
             return redirect('app:instructions')
     return render(request, 'public/register.html', {'form': form})
