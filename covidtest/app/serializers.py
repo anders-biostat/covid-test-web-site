@@ -48,7 +48,7 @@ class RSAKeySerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['id', 'sample', 'status', 'comment', 'updated_on']
+        fields = ['id', 'sample', 'status', 'comment', 'updated_on', 'updated_by']
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
