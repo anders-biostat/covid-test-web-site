@@ -28,8 +28,6 @@ urlpatterns = [
     path('lab/lab_query', views_lab.sample_query, name='query'),
     path('lab/dashboard', views_lab.dashboard, name='dashboard'),
 
-    path('api/create_sample', views_api.CreateSample.as_view(), name='api_create_sample'),
-
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

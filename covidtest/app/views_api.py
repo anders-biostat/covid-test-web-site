@@ -1,8 +1,7 @@
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .serializers import SampleSerializer, RSAKeySerializer, RegistrationSerializer, EventSerializer, BagSerializer, \
-    KeySamplesSerializers
+from .serializers import SampleSerializer, RSAKeySerializer, RegistrationSerializer, EventSerializer, BagSerializer, KeySamplesSerializers
 from .models import Sample, RSAKey, Registration, Event, Bag
 
 

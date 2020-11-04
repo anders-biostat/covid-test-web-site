@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from .statuses import SampleStatus
 
+
 class RSAKey(models.Model):
     key_name = models.CharField(max_length=50)
     comment = models.TextField(null=True, blank=True)
@@ -10,11 +11,12 @@ class RSAKey(models.Model):
     def __str__(self):
         return "RSAKey: %s" % self.key_name
 
-# TODO: Rename
+
 class Bag(models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField(null=True, blank=True)
     rsa_key = models.ForeignKey(RSAKey, on_delete=models.DO_NOTHING, related_name='bags')
+
 
 class Sample(models.Model):
     barcode = models.CharField(max_length=50)
@@ -42,6 +44,9 @@ class Sample(models.Model):
             return None
         else:
             return statuses[-1]
+
+    def __str__(self):
+        return "%s" % self.barcode
 
 
 class Registration(models.Model):
