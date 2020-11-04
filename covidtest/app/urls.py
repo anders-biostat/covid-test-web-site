@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
+from django.contrib.auth import views as auth_views
 from . import views_lab, views_public, views_api
 
 app_name = 'app'
@@ -23,6 +24,7 @@ urlpatterns = [
     path('pages/<str:page>', views_public.pages, name='pages'),
 
     path('lab', views_lab.index, name='lab_index'),
+    path('lab/login', auth_views.LoginView.as_view(), {'template_name': 'lab/login.html'}, name='login'),
     path('lab/checkin', views_lab.sample_check_in, name='checkin'),
     path('lab/rack', views_lab.sample_edit_rack, name='edit_rack'),
     path('lab/lab_query', views_lab.sample_query, name='query'),
