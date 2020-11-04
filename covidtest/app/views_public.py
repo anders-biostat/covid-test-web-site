@@ -147,7 +147,7 @@ def register(request):
             if sample is None:
                 messages.add_message(request, messages.ERROR,
                                      _('Der Zugangscode ist unbekannt. Bitte erneut versuchen.'))
-                return render(request, 'register.html', {'form': form})
+                return render(request, 'public/register.html', {'form': form})
 
             request.session["access_code"] = access_code
 
