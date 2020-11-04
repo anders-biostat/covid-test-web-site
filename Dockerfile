@@ -28,6 +28,9 @@ WORKDIR ${APP_ROOT}
 # Copy the current directory contents into the container at /app
 ADD covidtest ${APP_ROOT}
 
+# Copy the local .env file to the project root
+ADD .env ${APP_ROOT}
+
 RUN chmod 775 -R ${APP_ROOT}
 
 # Command for testing the server
