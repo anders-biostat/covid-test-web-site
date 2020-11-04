@@ -1,4 +1,4 @@
-import sys, random, string
+import os
 from django.shortcuts import render
 from django.contrib import messages
 from django.utils.translation import gettext as _
@@ -19,7 +19,12 @@ def index(request):
 
 @login_required
 def version(request):
-    git_dir = '../.git'
+    if os.path.isdir('../.git'):
+        git_dir = '../.git'
+    if os.path.isdir('.git'):
+        git_dir = '.git'
+    else:
+        HttpResponse('No .git directory found')
     with open(git_dir + '/HEAD', 'r') as head:
         ref = head.readline().split(' ')[-1].strip()
         branch_name = ref.split('/')[-1]
