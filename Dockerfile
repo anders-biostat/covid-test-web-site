@@ -31,6 +31,9 @@ ADD covidtest ${APP_ROOT}
 # Copy the local .env file to the project root
 ADD .env ${APP_ROOT}
 
+#Copy git directory to project (for version display)
+ADD .git ${APP_ROOT}/.git
+
 RUN chmod 775 -R ${APP_ROOT}
 
 # Command for testing the server

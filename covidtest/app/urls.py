@@ -29,6 +29,7 @@ urlpatterns = [
     path('lab/rack', views_lab.sample_edit_rack, name='edit_rack'),
     path('lab/lab_query', views_lab.sample_query, name='query'),
     path('lab/dashboard', views_lab.dashboard, name='dashboard'),
+    path('version', views_lab.version, name='version'),
 
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
