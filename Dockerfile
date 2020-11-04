@@ -32,7 +32,7 @@ ADD covidtest ${APP_ROOT}
 ADD .env ${APP_ROOT}
 
 #Copy git directory to project (for version display)
-ADD .git ${APP_ROOT}
+ADD .git ${APP_ROOT}/.git
 
 RUN chmod 775 -R ${APP_ROOT}
 
