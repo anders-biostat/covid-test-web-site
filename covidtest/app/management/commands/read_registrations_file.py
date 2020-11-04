@@ -1,4 +1,4 @@
-import datetime
+import datetime, json
 from django.core.management.base import BaseCommand, CommandError
 from app.models import Sample, RSAKey, Bag
 
@@ -12,38 +12,45 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         file = options['file'][0]
         with open(file, 'r') as f:
-            for line in f.readlines():
-                barcode, time, password_hash, fingerprint, session_key, aes_iv, name, address, contact = line.split(',')
+            j = json.loads(f.read())
+            key = RSAKey.objects.get(key_name='default.pem')
 
-                key = RSAKey.objects.get(key_name='default.pem')
+            for batch in j['batches']:
+                batch_name = batch['name']
                 bag, created = Bag.objects.get_or_create(
-                    name='papagei',
+                    name=batch_name,
                     rsa_key=key,
                 )
 
-                sample, created = Sample.objects.get_or_create(
-                    barcode=barcode,
-                    access_code=barcode,
-                    rack='',
-                    password_hash=password_hash,
-                    bag=bag,
-                )
-
-                registration = sample.registrations.filter(session_key_encrypted=session_key).first()
-
-                if registration:
-                    print("Already in DB: ", barcode)
-                else:
-                    registration = sample.registrations.create(
-                        name_encrypted=name,
-                        address_encrypted=address,
-                        contact_encrypted=contact,
-                        public_key_fingerprint=fingerprint,
-                        session_key_encrypted=session_key,
-                        aes_instance_iv=aes_iv,
+                for barcode in batch['codes']:
+                    sample, created = Sample.objects.get_or_create(
+                        barcode=barcode,
+                        access_code=barcode,
+                        rack='',
+                        password_hash='',
+                        bag=bag,
                     )
-                    print("Added: ", barcode)
-                registration.time=datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
-                registration.save()
 
-
+            for registration in j['registrations']:
+                sample = Sample.objects.filter(barcode=registration['barcode']).first()
+                if sample is None:
+                    print("Sample for registration not in DB: ", registration['barcode'])
+                    pass
+                else:
+                    is_already_registered = sample.registrations.filter(
+                        session_key_encrypted=registration['session_key_encrypted']).first()
+                    if is_already_registered:
+                        print("Already in DB: ", barcode)
+                        pass
+                    else:
+                        registration_object = sample.registrations.create(
+                            name_encrypted=registration['name_encrypted'],
+                            address_encrypted=registration['address_encrypted'],
+                            contact_encrypted=registration['contact_encrypted'],
+                            public_key_fingerprint=registration['public_key_fingerprint'],
+                            session_key_encrypted=registration['session_key_encrypted'],
+                            aes_instance_iv=registration['aes_instance_iv'],
+                        )
+                        registration_object.time = datetime.datetime.strptime(registration['time'], '%Y-%m-%d %H:%M:%S')
+                        registration_object.save()
+                        print("Added: ", barcode)
