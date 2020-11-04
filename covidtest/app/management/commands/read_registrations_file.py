@@ -31,10 +31,11 @@ class Command(BaseCommand):
                         password_hash='',
                         bag=bag,
                     )
-                    sample.events.create(
-                        status=SampleStatus.INFO,
-                        comment='Imported from commandline'
-                    )
+                    if created:
+                        sample.events.create(
+                            status=SampleStatus.INFO,
+                            comment='Imported from commandline'
+                        )
 
             for registration in j['registrations']:
                 sample = Sample.objects.filter(barcode=registration['barcode']).first()
