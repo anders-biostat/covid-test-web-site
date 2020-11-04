@@ -19,12 +19,13 @@ def index(request):
 
 @login_required
 def version(request):
+    print(os.listdir())
     if os.path.isdir('../.git'):
         git_dir = '../.git'
-    if os.path.isdir('.git'):
+    elif os.path.isdir('.git'):
         git_dir = '.git'
     else:
-        HttpResponse('No .git directory found')
+        return HttpResponse('No .git directory found')
     with open(git_dir + '/HEAD', 'r') as head:
         ref = head.readline().split(' ')[-1].strip()
         branch_name = ref.split('/')[-1]
