@@ -1,6 +1,7 @@
 import datetime, json
 from django.core.management.base import BaseCommand, CommandError
 from app.models import Sample, RSAKey, Bag
+from app.statuses import SampleStatus
 
 
 class Command(BaseCommand):
@@ -29,6 +30,10 @@ class Command(BaseCommand):
                         rack='',
                         password_hash='',
                         bag=bag,
+                    )
+                    sample.events.create(
+                        status=SampleStatus.INFO,
+                        comment='Imported from commandline'
                     )
 
             for registration in j['registrations']:
