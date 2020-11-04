@@ -1,6 +1,7 @@
 import datetime, json
 from django.core.management.base import BaseCommand, CommandError
 from app.models import Sample, RSAKey, Bag
+from app.statuses import SampleStatus
 
 
 class Command(BaseCommand):
@@ -30,6 +31,11 @@ class Command(BaseCommand):
                         password_hash='',
                         bag=bag,
                     )
+                    if created:
+                        sample.events.create(
+                            status=SampleStatus.INFO,
+                            comment='Imported from commandline'
+                        )
 
             for registration in j['registrations']:
                 sample = Sample.objects.filter(barcode=registration['barcode']).first()
@@ -40,7 +46,7 @@ class Command(BaseCommand):
                     is_already_registered = sample.registrations.filter(
                         session_key_encrypted=registration['session_key_encrypted']).first()
                     if is_already_registered:
-                        print("Already in DB: ", barcode)
+                        print("Already in DB: ", registration['barcode'])
                         pass
                     else:
                         registration_object = sample.registrations.create(
@@ -53,4 +59,6 @@ class Command(BaseCommand):
                         )
                         registration_object.time = datetime.datetime.strptime(registration['time'], '%Y-%m-%d %H:%M:%S')
                         registration_object.save()
-                        print("Added: ", barcode)
+                        sample.password_hash = registration['password_hash']
+                        sample.save()
+                        print("Added: ", registration['barcode'])

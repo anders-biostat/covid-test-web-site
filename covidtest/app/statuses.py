@@ -10,3 +10,4 @@ class SampleStatus(Enum):
     PCRPOS = 'PCRPOS'
     PCRNEG = 'PCRNEG'
     UNDEF = 'UNDEF'
+    INFO = 'INFO'
