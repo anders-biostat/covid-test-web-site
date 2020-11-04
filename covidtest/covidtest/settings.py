@@ -9,21 +9,23 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from envparse import env
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Reading environment variables
+env.read_envfile()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nwj5+r)qg702rlj7@0vjw!dytc6swa%#7#tjbhsl@ph84$_o!!'
+SECRET_KEY = env('DJANGO_SECRET_KEY', cast=str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DJANGO_DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -81,10 +83,26 @@ WSGI_APPLICATION = 'covidtest.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('POSTGRES_DB', cast=str),
+        'USER': env('POSTGRES_USER', cast=str),
+        'PASSWORD': env('POSTGRES_USER', cast=str),
+        'HOST': env('POSTGRES_HOST', cast=str),
+        'PORT': env('POSTGRES_PORT', cast=str),
+        'TEST': {
+                'NAME': env('POSTGRES_DB', cast=str) + "_test",
+        },
+    }
+}
+
+# Use a SQLite3 Database for local testing
+
+if env("DJANGO_SQLITE", cast=bool, default=False) is True:
+    DATABASES["default"] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+
 
 
 # Password validation
