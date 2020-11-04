@@ -17,14 +17,23 @@ from .statuses import SampleStatus
 def index(request):
     return render(request, "lab/index.html")
 
+@login_required
+def version(request):
+    git_dir = '../.git'
+    with open(git_dir + '/HEAD', 'r') as head:
+        ref = head.readline().split(' ')[-1].strip()
+        branch_name = ref.split('/')[-1]
+    with open(git_dir + '/' + ref, 'r') as git_hash:
+        commit_hash = git_hash.readline().strip()
 
-def random_barcode(length=6):
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
-
-
-def random_accesscode(length=9):
-    return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
-
+    version_str = """
+    <code>
+    Branch: <a href='https://github.com/anders-biostat/covid-test-web-site/tree/%s'>%s</a><br>
+    Commit: <a href='https://github.com/anders-biostat/covid-test-web-site/commit/%s'>%s</a><br>
+    Short: %s <br>
+    </code>
+    """
+    return HttpResponse(version_str % (branch_name, branch_name, commit_hash, commit_hash, commit_hash[:7]))
 
 @login_required
 def sample_check_in(request):
