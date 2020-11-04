@@ -40,7 +40,7 @@ class Command(BaseCommand):
                     is_already_registered = sample.registrations.filter(
                         session_key_encrypted=registration['session_key_encrypted']).first()
                     if is_already_registered:
-                        print("Already in DB: ", barcode)
+                        print("Already in DB: ", registration['barcode'])
                         pass
                     else:
                         registration_object = sample.registrations.create(
@@ -53,4 +53,6 @@ class Command(BaseCommand):
                         )
                         registration_object.time = datetime.datetime.strptime(registration['time'], '%Y-%m-%d %H:%M:%S')
                         registration_object.save()
-                        print("Added: ", barcode)
+                        sample.password_hash = registration['password_hash']
+                        sample.save()
+                        print("Added: ", registration['barcode'])
