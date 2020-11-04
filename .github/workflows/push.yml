@@ -15,6 +15,7 @@ jobs:
           docker exec covidtest_app pytest --cov=.
   deploy:
     needs: build
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/production'
     steps:
       - name: Triggering webhook
