@@ -114,7 +114,7 @@ def results_query(request):
                                              _(
                                                  'Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal.'))
                         request.session['access_code'] = access_code
-                        return render('public/result-query.html', {'form': form})
+                        return render(request, 'public/result-query.html', {'form': form})
 
             # Checking the status of the sample
             event = sample.get_status()
