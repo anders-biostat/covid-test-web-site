@@ -38,11 +38,7 @@ class Sample(models.Model):
         return self.events.exclude(status=SampleStatus.INFO.value)
 
     def get_status(self):
-        statuses = self.get_statuses()
-        if len(statuses) == 0:
-            return None
-        else:
-            return statuses[-1]
+        return self.get_statuses().last()
 
     def __str__(self):
         return "%s" % self.barcode
