@@ -1,0 +1,43 @@
+<head>
+	<title>Test js decryption</title>
+	<script type="text/javascript" src="src/forge.min.js"></script>
+	<script type="text/javascript" src="decrypt.js"></script>
+</head>
+<body>
+	<input type="file" name="privateKey" id="privateKey"><br>
+	Private key password: <input type="password" name="ps" id="ps"> <br>
+	<button onclick="decryptData();">Decipher</button>
+	<div id="key"></div>
+	<div id="output"></div>
+	<script type="text/javascript">
+		var data = {
+    	"address_encrypted": "DHFW9EcYheQnk9E1XxVX1uhUMtdC9E3wPLTcXyCZ/aQ=",
+    	"aes_instance_iv": "KDQXeiRtXJiuav3lBoMMYA==",
+    	"contact_encrypted": "qlnJaGUWAtfnu5hQ61W4sJvXlR4WoUONtRIMBXxWHOY=",
+    	"name_encrypted": "Fz/BMmD10co/jeQxcHgqRQ==",
+    	"public_key_fingerprint": "32c865458d460721a6b790598261c5c4",
+    	"session_key_encrypted": "bRWiHdc/6sLDl6XBsLAZ6aiBkWuUjCaZdPzjPZdDNOv5I6AIJY+68PGp2cSGIbqwRYKL7Uwa6lfd+GSDA2MX1p+a4goTUIEXgTq+f34NyA+rSDTKWPasQ1QVlLCWYHhjHDa2ORAds23oVw5mb//j40J6YdT5bVCDCN2iXsxf35fFo0N4MfqSdEGXmQNrLzQSFzcpvc30ujAImWwysCiZmoJ5GVZ/TijMHy2IUKf3VtOtzeaziurzSFRMl9xB6a2tx0OLtuXDEt69zj3ifFh0WB+GpYgQiaiVlYBDfIuTAULqHpXcBw1f4h9FXQ9zHjku4ROGL6A6efBOtKJnXqN9OzYwop/EMwvoaQgPRsa9InlE5Vj8E+MDpVux3GFeehc6BeJWjyxr9xmESeSu33OYS94MmhmP7+UWgqPC1j483G73gerug4S9H7+jq5zM9CKy1Dn12xrNsC3pmrj4e/11P58sihAh0YMvIwVPgr9m1bkZNslm/qS7JS3Wo/FYPf8e"
+		};
+		var res;
+
+		function decryptData() {
+			var file = document.getElementById("privateKey").files[0];
+			var password = document.getElementById("ps").value
+			if (file) {
+			  var reader = new FileReader();
+			  reader.readAsText(file);
+			  reader.onload = function (evt) {
+			    //document.getElementById("key").innerHTML = evt.target.result;
+			    document.getElementById("key").innerHTML = "private key loaded";
+			    res = decrypt(data, reader.result, password);
+			    Object.keys(res).forEach(el => {
+			    	document.getElementById("output").innerHTML += "<b>" +  el + "</b>: " + res[el] + "<br>"
+			    })
+			  }
+			  reader.onerror = function (evt) {
+			    document.getElementById("key").innerHTML = "error reading file";
+			  }
+			}
+		};
+	</script>
+</body>
