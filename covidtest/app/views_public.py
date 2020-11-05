@@ -41,9 +41,9 @@ def consent(request):
     return render(request, 'public/consent.html', {'form': form})
 
 
-def render_status(request, status):
-    if status is not None:
-        status = SampleStatus[status['status']]
+def render_status(request, event):
+    if event is not None:
+        status = SampleStatus[event.status]
         if status == SampleStatus.PCRPOS:
             return render(request, "public/pages/test-PCRPOS.html")
         if status == SampleStatus.PCRNEG:
@@ -58,7 +58,7 @@ def render_status(request, status):
             return render(request, "public/pages/test-UNDEF.html")
         if status == SampleStatus.WAIT:
             return render(request, "public/pages/test-WAIT.html")
-        return render(request, "public/pages/test-UNDEF.html")
+    return render(request, "public/pages/test-UNDEF.html")
 
 
 def results_query(request):
@@ -110,8 +110,8 @@ def results_query(request):
                         return render('public/result-query.html', {'form': form})
 
             # Checking the status of the sample
-            status = sample.get_status()
-            return render_status(request, status)
+            event = sample.get_status()
+            return render_status(request, event)
 
     return render(request, 'public/result-query.html', {'form': form})
 
