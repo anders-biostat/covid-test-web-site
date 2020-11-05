@@ -3,6 +3,7 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/production'
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
@@ -14,7 +15,6 @@ jobs:
           docker container ls
           docker exec covidtest_app pytest --cov=.
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/production'
     steps:
