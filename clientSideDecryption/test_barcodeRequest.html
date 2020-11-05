@@ -9,14 +9,27 @@
 		<input type="text" name="barcode" id="barcode">
 		<button onclick="request(document.getElementById('barcode').value);">Request information</button>
 	</div>
+	<div id="result"></div>
+	<div id="registrations"></div>
 	<script type="text/javascript">
 		function request(barcode) {
 			if(!barcode) throw "Barcode is not defined";
 
 			fetch("http://localhost:8000/api/samples/?barcode=" + barcode)
-				.then(res => {
-					console.log(res);
-				})
+				.then(res => res.json())
+				.then(data => {
+					if(data.length == 0)
+						document.getElementById("result").innerHTML = "Barcode not found"
+					else {
+						document.getElementById("result").innerHTML = "Barcode <b>" + data[0].barcode + "</b><br>" +
+							"Access code: " +  data[0].access_code + "<h3>Events</h3>" 
+						data[0].events.forEach(el => {
+							document.getElementById("result").innerHTML += el.comment + " on " + el.updated_on + "<br>"
+						})
+						document.getElementById("result").innerHTML += "Found " + data[0].registrations.length + " registration entry";
+					}
+
+				});
 		};
 	</script>
 </body>
