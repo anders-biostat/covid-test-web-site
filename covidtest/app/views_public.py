@@ -10,7 +10,7 @@ from .encryption_helper import rsa_instance_from_key, encrypt_subject_data
 
 def index(request):
     access_code = None
-    if 'access_code' in request.GET:
+    if 'code' in request.GET:
         access_code = request.GET['code']
     if access_code is not None:
         request.session['access_code'] = access_code
@@ -22,7 +22,7 @@ def instructions(request):
     access_code = None
     if 'access_code' in request.session:
         access_code = request.session.get('access_code')
-    if 'access_code' in request.GET:
+    if 'code' in request.GET:
         access_code = request.GET['code']
     return render(request, 'public/instructions.html')
 
@@ -132,7 +132,7 @@ def register(request):
 
     if 'access_code' in request.session:
         access_code = request.session.get('access_code')
-    if 'access_code' in request.GET:
+    if 'code' in request.GET:
         access_code = request.GET['code']
 
     if request.session.get("consent") != True:
