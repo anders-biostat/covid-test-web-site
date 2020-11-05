@@ -95,7 +95,7 @@ def results_query(request):
 
                 # Check if form is legacy
                 if 'password' not in request.POST.keys():
-                    return render('public/result-query.html', {'form': form})
+                    return render(request, 'public/result-query.html', {'form': form})
 
                 if form.is_valid():
                     password = form.cleaned_data['password']
