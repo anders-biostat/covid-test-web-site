@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..models import Sample, RSAKey, Bag
+from ..models import Sample, RSAKey, Bag, Event
 
 
 class SampleTestCase(TestCase):
@@ -38,5 +38,5 @@ xkNg2AegGcT+ysU2uleSmkkSxs3VDYhRG8njYfzXchpVAgMBAAE=
         """Return None if no status set"""
         sample = Sample.objects.filter(barcode="123456789").first()
         self.assertEqual(sample.get_status(), None)
-        self.assertEqual(sample.get_statuses(), [])
+        self.assertEqual(sample.get_statuses().count(), 0)
         pass

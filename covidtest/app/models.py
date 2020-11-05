@@ -35,8 +35,7 @@ class Sample(models.Model):
         )
 
     def get_statuses(self):
-        events = self.events.all()
-        return [event for event in events if event.status != 'INFO']
+        return self.events.exclude(status=SampleStatus.INFO.value)
 
     def get_status(self):
         statuses = self.get_statuses()
