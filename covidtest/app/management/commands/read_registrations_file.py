@@ -33,7 +33,7 @@ class Command(BaseCommand):
                     )
                     if created:
                         sample.events.create(
-                            status=SampleStatus.INFO,
+                            status=SampleStatus.INFO.value,
                             comment='Imported from commandline'
                         )
 
