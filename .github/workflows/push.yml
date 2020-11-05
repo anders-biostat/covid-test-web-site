@@ -3,7 +3,7 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/production'
+    if: github.ref != 'refs/heads/production' && github.ref != 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
