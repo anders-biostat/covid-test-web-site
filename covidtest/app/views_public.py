@@ -43,7 +43,11 @@ def consent(request):
 
 def render_status(request, event):
     if event is not None:
-        status = SampleStatus[event.status]
+        try:
+            status = SampleStatus[event.status]
+        except KeyError:
+            return render(request, "public/pages/test-ERROR.html", {'error': _('Status unbekannt')})
+
         if status == SampleStatus.PCRPOS:
             return render(request, "public/pages/test-PCRPOS.html")
         if status == SampleStatus.PCRNEG:
@@ -54,11 +58,14 @@ def render_status(request, event):
             return render(request, "public/pages/test-LAMPNEG.html")
         if status == SampleStatus.LAMPINC:
             return render(request, "public/pages/test-LAMPINC.html")
+        if status == SampleStatus.LAMPFAIL:
+            return render(request, "public/pages/test-LAMPFAIL.html")
         if status == SampleStatus.UNDEF:
             return render(request, "public/pages/test-UNDEF.html")
         if status == SampleStatus.WAIT:
             return render(request, "public/pages/test-WAIT.html")
-    return render(request, "public/pages/test-UNDEF.html")
+        return render(request, "public/pages/test-UNDEF.html")
+    return render(request, 'public/pages/test-ERROR.html', {'error': _('Kein Status vorhanden')})
 
 
 def results_query(request):
