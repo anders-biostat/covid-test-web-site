@@ -65,7 +65,7 @@ class Command(BaseCommand):
                         print("Added: ", registration['barcode'])
             print('Adding results:')
             for result in j['results']:
-                sample = Sample.objects.filter(barcode=result['barcode'])
+                sample = Sample.objects.filter(barcode=result['barcode']).first()
                 if sample is None:
                     print('Sample not found for result ', result['barcode'])
                 else:
