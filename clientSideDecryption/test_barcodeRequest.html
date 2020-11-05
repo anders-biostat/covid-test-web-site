@@ -1,0 +1,22 @@
+<head>
+	<title>Request and decrypt barcode registration information</title>
+	<script type="text/javascript" src="src/forge.min.js"></script>
+	<script type="text/javascript" src="src/decrypt.js"></script>
+</head>
+<body>
+	<div>
+		Barcode:
+		<input type="text" name="barcode" id="barcode">
+		<button onclick="request(document.getElementById('barcode').value);">Request information</button>
+	</div>
+	<script type="text/javascript">
+		function request(barcode) {
+			if(!barcode) throw "Barcode is not defined";
+
+			fetch("http://localhost:8000/api/samples/?barcode=" + barcode)
+				.then(res => {
+					console.log(res);
+				})
+		};
+	</script>
+</body>
