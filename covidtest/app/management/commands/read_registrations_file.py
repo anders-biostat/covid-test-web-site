@@ -1,4 +1,5 @@
 import datetime, json
+from django.utils.timezone import make_aware
 from django.core.management.base import BaseCommand, CommandError
 from app.models import Sample, RSAKey, Bag
 from app.statuses import SampleStatus
@@ -57,7 +58,7 @@ class Command(BaseCommand):
                             session_key_encrypted=registration['session_key_encrypted'],
                             aes_instance_iv=registration['aes_instance_iv'],
                         )
-                        registration_object.time = datetime.datetime.strptime(registration['time'], '%Y-%m-%d %H:%M:%S')
+                        registration_object.time = make_aware(datetime.datetime.strptime(registration['time'], '%Y-%m-%d %H:%M:%S'))
                         registration_object.save()
                         sample.password_hash = registration['password_hash']
                         sample.save()
