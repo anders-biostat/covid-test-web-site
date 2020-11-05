@@ -14,7 +14,7 @@ def index(request):
         access_code = request.GET['code']
     if access_code is not None:
         request.session['access_code'] = access_code
-        return redirect('consent')
+        return redirect('app:consent')
     return render(request, 'public/index.html')
 
 
