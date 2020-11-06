@@ -81,3 +81,8 @@ class Command(BaseCommand):
                                 comment='Result from commandline'
                             )
                             print('Result added ...')
+
+            for sample in Sample.objects.all():
+                if sample.get_status() == None:
+                    sample.events.create(status='PRINTED', comment='Result from commandline')
+                    print('Updated status "printed: " ', sample.barcode)
