@@ -97,7 +97,7 @@ def results_query(request):
 
 
             # Registered and password exists
-            if sample.password_hash is not None:
+            if sample.password_hash is not None and sample.password_hash != '':
                 form = ResultsQueryFormLegacy(request.POST)
 
                 # Check if form is legacy
