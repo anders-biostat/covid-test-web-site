@@ -35,7 +35,7 @@ class Sample(models.Model):
         )
 
     def get_statuses(self):
-        return self.events.exclude(status=SampleStatus.INFO.value)
+        return self.events.order_by('updated_on').exclude(status=SampleStatus.INFO.value)
 
     def get_status(self):
         return self.get_statuses().last()
