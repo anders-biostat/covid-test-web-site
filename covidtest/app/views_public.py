@@ -62,10 +62,10 @@ def render_status(request, event):
             return render(request, "public/pages/test-LAMPFAIL.html")
         if status == SampleStatus.UNDEF:
             return render(request, "public/pages/test-UNDEF.html")
-        if status == SampleStatus.WAIT:
+        if status == SampleStatus.WAIT or status == SampleStatus.PRINTED:
             return render(request, "public/pages/test-WAIT.html")
         return render(request, "public/pages/test-UNDEF.html")
-    return render(request, 'public/pages/test-ERROR.html', {'error': _('Kein Status vorhanden')})
+    return render(request, 'public/pages/test-ERROR.html', {'error': _('Kein Status vorhanden (bitte später erneut abrufen)')})
 
 
 def results_query(request):
