@@ -1,5 +1,5 @@
 import random, string
-from rest_framework import serializers
+from rest_framework import serializers, validators
 from .models import RSAKey, Sample, Event, Registration, Bag
 
 """Damm algorithm decimal check digit
@@ -61,6 +61,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class SampleSerializer(serializers.ModelSerializer):
     registrations = RegistrationSerializer(many=True, read_only=True)
     events = EventSerializer(many=True, read_only=True)
+
+    barcode = serializers.CharField(
+        validators = [ validators.UniqueValidator(queryset=Sample.objects.all(), message="duplicate")])
 
     def create(self, validated_data):
         if 'access_code' not in validated_data:

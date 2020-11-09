@@ -25,5 +25,3 @@ class CallLabURLs(TestCase):
             response = c.get(url)
             self.assertEqual(response.status_code, 200)
         c.logout()
-        
-       

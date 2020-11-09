@@ -1,0 +1,15 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <h3 class="ui header">{% blocktrans %}Fehler{% endblocktrans %}</h3>
+  <p>
+    {% blocktrans %}Es ist ein Fehler eingetreten: {% endblocktrans %}
+    {{ error }}
+  </p>
+  <p>
+
+  </p>
+</div>
+{% endblock %}
