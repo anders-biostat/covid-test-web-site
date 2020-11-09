@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 03:19+0100\n"
+"POT-Creation-Date: 2020-11-09 16:43+0000\n"
 "PO-Revision-Date: 2020-11-04 20:16+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.4.1\n"
 
 #: app/forms_lab.py:8 app/forms_lab.py:25
@@ -110,6 +110,104 @@ msgstr "password"
 #: app/templates/lab/base.html:5
 msgid "COVID19-LAB"
 msgstr "COVID19-LAB"
+
+#: app/templates/lab/dashboard.html:25
+msgid ""
+"\n"
+"                        Anzahl nicht registrierter Proben\n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:37
+msgid ""
+"\n"
+"                        Anzahl Proben in Bearbeitung\n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:49
+msgid ""
+"\n"
+"                        Anzahl abgeschlossener Proben\n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:59
+msgid ""
+"\n"
+"        Registriert in System\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:71
+msgid ""
+"\n"
+"                        Anzahl noch nicht bearbeiteter Proben \"WAIT\"\n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:81
+msgid ""
+"\n"
+"        LAMP Test\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:93
+msgid ""
+"\n"
+"                        positiver LAMP Test \n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:105
+msgid ""
+"\n"
+"                        unschlüssiger LAMP Test \n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:117
+msgid ""
+"\n"
+"                        negativer  LAMP Test \n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:129
+msgid ""
+"\n"
+"                        fehlerhafter LAMP Test \n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:139
+msgid ""
+"\n"
+"        PCR Test\n"
+"        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:151
+msgid ""
+"\n"
+"                        Positiver PCR Test\n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:163
+msgid ""
+"\n"
+"                        Negativer PCR Test\n"
+"                        "
+msgstr ""
+
+#: app/templates/lab/dashboard.html:177
+msgid ""
+"\n"
+"                        Undefiniert\n"
+"                        "
+msgstr ""
 
 #: app/templates/lab/generate_barcodes.html:6
 msgid "Lab Interface - Generate Barcodes"
@@ -219,7 +317,7 @@ msgstr "Samples not checked in successfully"
 msgid "Barcode nicht in db: "
 msgstr "Barcode not in database: "
 
-#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:97
+#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:116
 msgid "Status konnte nicht gesetzt werden: "
 msgstr "Could not set status: "
 
@@ -301,8 +399,8 @@ msgid "Barcode nicht gefunden."
 msgstr "Barcode not found"
 
 #: app/templates/lab/snippets/menubar.html:16
-msgid "Generate barcodes"
-msgstr "Generate barcodes"
+msgid "Dashboard"
+msgstr ""
 
 #: app/templates/lab/snippets/menubar.html:19
 msgid "Admin"
@@ -984,6 +1082,14 @@ msgid ""
 "    noch einmal."
 msgstr ""
 
+#: app/templates/public/pages/test-ERROR.html:6
+msgid "Fehler"
+msgstr ""
+
+#: app/templates/public/pages/test-ERROR.html:8
+msgid "Es ist ein Fehler eingetreten: "
+msgstr ""
+
 #: app/templates/public/pages/test-LAMPINC.html:6
 msgid "Ooops, das Ergebnis liegt noch nicht vor... "
 msgstr ""
@@ -1132,17 +1238,11 @@ msgid ""
 "        Kontakt-Daten an: "
 msgstr ""
 
-#: app/templates/public/register.html:27
-msgid ""
-"Damit Sie selbst Ihr Ergebnis abfragen können, notieren Sie\n"
-"            sich bitte ihren Zugangscode und geben Sie ein Passwort an."
-msgstr ""
-
-#: app/templates/public/register.html:38
+#: app/templates/public/register.html:32
 msgid "Abbrechen"
 msgstr "Cancel"
 
-#: app/templates/public/register.html:41
+#: app/templates/public/register.html:35
 msgid "Daten abschicken"
 msgstr "Send data"
 
@@ -1167,39 +1267,39 @@ msgstr "Register"
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: app/views_lab.py:54
+#: app/views_lab.py:73
 msgid "Einige Barcodes waren nicht in der Datenbank"
 msgstr "A number of barcodes were not found in the database"
 
-#: app/views_lab.py:56
+#: app/views_lab.py:75
 msgid "Einige status konnten nicht gesetzt werden"
 msgstr "Could not set several statuses"
 
-#: app/views_lab.py:58
+#: app/views_lab.py:77
 msgid "Einige racks konnten nicht gesetzt werden"
 msgstr "Could not set several racks"
 
-#: app/views_lab.py:62
+#: app/views_lab.py:81
 msgid "Proben erfolgreich eingetragen"
 msgstr "Samples added successfully"
 
-#: app/views_lab.py:101
+#: app/views_lab.py:120
 msgid "Ergebnisse hinzugefügt: "
 msgstr "Results added: "
 
-#: app/views_lab.py:103
+#: app/views_lab.py:122
 msgid "Keine Proben zu Rack gefunden"
 msgstr "No samples found in rack"
 
-#: app/views_lab.py:130
+#: app/views_lab.py:149
 msgid "Sample nicht gefunde"
 msgstr "Sample not found"
 
-#: app/views_lab.py:134
+#: app/views_lab.py:153
 msgid "Sample rack geupdated"
 msgstr "Sample rack updated"
 
-#: app/views_lab.py:142
+#: app/views_lab.py:161
 msgid "Status geupdated"
 msgstr "Status updated"
 
@@ -1207,19 +1307,32 @@ msgstr "Status updated"
 msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
 msgstr "Please agree to the participation to continue."
 
-#: app/views_public.py:77 app/views_public.py:149
+#: app/views_public.py:49
+#, fuzzy
+#| msgid "Status geupdated"
+msgid "Status unbekannt"
+msgstr "Status updated"
+
+#: app/views_public.py:68
+msgid "Kein Status vorhanden (bitte später erneut abrufen)"
+msgstr ""
+
+#: app/views_public.py:84 app/views_public.py:156
 msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
 msgstr "Unknown access code. Please try again."
 
-#: app/views_public.py:85
+#: app/views_public.py:92
 msgid ""
 "Der Zugangscode wurde nicht registriert. Bitte registrieren Sie sich vorher."
 msgstr "The access code has not been registered yet. Please register it."
 
-#: app/views_public.py:108
+#: app/views_public.py:115
 msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
 msgstr "The password you entered is not correct. Please try again."
 
-#: app/views_public.py:165
+#: app/views_public.py:177
 msgid "Erfolgreich registriert"
 msgstr "Registration successful"
+
+#~ msgid "Generate barcodes"
+#~ msgstr "Generate barcodes"
