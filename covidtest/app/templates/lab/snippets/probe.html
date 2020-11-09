@@ -12,7 +12,7 @@
         <h3 class="ui header">{% blocktrans %}Historie{% endblocktrans %}</h3>
         <div class="extra content">
             <div class="ui small feed">
-                {% for event in sample.events %}
+                {% for event in sample.events.all %}
                 <div class="event">
                     <div class="content">
                         <div class="summary">

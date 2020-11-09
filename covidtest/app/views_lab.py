@@ -30,8 +30,11 @@ def version(request):
     with open(git_dir + '/HEAD', 'r') as head:
         ref = head.readline().split(' ')[-1].strip()
         branch_name = ref.split('/')[-1]
-    with open(git_dir + '/' + ref, 'r') as git_hash:
-        commit_hash = git_hash.readline().strip()
+    if "/" in ref:
+        with open(git_dir + '/' + ref, 'r') as git_hash:
+            commit_hash = git_hash.readline().strip()
+    else:
+        commit_hash = ref
 
     version_str = """
     <code>
