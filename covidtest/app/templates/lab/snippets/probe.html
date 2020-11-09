@@ -180,18 +180,17 @@
             privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
 
         Object.keys(data).forEach(key => {
-            data[key] = forge.util.decode64(data[key]);
+            data[key + "_decoded"] = forge.util.decode64(data[key]);
         });
 
-        console.log(data.session_key_encrypted);
-        var session_key = privateKey.decrypt(data.session_key_encrypted, "RSAES-OAEP"); 
+        var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP"); 
 
         var encrypted_fields = ["name", "address", "contact"];
 
         var decipher = forge.cipher.createDecipher('AES-CBC', session_key);
-        decipher.start({iv: data.aes_instance_iv});
+        decipher.start({iv: data.aes_instance_iv_decoded});
         encrypted_fields.forEach(el => {
-            decipher.update(forge.util.createBuffer(data[el + "_encrypted"]));
+            decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
         })
         
         var output = decipher.output.toString();
@@ -200,9 +199,9 @@
         var i = 0;
         encrypted_fields.forEach(el => {
             result[el] = output
-                .slice(i, i + data[el + "_encrypted"].length)
+                .slice(i, i + data[el + "_encrypted_decoded"].length)
                 .replace(/\0/g, '');
-            i += data[el + "_encrypted"].length;
+            i += data[el + "_encrypted_decoded"].length;
         });
 
         return result;
