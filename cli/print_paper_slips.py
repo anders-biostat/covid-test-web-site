@@ -4,14 +4,14 @@ import subprocess
 
 #from cli.tools.label_template import label_template
 
-api_url = 'http://127.0.0.1:8000/api/'
-
+#api_url = 'http://127.0.0.1:8000/api/'
+api_url = 'http://129.206.245.42:8000/api/'
 
 def render_label_template(template, context):
     tokens = re.findall(r'\{\{\W*(.*?)\W*\}\}', template)
     for token in tokens:
         try:
-            substitute = context[token]
+            substitute = str(context[token])
         except KeyError:
             substitute = ""
         regex = r'\{\{\W*%s\W*\}\}' % token
@@ -32,8 +32,8 @@ def receive_availible_printer():
 def print_paper_slip(barcode, access_code, bag_id, printer):
     label = render_label_template(label_template, {'barcode': barcode, 'access_code': access_code, 'bag_id': bag_id,
                                            'access_code_url': access_code.replace(' ', '')})
-    lp = subprocess.Popen(["lpr", "-P", printer, "-o", "raw"], stdin=subprocess.PIPE)
-    lp.stdin.write(label.encode('ascii'))
+    lp = subprocess.Popen(["lpr", "-P", printer], stdin=subprocess.PIPE)
+    lp.stdin.write(label.encode('utf-8'))
     lp.stdin.close()
     pass
 
