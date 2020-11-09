@@ -45,6 +45,9 @@
             </div>
         </div>        
         <button class="ui button" onclick="requestPrivateKey();">{% blocktrans %}Decrypt registrations{% endblocktrans %}</button>
+        <div class="ui negative hidden message prKeyMessage" id="encrypted">Your private key seems to be encrypted. Please, try again and enter your private key password.</div>
+        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">The password for you private key is incorrect. Please, try again.</div>
+        <div class="ui negative hidden message prKeyMessage" id="notPem">The sumbitted file doesn't contain a recognizeable private key in '.pem' format.</div>
     </div>
 </div>
 <div class="ui tiny modal">
@@ -116,6 +119,7 @@
             .modal({
                 onApprove: function() {
                     var files = $(this).find("input:file").prop("files");
+                    $(".prKeyMessage").hide();
                     if(files.length == 0) {
                         $(this).find(".message").show();
                         return false
@@ -136,7 +140,22 @@
         reader.readAsText(file);
         reader.onload = function (evt) {
             registrations.forEach(data => {
-                decrypted.push(decrypt(data, reader.result, password));
+                var decryptedData;
+                try {
+                    decryptedData = decrypt(data, reader.result, password);
+                } catch(e) {
+                    if(e.message.indexOf("PEM is encrypted") > -1) {
+                        $("#encrypted").show();
+                    } else if(e.message.indexOf("privateKey is null") > -1) {
+                        $("#wrongPassword").show();
+                    } else if(e.message.indexOf("PEM header type is not") > -1) {
+                        $("#notPem").show();
+                    }
+                    console.log(e.message);
+                    decryptedData = {};
+                }
+
+                decrypted.push(decryptedData);
             });
             addRegInfo(decrypted);
         }
@@ -149,7 +168,7 @@
         $(".regInfo").each((i, el) => {
             var inf = Object.keys(regInfo[i])
                 .reduce((str, key) => str + "<b>" + key + ":</b> " + regInfo[i][key] + "<br>", "");
-            $(el).html(inf);
+            if(inf) $(el).html(inf);
         })
     };
 
@@ -164,8 +183,8 @@
             data[key] = forge.util.decode64(data[key]);
         });
 
+        console.log(data.session_key_encrypted);
         var session_key = privateKey.decrypt(data.session_key_encrypted, "RSAES-OAEP"); 
-        //console.log(forge.util.encode64(session_key));
 
         var encrypted_fields = ["name", "address", "contact"];
 
@@ -176,7 +195,6 @@
         })
         
         var output = decipher.output.toString();
-        //console.log(decipher.finish());
 
         var result = {};
         var i = 0;
