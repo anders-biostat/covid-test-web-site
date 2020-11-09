@@ -45,9 +45,24 @@
             </div>
         </div>        
         <button class="ui button" onclick="requestPrivateKey();">{% blocktrans %}Decrypt registrations{% endblocktrans %}</button>
-        <div class="ui negative hidden message prKeyMessage" id="encrypted">Your private key seems to be encrypted. Please, try again and enter your private key password.</div>
-        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">The password for you private key is incorrect. Please, try again.</div>
-        <div class="ui negative hidden message prKeyMessage" id="notPem">The sumbitted file doesn't contain a recognizeable private key in '.pem' format.</div>
+        <div class="ui negative hidden message prKeyMessage" id="encrypted">
+            {% blocktrans %}Your private key is encrypted. Please, try again and enter your private key password.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
+            {% blocktrans %}The password for you private key is incorrect. Please, try again.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
+            {% blocktrans %}The sumbitted file doesn't contain a private key.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="notPem">
+            {% blocktrans %}The sumbitted file is not in PEM format.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="wrongKey">
+            {% blocktrans %}The private key doesn't match the encrypted information.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="somethingElse">
+            {% blocktrans %}The private key doesn't match the encrypted information.{% endblocktrans %}
+        </div>
     </div>
 </div>
 <div class="ui tiny modal">
@@ -149,9 +164,16 @@
                     } else if(e.message.indexOf("privateKey is null") > -1) {
                         $("#wrongPassword").show();
                     } else if(e.message.indexOf("PEM header type is not") > -1) {
+                        $("#notPrivateKey").show();
+                    } else if(e.message.indexOf("Invalid PEM formatted message") > -1) {
                         $("#notPem").show();
+                    } else if(e.message.indexOf("padding") > -1) {
+                        $("#wrongKey").show();
+                    } else {
+                        $("#somethingElse")
+                            .html(e.message)
+                            .show();
                     }
-                    console.log(e.message);
                     decryptedData = {};
                 }
 
