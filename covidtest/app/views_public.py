@@ -10,11 +10,11 @@ from .encryption_helper import rsa_instance_from_key, encrypt_subject_data
 
 def index(request):
     access_code = None
-    if 'access_code' in request.GET:
-        access_code = request.GET['access_code']
+    if 'code' in request.GET:
+        access_code = request.GET['code']
     if access_code is not None:
         request.session['access_code'] = access_code
-        return redirect('consent')
+        return redirect('app:consent')
     return render(request, 'public/index.html')
 
 
@@ -22,8 +22,8 @@ def instructions(request):
     access_code = None
     if 'access_code' in request.session:
         access_code = request.session.get('access_code')
-    if 'access_code' in request.GET:
-        access_code = request.GET['access_code']
+    if 'code' in request.GET:
+        access_code = request.GET['code']
     return render(request, 'public/instructions.html')
 
 
@@ -41,9 +41,13 @@ def consent(request):
     return render(request, 'public/consent.html', {'form': form})
 
 
-def render_status(request, status):
-    if status is not None:
-        status = SampleStatus[status['status']]
+def render_status(request, event):
+    if event is not None:
+        try:
+            status = SampleStatus[event.status]
+        except KeyError:
+            return render(request, "public/pages/test-ERROR.html", {'error': _('Status unbekannt')})
+
         if status == SampleStatus.PCRPOS:
             return render(request, "public/pages/test-PCRPOS.html")
         if status == SampleStatus.PCRNEG:
@@ -54,11 +58,14 @@ def render_status(request, status):
             return render(request, "public/pages/test-LAMPNEG.html")
         if status == SampleStatus.LAMPINC:
             return render(request, "public/pages/test-LAMPINC.html")
+        if status == SampleStatus.LAMPFAIL:
+            return render(request, "public/pages/test-LAMPFAIL.html")
         if status == SampleStatus.UNDEF:
             return render(request, "public/pages/test-UNDEF.html")
-        if status == SampleStatus.WAIT:
+        if status == SampleStatus.WAIT or status == SampleStatus.PRINTED:
             return render(request, "public/pages/test-WAIT.html")
         return render(request, "public/pages/test-UNDEF.html")
+    return render(request, 'public/pages/test-ERROR.html', {'error': _('Kein Status vorhanden (bitte später erneut abrufen)')})
 
 
 def results_query(request):
@@ -90,12 +97,12 @@ def results_query(request):
 
 
             # Registered and password exists
-            if sample.password_hash is not None:
+            if sample.password_hash is not None and sample.password_hash != '':
                 form = ResultsQueryFormLegacy(request.POST)
 
                 # Check if form is legacy
                 if 'password' not in request.POST.keys():
-                    return render('public/result-query.html', {'form': form})
+                    return render(request, 'public/result-query.html', {'form': form})
 
                 if form.is_valid():
                     password = form.cleaned_data['password']
@@ -107,11 +114,11 @@ def results_query(request):
                                              _(
                                                  'Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal.'))
                         request.session['access_code'] = access_code
-                        return render('public/result-query.html', {'form': form})
+                        return render(request, 'public/result-query.html', {'form': form})
 
             # Checking the status of the sample
-            status = sample.get_status()
-            return render_status(request, status)
+            event = sample.get_status()
+            return render_status(request, event)
 
     return render(request, 'public/result-query.html', {'form': form})
 
@@ -125,8 +132,8 @@ def register(request):
 
     if 'access_code' in request.session:
         access_code = request.session.get('access_code')
-    if 'access_code' in request.GET:
-        access_code = request.GET['access_code']
+    if 'code' in request.GET:
+        access_code = request.GET['code']
 
     if request.session.get("consent") != True:
         return redirect('app:consent')
