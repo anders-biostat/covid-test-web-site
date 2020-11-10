@@ -1,0 +1,35 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+<div class="">
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Suche{% endblocktrans %}</h1>
+    <p>
+        {% blocktrans %}
+        Hier können Barcodes gesucht werden:
+        {% endblocktrans %}
+    </p>
+
+    <form style="margin-bottom: 20px;" action="{% url 'app:query' %}" method="post" class="ui form">
+        {% csrf_token %}
+        <div class="ui search">
+            <div class="ui icon input">
+                <input name="search" class="prompt" type="text"
+                       placeholder="{% blocktrans %}Search Barcode...{% endblocktrans %}" autofocus>
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+    </form>
+
+    {% if search %}
+    <p>{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</p>
+    {% endif %}
+
+        {% render_table table %}
+
+
+</div>
+</div>
+{% endblock %}
