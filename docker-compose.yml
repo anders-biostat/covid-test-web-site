@@ -37,6 +37,7 @@ services:
       context: .
     container_name: covidtest_app
     command: sh -c './startup.sh'
+    restart: always
     ports:
         - "8000:8000"
     depends_on:
