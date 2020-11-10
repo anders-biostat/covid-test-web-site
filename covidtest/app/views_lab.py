@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 from django.views.generic import ListView
 
-from django_tables2 import SingleTableView
+import django_filters
+from django_tables2 import SingleTableView, SingleTableMixin
+from django_filters.views import FilterView
 
 from .serializers import SampleSerializer
 from .forms_lab import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm, LabGenerateBarcodeForm
@@ -165,10 +167,16 @@ def sample_detail(request):
     return render(request, 'lab/sample_query.html', {'form': form, 'edit_form': edit_form})
 
 
-class SampleListView(SingleTableView):
+class SampleFilter(django_filters.FilterSet):
+    class Meta:
+        model = Sample
+        fields = ['barcode', 'access_code']
+
+class SampleListView(SingleTableMixin, FilterView):
     model = Sample
     table_class = SampleTable
     template_name = 'lab/sample_list.html'
+    filterset_class = SampleFilter
 
 
 @login_required
