@@ -99,23 +99,6 @@ div.menu button {
     width: 100%;
 }
 
-button.languagebutton{
-    background-color: none;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 0;
-}
-
-button.languagebutton:hover{
-    background-color: #a6a6a6;
-}
-
-.language.menu {
-    border-radius: 10px;
-    overflow: hidden;
-    border: none;
-}
-
 /* Menu bar background -> color from uni-heidelberg.de */
 .ui.menu.page {
     background-color: #cc0130;

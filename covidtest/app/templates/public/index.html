@@ -19,34 +19,8 @@
         >{% blocktrans %}Mehr über den Test erfahren{% endblocktrans %}</a
         >
         <p>
-            {% get_language_info_list for LANGUAGES as languages %}
-        {% if languages|length > 1 %}
-        <form style="margin: 0;" action="{% url 'set_language' %}" method="post">
-        <div class="ui floating dropdown labeled search icon button">
-        <i class="globe icon"></i>
-        <div class="ui simple dropdown">
-            <div class="ui simple dropdown item">
-
-            {% csrf_token %}
-            Language <i class="dropdown icon"></i>
-            <div class="menu">
-                {% for language in languages %}
-                    <button name="language" value="{{ language.code }}" class="languagebutton">
-                        {% if language.code == LANGUAGE_CODE %}
-                            <b>{{ language.name_local }}</b>
-                        {% else %}
-                            {{ language.name_local }}
-                        {% endif %}
-                    </button>
-                {% endfor %}
-            </div>
-
-                </div>
-        </div>
-        </div>
-        </form>
-        {% endif %}
-
+            {% blocktrans %}Diese Seite ist verfügbar in:{% endblocktrans %} &nbsp;
+            <a href="/de/"> Deutsch </a> &nbsp; <a href="/en/"> English </a>
         </p>
     </div>
 </div>
