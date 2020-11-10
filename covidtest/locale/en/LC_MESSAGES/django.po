@@ -3,64 +3,64 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-03 03:19+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-11-04 20:16+0100\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: app/forms_lab.py:8 app/forms_lab.py:25
 msgid "Barcode"
-msgstr ""
+msgstr "Barcode"
 
 #: app/forms_lab.py:11
 msgid "Barcodes"
-msgstr ""
+msgstr "Barcodes"
 
 #: app/forms_lab.py:13 app/forms_lab.py:17
 msgid "Rack (Barcode)"
-msgstr ""
+msgstr "Rack (barcode)"
 
 #: app/forms_lab.py:19
 msgid "LAMP positiv"
-msgstr ""
+msgstr "LAMP positive"
 
 #: app/forms_lab.py:20
 msgid "LAMP unklares Ergebnis"
-msgstr ""
+msgstr "LAMP inconclusive"
 
 #: app/forms_lab.py:26 app/templates/lab/snippets/probe.html:40
 msgid "Rack"
-msgstr ""
+msgstr "Rack"
 
 #: app/forms_lab.py:28
 msgid "Probenstatus"
-msgstr ""
+msgstr "Sample status"
 
 #: app/forms_lab.py:34
 msgid "Anzahl der batches"
-msgstr ""
+msgstr "Number of batches"
 
 #: app/forms_lab.py:35
 msgid "Schlüssel"
-msgstr ""
+msgstr "Key"
 
 #: app/forms_public.py:6
 msgid "Einverständnis"
-msgstr ""
+msgstr "Consent"
 
 #: app/forms_public.py:14
 msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
-msgstr ""
+msgstr "h3 class=“ui dividing header”>Personal data</h3>"
 
 #: app/forms_public.py:16
 msgid ""
@@ -68,50 +68,52 @@ msgid ""
 "vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf "
 "Zugriff.</p>"
 msgstr ""
+"<p>Data protection notice: Your name and contact data will be treated "
+"confidentially. Only employees of the health authority will have access. </p>"
 
 #: app/forms_public.py:22
 msgid "Zugangscode (beiliegender Zettel):"
-msgstr ""
+msgstr "Access code (see paper slip): "
 
 #: app/forms_public.py:24 app/forms_public.py:39 app/forms_public.py:42
 msgid "Zugangscode"
-msgstr ""
+msgstr "Access code"
 
 #: app/forms_public.py:25
 msgid "Name (Nachname, Vorname):"
-msgstr ""
+msgstr "Name (last name, first name): "
 
 #: app/forms_public.py:26
 msgid "Nachname, Vorname"
-msgstr ""
+msgstr "Last name, first name"
 
 #: app/forms_public.py:27
 msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"
-msgstr ""
+msgstr "Address (street, street number, zip code, city):"
 
 #: app/forms_public.py:29
 msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
-msgstr ""
+msgstr "City, street number, zip code, city"
 
 #: app/forms_public.py:30
 msgid "Telefonnummer:"
-msgstr ""
+msgstr "telephone number"
 
 #: app/forms_public.py:31
 msgid "Telefonnummer"
-msgstr ""
+msgstr "telephone number"
 
 #: app/forms_public.py:43
 msgid "Passwort"
-msgstr ""
+msgstr "password"
 
 #: app/templates/lab/base.html:5
 msgid "COVID19-LAB"
-msgstr ""
+msgstr "COVID19-LAB"
 
 #: app/templates/lab/generate_barcodes.html:6
 msgid "Lab Interface - Generate Barcodes"
-msgstr ""
+msgstr "Lab interface - generate barcodes"
 
 #: app/templates/lab/generate_barcodes.html:8
 msgid ""
@@ -119,10 +121,13 @@ msgid ""
 "        Hier können Barcodes generiert werden:\n"
 "        "
 msgstr ""
+"\n"
+"        Barcodes can be generated here:\n"
+"        "
 
 #: app/templates/lab/index.html:5
 msgid "Lab Interface - Home"
-msgstr ""
+msgstr "Lab interface - home"
 
 #: app/templates/lab/index.html:7
 msgid ""
@@ -131,10 +136,14 @@ msgid ""
 "editieren. Folgende Prozesse stehen zur Verfügung:\n"
 "        "
 msgstr ""
+"\n"
+"        This is the lab interface to edit the test data records. The "
+"following procedures are available:\n"
+"        "
 
 #: app/templates/lab/index.html:13 app/templates/lab/snippets/menubar.html:7
 msgid "Probeneingang"
-msgstr ""
+msgstr "Sample entry"
 
 #: app/templates/lab/index.html:16
 msgid ""
@@ -146,10 +155,17 @@ msgid ""
 "werden.\n"
 "        "
 msgstr ""
+"\n"
+"            Upon receiving the samples each sample vial needs to be assigned "
+"to a\n"
+"            test rack/plate. Please first scan the barcode of the rack and \n"
+"            after that the barcodes of all of the sample vials that go into "
+"this rack.\n"
+"        "
 
 #: app/templates/lab/index.html:24 app/templates/lab/snippets/menubar.html:10
 msgid "Rack editieren"
-msgstr ""
+msgstr "Edit rack"
 
 #: app/templates/lab/index.html:27
 msgid ""
@@ -166,7 +182,7 @@ msgstr ""
 
 #: app/templates/lab/index.html:36 app/templates/lab/snippets/menubar.html:13
 msgid "Probe suchen"
-msgstr ""
+msgstr "Look for sample"
 
 #: app/templates/lab/index.html:39
 msgid ""
@@ -178,7 +194,7 @@ msgstr ""
 
 #: app/templates/lab/sample_check_in.html:71
 msgid "Lab Interface - Proben registrieren"
-msgstr ""
+msgstr "Lab interface - register samples"
 
 #: app/templates/lab/sample_check_in.html:73
 msgid ""
@@ -186,31 +202,34 @@ msgid ""
 "        Hier können Barcodes als eingegangen markiert werden:\n"
 "        "
 msgstr ""
+"\n"
+"        Mark barcodes as checked in here:\n"
+"        "
 
 #: app/templates/lab/sample_check_in.html:93
 #: app/templates/lab/sample_rack_results.html:77
 msgid "Abschicken"
-msgstr ""
+msgstr "Send"
 
 #: app/templates/lab/sample_check_in.html:99
 msgid "Proben nicht erfolgreich eingetragen:"
-msgstr ""
+msgstr "Samples not checked in successfully"
 
 #: app/templates/lab/sample_check_in.html:102
 msgid "Barcode nicht in db: "
-msgstr ""
+msgstr "Barcode not in database: "
 
 #: app/templates/lab/sample_check_in.html:105 app/views_lab.py:97
 msgid "Status konnte nicht gesetzt werden: "
-msgstr ""
+msgstr "Could not set status: "
 
 #: app/templates/lab/sample_check_in.html:108
 msgid "Rack konnte nicht gesetzt werden: "
-msgstr ""
+msgstr "Could not set rack: "
 
 #: app/templates/lab/sample_query.html:6
 msgid "Lab Interface - Suche"
-msgstr ""
+msgstr "Lab interface - search"
 
 #: app/templates/lab/sample_query.html:8
 msgid ""
@@ -218,22 +237,25 @@ msgid ""
 "        Hier können Barcodes gesucht werden:\n"
 "        "
 msgstr ""
+"\n"
+"        Search barcodes here:\n"
+"        "
 
 #: app/templates/lab/sample_query.html:18
 msgid "Search Barcode..."
-msgstr ""
+msgstr "Search barcode …"
 
 #: app/templates/lab/sample_query.html:26
 msgid "Ergebnis für: "
-msgstr ""
+msgstr "Result for: "
 
 #: app/templates/lab/sample_query.html:34
 msgid "Keine Probe mit diesem Barcode gefunden."
-msgstr ""
+msgstr "No sample found with this barce. "
 
 #: app/templates/lab/sample_rack_results.html:35
 msgid "Lab Interface - Testergebnisse registrieren (Rack)"
-msgstr ""
+msgstr "Lab interface - register test results (rack)"
 
 #: app/templates/lab/sample_rack_results.html:37
 msgid ""
@@ -254,63 +276,65 @@ msgstr ""
 
 #: app/templates/lab/sample_rack_results.html:60
 msgid "Positive LAMP Proben (Barcodes)"
-msgstr ""
+msgstr "Positive LAMP samples (barcodes)"
 
 #: app/templates/lab/sample_rack_results.html:62
 msgid "Positive Proben (Barcodes)"
-msgstr ""
+msgstr "Positive samples (barcodes)"
 
 #: app/templates/lab/sample_rack_results.html:68
 msgid "Unklare LAMP Proben (Barcodes)"
-msgstr ""
+msgstr "Inconclusive LAMP samples (barcodes)"
 
 #: app/templates/lab/sample_rack_results.html:70
 msgid "Unklare Proben (Barcodes)"
-msgstr ""
+msgstr "Inconclusive samples (barcodes)"
 
 #: app/templates/lab/sample_rack_results.html:76
 #: app/templates/public/consent.html:29
 #: app/templates/public/result-query.html:24
 msgid "Zurück"
-msgstr ""
+msgstr "Go back"
 
 #: app/templates/lab/sample_rack_results.html:84
 msgid "Barcode nicht gefunden."
-msgstr ""
+msgstr "Barcode not found"
 
 #: app/templates/lab/snippets/menubar.html:16
 msgid "Generate barcodes"
-msgstr ""
+msgstr "Generate barcodes"
 
 #: app/templates/lab/snippets/menubar.html:19
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: app/templates/lab/snippets/probe.html:4
 msgid "Barcode: "
-msgstr ""
+msgstr "Barcode: "
 
 #: app/templates/lab/snippets/probe.html:12
 msgid "Historie"
-msgstr ""
+msgstr "History"
 
 #: app/templates/lab/snippets/probe.html:36
 msgid "Status der Probe"
-msgstr ""
+msgstr "Sample status"
 
 #: app/templates/lab/snippets/probe.html:44
 msgid "Speichern"
-msgstr ""
+msgstr "Save"
 
 #: app/templates/public/base.html:7
 msgid ""
 "Schnelltest der Universität Heidelberg auf das\n"
 "        Covid-19-Coronavirus (SARS-CoV-2)"
 msgstr ""
+"Rapid test of the University of Heidelberg for the \n"
+"        Covid-19-Coronavirus (SARS-CoV-2)"
 
 #: app/templates/public/base.html:43
 msgid "Schnelltest auf COVID-19"
-msgstr ""
+msgstr "Rapid test for COVID-19"
 
 #: app/templates/public/base.html:44
 msgid "LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2"
@@ -577,6 +601,25 @@ msgid ""
 "Studie erproben, wie man dies in großem Stil,\n"
 "    vielleicht gar für ganz Deutschland, bewerkstelligen könnte. </p>\n"
 msgstr ""
+"\n"
+"<h3 class=“ui header”> If the study was successful, what would be the "
+"benefit for all of us? </h3>\n"
+" <p> Certainly, you have heard in the news about city districts, regions or "
+"businesses, where an outbreak had unexpectedly occurred. After some people "
+"had shown symptoms, their surroundings were tested (with qPCR) just to "
+"uncover that a great number of people had been already infected. As a "
+"result, many people were needed to go into quarantine and contact "
+"restrictions were tightened again in entire towns or districts. To prevent "
+"this, we need to test in closer networks, for example: in one town or city "
+"we could regularly ask a group of the residents (a different group every "
+"week) to give a saliva sample. The more often this is done, the higher is "
+"the chance, to detect an outbreak early on, when only a few people are "
+"infected. We would like to try out such an approach here. </p>\n"
+"<p> We have to ponder whether we should run as many tests as possible, even "
+"if the individual tests are not as accurate as possible, or we should use "
+"the most accurate tests, even if we can then run significantly fewer tests? "
+"If the former is the better strategy, our study will show, how to test on "
+"large scale, potentially throughout Germany. </p>\n"
 
 #: app/templates/public/information-text.html:125
 msgid ""
@@ -1040,7 +1083,7 @@ msgstr ""
 
 #: app/templates/public/pages/test-UNDEF.html:6
 msgid "Test fehlgeschlagen"
-msgstr ""
+msgstr "Test failed"
 
 #: app/templates/public/pages/test-UNDEF.html:8
 msgid ""
@@ -1060,7 +1103,7 @@ msgstr ""
 #: app/templates/public/pages/test-WAIT-LONG.html:6
 #: app/templates/public/pages/test-WAIT.html:6
 msgid "Ergebnis liegt noch nicht vor"
-msgstr ""
+msgstr "Result pending"
 
 #: app/templates/public/pages/test-WAIT-LONG.html:8
 #: app/templates/public/pages/test-WAIT.html:8
@@ -1071,7 +1114,7 @@ msgstr ""
 
 #: app/templates/public/register.html:10
 msgid "Bitte registrieren Sie ihr Testkit:"
-msgstr ""
+msgstr "Please register your test kit"
 
 #: app/templates/public/register.html:14
 msgid ""
@@ -1097,15 +1140,15 @@ msgstr ""
 
 #: app/templates/public/register.html:38
 msgid "Abbrechen"
-msgstr ""
+msgstr "Cancel"
 
 #: app/templates/public/register.html:41
 msgid "Daten abschicken"
-msgstr ""
+msgstr "Send data"
 
 #: app/templates/public/result-query.html:9
 msgid "Ergebnis Ihres COVID-19 Tests abfragen:"
-msgstr ""
+msgstr "Retrieve COVID-19 test result:"
 
 #: app/templates/public/result-query.html:13
 msgid ""
@@ -1118,65 +1161,65 @@ msgstr ""
 
 #: app/templates/public/result-query.html:17
 msgid "Registrieren"
-msgstr ""
+msgstr "Register"
 
 #: app/templates/public/result-query.html:27
 msgid "Ergebnis anzeigen"
-msgstr ""
+msgstr "Show result"
 
 #: app/views_lab.py:54
 msgid "Einige Barcodes waren nicht in der Datenbank"
-msgstr ""
+msgstr "A number of barcodes were not found in the database"
 
 #: app/views_lab.py:56
 msgid "Einige status konnten nicht gesetzt werden"
-msgstr ""
+msgstr "Could not set several statuses"
 
 #: app/views_lab.py:58
 msgid "Einige racks konnten nicht gesetzt werden"
-msgstr ""
+msgstr "Could not set several racks"
 
 #: app/views_lab.py:62
 msgid "Proben erfolgreich eingetragen"
-msgstr ""
+msgstr "Samples added successfully"
 
 #: app/views_lab.py:101
 msgid "Ergebnisse hinzugefügt: "
-msgstr ""
+msgstr "Results added: "
 
 #: app/views_lab.py:103
 msgid "Keine Proben zu Rack gefunden"
-msgstr ""
+msgstr "No samples found in rack"
 
 #: app/views_lab.py:130
 msgid "Sample nicht gefunde"
-msgstr ""
+msgstr "Sample not found"
 
 #: app/views_lab.py:134
 msgid "Sample rack geupdated"
-msgstr ""
+msgstr "Sample rack updated"
 
 #: app/views_lab.py:142
 msgid "Status geupdated"
-msgstr ""
+msgstr "Status updated"
 
 #: app/views_public.py:39
 msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
-msgstr ""
+msgstr "Please agree to the participation to continue."
 
 #: app/views_public.py:77 app/views_public.py:149
 msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
-msgstr ""
+msgstr "Unknown access code. Please try again."
 
 #: app/views_public.py:85
 msgid ""
 "Der Zugangscode wurde nicht registriert. Bitte registrieren Sie sich vorher."
-msgstr ""
+msgstr "The access code has not been registered yet. Please register it."
 
 #: app/views_public.py:108
 msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
-msgstr ""
+msgstr "The password you entered is not correct. Please try again."
 
 #: app/views_public.py:165
 msgid "Erfolgreich registriert"
-msgstr ""
+msgstr "Registration successful"
