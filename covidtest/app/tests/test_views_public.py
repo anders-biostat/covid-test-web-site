@@ -86,19 +86,3 @@ class TestRegistration(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('app:instructions'))
         self.assertEqual(sample.registrations.count(), 1)
-
-    def test_registration_with_consent(self):
-        session = self.client.session
-        session['consent'] = True
-        session.save()
-
-        form_input = {
-            'access_code': '123412341234',
-            'name': 'Mustermann, Maximilian',
-            'address': 'Musterstraße 1, Musterstadt',
-            'contact': '+49 0123 123 123'
-        }
-
-        response = self.client.post(reverse('app:register'), form_input)
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('app:instructions'))
