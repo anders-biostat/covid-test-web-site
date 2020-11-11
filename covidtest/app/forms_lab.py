@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from .models import RSAKey
 from .statuses import SampleStatus
@@ -18,6 +18,8 @@ class LabRackResultsForm(forms.Form):
 
     lamp_positive = forms.CharField(label=_('LAMP positiv'), required=False)
     lamp_inconclusive = forms.CharField(label=_('LAMP unklares Ergebnis'), required=False)
+    lamp_failed = forms.CharField(label=_('LAMP fehlgeschlagen'), required=False)
+
 
 status_choices = [('-', '-')] + [(status.value, status.value) for status in SampleStatus]
 

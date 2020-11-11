@@ -86,8 +86,17 @@ div.field small {
     font-size: 20px;
 }
 
+form.ui.dropdown.item.language{
+    margin: 0;
+}
+
 .ui.dropdown.item.language:hover {
     color: #fff;
+}
+
+div.menu button {
+    display: block;
+    width: 100%;
 }
 
 /* Menu bar background -> color from uni-heidelberg.de */
@@ -125,7 +134,7 @@ div.field small {
     div.header.item {
         padding: 0;
     }
-    div.ui.dropdown.item.language {
+    form.ui.simple.dropdown.item.language {
         display: inline-block;
     }
     h2.ui.header.menubar {
