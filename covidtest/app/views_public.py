@@ -88,8 +88,7 @@ def results_query(request):
             registration_count = sample.registrations.count()
             if registration_count < 1:
                 messages.add_message(request, messages.WARNING,
-                                     _(
-                                         'Der Zugangscode wurde nicht registriert. Bitte registrieren Sie sich vorher.'))
+                                     _('Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte registrieren Sie sich vorher.'))
                 request.session['access_code'] = access_code
                 return redirect('app:register')
 

@@ -3,6 +3,18 @@
 
 {% block content %}
 <div class="ui segment content">
-  <p></p>
+ <h3 class="ui header">{% blocktrans %}Test fehlgeschlagen{% endblocktrans %}</h3>
+  <p class="lead">
+    {% blocktrans %}Leider ist es bei Ihrer Probe zu einem technsichen Problem
+    gekommen, so dass wir Ihre Probe nicht auswerten konnten.{% endblocktrans %}
+  </p>
+  <p class="lead">
+    {% blocktrans %}Solche technischen Problem sind selten, kommen aber vor.
+    Es tut uns leid, dass wir Ihnen deshalb kein Ergebnis mitteilen können. Geben Sie
+    bitte bei nächster Gelegenheit eine neue Probe ab.{% endblocktrans %}
+  </p>
+  <p class="lead">
+    {% blocktrans %}Bleiben Sie dran, wir tun unser Bestes.{% endblocktrans %}
+  </p>
 </div>
 {% endblock %}

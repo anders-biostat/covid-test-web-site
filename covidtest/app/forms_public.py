@@ -32,11 +32,15 @@ class RegistrationForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
-        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().strip()
+        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().replace(' ', '').strip()
 
 
 class ResultsQueryForm(forms.Form):
     access_code = forms.CharField(label=_('Zugangscode'), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")}))
+
+    def clean(self):
+        cleaned_data = super(ResultsQueryForm, self).clean()
+        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().replace(' ', '').strip()
 
 class ResultsQueryFormLegacy(forms.Form):
     access_code = forms.CharField(label=_('Zugangscode'), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")}))

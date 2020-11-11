@@ -18,6 +18,8 @@ class LabRackResultsForm(forms.Form):
 
     lamp_positive = forms.CharField(label=_('LAMP positiv'), required=False)
     lamp_inconclusive = forms.CharField(label=_('LAMP unklares Ergebnis'), required=False)
+    lamp_failed = forms.CharField(label=_('LAMP fehlgeschlagen'), required=False)
+
 
 status_choices = [('-', '-')] + [(status.value, status.value) for status in SampleStatus]
 

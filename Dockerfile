@@ -13,7 +13,8 @@ RUN mkdir -p ${APP_ROOT}/media
 RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev && \
     apk add postgresql-dev && \
-    apk add netcat-openbsd
+    apk add netcat-openbsd && \
+    apk add gettext
 
 # Install packages
 RUN pip3 install -U pip

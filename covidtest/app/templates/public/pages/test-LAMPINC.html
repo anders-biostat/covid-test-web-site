@@ -3,22 +3,18 @@
 
 {% block content %}
 <div class="ui segment content">
-  <h3 class="ui header">{% blocktrans %}Ooops, das Ergebnis liegt noch nicht vor... {% endblocktrans %}</h3>
+  <h3 class="ui header">{% blocktrans %}Ergebnis liegt noch nicht vor{% endblocktrans %}</h3>
   <p class="lead">
-    {% blocktrans %}Das tut uns sehr leid! Leider haben wir immer einen kleinen
-    Bruchteil der Proben mit nicht eindeutigen Ergebnissen.{% endblocktrans %}
+    {% blocktrans %}In unserer ersten Analyse haben wir für hre Probe kein klares
+    Ergebnis ablesen können. Solche nicht-eindeutigen Ergebnisse kommen leider
+    bei unserem LAMP-Verfahren stets bei einem kleinen Bruchteil der Proben vor.{% endblocktrans %}
   </p>
   <p class="lead">
-    {% blocktrans %}Dies sind meist falsch-positive Ergebnisse. Um dies zu
-    überprüfen, analysieren wir diese Proben erneut mittels RT-qPCR, um ein
-    eindeutiges Ergebnis zu erhalten. Das dauert maximal 24 Stunden. Falls Sie
-    die Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die Probe
-    abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu
-    denjenigen gehört, die erneut getestet werden, um ein schlüssiges Ergebnis
-    zu erhalten.{% endblocktrans %}
-  </p>
-  <p class="lead">
-    {% blocktrans %}Bleiben Sie dran, wir tun unser Bestes.{% endblocktrans %}
+    {% blocktrans %}Wir überprüfen Ihre Probe daher nun erneut, diesmal mit einem
+    anderen Labor-Verfahren, der Standard-Methode RT-PCR. Dies dauert höchsten
+    24 Stunden. Fragen Sie also bitte Ihr Ergebnis morgen (d.h., am Abend des Tages
+    nach der Abgabe der Probe) nochmals hier ab; bis dann sollte diese Meldung
+    durch das endgültige Ergebnis ersetzt worden sein.{% endblocktrans %}
   </p>
 </div>
 {% endblock %}
