@@ -9,10 +9,6 @@ class RegistrationForm(forms.Form):
     class Meta:
         layout = [
             ("Field", "access_code"),
-
-            ("Text", _("<h3 class=\"ui dividing header\">Persönliche Daten</h3>")),
-            ("Text", _(
-                "<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf Zugriff.</p>")),
             ("Field", "name"),
             ("Field", "address"),
             ("Field", "contact"),
