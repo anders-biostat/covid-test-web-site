@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-10 17:42+0000\n"
-"PO-Revision-Date: 2020-11-04 20:16+0100\n"
+"PO-Revision-Date: 2020-11-10 19:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -116,98 +116,98 @@ msgid ""
 "\n"
 "                        Anzahl nicht registrierter Proben\n"
 "                        "
-msgstr ""
+msgstr "Number of unregistered samples"
 
 #: app/templates/lab/dashboard.html:37
 msgid ""
 "\n"
 "                        Anzahl Proben in Bearbeitung\n"
 "                        "
-msgstr ""
+msgstr "Number of samples being processed"
 
 #: app/templates/lab/dashboard.html:49
 msgid ""
 "\n"
 "                        Anzahl abgeschlossener Proben\n"
 "                        "
-msgstr ""
+msgstr "Number of processed samples"
 
 #: app/templates/lab/dashboard.html:59
 msgid ""
 "\n"
 "        Registriert in System\n"
 "        "
-msgstr ""
+msgstr "Registered with system"
 
 #: app/templates/lab/dashboard.html:71
 msgid ""
 "\n"
 "                        Anzahl noch nicht bearbeiteter Proben \"WAIT\"\n"
 "                        "
-msgstr ""
+msgstr "Number of samples that have not been processed yet “WAIT”"
 
 #: app/templates/lab/dashboard.html:81
 msgid ""
 "\n"
 "        LAMP Test\n"
 "        "
-msgstr ""
+msgstr "LAMP test"
 
 #: app/templates/lab/dashboard.html:93
 msgid ""
 "\n"
 "                        positiver LAMP Test \n"
 "                        "
-msgstr ""
+msgstr "positive LAMP test"
 
 #: app/templates/lab/dashboard.html:105
 msgid ""
 "\n"
 "                        unschlüssiger LAMP Test \n"
 "                        "
-msgstr ""
+msgstr "inconclusive LAMP test"
 
 #: app/templates/lab/dashboard.html:117
 msgid ""
 "\n"
 "                        negativer  LAMP Test \n"
 "                        "
-msgstr ""
+msgstr "negative LAMP test"
 
 #: app/templates/lab/dashboard.html:129
 msgid ""
 "\n"
 "                        fehlerhafter LAMP Test \n"
 "                        "
-msgstr ""
+msgstr "erroneous LAMP test"
 
 #: app/templates/lab/dashboard.html:139
 msgid ""
 "\n"
 "        PCR Test\n"
 "        "
-msgstr ""
+msgstr "PCR test"
 
 #: app/templates/lab/dashboard.html:151
 msgid ""
 "\n"
 "                        Positiver PCR Test\n"
 "                        "
-msgstr ""
+msgstr "positive PCR test"
 
 #: app/templates/lab/dashboard.html:163
 msgid ""
 "\n"
 "                        Negativer PCR Test\n"
 "                        "
-msgstr ""
+msgstr "negative PCR test"
 
 #: app/templates/lab/dashboard.html:177
 msgid ""
 "\n"
 "                        Undefiniert\n"
 "                        "
-msgstr ""
+msgstr "undefined"
 
 #: app/templates/lab/generate_barcodes.html:6
 msgid "Lab Interface - Generate Barcodes"
@@ -277,6 +277,10 @@ msgid ""
 "            einfach zeilenweise eingefügt (Barcode-Scanner).\n"
 "        "
 msgstr ""
+"LAMP test results are recorded here. First, scan the rack and then all of "
+"the positive and inconclusive sample vials. Samples that are not scanned are "
+"automatically recorded as negative. The lists containing positive/"
+"inconclusive samples are inserted row-wise using the barcode scanner."
 
 #: app/templates/lab/index.html:36 app/templates/lab/snippets/menubar.html:13
 msgid "Probe suchen"
@@ -289,6 +293,8 @@ msgid ""
 "sowie das Rack manuell gesetzt werden.\n"
 "        "
 msgstr ""
+"Here you have the option to look for individual sample vials as well as "
+"setting the status and the rack manually."
 
 #: app/templates/lab/sample_check_in.html:71
 msgid "Lab Interface - Proben registrieren"
@@ -364,13 +370,15 @@ msgid ""
 "eingegeben.\n"
 "        "
 msgstr ""
+"Here you can register test results. Usually, results are negative. Positive "
+"and inconclusive results are entered row-wise into the respective fields. "
 
 #: app/templates/lab/sample_rack_results.html:55
 msgid ""
 "Nachfolgend die Barcodes der jeweils positiven / unklaren Proben "
 "(zeilenweise separiert)\n"
 "                "
-msgstr ""
+msgstr "Barcodes of positive and inconclusive samples, separated by row. "
 
 #: app/templates/lab/sample_rack_results.html:60
 msgid "Positive LAMP Proben (Barcodes)"
@@ -400,7 +408,7 @@ msgstr "Barcode not found"
 
 #: app/templates/lab/snippets/menubar.html:16
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: app/templates/lab/snippets/menubar.html:19
 msgid "Admin"
@@ -436,57 +444,57 @@ msgstr "Rapid test for COVID-19"
 
 #: app/templates/public/base.html:44
 msgid "LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2"
-msgstr ""
+msgstr "Rapid test for SARS-CoV-2 based on LAMP"
 
 #: app/templates/public/consent.html:6
 msgid "Teilnahme am Coronavirus-Test"
-msgstr ""
+msgstr "Participation Coronavirus test"
 
 #: app/templates/public/consent.html:23
 msgid "Ich bin einverstanden und möchte am Test teilnehmen."
-msgstr ""
+msgstr "I agree and want to participate"
 
 #: app/templates/public/consent.html:37
 msgid "Weiter"
-msgstr ""
+msgstr "Next"
 
 #: app/templates/public/footer.html:5 app/templates/public/pages/contact.html:6
 #: app/templates/public/pages/no-tube.html:24
 msgid "Kontakt"
-msgstr ""
+msgstr "Contact"
 
 #: app/templates/public/footer.html:7
 #: app/templates/public/pages/impressum.html:6
 msgid "Impressum"
-msgstr ""
+msgstr "Legal notice"
 
 #: app/templates/public/index.html:9
 msgid "Schnelltest der Universität Heidelberg auf das"
-msgstr ""
+msgstr "Rapid test of the University of Heidelberg for "
 
 #: app/templates/public/index.html:10
 msgid "Covid-19-Coronavirus (SARS-CoV-2)"
-msgstr ""
+msgstr "SARS-CoV-2"
 
 #: app/templates/public/index.html:13
 msgid "Ich habe ein Test-Kit erhalten"
-msgstr ""
+msgstr "I have received a test kit"
 
 #: app/templates/public/index.html:16
 msgid "Mein Test-Ergebnis abfragen"
-msgstr ""
+msgstr "Check test result"
 
 #: app/templates/public/index.html:19
 msgid "Mehr über den Test erfahren"
-msgstr ""
+msgstr "Learn more about the test"
 
 #: app/templates/public/index.html:22
 msgid "Diese Seite ist verfügbar in:"
-msgstr ""
+msgstr "This page is available in: "
 
 #: app/templates/public/information-text.html:3
 msgid "Informationen für Teilnehmer/innen"
-msgstr ""
+msgstr "Information for participants"
 
 #: app/templates/public/information-text.html:4
 msgid ""
@@ -503,6 +511,14 @@ msgid ""
 "    auf das Virus testen zu können. Wir erproben ein Verfahren hierzu, und "
 "möchten Sie um Ihre Mithilfe bitten. </p>\n"
 msgstr ""
+"        <h5> What is this study about? </h5>\n"
+"          <p>The novel corona virus (SARS-CoV-2) is keeping us all on edge. "
+"In order to get this pandemic under control, we had to take strict measures "
+"in the last few months. Now life is gradually returning to its normal state. "
+"However, to keep the virus under control, we still need to detect any "
+"resurgence of the disease. For that we have to be able to test as many "
+"people as possible for the virus as easily as possible. We are testing a "
+"procedure for this, and would like to ask you for your help. </p>\n"
 
 #: app/templates/public/information-text.html:12
 msgid ""
@@ -519,6 +535,15 @@ msgid ""
 "Vorhandensein von RNA des SARS-Coronavirus 2\n"
 "    getestet. Die dabei verwendete Labortechnik nennt man \"qPCR\". </p>\n"
 msgstr ""
+"        <h5> How does a regular test for the virus work? </h5>\n"
+"          <p>  Individuals, who might have gotten infected with the novel "
+"coronavirus, are usually asked by the public health office (Gesundheitsamt) "
+"or their physician, to take a oropharyngeal swab sample. For this, a health "
+"care specialist inserts a swab test stick (something like a long Q-tip) "
+"through mouth or nose into the throat to collect material (secretion and "
+"cells). In a medical laboratory, the sample will be tested for the presence "
+"of SARS-CoV-2 RNA. The laboratory method used for this is called “qPCR”.</"
+"p>\n"
 
 #: app/templates/public/information-text.html:20
 msgid ""
@@ -551,6 +576,23 @@ msgid ""
 "</ol>\n"
 "</p>\n"
 msgstr ""
+"       <h5> What do we want to do differently? </h5>\n"
+"          <p> The method we want to test differs in two points:</p>\n"
+"            <ol>\n"
+"              <li> We want to use saliva instead of oropharyngeal swabs as "
+"it has several advantages:\n"
+"                <ul>\n"
+"                  <li> It is rather unpleasant to take an oropharyngeal "
+"swab. Spitting into a tube is much more easy and less unpleasant. </li>\n"
+"                  <li> Taking an oropharyngeal swab sample needs to be "
+"performed by medical professionals and you need to visit a medical office or "
+"a test station. Saliva samples on the other hand can be easily taken at "
+"home. We explain in a video, how to do it correctly. </li>\n"
+"                </ul>\n"
+"              <li> We want to implement a different analysis method in the "
+"laboratory. Instead of the regular “qPCR”-method, we want to test an "
+"alternative, requiring less technical effort, called “LAMP”. </li>\n"
+"            </ol>\n"
 
 #: app/templates/public/information-text.html:41
 msgid ""
@@ -587,6 +629,28 @@ msgid ""
 "</ul>\n"
 "</p>\n"
 msgstr ""
+"          <h5 class=“ui header”> Is our test as good as the “official” test? "
+"</h5>\n"
+"          <p> We are not able to definitively answer this question yet. "
+"Hence, we want to test this method. So far, we can state the following: </"
+"p>\n"
+"              <ul>\n"
+"                <li> During the last months, it became evident in multiple "
+"studies, that SARS-CoV-2 can be detected in saliva samples comparably well "
+"as in the regular oropharyngeal swab samples. Numerous points are indicative "
+"that the unpleasant oropharyngeal swab can be replaced by saliva sample "
+"analysis. How exactly to collect your saliva ideally, is yet not fully clear "
+"(see below). </li>\n"
+"                <li> Neither laboratory methods, qPCR or LAMP, are perfect: "
+"If a sample contains only few virus particles, an infection can be "
+"overlooked. The well established qPCR method is clearly better in "
+"identifying samples with few virus particles as infected, compared to the "
+"LAMP method we want to test. If our test does not detect virus particles in "
+"your sample, it is less reliable than a negative qPCR result. </li>\n"
+"                <li>  On the other hand, the LAMP method is technically much "
+"simpler. By the same laboratory capacity and the same number of technical "
+"assistances, more people can be tested, compared to qPCR analysis. </li>\n"
+"</ul>\n"
 
 #: app/templates/public/information-text.html:63
 msgid ""
@@ -626,6 +690,34 @@ msgid ""
 "    kennen, etwas weniger, und wenn ihr nächste Briefkasten ein weiter Weg "
 "ist, etwas mehr.) </p>\n"
 msgstr ""
+"        <h5 class=“ui header”> How do I participate? </h5>\n"
+"\n"
+"            <ol class=“ui list”>\n"
+"              <li>  You should have received a small tube (a little tube "
+"with a screw cap). It contains some salty water (5 mL clean water with 0.9% "
+"salt). </li>\n"
+"              <li>  First, you should read these information here and, if "
+"you agree with everything, confirm at the end of this page by a mouse click "
+"that you are willing to participate. </li>\n"
+"              <li> We will ask you on the next page to enter your contact "
+"data ( so the public health office (Gesundheitsamt) can contact you, in case "
+"of a detected infection), as well as you barcode on your test tube. Your "
+"name and contact information will be encrypted and stored in a way that we "
+"(the Heidelberg University team) cannot access or read them. Only employees "
+"of the public health office, who supervises this study, have access to your "
+"contact information. </li>\n"
+"              <li> Thereafter, please watch a short <a href=“https://www."
+"youtube.com/watch?v=hVniPRMuCjo&feature=emb_title”>video clip</a> that will "
+"show you how to take your saliva sample. </li>\n"
+"              <li> Now please prepare your sample as shown in the video. </"
+"li>\n"
+"              <li> Either post the sample or deliver it to a collection "
+"point. You find the instructions on after submitting your barcode. </li>\n"
+"            </ol>\n"
+"\n"
+"        <p> <b> Required time: </b> In total, the whole procedure should "
+"take 15 to 25 minutes. It might take less time, if you know the video "
+"already, or more time, if your next drop-off point is farther away. </p>\n"
 
 #: app/templates/public/information-text.html:88
 msgid ""
@@ -914,13 +1006,13 @@ msgstr ""
 
 #: app/templates/public/instructions.html:7
 msgid "Anleitung Probenname"
-msgstr ""
+msgstr "How to take a sample"
 
 #: app/templates/public/instructions.html:10
 msgid ""
 "Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,\n"
 "        was Sie nun machen müssen."
-msgstr ""
+msgstr "Please watch the following video that shows you what you need to do."
 
 #: app/templates/public/instructions.html:27
 msgid ""
@@ -928,25 +1020,25 @@ msgid ""
 "        Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten "
 "Sie uns das Röhrchen bitte zu.\n"
 "        "
-msgstr ""
+msgstr "After the filling the vial as shown please mail us the sample."
 
 #: app/templates/public/instructions.html:34
 msgid "Vielen Dank für Ihre Teilnahme."
-msgstr ""
+msgstr "Thank you for your participation."
 
 #: app/templates/public/instructions.html:36
 msgid ""
 "Morgen oder übermorgen können Sie Ihr Ergebnis auf dieser Seite abfragen."
-msgstr ""
+msgstr "In one or two days you can retrieve your test result on this website. "
 
 #: app/templates/public/instructions.html:43
 msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
-msgstr ""
+msgstr "Please note your code and password. "
 
 #: app/templates/public/pages/contact.html:7
 #: app/templates/public/pages/impressum.html:7
 msgid "Diese Studie wird organisert vom "
-msgstr ""
+msgstr "This study is organised by"
 
 #: app/templates/public/pages/contact.html:10
 #: app/templates/public/pages/impressum.html:10
@@ -962,7 +1054,7 @@ msgstr ""
 #: app/templates/public/pages/contact.html:17
 #: app/templates/public/pages/impressum.html:17
 msgid "in Zusammenarbeit mit dem"
-msgstr ""
+msgstr "in collaboration with "
 
 #: app/templates/public/pages/contact.html:20
 #: app/templates/public/pages/impressum.html:20
@@ -977,7 +1069,7 @@ msgstr ""
 #: app/templates/public/pages/contact.html:27
 #: app/templates/public/pages/impressum.html:27
 msgid "Für Anfragen wenden Sie sich bitte an"
-msgstr ""
+msgstr "For questions please contact"
 
 #: app/templates/public/pages/contact.html:31
 #: app/templates/public/pages/impressum.html:31
@@ -1258,6 +1350,8 @@ msgid ""
 "        Das Testkit können Sie unter folgendem Link registrieren:\n"
 "        "
 msgstr ""
+"To retrieve your test result the test has to be registered first. You can "
+"register the test kit under the following link: "
 
 #: app/templates/public/result-query.html:17
 msgid "Registrieren"
@@ -1308,14 +1402,12 @@ msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
 msgstr "Please agree to the participation to continue."
 
 #: app/views_public.py:49
-#, fuzzy
-#| msgid "Status geupdated"
 msgid "Status unbekannt"
-msgstr "Status updated"
+msgstr "Status unknown"
 
 #: app/views_public.py:68
 msgid "Kein Status vorhanden (bitte später erneut abrufen)"
-msgstr ""
+msgstr "Status not available, please try again later"
 
 #: app/views_public.py:84 app/views_public.py:156
 msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
