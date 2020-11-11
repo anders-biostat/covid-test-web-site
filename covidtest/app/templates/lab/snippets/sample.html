@@ -24,7 +24,7 @@
 
             </div>
         </div>
-        <h3 class="ui header">{% blocktrans %}Registrations{% endblocktrans %}</h3>
+        <h3 class="ui header">{% blocktrans %}Registrierungen{% endblocktrans %}</h3>
         <div style="margin-bottom: 10px;" class="extra content">
             <div class="ui small feed">
                 {% for reg in sample.registrations.all %}
@@ -34,7 +34,7 @@
                             {{ reg.time|date:"Y-m-d H:i:s" }}
                         </div>
                         <div class="regInfo">
-                            {% blocktrans %}public key fingerprint:{% endblocktrans %} 
+                            {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %} 
                             <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
                         </div>
                     </div>
@@ -43,31 +43,31 @@
 
             </div>
         </div>        
-        <button class="ui button" onclick="requestPrivateKey();">{% blocktrans %}Decrypt registrations{% endblocktrans %}</button>
+        <button class="ui button" onclick="requestPrivateKey();">{% blocktrans %}Registrierungen entschüsseln{% endblocktrans %}</button>
         <div class="ui negative hidden message prKeyMessage" id="encrypted">
-            {% blocktrans %}Your private key is encrypted. Please, try again and enter your private key password.{% endblocktrans %}
+            {% blocktrans %}Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie das Passwort für Ihren privaten Schlüssel an.{% endblocktrans %}
         </div>
         <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
-            {% blocktrans %}The password for you private key is incorrect. Please, try again.{% endblocktrans %}
+            {% blocktrans %}Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.{% endblocktrans %}
         </div>
         <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
-            {% blocktrans %}The sumbitted file doesn't contain a private key.{% endblocktrans %}
+            {% blocktrans %}Die gewählte Datei enthält keinen RSA-Geheimschlüssel.{% endblocktrans %}
         </div>
         <div class="ui negative hidden message prKeyMessage" id="notPem">
-            {% blocktrans %}The sumbitted file is not in PEM format.{% endblocktrans %}
+            {% blocktrans %}Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.{% endblocktrans %}
         </div>
         <div class="ui negative hidden message prKeyMessage" id="wrongKey">
-            {% blocktrans %}The private key doesn't match the encrypted information.{% endblocktrans %}
+            {% blocktrans %}Der geheime Schlüssel passt nicht zu der verschlüsselten Information.{% endblocktrans %}
         </div>
         <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
     </div>
 </div>
 <div class="ui tiny modal">
-    <div class="ui header">{% blocktrans %}Please, sumbit your private key{% endblocktrans %}</div>
+    <div class="ui header">{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</div>
     <div class="content">
         <form class="ui form" id="prKeyInput">
             <div class="required field">
-                <label>{% blocktrans %}Private key file (.pem){% endblocktrans %}</label>
+                <label>{% blocktrans %}Geheimschlüssel-Datei (.pem){% endblocktrans %}</label>
                 <div class="ui icon input">
                     <input type="file" style="display: none;">
                     <input type="text" placeholder="PrivateKey.pem" readonly>
@@ -75,17 +75,17 @@
                 </div>
             </div>
             <div class="field">
-                <label>{% blocktrans %}Password for private key (optional){% endblocktrans %}</label>
+                <label>{% blocktrans %}Passwort für den Geheimschlüssel (optional){% endblocktrans %}</label>
                 <input type="password">
             </div>
         </form>
         <div class="ui negative hidden message">
-            <p>{% blocktrans %}Please, submit your private key.{% endblocktrans %}</p>
+            <p>{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</p>
         </div>        
     </div>
     <div class="actions">
-        <div class="ui cancel button">{% blocktrans %}Cancel{% endblocktrans %}</div>
-        <div class="ui approve button">{% blocktrans %}Decrypt{% endblocktrans %}</div>
+        <div class="ui cancel button">{% blocktrans %}Abbrechen{% endblocktrans %}</div>
+        <div class="ui approve button">{% blocktrans %}Entschlüsseln{% endblocktrans %}</div>
     </div>
 </div>
 
