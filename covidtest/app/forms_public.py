@@ -1,6 +1,5 @@
 from django import forms
-from django.utils.translation import gettext as _
-
+from django.utils.translation import ugettext_lazy as _
 
 class ConsentForm(forms.Form):
     terms = forms.BooleanField(label=_('Einverständnis'), required=True)
@@ -10,10 +9,6 @@ class RegistrationForm(forms.Form):
     class Meta:
         layout = [
             ("Field", "access_code"),
-
-            ("Text", _("<h3 class=\"ui dividing header\">Persönliche Daten</h3>")),
-            ("Text", _(
-                "<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf Zugriff.</p>")),
             ("Field", "name"),
             ("Field", "address"),
             ("Field", "contact"),
@@ -32,11 +27,15 @@ class RegistrationForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
-        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().strip()
+        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().replace(' ', '').strip()
 
 
 class ResultsQueryForm(forms.Form):
     access_code = forms.CharField(label=_('Zugangscode'), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")}))
+
+    def clean(self):
+        cleaned_data = super(ResultsQueryForm, self).clean()
+        cleaned_data['access_code'] = cleaned_data.get("access_code").upper().replace(' ', '').strip()
 
 class ResultsQueryFormLegacy(forms.Form):
     access_code = forms.CharField(label=_('Zugangscode'), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")}))

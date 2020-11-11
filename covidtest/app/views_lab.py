@@ -1,7 +1,7 @@
 import os
 from django.shortcuts import render
 from django.contrib import messages
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 from django.views.generic import ListView
@@ -100,8 +100,10 @@ def sample_edit_rack(request):
             rack = form.cleaned_data['rack'].upper().strip()
             lamp_positive = form.data['lamp_positive'].split()
             lamp_inconclusive = form.data['lamp_inconclusive'].split()
+            lamp_failed = form.data['lamp_failed'].split()
             lamp_positive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_positive]
             lamp_inconclusive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_inconclusive]
+            lamp_failed = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_inconclusive]
 
             rack_samples = Sample.objects.filter(rack=rack)
             if len(rack_samples) > 0:
@@ -111,6 +113,8 @@ def sample_edit_rack(request):
                         status = SampleStatus.LAMPPOS
                     if sample.barcode in lamp_inconclusive:
                         status = SampleStatus.LAMPINC
+                    if sample.barcode in lamp_failed:
+                        status = SampleStatus.LAMPFAIL
 
                     set_status = sample.set_status(status, author=request.user.get_username())
                     barcodes_status_set = []
