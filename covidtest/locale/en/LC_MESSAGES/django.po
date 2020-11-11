@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-11 16:25+0000\n"
+"POT-Creation-Date: 2020-11-11 17:21+0000\n"
 "PO-Revision-Date: 2020-11-11 18:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -58,15 +58,15 @@ msgstr "Number of batches"
 msgid "Schlüssel"
 msgstr "Key"
 
-#: app/forms_public.py:6
+#: app/forms_public.py:5
 msgid "Einverständnis"
 msgstr "Consent"
 
-#: app/forms_public.py:14
+#: app/forms_public.py:13
 msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
 msgstr "h3 class=“ui dividing header”>Personal data</h3>"
 
-#: app/forms_public.py:16
+#: app/forms_public.py:15
 msgid ""
 "<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
 "vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf "
@@ -75,39 +75,39 @@ msgstr ""
 "<p>Data protection notice: Your name and contact data will be treated "
 "confidentially. Only employees of the health authority will have access. </p>"
 
-#: app/forms_public.py:22
+#: app/forms_public.py:21
 msgid "Zugangscode (beiliegender Zettel):"
 msgstr "Access code (see paper slip):"
 
-#: app/forms_public.py:24 app/forms_public.py:39 app/forms_public.py:46
+#: app/forms_public.py:23 app/forms_public.py:38 app/forms_public.py:45
 msgid "Zugangscode"
 msgstr "Access code"
 
-#: app/forms_public.py:25
+#: app/forms_public.py:24
 msgid "Name (Nachname, Vorname):"
 msgstr "Name (last name, first name):"
 
-#: app/forms_public.py:26
+#: app/forms_public.py:25
 msgid "Nachname, Vorname"
 msgstr "Last name, first name"
 
-#: app/forms_public.py:27
+#: app/forms_public.py:26
 msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"
 msgstr "Address (street, street number, zip code, city):"
 
-#: app/forms_public.py:29
+#: app/forms_public.py:28
 msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
 msgstr "City, street number, zip code, city"
 
-#: app/forms_public.py:30
+#: app/forms_public.py:29
 msgid "Telefonnummer:"
 msgstr "Telephone number:"
 
-#: app/forms_public.py:31
+#: app/forms_public.py:30
 msgid "Telefonnummer"
 msgstr "Telephone number"
 
-#: app/forms_public.py:47
+#: app/forms_public.py:46
 msgid "Passwort"
 msgstr "Password"
 
