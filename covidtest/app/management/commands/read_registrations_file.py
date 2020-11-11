@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 from app.models import Sample, RSAKey, Bag
 from app.statuses import SampleStatus
 
+comment = 'Imported from "papagei" via "read_registrations_file"'
 
 class Command(BaseCommand):
     help = 'Reads results file'
@@ -35,7 +36,7 @@ class Command(BaseCommand):
                     if created:
                         sample.events.create(
                             status=SampleStatus.INFO.value,
-                            comment='Imported from commandline'
+                            comment=comment
                         )
 
             for registration in j['registrations']:
@@ -73,16 +74,16 @@ class Command(BaseCommand):
                     if not last_event:
                         print('Last event not found', result['barcode'])
                     else:
-                        if last_event.comment != 'Imported from commandline':
+                        if last_event.comment != comment:
                             print('Already imported status .. ', result['barcode'])
                         else:
                             sample.events.create(
                                 status=result['result'],
-                                comment='Result from commandline'
+                                comment=comment
                             )
                             print('Result added ...')
 
             for sample in Sample.objects.all():
                 if sample.get_status() == None:
-                    sample.events.create(status='PRINTED', comment='Result from commandline')
+                    sample.events.create(status='PRINTED', comment=comment)
                     print('Updated status "printed: " ', sample.barcode)
