@@ -1,0 +1,230 @@
+{% load i18n %}
+<div class="ui red top attached segment">
+    <div class="content">
+        <h2 class="ui header">{% blocktrans %}Barcode: {% endblocktrans %}{{ sample.barcode }}</h2>
+        <div class="meta">
+            <b>Batch:</b> {{ sample.batch }}<br>
+            <b>Rack:</b> {{ sample.rack }}
+        </div>
+
+
+        <h3 class="ui header">{% blocktrans %}Historie{% endblocktrans %}</h3>
+        <div class="extra content">
+            <div class="ui small feed">
+                {% for event in sample.events.all %}
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            {{ event.updated_on|date:"Y-m-d H:i:s" }}
+                            - <span style="color: #ff0000">{{ event.status }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <h3 class="ui header">{% blocktrans %}Registrierungen{% endblocktrans %}</h3>
+        <div style="margin-bottom: 10px;" class="extra content">
+            <div class="ui small feed">
+                {% for reg in sample.registrations.all %}
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            {{ reg.time|date:"Y-m-d H:i:s" }}
+                        </div>
+                        <div class="regInfo">
+                            {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %} 
+                            <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>        
+        <button class="ui button" onclick="requestPrivateKey();">{% blocktrans %}Registrierungen entschüsseln{% endblocktrans %}</button>
+        <div class="ui negative hidden message prKeyMessage" id="encrypted">
+            {% blocktrans %}Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie das Passwort für Ihren privaten Schlüssel an.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
+            {% blocktrans %}Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
+            {% blocktrans %}Die gewählte Datei enthält keinen RSA-Geheimschlüssel.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="notPem">
+            {% blocktrans %}Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="wrongKey">
+            {% blocktrans %}Der geheime Schlüssel passt nicht zu der verschlüsselten Information.{% endblocktrans %}
+        </div>
+        <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
+    </div>
+</div>
+<div class="ui tiny modal">
+    <div class="ui header">{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</div>
+    <div class="content">
+        <form class="ui form" id="prKeyInput">
+            <div class="required field">
+                <label>{% blocktrans %}Geheimschlüssel-Datei (.pem){% endblocktrans %}</label>
+                <div class="ui icon input">
+                    <input type="file" style="display: none;">
+                    <input type="text" placeholder="PrivateKey.pem" readonly>
+                    <i class="attach icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label>{% blocktrans %}Passwort für den Geheimschlüssel (optional){% endblocktrans %}</label>
+                <input type="password">
+            </div>
+        </form>
+        <div class="ui negative hidden message">
+            <p>{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</p>
+        </div>        
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">{% blocktrans %}Abbrechen{% endblocktrans %}</div>
+        <div class="ui approve button">{% blocktrans %}Entschlüsseln{% endblocktrans %}</div>
+    </div>
+</div>
+
+<div class="ui bottom attached message">
+    <form action="{% url 'app:query' %}" class="ui form" method="post">
+        {% csrf_token %}
+        <div class="field">
+            <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>
+            {{ edit_form.status }}
+        </div>
+        <div class="field">
+            <label>{% blocktrans %}Rack{% endblocktrans %}</label>
+            {{ edit_form.rack }}
+        </div>
+        <input name="barcode" value="{{ sample.barcode }}" hidden>
+        <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
+<script type="text/javascript">
+    $("#prKeyInput input:text").click(function() {
+        $(this).parent().find("input:file").click();
+    });
+    $("#prKeyInput input:file").on("change", function(e) {
+        var name = e.target.files[0].name;
+        $(this).parent().find("input:text").val(name);
+    });
+
+    var registrations = [];
+    {% for reg in sample.registrations.all %}
+        registrations.push({
+            name_encrypted: '{{ reg.name_encrypted }}',
+            address_encrypted: '{{ reg.address_encrypted }}',
+            contact_encrypted: '{{ reg.contact_encrypted }}',
+            session_key_encrypted: '{{ reg.session_key_encrypted }}',
+            aes_instance_iv: '{{ reg.aes_instance_iv }}'
+        });
+    {% endfor %}
+
+    function requestPrivateKey() {
+        $(".ui.tiny.modal")
+            .modal({
+                onApprove: function() {
+                    var files = $(this).find("input:file").prop("files");
+                    $(".prKeyMessage").hide();
+                    if(files.length == 0) {
+                        $(this).find(".message").show();
+                        return false
+                    } else {
+                        $(this).find(".message").hide();
+                        loadKey(files[0], $(this).find("input:password").val());
+                        return true;
+                    }
+                }
+            })
+            .modal("show");
+    };
+
+    function loadKey(file, password) {
+        var decrypted = [];
+
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function (evt) {
+            registrations.forEach(data => {
+                var decryptedData;
+                try {
+                    decryptedData = decrypt(data, reader.result, password);
+                } catch(e) {
+                    if(e.message.indexOf("PEM is encrypted") > -1) {
+                        $("#encrypted").show();
+                    } else if(e.message.indexOf("privateKey is null") > -1) {
+                        $("#wrongPassword").show();
+                    } else if(e.message.indexOf("PEM header type is not") > -1) {
+                        $("#notPrivateKey").show();
+                    } else if(e.message.indexOf("Invalid PEM formatted message") > -1) {
+                        $("#notPem").show();
+                    } else if(e.message.indexOf("padding") > -1) {
+                        $("#wrongKey").show();
+                    } else {
+                        $("#somethingElse")
+                            .html(e.message)
+                            .show();
+                    }
+                    decryptedData = {};
+                }
+
+                decrypted.push(decryptedData);
+            });
+            addRegInfo(decrypted);
+        }
+        reader.onerror = function (evt) {
+            alert("Error reading private key file");
+        }
+    };
+
+    function addRegInfo(regInfo) {
+        $(".regInfo").each((i, el) => {
+            var inf = Object.keys(regInfo[i])
+                .reduce((str, key) => str + "<b>" + key + ":</b> " + regInfo[i][key] + "<br>", "");
+            if(inf) $(el).html(inf);
+        })
+    };
+
+    function decrypt(data, privateKeyPem, password) {
+        var privateKey;
+        if(password)
+            privateKey = forge.pki.decryptRsaPrivateKey(privateKeyPem, password)
+        else 
+            privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
+
+        Object.keys(data).forEach(key => {
+            data[key + "_decoded"] = forge.util.decode64(data[key]);
+        });
+
+        var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP"); 
+
+        var encrypted_fields = ["name", "address", "contact"];
+
+        var decipher = forge.cipher.createDecipher('AES-CBC', session_key);
+        decipher.start({iv: data.aes_instance_iv_decoded});
+        encrypted_fields.forEach(el => {
+            decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
+        })
+        
+        var output = decipher.output.toString();
+
+        var result = {};
+        var i = 0;
+        encrypted_fields.forEach(el => {
+            result[el] = output
+                .slice(i, i + data[el + "_encrypted_decoded"].length)
+                .replace(/\0/g, '');
+            i += data[el + "_encrypted_decoded"].length;
+        });
+
+        return result;
+    }
+</script>
+
+

@@ -9,12 +9,13 @@ class CallLabURLs(TestCase):
             username="admin",
             password="admin",
             email="test@this.com")
-        self.ListOfUrls = ['/lab','/lab/checkin','/lab/rack', '/lab/lab_query', '/lab/dashboard']
+        self.ListOfUrls = ['/lab','/lab/checkin','/lab/rack', '/lab/dashboard']
 
     # no login should lead to redirect
     def test_callLabPages(self):
         c = Client()
         for url in self.ListOfUrls:
+            print(url)
             response = c.get(url)
             self.assertEqual(response.status_code, 302)
         

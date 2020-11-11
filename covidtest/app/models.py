@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from .statuses import SampleStatus
 
-
 class RSAKey(models.Model):
     key_name = models.CharField(max_length=50)
     comment = models.TextField(null=True, blank=True)
