@@ -1,6 +1,5 @@
 from django import forms
-from django.utils.translation import gettext as _
-
+from django.utils.translation import ugettext_lazy as _
 
 class ConsentForm(forms.Form):
     terms = forms.BooleanField(label=_('Einverständnis'), required=True)

@@ -1,7 +1,7 @@
 import os
 from django.shortcuts import render
 from django.contrib import messages
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
 
