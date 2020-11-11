@@ -170,12 +170,18 @@ def sample_query(request):
 
 @login_required
 def dashboard(request):
-
-    count_wait = Event.objects.filter(status="PRINTED").count()
-
-    dashboard_values = {
-        "count_Samples" : Sample.objects.filter().count(),
-        "count_wait" : count_wait
+    counts = {
+        'samples': 0,
+        'positive': 0,
+        'WAIT': 0,
+        'no_status': 0,
     }
 
-    return render(request, "lab/dashboard.html", {'dashboard_values' : dashboard_values})
+    for sample in Sample.objects.all():
+        event = sample.get_status()
+        if not event:
+            counts['no_status'] += 1
+        elif event.status == SampleStatus.WAIT.value:
+            counts['WAIT'] += 1
+
+    return render(request, "lab/dashboard.html", {'counts' : counts})
