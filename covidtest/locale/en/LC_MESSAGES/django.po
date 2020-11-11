@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-11 17:21+0000\n"
-"PO-Revision-Date: 2020-11-11 18:46+0100\n"
+"POT-Creation-Date: 2020-11-11 17:49+0000\n"
+"PO-Revision-Date: 2020-11-11 18:49+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -62,52 +62,39 @@ msgstr "Key"
 msgid "Einverständnis"
 msgstr "Consent"
 
-#: app/forms_public.py:13
-msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
-msgstr "h3 class=“ui dividing header”>Personal data</h3>"
-
-#: app/forms_public.py:15
-msgid ""
-"<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
-"vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf "
-"Zugriff.</p>"
-msgstr ""
-"<p>Data protection notice: Your name and contact data will be treated "
-"confidentially. Only employees of the health authority will have access. </p>"
-
-#: app/forms_public.py:21
+#: app/forms_public.py:17
 msgid "Zugangscode (beiliegender Zettel):"
 msgstr "Access code (see paper slip):"
 
-#: app/forms_public.py:23 app/forms_public.py:38 app/forms_public.py:45
+#: app/forms_public.py:19 app/forms_public.py:34 app/forms_public.py:41
 msgid "Zugangscode"
 msgstr "Access code"
 
-#: app/forms_public.py:24
+#: app/forms_public.py:20
 msgid "Name (Nachname, Vorname):"
 msgstr "Name (last name, first name):"
 
-#: app/forms_public.py:25
+#: app/forms_public.py:21
 msgid "Nachname, Vorname"
 msgstr "Last name, first name"
 
-#: app/forms_public.py:26
+#: app/forms_public.py:22
 msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"
 msgstr "Address (street, street number, zip code, city):"
 
-#: app/forms_public.py:28
+#: app/forms_public.py:24
 msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
 msgstr "City, street number, zip code, city"
 
-#: app/forms_public.py:29
+#: app/forms_public.py:25
 msgid "Telefonnummer:"
 msgstr "Telephone number:"
 
-#: app/forms_public.py:30
+#: app/forms_public.py:26
 msgid "Telefonnummer"
 msgstr "Telephone number"
 
-#: app/forms_public.py:46
+#: app/forms_public.py:42
 msgid "Passwort"
 msgstr "Password"
 
@@ -1430,8 +1417,6 @@ msgstr "An error has occurred: "
 
 #: app/templates/public/pages/test-ERROR.html:12
 #: app/templates/public/pages/test-UNDEF.html:12
-#, fuzzy
-#| msgid "Bitte kontaktieren Sie uns:"
 msgid "Bitte kontaktieren Sie uns ggf.:"
 msgstr "Please contact us:"
 
@@ -1625,14 +1610,6 @@ msgstr ""
 "speak to a doctor please contact your GP via telephone. "
 
 #: app/templates/public/pages/test-PCRPOS.html:18
-#, fuzzy
-#| msgid ""
-#| "Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit\n"
-#| "    Ihnen in Verbindung setzen und das weitere Vorgehen mit Ihnen "
-#| "besprechen.\n"
-#| "    Sie können auch selbst die Corona-Hotline des Gesundheitsamtes "
-#| "anrufen:\n"
-#| "    06221 522-1881. "
 msgid ""
 "Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit\n"
 "    Ihnen in Verbindung setzen und das weitere Vorgehen mit Ihnen "
@@ -1694,11 +1671,20 @@ msgstr ""
 "If the virus is detected in your sample the public health office needs to be "
 "able to contact you. We therefore ask you to provide your contact data: "
 
-#: app/templates/public/register.html:32
+#: app/templates/public/register.html:23
+msgid ""
+"<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
+"vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf "
+"Zugriff.</p>"
+msgstr ""
+"<p>Data protection notice: Your name and contact data will be treated "
+"confidentially. Only employees of the health authority will have access. </p>"
+
+#: app/templates/public/register.html:34
 msgid "Abbrechen"
 msgstr "Cancel"
 
-#: app/templates/public/register.html:35
+#: app/templates/public/register.html:37
 msgid "Daten abschicken"
 msgstr "Send data"
 
@@ -1791,6 +1777,9 @@ msgstr "The password you entered is not correct. Please try again."
 #: app/views_public.py:176
 msgid "Erfolgreich registriert"
 msgstr "Registration successful"
+
+#~ msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
+#~ msgstr "h3 class=“ui dividing header”>Personal data</h3>"
 
 #~ msgid "Ooops, das Ergebnis liegt noch nicht vor... "
 #~ msgstr "Result not available yet "
