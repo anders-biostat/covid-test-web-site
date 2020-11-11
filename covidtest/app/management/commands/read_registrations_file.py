@@ -25,14 +25,19 @@ class Command(BaseCommand):
                 )
 
                 for barcode in batch['codes']:
-                    sample, created = Sample.objects.get_or_create(
+                    sample = Sample.objects.filter(
                         barcode=barcode,
                         access_code=barcode,
-                        rack='',
-                        password_hash='',
-                        bag=bag,
-                    )
-                    if created:
+                    ).first()
+
+                    if not sample:
+                        sample = Sample.objects.create(
+                            barcode=barcode,
+                            access_code=barcode,
+                            rack='',
+                            password_hash='',
+                            bag=bag,
+                        )
                         sample.events.create(
                             status=SampleStatus.INFO.value,
                             comment='Imported from commandline'
