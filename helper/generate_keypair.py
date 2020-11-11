@@ -10,6 +10,10 @@ if passphrase != passphrase_repeat:
 	sys.stderr.write( "The passphrases differ. Aborting." )
 	sys.exit( 1 )
 
+if passphrase == "":
+	passphrase = None
+	print( "You have entered an empty passphrase. You private key will not get encrypted." )
+
 print( "Generating key pair." )
 key = Crypto.PublicKey.RSA.generate( 3072 )
 
