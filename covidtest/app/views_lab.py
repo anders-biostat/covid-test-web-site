@@ -4,14 +4,17 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponse
+from django.views.generic import ListView
 
-from rest_framework import viewsets
-from rest_framework import permissions
+import django_filters
+from django_tables2 import SingleTableView, SingleTableMixin
+from django_filters.views import FilterView
 
 from .serializers import SampleSerializer
 from .forms_lab import LabCheckInForm, LabQueryForm, LabRackResultsForm, LabProbeEditForm, LabGenerateBarcodeForm
 from .models import Sample, RSAKey, Registration, Event
 from .statuses import SampleStatus
+from .tables import SampleTable
 
 @login_required
 def index(request):
@@ -129,7 +132,7 @@ def sample_edit_rack(request):
 
 
 @login_required
-def sample_query(request):
+def sample_detail(request):
     form = LabQueryForm()
     edit_form = LabProbeEditForm()
     if request.method == 'POST':
@@ -166,6 +169,18 @@ def sample_query(request):
                 return render(request, 'lab/sample_query.html', {'form': form, 'edit_form': edit_form, 'sample': sample})
 
     return render(request, 'lab/sample_query.html', {'form': form, 'edit_form': edit_form})
+
+
+class SampleFilter(django_filters.FilterSet):
+    class Meta:
+        model = Sample
+        fields = ['barcode', 'access_code']
+
+class SampleListView(SingleTableMixin, FilterView):
+    model = Sample
+    table_class = SampleTable
+    template_name = 'lab/sample_list.html'
+    filterset_class = SampleFilter
 
 
 @login_required

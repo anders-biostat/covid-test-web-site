@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-11 17:49+0000\n"
+"POT-Creation-Date: 2020-11-11 20:42+0100\n"
 "PO-Revision-Date: 2020-11-11 18:49+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr "LAMP inconclusive"
 msgid "LAMP fehlgeschlagen"
 msgstr "LAMP test failed"
 
-#: app/forms_lab.py:28 app/templates/lab/snippets/probe.html:40
+#: app/forms_lab.py:28 app/templates/lab/snippets/sample.html:100
 msgid "Rack"
 msgstr "Rack"
 
@@ -344,13 +344,23 @@ msgstr "Samples not checked in successfully:"
 msgid "Barcode nicht in db: "
 msgstr "Barcode not in database: "
 
-#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:120
+#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:123
 msgid "Status konnte nicht gesetzt werden: "
 msgstr "Could not set status: "
 
 #: app/templates/lab/sample_check_in.html:108
 msgid "Rack konnte nicht gesetzt werden: "
 msgstr "Could not set rack: "
+
+#: app/templates/lab/sample_list.html:8
+#, fuzzy
+#| msgid "Lab Interface - Home"
+msgid "Lab Interface - Samples"
+msgstr "Lab interface - home"
+
+#: app/templates/lab/sample_list.html:12 app/templates/lab/sample_query.html:26
+msgid "Ergebnis für: "
+msgstr "Result for: "
 
 #: app/templates/lab/sample_query.html:6
 msgid "Lab Interface - Suche"
@@ -369,10 +379,6 @@ msgstr ""
 #: app/templates/lab/sample_query.html:18
 msgid "Search Barcode..."
 msgstr "Search barcode …"
-
-#: app/templates/lab/sample_query.html:26
-msgid "Ergebnis für: "
-msgstr "Result for: "
 
 #: app/templates/lab/sample_query.html:34
 msgid "Keine Probe mit diesem Barcode gefunden."
@@ -444,19 +450,79 @@ msgstr "Dashboard"
 msgid "Admin"
 msgstr "Admin"
 
-#: app/templates/lab/snippets/probe.html:4
+#: app/templates/lab/snippets/sample.html:4
 msgid "Barcode: "
 msgstr "Barcode: "
 
-#: app/templates/lab/snippets/probe.html:12
+#: app/templates/lab/snippets/sample.html:11
 msgid "Historie"
 msgstr "History"
 
-#: app/templates/lab/snippets/probe.html:36
+#: app/templates/lab/snippets/sample.html:27
+msgid "Registrierungen"
+msgstr "Registrations"
+
+#: app/templates/lab/snippets/sample.html:37
+msgid "Schlüssel-Fingerprint:"
+msgstr "key fingerprint"
+
+#: app/templates/lab/snippets/sample.html:46
+msgid "Registrierungen entschüsseln"
+msgstr "decrypt registrations"
+
+#: app/templates/lab/snippets/sample.html:48
+msgid ""
+"Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal "
+"und geben Sie das Passwort für Ihren privaten Schlüssel an."
+msgstr ""
+"Your secret key is encrypted. Please try again, and provide the passcode for "
+"your private key."
+
+#: app/templates/lab/snippets/sample.html:51
+msgid ""
+"Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es "
+"noch einmal."
+msgstr "The password for your private key was wrong. Please try again."
+
+#: app/templates/lab/snippets/sample.html:54
+msgid "Die gewählte Datei enthält keinen RSA-Geheimschlüssel."
+msgstr "The selected file does not contain a private RSA key."
+
+#: app/templates/lab/snippets/sample.html:57
+msgid "Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format."
+msgstr "The selected file is not a key file in PEM format"
+
+#: app/templates/lab/snippets/sample.html:60
+msgid "Der geheime Schlüssel passt nicht zu der verschlüsselten Information."
+msgstr "The private key does not match the encrypted information."
+
+#: app/templates/lab/snippets/sample.html:66
+#: app/templates/lab/snippets/sample.html:83
+msgid "Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel."
+msgstr "Please select the PEM file with your private RSA key."
+
+#: app/templates/lab/snippets/sample.html:70
+msgid "Geheimschlüssel-Datei (.pem)"
+msgstr "private key file (.pem)"
+
+#: app/templates/lab/snippets/sample.html:78
+msgid "Passwort für den Geheimschlüssel (optional)"
+msgstr "passcode for the private key (optional)"
+
+#: app/templates/lab/snippets/sample.html:87
+#: app/templates/public/register.html:34
+msgid "Abbrechen"
+msgstr "Cancel"
+
+#: app/templates/lab/snippets/sample.html:88
+msgid "Entschlüsseln"
+msgstr "Decrypt"
+
+#: app/templates/lab/snippets/sample.html:96
 msgid "Status der Probe"
 msgstr "Sample status"
 
-#: app/templates/lab/snippets/probe.html:44
+#: app/templates/lab/snippets/sample.html:104
 msgid "Speichern"
 msgstr "Save"
 
@@ -1680,10 +1746,6 @@ msgstr ""
 "<p>Data protection notice: Your name and contact data will be treated "
 "confidentially. Only employees of the health authority will have access. </p>"
 
-#: app/templates/public/register.html:34
-msgid "Abbrechen"
-msgstr "Cancel"
-
 #: app/templates/public/register.html:37
 msgid "Daten abschicken"
 msgstr "Send data"
@@ -1712,39 +1774,39 @@ msgstr "Register"
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: app/views_lab.py:73
+#: app/views_lab.py:76
 msgid "Einige Barcodes waren nicht in der Datenbank"
 msgstr "A number of barcodes were not found in the database"
 
-#: app/views_lab.py:75
+#: app/views_lab.py:78
 msgid "Einige status konnten nicht gesetzt werden"
 msgstr "Could not set several statuses"
 
-#: app/views_lab.py:77
+#: app/views_lab.py:80
 msgid "Einige racks konnten nicht gesetzt werden"
 msgstr "Could not set several racks"
 
-#: app/views_lab.py:81
+#: app/views_lab.py:84
 msgid "Proben erfolgreich eingetragen"
 msgstr "Samples added successfully"
 
-#: app/views_lab.py:124
+#: app/views_lab.py:127
 msgid "Ergebnisse hinzugefügt: "
 msgstr "Results added: "
 
-#: app/views_lab.py:126
+#: app/views_lab.py:129
 msgid "Keine Proben zu Rack gefunden"
 msgstr "No samples found in rack"
 
-#: app/views_lab.py:153
+#: app/views_lab.py:156
 msgid "Sample nicht gefunde"
 msgstr "Sample not found"
 
-#: app/views_lab.py:157
+#: app/views_lab.py:160
 msgid "Sample rack geupdated"
 msgstr "Sample rack updated"
 
-#: app/views_lab.py:165
+#: app/views_lab.py:168
 msgid "Status geupdated"
 msgstr "Status updated"
 
