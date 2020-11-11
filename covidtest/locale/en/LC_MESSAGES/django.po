@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-11 17:49+0000\n"
+"POT-Creation-Date: 2020-11-11 20:42+0100\n"
 "PO-Revision-Date: 2020-11-11 18:49+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr "LAMP inconclusive"
 msgid "LAMP fehlgeschlagen"
 msgstr "LAMP test failed"
 
-#: app/forms_lab.py:28 app/templates/lab/snippets/probe.html:40
+#: app/forms_lab.py:28 app/templates/lab/snippets/sample.html:100
 msgid "Rack"
 msgstr "Rack"
 
@@ -344,7 +344,7 @@ msgstr "Samples not checked in successfully:"
 msgid "Barcode nicht in db: "
 msgstr "Barcode not in database: "
 
-#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:120
+#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:123
 msgid "Status konnte nicht gesetzt werden: "
 msgstr "Could not set status: "
 
@@ -510,7 +510,7 @@ msgid "Passwort für den Geheimschlüssel (optional)"
 msgstr "passcode for the private key (optional)"
 
 #: app/templates/lab/snippets/sample.html:87
-#: app/templates/public/register.html:32
+#: app/templates/public/register.html:34
 msgid "Abbrechen"
 msgstr "Cancel"
 
@@ -1746,10 +1746,6 @@ msgstr ""
 "<p>Data protection notice: Your name and contact data will be treated "
 "confidentially. Only employees of the health authority will have access. </p>"
 
-#: app/templates/public/register.html:34
-msgid "Abbrechen"
-msgstr "Cancel"
-
 #: app/templates/public/register.html:37
 msgid "Daten abschicken"
 msgstr "Send data"
@@ -1778,39 +1774,39 @@ msgstr "Register"
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: app/views_lab.py:73
+#: app/views_lab.py:76
 msgid "Einige Barcodes waren nicht in der Datenbank"
 msgstr "A number of barcodes were not found in the database"
 
-#: app/views_lab.py:75
+#: app/views_lab.py:78
 msgid "Einige status konnten nicht gesetzt werden"
 msgstr "Could not set several statuses"
 
-#: app/views_lab.py:77
+#: app/views_lab.py:80
 msgid "Einige racks konnten nicht gesetzt werden"
 msgstr "Could not set several racks"
 
-#: app/views_lab.py:81
+#: app/views_lab.py:84
 msgid "Proben erfolgreich eingetragen"
 msgstr "Samples added successfully"
 
-#: app/views_lab.py:124
+#: app/views_lab.py:127
 msgid "Ergebnisse hinzugefügt: "
 msgstr "Results added: "
 
-#: app/views_lab.py:126
+#: app/views_lab.py:129
 msgid "Keine Proben zu Rack gefunden"
 msgstr "No samples found in rack"
 
-#: app/views_lab.py:153
+#: app/views_lab.py:156
 msgid "Sample nicht gefunde"
 msgstr "Sample not found"
 
-#: app/views_lab.py:157
+#: app/views_lab.py:160
 msgid "Sample rack geupdated"
 msgstr "Sample rack updated"
 
-#: app/views_lab.py:165
+#: app/views_lab.py:168
 msgid "Status geupdated"
 msgstr "Status updated"
 
