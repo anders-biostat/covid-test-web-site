@@ -1,0 +1,26 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% load semanticui %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+<div class="">
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Samples{% endblocktrans %}</h1>
+
+
+    {% if search %}
+    <p>{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</p>
+    {% endif %}
+
+    {% if filter %}
+    <form class="ui form" action="" method="get" class="form form-inline">
+        {% render_form filter.form %}
+        <button class="ui button">filter</button>
+    </form>
+    {% endif %}
+{% render_table table %}
+
+
+</div>
+</div>
+{% endblock %}

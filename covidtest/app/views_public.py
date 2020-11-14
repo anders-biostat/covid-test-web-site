@@ -1,7 +1,7 @@
 import hashlib, binascii
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy
 from .models import Sample, Registration, Event, RSAKey
 from .statuses import SampleStatus

@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 from app.models import Sample, RSAKey, Bag
 from app.statuses import SampleStatus
 
+comment = 'Imported from "papagei" via "read_registrations_file"'
 
 class Command(BaseCommand):
     help = 'Reads results file'
@@ -25,30 +26,36 @@ class Command(BaseCommand):
                 )
 
                 for barcode in batch['codes']:
-                    sample, created = Sample.objects.get_or_create(
+                    sample = Sample.objects.filter(
                         barcode=barcode,
                         access_code=barcode,
-                        rack='',
-                        password_hash='',
-                        bag=bag,
-                    )
-                    if created:
+                    ).first()
+
+                    if not sample:
+                        sample = Sample.objects.create(
+                            barcode=barcode,
+                            access_code=barcode,
+                            rack='',
+                            password_hash='',
+                            bag=bag,
+                        )
                         sample.events.create(
                             status=SampleStatus.INFO.value,
-                            comment='Imported from commandline'
+                            comment=comment
                         )
 
+            not_in_db = []
+            already_registered = []
+            added_registration = []
             for registration in j['registrations']:
                 sample = Sample.objects.filter(barcode=registration['barcode']).first()
                 if sample is None:
-                    print("Sample for registration not in DB: ", registration['barcode'])
-                    pass
+                    not_in_db.append(registration['barcode'])
                 else:
                     is_already_registered = sample.registrations.filter(
                         session_key_encrypted=registration['session_key_encrypted']).first()
                     if is_already_registered:
-                        print("Already in DB: ", registration['barcode'])
-                        pass
+                        already_registered.append(registration['barcode'])
                     else:
                         registration_object = sample.registrations.create(
                             name_encrypted=registration['name_encrypted'],
@@ -62,27 +69,38 @@ class Command(BaseCommand):
                         registration_object.save()
                         sample.password_hash = registration['password_hash']
                         sample.save()
-                        print("Added: ", registration['barcode'])
+                        added_registration.append(registration['barcode'])
+
+            print("Samples for registration not in DB: ", not_in_db)
+            print("Already registered: ", already_registered)
+            print("Added registration: ", already_registered)
+            print()
+
             print('Adding results:')
+
+            updated_status = []
+            for sample in Sample.objects.all():
+                if sample.get_status() == None:
+                    sample.events.create(status='PRINTED', comment=comment)
+                    updated_status.append(sample.barcode)
+            print('Updated status "printed: " ', updated_status)
+
+            not_in_db = []
+            added_result = []
             for result in j['results']:
                 sample = Sample.objects.filter(barcode=result['barcode']).first()
                 if sample is None:
-                    print('Sample not found for result ', result['barcode'])
+                    not_in_db.append(result['barcode'])
                 else:
                     last_event = sample.events.last()
                     if not last_event:
                         print('Last event not found', result['barcode'])
                     else:
-                        if last_event.comment != 'Imported from commandline':
-                            print('Already imported status .. ', result['barcode'])
-                        else:
-                            sample.events.create(
-                                status=result['result'],
-                                comment='Result from commandline'
-                            )
-                            print('Result added ...')
-
-            for sample in Sample.objects.all():
-                if sample.get_status() == None:
-                    sample.events.create(status='PRINTED', comment='Result from commandline')
-                    print('Updated status "printed: " ', sample.barcode)
+                        event, created = sample.events.get_or_create(
+                            status=result['result'],
+                            comment=comment
+                        )
+                        if created:
+                            added_result.append(result['barcode'])
+            print('Result added ... ', added_result)
+            print('Sample not found for result ', not_in_db)
