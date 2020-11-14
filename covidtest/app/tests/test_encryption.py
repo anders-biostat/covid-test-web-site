@@ -1,10 +1,11 @@
+import binascii
+
+from Crypto.Cipher import AES, PKCS1_OAEP
+from Crypto.PublicKey import RSA
 from django.test import TestCase
 
-import binascii
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from ..models import Sample, RSAKey, Bag
-from ..encryption_helper import encrypt_subject_data, rsa_instance_from_key, decrypt_string
+from ..encryption_helper import decrypt_string, encrypt_subject_data, rsa_instance_from_key
+from ..models import Bag, RSAKey, Sample
 
 
 class EncryptionTestCase(TestCase):
@@ -67,7 +68,7 @@ K+MIIE+GFzr1n4DY1a+RhndflMkBYpmv840ps3K4oIOf78evWI4hawwqeWA3yvHI
         key = RSAKey.objects.create(
             key_name="Gesundheitsamt Musterhausen",
             comment="Gesundheitsamt Musterhausen\nMusterstraße 1\n10001 Musterstadt",
-            public_key=self.public_musterhausen
+            public_key=self.public_musterhausen,
         )
 
         bag = Bag.objects.create(
@@ -93,21 +94,25 @@ K+MIIE+GFzr1n4DY1a+RhndflMkBYpmv840ps3K4oIOf78evWI4hawwqeWA3yvHI
         """Return None if no status set"""
         sample = Sample.objects.get(barcode="123456789")
         rsa_instance_alice = rsa_instance_from_key(sample.bag.rsa_key.public_key)
-        doc = encrypt_subject_data(rsa_instance_alice, "Mustermann, Max", "Musterstraße 2, 10001 Musterstadt",
-                                   "+49 1234 56789")
+        doc = encrypt_subject_data(
+            rsa_instance_alice,
+            "Mustermann, Max",
+            "Musterstraße 2, 10001 Musterstadt",
+            "+49 1234 56789",
+        )
 
         private_key = RSA.import_key(self.private_musterhausen, passphrase="123")
         rsa_instance_bob = PKCS1_OAEP.new(private_key)
         aes_instance = AES.new(
-            rsa_instance_bob.decrypt(binascii.a2b_base64(doc['session_key_encrypted'])),
+            rsa_instance_bob.decrypt(binascii.a2b_base64(doc["session_key_encrypted"])),
             AES.MODE_CBC,
-            iv=binascii.a2b_base64(doc['aes_instance_iv'])
+            iv=binascii.a2b_base64(doc["aes_instance_iv"]),
         )
 
-        name = aes_instance.decrypt(binascii.a2b_base64(doc['name_encrypted'])).decode()
-        address = aes_instance.decrypt(binascii.a2b_base64(doc['address_encrypted'])).decode()
-        contact = aes_instance.decrypt(binascii.a2b_base64(doc['contact_encrypted'])).decode()
+        name = aes_instance.decrypt(binascii.a2b_base64(doc["name_encrypted"])).decode()
+        address = aes_instance.decrypt(binascii.a2b_base64(doc["address_encrypted"])).decode()
+        contact = aes_instance.decrypt(binascii.a2b_base64(doc["contact_encrypted"])).decode()
 
-        self.assertEqual(name.rstrip('\x00'), "Mustermann, Max")
-        self.assertEqual(address.rstrip('\x00'), "Musterstraße 2, 10001 Musterstadt")
-        self.assertEqual(contact.rstrip('\x00'), "+49 1234 56789")
+        self.assertEqual(name.rstrip("\x00"), "Mustermann, Max")
+        self.assertEqual(address.rstrip("\x00"), "Musterstraße 2, 10001 Musterstadt")
+        self.assertEqual(contact.rstrip("\x00"), "+49 1234 56789")

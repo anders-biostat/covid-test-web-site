@@ -1,5 +1,6 @@
 from django.test import TestCase
-from ..models import Sample, RSAKey, Bag, Event
+
+from ..models import Bag, Event, RSAKey, Sample
 
 
 class SampleTestCase(TestCase):
@@ -7,7 +8,7 @@ class SampleTestCase(TestCase):
         key = RSAKey.objects.create(
             key_name="Gesundheitsamt Musterhausen",
             comment="Gesundheitsamt Musterhausen\nMusterstraße 1\n10001 Musterstadt",
-            public_key= """-----BEGIN PUBLIC KEY-----
+            public_key="""-----BEGIN PUBLIC KEY-----
 MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAqLmkv8hfSOI2tWS8iTQ4
 iseE0ijNyNq+38T7znLoK3SsxwKVujsIxFjGonp1BO8wxwdzQNVV7XeYS1W0i2ea
 3h7uDJBWbDG31btcZHkcHew8POTBKDK24PcXNZqtNg3i72OxXR+dYYw0VXWAfLdw
@@ -17,7 +18,7 @@ no/m4ZLQYSohOBvVYS4M/jLLp7ZET7SPMJ7zgJmrGHiPh/E+xdGIW+xqp7OV23xW
 qXImn6gi/olvMGJ0IG3nPm0dl3juEIotAqF6F6CqSTXrAkxdLh7XAxighwEKje9L
 pG074ITbdUvg3KeW5cz9tMRJO5Ve/ekplf+e39I6SBX9uwuC06ntWc2i3qh/ljpG
 xkNg2AegGcT+ysU2uleSmkkSxs3VDYhRG8njYfzXchpVAgMBAAE=
------END PUBLIC KEY-----"""
+-----END PUBLIC KEY-----""",
         )
 
         bag = Bag.objects.create(

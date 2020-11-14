@@ -1,7 +1,8 @@
-from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib.auth.models import User
-from ..models import Sample, Registration, Event, RSAKey, Bag
+from django.test import Client, TestCase
+from django.urls import reverse
+
+from ..models import Bag, Event, Registration, RSAKey, Sample
 
 
 class TestRegistration(TestCase):
@@ -19,7 +20,7 @@ class TestRegistration(TestCase):
         qXImn6gi/olvMGJ0IG3nPm0dl3juEIotAqF6F6CqSTXrAkxdLh7XAxighwEKje9L
         pG074ITbdUvg3KeW5cz9tMRJO5Ve/ekplf+e39I6SBX9uwuC06ntWc2i3qh/ljpG
         xkNg2AegGcT+ysU2uleSmkkSxs3VDYhRG8njYfzXchpVAgMBAAE=
-        -----END PUBLIC KEY-----"""
+        -----END PUBLIC KEY-----""",
         )
 
         bag = Bag.objects.create(
@@ -29,76 +30,57 @@ class TestRegistration(TestCase):
         )
 
         self.sample = Sample.objects.create(
-            barcode='1234',
-            access_code='123412341234',
-            rack='abc',
+            barcode="1234",
+            access_code="123412341234",
+            rack="abc",
             password_hash=None,
             bag=bag,
         )
 
     def test_registration_form_no_consent(self):
         form_input = {
-            'access_code': '123412341234',
-            'name': 'Mustermann, Maximilian',
-            'address': 'Musterstraße 1, Musterstadt',
-            'contact': '+49 0123 123 123'
+            "access_code": "123412341234",
+            "name": "Mustermann, Maximilian",
+            "address": "Musterstraße 1, Musterstadt",
+            "contact": "+49 0123 123 123",
         }
 
-        response = self.client.post(reverse('app:register'), form_input)
+        response = self.client.post(reverse("app:register"), form_input)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('app:consent'))
+        self.assertRedirects(response, reverse("app:consent"))
 
     def test_consent_given(self):
-        consent_before = self.client.session.get('consent')
+        consent_before = self.client.session.get("consent")
         form_input = {
-            'terms': 1,
+            "terms": 1,
         }
-        response = self.client.post(reverse('app:consent'), form_input)
-        consent_after = self.client.session.get('consent')
+        response = self.client.post(reverse("app:consent"), form_input)
+        consent_after = self.client.session.get("consent")
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('app:register'))
+        self.assertRedirects(response, reverse("app:register"))
 
         self.assertEqual(consent_before, None)
         self.assertEqual(consent_after, True)
 
-
-
     def test_consent_not_given(self):
-        form_input = {
-        }
-        response = self.client.post(reverse('app:consent'), form_input)
+        form_input = {}
+        response = self.client.post(reverse("app:consent"), form_input)
         self.assertEqual(response.status_code, 200)
 
     def test_registration_with_consent(self):
         session = self.client.session
-        session['consent'] = True
+        session["consent"] = True
         session.save()
 
-        sample = Sample.objects.filter(access_code='123412341234').first()
+        sample = Sample.objects.filter(access_code="123412341234").first()
         self.assertEqual(sample.registrations.count(), 0)
         form_input = {
-            'access_code': '123412341234',
-            'name': 'Mustermann, Maximilian',
-            'address': 'Musterstraße 1, Musterstadt',
-            'contact': '+49 0123 123 123'
+            "access_code": "123412341234",
+            "name": "Mustermann, Maximilian",
+            "address": "Musterstraße 1, Musterstadt",
+            "contact": "+49 0123 123 123",
         }
-        response = self.client.post(reverse('app:register'), form_input)
+        response = self.client.post(reverse("app:register"), form_input)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('app:instructions'))
+        self.assertRedirects(response, reverse("app:instructions"))
         self.assertEqual(sample.registrations.count(), 1)
-
-    def test_registration_with_consent(self):
-        session = self.client.session
-        session['consent'] = True
-        session.save()
-
-        form_input = {
-            'access_code': '123412341234',
-            'name': 'Mustermann, Maximilian',
-            'address': 'Musterstraße 1, Musterstadt',
-            'contact': '+49 0123 123 123'
-        }
-
-        response = self.client.post(reverse('app:register'), form_input)
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('app:instructions'))

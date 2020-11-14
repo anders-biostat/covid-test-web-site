@@ -1,6 +1,8 @@
-import Crypto.PublicKey.RSA
+import binascii
+import hashlib
+
 import Crypto.Cipher.PKCS1_OAEP
-import hashlib, binascii
+import Crypto.PublicKey.RSA
 
 
 def rsa_instance_from_key(public_key_string: str):
@@ -23,13 +25,13 @@ def rsa_instance_from_key(public_key_string: str):
 
 
 def binary_to_ascii(binary):
-    return binascii.b2a_base64(binary, newline=False).decode('ascii')
+    return binascii.b2a_base64(binary, newline=False).decode("ascii")
 
 
 def encrypt_string(string: str, aes_instance, fmt=str):
-    bytes_string = string.encode('utf-8')
+    bytes_string = string.encode("utf-8")
     if len(bytes_string) % 16 != 0:
-        bytes_string += b'\000' * (16 - len(bytes_string) % 16)
+        bytes_string += b"\000" * (16 - len(bytes_string) % 16)
     encrypted_bytes = aes_instance.encrypt(bytes_string)
     encrypted_string = binary_to_ascii(encrypted_bytes)
     if fmt == str:
@@ -42,7 +44,7 @@ def encrypt_string(string: str, aes_instance, fmt=str):
 def decrypt_string(string, aes_instance, fmt=str):
     decoded = binascii.a2b_base64(string)
     decrypted_bytes = aes_instance.decrypt(decoded)
-    decrypted_string = decrypted_bytes.decode('ascii')
+    decrypted_string = decrypted_bytes.decode("ascii")
     if fmt == str:
         return decrypted_string
     if fmt == bytes:
@@ -75,10 +77,10 @@ def encrypt_subject_data(rsa_instance, name, address, contact):
     contact_encrypted = encrypt_string(contact, aes_instance)
 
     return {
-        'name_encrypted': name_encrypted,
-        'address_encrypted': address_encrypted,
-        'contact_encrypted': contact_encrypted,
-        'public_key_fingerprint': rsa_instance.public_key_fingerprint.decode("ascii"),
-        'session_key_encrypted': binary_to_ascii(encrypted_session_key),
-        'aes_instance_iv': binary_to_ascii(aes_instance.iv),
+        "name_encrypted": name_encrypted,
+        "address_encrypted": address_encrypted,
+        "contact_encrypted": contact_encrypted,
+        "public_key_fingerprint": rsa_instance.public_key_fingerprint.decode("ascii"),
+        "session_key_encrypted": binary_to_ascii(encrypted_session_key),
+        "aes_instance_iv": binary_to_ascii(aes_instance.iv),
     }
