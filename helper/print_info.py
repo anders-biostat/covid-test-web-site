@@ -1,19 +1,14 @@
-import binascii
-import getpass
-import hashlib
-import os
-import sys
-
 import requests
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.PublicKey import RSA
+import os, sys
+import getpass, binascii, hashlib
 
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import AES, PKCS1_OAEP
 
 def decrypt_str(aes_instance, string):
     item_encrypted = binascii.a2b_base64(string)
     item_decrypted = aes_instance.decrypt(item_encrypted)
     return item_decrypted.decode()
-
 
 # Main function to decrypt the data
 def decrypt_and_print(registration_data, file, barcode):
@@ -22,21 +17,20 @@ def decrypt_and_print(registration_data, file, barcode):
     # the remainder has to go through Base-64 decodasding
 
     # Check whether we have the right key
-    if registration_data["key_information"]["public_key_fingerprint"] == fingerprint_from_file:
-        session_key_encrypted = binascii.a2b_base64(registration_data["key_information"]["session_key_encrypted"])
-        aes_instance_iv = binascii.a2b_base64(registration_data["key_information"]["aes_instance_iv"])
+    if registration_data['key_information']['public_key_fingerprint'] == fingerprint_from_file:
+        session_key_encrypted = binascii.a2b_base64(registration_data['key_information']['session_key_encrypted'])
+        aes_instance_iv = binascii.a2b_base64(registration_data['key_information']['aes_instance_iv'])
 
         # Decode session key for line, use it to instantiate AES decoder
         aes_instance = AES.new(
             rsa_instance.decrypt(session_key_encrypted),
             AES.MODE_CBC,
-            iv=aes_instance_iv,
-        )
+            iv=aes_instance_iv)
 
         # Decrypt subject data
-        name = decrypt_str(aes_instance, registration_data["name_encrypted"])
-        address = decrypt_str(aes_instance, registration_data["address_encrypted"])
-        contact = decrypt_str(aes_instance, registration_data["contact_encrypted"])
+        name = decrypt_str(aes_instance, registration_data['name_encrypted'])
+        address = decrypt_str(aes_instance, registration_data['address_encrypted'])
+        contact = decrypt_str(aes_instance, registration_data['contact_encrypted'])
 
         print("=" * 80)
         print("Barcode:\t", barcode)
@@ -53,12 +47,8 @@ def load_key(filename):
     try:
         with open(filename, "rb") as f:
             protected_private_key = f.read()
-    except IOError:
-        sys.stderr.write("ERROR: Failed to read private key file 'private.pem (IO-Error)'.\n\n")
-        sys.stderr.write(str(sys.exc_info()[1]) + "\n")
-        sys.exit(1)
-    except FileNotFoundError:
-        sys.stderr.write("ERROR: Failed to read private key file 'private.pem (file does not exist)'.\n\n")
+    except:
+        sys.stderr.write("ERROR: Failed to read private key file 'private.pem'.\n\n")
         sys.stderr.write(str(sys.exc_info()[1]) + "\n")
         sys.exit(1)
 
@@ -68,7 +58,7 @@ def load_key(filename):
     # instantiate RSA
     try:
         private_key = RSA.import_key(protected_private_key, passphrase=passphrase)
-    except ValueError or TypeError or IndexError:
+    except:
         sys.stderr.write("ERROR: Failed to use private key. Maybe the passphrase was wrong?\n\n")
     rsa_instance = PKCS1_OAEP.new(private_key)
 
@@ -107,7 +97,7 @@ if not key_files:
 
 print(key_files)
 
-while retrieve_contact.upper() == "YES":
+while (retrieve_contact.upper() == "YES"):
     code = input("Please enter the barcode: ").strip().upper()
 
     # Print the batch file number and assigned event
@@ -125,15 +115,15 @@ while retrieve_contact.upper() == "YES":
 
         if not result or result == {}:
             print("There is no record available with this barcode. Please check if you typed the barcode correctly.")
-        elif "registrations" not in result or result["registrations"] == []:
+        elif 'registrations' not in result or result['registrations'] == []:
             print("No registrations for barcode found")
         else:
             # Iterating over the stored data
-            for i in range(len(result["registrations"])):
-                registration_data = result["registrations"][i]
+            for i in range(len(result['registrations'])):
+                registration_data = result['registrations'][i]
 
                 # Fingerprint of the encoding key for the line i
-                key_short_fingerprint = registration_data["key_information"]["public_key_fingerprint"][:6]
+                key_short_fingerprint = registration_data['key_information']['public_key_fingerprint'][:6]
 
                 if key_short_fingerprint not in key_files:
                     print("No key found for registration: ", key_short_fingerprint)

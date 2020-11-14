@@ -1,14 +1,8 @@
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets
+from rest_framework import permissions
 
-from .models import Bag, Event, Registration, RSAKey, Sample
-from .serializers import (
-    BagSerializer,
-    EventSerializer,
-    KeySamplesSerializers,
-    RegistrationSerializer,
-    RSAKeySerializer,
-    SampleSerializer,
-)
+from .serializers import SampleSerializer, RSAKeySerializer, RegistrationSerializer, EventSerializer, BagSerializer, KeySamplesSerializers
+from .models import Sample, RSAKey, Registration, Event, Bag
 
 
 class SampleViewSet(viewsets.ModelViewSet):
@@ -17,7 +11,7 @@ class SampleViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):  # with filter for barcode
         queryset = Sample.objects.all()
-        barcode = self.request.query_params.get("barcode", None)
+        barcode = self.request.query_params.get('barcode', None)
         if barcode is not None:
             print("Filtering to barcode:", barcode)
             queryset = queryset.filter(barcode=barcode)

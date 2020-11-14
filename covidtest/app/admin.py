@@ -1,30 +1,26 @@
 from django.contrib import admin
-
-from .models import Bag, Event, Registration, RSAKey, Sample
+from .models import Sample, Registration, Event, RSAKey, Bag
 
 admin.site.site_header = "COVID-19 LAB ADMIN"
 admin.site.site_title = "COVID-19 LAB ADMIN"
 admin.site.index_title = "Admin"
 
 
-class SampleAdmin(admin.ModelAdmin):
-    list_display = ("barcode", "access_code", "rack", "bag", "password_hash")
 
+class SampleAdmin(admin.ModelAdmin):
+    list_display = ('barcode', 'access_code', 'rack', 'bag', 'password_hash')
 
 class RegistrationAdmin(admin.ModelAdmin):
-    list_display = ("sample", "time", "public_key_fingerprint")
-
+    list_display = ('sample', 'time', 'public_key_fingerprint')
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ("sample", "status", "comment", "updated_on", "updated_by")
-
+    list_display = ('sample', 'status', 'comment', 'updated_on', 'updated_by')
 
 class RSAKeyAdmin(admin.ModelAdmin):
-    list_display = ("key_name", "comment")
-
+    list_display = ('key_name', 'comment')
 
 class BagAdmin(admin.ModelAdmin):
-    list_display = ("name", "rsa_key", "comment")
+    list_display = ('name', 'rsa_key', 'comment')
 
 
 admin.site.register(Sample, SampleAdmin)

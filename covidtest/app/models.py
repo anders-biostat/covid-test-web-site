@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-
 from .statuses import SampleStatus
 
 
@@ -16,7 +15,7 @@ class RSAKey(models.Model):
 class Bag(models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField(null=True, blank=True)
-    rsa_key = models.ForeignKey(RSAKey, on_delete=models.DO_NOTHING, related_name="bags")
+    rsa_key = models.ForeignKey(RSAKey, on_delete=models.DO_NOTHING, related_name='bags')
 
 
 class Sample(models.Model):
@@ -24,7 +23,7 @@ class Sample(models.Model):
     access_code = models.CharField(max_length=50)
     rack = models.CharField(max_length=50, blank=True, null=True)
     password_hash = models.CharField(max_length=200, blank=True, null=True)
-    bag = models.ForeignKey(Bag, on_delete=models.DO_NOTHING, related_name="samples")
+    bag = models.ForeignKey(Bag, on_delete=models.DO_NOTHING, related_name='samples')
 
     def set_status(self, status, author=None):
         if type(status) == SampleStatus:
@@ -36,7 +35,7 @@ class Sample(models.Model):
         )
 
     def get_statuses(self):
-        return self.events.order_by("updated_on").exclude(status=SampleStatus.INFO.value)
+        return self.events.order_by('updated_on').exclude(status=SampleStatus.INFO.value)
 
     def get_status(self):
         return self.get_statuses().last()
@@ -46,7 +45,7 @@ class Sample(models.Model):
 
 
 class Registration(models.Model):
-    sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name="registrations")
+    sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name='registrations')
     time = models.DateTimeField(auto_now_add=True, blank=True)
     name_encrypted = models.CharField(max_length=200)
     address_encrypted = models.CharField(max_length=200)
@@ -57,7 +56,7 @@ class Registration(models.Model):
 
 
 class Event(models.Model):
-    sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name="events")
+    sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name='events')
     status = models.CharField(max_length=50)
     comment = models.TextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True)
