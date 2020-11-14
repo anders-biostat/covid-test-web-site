@@ -1,5 +1,7 @@
 import django_tables2 as tables
+
 from .models import Sample
+
 
 class SampleTable(tables.Table):
     bag = tables.Column(empty_values=())
