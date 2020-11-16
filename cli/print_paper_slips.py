@@ -8,9 +8,9 @@ import requests
 
 # from cli.tools.label_template import label_template
 
-# api_url = 'http://127.0.0.1:8000/api/'
-api_url = "http://129.206.245.42:8000/api/"
-
+#api_url = 'http://127.0.0.1:8000/api/'
+#api_url = "http://129.206.245.42:8000/api/"
+api_url = 'https://covidtest-hd.de/api/'
 
 def render_label_template(template, context):
     tokens = re.findall(r"\{\{\W*(.*?)\W*\}\}", template)
@@ -157,13 +157,20 @@ def main_loop(auth, bag_id, key_id, printer):
 
         if r.status_code == 400 and "barcode" in r.json() and "duplicate" in r.json()["barcode"]:
             print("This barcode has already been registered!")
-            print("Do you want to reprint the paper slip for it? (y/n) ", end="")
+            print("Do you want to overwrite the old access code and the reprint")
+            print("the paper slip with a new barcode? (y/n)", end = "")
             yn = input()
 
             if yn.lower().strip() == "y":
                 r = requests.get(api_url + "samples/?barcode=" + tube_barcode, auth=auth)
                 check_response_status(r, 200, "Could not access existing sample tube.")
-                access_code = r.json()[0]["access_code"]
+
+                sample_id = r.json()[0]["id"]
+                r = requests.delete(api_url + "samples/" + str(sample_id) + "/", auth=auth)
+
+                r = requests.post(api_url + "samples/", auth=auth, data={"barcode": tube_barcode, "bag": bag_id})
+                check_response_status(r, 201, "Could not register tube.")
+                access_code = r.json()["access_code"]
             else:
                 print("Skipping barcode %s." % tube_barcode)
                 continue
