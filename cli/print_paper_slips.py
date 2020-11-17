@@ -8,9 +8,9 @@ import requests
 
 # from cli.tools.label_template import label_template
 
-#api_url = 'http://127.0.0.1:8000/api/'
+api_url = 'http://127.0.0.1:8000/api/'
 #api_url = "http://129.206.245.42:8000/api/"
-api_url = 'https://covidtest-hd.de/api/'
+#api_url = 'https://covidtest-hd.de/api/'
 
 def render_label_template(template, context):
     tokens = re.findall(r"\{\{\W*(.*?)\W*\}\}", template)
@@ -148,7 +148,8 @@ def main_loop(auth, bag_id, key_id, printer):
 
         if tube_barcode.lower() == "quit":
             print("Exiting.")
-            sys.exit()
+            break
+            #sys.exit()
 
         if tube_barcode.lower() == "":
             continue
