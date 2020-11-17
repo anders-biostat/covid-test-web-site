@@ -15,18 +15,16 @@ class SampleViewSet(viewsets.ModelViewSet):
     serializer_class = SampleSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):  # with filter for barcode
+    def get_queryset(self):
         queryset = Sample.objects.all()
         barcode = self.request.query_params.get("barcode", None)
-        if barcode is not None:
-            print("Filtering to barcode:", barcode)
+        access_code = self.request.query_params.get("access_code", None)
+        if not barcode and not access_code:
+            return queryset.none()
+        if barcode:
             queryset = queryset.filter(barcode=barcode)
-        else:
-            # get status by access_code
-            access_code = self.request.query_params.get("access_code", None)
-            if access_code is not None:
-                sample = Sample.objects.filter(access_code=access_code)
-                queryset = sample.get_status()
+        if access_code:
+            queryset = queryset.filter(access_code=access_code)
         return queryset
 
 
