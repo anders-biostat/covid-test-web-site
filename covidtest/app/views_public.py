@@ -125,6 +125,7 @@ def results_query(request):
 
             # Checking the status of the sample
             event = sample.get_status()
+            sample.events.create(status="INFO", comment="result queried; status: " + event.status)
             return render_status(request, event)
 
     return render(request, "public/result-query.html", {"form": form})
