@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-11 20:42+0100\n"
-"PO-Revision-Date: 2020-11-11 18:49+0100\n"
+"POT-Creation-Date: 2020-11-16 18:23+0000\n"
+"PO-Revision-Date: 2020-11-16 19:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -18,83 +18,83 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.1\n"
 
-#: app/forms_lab.py:8 app/forms_lab.py:27
+#: app/forms_lab.py:9 app/forms_lab.py:35
 msgid "Barcode"
 msgstr "Barcode"
 
-#: app/forms_lab.py:11
+#: app/forms_lab.py:14
 msgid "Barcodes"
 msgstr "Barcodes"
 
-#: app/forms_lab.py:13 app/forms_lab.py:17
+#: app/forms_lab.py:19 app/forms_lab.py:24
 msgid "Rack (Barcode)"
 msgstr "Rack (barcode)"
 
-#: app/forms_lab.py:19
+#: app/forms_lab.py:26
 msgid "LAMP positiv"
 msgstr "LAMP positive"
 
-#: app/forms_lab.py:20
+#: app/forms_lab.py:27
 msgid "LAMP unklares Ergebnis"
 msgstr "LAMP inconclusive"
 
-#: app/forms_lab.py:21
+#: app/forms_lab.py:28
 msgid "LAMP fehlgeschlagen"
 msgstr "LAMP test failed"
 
-#: app/forms_lab.py:28 app/templates/lab/snippets/sample.html:100
+#: app/forms_lab.py:36 app/templates/lab/snippets/sample.html:100
 msgid "Rack"
 msgstr "Rack"
 
-#: app/forms_lab.py:30
+#: app/forms_lab.py:37
 msgid "Probenstatus"
 msgstr "Sample status"
 
-#: app/forms_lab.py:36
+#: app/forms_lab.py:41
 msgid "Anzahl der batches"
 msgstr "Number of batches"
 
-#: app/forms_lab.py:37
+#: app/forms_lab.py:42
 msgid "Schlüssel"
 msgstr "Key"
 
-#: app/forms_public.py:5
+#: app/forms_public.py:6
 msgid "Einverständnis"
 msgstr "Consent"
 
-#: app/forms_public.py:17
+#: app/forms_public.py:19
 msgid "Zugangscode (beiliegender Zettel):"
 msgstr "Access code (see paper slip):"
 
-#: app/forms_public.py:19 app/forms_public.py:34 app/forms_public.py:41
+#: app/forms_public.py:20 app/forms_public.py:40 app/forms_public.py:50
 msgid "Zugangscode"
 msgstr "Access code"
 
-#: app/forms_public.py:20
+#: app/forms_public.py:23
 msgid "Name (Nachname, Vorname):"
 msgstr "Name (last name, first name):"
 
-#: app/forms_public.py:21
+#: app/forms_public.py:23
 msgid "Nachname, Vorname"
 msgstr "Last name, first name"
 
-#: app/forms_public.py:22
+#: app/forms_public.py:26
 msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"
 msgstr "Address (street, street number, zip code, city):"
 
-#: app/forms_public.py:24
+#: app/forms_public.py:27
 msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
 msgstr "City, street number, zip code, city"
 
-#: app/forms_public.py:25
+#: app/forms_public.py:30
 msgid "Telefonnummer:"
 msgstr "Telephone number:"
 
-#: app/forms_public.py:26
+#: app/forms_public.py:30
 msgid "Telefonnummer"
 msgstr "Telephone number"
 
-#: app/forms_public.py:42
+#: app/forms_public.py:52
 msgid "Passwort"
 msgstr "Password"
 
@@ -344,7 +344,7 @@ msgstr "Samples not checked in successfully:"
 msgid "Barcode nicht in db: "
 msgstr "Barcode not in database: "
 
-#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:123
+#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:135
 msgid "Status konnte nicht gesetzt werden: "
 msgstr "Could not set status: "
 
@@ -353,10 +353,8 @@ msgid "Rack konnte nicht gesetzt werden: "
 msgstr "Could not set rack: "
 
 #: app/templates/lab/sample_list.html:8
-#, fuzzy
-#| msgid "Lab Interface - Home"
 msgid "Lab Interface - Samples"
-msgstr "Lab interface - home"
+msgstr "Lab interface - Samples"
 
 #: app/templates/lab/sample_list.html:12 app/templates/lab/sample_query.html:26
 msgid "Ergebnis für: "
@@ -464,11 +462,11 @@ msgstr "Registrations"
 
 #: app/templates/lab/snippets/sample.html:37
 msgid "Schlüssel-Fingerprint:"
-msgstr "key fingerprint"
+msgstr "Key fingerprint:"
 
 #: app/templates/lab/snippets/sample.html:46
 msgid "Registrierungen entschüsseln"
-msgstr "decrypt registrations"
+msgstr "Decrypt registrations"
 
 #: app/templates/lab/snippets/sample.html:48
 msgid ""
@@ -490,7 +488,7 @@ msgstr "The selected file does not contain a private RSA key."
 
 #: app/templates/lab/snippets/sample.html:57
 msgid "Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format."
-msgstr "The selected file is not a key file in PEM format"
+msgstr "The selected file is not a key file in PEM format."
 
 #: app/templates/lab/snippets/sample.html:60
 msgid "Der geheime Schlüssel passt nicht zu der verschlüsselten Information."
@@ -503,11 +501,11 @@ msgstr "Please select the PEM file with your private RSA key."
 
 #: app/templates/lab/snippets/sample.html:70
 msgid "Geheimschlüssel-Datei (.pem)"
-msgstr "private key file (.pem)"
+msgstr "Private key file (.pem)"
 
 #: app/templates/lab/snippets/sample.html:78
 msgid "Passwort für den Geheimschlüssel (optional)"
-msgstr "passcode for the private key (optional)"
+msgstr "Passcode for the private key (optional)"
 
 #: app/templates/lab/snippets/sample.html:87
 #: app/templates/public/register.html:34
@@ -587,6 +585,15 @@ msgstr "Learn more about the test"
 #: app/templates/public/index.html:22
 msgid "Diese Seite ist verfügbar in:"
 msgstr "This page is available in:"
+
+#: app/templates/public/index.html:39
+msgid ""
+"Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
+"\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg.de</"
+"a>)"
+msgstr ""
+"In case of technical problems, please contact Simon Anders (<a href=\"mailto:"
+"s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg.de</a>)"
 
 #: app/templates/public/information-text.html:3
 msgid "Informationen für Teilnehmer/innen"
@@ -1774,47 +1781,47 @@ msgstr "Register"
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: app/views_lab.py:76
+#: app/views_lab.py:79
 msgid "Einige Barcodes waren nicht in der Datenbank"
 msgstr "A number of barcodes were not found in the database"
 
-#: app/views_lab.py:78
+#: app/views_lab.py:81
 msgid "Einige status konnten nicht gesetzt werden"
 msgstr "Could not set several statuses"
 
-#: app/views_lab.py:80
+#: app/views_lab.py:83
 msgid "Einige racks konnten nicht gesetzt werden"
 msgstr "Could not set several racks"
 
-#: app/views_lab.py:84
+#: app/views_lab.py:87
 msgid "Proben erfolgreich eingetragen"
 msgstr "Samples added successfully"
 
-#: app/views_lab.py:127
+#: app/views_lab.py:140
 msgid "Ergebnisse hinzugefügt: "
 msgstr "Results added: "
 
-#: app/views_lab.py:129
+#: app/views_lab.py:143
 msgid "Keine Proben zu Rack gefunden"
 msgstr "No samples found in rack"
 
-#: app/views_lab.py:156
+#: app/views_lab.py:173
 msgid "Sample nicht gefunde"
 msgstr "Sample not found"
 
-#: app/views_lab.py:160
+#: app/views_lab.py:177
 msgid "Sample rack geupdated"
 msgstr "Sample rack updated"
 
-#: app/views_lab.py:168
+#: app/views_lab.py:185
 msgid "Status geupdated"
 msgstr "Status updated"
 
-#: app/views_public.py:39
+#: app/views_public.py:37
 msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
 msgstr "Please agree to the participation to continue"
 
-#: app/views_public.py:49
+#: app/views_public.py:48
 msgid "Status unbekannt"
 msgstr "Status unknown"
 
@@ -1822,21 +1829,21 @@ msgstr "Status unknown"
 msgid "Kein Status vorhanden (bitte später erneut abrufen)"
 msgstr "Status not available, please try again later"
 
-#: app/views_public.py:84 app/views_public.py:155
+#: app/views_public.py:85 app/views_public.py:163
 msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
 msgstr "Unknown access code. Please try again."
 
-#: app/views_public.py:91
+#: app/views_public.py:96
 msgid ""
 "Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte "
 "registrieren Sie sich vorher."
 msgstr "The access code has not been registered yet. Please register it."
 
-#: app/views_public.py:114
+#: app/views_public.py:121
 msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
 msgstr "The password you entered is not correct. Please try again."
 
-#: app/views_public.py:176
+#: app/views_public.py:182
 msgid "Erfolgreich registriert"
 msgstr "Registration successful"
 
