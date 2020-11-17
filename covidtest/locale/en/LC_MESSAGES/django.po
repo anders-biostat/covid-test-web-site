@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-16 18:23+0000\n"
-"PO-Revision-Date: 2020-11-16 19:24+0100\n"
+"POT-Creation-Date: 2020-11-17 23:05+0000\n"
+"PO-Revision-Date: 2020-11-18 00:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: app/forms_lab.py:9 app/forms_lab.py:35
 msgid "Barcode"
@@ -1278,7 +1278,7 @@ msgstr ""
 "06221 54-6800). </p>\n"
 
 #: app/templates/public/instructions.html:7
-msgid "Anleitung Probenname"
+msgid "Anleitung Probennahme"
 msgstr "How to take a sample"
 
 #: app/templates/public/instructions.html:10
@@ -1307,8 +1307,8 @@ msgid ""
 msgstr "In one or two days you can retrieve your test result on this website."
 
 #: app/templates/public/instructions.html:43
-msgid "Notieren Sie sich dazu Ihren Code und Ihr Passwort."
-msgstr "Please note your code and password."
+msgid "Notieren Sie sich dazu Ihren Zugangscode."
+msgstr "Please note your access code."
 
 #: app/templates/public/pages/contact.html:7
 #: app/templates/public/pages/impressum.html:7
