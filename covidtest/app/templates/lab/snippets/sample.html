@@ -17,6 +17,12 @@
                         <div class="summary">
                             {{ event.updated_on|date:"Y-m-d H:i:s" }}
                             - <span style="color: #ff0000">{{ event.status }}</span>
+                            {% if event.comment %}
+                              : {{event.comment}}
+                            {% endif %}
+                            {% if event.updated_by %}
+                              [ {{event.updated_by}} ]
+                            {% endif %}
                         </div>
                     </div>
                 </div>
