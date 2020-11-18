@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import getpass
 import os
 import re
@@ -9,7 +11,8 @@ import requests
 # from cli.tools.label_template import label_template
 
 # api_url = 'http://127.0.0.1:8000/api/'
-api_url = "http://129.206.245.42:8000/api/"
+#api_url = "http://129.206.245.42:8000/api/"
+api_url = 'https://covidtest-hd.de/api/'
 
 
 def render_label_template(template, context):
@@ -42,7 +45,12 @@ def print_paper_slip(barcode, access_code, bag_id, printer):
             "access_code_url": access_code.replace(" ", ""),
         },
     )
-    lp = subprocess.Popen(["lpr", "-P", printer], stdin=subprocess.PIPE)
+    
+    label_file = open("/home/pi/covid-test-web-site/label_file.txt", "w")
+    label_file.write(label)
+    label_file.close()
+    
+    lp = subprocess.Popen(["lpr", "-p", printer], stdin=subprocess.PIPE)
     lp.stdin.write(label.encode("utf-8"))
     lp.stdin.close()
     pass
