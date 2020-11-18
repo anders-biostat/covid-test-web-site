@@ -29,7 +29,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", cast=str)
 DEBUG = env("DJANGO_DEBUG", cast=bool)
 
 ADD_HOSTS = env("HOSTS", cast=str, default="")
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "129.206.245.42"] + [host.strip() for host in ADD_HOSTS.split(",") if host.strip() != ""]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"] + [host.strip() for host in ADD_HOSTS.split(",") if host.strip() != ""]
 
 # Application definition
 
