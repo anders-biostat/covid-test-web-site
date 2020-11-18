@@ -73,6 +73,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class SampleSerializer(serializers.ModelSerializer):
     registrations = RegistrationSerializer(many=True, read_only=True)
     events = EventSerializer(many=True, read_only=True)
+    get_status = EventSerializer(read_only=True)
 
     barcode = serializers.CharField(
         validators=[validators.UniqueValidator(queryset=Sample.objects.all(), message="duplicate")]
@@ -93,7 +94,17 @@ class SampleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sample
         extra_kwargs = {"access_code": {"required": False}}
-        fields = ["id", "barcode", "access_code", "bag", "rack", "password_hash", "registrations", "events"]
+        fields = [
+            "id",
+            "barcode",
+            "access_code",
+            "bag",
+            "rack",
+            "password_hash",
+            "registrations",
+            "events",
+            "get_status",
+        ]
         optional_fields = ["access_code", "bag", "rack", "password_hash", "registrations", "events"]
 
 
