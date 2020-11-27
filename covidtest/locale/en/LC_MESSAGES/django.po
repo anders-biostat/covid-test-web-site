@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 23:05+0000\n"
-"PO-Revision-Date: 2020-11-18 00:07+0100\n"
+"POT-Creation-Date: 2020-11-27 13:27+0000\n"
+"PO-Revision-Date: 2020-11-27 14:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: app/forms_lab.py:9 app/forms_lab.py:35
 msgid "Barcode"
@@ -42,7 +42,7 @@ msgstr "LAMP inconclusive"
 msgid "LAMP fehlgeschlagen"
 msgstr "LAMP test failed"
 
-#: app/forms_lab.py:36 app/templates/lab/snippets/sample.html:100
+#: app/forms_lab.py:36 app/templates/lab/snippets/sample.html:106
 msgid "Rack"
 msgstr "Rack"
 
@@ -456,19 +456,19 @@ msgstr "Barcode: "
 msgid "Historie"
 msgstr "History"
 
-#: app/templates/lab/snippets/sample.html:27
+#: app/templates/lab/snippets/sample.html:33
 msgid "Registrierungen"
 msgstr "Registrations"
 
-#: app/templates/lab/snippets/sample.html:37
+#: app/templates/lab/snippets/sample.html:43
 msgid "Schlüssel-Fingerprint:"
 msgstr "Key fingerprint:"
 
-#: app/templates/lab/snippets/sample.html:46
+#: app/templates/lab/snippets/sample.html:52
 msgid "Registrierungen entschüsseln"
 msgstr "Decrypt registrations"
 
-#: app/templates/lab/snippets/sample.html:48
+#: app/templates/lab/snippets/sample.html:54
 msgid ""
 "Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal "
 "und geben Sie das Passwort für Ihren privaten Schlüssel an."
@@ -476,51 +476,51 @@ msgstr ""
 "Your secret key is encrypted. Please try again, and provide the passcode for "
 "your private key."
 
-#: app/templates/lab/snippets/sample.html:51
+#: app/templates/lab/snippets/sample.html:57
 msgid ""
 "Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es "
 "noch einmal."
 msgstr "The password for your private key was wrong. Please try again."
 
-#: app/templates/lab/snippets/sample.html:54
+#: app/templates/lab/snippets/sample.html:60
 msgid "Die gewählte Datei enthält keinen RSA-Geheimschlüssel."
 msgstr "The selected file does not contain a private RSA key."
 
-#: app/templates/lab/snippets/sample.html:57
+#: app/templates/lab/snippets/sample.html:63
 msgid "Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format."
 msgstr "The selected file is not a key file in PEM format."
 
-#: app/templates/lab/snippets/sample.html:60
+#: app/templates/lab/snippets/sample.html:66
 msgid "Der geheime Schlüssel passt nicht zu der verschlüsselten Information."
 msgstr "The private key does not match the encrypted information."
 
-#: app/templates/lab/snippets/sample.html:66
-#: app/templates/lab/snippets/sample.html:83
+#: app/templates/lab/snippets/sample.html:72
+#: app/templates/lab/snippets/sample.html:89
 msgid "Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel."
 msgstr "Please select the PEM file with your private RSA key."
 
-#: app/templates/lab/snippets/sample.html:70
+#: app/templates/lab/snippets/sample.html:76
 msgid "Geheimschlüssel-Datei (.pem)"
 msgstr "Private key file (.pem)"
 
-#: app/templates/lab/snippets/sample.html:78
+#: app/templates/lab/snippets/sample.html:84
 msgid "Passwort für den Geheimschlüssel (optional)"
 msgstr "Passcode for the private key (optional)"
 
-#: app/templates/lab/snippets/sample.html:87
+#: app/templates/lab/snippets/sample.html:93
 #: app/templates/public/register.html:34
 msgid "Abbrechen"
 msgstr "Cancel"
 
-#: app/templates/lab/snippets/sample.html:88
+#: app/templates/lab/snippets/sample.html:94
 msgid "Entschlüsseln"
 msgstr "Decrypt"
 
-#: app/templates/lab/snippets/sample.html:96
+#: app/templates/lab/snippets/sample.html:102
 msgid "Status der Probe"
 msgstr "Sample status"
 
-#: app/templates/lab/snippets/sample.html:104
+#: app/templates/lab/snippets/sample.html:110
 msgid "Speichern"
 msgstr "Save"
 
@@ -588,12 +588,11 @@ msgstr "This page is available in:"
 
 #: app/templates/public/index.html:39
 msgid ""
-"Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
-"\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg.de</"
-"a>)"
+"Aktuelle Informationen zu unserem Testprogramm <a href=\"https://www.knoplab."
+"de/blank\">finden Sie hier</a>."
 msgstr ""
-"In case of technical problems, please contact Simon Anders (<a href=\"mailto:"
-"s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg.de</a>)"
+"For updates and news on our test programme, <a href=\"https://www.knoplab.de/"
+"blank\">please click here</a>."
 
 #: app/templates/public/information-text.html:3
 msgid "Informationen für Teilnehmer/innen"
@@ -780,8 +779,8 @@ msgid ""
 "        Heidelberg) nicht zugänglich sind, sondern nur dem Gesundheitsamt, "
 "das den Versuch mit betreut.\n"
 "    </li>\n"
-"    <li> Dann sehen Sie sich bitte <a href=\"https://www.youtube.com/watch?"
-"v=hVniPRMuCjo\">ein kurzes Video</a> an, dass\n"
+"    <li> Dann sehen Sie sich bitte <a href=\"https://player.vimeo.com/"
+"video/480702586\">ein kurzes Video</a> an, dass\n"
 "        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
 "    </li>\n"
 "    <li> Nun spucken Sie in das Teströhrchen, genau wie im Video gezeigt.</"
@@ -819,7 +818,7 @@ msgstr ""
 "              <li> Now please prepare your sample as shown in the video. </"
 "li>\n"
 "              <li> Either post the sample or deliver it to a collection "
-"point. You find the instructions on after submitting your barcode. </li>\n"
+"point. You find the instructions on the web page. </li>\n"
 "            </ol>\n"
 "\n"
 "        <p> <b> Required time: </b> The whole procedure should take 15 to 25 "
@@ -1287,7 +1286,7 @@ msgid ""
 "        was Sie nun machen müssen."
 msgstr "Please watch the following video that shows you what you need to do."
 
-#: app/templates/public/instructions.html:27
+#: app/templates/public/instructions.html:28
 msgid ""
 "\n"
 "        Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten "
@@ -1297,16 +1296,16 @@ msgstr ""
 "\n"
 "After the filling the tube as shown please mail us the sample. "
 
-#: app/templates/public/instructions.html:34
+#: app/templates/public/instructions.html:35
 msgid "Vielen Dank für Ihre Teilnahme."
 msgstr "Thank you for your participation."
 
-#: app/templates/public/instructions.html:36
+#: app/templates/public/instructions.html:37
 msgid ""
 "Morgen oder übermorgen können Sie Ihr Ergebnis auf dieser Seite abfragen."
 msgstr "In one or two days you can retrieve your test result on this website."
 
-#: app/templates/public/instructions.html:43
+#: app/templates/public/instructions.html:44
 msgid "Notieren Sie sich dazu Ihren Zugangscode."
 msgstr "Please note your access code."
 
@@ -1829,7 +1828,7 @@ msgstr "Status unknown"
 msgid "Kein Status vorhanden (bitte später erneut abrufen)"
 msgstr "Status not available, please try again later"
 
-#: app/views_public.py:85 app/views_public.py:163
+#: app/views_public.py:85 app/views_public.py:164
 msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
 msgstr "Unknown access code. Please try again."
 
@@ -1843,9 +1842,18 @@ msgstr "The access code has not been registered yet. Please register it."
 msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
 msgstr "The password you entered is not correct. Please try again."
 
-#: app/views_public.py:182
+#: app/views_public.py:183
 msgid "Erfolgreich registriert"
 msgstr "Registration successful"
+
+#~ msgid ""
+#~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
+#~ "\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg."
+#~ "de</a>)"
+#~ msgstr ""
+#~ "In case of technical problems, please contact Simon Anders (<a href="
+#~ "\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg."
+#~ "de</a>)"
 
 #~ msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
 #~ msgstr "h3 class=“ui dividing header”>Personal data</h3>"
