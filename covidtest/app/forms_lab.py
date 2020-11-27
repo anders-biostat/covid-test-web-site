@@ -12,7 +12,6 @@ class LabQueryForm(forms.Form):
 class LabCheckInForm(forms.Form):
     barcodes = forms.CharField(
         label=_("Barcodes"),
-        max_length=100,
         widget=forms.Textarea(attrs={"autofocus": "autofocus", "placeholder": "Barcode ..."}),
     )
     rack = forms.CharField(
