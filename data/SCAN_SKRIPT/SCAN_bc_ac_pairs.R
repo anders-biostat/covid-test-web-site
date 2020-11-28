@@ -110,7 +110,7 @@ run_script <- function() {
     
     rm(subtab, hh_id, ac, bc)
     flush(con)
-    
+
     yn <- readline_shell("\nPress enter to continue or type 'q' to quit.\n")
     if (yn == "q") {
       message("Thank you and goodbye :)\n")
