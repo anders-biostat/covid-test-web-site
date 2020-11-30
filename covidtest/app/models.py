@@ -17,6 +17,8 @@ class Bag(models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField(null=True, blank=True)
     rsa_key = models.ForeignKey(RSAKey, on_delete=models.DO_NOTHING, related_name="bags")
+    def __str__(self):
+        return "Bag #%d ('%s')" % (self.pk, self.name)
 
 
 class Sample(models.Model):

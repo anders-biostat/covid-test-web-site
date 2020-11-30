@@ -9,14 +9,17 @@ admin.site.index_title = "Admin"
 
 class SampleAdmin(admin.ModelAdmin):
     list_display = ("barcode", "access_code", "rack", "bag", "password_hash")
+    search_fields = ("barcode", "access_code", "rack", "bag__name")
 
 
 class RegistrationAdmin(admin.ModelAdmin):
     list_display = ("sample", "time", "public_key_fingerprint")
+    search_fields = ("sample__barcode",)
 
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ("sample", "status", "comment", "updated_on", "updated_by")
+    search_fields = ("sample__barcode", "status")
 
 
 class RSAKeyAdmin(admin.ModelAdmin):
