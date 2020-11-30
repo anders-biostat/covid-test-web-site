@@ -10,6 +10,7 @@ class Command(BaseCommand):
              choices=[a.name for a in SampleStatus])
         parser.add_argument('barcode_list', type=str, help="text file with barcodes, one barcode per line (or '-' for stdin)" )
         parser.add_argument('--comment', type=str, default="", help="comment to be stored in Event records", dest='comment')
+        parser.add_argument('--rack', type=str, default="", help="set rack", dest='rack')
 
     def handle(self, *args, **options):
         if options['barcode_list'] == "-":
@@ -27,7 +28,14 @@ class Command(BaseCommand):
             elif len(sq) > 1:
                 bc_duplicated.append( bc )
             else:
-                sq.first().events.create(
+                s = sq.first()
+                if options['rack'] != '':
+                    s.rack = options['rack']
+                    s.save()
+                    s.events.create(
+                        status=SampleStatus.INFO.name,
+                        comment='Rack set to "%s".\n(Comment put by set_status script.)' % options['rack'] )
+                s.events.create(
                     status=options['status'],
                     comment=options['comment'] )
                 bc_ok.append( bc )
