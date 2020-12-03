@@ -28,6 +28,7 @@ urlpatterns = [
     path("lab/checkin", views_lab.sample_check_in, name="checkin"),
     path("lab/rack", views_lab.sample_edit_rack, name="edit_rack"),
     path("lab/samples/detail", views_lab.sample_detail, name="query"),
+    path("lab/samples/update_status", views_lab.update_status, name="update_status"),
     path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
     path("lab/dashboard", views_lab.dashboard, name="dashboard"),
     path("version", views_lab.version, name="version"),
