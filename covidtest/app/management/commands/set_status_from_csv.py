@@ -19,6 +19,7 @@ class Command(BaseCommand):
         bc_missing = []
         bc_duplicated = []
         wrong_status = []
+        status_recorder = {}
         for r in csv.DictReader(fin):
             if r['call'] == '':
                 continue
@@ -36,12 +37,14 @@ class Command(BaseCommand):
                 s.events.create(
                     status=r['call'],
                     comment="Rack %s, Well %s\n%s" % (r['rack'], r['well'], options['comment']))
+                status_recorder[r['barcode']] = r['call']
                 bc_ok.append( r['barcode'] )
         if options['csv_file'] != "-":
             fin.close()
         if len(bc_ok) > 0:
-            print("Status %s set for following barcodes:" % r['call'])
-            print("   ", ", ".join(bc_ok))
+            print("THE FOLLOWING STATUS HAVE BEEN SET:")
+            for bc, stat in status_recorder.items():
+                print("Barcode %s  ==>  %s:" % bc, stat)
         else:
             print("Status *not* set for any barcode!")
         if len(bc_missing) > 0:

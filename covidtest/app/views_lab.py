@@ -3,7 +3,7 @@ import os
 import django_filters
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
@@ -15,6 +15,8 @@ from .models import Event, Registration, RSAKey, Sample
 from .serializers import SampleSerializer
 from .statuses import SampleStatus
 from .tables import SampleTable
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 @login_required
@@ -188,6 +190,38 @@ def sample_detail(request):
                 )
 
     return render(request, "lab/sample_query.html", {"form": form, "edit_form": edit_form})
+
+@csrf_exempt
+def update_status(request):
+    if request.method == "POST":
+        body = json.loads(request.body)
+
+        bc = body['barcode'].strip().upper()
+        bc_ok = []
+        bc_missing = []
+        bc_duplicated = []
+        qset = Sample.objects.filter(barcode=bc)
+
+        if len(qset) == 0:
+            bc_missing.append(bc)
+            return HttpResponseBadRequest("Barcode %s not found on the server." % bc)
+        if len(qset) > 1:
+            bc_duplicated.append(bc)
+            return HttpResponseBadRequest("Multiple samples with barcode %s found." % bc)
+        if 'status' not in body:
+            return HttpResponseBadRequest("No sample status provided")
+        if 'comment' not in body:
+            comment = ""
+        else:
+            comment = body['comment']
+
+        sample = qset.first()
+        if 'rack' in body:
+            sample.rack = body['rack']
+            sample.save()
+        sample.events.create(status=body['status'], comment=comment)
+        bc_ok.append(bc)
+        return HttpResponse("Event created successfully", status=201)
 
 
 class SampleFilter(django_filters.FilterSet):
