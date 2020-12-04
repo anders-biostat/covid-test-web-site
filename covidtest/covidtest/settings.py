@@ -183,7 +183,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / '../logs/django',
+            'filename': BASE_DIR / 'django.log',
             'formatter': 'timestamp',
         }
     },
