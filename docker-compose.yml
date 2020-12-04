@@ -45,7 +45,7 @@ services:
     volumes:
       - static_volume:/project/static
       - media_volume:/project/media
-      - ./logs/django:/project/django.log
+      - ./logs_django:/project/logs
     env_file: .env
     links:
       - postgres
