@@ -37,5 +37,8 @@ ADD .git ${APP_ROOT}/.git
 
 RUN chmod 775 -R ${APP_ROOT}
 
+# Add log file
+RUN mkdir -p ${APP_ROOT}/logs
+
 # Command for testing the server
 CMD python ./manage.py collectstatic --noinput
