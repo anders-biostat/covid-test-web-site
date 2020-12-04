@@ -18,6 +18,10 @@ from .tables import SampleTable
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
 
 @login_required
 def index(request):
@@ -191,7 +195,8 @@ def sample_detail(request):
 
     return render(request, "lab/sample_query.html", {"form": form, "edit_form": edit_form})
 
-@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def update_status(request):
     if request.method == "POST":
         body = json.loads(request.body)
