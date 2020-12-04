@@ -44,7 +44,7 @@ class Command(BaseCommand):
         if len(bc_ok) > 0:
             print("THE FOLLOWING STATUS HAVE BEEN SET:")
             for bc, stat in status_recorder.items():
-                print("Barcode %s  ==>  %s:" % bc, stat)
+                print("Barcode %s  ==>  %s:" % (bc, stat))
         else:
             print("Status *not* set for any barcode!")
         if len(bc_missing) > 0:
