@@ -1,4 +1,4 @@
 #!/bin/bash
 
-Rscript SCAN_bc_ac_pairs.R
+Rscript SCAN_bc_ac_pairs.R $1
 bash
