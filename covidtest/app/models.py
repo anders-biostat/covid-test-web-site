@@ -31,11 +31,11 @@ class Sample(models.Model):
     def set_status(self, status, author=None):
         if type(status) == SampleStatus:
             status = status.value
-
         self.events.create(
             status=status,
             updated_by=author,
         )
+        return status
 
     def get_statuses(self):
         return self.events.order_by("updated_on").exclude(status=SampleStatus.INFO.value)
