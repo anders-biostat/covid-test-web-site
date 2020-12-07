@@ -227,6 +227,7 @@ def update_status(request):
         if 'rack' in body:
             sample.rack = body['rack']
             sample.save()
+            comment += ". Rack: " + str(body['rack'])
         sample.events.create(status=body['status'], comment=comment)
         bc_ok.append(bc)
         return HttpResponse("Event created successfully", status=201)
