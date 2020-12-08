@@ -254,3 +254,13 @@ def dashboard(request):
     dashboard_values = {"count_Samples": Sample.objects.filter().count(), "count_wait": count_wait}
 
     return render(request, "lab/dashboard.html", {"dashboard_values": dashboard_values})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def sample_details_snippet(request):
+    sample = Sample.objects.filter(access_code = request.POST.get("access_code")).first()
+    if sample is not None:
+       return render(request, "lab/snippets/sample.html", {"sample": sample})
+    else:
+       return HttpResponse("<i>Access code %s not found</i>" % request.POST.get("access_code"))
