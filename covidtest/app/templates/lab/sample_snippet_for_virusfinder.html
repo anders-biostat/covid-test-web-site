@@ -1,0 +1,20 @@
+<div class="meta">
+    <b>Barcode:</b> {{sample.barcode}}<br>
+    <b>Access code:</b> {{sample.access_code}}<br>
+    <b>Batch:</b> {{ sample.batch }}<br>
+    <b>Rack:</b> {{ sample.rack }}
+</div>
+
+<h6>Historie</h6>
+
+{% for event in sample.events.all %}
+    {{ event.updated_on|date:"Y-m-d H:i:s" }} -
+    {{ event.status }}
+    {% if event.comment %}
+      : {{event.comment}}
+    {% endif %}
+    {% if event.updated_by %}
+      [ {{event.updated_by}} ]
+    {% endif %}
+    <br>
+{% endfor %}
