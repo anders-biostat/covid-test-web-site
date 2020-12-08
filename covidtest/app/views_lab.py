@@ -68,25 +68,27 @@ def sample_check_in(request):
             barcodes_not_in_db = []
             status_not_set = []
             rack_not_set = []
+            successful_barcodes = []
 
             for barcode in barcodes:
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if not sample:
                     barcodes_not_in_db.append(barcode)
                 else:
-                    set_rack = sample.modify(rack=rack)
-                    set_status = sample.set_status(SampleStatus.WAIT)
-                    if not set_rack:
-                        rack_not_set.append(barcode)
+                    sample.rack = rack
+                    sample.save()
+                    set_status = sample.set_status(SampleStatus.WAIT.name)
                     if not set_status:
                         status_not_set.append(barcode)
+                    else:
+                        successful_barcodes.append(barcode)
 
             if len(barcodes_not_in_db) > 0:
                 messages.add_message(request, messages.ERROR, _("Einige Barcodes waren nicht in der Datenbank"))
             if len(status_not_set) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige status konnten nicht gesetzt werden"))
+                messages.add_message(request, messages.ERROR, _("Einige Status konnten nicht gesetzt werden"))
             if len(rack_not_set) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige racks konnten nicht gesetzt werden"))
+                messages.add_message(request, messages.ERROR, _("Einige Racks konnten nicht gesetzt werden"))
             no_success = True
             if len(rack_not_set) == 0 and len(status_not_set) == 0 and len(barcodes_not_in_db) == 0:
                 no_success = False
@@ -102,6 +104,7 @@ def sample_check_in(request):
                     "rack_not_set": rack_not_set,
                     "status_not_set": status_not_set,
                     "no_success": no_success,
+                    "successful_barcodes": successful_barcodes
                 },
             )
     else:
@@ -224,6 +227,7 @@ def update_status(request):
         if 'rack' in body:
             sample.rack = body['rack']
             sample.save()
+            comment += ". Rack: " + str(body['rack'])
         sample.events.create(status=body['status'], comment=comment)
         bc_ok.append(bc)
         return HttpResponse("Event created successfully", status=201)

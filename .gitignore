@@ -36,3 +36,5 @@ logs
 .coverage
 coverage.xml
 .pytest_cache
+.Rproj.user
+
