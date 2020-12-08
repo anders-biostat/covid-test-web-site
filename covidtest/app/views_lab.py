@@ -261,6 +261,6 @@ def dashboard(request):
 def sample_details_snippet(request):
     sample = Sample.objects.filter(access_code = request.POST.get("access_code")).first()
     if sample is not None:
-       return render(request, "lab/snippets/sample.html", {"sample": sample})
+       return render(request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample})
     else:
        return HttpResponse("<i>Access code %s not found</i>" % request.POST.get("access_code"))
