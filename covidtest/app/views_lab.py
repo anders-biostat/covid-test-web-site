@@ -164,6 +164,8 @@ def sample_detail(request):
             if form.is_valid():
                 search = form.cleaned_data["search"].upper().strip()
                 sample = Sample.objects.filter(barcode=search).first()
+                if not sample:
+                    sample = Sample.objects.filter(access_code=search).first()
                 if sample:
                     edit_form = LabProbeEditForm(initial={"rack": sample.rack})
                 return render(
