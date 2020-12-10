@@ -34,6 +34,7 @@ class LabProbeEditForm(forms.Form):
     barcode = forms.CharField(label=_("Barcode"))
     rack = forms.CharField(label=_("Rack"))
     status = forms.ChoiceField(label=_("Probenstatus"), choices=status_choices, widget=forms.Select())
+    comment = forms.CharField(label=_("Kommentar"), max_length=500, required=False)
 
 
 class LabGenerateBarcodeForm(forms.Form):

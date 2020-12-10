@@ -179,21 +179,25 @@ def sample_detail(request):
                 barcode = edit_form.cleaned_data["barcode"].upper().strip()
                 status = edit_form.cleaned_data["status"].upper().strip()
                 rack = edit_form.cleaned_data["rack"].upper().strip()
+                comment =  edit_form.cleaned_data["comment"].upper().strip()
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
                     messages.add_message(request, messages.ERROR, _("Sample nicht gefunde"))
                 else:
-                    rack_changed = sample.modify(rack=rack)
+                    rack_changed = sample.rack != rack
                     if rack_changed:
+                        sample.rack = rack
+                        sample.save()
                         messages.add_message(request, messages.SUCCESS, _("Sample rack geupdated"))
                     if status != "-":
                         status = SampleStatus[status]
                         event = Event(
+                            sample=sample,
                             status=status.value,
+                            comment=comment
                         )
-                        event_added = sample.modify(push__events=event)
-                        if event_added:
-                            messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
+                        event.save()
+                        messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
                 return render(
                     request, "lab/sample_query.html", {"form": form, "edit_form": edit_form, "sample": sample}
                 )
