@@ -107,6 +107,10 @@
             <label>{% blocktrans %}Rack{% endblocktrans %}</label>
             {{ edit_form.rack }}
         </div>
+        <div class="field">
+            <label>{% blocktrans %}Kommentar{% endblocktrans %}</label>
+            {{ edit_form.comment }}
+        </div>
         <input name="barcode" value="{{ sample.barcode }}" hidden>
         <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
     </form>
