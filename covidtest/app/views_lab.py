@@ -167,7 +167,7 @@ def sample_detail(request):
                 if not sample:
                     sample = Sample.objects.filter(access_code=search).first()
                 if sample:
-                    edit_form = LabProbeEditForm(initial={"rack": sample.rack})
+                    edit_form = LabProbeEditForm(initial={"rack": sample.rack, "comment": "Status changed in lab interface"})
                 return render(
                     request,
                     "lab/sample_query.html",
@@ -186,8 +186,14 @@ def sample_detail(request):
                 else:
                     rack_changed = sample.rack != rack
                     if rack_changed:
+                        event = Event(
+                            sample=sample,
+                            status=SampleStatus.INFO,
+                            comment="Rack changed in lab interface from "+str(sample.rack)+" to "+str(rack)+"."
+                        )
                         sample.rack = rack
                         sample.save()
+                        event.save()
                         messages.add_message(request, messages.SUCCESS, _("Sample rack geupdated"))
                     if status != "-":
                         status = SampleStatus[status]
