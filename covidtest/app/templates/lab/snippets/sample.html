@@ -223,7 +223,7 @@
             decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
         })
         
-        var output = decipher.output.toString();
+        var output = decipher.output.data;
 
         var result = {};
         var i = 0;
@@ -232,6 +232,7 @@
                 .slice(i, i + data[el + "_encrypted_decoded"].length)
                 .replace(/\0/g, '');
             i += data[el + "_encrypted_decoded"].length;
+            result[el] = forge.util.decodeUtf8(result[el])
         });
 
         return result;

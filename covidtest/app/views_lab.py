@@ -179,7 +179,7 @@ def sample_detail(request):
                 barcode = edit_form.cleaned_data["barcode"].upper().strip()
                 status = edit_form.cleaned_data["status"].upper().strip()
                 rack = edit_form.cleaned_data["rack"].upper().strip()
-                comment =  edit_form.cleaned_data["comment"].upper().strip()
+                comment =  edit_form.cleaned_data["comment"].strip()
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
                     messages.add_message(request, messages.ERROR, _("Sample nicht gefunde"))
