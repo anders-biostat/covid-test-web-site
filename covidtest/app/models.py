@@ -28,12 +28,13 @@ class Sample(models.Model):
     password_hash = models.CharField(max_length=200, blank=True, null=True)
     bag = models.ForeignKey(Bag, on_delete=models.DO_NOTHING, related_name="samples")
 
-    def set_status(self, status, author=None):
+    def set_status(self, status, comment=None, author=None):
         if type(status) == SampleStatus:
             status = status.value
         self.events.create(
             status=status,
             updated_by=author,
+            comment=comment
         )
         return status
 
