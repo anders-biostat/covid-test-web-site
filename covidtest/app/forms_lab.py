@@ -19,7 +19,7 @@ class LabCheckInForm(forms.Form):
     )
     status = forms.ChoiceField(
         label="Status",
-        choices=[(s, s.name) for s in SampleStatus]
+        choices=[(s.name, s.name) for s in SampleStatus]
     )
     comment = forms.CharField(
         label="Here you can add a comment", widget=forms.TextInput(attrs={"placeholder": "Add a comment ..."})
