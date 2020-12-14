@@ -75,12 +75,16 @@
         {% endblocktrans%}
     </p>
 
+    <p>
+        Hier kann ein Status für Barcodes gesetzt werden.
+    </p>
+
     <form style="margin-bottom: 20px;" action="{% url 'app:checkin' %}" method="post" class="ui form">
         {% csrf_token %}
 
 
         <div class="ui large form">
-            <div class="two fields">
+            <div class="three fields">
                 <div class="required field">
                     <label>{{ form.barcodes.label }}</label>
                     {{ form.barcodes }}
@@ -89,7 +93,15 @@
                     <label>{{ form.rack.label }}</label>
                     {{ form.rack }}
                 </div>
+                <div class="required field">
+                    <label>Status</label>
+                    {{ form.status }}
+                </div>
             </div>
+            <div>
+                {{ form.comment }}
+            </div>
+            <br>
             <button class="ui button" type="submit">{% blocktrans %}Abschicken{% endblocktrans %}</button>
         </div>
     </form>

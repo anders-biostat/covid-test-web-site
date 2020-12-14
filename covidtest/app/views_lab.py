@@ -64,6 +64,8 @@ def sample_check_in(request):
         if form.is_valid():
             barcodes = [x.strip().upper() for x in form.data["barcodes"].split()]
             rack = form.cleaned_data["rack"].strip().upper()
+            status = form.data["status"]
+            comment = form.data["comment"]
 
             barcodes_not_in_db = []
             status_not_set = []
@@ -77,7 +79,7 @@ def sample_check_in(request):
                 else:
                     sample.rack = rack
                     sample.save()
-                    set_status = sample.set_status(SampleStatus.WAIT.name)
+                    set_status = sample.set_status(status, comment=comment)
                     if not set_status:
                         status_not_set.append(barcode)
                     else:

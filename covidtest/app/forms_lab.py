@@ -17,6 +17,13 @@ class LabCheckInForm(forms.Form):
     rack = forms.CharField(
         label=_("Rack (Barcode)"), max_length=100, widget=forms.TextInput(attrs={"placeholder": "Rack ..."})
     )
+    status = forms.ChoiceField(
+        label="Status",
+        choices=[(s, s.name) for s in SampleStatus]
+    )
+    comment = forms.CharField(
+        label="Here you can add a comment", widget=forms.TextInput(attrs={"placeholder": "Add a comment ..."})
+    )
 
 
 class LabRackResultsForm(forms.Form):
