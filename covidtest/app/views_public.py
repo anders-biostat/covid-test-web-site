@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy as _
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
-from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy
+from .forms_public import AgeForm, ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy
 from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
 
@@ -24,6 +24,13 @@ def index(request):
 def instructions(request):
     return render(request, "public/instructions.html")
 
+def age(request):
+    form = AgeForm()
+    if request.method == "POST":
+        form = AgeForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    return render(request, "public/age.html", {"form": form})
 
 def consent(request):
     form = ConsentForm()

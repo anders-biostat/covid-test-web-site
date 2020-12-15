@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schnelltest der Universität Heidelberg</title>
+</head>
+<body>
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<form action="{% url 'app:age' %}" method="post" class="ui form">
+    {% csrf_token %}
+    <div class="required field">
+        <label>{{ form.age.label }}</label>
+        {{ form.age }}
+    </div>
+    <div class="field" style="text-align: center">
+        <a href="{% url 'app:index' %}" id="closeform" class="ui primary button">
+            {% blocktrans %}Zurück{% endblocktrans %}
+        </a>
+        <button type="submit" id="showForm" class="ui primary button">
+            {% blocktrans %}Weiter{% endblocktrans %}
+        </button>
+    </div>
+</form>
+
+
+</body>
+</html>
+
+{% endblock %}

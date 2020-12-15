@@ -17,6 +17,7 @@ router.register(r"keysamples", views_api.KeySamplesViewSet)
 
 urlpatterns = [
     path("", views_public.index, name="index"),
+    path("age", views_public.age, name="age"),
     path("consent", views_public.consent, name="consent"),
     path("results", views_public.results_query, name="results_query"),
     path("instructions", views_public.instructions, name="instructions"),

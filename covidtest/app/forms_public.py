@@ -2,6 +2,18 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 
+class AgeForm(forms.Form):
+    age = forms.ChoiceField(
+        label=_("Bitte geben Sie Ihre Altersgruppe an:"),
+        choices = [
+            ('too_young', "Jünger als 7 Jahre"),
+            ('child', "7-11 Jahre"),
+            ('teenager', "12-17 Jahre"),
+            ('adult', "18 Jahre oder älter")
+        ]
+    )
+
+
 class ConsentForm(forms.Form):
     terms = forms.BooleanField(label=_("Einverständnis"), required=True)
 
