@@ -5,7 +5,7 @@
 {% block content %}
 <h1 class="ui header centered">{% blocktrans %}Teilnahme am Coronavirus-Test{% endblocktrans %}</h1>
 <div class="consent-box">
-    {% include 'public/information-text.html' %}
+    {% include template_name %}
 </div>
 
 <form class="ui form" action="{% url 'app:consent' %}" method="POST">
