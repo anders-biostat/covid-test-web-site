@@ -4,11 +4,13 @@ import hashlib
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy as _
+from django.views import View
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
-from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy
+from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy, AgeGroupForm
 from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
+from .views_consent import has_consent
 
 
 def index(request):
@@ -23,21 +25,6 @@ def index(request):
 
 def instructions(request):
     return render(request, "public/instructions.html")
-
-
-def consent(request):
-    form = ConsentForm()
-    if request.method == "POST":
-        form = ConsentForm(request.POST)
-        if form.is_valid():
-            if form.cleaned_data["terms"]:
-                request.session["consent"] = True
-                return redirect("app:register")
-            messages.add_message(
-                request, messages.WARNING, _("Sie müssen erst der Teilnahme zustimmen, um fortzufahren")
-            )
-            return render(request, "public/consent.html", {"form": form})
-    return render(request, "public/consent.html", {"form": form})
 
 
 def render_status(request, event):
@@ -146,7 +133,7 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    if not request.session.get("consent"):
+    if not has_consent(request.session):
         return redirect("app:consent")
 
     request.session["access_code"] = None

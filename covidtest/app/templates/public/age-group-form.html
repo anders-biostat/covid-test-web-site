@@ -1,0 +1,23 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<form class="ui form" action="{% url 'app:consent_age' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="ui inline field">
+        <div for="ageInput" class="ui right pointing label">
+            {% blocktrans %} Ihre Alt {% endblocktrans %}
+        </div>
+        <input type="text" name="age" id="ageInput" placeholder="">
+    </div>
+    <div class="field" style="text-align: center">
+        <a href="{% url 'app:index' %}" id="closeform" class="ui primary button">
+            {% blocktrans %}Zurück{% endblocktrans %}</a>
+        <button type="submit" id="submitButton" class="ui primary button">
+            {% blocktrans %}Weiter{% endblocktrans %}
+        </button>
+    </div>
+</form>
+{% endblock %}

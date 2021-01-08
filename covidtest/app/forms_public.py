@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ConsentForm(forms.Form):
+    consent_type = forms.CharField(widget=forms.HiddenInput())
     terms = forms.BooleanField(label=_("Einverständnis"), required=True)
 
 class AgeGroupForm(forms.Form):

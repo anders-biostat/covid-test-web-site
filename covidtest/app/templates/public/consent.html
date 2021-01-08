@@ -10,7 +10,7 @@
 
 <form class="ui form" action="" method="POST">
     {% csrf_token %}
-
+    {{ form.consent_type }}
     <div style="text-align: center;" class="field">
         <div class="ui checkbox">
             <input

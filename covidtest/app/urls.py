@@ -2,7 +2,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from rest_framework import routers
 
-from . import views_api, views_lab, views_public
+from . import views_api, views_lab, views_public, views_consent
 
 app_name = "app"
 
@@ -17,7 +17,8 @@ router.register(r"keysamples", views_api.KeySamplesViewSet)
 
 urlpatterns = [
     path("", views_public.index, name="index"),
-    path("consent", views_public.consent, name="consent"),
+    path("consent/age/", views_consent.AgeGroupFormView.as_view(), name="consent_age"),
+    path("consent/", views_consent.ConsentView.as_view(), name="consent"),
     path("results", views_public.results_query, name="results_query"),
     path("instructions", views_public.instructions, name="instructions"),
     path("information", views_public.information, name="information"),
