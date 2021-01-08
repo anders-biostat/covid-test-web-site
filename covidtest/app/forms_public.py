@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 class ConsentForm(forms.Form):
     terms = forms.BooleanField(label=_("Einverständnis"), required=True)
 
+class AgeGroupForm(forms.Form):
+    age = forms.IntegerField(required=True)
 
 class RegistrationForm(forms.Form):
     class Meta:
