@@ -37,50 +37,111 @@ class TestRegistration(TestCase):
             bag=bag,
         )
 
-    def test_registration_form_no_consent(self):
-        form_input = {
+    @classmethod
+    def setUpTestData(cls):
+        cls.form_input = {
             "access_code": "123412341234",
             "name": "Mustermann, Maximilian",
             "address": "Musterstraße 1, Musterstadt",
             "contact": "+49 0123 123 123",
         }
 
-        response = self.client.post(reverse("app:register"), form_input)
+    def test_registration_form_no_consent(self):
+        response = self.client.post(reverse("app:register"), self.form_input)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("app:consent"))
+        self.assertRedirects(response, reverse("app:consent"), target_status_code=302)
 
-    def test_consent_given(self):
-        consent_before = self.client.session.get("consent")
-        form_input = {
-            "terms": 1,
-        }
-        response = self.client.post(reverse("app:consent"), form_input)
-        consent_after = self.client.session.get("consent")
+    def test_redirects_to_age_if_no_age(self):
+        response = self.client.get(reverse("app:consent"))
+        self.assertRedirects(response, reverse("app:consent_age"))
+
+    def test_age_is_set(self):
+        age = 12
+        response = self.client.post(reverse("app:consent_age"), dict(age=age))
+        self.assertEqual(self.client.session["age"], age)
+
+    def test_success_adult_register(self):
+        session = self.client.session
+        session["age"] = 20
+        session["consent"] = ["consent_adult"]
+        session.save()
+        response = self.client.post(reverse("app:consent"), dict(terms=True))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
-        self.assertEqual(consent_before, None)
-        self.assertEqual(consent_after, True)
-
-    def test_consent_not_given(self):
-        form_input = {}
-        response = self.client.post(reverse("app:consent"), form_input)
-        self.assertEqual(response.status_code, 200)
-
-    def test_registration_with_consent(self):
+    def test_success_teenager_register(self):
         session = self.client.session
-        session["consent"] = True
+        session["age"] = 14
         session.save()
-
-        sample = Sample.objects.filter(access_code="123412341234").first()
-        self.assertEqual(sample.registrations.count(), 0)
-        form_input = {
-            "access_code": "123412341234",
-            "name": "Mustermann, Maximilian",
-            "address": "Musterstraße 1, Musterstadt",
-            "contact": "+49 0123 123 123",
-        }
-        response = self.client.post(reverse("app:register"), form_input)
+        response = self.client.get(reverse("app:consent"))
+        ctx = response.context
+        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
+        self.assertEqual(ctx["template_name"], "public/information-parents.html")
+        response = self.client.post(reverse("app:consent"),
+                                    dict(terms=True, consent_type="consent_parent"))
+        ctx = response.context
+        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_teenager")
+        self.assertEqual(ctx["template_name"], "public/information-teenager.html")
+        session["consent"] = ["consent_parent"]
+        session.save()
+        response = self.client.post(reverse("app:consent"),
+                                    dict(terms=True, consent_type="consent_teenager"))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("app:instructions"))
-        self.assertEqual(sample.registrations.count(), 1)
+        self.assertRedirects(response, reverse("app:register"))
+
+    def test_success_child_register(self):
+        session = self.client.session
+        session["age"] = 7
+        session.save()
+        response = self.client.get(reverse("app:consent"))
+        ctx = response.context
+        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
+        self.assertEqual(ctx["template_name"], "public/information-parents.html")
+        response = self.client.post(reverse("app:consent"),
+                                    dict(terms=True, consent_type="consent_parent"))
+        ctx = response.context
+        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_child")
+        self.assertEqual(ctx["template_name"], "public/information-child.html")
+        session["consent"] = ["consent_parent"]
+        session.save()
+        response = self.client.post(reverse("app:consent"),
+                                    dict(terms=True, consent_type="consent_child"))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("app:register"))
+
+    def test_success_baby_register(self):
+        session = self.client.session
+        session["age"] = 1
+        session.save()
+        response = self.client.get(reverse("app:consent"))
+        ctx = response.context
+        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
+        self.assertEqual(ctx["template_name"], "public/information-parents.html")
+        response = self.client.post(reverse("app:consent"),
+                                    dict(terms=True, consent_type="consent_parent"))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("app:register"))
+
+
+    # def test_consent_not_given(self):
+    #     form_input = {}
+    #     response = self.client.post(reverse("app:consent"), form_input)
+    #     self.assertEqual(response.status_code, 200)
+
+    # def test_registration_with_consent(self):
+    #     session = self.client.session
+    #     session["consent"] = True
+    #     session.save()
+
+    #     sample = Sample.objects.filter(access_code="123412341234").first()
+    #     self.assertEqual(sample.registrations.count(), 0)
+    #     form_input = {
+    #         "access_code": "123412341234",
+    #         "name": "Mustermann, Maximilian",
+    #         "address": "Musterstraße 1, Musterstadt",
+    #         "contact": "+49 0123 123 123",
+    #     }
+    #     response = self.client.post(reverse("app:register"), form_input)
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertRedirects(response, reverse("app:instructions"))
+    #     self.assertEqual(sample.registrations.count(), 1)
