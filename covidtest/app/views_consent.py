@@ -97,7 +97,7 @@ class ConsentView(View):
             messages.add_message(
                 request, messages.WARNING, _("Sie müssen erst der Teilnahme zustimmen, um fortzufahren")
             )
-        return self.dispatch_consent(request, form)
+        return self.dispatch_consent(request)
 
     def next_consent(self, session_consents, consent_forms):
         "None if no any consents needed, info template path otherwise"
