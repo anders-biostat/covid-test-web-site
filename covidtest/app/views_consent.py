@@ -63,7 +63,7 @@ def has_consent(session):
     age = get_age(session)
     wizard = get_age_wizard(age)
     if wizard:
-        return all([cons in wizard.keys() for cons in consent])
+        return all([cons in consent for cons in wizard.keys()])
     return False
 
 
