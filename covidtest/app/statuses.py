@@ -12,3 +12,4 @@ class SampleStatus(Enum):
     PCRNEG = "PCRNEG"
     UNDEF = "UNDEF"
     INFO = "INFO"
+    MESSAGE = "MESSAGE"
