@@ -94,9 +94,9 @@ class ConsentView(View):
                 if consent_type in get_age_wizard(age):
                     request.session = self.add_consent(request.session, consent_type)
                 return self.dispatch_consent(request)
-            messages.add_message(
-                request, messages.WARNING, _("Sie müssen erst der Teilnahme zustimmen, um fortzufahren")
-            )
+        messages.add_message(
+            request, messages.WARNING, _("Sie müssen erst der Teilnahme zustimmen, um fortzufahren")
+        )
         return self.dispatch_consent(request)
 
     def next_consent(self, session_consents, consent_forms):
