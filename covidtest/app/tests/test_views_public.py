@@ -123,10 +123,17 @@ class TestRegistration(TestCase):
         self.assertRedirects(response, reverse("app:register"))
 
 
-    # def test_consent_not_given(self):
-    #     form_input = {}
-    #     response = self.client.post(reverse("app:consent"), form_input)
-    #     self.assertEqual(response.status_code, 200)
+    def test_consent_not_given(self):
+        session = self.client.session
+        session["age"] = 1
+        session.save()
+        ## no consent, show message, same parent form
+        response = self.client.post(reverse("app:consent"),
+                                    dict(consent_type="consent_parent"))
+        ctx = response.context
+        self.assertEqual(len(ctx["messages"]), 1)
+        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
+        self.assertEqual(ctx["template_name"], "public/information-parents.html")
 
     # def test_registration_with_consent(self):
     #     session = self.client.session
