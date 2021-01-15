@@ -135,20 +135,15 @@ class TestRegistration(TestCase):
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
         self.assertEqual(ctx["template_name"], "public/information-parents.html")
 
-    # def test_registration_with_consent(self):
-    #     session = self.client.session
-    #     session["consent"] = True
-    #     session.save()
+    def test_registration_with_consent(self):
+        session = self.client.session
+        session["age"] = 20
+        session["consent"] = ["consent_adult"]
+        session.save()
 
-    #     sample = Sample.objects.filter(access_code="123412341234").first()
-    #     self.assertEqual(sample.registrations.count(), 0)
-    #     form_input = {
-    #         "access_code": "123412341234",
-    #         "name": "Mustermann, Maximilian",
-    #         "address": "Musterstraße 1, Musterstadt",
-    #         "contact": "+49 0123 123 123",
-    #     }
-    #     response = self.client.post(reverse("app:register"), form_input)
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertRedirects(response, reverse("app:instructions"))
-    #     self.assertEqual(sample.registrations.count(), 1)
+        sample = Sample.objects.filter(access_code=self.form_input["access_code"]).first()
+        self.assertEqual(sample.registrations.count(), 0)
+        response = self.client.post(reverse("app:register"), self.form_input)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("app:instructions"))
+        self.assertEqual(sample.registrations.count(), 1)
