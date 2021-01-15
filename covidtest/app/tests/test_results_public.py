@@ -32,7 +32,7 @@ class TestRegistration(TestCase):
 
         self.sample = Sample.objects.create(
             barcode="1234",
-            access_code="123412341234",
+            access_code=self.regforminput["access_code"],
             rack="abc",
             password_hash=None,
             bag=bag,
@@ -45,37 +45,37 @@ class TestRegistration(TestCase):
         "contact": "+49 0123 123 123",
     }
 
+    def query_access_code(self):
+        return self.client.post(
+            reverse("app:results_query"), {"access_code": self.regforminput["access_code"]}, follow=True
+        )
+
+    def register_access_code(self):
+        session = self.client.session
+        session["age"] = 20
+        session["consent"] = "consent_adult"
+        session.save()
+        response = self.client.post(reverse("app:register"), self.regforminput)
+
     def test_result_negative_unregistered(self):
-
         self.sample.set_status(SampleStatus.LAMPNEG)
-
-        response = self.client.post(reverse("app:results_query"), {"access_code": "123412341234"}, follow=True)
-        self.assertRedirects(response, reverse("app:consent"))
+        response = self.query_access_code()
+        self.assertRedirects(response, reverse("app:consent_age"))
         self.assertContains(response, "wurde noch nicht registriert")
 
     def test_result_negative(self):
         self.sample.set_status(SampleStatus.LAMPNEG)
 
-        response = self.client.get(reverse("app:register"))
-        self.assertRedirects(response, reverse("app:consent"))
-        response = self.client.post(reverse("app:consent"), {"terms": True})
-        self.assertRedirects(response, reverse("app:register"))
-        response = self.client.post(reverse("app:register"), self.regforminput)
-
-        response = self.client.post(reverse("app:results_query"), {"access_code": "123412341234"}, follow=True)
+        self.register_access_code()
+        response = self.query_access_code()
         self.assertContains(response, "nicht </strong> nachgewiesen")
 
     def test_result_negative_after_PCR(self):
         self.sample.set_status(SampleStatus.LAMPPOS)
         self.sample.set_status(SampleStatus.PCRNEG)
 
-        response = self.client.get(reverse("app:register"))
-        self.assertRedirects(response, reverse("app:consent"))
-        response = self.client.post(reverse("app:consent"), {"terms": True})
-        self.assertRedirects(response, reverse("app:register"))
-        response = self.client.post(reverse("app:register"), self.regforminput)
-
-        response = self.client.post(reverse("app:results_query"), {"access_code": "123412341234"}, follow=True)
+        self.register_access_code()
+        response = self.query_access_code()
         self.assertContains(response, "nicht </strong> nachgewiesen")
         self.assertTemplateUsed(response, "public/pages/test-PCRNEG.html")
 
@@ -83,11 +83,6 @@ class TestRegistration(TestCase):
         self.sample.set_status(SampleStatus.LAMPPOS)
         self.sample.set_status(SampleStatus.PCRPOS)
 
-        response = self.client.get(reverse("app:register"))
-        self.assertRedirects(response, reverse("app:consent"))
-        response = self.client.post(reverse("app:consent"), {"terms": True})
-        self.assertRedirects(response, reverse("app:register"))
-        response = self.client.post(reverse("app:register"), self.regforminput)
-
-        response = self.client.post(reverse("app:results_query"), {"access_code": "123412341234"}, follow=True)
+        self.register_access_code()
+        response = self.query_access_code()
         self.assertTemplateUsed(response, "public/pages/test-PCRPOS.html")
