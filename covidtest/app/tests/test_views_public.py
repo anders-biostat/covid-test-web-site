@@ -77,15 +77,13 @@ class TestRegistration(TestCase):
         ctx = response.context
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
         self.assertEqual(ctx["template_name"], "public/information-parents.html")
-        response = self.client.post(reverse("app:consent"),
-                                    dict(terms=True, consent_type="consent_parent"))
+        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_parent"))
         ctx = response.context
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_teenager")
         self.assertEqual(ctx["template_name"], "public/information-teenager.html")
         session["consent"] = ["consent_parent"]
         session.save()
-        response = self.client.post(reverse("app:consent"),
-                                    dict(terms=True, consent_type="consent_teenager"))
+        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_teenager"))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
@@ -97,15 +95,13 @@ class TestRegistration(TestCase):
         ctx = response.context
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
         self.assertEqual(ctx["template_name"], "public/information-parents.html")
-        response = self.client.post(reverse("app:consent"),
-                                    dict(terms=True, consent_type="consent_parent"))
+        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_parent"))
         ctx = response.context
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_child")
         self.assertEqual(ctx["template_name"], "public/information-child.html")
         session["consent"] = ["consent_parent"]
         session.save()
-        response = self.client.post(reverse("app:consent"),
-                                    dict(terms=True, consent_type="consent_child"))
+        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_child"))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
@@ -117,19 +113,16 @@ class TestRegistration(TestCase):
         ctx = response.context
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
         self.assertEqual(ctx["template_name"], "public/information-parents.html")
-        response = self.client.post(reverse("app:consent"),
-                                    dict(terms=True, consent_type="consent_parent"))
+        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_parent"))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
-
 
     def test_consent_not_given(self):
         session = self.client.session
         session["age"] = 1
         session.save()
         ## no consent, show message, same parent form
-        response = self.client.post(reverse("app:consent"),
-                                    dict(consent_type="consent_parent"))
+        response = self.client.post(reverse("app:consent"), dict(consent_type="consent_parent"))
         ctx = response.context
         self.assertEqual(len(ctx["messages"]), 1)
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
