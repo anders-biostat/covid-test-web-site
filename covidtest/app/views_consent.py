@@ -16,13 +16,15 @@ class AgeGroupFormView(View):
         form = AgeGroupForm(request.POST)
         if form.is_valid():
             age = form.cleaned_data["age"]
-            if self.age_is_valid(age):
+            if age_is_valid(age):
                 request.session["age"] = age
                 return redirect("app:consent")
+
+        messages.add_message(request, messages.ERROR, _("Der Teilnehmer muss mindestens 7 Jarhe alt sein."))
         return render(request, "public/age-group-form.html")
 
-    def age_is_valid(self, age):
-        return age > 0
+def age_is_valid(age):
+    return age >= 7
 
 
 def get_age_wizard(age):
@@ -41,8 +43,8 @@ def get_age_wizard(age):
             consent_parent="public/information-parents.html",
             consent_child="public/information-child.html",
         )
-    if age > 0:
-        return dict(consent_parent="public/information-parents.html")
+    if age < 7:
+        raise ValueError
 
 
 def get_consent(session):

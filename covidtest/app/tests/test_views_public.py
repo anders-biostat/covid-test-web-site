@@ -60,6 +60,12 @@ class TestRegistration(TestCase):
         response = self.client.post(reverse("app:consent_age"), dict(age=age))
         self.assertEqual(self.client.session["age"], age)
 
+    def test_age_valid(self):
+        age = 1
+        response = self.client.post(reverse("app:consent_age"), dict(age=age))
+        self.assertEqual(self.client.session.get("age"), None)
+        self.assertEqual(len(response.context["messages"]), 1)
+
     def test_success_adult_register(self):
         session = self.client.session
         session["age"] = 20
@@ -108,19 +114,9 @@ class TestRegistration(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
-    def test_success_baby_register(self):
-        session = self.client.session
-        session["age"] = 1
-        session.save()
-        response = self.client.get(reverse("app:consent"))
-        self.ensure_template_is_correct(response, "consent_parent", "public/information-parents.html")
-        response = self.post_consent("consent_parent")
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("app:register"))
-
     def test_consent_not_given(self):
         session = self.client.session
-        session["age"] = 1
+        session["age"] = 7
         session.save()
         ## no consent, show message, same parent form
         response = self.client.post(reverse("app:consent"), dict(consent_type="consent_parent"))
