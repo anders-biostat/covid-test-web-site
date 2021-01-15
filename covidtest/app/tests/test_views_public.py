@@ -31,7 +31,7 @@ class TestRegistration(TestCase):
 
         self.sample = Sample.objects.create(
             barcode="1234",
-            access_code="123412341234",
+            access_code=self.form_input["access_code"],
             rack="abc",
             password_hash=None,
             bag=bag,
