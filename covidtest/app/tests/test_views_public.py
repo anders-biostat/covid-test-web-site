@@ -69,21 +69,28 @@ class TestRegistration(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
+    def ensure_template_is_correct(self, response, consent_type, template_name):
+        ctx = response.context
+        self.assertEqual(ctx["form"]["consent_type"].value(), consent_type)
+        self.assertEqual(ctx["template_name"], template_name)
+
+    def post_consent(self, consent_type):
+        return self.client.post(
+            reverse("app:consent"),
+            dict(terms=True, consent_type=consent_type),
+        )
+
     def test_success_teenager_register(self):
         session = self.client.session
         session["age"] = 14
         session.save()
         response = self.client.get(reverse("app:consent"))
-        ctx = response.context
-        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
-        self.assertEqual(ctx["template_name"], "public/information-parents.html")
-        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_parent"))
-        ctx = response.context
-        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_teenager")
-        self.assertEqual(ctx["template_name"], "public/information-teenager.html")
+        self.ensure_template_is_correct(response, "consent_parent", "public/information-parents.html")
+        response = self.post_consent("consent_parent")
+        self.ensure_template_is_correct(response, "consent_teenager", "public/information-teenager.html")
         session["consent"] = ["consent_parent"]
         session.save()
-        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_teenager"))
+        response = self.post_consent("consent_teenager")
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
@@ -92,16 +99,12 @@ class TestRegistration(TestCase):
         session["age"] = 7
         session.save()
         response = self.client.get(reverse("app:consent"))
-        ctx = response.context
-        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
-        self.assertEqual(ctx["template_name"], "public/information-parents.html")
-        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_parent"))
-        ctx = response.context
-        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_child")
-        self.assertEqual(ctx["template_name"], "public/information-child.html")
+        self.ensure_template_is_correct(response, "consent_parent", "public/information-parents.html")
+        response = self.post_consent("consent_parent")
+        self.ensure_template_is_correct(response, "consent_child", "public/information-child.html")
         session["consent"] = ["consent_parent"]
         session.save()
-        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_child"))
+        response = self.post_consent("consent_child")
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
@@ -110,10 +113,8 @@ class TestRegistration(TestCase):
         session["age"] = 1
         session.save()
         response = self.client.get(reverse("app:consent"))
-        ctx = response.context
-        self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
-        self.assertEqual(ctx["template_name"], "public/information-parents.html")
-        response = self.client.post(reverse("app:consent"), dict(terms=True, consent_type="consent_parent"))
+        self.ensure_template_is_correct(response, "consent_parent", "public/information-parents.html")
+        response = self.post_consent("consent_parent")
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
