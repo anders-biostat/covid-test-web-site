@@ -60,7 +60,7 @@ class TestRegistration(TestCase):
         response = self.client.post(reverse("app:consent_age"), dict(age=age))
         self.assertEqual(self.client.session["age"], age)
 
-    def test_age_valid(self):
+    def test_age_invalid(self):
         age = 1
         response = self.client.post(reverse("app:consent_age"), dict(age=age))
         self.assertEqual(self.client.session.get("age"), None)
