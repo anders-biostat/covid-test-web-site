@@ -1,11 +1,13 @@
 {% extends "public/base.html" %}
 {% load i18n %}
-
+{% load markdown %}
 
 {% block content %}
 <h1 class="ui header centered">{% blocktrans %}Teilnahme am Coronavirus-Test{% endblocktrans %}</h1>
 <div class="consent-box">
+    {% filter markdown %}
     {% include template_name %}
+    {% endfilter %}
 </div>
 
 <form class="ui form" action="" method="POST">
