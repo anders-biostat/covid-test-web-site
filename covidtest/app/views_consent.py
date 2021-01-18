@@ -8,8 +8,7 @@ from django.contrib import messages
 class AgeGroupFormView(View):
     def get(self, request):
         form = AgeGroupForm()
-        request.session["consent"] = []
-        request.session["age"] = None
+        clear_consent_session(request.session)
         return render(request, "public/age-group-form.html")
 
     def post(self, request):
@@ -55,6 +54,9 @@ def set_consent(session, value):
     session["consent"] = value.copy()
     return session
 
+def clear_consent_session(session):
+    session.pop("age", None)
+    session.pop("consent", None)
 
 def get_age(session):
     return session.get("age")

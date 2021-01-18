@@ -10,7 +10,7 @@ from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
 from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy, AgeGroupForm
 from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
-from .views_consent import has_consent
+from .views_consent import has_consent, clear_consent_session
 
 
 def index(request):
@@ -169,7 +169,7 @@ def register(request):
                 aes_instance_iv=doc["aes_instance_iv"],
             )
             sample.events.create(status="INFO", comment="sample registered")
-
+            clear_consent_session(request.session)
             messages.add_message(request, messages.SUCCESS, _("Erfolgreich registriert"))
             return redirect("app:instructions")
     return render(request, "public/register.html", {"form": form})

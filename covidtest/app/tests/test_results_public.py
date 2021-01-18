@@ -57,6 +57,15 @@ class TestRegistration(TestCase):
         session.save()
         response = self.client.post(reverse("app:register"), self.regforminput)
 
+    def test_consent_is_cleared_after_registration(self):
+        session = self.client.session
+        session["age"] = 20
+        session["consent"] = "consent_adult"
+        session.save()
+        response = self.client.post(reverse("app:register"), self.regforminput)
+        self.assertEquals(self.client.session.get("age"), None)
+        self.assertEquals(self.client.session.get("consent"), None)
+
     def test_result_negative_unregistered(self):
         self.sample.set_status(SampleStatus.LAMPNEG)
         response = self.query_access_code()
