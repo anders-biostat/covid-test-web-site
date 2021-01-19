@@ -122,7 +122,7 @@ class ConsentView(View):
     def consent_is_valid(self, session, form):
         try:
             consent_type = form.cleaned_data["consent_type"]
-            hash_is_correct = self.get_consent_md5(session, consent_type) == form.cleaned_data["version"]
+            hash_is_correct = get_consent_md5(session, consent_type) == form.cleaned_data["version"]
             return form.cleaned_data["terms"] and hash_is_correct
         except KeyError:
             return False
@@ -159,11 +159,12 @@ class ConsentView(View):
         hashsum = hashlib.md5(text.encode("utf-8"))
         return hashsum.hexdigest()
 
-    def get_consent_md5(self, session, consent_type):
-        md5sums = session.get("consent_md5", dict())
-        return md5sums.get(consent_type, None)
-
     def set_consent_md5(self, session, consent_type, md5):
         if "consent_md5" not in session:
             session["consent_md5"] = {}
         session["consent_md5"][consent_type] = md5
+
+
+def get_consent_md5(session, consent_type):
+    md5sums = session.get("consent_md5", dict())
+    return md5sums.get(consent_type, None)

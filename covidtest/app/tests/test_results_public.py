@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from ..models import Bag, Event, Registration, RSAKey, Sample
+from ..models import Bag, Event, Registration, RSAKey, Sample, Consent
 from ..statuses import SampleStatus
 
 
@@ -53,14 +53,16 @@ class TestRegistration(TestCase):
     def register_access_code(self):
         session = self.client.session
         session["age"] = 20
-        session["consent"] = "consent_adult"
+        session["consent"] = ["consent_adult"]
+        session["consent_md5"] = {"consent_adult":"consent_adult_md5"}
         session.save()
         response = self.client.post(reverse("app:register"), self.regforminput)
 
     def test_consent_is_cleared_after_registration(self):
         session = self.client.session
         session["age"] = 20
-        session["consent"] = "consent_adult"
+        session["consent"] = ["consent_adult"]
+        session["consent_md5"] = {"consent_adult":"consent_adult_md5"}
         session.save()
         response = self.client.post(reverse("app:register"), self.regforminput)
         self.assertEquals(self.client.session.get("age"), None)
@@ -95,3 +97,12 @@ class TestRegistration(TestCase):
         self.register_access_code()
         response = self.query_access_code()
         self.assertTemplateUsed(response, "public/pages/test-PCRPOS.html")
+
+    def test_consent_md5_saved(self):
+        session = self.client.session
+        session["consent_md5"] = dict(consent_adult="md5_consent_adult")
+        session["age"] = 20
+        session["consent"] = ["consent_adult"]
+        session.save()
+        response = self.client.post(reverse("app:register"), self.regforminput)
+        print("OK")

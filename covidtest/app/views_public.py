@@ -10,7 +10,7 @@ from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
 from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy, AgeGroupForm
 from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
-from .views_consent import has_consent, clear_consent_session
+from .views_consent import has_consent, clear_consent_session, get_consent, get_consent_md5
 
 
 def index(request):
@@ -160,7 +160,7 @@ def register(request):
             rsa_inst = rsa_instance_from_key(sample.bag.rsa_key.public_key)
             doc = encrypt_subject_data(rsa_inst, name, address, contact)
 
-            sample.registrations.create(
+            registration = sample.registrations.create(
                 name_encrypted=doc["name_encrypted"],
                 address_encrypted=doc["address_encrypted"],
                 contact_encrypted=doc["contact_encrypted"],
@@ -168,6 +168,12 @@ def register(request):
                 session_key_encrypted=doc["session_key_encrypted"],
                 aes_instance_iv=doc["aes_instance_iv"],
             )
+            consents = get_consent(request.session)
+
+            for consent_type in consents:
+                md5 = get_consent_md5(request.session, consent_type)
+                registration.consents.create(consent_type=consent_type, md5=md5)
+
             sample.events.create(status="INFO", comment="sample registered")
             clear_consent_session(request.session)
             messages.add_message(request, messages.SUCCESS, _("Erfolgreich registriert"))

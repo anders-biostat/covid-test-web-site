@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from ..models import Bag, Event, Registration, RSAKey, Sample
+from ..models import Bag, Event, Registration, RSAKey, Sample, Consent
 
 
 class TestRegistration(TestCase):
@@ -69,9 +69,9 @@ class TestRegistration(TestCase):
     def test_success_adult_register(self):
         session = self.client.session
         session["age"] = 20
-        session["consent"] = ["consent_adult"]
         session.save()
-        response = self.client.post(reverse("app:consent"), dict(terms=True))
+        response = self.client.get(reverse("app:consent"))
+        response = self.post_consent("consent_adult", self.get_form_version(response))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
 
@@ -125,6 +125,7 @@ class TestRegistration(TestCase):
         session = self.client.session
         session["age"] = 20
         session["consent"] = ["consent_adult"]
+        session["consent_md5"] = {"consent_adult": "consent_adult_md5"}
         session.save()
 
         sample = Sample.objects.filter(access_code=self.form_input["access_code"]).first()
@@ -140,11 +141,15 @@ class TestRegistration(TestCase):
     def test_md5_consent_sum_is_saved(self):
         session = self.client.session
         session["age"] = 7
+        session["consent"] = ["consent_parent", "consent_child"]
+        session["consent_md5"] = {
+            "consent_child": "consent_child_md5",
+            "consent_parent": "consent_parent_md5",
+        }
         session.save()
-        response = self.client.get(reverse("app:consent"))
-        version = self.get_form_version(response)
-        # import pdb; pdb.set_trace()
-        response = self.post_consent("consent_parent", version=version)
-        session["consent"] = ["consent_parent"]
-        session.save()
-        response = self.post_consent("consent_child", version=version)
+        response = self.client.post(reverse("app:register"), self.form_input)
+        consents = Consent.objects.all()
+        self.assertEqual(consents[0].consent_type, "consent_parent")
+        self.assertEqual(consents[0].md5, "consent_parent_md5")
+        self.assertEqual(consents[1].consent_type, "consent_child")
+        self.assertEqual(consents[1].md5, "consent_child_md5")
