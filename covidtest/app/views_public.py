@@ -139,14 +139,10 @@ def register(request):
     request.session["access_code"] = None
 
     form = RegistrationForm(initial={"access_code": access_code})
-    if request.method == "POST":  # POST
+    if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            access_code = form.cleaned_data["access_code"].upper().strip()
-            name = form.cleaned_data["name"]
-            address = form.cleaned_data["address"]
-            contact = form.cleaned_data["contact"]
-
+            access_code = get_access_code(form)
             sample = Sample.objects.filter(access_code=access_code).first()
 
             if sample is None:
@@ -156,29 +152,41 @@ def register(request):
                 return render(request, "public/register.html", {"form": form})
 
             request.session["access_code"] = access_code
-
-            rsa_inst = rsa_instance_from_key(sample.bag.rsa_key.public_key)
-            doc = encrypt_subject_data(rsa_inst, name, address, contact)
-
-            registration = sample.registrations.create(
-                name_encrypted=doc["name_encrypted"],
-                address_encrypted=doc["address_encrypted"],
-                contact_encrypted=doc["contact_encrypted"],
-                public_key_fingerprint=doc["public_key_fingerprint"],
-                session_key_encrypted=doc["session_key_encrypted"],
-                aes_instance_iv=doc["aes_instance_iv"],
-            )
-            consents = get_consent(request.session)
-
-            for consent_type in consents:
-                md5 = get_consent_md5(request.session, consent_type)
-                registration.consents.create(consent_type=consent_type, md5=md5)
-
+            registration = create_registration(sample, form.cleaned_data)
+            save_consents(request.session, registration)
             sample.events.create(status="INFO", comment="sample registered")
             clear_consent_session(request.session)
             messages.add_message(request, messages.SUCCESS, _("Erfolgreich registriert"))
             return redirect("app:instructions")
     return render(request, "public/register.html", {"form": form})
+
+
+def get_access_code(form):
+    return form.cleaned_data["access_code"].upper().strip()
+
+
+def save_consents(session, registration):
+    consents = get_consent(session)
+    for consent_type in consents:
+        md5 = get_consent_md5(session, consent_type)
+        registration.consents.create(consent_type=consent_type, md5=md5)
+
+
+def create_registration(sample, cleaned_data):
+    name = cleaned_data["name"]
+    address = cleaned_data["address"]
+    contact = cleaned_data["contact"]
+    rsa_inst = rsa_instance_from_key(sample.bag.rsa_key.public_key)
+    doc = encrypt_subject_data(rsa_inst, name, address, contact)
+    registration = sample.registrations.create(
+        name_encrypted=doc["name_encrypted"],
+        address_encrypted=doc["address_encrypted"],
+        contact_encrypted=doc["contact_encrypted"],
+        public_key_fingerprint=doc["public_key_fingerprint"],
+        session_key_encrypted=doc["session_key_encrypted"],
+        aes_instance_iv=doc["aes_instance_iv"],
+    )
+    return registration
 
 
 def pages(request, page):
