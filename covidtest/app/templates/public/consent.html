@@ -20,7 +20,13 @@
                     value="1"
                     onclick="EnableSubmit(this)"
             />
-            <label>{% blocktrans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endblocktrans %}</label>
+            <label>
+            {% if acceptance_text %}
+                {{ acceptance_text }}
+            {% else %}
+                {% blocktrans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endblocktrans %}
+            {% endif %}
+            </label>
         </div>
     </div>
 

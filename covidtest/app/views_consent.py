@@ -29,24 +29,37 @@ def age_is_valid(age):
     return age >= 7
 
 
-def get_age_wizard(age):
+CONSENT_DATA = dict(
+    consent_parent={
+        "template_name": "public/information-parents.html",
+        "acceptance_text": _("Ich bin einverstanden, dass mein Kind am Test teilnehmen wird."),
+    },
+    consent_teenager={"template_name": "public/information-teenager.html"},
+    consent_child={"template_name": "public/information-child.html"},
+    consent_adult={"template_name": "public/information-text.html"},
+)
+
+
+def get_required_consents(age):
     "returns consent names and info templates, None if age is None"
     if not age:
         return None
     if age >= 18:
-        return dict(consent_adult="public/information-text.html")
+        return ["consent_adult"]
     if age >= 12:
-        return dict(
-            consent_parent="public/information-parents.html",
-            consent_teenager="public/information-teenager.html",
-        )
+        return ["consent_parent", "consent_teenager"]
     if age >= 7:
-        return dict(
-            consent_parent="public/information-parents.html",
-            consent_child="public/information-child.html",
-        )
+        return ["consent_parent", "consent_child"]
     if age < 7:
         raise ValueError
+
+
+def get_template_name(consent_type):
+    return CONSENT_DATA[consent_type]["template_name"]
+
+
+def get_acceptance_text(consent_type):
+    return CONSENT_DATA[consent_type].get("acceptance_text")
 
 
 def get_consent(session):
@@ -70,9 +83,9 @@ def get_age(session):
 def has_consent(session):
     consent = get_consent(session)
     age = get_age(session)
-    wizard = get_age_wizard(age)
-    if wizard:
-        return all([cons in consent for cons in wizard.keys()])
+    required = get_required_consents(age)
+    if required:
+        return all([cons in consent for cons in required])
     return False
 
 
@@ -107,15 +120,15 @@ class ConsentView(View):
             if self.consent_is_valid(request.session, form):
                 ## check that consent type is allowed and add it
                 consent_type = form.cleaned_data["consent_type"]
-                if consent_type in get_age_wizard(age):
+                if consent_type in get_required_consents(age):
                     request.session = self.add_consent(request.session, consent_type)
                 return self.dispatch_consent(request)
         messages.add_message(request, messages.WARNING, _("Sie müssen erst der Teilnahme zustimmen, um fortzufahren"))
         return self.dispatch_consent(request)
 
-    def next_consent(self, session_consents, consent_forms):
+    def next_consent(self, session_consents, required_consents):
         "None if no any consents needed, info template path otherwise"
-        for consent_type in consent_forms.keys():
+        for consent_type in required_consents:
             if consent_type not in session_consents:
                 return consent_type
 
@@ -138,18 +151,18 @@ class ConsentView(View):
         returns response with a new consent form or a redirect response.
         In case a form is sent, saves md5 fingerprint of the consent text to session.
         """
-        age_wizard = get_age_wizard(get_age(request.session))
+        required_consents = get_required_consents(get_age(request.session))
         consents = get_consent(request.session)
-        consent_type = self.next_consent(consents, age_wizard)
+        consent_type = self.next_consent(consents, required_consents)
         if consent_type:
-            template_name = age_wizard[consent_type]
+            template_name = get_template_name(consent_type)
             md5 = self.compute_consent_md5(template_name)
             self.set_consent_md5(request.session, consent_type, md5)
             form = ConsentForm(initial=dict(consent_type=consent_type, version=md5))
             return render(
                 request,
                 "public/consent.html",
-                dict(form=form, template_name=template_name),
+                dict(form=form, template_name=template_name, acceptance_text=get_acceptance_text(consent_type)),
             )
         return redirect(self.success_url)
 
