@@ -146,7 +146,6 @@ class ConsentView(View):
             md5 = self.compute_consent_md5(template_name)
             self.set_consent_md5(request.session, consent_type, md5)
             form = ConsentForm(initial=dict(consent_type=consent_type, version=md5))
-            info_template = get_template(template_name)
             return render(
                 request,
                 "public/consent.html",
