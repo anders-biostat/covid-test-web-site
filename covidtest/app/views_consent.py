@@ -20,8 +20,11 @@ class AgeGroupFormView(View):
             if age_is_valid(age):
                 request.session["age"] = age
                 return redirect("app:consent")
+            else:
+                messages.add_message(request, messages.ERROR, _("Für Kinder unter 7 Jahre ist die Teilnahme leider nicht möglich."))
+                return render(request, "public/age-group-form.html")
 
-        messages.add_message(request, messages.ERROR, _("Der Teilnehmer muss mindestens 7 Jarhe alt sein."))
+        messages.add_message(request, messages.ERROR, _("Bitte geben Sie Ihr Alter als Zahl ein."))
         return render(request, "public/age-group-form.html")
 
 

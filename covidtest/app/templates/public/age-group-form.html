@@ -8,9 +8,12 @@
 
     <div class="ui inline field">
         <div for="ageInput" class="ui right pointing label">
-            {% blocktrans %} Ihr Alter {% endblocktrans %}
+            {% blocktrans %} Alter des/der Teilnehmer/in {% endblocktrans %}
         </div>
         <input type="text" name="age" id="ageInput" placeholder="">
+        <div for="ageInput" class="ui label">
+            {% blocktrans %} Jahre {% endblocktrans %}
+        </div>
     </div>
     <div class="field" style="text-align: center">
         <a href="{% url 'app:index' %}" id="closeform" class="ui primary button">
