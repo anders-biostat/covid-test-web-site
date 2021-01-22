@@ -48,6 +48,8 @@ def render_status(request, event):
             return render(request, "public/pages/test-LAMPFAIL.html")
         if status == SampleStatus.UNDEF:
             return render(request, "public/pages/test-UNDEF.html")
+        if status == SampleStatus.MESSAGE:
+            return render(request, "public/pages/test-MESSAGE.html", {'msg': event.comment})
         if status == SampleStatus.WAIT or status == SampleStatus.PRINTED:
             return render(request, "public/pages/test-WAIT.html")
         return render(request, "public/pages/test-UNDEF.html")
