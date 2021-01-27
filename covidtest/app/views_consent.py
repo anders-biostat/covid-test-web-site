@@ -34,12 +34,12 @@ def age_is_valid(age):
 
 CONSENT_DATA = dict(
     consent_parent={
-        "template_name": "public/information-parents.html",
+        "template_name": "public/info_and_consent/adults.html",
         "acceptance_text": _("Ich bin einverstanden, dass mein Kind am Test teilnehmen wird."),
     },
-    consent_teenager={"template_name": "public/information-teenager.html"},
-    consent_child={"template_name": "public/information-child.html"},
-    consent_adult={"template_name": "public/information-text.html"},
+    consent_teenager={"template_name": "public/info_and_consent/adolescents.html"},
+    consent_child={"template_name": "public/info_and_consent/children.html"},
+    consent_adult={"template_name": "public/info_and_consent/adults.html"},
 )
 
 
