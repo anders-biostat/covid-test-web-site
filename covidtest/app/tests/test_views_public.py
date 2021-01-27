@@ -91,9 +91,9 @@ class TestRegistration(TestCase):
         session["age"] = 14
         session.save()
         response = self.client.get(reverse("app:consent"))
-        self.ensure_template_is_correct(response, "consent_parent", "public/information-parents.html")
+        self.ensure_template_is_correct(response, "consent_parent", "public/info_and_consent/parents.html")
         response = self.post_consent("consent_parent", self.get_form_version(response))
-        self.ensure_template_is_correct(response, "consent_teenager", "public/information-teenager.html")
+        self.ensure_template_is_correct(response, "consent_teenager", "public/info_and_consent/adolescents.html")
         response = self.post_consent("consent_teenager", self.get_form_version(response))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
@@ -103,9 +103,9 @@ class TestRegistration(TestCase):
         session["age"] = 7
         session.save()
         response = self.client.get(reverse("app:consent"))
-        self.ensure_template_is_correct(response, "consent_parent", "public/information-parents.html")
+        self.ensure_template_is_correct(response, "consent_parent", "public/info_and_consent/parents.html")
         response = self.post_consent("consent_parent", self.get_form_version(response))
-        self.ensure_template_is_correct(response, "consent_child", "public/information-child.html")
+        self.ensure_template_is_correct(response, "consent_child", "public/info_and_consent/children.html")
         response = self.post_consent("consent_child", self.get_form_version(response))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:register"))
@@ -119,7 +119,7 @@ class TestRegistration(TestCase):
         ctx = response.context
         self.assertEqual(len(ctx["messages"]), 1)
         self.assertEqual(ctx["form"]["consent_type"].value(), "consent_parent")
-        self.assertEqual(ctx["template_name"], "public/information-parents.html")
+        self.assertEqual(ctx["template_name"], "public/info_and_consent/parents.html")
 
     def test_registration_with_consent(self):
         session = self.client.session
