@@ -38,20 +38,21 @@ def obtain_consent( request ):
     # First, forms for parents, if participant is a minor
     if request.session["age"] < 18:
         consents.append({"consent_type": "parents", "required": True})
-        consents.append({"consent_type": "parents_biobank", "required": False})
+        consents.append({"consent_type": "parents_biobank", "required": True})
 
     # Now, forms for the participants, depending on the age
     if request.session["age"] > 16:
         consents.append({"consent_type": "adults", "required": True})
-        consents.append({"consent_type": "adults_biobank", "required": False})
+        consents.append({"consent_type": "adults_biobank", "required": True})
     elif request.session["age"] > 12:
         consents.append({"consent_type": "adolescents", "required": True})
-        consents.append({"consent_type": "adolescents_biobank", "required": False})
+        consents.append({"consent_type": "adolescents_biobank", "required": True})
     else:
         consents.append({"consent_type": "children", "required": True})
-        consents.append({"consent_type": "children_biobank", "required": False})
+        consents.append({"consent_type": "children_biobank", "required": True})
 
     request.session["consent_forms_to_be_displayed"] = consents
+    request.session["num_pages"] = len(consents)
     request.session["consents_obtained"] = []
 
     return redirect("app:consent")
