@@ -135,7 +135,7 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    if not "obtained_consents" in request.session:
+    if not "consents_obtained" in request.session:
         raise Exception("Register page accessed without going through consent pages.")
 
     request.session["access_code"] = None
