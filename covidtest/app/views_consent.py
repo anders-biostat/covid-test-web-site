@@ -70,9 +70,11 @@ class ConsentView(View):
             return redirect("app:register")
 
         data = request.session["consent_forms_to_be_displayed"][0].copy()
-        print(data)
+        if not data["required"]:
+            raise Exception("Non-required consent is not yet implemented.")
         data["num_pages"] = request.session["num_pages"]
         data["page_number"] = data["num_pages"] - len(request.session["consent_forms_to_be_displayed"]) + 1
+
         return render(request, get_template_file_for_consent_type(data["consent_type"]), data)
 
     def get(self, request):
