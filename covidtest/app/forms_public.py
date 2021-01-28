@@ -23,10 +23,10 @@ class RegistrationForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": _("Zugangscode"), "help": "Hallo"}),
     )
     name = forms.CharField(
-        label=_("Name (Nachname, Vorname):"), widget=forms.TextInput(attrs={"placeholder": _("Nachname, Vorname")})
+        label=_("Name:"), widget=forms.TextInput(attrs={"placeholder": _("Nachname, Vorname")})
     )
     address = forms.CharField(
-        label=_("Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"),
+        label=_("Anschrift:"),
         widget=forms.Textarea(attrs={"placeholder": _("Straße, Hausnummer, Postleitzahl, Wohnort")}),
     )
     contact = forms.CharField(
