@@ -21,7 +21,7 @@ class AgeGroupFormView(View):
         request.session["age_group"] = None
         if form.is_valid():
             request.session["age"] = form.cleaned_data["age"]
-            return obtain_consent( request )
+            return obtain_consent(request)
 
         messages.add_message(request, messages.WARNING, _("Gitte geben Sie ihr Alter als Zahl ein."))
         return render(request, "public/age-group-form.html")
@@ -68,8 +68,11 @@ class ConsentView(View):
             print( "Consents obtained:", request.session["consents_obtained"] )
             return redirect("app:register")
 
-        to_be_displayed = request.session["consent_forms_to_be_displayed"][0]
-        return render(request, get_template_file_for_consent_type(to_be_displayed["consent_type"]), to_be_displayed)
+        data = request.session["consent_forms_to_be_displayed"][0].copy()
+        print(data)
+        data["num_pages"] = request.session["num_pages"]
+        data["page_number"] = data["num_pages"] - len(request.session["consent_forms_to_be_displayed"]) + 1
+        return render(request, get_template_file_for_consent_type(data["consent_type"]), data)
 
     def get(self, request):
         return self.render_info_and_consent(request)
