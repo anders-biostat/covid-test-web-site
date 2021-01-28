@@ -3,25 +3,35 @@
 
 {% block content %}
 
-<form class="ui form" action="{% url 'app:consent_age' %}" method="POST">
-    {% csrf_token %}
 
-    <h3>{% blocktrans %} Wie alt sind Sie? {% endblocktrans %}</h3>
-    <div class="ui inline field">
-        <div for="ageInput" class="ui right pointing label">
-            {% blocktrans %} Alter des/der Teilnehmer/in {% endblocktrans %}
+    <h3>{% blocktrans %} Alter der Teilnehmerin / des Teilnehmers? {% endblocktrans %}</h3>
+
+        <div class="ui four item menu stackable">
+            <a href="{% url 'app:consent' %}?agegroup=adult"><div class="ui primary button">
+                {% blocktrans %}über 18 Jahre{% endblocktrans %}
+            </div></a>
+
+            <a href="{% url 'app:consent' %}?agegroup=adolescent"><div class="ui primary button">
+                {% blocktrans %}12-17 Jahre{% endblocktrans %}
+            </div></a>
+
+            <a href="{% url 'app:consent' %}?agegroup=child"><div class="ui primary button">
+                {% blocktrans %}7-11 Jahre{% endblocktrans %}
+            </div></a>
+
+            <a href="{% url 'app:pages' page='too_young.html' %}"><div class="ui primary button">
+                {% blocktrans %}0-6 Jahre{% endblocktrans %}
+            </div></a>
         </div>
-        <input type="text" name="age" id="ageInput" placeholder="">
-        <div for="ageInput" class="ui label">
-            {% blocktrans %} Jahre {% endblocktrans %}
-        </div>
+
+        <a href="{% url 'app:index' %}"><div class="ui basic button">
+            {% blocktrans %}Zurück{% endblocktrans %}
+        </div></a>
+
+    <div class="ui basic segment">
+        Bevor wir Sie teilnehmen lassen dürfen, müssen wir Ihnen Informationsmaterial in altersgemäßer
+        Formulierung bereit stellen. Außerdem müssen wir bei Minderjährigen nach dem Einverständnis der
+        Eltern oder Sorgeberechtigten fragen. Daher fragen wir hier, ob Sie volljährig sind.
     </div>
-    <div class="field" style="text-align: center">
-        <a href="{% url 'app:index' %}" id="closeform" class="ui primary button">
-            {% blocktrans %}Zurück{% endblocktrans %}</a>
-        <button type="submit" id="submitButton" class="ui primary button">
-            {% blocktrans %}Weiter{% endblocktrans %}
-        </button>
-    </div>
-</form>
+
 {% endblock %}

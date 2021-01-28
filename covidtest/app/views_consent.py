@@ -13,49 +13,32 @@ logger = logging.getLogger(__name__)
 class AgeGroupFormView(View):
 
     def get(self, request):
-        request.session["age_group"] = None
-        return render(request, "public/age-group-form.html")
-
-    def post(self, request):
-        form = AgeGroupForm(request.POST)
-        request.session["age_group"] = None
-        if form.is_valid():
-            request.session["age"] = form.cleaned_data["age"]
-            return obtain_consent(request)
-
-        messages.add_message(request, messages.WARNING, _("Gitte geben Sie ihr Alter als Zahl ein."))
         return render(request, "public/age-group-form.html")
 
 
-def obtain_consent( request ):
-
-    if request.session["age"] < 7:
-        messages.add_message(request, messages.WARNING, _("Kinder unter 7 Jahren dürfen leider nicht teilnehmen."))
-        return redirect("app:index")
+def consent_pages_to_be_displayed( agegroup ):
 
     consents = []
 
     # First, forms for parents, if participant is a minor
-    if request.session["age"] < 18:
+    if agegroup != "adult":
         consents.append({"consent_type": "parents", "required": True})
         consents.append({"consent_type": "parents_biobank", "required": True})
 
     # Now, forms for the participants, depending on the age
-    if request.session["age"] > 16:
+    if agegroup == "adult":
         consents.append({"consent_type": "adults", "required": True})
         consents.append({"consent_type": "adults_biobank", "required": True})
-    elif request.session["age"] > 12:
+    elif agegroup == "adolescent":
         consents.append({"consent_type": "adolescents", "required": True})
         consents.append({"consent_type": "adolescents_biobank", "required": True})
-    else:
+    elif agegroup == "child":
         consents.append({"consent_type": "children", "required": True})
         consents.append({"consent_type": "children_biobank", "required": True})
+    else:
+        raise Exception("Unexpected 'agegroup' value.")
 
-    request.session["consent_forms_to_be_displayed"] = consents
-    request.session["num_pages"] = len(consents)
-    request.session["consents_obtained"] = []
-
-    return redirect("app:consent")
+    return consents
 
 def get_template_file_for_consent_type(consent_type):
     return "public/info_and_consent/" + consent_type + ".html"
@@ -63,6 +46,9 @@ def get_template_file_for_consent_type(consent_type):
 class ConsentView(View):
 
     def render_info_and_consent(self, request):
+
+        if "consent_forms_to_be_displayed" not in request.session:
+            raise Exception("Consent page accessed bypassing age query")
 
         # Is there still work to do?
         if len(request.session["consent_forms_to_be_displayed"]) == 0:
@@ -78,6 +64,13 @@ class ConsentView(View):
         return render(request, get_template_file_for_consent_type(data["consent_type"]), data)
 
     def get(self, request):
+
+        if "agegroup" in request.GET:
+            consents = consent_pages_to_be_displayed( request.GET["agegroup"] )
+            request.session["consent_forms_to_be_displayed"] = consents
+            request.session["num_pages"] = len(consents)
+            request.session["consents_obtained"] = []
+
         return self.render_info_and_consent(request)
 
     def post(self, request):
