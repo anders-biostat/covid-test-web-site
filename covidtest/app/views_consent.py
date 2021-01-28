@@ -85,7 +85,7 @@ class ConsentView(View):
         if form.is_valid():
             # First assert that we use the right template
             if request.session["consent_forms_to_be_displayed"][0]["consent_type"] != form.cleaned_data["consent_type"]:
-                raise "Template mix-up"
+                raise Exception("Template mix-up")
             # Now store the consent in the session
             if form.cleaned_data["consent_given"]:
                 request.session["consents_obtained"].append( form.cleaned_data["consent_type"] )
