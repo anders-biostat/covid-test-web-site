@@ -1,5 +1,10 @@
 {% extends "public/consent.html" %}
 
+{% block preamble %}
+Bitte lesen Sie den folgenden Informationstext und klicken Sie ganz unten, wenn Sie einverstanden sind.
+{% endblock %}
+
+
 {% block info_text %}
 <p><strong>Informationsschrift für Eltern und Sorgeberechtigten von minderjährigen Probanden</strong></p>
 <p><strong>Titel der Studie: Entwicklung von unbeschränkt skalierbaren Testverfahren für die engmaschige Überwachung von Covid-19 Infektionen zur Verhinderung der Einschränkung des öffentlichen Lebens</strong></p>
@@ -152,4 +157,8 @@
 <p><strong>Haben Sie oder Ihr Kind noch Fragen?</strong></p>
 <p>Für weitere Informationen sowie für Auskünfte über allgemeine Ergebnisse und den Ausgang der Studie können Sei uns gerne unter <a href="mailto:info@covidtest-hd.de">info@covidtest-hd.de</a> oder unter 01525-7508379 kontaktieren.</p>
 <p><strong>Wir wären Ihnen für Ihre Teilnahme an diesem wichtigen Forschungsprojekt sehr dankbar!</strong></p>
+{% endblock %}
+
+{% block checkbox_text %}
+Ja, ich bin einverstanden.
 {% endblock %}

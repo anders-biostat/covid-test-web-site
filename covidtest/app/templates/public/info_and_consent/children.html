@@ -1,5 +1,9 @@
 {% extends "public/consent.html" %}
 
+{% block preamble %}
+Bitte lesen Sie den folgenden Informationstext und klicken Sie ganz unten, wenn Sie einverstanden sind.
+{% endblock %}
+
 {% block info_text %}
 <p><strong>Informationsschrift für minderjährige Probanden (Kinder im Alter von 7-11 Jahren)</strong></p>
 <p><strong>Titel der Studie: Entwicklung von unbeschränkt skalierbaren Testverfahren für die engmaschige Überwachung von Covid-19 Infektionen zur Verhinderung der Einschränkung des öffentlichen Lebens</strong></p>
@@ -113,4 +117,8 @@ m.knop@zmbh.uni-heidelberg.de</p>
 <p>Name der aufklärenden Person in Druckbuchstaben</p>
 <p>_________________ ________________________</p>
 <p>Ort, Datum, Unterschrift der aufklärenden Person</p>
+{% endblock %}
+
+{% block checkbox_text %}
+Ja, ich bin einverstanden.
 {% endblock %}

@@ -1,5 +1,9 @@
 {% extends "public/consent.html" %}
 
+{% block preamble %}
+Bitte lesen Sie den folgenden Informationstext und klicken Sie ganz unten, wenn Sie einverstanden sind.
+{% endblock %}
+
 {% block info_text %}
 <p><strong>Information und Einwilligung von MInderjährigen (Jugendliche von 12-17 Jahren) in die <em>anonyme</em> Verwendung von Speichelproben in einer Biobank</strong></p>
 <p>Corona Teststation des Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH)</p>
@@ -60,3 +64,5 @@
 <p>❐ <strong>Ich bin einverstanden, dass meine Probe für die Biobank verwendet wird.</strong></p>
 <p>(diese Box muss angeklickt sein, damit Du zur nächsten Seite kommst und die Registrierung abschließen kannst)</p>
 {% endblock %}
+
+{% block checkbox_text %} Ja, ich bin einverstanden. {% endblock %}

@@ -2,7 +2,12 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="ui header centered">{% blocktrans %}Teilnahme am Coronavirus-Test{% endblocktrans %}</h1>
+<h1 class="ui header centered">{% blocktrans %}Einverständnis zur Teilnahme{% endblocktrans %}</h1>
+
+<div>
+    {% block preamble %} {% endblock %}
+</div>
+
 <div class="consent-box">
     {% block info_text %} {% endblock %}
 </div>
@@ -20,9 +25,7 @@
                     onclick="EnableSubmit(this)"
             />
             <label>
-            {% block acceptance_text %}
-                {% blocktrans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endblocktrans %}
-            {% endblock %}
+            {% block checkbox_text %} {% endblock %}
             </label>
         </div>
     </div>
