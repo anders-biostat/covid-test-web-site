@@ -6,6 +6,7 @@
 <form class="ui form" action="{% url 'app:consent_age' %}" method="POST">
     {% csrf_token %}
 
+    <h3>{% blocktrans %} Wie alt sind Sie? {% endblocktrans %}</h3>
     <div class="ui inline field">
         <div for="ageInput" class="ui right pointing label">
             {% blocktrans %} Alter des/der Teilnehmer/in {% endblocktrans %}
