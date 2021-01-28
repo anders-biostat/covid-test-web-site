@@ -10,7 +10,7 @@ from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
 from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy, AgeGroupForm
 from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
-from .views_consent import has_consent, clear_consent_session, get_consent, get_consent_md5
+from .views_consent import get_consent_md5
 
 
 def index(request):
@@ -135,8 +135,8 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    if not has_consent(request.session):
-        return redirect("app:consent")
+    if not "obtained_consents" in request.session:
+        raise Exception("Register page accessed without going through consent pages.")
 
     request.session["access_code"] = None
 
@@ -168,9 +168,8 @@ def get_access_code(form):
 
 
 def save_consents(session, registration):
-    consents = get_consent(session)
-    for consent_type in consents:
-        md5 = get_consent_md5(session, consent_type)
+    for consent_type in request.session["consents_obtained"]:
+        md5 = get_consent_md5(consent_type)
         registration.consents.create(consent_type=consent_type, md5=md5)
 
 

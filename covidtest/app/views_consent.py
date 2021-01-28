@@ -3,183 +3,98 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
-from django.template.loader import get_template, render_to_string
+from django.template.loader import get_template
+from django.http import HttpResponse
 import hashlib
 
+import logging
+logger = logging.getLogger(__name__)
 
 class AgeGroupFormView(View):
+
     def get(self, request):
-        form = AgeGroupForm()
-        clear_consent_session(request.session)
+        request.session["age_group"] = None
         return render(request, "public/age-group-form.html")
 
     def post(self, request):
         form = AgeGroupForm(request.POST)
+        request.session["age_group"] = None
         if form.is_valid():
-            age = form.cleaned_data["age"]
-            if age_is_valid(age):
-                request.session["age"] = age
-                return redirect("app:consent")
-            else:
-                messages.add_message(request, messages.ERROR, _("Für Kinder unter 7 Jahre ist die Teilnahme leider nicht möglich."))
-                return render(request, "public/age-group-form.html")
+            request.session["age"] = form.cleaned_data["age"]
+            return obtain_consent( request )
 
-        messages.add_message(request, messages.ERROR, _("Bitte geben Sie Ihr Alter als Zahl ein."))
+        messages.add_message(request, messages.WARNING, _("Gitte geben Sie ihr Alter als Zahl ein."))
         return render(request, "public/age-group-form.html")
 
 
-def age_is_valid(age):
-    return age >= 7
+def obtain_consent( request ):
 
+    if request.session["age"] < 7:
+        messages.add_message(request, messages.WARNING, _("Kinder unter 7 Jahren dürfen leider nicht teilnehmen."))
+        return redirect("app:index")
 
-CONSENT_DATA = dict(
-    consent_parent={
-        "template_name": "public/info_and_consent/parents.html",
-        "acceptance_text": _("Ich bin einverstanden, dass mein Kind am Test teilnehmen wird."),
-    },
-    consent_teenager={"template_name": "public/info_and_consent/adolescents.html"},
-    consent_child={"template_name": "public/info_and_consent/children.html"},
-    consent_adult={"template_name": "public/info_and_consent/adults.html"},
-)
+    consents = []
 
+    # First, forms for parents, if participant is a minor
+    if request.session["age"] < 18:
+        consents.append({"consent_type": "parents", "required": True})
+        consents.append({"consent_type": "parents_biobank", "required": False})
 
-def get_required_consents(age):
-    "returns consent names and info templates, None if age is None"
-    if not age:
-        return None
-    if age >= 18:
-        return ["consent_adult"]
-    if age >= 12:
-        return ["consent_parent", "consent_teenager"]
-    if age >= 7:
-        return ["consent_parent", "consent_child"]
-    if age < 7:
-        raise ValueError
+    # Now, forms for the participants, depending on the age
+    if request.session["age"] > 16:
+        consents.append({"consent_type": "adults", "required": True})
+        consents.append({"consent_type": "adults_biobank", "required": False})
+    elif request.session["age"] > 12:
+        consents.append({"consent_type": "adolescents", "required": True})
+        consents.append({"consent_type": "adolescents_biobank", "required": False})
+    else:
+        consents.append({"consent_type": "children", "required": True})
+        consents.append({"consent_type": "children_biobank", "required": False})
 
+    request.session["consent_forms_to_be_displayed"] = consents
+    request.session["consents_obtained"] = []
 
-def get_template_name(consent_type):
-    return CONSENT_DATA[consent_type]["template_name"]
+    return redirect("app:consent")
 
-
-def get_acceptance_text(consent_type):
-    return CONSENT_DATA[consent_type].get("acceptance_text")
-
-
-def get_consent(session):
-    return session.get("consent", [])
-
-
-def set_consent(session, value):
-    session["consent"] = value.copy()
-    return session
-
-
-def clear_consent_session(session):
-    session.pop("age", None)
-    session.pop("consent", None)
-
-
-def get_age(session):
-    return session.get("age")
-
-
-def has_consent(session):
-    consent = get_consent(session)
-    age = get_age(session)
-    required = get_required_consents(age)
-    if required:
-        return all([cons in consent for cons in required])
-    return False
-
+def get_template_file_for_consent_type(consent_type):
+    return "public/info_and_consent/" + consent_type + ".html"
 
 class ConsentView(View):
-    """
-    consent is kept in the session variable "consent" as a list of strings,
-    i.e. session["consent"] = ["consent_parents", "consent_teenager"].
-    The view dispatches upon the state of the consent variable and renders
-    the corresponding template, where different info is included in template_name.
-    """
 
-    success_url = "app:register"
+    def render_info_and_consent(self, request):
+
+        # Is there still work to do?
+        if len(request.session["consent_forms_to_be_displayed"]) == 0:
+            print( "Consents obtained:", request.session["consents_obtained"] )
+            return redirect("app:register")
+
+        to_be_displayed = request.session["consent_forms_to_be_displayed"][0]
+        return render(request, get_template_file_for_consent_type(to_be_displayed["consent_type"]), to_be_displayed)
 
     def get(self, request):
-        if not get_age(request.session):
-            return redirect("app:consent_age")
-        return self.dispatch_consent(request)
+        return self.render_info_and_consent(request)
 
     def post(self, request):
-        """
-        We check validity of consent submission:
-        - there is age set
-        - consent type is allowed and form md5 sums coincides with the
-          md5 for this consent type in the session
-        - ONLY then add consent to the session
-        """
-        age = get_age(request.session)
-        if not age:
-            return redirect("app:consent_age")
         form = ConsentForm(request.POST)
         if form.is_valid():
-            if self.consent_is_valid(request.session, form):
-                ## check that consent type is allowed and add it
-                consent_type = form.cleaned_data["consent_type"]
-                if consent_type in get_required_consents(age):
-                    request.session = self.add_consent(request.session, consent_type)
-                return self.dispatch_consent(request)
-        messages.add_message(request, messages.WARNING, _("Sie müssen erst der Teilnahme zustimmen, um fortzufahren"))
-        return self.dispatch_consent(request)
-
-    def next_consent(self, session_consents, required_consents):
-        "None if no any consents needed, info template path otherwise"
-        for consent_type in required_consents:
-            if consent_type not in session_consents:
-                return consent_type
-
-    def consent_is_valid(self, session, form):
-        try:
-            consent_type = form.cleaned_data["consent_type"]
-            hash_is_correct = get_consent_md5(session, consent_type) == form.cleaned_data["version"]
-            return form.cleaned_data["terms"] and hash_is_correct
-        except KeyError:
-            return False
-
-    def add_consent(self, session, consent_type):
-        consents = get_consent(session)
-        if consent_type not in consents:
-            consents.append(consent_type)
-        return set_consent(session, consents)
-
-    def dispatch_consent(self, request):
-        """
-        returns response with a new consent form or a redirect response.
-        In case a form is sent, saves md5 fingerprint of the consent text to session.
-        """
-        required_consents = get_required_consents(get_age(request.session))
-        consents = get_consent(request.session)
-        consent_type = self.next_consent(consents, required_consents)
-        if consent_type:
-            template_name = get_template_name(consent_type)
-            md5 = self.compute_consent_md5(template_name)
-            self.set_consent_md5(request.session, consent_type, md5)
-            form = ConsentForm(initial=dict(consent_type=consent_type, version=md5))
-            return render(
-                request,
-                "public/consent.html",
-                dict(form=form, template_name=template_name, acceptance_text=get_acceptance_text(consent_type)),
-            )
-        return redirect(self.success_url)
-
-    def compute_consent_md5(self, template):
-        text = render_to_string(template)
-        hashsum = hashlib.md5(text.encode("utf-8"))
-        return hashsum.hexdigest()
-
-    def set_consent_md5(self, session, consent_type, md5):
-        if "consent_md5" not in session:
-            session["consent_md5"] = {}
-        session["consent_md5"][consent_type] = md5
+            # First assert that we use the right template
+            if request.session["consent_forms_to_be_displayed"][0]["consent_type"] != form.cleaned_data["consent_type"]:
+                raise "Template mix-up"
+            # Now store the consent in the session
+            if form.cleaned_data["consent_given"]:
+                request.session["consents_obtained"].append( form.cleaned_data["consent_type"] )
+            # And remove the template from the to-do list
+            request.session["consent_forms_to_be_displayed"] = request.session["consent_forms_to_be_displayed"][1:]
+            # Finally, go back to start
+            return self.render_info_and_consent(request)
+        raise "Invalid form"  # shouldn't happen
 
 
-def get_consent_md5(session, consent_type):
-    md5sums = session.get("consent_md5", dict())
-    return md5sums.get(consent_type, None)
+
+def get_consent_md5(consent_type):
+    # get full path of HTML file with info and consent text
+    filepath = get_template(get_template_file_for_consent_type).origin.name
+    # calculate its MD5 hash
+    with open(filepath, 'rb' ) as f:
+        hashsum = hashlib.md5(f.read())
+    return hashsum.hexdigest()
