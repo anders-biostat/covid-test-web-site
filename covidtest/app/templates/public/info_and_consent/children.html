@@ -1,4 +1,4 @@
-{% extends "public/consent.html" %}
+{% extends bare|yesno:"public/bareinfotext.html,public/consent.html" %}
 
 {% block preamble %}
 für Kinder: Bitte lies den folgenden Informationstext und klicke ganz unten, wenn Du einverstanden bist.
