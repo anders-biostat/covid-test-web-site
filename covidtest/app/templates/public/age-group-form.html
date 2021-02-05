@@ -1,0 +1,37 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+
+    <h3>{% blocktrans %} Alter der Teilnehmerin / des Teilnehmers? {% endblocktrans %}</h3>
+
+        <div class="ui four item menu stackable">
+            <a href="{% url 'app:consent' %}?agegroup=adult"><div class="ui primary button">
+                {% blocktrans %}über 18 Jahre{% endblocktrans %}
+            </div></a>
+
+            <a href="{% url 'app:consent' %}?agegroup=adolescent"><div class="ui primary button">
+                {% blocktrans %}12-17 Jahre{% endblocktrans %}
+            </div></a>
+
+            <a href="{% url 'app:consent' %}?agegroup=child"><div class="ui primary button">
+                {% blocktrans %}7-11 Jahre{% endblocktrans %}
+            </div></a>
+
+            <a href="{% url 'app:pages' page='too_young.html' %}"><div class="ui primary button">
+                {% blocktrans %}0-6 Jahre{% endblocktrans %}
+            </div></a>
+        </div>
+
+        <a href="{% url 'app:index' %}"><div class="ui basic button">
+            {% blocktrans %}Zurück{% endblocktrans %}
+        </div></a>
+
+    <div class="ui basic segment">
+        Bevor wir Sie teilnehmen lassen dürfen, müssen wir Ihnen Informationsmaterial in altersgemäßer
+        Formulierung bereit stellen. Außerdem müssen wir bei Minderjährigen nach dem Einverständnis der
+        Eltern oder Sorgeberechtigten fragen. Daher fragen wir hier, ob Sie volljährig sind.
+    </div>
+
+{% endblock %}

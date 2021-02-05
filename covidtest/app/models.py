@@ -65,3 +65,9 @@ class Event(models.Model):
     comment = models.TextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True)
     updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+
+class Consent(models.Model):
+    consent_type = models.CharField(max_length=50)
+    md5 = models.CharField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True,)
+    registration = models.ForeignKey(Registration, on_delete=models.CASCADE, related_name="consents")
