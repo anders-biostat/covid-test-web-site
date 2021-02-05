@@ -1,26 +1,33 @@
 {% extends "public/base.html" %}
 {% load i18n %}
 
-
 {% block content %}
-<h1 class="ui header centered">{% blocktrans %}Teilnahme am Coronavirus-Test{% endblocktrans %}</h1>
-<div class="consent-box">
-    {% include 'public/information-text.html' %}
+<h1 class="ui header centered">{% blocktrans %}Einverständnis zur Teilnahme{% endblocktrans %}</h1>
+<h3>Informationsschrift {{page_number}} von {{num_pages}}</h3>
+
+<div>
+    {% block preamble %} {% endblock %}
 </div>
 
-<form class="ui form" action="{% url 'app:consent' %}" method="POST">
-    {% csrf_token %}
+<div class="consent-box">
+    {% block info_text %} {% endblock %}
+</div>
 
+<form class="ui form" action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="consent_type" value="{{consent_type}}">
     <div style="text-align: center;" class="field">
         <div class="ui checkbox">
             <input
-                    name="terms"
+                    name="consent_given"
                     type="checkbox"
                     id="TOC"
                     value="1"
                     onclick="EnableSubmit(this)"
             />
-            <label>{% blocktrans %}Ich bin einverstanden und möchte am Test teilnehmen.{% endblocktrans %}</label>
+            <label>
+            {% block checkbox_text %} {% endblock %}
+            </label>
         </div>
     </div>
 
