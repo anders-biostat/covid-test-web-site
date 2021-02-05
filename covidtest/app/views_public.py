@@ -157,7 +157,7 @@ def register(request):
             registration = create_registration(sample, form.cleaned_data)
             save_consents(request, registration)
             sample.events.create(status="INFO", comment="sample registered")
-            clear_consent_session(request.session)
+            request.session.flush()
             messages.add_message(request, messages.SUCCESS, _("Erfolgreich registriert"))
             return redirect("app:instructions")
     return render(request, "public/register.html", {"form": form})
