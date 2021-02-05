@@ -1,4 +1,4 @@
-{% extends "public/consent.html" %}
+{% extends bare|yesno:"public/bareinfotext.html,public/consent.html" %}
 
 {% block preamble %}
 für Eltern/Sorgeberechtigte: Bitte lesen Sie den folgenden Informationstext und klicken Sie ganz unten, wenn Sie einverstanden sind.
