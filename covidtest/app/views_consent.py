@@ -92,7 +92,7 @@ class ConsentView(View):
 
 def get_consent_md5(consent_type):
     # get full path of HTML file with info and consent text
-    filepath = get_template(get_template_file_for_consent_type).origin.name
+    filepath = get_template(get_template_file_for_consent_type(consent_type)).origin.name
     # calculate its MD5 hash
     with open(filepath, 'rb' ) as f:
         hashsum = hashlib.md5(f.read())

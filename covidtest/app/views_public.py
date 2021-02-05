@@ -155,7 +155,7 @@ def register(request):
 
             request.session["access_code"] = access_code
             registration = create_registration(sample, form.cleaned_data)
-            save_consents(request.session, registration)
+            save_consents(request, registration)
             sample.events.create(status="INFO", comment="sample registered")
             clear_consent_session(request.session)
             messages.add_message(request, messages.SUCCESS, _("Erfolgreich registriert"))
@@ -167,7 +167,7 @@ def get_access_code(form):
     return form.cleaned_data["access_code"].upper().strip()
 
 
-def save_consents(session, registration):
+def save_consents(request, registration):
     for consent_type in request.session["consents_obtained"]:
         md5 = get_consent_md5(consent_type)
         registration.consents.create(consent_type=consent_type, md5=md5)
