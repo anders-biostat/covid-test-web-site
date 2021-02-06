@@ -1,5 +1,6 @@
 import binascii
 import hashlib
+import logging
 
 from django.contrib import messages
 from django.shortcuts import redirect, render
@@ -12,8 +13,10 @@ from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
 from .views_consent import get_consent_md5
 
+log = logging.getLogger(__name__)
 
 def index(request):
+    request.session.flush()
     access_code = None
     if "code" in request.GET:
         access_code = request.GET["code"]
@@ -135,10 +138,11 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    # TODO possibly better to check for length of consent to make sure some are actually given
-    # TODO redirect to consent page instead of throwing error
-    if not "consents_obtained" in request.session:
-        raise Exception("Register page accessed without going through consent pages.")
+
+    # TODO to further increase security, sessions could be made to expire
+    if len(request.session.get("consents_obtained", list())) == 0:
+        log.warning("Register page accessed without going through consent pages.")
+        return redirect("app:consent_age")
 
     request.session["access_code"] = None
 
