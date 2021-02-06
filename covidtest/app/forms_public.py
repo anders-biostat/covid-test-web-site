@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+import bleach
 
 
 class ConsentForm(forms.Form):
@@ -10,7 +11,6 @@ class AgeGroupForm(forms.Form):
     age = forms.IntegerField(required=True)
 
 class RegistrationForm(forms.Form):
-    # TODO implement solution of cleaning the data properly to prevent XSS attacks
     class Meta:
         layout = [
             ("Field", "access_code"),
@@ -33,6 +33,15 @@ class RegistrationForm(forms.Form):
     contact = forms.CharField(
         label=_("Telefonnummer:"), widget=forms.TextInput(attrs={"placeholder": _("Telefonnummer")})
     )
+
+    def clean_name(self):
+        return bleach.clean(self.cleaned_data["name"])
+
+    def clean_address(self):
+        return bleach.clean(self.cleaned_data["address"])
+
+    def clean_contact(self):
+        return bleach.clean(self.cleaned_data["contact"])
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
