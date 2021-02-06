@@ -135,6 +135,8 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
+    # TODO possibly better to check for length of consent to make sure some are actually given
+    # TODO redirect to consent page instead of throwing error
     if not "consents_obtained" in request.session:
         raise Exception("Register page accessed without going through consent pages.")
 
@@ -154,6 +156,7 @@ def register(request):
                 return render(request, "public/register.html", {"form": form})
 
             request.session["access_code"] = access_code
+            # ! A registration can be created without ensuring a corresponding consent is created with it
             registration = create_registration(sample, form.cleaned_data)
             save_consents(request, registration)
             sample.events.create(status="INFO", comment="sample registered")
@@ -168,6 +171,7 @@ def get_access_code(form):
 
 
 def save_consents(request, registration):
+    # TODO if len of consents is 0, no consent will be created
     for consent_type in request.session["consents_obtained"]:
         md5 = get_consent_md5(consent_type)
         registration.consents.create(consent_type=consent_type, md5=md5)

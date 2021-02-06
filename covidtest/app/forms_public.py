@@ -10,6 +10,7 @@ class AgeGroupForm(forms.Form):
     age = forms.IntegerField(required=True)
 
 class RegistrationForm(forms.Form):
+    # TODO implement solution of cleaning the data properly to prevent XSS attacks
     class Meta:
         layout = [
             ("Field", "access_code"),
