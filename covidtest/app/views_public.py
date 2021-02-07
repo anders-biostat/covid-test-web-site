@@ -177,6 +177,8 @@ def get_access_code(form):
 def save_consents(request, registration):
     # TODO if len of consents is 0, no consent will be created
     for consent_type in request.session["consents_obtained"]:
+        # TODO if an invalid consent type is submitted somehow, create better
+        #  solution than throwing a TemplateDoesNotExistError
         md5 = get_consent_md5(consent_type)
         registration.consents.create(consent_type=consent_type, md5=md5)
 
