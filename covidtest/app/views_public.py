@@ -22,7 +22,7 @@ def index(request):
         access_code = request.GET["code"]
     if access_code is not None:
         request.session["access_code"] = access_code
-        return redirect("app:consent")
+        return redirect("app:consent_age")
     return render(request, "public/index.html")
 
 
