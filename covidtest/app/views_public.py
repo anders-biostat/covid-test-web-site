@@ -1,5 +1,6 @@
 import binascii
 import hashlib
+import logging
 
 from django.contrib import messages
 from django.shortcuts import redirect, render
@@ -12,14 +13,16 @@ from .models import Event, Registration, RSAKey, Sample
 from .statuses import SampleStatus
 from .views_consent import get_consent_md5
 
+log = logging.getLogger(__name__)
 
 def index(request):
+    request.session.flush()
     access_code = None
     if "code" in request.GET:
         access_code = request.GET["code"]
     if access_code is not None:
         request.session["access_code"] = access_code
-        return redirect("app:consent")
+        return redirect("app:consent_age")
     return render(request, "public/index.html")
 
 
@@ -135,8 +138,11 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    if not "consents_obtained" in request.session:
-        raise Exception("Register page accessed without going through consent pages.")
+
+    # TODO to further increase security, sessions could be made to expire
+    if len(request.session.get("consents_obtained", list())) == 0:
+        log.warning("Register page accessed without going through consent pages.")
+        return redirect("app:consent_age")
 
     request.session["access_code"] = None
 
@@ -154,6 +160,7 @@ def register(request):
                 return render(request, "public/register.html", {"form": form})
 
             request.session["access_code"] = access_code
+            # ! A registration can be created without ensuring a corresponding consent is created with it
             registration = create_registration(sample, form.cleaned_data)
             save_consents(request, registration)
             sample.events.create(status="INFO", comment="sample registered")
@@ -168,7 +175,10 @@ def get_access_code(form):
 
 
 def save_consents(request, registration):
+    # TODO if len of consents is 0, no consent will be created
     for consent_type in request.session["consents_obtained"]:
+        # TODO if an invalid consent type is submitted somehow, create better
+        #  solution than throwing a TemplateDoesNotExistError
         md5 = get_consent_md5(consent_type)
         registration.consents.create(consent_type=consent_type, md5=md5)
 

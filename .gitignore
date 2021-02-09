@@ -6,6 +6,7 @@
 
 # Python
 __pycache__/
+.python-version
 
 # Pybabel
 messages.pot
@@ -21,6 +22,7 @@ messages.pot
 subjects.csv
 db.sqlite3
 postgres-data
+logs_django/
 
 # Editor
 .idea/

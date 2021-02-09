@@ -36,6 +36,7 @@ def consent_pages_to_be_displayed( agegroup ):
         consents.append({"consent_type": "children", "required": True})
         consents.append({"consent_type": "children_biobank", "required": True})
     else:
+        # TODO handle this exception in case some enters with an invalid agegroup
         raise Exception("Unexpected 'agegroup' value.")
 
     return consents
@@ -48,7 +49,8 @@ class ConsentView(View):
     def render_info_and_consent(self, request):
 
         if "consent_forms_to_be_displayed" not in request.session:
-            raise Exception("Consent page accessed bypassing age query")
+            logger.warning("Consent page accessed bypassing age query")
+            return redirect("app:consent_age")
 
         # Is there still work to do?
         if len(request.session["consent_forms_to_be_displayed"]) == 0:
