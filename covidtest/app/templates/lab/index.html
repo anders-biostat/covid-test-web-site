@@ -1,22 +1,33 @@
 {% extends 'lab/base.html' %}
 {% load i18n %}
+{% load permissions %}
 {% block content %}
 <div>
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans  %}</h1>
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans %}</h1>
     <p>
         {% blocktrans %}
         Dies ist das Laborinterface, um Datensätze der Testungen zu editieren. Folgende Prozesse stehen zur Verfügung:
         {% endblocktrans %}
-     </p>
+    </p>
 
+    {% if user|is_allowed_to:"read_and_edit" %}
     <h3 class="ui header">
-        {% blocktrans %}Probeneingang{% endblocktrans %}
+        {% blocktrans %}Probe suchen{% endblocktrans %}
     </h3>
     <p>
         {% blocktrans %}
-            Hier werden nach dem Empfang der Probe die Probenröhrchen den
-            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der Barcode des Racks eingescannt werden
-            und nachfolgend alle Probenröhrchen dieses Racks eingescannt werden.
+        Hier können einzelne Proberöhrchen gesucht werden und der Status sowie das Rack manuell gesetzt werden.
+        {% endblocktrans %}
+    </p>
+
+    <h3 class="ui header">
+        {% blocktrans %}Batch Proben Status{% endblocktrans %}
+    </h3>
+    <p>
+        {% blocktrans %}
+        Hier werden nach dem Empfang der Probe die Probenröhrchen den
+        jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der Barcode des Racks eingescannt werden
+        und nachfolgend alle Probenröhrchen dieses Racks eingescannt werden.
         {% endblocktrans %}
     </p>
 
@@ -25,20 +36,22 @@
     </h3>
     <p>
         {% blocktrans %}
-            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu wird das Rack eingescannt und danach
-            jeweils die positiven und unklaren Probenröhrchen eingescannt. Alle nicht eingescannten Proben
-            des Racks werden automatisch als negativ gewertet. Die Listen der positiven/unklaren Proben werden
-            einfach zeilenweise eingefügt (Barcode-Scanner).
+        Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu wird das Rack eingescannt und danach
+        jeweils die positiven und unklaren Probenröhrchen eingescannt. Alle nicht eingescannten Proben
+        des Racks werden automatisch als negativ gewertet. Die Listen der positiven/unklaren Proben werden
+        einfach zeilenweise eingefügt (Barcode-Scanner).
         {% endblocktrans %}
     </p>
-
+    {% else %}
     <h3 class="ui header">
         {% blocktrans %}Probe suchen{% endblocktrans %}
     </h3>
     <p>
         {% blocktrans %}
-            Hier können einzelne Proberöhrchen gesucht werden und der Status sowie das Rack manuell gesetzt werden.
+        Hier können einzelne Proberöhrchen gesucht werden.
         {% endblocktrans %}
     </p>
+    {% endif %}
+
 </div>
 {% endblock %}

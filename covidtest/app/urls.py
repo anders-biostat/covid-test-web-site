@@ -26,6 +26,7 @@ urlpatterns = [
     path("pages/<str:page>", views_public.pages, name="pages"),
     path("lab", views_lab.index, name="lab_index"),
     path("lab/login", auth_views.LoginView.as_view(), {"template_name": "lab/login.html"}, name="login"),
+    path("lab/logout", auth_views.LogoutView.as_view(next_page="app:login"), name="logout"),
     path("lab/checkin", views_lab.sample_check_in, name="checkin"),
     path("lab/rack", views_lab.sample_edit_rack, name="edit_rack"),
     path("lab/samples/detail_snippet", views_lab.sample_details_snippet, name="sample_details_snippet"),

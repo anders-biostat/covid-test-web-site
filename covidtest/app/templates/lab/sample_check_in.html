@@ -3,61 +3,56 @@
 
 {% block content %}
 <script>
-    $(window).ready(function() {
-        if ($("input[name=rack]").val() == ""){
-            var input = $("input[name=rack]");
-            input.focus();
-            input.select();
-        }
-        $("input[name=rack]").on("keypress", function (event) {
-            var keyPressed = event.keyCode || event.which;
-            if (keyPressed === 13) {
-                event.preventDefault();
-                var input = $("input[name=barcode]");
-                input.focus();
-                input.select();
-                return false;
-            }
-        });
+  $(window).ready(function () {
+    if ($("input[name=rack]").val() == "") {
+      var input = $("input[name=rack]");
+      input.focus();
+      input.select();
+    }
+    $("input[name=rack]").on("keypress", function (event) {
+      var keyPressed = event.keyCode || event.which;
+      if (keyPressed === 13) {
+        event.preventDefault();
+        var input = $("input[name=barcode]");
+        input.focus();
+        input.select();
+        return false;
+      }
     });
+  });
 
 
-    $('.ui.positive.message')
+  $('.ui.positive.message')
     .modal({
-        onShow: function () {
-          $(".ui.dimmer").css("background-color","rgba(0,255,0,0.8)");
-        },
+      onShow: function () {
+        $(".ui.dimmer").css("background-color", "rgba(0,255,0,0.8)");
+      },
     })
     .modal('show')
     .delay(400)
-    .queue(function() {
-        $(this).modal('hide').dequeue();
+    .queue(function () {
+      $(this).modal('hide').dequeue();
     });
 
-    $('.ui.error.message')
+  $('.ui.error.message')
     .modal({
-        onShow: function () {
-          $(".ui.dimmer").css("background-color","rgba(255,0,0,0.8)");
-        }
+      onShow: function () {
+        $(".ui.dimmer").css("background-color", "rgba(255,0,0,0.8)");
+      }
     })
     .modal('show')
     .delay(1000)
-    .queue(function() {
-        $(this).modal('hide').dequeue();
+    .queue(function () {
+      $(this).modal('hide').dequeue();
     });
-
-
-
-
 
 
 </script>
 
 <style>
     .ui.dimmer {
-        background-color: rgba(0,255,0,0.7);
+        background-color: rgba(0, 255, 0, 0.7);
     }
-
 
 
 </style>
@@ -68,15 +63,10 @@
     {{ form.errors }}
     {{ form.non_field_errors }}
 
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Proben registrieren{% endblocktrans %}</h1>
-    <p>
-        {% blocktrans %}
-        Hier können Barcodes als eingegangen markiert werden:
-        {% endblocktrans%}
-    </p>
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Proben Status{% endblocktrans %}</h1>
 
     <p>
-        Hier kann ein Status für Barcodes gesetzt werden.
+        Hier kann der Status einer oder mehrerer Proben gesetzt werden.
     </p>
 
     <form style="margin-bottom: 20px;" action="{% url 'app:checkin' %}" method="post" class="ui form">
@@ -90,15 +80,16 @@
                     {{ form.barcodes }}
                 </div>
                 <div class="required field">
-                    <label>{{ form.rack.label }}</label>
-                    {{ form.rack }}
-                </div>
-                <div class="required field">
                     <label>Status</label>
                     {{ form.status }}
                 </div>
             </div>
-            <div>
+            <div class="field">
+                <label>{{ form.rack.label }}</label>
+                {{ form.rack }}
+            </div>
+            <div class="field">
+                <label>{{form.comment.label}}</label>
                 {{ form.comment }}
             </div>
             <br>

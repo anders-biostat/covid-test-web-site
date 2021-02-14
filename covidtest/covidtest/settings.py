@@ -165,7 +165,9 @@ REST_FRAMEWORK = {
 # Login
 #
 
-LOGIN_URL = "/admin/login/"
+#LOGIN_URL = "/admin/login/"
+LOGIN_URL = '/lab/login'
+#LOGOUT_REDIRECT_URL = 'app:login'
 
 
 ## Logging
