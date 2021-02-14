@@ -37,6 +37,13 @@ the root directory. You can copy the `example.env`
 $ cp example.env .env
 ```
 
+### User Permissions
+In order for permissions to work, add two permission groups 
+at the admin dashboard.
+1. Group - name = "only_read" permissions = all "can view" permissions
+2. Group - name = "read_and_edit" permissions = all permissions
+
+
 ## Usage
 
 For testing the application can be started with the command `python manage.py runserver`:
