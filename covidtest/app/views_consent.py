@@ -79,8 +79,19 @@ class ConsentView(View):
         form = ConsentForm(request.POST)
         if form.is_valid():
             # First assert that we use the right template
-            if request.session["consent_forms_to_be_displayed"][0]["consent_type"] != form.cleaned_data["consent_type"]:
-                raise Exception("Template mix-up")
+            # TODO find a better solution for this fix
+            #  An error occurs if a user clicks on consent and then goes one step back via the browser button
+            try:
+                if request.session["consent_forms_to_be_displayed"][0]["consent_type"] != form.cleaned_data["consent_type"]:
+                    raise ValueError("Template mix-up")
+            except (IndexError, ValueError) as e:
+                logger.warning(e)
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    _("Ein technischer Fehler ist aufgetreten. Bitte die Registrierung nochmals versuchen.")
+                )
+                return redirect("app:index")
             # Now store the consent in the session
             if form.cleaned_data["consent_given"]:
                 request.session["consents_obtained"].append( form.cleaned_data["consent_type"] )
