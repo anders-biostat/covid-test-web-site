@@ -80,7 +80,7 @@ def sample_check_in(request):
                 else:
                     sample.rack = rack
                     sample.save()
-                    set_status = sample.set_status(status, comment=comment)
+                    set_status = sample.set_status(status, comment=comment, author=request.user)
                     if not set_status:
                         status_not_set.append(barcode)
                     else:
@@ -116,50 +116,9 @@ def sample_check_in(request):
 
 
 @login_required
-@permission_required("sample.can_change_sample", login_url='/lab')
-def sample_edit_rack(request):
-    form = LabRackResultsForm()
-    if request.method == "POST":
-        form = LabRackResultsForm(request.POST)
-        if form.is_valid():
-            rack = form.cleaned_data["rack"].upper().strip()
-            lamp_positive = form.data["lamp_positive"].split()
-            lamp_inconclusive = form.data["lamp_inconclusive"].split()
-            lamp_failed = form.data["lamp_failed"].split()
-            lamp_positive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_positive]
-            lamp_inconclusive = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_inconclusive]
-            lamp_failed = [x.replace("\n", "").replace("\r", "").strip() for x in lamp_inconclusive]
-
-            rack_samples = Sample.objects.filter(rack=rack)
-            if len(rack_samples) > 0:
-                for sample in rack_samples:
-                    status = SampleStatus.LAMPNEG
-                    if sample.barcode in lamp_positive:
-                        status = SampleStatus.LAMPPOS
-                    if sample.barcode in lamp_inconclusive:
-                        status = SampleStatus.LAMPINC
-                    if sample.barcode in lamp_failed:
-                        status = SampleStatus.LAMPFAIL
-
-                    set_status = sample.set_status(status, author=request.user.get_username())
-                    barcodes_status_set = []
-                    if not set_status:
-                        messages.add_message(
-                            request, messages.ERROR, _("Status konnte nicht gesetzt werden: ") + str(sample.barcode)
-                        )
-                    else:
-                        barcodes_status_set.append(sample.barcode)
-                messages.add_message(
-                    request, messages.SUCCESS, _("Ergebnisse hinzugefügt: ") + ", ".join(barcodes_status_set)
-                )
-            else:
-                messages.add_message(request, messages.ERROR, _("Keine Proben zu Rack gefunden"))
-
-    return render(request, "lab/sample_rack_results.html", {"form": form})
-
-
-@login_required
 def sample_detail(request):
+    sample_detail_template = "lab/sample_query.html"
+
     form = LabQueryForm()
     edit_form = LabProbeEditForm()
     if request.method == "POST":
@@ -174,7 +133,7 @@ def sample_detail(request):
                     edit_form = LabProbeEditForm(initial={"rack": sample.rack, "comment": "Status changed in lab interface"})
                 return render(
                     request,
-                    "lab/sample_query.html",
+                    sample_detail_template,
                     {"form": form, "edit_form": edit_form, "sample": sample, "search": search},
                 )
         if "edit" in request.POST.keys():
@@ -193,7 +152,8 @@ def sample_detail(request):
                         event = Event(
                             sample=sample,
                             status=SampleStatus.INFO,
-                            comment="Rack changed in lab interface from "+str(sample.rack)+" to "+str(rack)+"."
+                            comment="Rack changed in lab interface from "+str(sample.rack)+" to "+str(rack)+".",
+                            updated_by=request.user
                         )
                         sample.rack = rack
                         sample.save()
@@ -204,15 +164,16 @@ def sample_detail(request):
                         event = Event(
                             sample=sample,
                             status=status.value,
-                            comment=comment
+                            comment=comment,
+                            updated_by=request.user
                         )
                         event.save()
                         messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
                 return render(
-                    request, "lab/sample_query.html", {"form": form, "edit_form": edit_form, "sample": sample}
+                    request, sample_detail_template, {"form": form, "edit_form": edit_form, "sample": sample}
                 )
 
-    return render(request, "lab/sample_query.html", {"form": form, "edit_form": edit_form})
+    return render(request, sample_detail_template, {"form": form, "edit_form": edit_form})
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
