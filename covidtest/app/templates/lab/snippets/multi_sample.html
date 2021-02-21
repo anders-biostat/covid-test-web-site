@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load permissions %}
+<div class="ui red top attached segment">
+    <div class="content">
+        <h2 class="ui header">{% blocktrans %}Samples{% endblocktrans %}</h2>
+        <div class="extra content">
+
+            <table class="ui celled padded table">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Barcode</th>
+                    <th class="single line">Access code</th>
+                    <th>Bag</th>
+                    <th>Rack</th>
+                    <th class="single line">Status Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sample in multi_sample %}
+                <tr>
+                    <td>
+                        <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
+                    </td>
+                    <td class="single line">
+                        {{sample.barcode}}
+                    </td>
+                    <td class="single line">
+                        {{sample.access_code}}
+                    </td>
+                    <td class="single line">
+                        {{sample.bag.name}}
+                    </td>
+                    <td class="single line">
+                        {{sample.rack}}
+                    </td>
+                    <td>
+                        {{sample.get_status.comment}}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+

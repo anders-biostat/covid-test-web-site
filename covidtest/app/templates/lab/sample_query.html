@@ -6,7 +6,7 @@
     <h1 class="ui header">{% blocktrans %}Lab Interface - Suche{% endblocktrans %}</h1>
     <p>
         {% blocktrans %}
-        Hier kann nach barcodes oder access codes gesucht werden:
+        Hier kann nach Barcodes, Access Codes, Bags, Racks oder Status gesucht werden:
         {% endblocktrans %}
     </p>
 
@@ -15,7 +15,7 @@
         <div class="ui search">
             <div class="ui icon input">
                 <input name="search" class="prompt" type="text"
-                       placeholder="{% blocktrans %}Enter barcode/access code...{% endblocktrans %}" autofocus>
+                       placeholder="{% blocktrans %}Enter barcode/access code/bag/rack...{% endblocktrans %}" autofocus>
                 <button class="ui button" style="margin-left: 5px;" type="submit">
                     Suchen
                 </button>
@@ -25,12 +25,26 @@
     </form>
 
     {% if search %}
-    <p>{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</p>
+    {% if sample %}
+    <h3 class="ui header">{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</h3>
+    {% else %}
+        <h3 class="ui header">
+            {{ multi_sample|length }}
+            {% if multi_sample|length == 1 %}
+            Ergebnis
+            {% else %}
+            Ergebnisse
+            {% endif %}
+            für: {{search}}
+        </h3>
+    {% endif %}
     {% endif %}
 
 
     {% if sample %}
     {% include 'lab/snippets/sample.html' %}
+    {% elif multi_sample %}
+    {% include 'lab/snippets/multi_sample.html' %}
     {% elif search %}
     <div class="ui warning message">
         <p>{% blocktrans %}Keine Probe mit diesem Barcode gefunden.{% endblocktrans %}</p>
