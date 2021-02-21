@@ -49,8 +49,8 @@ def render_status(request, event):
             return render(request, "public/pages/test-LAMPINC.html")
         if status == SampleStatus.LAMPFAIL:
             return render(request, "public/pages/test-LAMPFAIL.html")
-        if status == SampleStatus.LAMPRECEIVED:
-            return render(request, "public/pages/test-LAMPRECEIVED.html")
+        if status == SampleStatus.RECEIVED:
+            return render(request, "public/pages/test-RECEIVED.html")
         if status == SampleStatus.LAMPREPEAT:
             return render(request, "public/pages/test-LAMPREPEAT.html")
         if status == SampleStatus.UNDEF:

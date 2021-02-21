@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class SampleStatus(Enum):
-    LAMPRECEIVED = "LAMPRECEIVED"
+    RECEIVED = "RECEIVED"
     LAMPREPEAT = "LAMPREPEAT"
     LAMPPOS = "LAMPPOS"
     LAMPNEG = "LAMPNEG"
