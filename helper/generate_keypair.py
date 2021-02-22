@@ -18,7 +18,7 @@ if passphrase == "":
     print("You have entered an empty passphrase. You private key will not get encrypted.")
 
 print("Generating key pair.")
-key = Crypto.PublicKey.RSA.generate(3072)
+key = Crypto.PublicKey.RSA.generate(4096)
 
 # Get fingerprint
 md5_instance = hashlib.md5()
