@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin, SingleTableView
-from django.db.models import Q
+from django.db.models import Q, Max
 
 from .forms_lab import LabCheckInForm, LabGenerateBarcodeForm, LabProbeEditForm, LabQueryForm, LabRackResultsForm
 from .models import Event, Registration, RSAKey, Sample
@@ -128,11 +128,7 @@ def sample_detail(request):
             if form.is_valid():
                 search = form.cleaned_data["search"].upper().strip()
                 single_sample = Sample.objects.filter(Q(barcode=search) | Q(access_code=search)).first()
-                multi_sample = Sample.objects.filter(
-                    Q(rack__icontains=search) |
-                    Q(bag__name__icontains=search)
-                    # Q(events__status__contains=search) # TODO only find the newest status
-                )
+
                 if single_sample:
                     edit_form = LabProbeEditForm(initial={"rack": single_sample.rack, "comment": "Status changed in lab interface"})
                     return render(
@@ -140,18 +136,31 @@ def sample_detail(request):
                         sample_detail_template,
                         {"form": form, "edit_form": edit_form, "sample": single_sample, "search": search},
                     )
-                elif multi_sample:
-                    return render(
-                        request,
-                        sample_detail_template,
-                        {"form": form, "multi_sample": multi_sample, "search": search},
-                    )
                 else:
-                    return render(
-                        request,
-                        sample_detail_template,
-                        {"form": form, "edit_form": edit_form, "search": search},
+                    # TODO this probably needs some sort of pagination in the future
+                    #  to prevent sending too many samples in response
+                    sample_pks = []
+                    events = Event.objects.filter(status__icontains=search)
+                    if events:
+                        event_list = events.values("sample").annotate(updated_on=Max("updated_on"))
+                        sample_pks = [event["sample"] for event in event_list]
+                    multi_sample = Sample.objects.filter(
+                        Q(rack__icontains=search) |
+                        Q(bag__name__icontains=search) |
+                        Q(pk__in=sample_pks)
                     )
+                    if multi_sample:
+                        return render(
+                            request,
+                            sample_detail_template,
+                            {"form": form, "multi_sample": multi_sample, "search": search},
+                        )
+                    else:
+                        return render(
+                            request,
+                            sample_detail_template,
+                            {"form": form, "edit_form": edit_form, "search": search},
+                        )
         if "edit" in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
             if edit_form.is_valid():
