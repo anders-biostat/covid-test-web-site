@@ -1,0 +1,255 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'COVID19-LAB' %}</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+    <style>
+        body {
+            background-color: #ecf0f1;
+        }
+
+        .ui.segment {
+            margin: 10px;
+            padding: 20px;
+        }
+        .textField {
+            margin-top: 30px;
+            margin-right: 30px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<div class="ui red top attached segment"
+     style="max-width: 900px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -90%);">
+    <h3 style="text-align: center">Zentrum für Molekulare Biologie der Universität Heidelberg
+        LAMP-Test-Station
+    </h3>
+    <div style="text-align: center" class="textField">
+        Dechiffrierung codierter Fallmeldungen</br>
+        durch Mitarbeiter des Gesundheitsamtes Rhein-Neckar-Kreis
+    </div>
+    <div class="textField">
+        Hintergrund: An der Universität werden Covid19-Tests für Mitarbeiter, Studierende und andere Personen angeboten,
+        bei denen die Probanden Ihre Test-Kits online auf https://coronatest-hd.de registrieren. Name und Kontaktdaten
+        der Probanden werden dabei sofort so verschlüsselt, dass auch die Mitarbeiter des Test-Labors sie nicht mehr
+        einsehen können. Der Schlüssel zur Entschlüsselung liegt dem Gesundheitsamt aber vor.
+    </div>
+    <div class="textField">
+        Unser Labor gibt möglicherweise positive Proben an das diagnostische Labor der Virologie der Universitätsklinik
+        zur Validierung durch PCR weiter. Wenn die PCR-Analyse positiv auffällt, generiert das IT-System des
+        Kliniklabors automatisch eine Meldung per Fax an das Gesundheitsamt.
+    </div>
+    <div class="textField">
+        Wenn Sie also eine Covid19-Fallmeldung von der Virologie der Universitätsklinik erhalten, in der statt eines
+        Patienten-Namens lediglich ein Code angegeben ist, so handelt es sich vermutlich um einen Probe von uns.
+    </div>
+    <div class="textField">
+        Dann können Sie auf dieser Seite die Identität bestimmen. Füllen Sie dazu das folgende Formular aus:
+    </div>
+    <div style="margin-bottom: 10px;" class="extra content">
+        <div class="ui small feed">
+            {% for reg in sample.registrations.all %}
+            <div class="event">
+                <div class="content">
+                    <div class="summary">
+                        {{ reg.time|date:"Y-m-d H:i:s" }}
+                    </div>
+                    <div class="regInfo">
+                        {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %}
+                        <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <button class="ui button" onclick="requestPrivateKey();">Registrierungen entschüsseln
+    </button>
+    <div class="ui negative hidden message prKeyMessage" id="encrypted">
+        Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben
+        Sie das Passwort für Ihren privaten Schlüssel an.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
+        Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch
+        einmal.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
+        Die gewählte Datei enthält keinen RSA-Geheimschlüssel.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="notPem">
+        Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="wrongKey">
+        Der geheime Schlüssel passt nicht zu der verschlüsselten Information.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
+    <div>
+        Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter folgender
+        Dienst-Handy-Nummer:
+        01525 7908 378
+
+    </div>
+</div>
+<div class="ui tiny modal">
+    <div class="ui header">Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.
+    </div>
+    <div class="content">
+        <form class="ui form" id="prKeyInput">
+            <div class="required field">
+                <label>Geheimschlüssel-Datei (.pem)</label>
+                <div class="ui icon input">
+                    <input type="file" style="display: none;">
+                    <input type="text" placeholder="PrivateKey.pem" readonly>
+                    <i class="attach icon"></i>
+                </div>
+            </div>
+            <div class="field">
+                <label>Passwort für den Geheimschlüssel (optional)</label>
+                <input type="password">
+            </div>
+        </form>
+        <div class="ui negative hidden message">
+            <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui cancel button">Abbrechen</div>
+        <div class="ui approve button">Entschlüsseln</div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
+<script type="text/javascript">
+  $("#prKeyInput input:text").click(function () {
+    $(this).parent().find("input:file").click();
+  });
+  $("#prKeyInput input:file").on("change", function (e) {
+    var name = e.target.files[0].name;
+    $(this).parent().find("input:text").val(name);
+  });
+
+  var registrations = [];
+  {%
+    for reg in sample.registrations.all %}
+  registrations.push({
+    name_encrypted: '{{ reg.name_encrypted }}',
+    address_encrypted: '{{ reg.address_encrypted }}',
+    contact_encrypted: '{{ reg.contact_encrypted }}',
+    session_key_encrypted: '{{ reg.session_key_encrypted }}',
+    aes_instance_iv: '{{ reg.aes_instance_iv }}'
+  });
+  {%
+    endfor %
+  }
+
+  function requestPrivateKey() {
+    $(".ui.tiny.modal")
+      .modal({
+        onApprove: function () {
+          var files = $(this).find("input:file").prop("files");
+          $(".prKeyMessage").hide();
+          if (files.length == 0) {
+            $(this).find(".message").show();
+            return false
+          } else {
+            $(this).find(".message").hide();
+            loadKey(files[0], $(this).find("input:password").val());
+            return true;
+          }
+        }
+      })
+      .modal("show");
+  };
+
+  function loadKey(file, password) {
+    var decrypted = [];
+
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function (evt) {
+      registrations.forEach(data => {
+        var decryptedData;
+        try {
+          decryptedData = decrypt(data, reader.result, password);
+        } catch (e) {
+          if (e.message.indexOf("PEM is encrypted") > -1) {
+            $("#encrypted").show();
+          } else if (e.message.indexOf("privateKey is null") > -1) {
+            $("#wrongPassword").show();
+          } else if (e.message.indexOf("PEM header type is not") > -1) {
+            $("#notPrivateKey").show();
+          } else if (e.message.indexOf("Invalid PEM formatted message") > -1) {
+            $("#notPem").show();
+          } else if (e.message.indexOf("padding") > -1) {
+            $("#wrongKey").show();
+          } else {
+            $("#somethingElse")
+              .html(e.message)
+              .show();
+          }
+          decryptedData = {};
+        }
+
+        decrypted.push(decryptedData);
+      });
+      addRegInfo(decrypted);
+    }
+    reader.onerror = function (evt) {
+      alert("Error reading private key file");
+    }
+  };
+
+  function addRegInfo(regInfo) {
+    $(".regInfo").each((i, el) => {
+      var inf = Object.keys(regInfo[i])
+        .reduce((str, key) => str + "<b>" + key + ":</b> " + regInfo[i][key] + "<br>", "");
+      if (inf) $(el).html(inf);
+    })
+  };
+
+  function decrypt(data, privateKeyPem, password) {
+    var privateKey;
+    if (password)
+      privateKey = forge.pki.decryptRsaPrivateKey(privateKeyPem, password)
+    else
+      privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
+
+    Object.keys(data).forEach(key => {
+      data[key + "_decoded"] = forge.util.decode64(data[key]);
+    });
+
+    var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP");
+
+    var encrypted_fields = ["name", "address", "contact"];
+
+    var decipher = forge.cipher.createDecipher('AES-CBC', session_key);
+    decipher.start({iv: data.aes_instance_iv_decoded});
+    encrypted_fields.forEach(el => {
+      decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
+    })
+
+    var output = decipher.output.data;
+
+    var result = {};
+    var i = 0;
+    encrypted_fields.forEach(el => {
+      result[el] = output
+        .slice(i, i + data[el + "_encrypted_decoded"].length)
+        .replace(/\0/g, '');
+      i += data[el + "_encrypted_decoded"].length;
+      result[el] = forge.util.decodeUtf8(result[el])
+    });
+
+    return result;
+  }
+</script>
+
+
