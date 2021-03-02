@@ -16,112 +16,161 @@
             margin: 10px;
             padding: 20px;
         }
+
         .textField {
             margin-top: 30px;
+        }
+
+        .content {
             margin-right: 30px;
             margin-left: 30px;
         }
     </style>
 </head>
 <div class="ui red top attached segment"
-     style="max-width: 900px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -90%);">
-    <h3 style="text-align: center">Zentrum für Molekulare Biologie der Universität Heidelberg
-        LAMP-Test-Station
-    </h3>
-    <div style="text-align: center" class="textField">
-        Dechiffrierung codierter Fallmeldungen</br>
-        durch Mitarbeiter des Gesundheitsamtes Rhein-Neckar-Kreis
-    </div>
-    <div class="textField">
-        Hintergrund: An der Universität werden Covid19-Tests für Mitarbeiter, Studierende und andere Personen angeboten,
-        bei denen die Probanden Ihre Test-Kits online auf https://coronatest-hd.de registrieren. Name und Kontaktdaten
-        der Probanden werden dabei sofort so verschlüsselt, dass auch die Mitarbeiter des Test-Labors sie nicht mehr
-        einsehen können. Der Schlüssel zur Entschlüsselung liegt dem Gesundheitsamt aber vor.
-    </div>
-    <div class="textField">
-        Unser Labor gibt möglicherweise positive Proben an das diagnostische Labor der Virologie der Universitätsklinik
-        zur Validierung durch PCR weiter. Wenn die PCR-Analyse positiv auffällt, generiert das IT-System des
-        Kliniklabors automatisch eine Meldung per Fax an das Gesundheitsamt.
-    </div>
-    <div class="textField">
-        Wenn Sie also eine Covid19-Fallmeldung von der Virologie der Universitätsklinik erhalten, in der statt eines
-        Patienten-Namens lediglich ein Code angegeben ist, so handelt es sich vermutlich um einen Probe von uns.
-    </div>
-    <div class="textField">
-        Dann können Sie auf dieser Seite die Identität bestimmen. Füllen Sie dazu das folgende Formular aus:
-    </div>
-    <div style="margin-bottom: 10px;" class="extra content">
-        <div class="ui small feed">
-            {% for reg in sample.registrations.all %}
-            <div class="event">
-                <div class="content">
-                    <div class="summary">
-                        {{ reg.time|date:"Y-m-d H:i:s" }}
-                    </div>
-                    <div class="regInfo">
-                        {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %}
-                        <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
-    </div>
-    <button class="ui button" onclick="requestPrivateKey();">Registrierungen entschüsseln
-    </button>
-    <div class="ui negative hidden message prKeyMessage" id="encrypted">
-        Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben
-        Sie das Passwort für Ihren privaten Schlüssel an.
-    </div>
-    <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
-        Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch
-        einmal.
-    </div>
-    <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
-        Die gewählte Datei enthält keinen RSA-Geheimschlüssel.
-    </div>
-    <div class="ui negative hidden message prKeyMessage" id="notPem">
-        Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.
-    </div>
-    <div class="ui negative hidden message prKeyMessage" id="wrongKey">
-        Der geheime Schlüssel passt nicht zu der verschlüsselten Information.
-    </div>
-    <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
-    <div>
-        Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter folgender
-        Dienst-Handy-Nummer:
-        01525 7908 378
-
-    </div>
-</div>
-<div class="ui tiny modal">
-    <div class="ui header">Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.
-    </div>
+     style="max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 5%">
     <div class="content">
-        <form class="ui form" id="prKeyInput">
-            <div class="required field">
-                <label>Geheimschlüssel-Datei (.pem)</label>
-                <div class="ui icon input">
-                    <input type="file" style="display: none;">
-                    <input type="text" placeholder="PrivateKey.pem" readonly>
-                    <i class="attach icon"></i>
+        <h2 style="text-align: center">Zentrum für Molekulare Biologie der Universität Heidelberg
+            LAMP-Test-Station
+        </h2>
+        <h5 style="text-align: center" class="textField">
+            Dechiffrierung codierter Fallmeldungen durch Mitarbeiter des Gesundheitsamtes Rhein-Neckar-Kreis
+        </h5>
+        <div class="textField">
+            Hintergrund: An der Universität werden Covid19-Tests für Mitarbeiter, Studierende und andere Personen
+            angeboten,
+            bei denen die Probanden Ihre Test-Kits online auf https://coronatest-hd.de registrieren. Name und
+            Kontaktdaten
+            der Probanden werden dabei sofort so verschlüsselt, dass auch die Mitarbeiter des Test-Labors sie nicht mehr
+            einsehen können. Der Schlüssel zur Entschlüsselung liegt dem Gesundheitsamt aber vor.
+        </div>
+        <div class="textField">
+            Unser Labor gibt möglicherweise positive Proben an das diagnostische Labor der Virologie der
+            Universitätsklinik
+            zur Validierung durch PCR weiter. Wenn die PCR-Analyse positiv auffällt, generiert das IT-System des
+            Kliniklabors automatisch eine Meldung per Fax an das Gesundheitsamt.
+        </div>
+        <div class="textField">
+            Wenn Sie also eine Covid19-Fallmeldung von der Virologie der Universitätsklinik erhalten, in der statt eines
+            Patienten-Namens lediglich ein Code angegeben ist, so handelt es sich vermutlich um einen Probe von uns.
+        </div>
+        <div class="textField">
+            Dann können Sie auf dieser Seite die Identität bestimmen. Füllen Sie dazu das folgende Formular aus:
+        </div>
+        <form class="ui form textField">
+            <h3 class="ui dividing header">1. Anmelde-Daten für den Labor-Server des LAMP-Labors</h3>
+            <div class="two fields">
+                <div class="required field">
+                    <label>Benutzername für Server (normalerweise ga-rnk)</label>
+                    <input type="text" placeholder="Benutzername">
+                </div>
+                <div class="required field">
+                    <label>Passwort für Server (zu erfragen bei Herrn Dr. Welker)</label>
+                    <input type="text" placeholder="Passwort">
                 </div>
             </div>
-            <div class="field">
-                <label>Passwort für den Geheimschlüssel (optional)</label>
-                <input type="password">
+            <h3 class="ui dividing header">2. Barcode der Probe, wie auf der Fallmeldung statt des Namens angegeben</h3>
+            <div class="two fields">
+                <div class="required field">
+                    <label>Code</label>
+                    <input type="text" placeholder="Code">
+                </div>
+            </div>
+            <h3 class="ui dividing header">3. Geheimer RSA-Schlüssel zum Entschlüsseln der Kontaktdaten</h3>
+            <span>Dieser Schlüssel ist im internen Netzwerk des Gesundheitsamtes  als Datei hinterlegt. Klicken Sie die Schaltfläche, um ihn zu laden, und geben Sie vorher das Schlüssel-Passwort ein</span>
+            <div class="two fields" style="margin-top: 10px">
+                <div class="field">
+                    <label>Schlüssel-Passwort (zu erfragen bei Herrn Dr. Welker)</label>
+                    <input type="text" placeholder="Schlüssel-Passwort">
+                </div>
+                <div class="required field">
+                    <label>Schlüssel-Datei</label>
+                    <div class="ui icon input" id="prKeyInput">
+                        <input type="file" style="display: none;">
+                        <input type="text" placeholder="PrivateKey.pem" readonly>
+                        <i class="attach icon"></i>
+                    </div>
+                </div>
+            </div>
+            <h3 class="ui dividing header">4. Klicken Sie hier</h3>
+            <div style="text-align: center">
+                <div class="ui button" id="getData">Daten anfordern und entschlüsseln</div>
             </div>
         </form>
-        <div class="ui negative hidden message">
-            <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>
+        <!--        <div style="margin-bottom: 10px;" class="extra content">-->
+        <!--            <div class="ui small feed">-->
+        <!--                {% for reg in sample.registrations.all %}-->
+        <!--                <div class="event">-->
+        <!--                    <div class="content">-->
+        <!--                        <div class="summary">-->
+        <!--                            {{ reg.time|date:"Y-m-d H:i:s" }}-->
+        <!--                        </div>-->
+        <!--                        <div class="regInfo">-->
+        <!--                            {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %}-->
+        <!--                            <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                {% endfor %}-->
+
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <button class="ui button" onclick="requestPrivateKey();">Registrierungen entschüsseln-->
+        <!--        </button>-->
+        <!--        <div class="ui negative hidden message prKeyMessage" id="encrypted">-->
+        <!--            Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben-->
+        <!--            Sie das Passwort für Ihren privaten Schlüssel an.-->
+        <!--        </div>-->
+        <!--        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">-->
+        <!--            Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch-->
+        <!--            einmal.-->
+        <!--        </div>-->
+        <!--        <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">-->
+        <!--            Die gewählte Datei enthält keinen RSA-Geheimschlüssel.-->
+        <!--        </div>-->
+        <!--        <div class="ui negative hidden message prKeyMessage" id="notPem">-->
+        <!--            Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.-->
+        <!--        </div>-->
+        <!--        <div class="ui negative hidden message prKeyMessage" id="wrongKey">-->
+        <!--            Der geheime Schlüssel passt nicht zu der verschlüsselten Information.-->
+        <!--        </div>-->
+        <!--        <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>-->
+
+        <div class="textField" style="max-width: 700px; margin-left: auto; margin-right: auto; text-align: center">
+            Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter folgender
+            Dienst-Handy-Nummer:
+            01525 7908 378
+
         </div>
     </div>
-    <div class="actions">
-        <div class="ui cancel button">Abbrechen</div>
-        <div class="ui approve button">Entschlüsseln</div>
-    </div>
 </div>
+<!--<div class="ui tiny modal">-->
+<!--    <div class="ui header">Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.-->
+<!--    </div>-->
+<!--    <div class="content">-->
+<!--        <form class="ui form" id="prKeyInput">-->
+<!--            <div class="required field">-->
+<!--                <label>Geheimschlüssel-Datei (.pem)</label>-->
+<!--                <div class="ui icon input">-->
+<!--                    <input type="file" style="display: none;">-->
+<!--                    <input type="text" placeholder="PrivateKey.pem" readonly>-->
+<!--                    <i class="attach icon"></i>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="field">-->
+<!--                <label>Passwort für den Geheimschlüssel (optional)</label>-->
+<!--                <input type="password">-->
+<!--            </div>-->
+<!--        </form>-->
+<!--        <div class="ui negative hidden message">-->
+<!--            <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="actions">-->
+<!--        <div class="ui cancel button">Abbrechen</div>-->
+<!--        <div class="ui approve button">Entschlüsseln</div>-->
+<!--    </div>-->
+<!--</div>-->
 
 </body>
 </html>
@@ -136,19 +185,23 @@
     $(this).parent().find("input:text").val(name);
   });
 
-  var registrations = [];
-  {%
-    for reg in sample.registrations.all %}
-  registrations.push({
-    name_encrypted: '{{ reg.name_encrypted }}',
-    address_encrypted: '{{ reg.address_encrypted }}',
-    contact_encrypted: '{{ reg.contact_encrypted }}',
-    session_key_encrypted: '{{ reg.session_key_encrypted }}',
-    aes_instance_iv: '{{ reg.aes_instance_iv }}'
+  $("#getData").click(function (){
+    console.log("clicked")
   });
-  {%
-    endfor %
-  }
+
+  var registrations = [];
+  // {%
+  //   for reg in sample.registrations.all %}
+  // registrations.push({
+  //   name_encrypted: '{{ reg.name_encrypted }}',
+  //   address_encrypted: '{{ reg.address_encrypted }}',
+  //   contact_encrypted: '{{ reg.contact_encrypted }}',
+  //   session_key_encrypted: '{{ reg.session_key_encrypted }}',
+  //   aes_instance_iv: '{{ reg.aes_instance_iv }}'
+  // });
+  // {%
+  //   endfor %
+  // }
 
   function requestPrivateKey() {
     $(".ui.tiny.modal")
