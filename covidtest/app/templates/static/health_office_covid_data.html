@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% trans 'COVID19-LAB' %}</title>
+    <title>COVID19 Fallmeldungen</title>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -27,8 +27,11 @@
         }
     </style>
 </head>
+<body>
+
+
 <div class="ui red top attached segment"
-     style="max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 5%">
+     style="max-width: 1000px; min-height: 500px; margin-left: auto; margin-right: auto; margin-top: 5%">
     <div class="content">
         <h2 style="text-align: center">Zentrum für Molekulare Biologie der Universität Heidelberg
             LAMP-Test-Station
@@ -36,142 +39,126 @@
         <h5 style="text-align: center" class="textField">
             Dechiffrierung codierter Fallmeldungen durch Mitarbeiter des Gesundheitsamtes Rhein-Neckar-Kreis
         </h5>
-        <div class="textField">
-            Hintergrund: An der Universität werden Covid19-Tests für Mitarbeiter, Studierende und andere Personen
-            angeboten,
-            bei denen die Probanden Ihre Test-Kits online auf https://coronatest-hd.de registrieren. Name und
-            Kontaktdaten
-            der Probanden werden dabei sofort so verschlüsselt, dass auch die Mitarbeiter des Test-Labors sie nicht mehr
-            einsehen können. Der Schlüssel zur Entschlüsselung liegt dem Gesundheitsamt aber vor.
+        <div class="ui inline loader" id="loading"
+             style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </div>
-        <div class="textField">
-            Unser Labor gibt möglicherweise positive Proben an das diagnostische Labor der Virologie der
-            Universitätsklinik
-            zur Validierung durch PCR weiter. Wenn die PCR-Analyse positiv auffällt, generiert das IT-System des
-            Kliniklabors automatisch eine Meldung per Fax an das Gesundheitsamt.
-        </div>
-        <div class="textField">
-            Wenn Sie also eine Covid19-Fallmeldung von der Virologie der Universitätsklinik erhalten, in der statt eines
-            Patienten-Namens lediglich ein Code angegeben ist, so handelt es sich vermutlich um einen Probe von uns.
-        </div>
-        <div class="textField">
-            Dann können Sie auf dieser Seite die Identität bestimmen. Füllen Sie dazu das folgende Formular aus:
-        </div>
-        <form class="ui form textField">
-            <h3 class="ui dividing header">1. Anmelde-Daten für den Labor-Server des LAMP-Labors</h3>
-            <div class="two fields">
-                <div class="required field">
-                    <label>Benutzername für Server (normalerweise ga-rnk)</label>
-                    <input type="text" placeholder="Benutzername">
-                </div>
-                <div class="required field">
-                    <label>Passwort für Server (zu erfragen bei Herrn Dr. Welker)</label>
-                    <input type="text" placeholder="Passwort">
-                </div>
+
+        <div id="mainContent">
+            <div class="textField">
+                Hintergrund: An der Universität werden Covid19-Tests für Mitarbeiter, Studierende und andere Personen
+                angeboten,
+                bei denen die Probanden Ihre Test-Kits online auf https://coronatest-hd.de registrieren. Name und
+                Kontaktdaten
+                der Probanden werden dabei sofort so verschlüsselt, dass auch die Mitarbeiter des Test-Labors sie nicht
+                mehr
+                einsehen können. Der Schlüssel zur Entschlüsselung liegt dem Gesundheitsamt aber vor.
             </div>
-            <h3 class="ui dividing header">2. Barcode der Probe, wie auf der Fallmeldung statt des Namens angegeben</h3>
-            <div class="two fields">
-                <div class="required field">
-                    <label>Code</label>
-                    <input type="text" placeholder="Code">
-                </div>
+            <div class="textField">
+                Unser Labor gibt möglicherweise positive Proben an das diagnostische Labor der Virologie der
+                Universitätsklinik
+                zur Validierung durch PCR weiter. Wenn die PCR-Analyse positiv auffällt, generiert das IT-System des
+                Kliniklabors automatisch eine Meldung per Fax an das Gesundheitsamt.
             </div>
-            <h3 class="ui dividing header">3. Geheimer RSA-Schlüssel zum Entschlüsseln der Kontaktdaten</h3>
-            <span>Dieser Schlüssel ist im internen Netzwerk des Gesundheitsamtes  als Datei hinterlegt. Klicken Sie die Schaltfläche, um ihn zu laden, und geben Sie vorher das Schlüssel-Passwort ein</span>
-            <div class="two fields" style="margin-top: 10px">
-                <div class="field">
-                    <label>Schlüssel-Passwort (zu erfragen bei Herrn Dr. Welker)</label>
-                    <input type="text" placeholder="Schlüssel-Passwort">
-                </div>
-                <div class="required field">
-                    <label>Schlüssel-Datei</label>
-                    <div class="ui icon input" id="prKeyInput">
-                        <input type="file" style="display: none;">
-                        <input type="text" placeholder="PrivateKey.pem" readonly>
-                        <i class="attach icon"></i>
+            <div class="textField">
+                Wenn Sie also eine Covid19-Fallmeldung von der Virologie der Universitätsklinik erhalten, in der statt
+                eines
+                Patienten-Namens lediglich ein Code angegeben ist, so handelt es sich vermutlich um einen Probe von uns.
+            </div>
+            <div class="textField">
+                Dann können Sie auf dieser Seite die Identität bestimmen. Füllen Sie dazu das folgende Formular aus:
+            </div>
+            <form class="ui form textField">
+                <h3 class="ui dividing header">1. Anmelde-Daten für den Labor-Server des LAMP-Labors</h3>
+                <div class="two fields">
+                    <div class="required field">
+                        <label>Benutzername für Server (normalerweise ga-rnk)</label>
+                        <input type="text" placeholder="Benutzername" id="username">
+                    </div>
+                    <div class="required field">
+                        <label>Passwort für Server (zu erfragen bei Herrn Dr. Welker)</label>
+                        <input type="password" placeholder="Passwort" id="userPassword">
                     </div>
                 </div>
+                <h3 class="ui dividing header">2. Barcode der Probe, wie auf der Fallmeldung statt des Namens
+                    angegeben</h3>
+                <div class="two fields">
+                    <div class="required field">
+                        <label>Code</label>
+                        <input type="text" placeholder="Code" id="sampleCode">
+                    </div>
+                </div>
+                <h3 class="ui dividing header">3. Geheimer RSA-Schlüssel zum Entschlüsseln der Kontaktdaten</h3>
+                <span>Dieser Schlüssel ist im internen Netzwerk des Gesundheitsamtes  als Datei hinterlegt. Klicken Sie die Schaltfläche, um ihn zu laden, und geben Sie vorher das Schlüssel-Passwort ein</span>
+                <div class="two fields" style="margin-top: 10px">
+                    <div class="field">
+                        <label>Schlüssel-Passwort (zu erfragen bei Herrn Dr. Welker)</label>
+                        <input type="password" placeholder="Schlüssel-Passwort" id="decodePassword">
+                    </div>
+                    <div class="required field">
+                        <label>Schlüssel-Datei</label>
+                        <div class="ui icon input" id="prKeyInput">
+                            <input type="file" style="display: none;" id="prKeyFile">
+                            <input type="text" placeholder="PrivateKey.pem" readonly>
+                            <i class="attach icon"></i>
+                        </div>
+                    </div>
+                    <div class="ui negative hidden message">
+                        <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>
+                    </div>
+                </div>
+                <h3 class="ui dividing header">4. Klicken Sie hier</h3>
+                <div style="text-align: center">
+                    <div class="ui button" id="getData">Daten anfordern und entschlüsseln</div>
+                </div>
+            </form>
+            <div class="ui negative hidden message prKeyMessage" id="wrongCredentials">
+                Der Benutzername oder das Passwort ist ungültig.
             </div>
-            <h3 class="ui dividing header">4. Klicken Sie hier</h3>
-            <div style="text-align: center">
-                <div class="ui button" id="getData">Daten anfordern und entschlüsseln</div>
+            <div class="ui negative hidden message prKeyMessage" id="wrongBarcode">
+                Für diesen Barcode wurde keine Probe gefunden.
             </div>
-        </form>
-        <!--        <div style="margin-bottom: 10px;" class="extra content">-->
-        <!--            <div class="ui small feed">-->
-        <!--                {% for reg in sample.registrations.all %}-->
-        <!--                <div class="event">-->
-        <!--                    <div class="content">-->
-        <!--                        <div class="summary">-->
-        <!--                            {{ reg.time|date:"Y-m-d H:i:s" }}-->
-        <!--                        </div>-->
-        <!--                        <div class="regInfo">-->
-        <!--                            {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %}-->
-        <!--                            <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                {% endfor %}-->
+            <div class="ui negative hidden message prKeyMessage" id="encrypted">
+                Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie
+                das Passwort für Ihren privaten Schlüssel an.
+            </div>
+            <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
+                Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.
+            </div>
+            <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
+                Die gewählte Datei enthält keinen RSA-Geheimschlüssel.
+            </div>
+            <div class="ui negative hidden message prKeyMessage" id="notPem">
+                Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.
+            </div>
+            <div class="ui negative hidden message prKeyMessage" id="wrongKey">
+                Der geheime Schlüssel passt nicht zu der verschlüsselten Information.
+            </div>
+            <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
 
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <button class="ui button" onclick="requestPrivateKey();">Registrierungen entschüsseln-->
-        <!--        </button>-->
-        <!--        <div class="ui negative hidden message prKeyMessage" id="encrypted">-->
-        <!--            Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben-->
-        <!--            Sie das Passwort für Ihren privaten Schlüssel an.-->
-        <!--        </div>-->
-        <!--        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">-->
-        <!--            Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch-->
-        <!--            einmal.-->
-        <!--        </div>-->
-        <!--        <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">-->
-        <!--            Die gewählte Datei enthält keinen RSA-Geheimschlüssel.-->
-        <!--        </div>-->
-        <!--        <div class="ui negative hidden message prKeyMessage" id="notPem">-->
-        <!--            Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.-->
-        <!--        </div>-->
-        <!--        <div class="ui negative hidden message prKeyMessage" id="wrongKey">-->
-        <!--            Der geheime Schlüssel passt nicht zu der verschlüsselten Information.-->
-        <!--        </div>-->
-        <!--        <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>-->
-
+        </div>
+        <div style="display: none; margin-top: 30px" id="sampleResults">
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>address</th>
+                    <th>contact</th>
+                </tr>
+                </thead>
+                <tbody class="regInfo">
+                </tbody>
+            </table>
+        </div>
         <div class="textField" style="max-width: 700px; margin-left: auto; margin-right: auto; text-align: center">
-            Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter folgender
+            Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter
+            folgender
             Dienst-Handy-Nummer:
             01525 7908 378
 
         </div>
     </div>
-</div>
-<!--<div class="ui tiny modal">-->
-<!--    <div class="ui header">Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.-->
-<!--    </div>-->
-<!--    <div class="content">-->
-<!--        <form class="ui form" id="prKeyInput">-->
-<!--            <div class="required field">-->
-<!--                <label>Geheimschlüssel-Datei (.pem)</label>-->
-<!--                <div class="ui icon input">-->
-<!--                    <input type="file" style="display: none;">-->
-<!--                    <input type="text" placeholder="PrivateKey.pem" readonly>-->
-<!--                    <i class="attach icon"></i>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="field">-->
-<!--                <label>Passwort für den Geheimschlüssel (optional)</label>-->
-<!--                <input type="password">-->
-<!--            </div>-->
-<!--        </form>-->
-<!--        <div class="ui negative hidden message">-->
-<!--            <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="actions">-->
-<!--        <div class="ui cancel button">Abbrechen</div>-->
-<!--        <div class="ui approve button">Entschlüsseln</div>-->
-<!--    </div>-->
-<!--</div>-->
 
+</div>
 </body>
 </html>
 
@@ -185,41 +172,92 @@
     $(this).parent().find("input:text").val(name);
   });
 
-  $("#getData").click(function (){
-    console.log("clicked")
+  $("#getData").click(function () {
+    $("#mainContent").hide();
+    $("#loading").show();
+    getData()
+    // $.ajax({
+    //   url: "http://localhost:8000/get-csrf-token",
+    //   type: "GET",
+    // }).done(function (data, textStatus, xhr) {
+    //   console.log(xhr.getResponseHeader("Set-Cookie"))
+    //   getData()
+    // }).fail(function (data, textStatus, xhr) {
+    //   $("#mainContent").show();
+    //   $("#loading").hide();
+    //   $("#somethingElse")
+    //     .html(data.status)
+    //     .show();
+    // })
   });
 
-  var registrations = [];
-  // {%
-  //   for reg in sample.registrations.all %}
-  // registrations.push({
-  //   name_encrypted: '{{ reg.name_encrypted }}',
-  //   address_encrypted: '{{ reg.address_encrypted }}',
-  //   contact_encrypted: '{{ reg.contact_encrypted }}',
-  //   session_key_encrypted: '{{ reg.session_key_encrypted }}',
-  //   aes_instance_iv: '{{ reg.aes_instance_iv }}'
-  // });
-  // {%
-  //   endfor %
-  // }
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function getData() {
+    const username = $.trim($('#username').val());
+    const userPassword = $.trim($('#userPassword').val());
+    const sampleCode = $.trim($('#sampleCode').val());
+
+    $.ajax({
+      url: "http://localhost:8000/external-login",
+      type: "POST",
+      xhrFields: {
+        withCredentials: true
+      },
+      data: {
+        // csrfmiddlewaretoken: getCookie('csrftoken'),
+        username: username,
+        password: userPassword,
+        sampleCode: sampleCode,
+      }
+    }).done(function (data, textStatus, xhr) {
+      registrations = data
+      requestPrivateKey()
+    }).fail(function (data, textStatus, xhr) {
+      $("#mainContent").show();
+      $("#loading").hide();
+      if (data.status == 400) {
+        $("#wrongBarcode").show();
+      } else if (data.status == 401) {
+        $("#wrongCredentials").show();
+      } else {
+        $("#somethingElse")
+          .html(data.status)
+          .show();
+      }
+    })
+  }
+
 
   function requestPrivateKey() {
-    $(".ui.tiny.modal")
-      .modal({
-        onApprove: function () {
-          var files = $(this).find("input:file").prop("files");
-          $(".prKeyMessage").hide();
-          if (files.length == 0) {
-            $(this).find(".message").show();
-            return false
-          } else {
-            $(this).find(".message").hide();
-            loadKey(files[0], $(this).find("input:password").val());
-            return true;
-          }
-        }
-      })
-      .modal("show");
+
+    var files = $('#prKeyInput').find("input:file").prop("files")
+    $(".prKeyMessage").hide();
+    if (files.length == 0) {
+      $("#mainContent").show();
+      $("#loading").hide();
+      $(this).find(".message").show();
+      return false
+    } else {
+      $(this).find(".message").hide();
+      loadKey(files[0], $.trim($('#decodePassword').val()));
+      return true;
+    }
+
   };
 
   function loadKey(file, password) {
@@ -233,6 +271,8 @@
         try {
           decryptedData = decrypt(data, reader.result, password);
         } catch (e) {
+          $("#mainContent").show();
+          $("#loading").hide();
           if (e.message.indexOf("PEM is encrypted") > -1) {
             $("#encrypted").show();
           } else if (e.message.indexOf("privateKey is null") > -1) {
@@ -254,6 +294,8 @@
         decrypted.push(decryptedData);
       });
       addRegInfo(decrypted);
+      $("#sampleResults").show();
+      $("#loading").hide();
     }
     reader.onerror = function (evt) {
       alert("Error reading private key file");
@@ -261,11 +303,12 @@
   };
 
   function addRegInfo(regInfo) {
-    $(".regInfo").each((i, el) => {
-      var inf = Object.keys(regInfo[i])
-        .reduce((str, key) => str + "<b>" + key + ":</b> " + regInfo[i][key] + "<br>", "");
-      if (inf) $(el).html(inf);
+    var html = ""
+    $.each(regInfo, function (i, value) {
+      html = html + "<tr>" + Object.keys(regInfo[i])
+        .reduce((str, key) => str + "<td data-label=" + key + ">" + regInfo[i][key] + "</td>", "") + "</tr>"
     })
+    $(".regInfo").append(html)
   };
 
   function decrypt(data, privateKeyPem, password) {
@@ -276,7 +319,11 @@
       privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
 
     Object.keys(data).forEach(key => {
-      data[key + "_decoded"] = forge.util.decode64(data[key]);
+      try {
+        data[key + "_decoded"] = forge.util.decode64(data[key]);
+      } catch {
+
+      }
     });
 
     var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP");
