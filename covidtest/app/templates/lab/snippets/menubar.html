@@ -15,9 +15,6 @@
     <a href="{% url 'app:dashboard'  %}" class="item">
         {% trans 'Dashboard' %}
     </a>
-    <a href="{% url 'admin:index'  %}" class="item">
-        {% trans 'Admin' %}
-    </a>
     {% else %}
     <a href="{% url 'app:query'  %}" class="item">
         {% trans 'Probe suchen' %}
