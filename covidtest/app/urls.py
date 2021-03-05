@@ -37,6 +37,5 @@ urlpatterns = [
     path("version", views_lab.version, name="version"),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("get-csrf-token", views_api.get_csrf_token, name="get_csrf_token"),
     path("external-login", csrf_exempt(views_api.authorize_and_request_data), name="external_login"),
 ]

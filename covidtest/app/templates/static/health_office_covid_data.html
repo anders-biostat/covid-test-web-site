@@ -33,9 +33,9 @@
 <div class="ui red top attached segment"
      style="max-width: 1000px; min-height: 500px; margin-left: auto; margin-right: auto; margin-top: 5%">
     <div class="content">
-        <h2 style="text-align: center">Zentrum für Molekulare Biologie der Universität Heidelberg
+        <h1 style="text-align: center">Zentrum für Molekulare Biologie der Universität Heidelberg </br>
             LAMP-Test-Station
-        </h2>
+        </h1>
         <h5 style="text-align: center" class="textField">
             Dechiffrierung codierter Fallmeldungen durch Mitarbeiter des Gesundheitsamtes Rhein-Neckar-Kreis
         </h5>
@@ -90,10 +90,6 @@
                 <h3 class="ui dividing header">3. Geheimer RSA-Schlüssel zum Entschlüsseln der Kontaktdaten</h3>
                 <span>Dieser Schlüssel ist im internen Netzwerk des Gesundheitsamtes  als Datei hinterlegt. Klicken Sie die Schaltfläche, um ihn zu laden, und geben Sie vorher das Schlüssel-Passwort ein</span>
                 <div class="two fields" style="margin-top: 10px">
-                    <div class="field">
-                        <label>Schlüssel-Passwort (zu erfragen bei Herrn Dr. Welker)</label>
-                        <input type="password" placeholder="Schlüssel-Passwort" id="decodePassword">
-                    </div>
                     <div class="required field">
                         <label>Schlüssel-Datei</label>
                         <div class="ui icon input" id="prKeyInput">
@@ -102,6 +98,11 @@
                             <i class="attach icon"></i>
                         </div>
                     </div>
+                    <div class="required field">
+                        <label>Schlüssel-Passwort (zu erfragen bei Herrn Dr. Welker)</label>
+                        <input type="password" placeholder="Schlüssel-Passwort" id="decodePassword">
+                    </div>
+
                     <div class="ui negative hidden message">
                         <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>
                     </div>
@@ -111,6 +112,12 @@
                     <div class="ui button" id="getData">Daten anfordern und entschlüsseln</div>
                 </div>
             </form>
+            <div class="ui negative hidden message" id="noFileMessage">
+                <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>
+            </div>
+            <div class="ui negative hidden message prKeyMessage" id="decodePasswordMessage">
+                Ein Schlüssel-Passwort ist zwingend erforderlich.
+            </div>
             <div class="ui negative hidden message prKeyMessage" id="wrongCredentials">
                 Der Benutzername oder das Passwort ist ungültig.
             </div>
@@ -136,25 +143,13 @@
             <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
 
         </div>
-        <div style="display: none; margin-top: 30px" id="sampleResults">
-            <table class="ui celled table">
-                <thead>
-                <tr>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>contact</th>
-                </tr>
-                </thead>
-                <tbody class="regInfo">
-                </tbody>
-            </table>
-        </div>
+        <h2 class="textField" style="display:none;" id="sampleCodeHeader">Barcode: <span id="barcodeValue"></span> </h2>
+        <div class="ui stackable grid textField" id="registrations" style="display:none;"></div>
         <div class="textField" style="max-width: 700px; margin-left: auto; margin-right: auto; text-align: center">
             Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter
             folgender
             Dienst-Handy-Nummer:
             01525 7908 378
-
         </div>
     </div>
 
@@ -164,6 +159,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
 <script type="text/javascript">
+
+  let sampleCode
+
   $("#prKeyInput input:text").click(function () {
     $(this).parent().find("input:file").click();
   });
@@ -173,44 +171,24 @@
   });
 
   $("#getData").click(function () {
-    $("#mainContent").hide();
-    $("#loading").show();
-    getData()
-    // $.ajax({
-    //   url: "http://localhost:8000/get-csrf-token",
-    //   type: "GET",
-    // }).done(function (data, textStatus, xhr) {
-    //   console.log(xhr.getResponseHeader("Set-Cookie"))
-    //   getData()
-    // }).fail(function (data, textStatus, xhr) {
-    //   $("#mainContent").show();
-    //   $("#loading").hide();
-    //   $("#somethingElse")
-    //     .html(data.status)
-    //     .show();
-    // })
-  });
+    let decodePassword = $.trim($('#decodePassword').val())
+    let file = $('#prKeyInput').find("input:file").prop("files")
 
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
+    if (decodePassword.length === 0) {
+      $("#decodePasswordMessage").show()
+    } else if (file.length === 0) {
+      $("#noFileMessage").show()
+    } else {
+      $("#mainContent").hide();
+      $("#loading").show();
+      getData()
     }
-    return cookieValue;
-  }
+  });
 
   function getData() {
     const username = $.trim($('#username').val());
     const userPassword = $.trim($('#userPassword').val());
-    const sampleCode = $.trim($('#sampleCode').val());
+    sampleCode = $.trim($('#sampleCode').val());
 
     $.ajax({
       url: "http://localhost:8000/external-login",
@@ -219,7 +197,6 @@
         withCredentials: true
       },
       data: {
-        // csrfmiddlewaretoken: getCookie('csrftoken'),
         username: username,
         password: userPassword,
         sampleCode: sampleCode,
@@ -270,6 +247,8 @@
         var decryptedData;
         try {
           decryptedData = decrypt(data, reader.result, password);
+
+          addRegInfo(decrypted);
         } catch (e) {
           $("#mainContent").show();
           $("#loading").hide();
@@ -290,12 +269,9 @@
           }
           decryptedData = {};
         }
-
         decrypted.push(decryptedData);
       });
-      addRegInfo(decrypted);
-      $("#sampleResults").show();
-      $("#loading").hide();
+
     }
     reader.onerror = function (evt) {
       alert("Error reading private key file");
@@ -303,12 +279,21 @@
   };
 
   function addRegInfo(regInfo) {
-    var html = ""
+    let table = ""
     $.each(regInfo, function (i, value) {
-      html = html + "<tr>" + Object.keys(regInfo[i])
-        .reduce((str, key) => str + "<td data-label=" + key + ">" + regInfo[i][key] + "</td>", "") + "</tr>"
+      table = table +
+        "<div class='eight wide column'><table class='ui definition table'><tbody><tr><td>Name</td><td>" +
+        value['name'] +
+        '</td></tr><tr><td>Adresse</td><td style="white-space: pre-line">' +
+        value['address'] +
+        '</td></tr><tr><td>Kontakt</td><td>' +
+        value['contact'] +
+        '</td></tr></tbody></table></div>'
     })
-    $(".regInfo").append(html)
+    $("#barcodeValue").html(sampleCode)
+    $("#sampleCodeHeader").show()
+    $("#registrations").append(table).show();
+    $("#loading").hide();
   };
 
   function decrypt(data, privateKeyPem, password) {
@@ -316,7 +301,7 @@
     if (password)
       privateKey = forge.pki.decryptRsaPrivateKey(privateKeyPem, password)
     else
-      privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
+      throw "Schlüssel Passwort ungültig"
 
     Object.keys(data).forEach(key => {
       try {

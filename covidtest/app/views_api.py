@@ -1,6 +1,5 @@
 from rest_framework import permissions, viewsets
 from django.http import JsonResponse
-from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login
 
 from .models import Bag, Event, Registration, RSAKey, Sample
@@ -12,13 +11,6 @@ from .serializers import (
     RSAKeySerializer,
     SampleSerializer,
 )
-
-
-def get_csrf_token(request):
-    token = get_token(request)
-    resp = JsonResponse({"data": token}, status=201)
-    resp['Access-Control-Allow-Origin'] = '*'
-    return resp
 
 
 def authorize_and_request_data(request):
