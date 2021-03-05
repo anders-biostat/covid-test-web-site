@@ -143,7 +143,7 @@
             <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
 
         </div>
-        <h2 class="textField" style="display:none;" id="sampleCodeHeader">Barcode: <span id="barcodeValue"></span> </h2>
+        <h2 class="textField" style="display:none;" id="sampleCodeHeader">Barcode: <span id="barcodeValue"></span></h2>
         <div class="ui stackable grid textField" id="registrations" style="display:none;"></div>
         <div class="textField" style="max-width: 700px; margin-left: auto; margin-right: auto; text-align: center">
             Bei Rückfragen oder Problemen erreichen Sie jederzeit einen Mitarbeiter des ZMBH-LAMP-Labors unter
@@ -247,8 +247,7 @@
         var decryptedData;
         try {
           decryptedData = decrypt(data, reader.result, password);
-
-          addRegInfo(decrypted);
+          decrypted.push(decryptedData);
         } catch (e) {
           $("#mainContent").show();
           $("#loading").hide();
@@ -267,11 +266,9 @@
               .html(e.message)
               .show();
           }
-          decryptedData = {};
         }
-        decrypted.push(decryptedData);
       });
-
+      addRegInfo(decrypted);
     }
     reader.onerror = function (evt) {
       alert("Error reading private key file");
@@ -290,9 +287,11 @@
         value['contact'] +
         '</td></tr></tbody></table></div>'
     })
-    $("#barcodeValue").html(sampleCode)
-    $("#sampleCodeHeader").show()
-    $("#registrations").append(table).show();
+    if (table !== "") {
+      $("#barcodeValue").html(sampleCode)
+      $("#sampleCodeHeader").show()
+      $("#registrations").html(table).show();
+    }
     $("#loading").hide();
   };
 
