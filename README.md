@@ -38,10 +38,11 @@ $ cp example.env .env
 ```
 
 ### User Permissions
-In order for permissions to work, add two permission groups 
-at the admin dashboard.
-1. Group - name = "only_read" permissions = all "can view" permissions
-2. Group - name = "read_and_edit" permissions = all permissions
+In order for permissions to work, add following groups 
+at the admin dashboard. (A superuser does not need to be part of a 
+group as he/she is allowed to do everything)
+1. Group - name = "lab_user" permissions = permissions type app | (bag, event, sample) and 
+sessions | Sitzung
 
 
 ## Usage

@@ -59,7 +59,6 @@ def version(request):
 
 
 @login_required
-#@permission_required("sample.can_add_sample", login_url='/lab')
 def sample_check_in(request):
     if request.method == "POST":
         form = LabCheckInForm(request.POST)
