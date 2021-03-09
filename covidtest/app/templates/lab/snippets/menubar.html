@@ -12,9 +12,6 @@
     <a href="{% url 'app:checkin'  %}" class="item">
         {% trans 'Batch Proben Status' %}
     </a>
-    <a href="{% url 'app:dashboard'  %}" class="item">
-        {% trans 'Dashboard' %}
-    </a>
     {% else %}
     <a href="{% url 'app:query'  %}" class="item">
         {% trans 'Probe suchen' %}
