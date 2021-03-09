@@ -1,5 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
 
 from . import views_api, views_lab, views_public, views_consent
@@ -36,4 +37,5 @@ urlpatterns = [
     path("version", views_lab.version, name="version"),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("external-login", csrf_exempt(views_api.authorize_and_request_data), name="external_login"),
 ]
