@@ -5,16 +5,12 @@
         <i class="flask icon"></i> COVID19-LAB
     </a>
     {% if user.is_authenticated %}
+    <a href="{% url 'app:query'  %}" class="item">
+        {% trans 'Proben Suchen' %}
+    </a>
     {% if user|is_allowed_to:"read_and_edit" %}
-    <a href="{% url 'app:query'  %}" class="item">
-        {% trans 'Probe suchen' %}
-    </a>
     <a href="{% url 'app:checkin'  %}" class="item">
-        {% trans 'Batch Proben Status' %}
-    </a>
-    {% else %}
-    <a href="{% url 'app:query'  %}" class="item">
-        {% trans 'Probe suchen' %}
+        {% trans 'Mehrere Proben Bearbeiten' %}
     </a>
     {% endif %}
     <div class="right menu">

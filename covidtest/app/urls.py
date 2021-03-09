@@ -33,7 +33,8 @@ urlpatterns = [
     path("lab/samples/detail", views_lab.sample_detail, name="query"),
     path("lab/samples/update_status", views_lab.update_status, name="update_status"),
     path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
-    path("lab/dashboard", views_lab.dashboard, name="dashboard"),
+    # Unused, might be activated on future releases
+    # path("lab/dashboard", views_lab.dashboard, name="dashboard"),
     path("version", views_lab.version, name="version"),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),

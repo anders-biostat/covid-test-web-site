@@ -63,10 +63,10 @@
     {{ form.errors }}
     {{ form.non_field_errors }}
 
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Proben Status{% endblocktrans %}</h1>
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Mehrere Proben Bearbeiten{% endblocktrans %}</h1>
 
     <p>
-        Hier kann der Status einer oder mehrerer Proben gesetzt werden.
+        Zunächst Barcodes der Proben eingeben um anschließend den Status, Rack Barcode oder ein Kommentar zu setzen.
     </p>
 
     <form style="margin-bottom: 20px;" action="{% url 'app:checkin' %}" method="post" class="ui form">

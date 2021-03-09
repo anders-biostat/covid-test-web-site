@@ -6,7 +6,7 @@
     <h1 class="ui header">{% blocktrans %}Lab Interface - Suche{% endblocktrans %}</h1>
     <p>
         {% blocktrans %}
-        Hier kann nach Barcodes, Access Codes, Bags, Racks oder Status gesucht werden:
+        Suche nach Barcodes, Access Codes, Bags, Racks oder Status:
         {% endblocktrans %}
     </p>
 
@@ -25,18 +25,16 @@
     </form>
 
     {% if search %}
-    {% if sample %}
-    <h3 class="ui header">{% blocktrans %}Ergebnis für: {% endblocktrans %} {{ search }}</h3>
-    {% else %}
-        <h3 class="ui header">
-            {{ multi_sample|length }}
-            {% if multi_sample|length == 1 %}
-            Ergebnis
-            {% else %}
-            Ergebnisse
-            {% endif %}
-            für: {{search}}
-        </h3>
+    {% if not sample %}
+    <h3 class="ui header">
+        {{ multi_sample|length }}
+        {% if multi_sample|length == 1 %}
+        Ergebnis
+        {% else %}
+        Ergebnisse
+        {% endif %}
+        für: {{search}}
+    </h3>
     {% endif %}
     {% endif %}
 

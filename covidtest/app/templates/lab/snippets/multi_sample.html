@@ -5,11 +5,11 @@
 <table class="ui selectable celled padded red table">
     <thead>
     <tr>
-        <th>Status</th>
         <th>Barcode</th>
         <th class="single line">Access code</th>
         <th>Bag</th>
         <th>Rack</th>
+        <th>Status</th>
         <th class="single line">Status Comment</th>
     </tr>
     </thead>
@@ -21,9 +21,6 @@
         {% csrf_token %}
         <tr value={{sample.access_code}} style="cursor: pointer">
             <input name="search" type="hidden" id="remoteInput"/>
-            <td>
-                <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
-            </td>
             <td class="single line">
                 {{sample.barcode}}
             </td>
@@ -35,6 +32,9 @@
             </td>
             <td class="single line">
                 {{sample.rack}}
+            </td>
+            <td>
+                <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
             </td>
             <td>
                 {{sample.get_status.comment}}
