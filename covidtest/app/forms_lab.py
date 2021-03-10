@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.fields import BLANK_CHOICE_DASH
 
 from .models import RSAKey
 from .statuses import SampleStatus
@@ -15,14 +16,17 @@ class LabCheckInForm(forms.Form):
         widget=forms.Textarea(attrs={"autofocus": "autofocus", "placeholder": "Barcode ..."}),
     )
     rack = forms.CharField(
-        label=_("Rack (Barcode)"), max_length=100, widget=forms.TextInput(attrs={"placeholder": "Rack ..."})
+        label=_("Rack Barcode (Optional)"), max_length=100, widget=forms.TextInput(attrs={"placeholder": "Rack ..."}),
+        required=False
     )
     status = forms.ChoiceField(
         label="Status",
-        choices=[(s.name, s.name) for s in SampleStatus]
+        choices=BLANK_CHOICE_DASH + [(s.name, s.name) for s in SampleStatus],
+        required=True
     )
     comment = forms.CharField(
-        label="Here you can add a comment", widget=forms.TextInput(attrs={"placeholder": "Add a comment ..."})
+        label="Kommentar (Optional)", widget=forms.TextInput(attrs={"placeholder": "Add a comment ..."}),
+        required=False
     )
 
 

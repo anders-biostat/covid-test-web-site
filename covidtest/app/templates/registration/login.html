@@ -1,5 +1,6 @@
 {% extends 'lab/base.html' %}
 {% block content %}
+<div style="max-width: 400px; margin-left: auto; margin-right: auto; margin-top: 40px; margin-bottom: 40px">
 <h1>Login</h1>
 
 <form class="ui form" id="login-form" method="post"
@@ -29,5 +30,6 @@
            class="ui button"/>
     <input type="hidden" name="next" value="{% url 'app:lab_index' %}"/>
 </form>
+    </div>
 
 {% endblock content %}

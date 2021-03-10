@@ -1,23 +1,18 @@
 {% load i18n %}
+{% load permissions %}
 <div style="margin: 10px;" class="ui top large menu">
-    <a class="header item" href="{% url 'app:index' %}">
+    <a class="header item" href="{% url 'app:lab_index' %}">
         <i class="flask icon"></i> COVID19-LAB
     </a>
-    <a href="{% url 'app:checkin'  %}" class="item">
-        {% trans 'Probeneingang' %}
-    </a>
-    <a href="{% url 'app:edit_rack'  %}" class="item">
-        {% trans 'Rack editieren' %}
-    </a>
+    {% if user.is_authenticated %}
     <a href="{% url 'app:query'  %}" class="item">
-        {% trans 'Probe suchen' %}
+        {% trans 'Proben Suchen' %}
     </a>
-    <a href="{% url 'app:dashboard'  %}" class="item">
-        {% trans 'Dashboard' %}
+    {% if user|is_in_group:"lab_user" %}
+    <a href="{% url 'app:checkin'  %}" class="item">
+        {% trans 'Mehrere Proben Bearbeiten' %}
     </a>
-    <a href="{% url 'admin:index'  %}" class="item">
-        {% trans 'Admin' %}
-    </a>
+    {% endif %}
     <div class="right menu">
         <div class="ui right simple dropdown item">
             Languages
@@ -27,11 +22,8 @@
                 <div class="item">English</div>
             </div>
         </div>
-        {% if user.is_authenticated %}
         <div class="ui item">logged in as {{ user.username }}</div>
-          <a class="ui item" href="{% url 'admin:logout' %}">Log Out</a>
-        {% else %}
-          <a class="ui item" href="{% url 'admin:login' %}">Log In</a>
-        {% endif %}
+        <a class="ui item" href="{% url 'app:logout' %}">Log Out</a>
     </div>
+    {% endif %}
 </div>

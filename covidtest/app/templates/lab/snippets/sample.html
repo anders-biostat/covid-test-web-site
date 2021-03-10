@@ -1,119 +1,150 @@
 {% load i18n %}
-<div class="ui red top attached segment">
-    <div class="content">
-        <h2 class="ui header">{% blocktrans %}Barcode: {% endblocktrans %}{{ sample.barcode }}</h2>
-        <div class="meta">
-            <b>Access code:</b> {{sample.access_code}}<br>
-            <b>Batch:</b> {{ sample.batch }}<br>
-            <b>Rack:</b> {{ sample.rack }}
-        </div>
+{% load permissions %}
 
-
-        <h3 class="ui header">{% blocktrans %}Historie{% endblocktrans %}</h3>
-        <div class="extra content">
-            <div class="ui small feed">
-                {% for event in sample.events.all %}
-                <div class="event">
-                    <div class="content">
-                        <div class="summary">
-                            {{ event.updated_on|date:"Y-m-d H:i:s" }}
-                            - <span style="color: #ff0000">{{ event.status }}</span>
-                            {% if event.comment %}
-                              : {{event.comment}}
-                            {% endif %}
-                            {% if event.updated_by %}
-                              [ {{event.updated_by}} ]
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-            </div>
+<div class="content">
+    <h2 class="ui header">{% blocktrans %}Barcode: {% endblocktrans %}{{ sample.barcode }}</h2>
+    <div class="meta">
+        <h3 style="display: inline">Access code:</h3> {{sample.access_code}}</br>
+        <h3 style="display: inline; margin-top: 15px">Rack:</h3> {{ sample.rack }}</br>
+        <h3 style="display: inline; margin-top: 15px">Bag:</h3></br>
+        <div style="margin-left: 10px; margin-top: 5px">
+            <b>ID: </b>{{sample.bag.id}}</br>
+            <b>Name: </b>{{sample.bag.name}}</br>
+            <b>Kommentar: </b>{{sample.bag.comment}}</br>
         </div>
-        <h3 class="ui header">{% blocktrans %}Registrierungen{% endblocktrans %}</h3>
-        <div style="margin-bottom: 10px;" class="extra content">
-            <div class="ui small feed">
-                {% for reg in sample.registrations.all %}
-                <div class="event">
-                    <div class="content">
-                        <div class="summary">
-                            {{ reg.time|date:"Y-m-d H:i:s" }}
-                        </div>
-                        <div class="regInfo">
-                            {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %} 
-                            <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-            </div>
-        </div>        
-        <button class="ui button" onclick="requestPrivateKey();">{% blocktrans %}Registrierungen entschüsseln{% endblocktrans %}</button>
-        <div class="ui negative hidden message prKeyMessage" id="encrypted">
-            {% blocktrans %}Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie das Passwort für Ihren privaten Schlüssel an.{% endblocktrans %}
-        </div>
-        <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
-            {% blocktrans %}Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.{% endblocktrans %}
-        </div>
-        <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
-            {% blocktrans %}Die gewählte Datei enthält keinen RSA-Geheimschlüssel.{% endblocktrans %}
-        </div>
-        <div class="ui negative hidden message prKeyMessage" id="notPem">
-            {% blocktrans %}Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.{% endblocktrans %}
-        </div>
-        <div class="ui negative hidden message prKeyMessage" id="wrongKey">
-            {% blocktrans %}Der geheime Schlüssel passt nicht zu der verschlüsselten Information.{% endblocktrans %}
-        </div>
-        <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
     </div>
-</div>
-<div class="ui tiny modal">
-    <div class="ui header">{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</div>
-    <div class="content">
-        <form class="ui form" id="prKeyInput">
-            <div class="required field">
-                <label>{% blocktrans %}Geheimschlüssel-Datei (.pem){% endblocktrans %}</label>
-                <div class="ui icon input">
-                    <input type="file" style="display: none;">
-                    <input type="text" placeholder="PrivateKey.pem" readonly>
-                    <i class="attach icon"></i>
+
+    <h2 class="ui header">Historie</h2>
+    <table class="ui selectable celled red padded table">
+        <thead>
+        <tr>
+            <th class="single line">Bearbeitet am</th>
+            <th class="single line">Status</th>
+            <th class="single line">Kommentar</th>
+            <th class="single line">Status gesetzt von</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% for event in sample.events.all %}
+        <tr>
+            <td class="single line">
+                {{ event.updated_on|date:"Y-m-d H:i:s" }}
+            </td>
+
+            <td>
+                <h4 class="ui center aligned header">{{ event.status }}</h4>
+            </td>
+            <td class="single line">
+                {% if event.comment %}
+                {{event.comment}}
+                {% endif %}
+            </td>
+            <td class="single line">
+                {% if event.updated_by %}
+                {{event.updated_by}}
+                {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <h3 class="ui header">{% blocktrans %}Registrierungen{% endblocktrans %}</h3>
+    <div style="margin-bottom: 10px;" class="extra content">
+        <div class="ui small feed">
+            {% for reg in sample.registrations.all %}
+            <div class="event">
+                <div class="content">
+                    <div class="summary">
+                        {{ reg.time|date:"Y-m-d H:i:s" }}
+                    </div>
+                    <div class="regInfo">
+                        {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %}
+                        <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
+                    </div>
                 </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <button class="ui button" onclick="requestPrivateKey();">Registrierungen entschüsseln</button>
+    <div class="ui negative hidden message prKeyMessage" id="encrypted">
+        {% blocktrans %}Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie
+        das Passwort für Ihren privaten Schlüssel an.{% endblocktrans %}
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
+        Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.{%
+
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">
+        Die gewählte Datei enthält keinen RSA-Geheimschlüssel.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="notPem">
+        Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="wrongKey">
+        Der geheime Schlüssel passt nicht zu der verschlüsselten Information.
+    </div>
+    <div class="ui negative hidden message prKeyMessage" id="somethingElse"></div>
+
+
+    <div class="ui tiny modal">
+        <div class="ui header">Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.
+        </div>
+        <div class="content">
+            <form class="ui form" id="prKeyInput">
+                <div class="required field">
+                    <label>{% blocktrans %}Geheimschlüssel-Datei (.pem){% endblocktrans %}</label>
+                    <div class="ui icon input">
+                        <input type="file" style="display: none;">
+                        <input type="text" placeholder="PrivateKey.pem" readonly>
+                        <i class="attach icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>{% blocktrans %}Passwort für den Geheimschlüssel (optional){% endblocktrans %}</label>
+                    <input type="password">
+                </div>
+            </form>
+            <div class="ui negative hidden message">
+                <p>{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</p>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui cancel button">{% blocktrans %}Abbrechen{% endblocktrans %}</div>
+            <div class="ui approve button">{% blocktrans %}Entschlüsseln{% endblocktrans %}</div>
+        </div>
+    </div>
+
+
+    {% if user|is_in_group:"lab_user" %}
+    <div class="ui bottom attached message" style="margin-top: 30px">
+        <h3>Status der Probe &auml;ndern</h3>
+        <form action="{% url 'app:query' %}" class="ui form" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>
+                {{ edit_form.status }}
             </div>
             <div class="field">
-                <label>{% blocktrans %}Passwort für den Geheimschlüssel (optional){% endblocktrans %}</label>
-                <input type="password">
+                <label>{% blocktrans %}Rack{% endblocktrans %}</label>
+                {{ edit_form.rack }}
             </div>
+            <div class="field">
+                <label>{% blocktrans %}Kommentar{% endblocktrans %}</label>
+                {{ edit_form.comment }}
+            </div>
+            <input name="barcode" value="{{ sample.barcode }}" hidden>
+            <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
         </form>
-        <div class="ui negative hidden message">
-            <p>{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</p>
-        </div>        
     </div>
-    <div class="actions">
-        <div class="ui cancel button">{% blocktrans %}Abbrechen{% endblocktrans %}</div>
-        <div class="ui approve button">{% blocktrans %}Entschlüsseln{% endblocktrans %}</div>
-    </div>
-</div>
-
-<div class="ui bottom attached message">
-    <form action="{% url 'app:query' %}" class="ui form" method="post">
-        {% csrf_token %}
-        <div class="field">
-            <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>
-            {{ edit_form.status }}
-        </div>
-        <div class="field">
-            <label>{% blocktrans %}Rack{% endblocktrans %}</label>
-            {{ edit_form.rack }}
-        </div>
-        <div class="field">
-            <label>{% blocktrans %}Kommentar{% endblocktrans %}</label>
-            {{ edit_form.comment }}
-        </div>
-        <input name="barcode" value="{{ sample.barcode }}" hidden>
-        <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
-    </form>
+    {% endif %}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
@@ -206,14 +237,14 @@
         var privateKey;
         if(password)
             privateKey = forge.pki.decryptRsaPrivateKey(privateKeyPem, password)
-        else 
+        else
             privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
 
         Object.keys(data).forEach(key => {
             data[key + "_decoded"] = forge.util.decode64(data[key]);
         });
 
-        var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP"); 
+        var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP");
 
         var encrypted_fields = ["name", "address", "contact"];
 
@@ -222,7 +253,7 @@
         encrypted_fields.forEach(el => {
             decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
         })
-        
+
         var output = decipher.output.data;
 
         var result = {};
@@ -238,5 +269,3 @@
         return result;
     }
 </script>
-
-

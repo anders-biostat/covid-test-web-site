@@ -156,7 +156,6 @@ STATICFILES_DIRS = [
 ]
 
 # REST API
-#
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -167,13 +166,15 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# Login
-#
+#LOGIN_URL = "/admin/login/"
+LOGIN_URL = '/lab/login'
+#LOGOUT_REDIRECT_URL = 'app:login'
 
-LOGIN_URL = "/admin/login/"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Logout if browser is closed
+SESSION_COOKIE_AGE = 8 * 60  # Logout after 8 minutes of inactivity
+SESSION_SAVE_EVERY_REQUEST = True  # Refresh session timeout on every request
 
-
-## Logging
+# Logging
 
 LOGGING = {
     'version': 1,
