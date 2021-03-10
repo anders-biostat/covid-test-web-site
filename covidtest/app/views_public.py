@@ -60,9 +60,10 @@ def render_status(request, event):
         if status == SampleStatus.WAIT or status == SampleStatus.PRINTED:
             return render(request, "public/pages/test-WAIT.html")
         return render(request, "public/pages/test-UNDEF.html")
-    return render(
-        request, "public/pages/test-ERROR.html", {"error": _("Kein Status vorhanden (bitte später erneut abrufen)")}
-    )
+    # return render(
+    #     request, "public/pages/test-ERROR.html", {"error": _("Kein Status vorhanden (bitte später erneut abrufen)")}
+    # )
+    return render(request, "public/pages/test-WAIT.html")
 
 
 def results_query(request):
