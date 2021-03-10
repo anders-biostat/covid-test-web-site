@@ -37,6 +37,14 @@ the root directory. You can copy the `example.env`
 $ cp example.env .env
 ```
 
+### User Permissions
+In order for permissions to work, add following groups 
+at the admin dashboard. (A superuser does not need to be part of a 
+group as he/she is allowed to do everything)
+1. Group - name = "lab_user" permissions = permissions type app | (bag, event, sample) and 
+sessions | Sitzung
+
+
 ## Usage
 
 For testing the application can be started with the command `python manage.py runserver`:

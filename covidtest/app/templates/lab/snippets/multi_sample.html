@@ -1,0 +1,63 @@
+{% load i18n %}
+{% load permissions %}
+
+
+<table class="ui selectable celled padded red table">
+    <thead>
+    <tr>
+        <th>Barcode</th>
+        <th class="single line">Access code</th>
+        <th>Bag</th>
+        <th>Rack</th>
+        <th>Status</th>
+        <th class="single line">Status Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+    {% for sample in multi_sample %}
+    <form action="{% url 'app:query' %}" method="post" class="ui form" id="multiSampleForm">
+        {% csrf_token %}
+        <tr value={{sample.access_code}} style="cursor: pointer">
+            <input name="search" type="hidden" id="remoteInput"/>
+            <td class="single line">
+                {{sample.barcode}}
+            </td>
+            <td class="single line">
+                {{sample.access_code}}
+            </td>
+            <td class="single line">
+                {{sample.bag.name}}
+            </td>
+            <td class="single line">
+                {{sample.rack}}
+            </td>
+            <td>
+                <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
+            </td>
+            <td>
+                {{sample.get_status.comment}}
+            </td>
+        </tr>
+    </form>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+  $("table").on('click', 'tr', function (e) {
+    e.preventDefault();
+    const searchQ = $(this).attr('value');
+    const $form = $('#multiSampleForm');
+    // set the input value
+    $('#remoteInput').val(searchQ);
+
+    $form.submit();
+  });
+</script>
+
+
+

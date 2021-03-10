@@ -1,44 +1,52 @@
 {% extends 'lab/base.html' %}
 {% load i18n %}
+{% load permissions %}
 {% block content %}
 <div>
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans  %}</h1>
+    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans %}</h1>
     <p>
         {% blocktrans %}
-        Dies ist das Laborinterface, um Datensätze der Testungen zu editieren. Folgende Prozesse stehen zur Verfügung:
-        {% endblocktrans %}
-     </p>
-
-    <h3 class="ui header">
-        {% blocktrans %}Probeneingang{% endblocktrans %}
-    </h3>
-    <p>
-        {% blocktrans %}
-            Hier werden nach dem Empfang der Probe die Probenröhrchen den
-            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der Barcode des Racks eingescannt werden
-            und nachfolgend alle Probenröhrchen dieses Racks eingescannt werden.
+        Laborinterface, zur Bearbeitung und Erfassung von Proben. Folgende Prozesse stehen zur Verfügung:
         {% endblocktrans %}
     </p>
 
-    <h3 class="ui header">
-        {% blocktrans %}Rack editieren{% endblocktrans %}
-    </h3>
-    <p>
-        {% blocktrans %}
-            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu wird das Rack eingescannt und danach
-            jeweils die positiven und unklaren Probenröhrchen eingescannt. Alle nicht eingescannten Proben
-            des Racks werden automatisch als negativ gewertet. Die Listen der positiven/unklaren Proben werden
-            einfach zeilenweise eingefügt (Barcode-Scanner).
-        {% endblocktrans %}
-    </p>
+    {% if user|is_in_group:"lab_user" %}
+    <a href="{% url 'app:query'  %}" style="color: inherit">
+        <div class="ui segment" style="margin-top: 30px; padding: 30px">
+            <h3 class="ui header">
+                {% blocktrans %}Proben Suchen{% endblocktrans %}
+            </h3>
 
-    <h3 class="ui header">
-        {% blocktrans %}Probe suchen{% endblocktrans %}
-    </h3>
-    <p>
-        {% blocktrans %}
-            Hier können einzelne Proberöhrchen gesucht werden und der Status sowie das Rack manuell gesetzt werden.
-        {% endblocktrans %}
-    </p>
+            <p>
+                Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen, sowie Status und Rack manuell setzen.
+            </p>
+        </div>
+    </a>
+    <a href="{% url 'app:checkin'  %}" style="color: inherit">
+        <div class="ui segment" style="margin-top: 30px; padding: 30px">
+
+            <h3 class="ui header">
+                {% blocktrans %}Mehrere Proben Bearbeiten{% endblocktrans %}
+            </h3>
+            <p>
+                Status, Rack und Kommentar einer oder mehrerer Proben gleichzeitig bearbeiten.
+            </p>
+        </div>
+    </a>
+    {% else %}
+    <a href="{% url 'app:query'  %}" style="color: inherit">
+        <div class="ui segment" style="margin-top: 30px; padding: 30px">
+            <h3 class="ui header">
+                {% blocktrans %}Proben Suchen{% endblocktrans %}
+            </h3>
+            <p>
+                {% blocktrans %}
+                Hier können einzelne Proberöhrchen gesucht werden.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </a>
+    {% endif %}
+
 </div>
 {% endblock %}

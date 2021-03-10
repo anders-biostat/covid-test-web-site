@@ -49,6 +49,10 @@ def render_status(request, event):
             return render(request, "public/pages/test-LAMPINC.html")
         if status == SampleStatus.LAMPFAIL:
             return render(request, "public/pages/test-LAMPFAIL.html")
+        if status == SampleStatus.RECEIVED:
+            return render(request, "public/pages/test-RECEIVED.html")
+        if status == SampleStatus.LAMPREPEAT:
+            return render(request, "public/pages/test-LAMPREPEAT.html")
         if status == SampleStatus.UNDEF:
             return render(request, "public/pages/test-UNDEF.html")
         if status == SampleStatus.MESSAGE:
@@ -62,6 +66,8 @@ def render_status(request, event):
 
 
 def results_query(request):
+    result_query_template = "public/result-query.html"
+
     form = ResultsQueryForm()
     if request.method == "POST":
         form = ResultsQueryForm(request.POST)
@@ -99,7 +105,7 @@ def results_query(request):
 
                 # Check if form is legacy
                 if "password" not in request.POST.keys():
-                    return render(request, "public/result-query.html", {"form": form})
+                    return render(request, result_query_template, {"form": form})
 
                 if form.is_valid():
                     password = form.cleaned_data["password"]
@@ -113,7 +119,7 @@ def results_query(request):
                             _("Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."),
                         )
                         request.session["access_code"] = access_code
-                        return render(request, "public/result-query.html", {"form": form})
+                        return render(request, result_query_template, {"form": form})
 
             # Checking the status of the sample
             event = sample.get_status()
@@ -123,7 +129,7 @@ def results_query(request):
                 sample.events.create(status="INFO", comment="result queried; status: None")
             return render_status(request, event)
 
-    return render(request, "public/result-query.html", {"form": form})
+    return render(request, result_query_template, {"form": form})
 
 
 def information(request):
