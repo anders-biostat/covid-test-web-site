@@ -7,7 +7,8 @@
     <tr>
         <th>Barcode</th>
         <th class="single line">Access code</th>
-        <th>Bag</th>
+        <th>Bag Name</th>
+        <th>Bag ID</th>
         <th>Rack</th>
         <th>Status</th>
         <th class="single line">Status Comment</th>
@@ -29,6 +30,9 @@
             </td>
             <td class="single line">
                 {{sample.bag.name}}
+            </td>
+            <td class="single line">
+                {{sample.bag.pk}}
             </td>
             <td class="single line">
                 {{sample.rack}}
