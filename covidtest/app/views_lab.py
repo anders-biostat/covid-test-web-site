@@ -144,7 +144,6 @@ def sample_detail(request):
                         event_list = events.values("sample").annotate(updated_on=Max("updated_on"))
                         sample_pks = [event["sample"] for event in event_list]
 
-                    print(f"SAMPLE PKS {sample_pks}")
                     multi_sample = Sample.objects.filter(
                         Q(rack__icontains=search) |
                         Q(bag__pk__iexact=search) |
