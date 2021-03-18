@@ -594,6 +594,10 @@ msgstr ""
 "For updates and news on our test programme, <a href=\"https://www.knoplab.de/"
 "blank\">please click here</a>."
 
+#: app/templates/public/index.html:42
+msgid "Hinweis, <strong>nur</strong> für teilnehmer vom <strong>EMBL</strong>: Bitte überprüfen Sie die Web-Adresse auf dem Zettel in Ihrem Testkit, um zu sehen ob Sie es hier registrieren sollen (alte Testkits) oder auf dem neuen EMBL-eigenen Server."
+msgstr "Note <strong>only</strong> for participants from <strong>EMBL</strong>: Please carefully check the web address on your paper slip to see whether you have an old kit (to be registered here) or a new kit (to be registered at EMBL's new server)."
+
 #: app/templates/public/information-text.html:3
 msgid "Informationen für Teilnehmer/innen"
 msgstr "Information for participants"
