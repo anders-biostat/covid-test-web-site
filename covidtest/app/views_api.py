@@ -35,6 +35,13 @@ def authorize_and_request_data(request):
             registrations = Registration.objects.filter(sample__barcode=barcode)
             if not registrations.exists():
                 return JsonResponse({"message": "Invalid Barcode"}, status=400)
+
+            sample = Sample.objects.get(barcode=barcode)
+            sample.events.create(
+                status="INFO",
+                comment=f"GA queried result - Account Name: {email}",
+                updated_by=account
+            )
             context = RegistrationSerializer(registrations, many=True)
             return JsonResponse(context.data, status=200, safe=False)
 
