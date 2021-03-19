@@ -1,0 +1,23 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+    <h2 class="ui header" style="text-align: center">
+        {% block segment-title %}
+        {% endblock %}
+    </h2>
+
+    <div style="margin-top: 30px; margin-bottom: 30px">
+    {% block segment-body %}
+    {% endblock %}
+    </div>
+
+    {% if updated_on %}
+    <p style="text-align: center; font-size: small; font-weight: bold">
+    Stand {{updated_on.date}} um {{updated_on.time}}
+    </p>
+    {% endif %}
+
+</div>
+{% endblock %}

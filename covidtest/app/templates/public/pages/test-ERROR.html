@@ -1,15 +1,14 @@
-{% extends "public/base.html" %}
+{% extends "public/pages/result_ui_segment.html" %}
 {% load i18n %}
 
-{% block content %}
-<div class="ui segment content">
-  <h3 class="ui header">{% blocktrans %}Fehler{% endblocktrans %}</h3>
-  <p>
-    {% blocktrans %}Es ist ein Fehler eingetreten: {% endblocktrans %}
-    {{ error }}
-  </p>
-  <p>
-    {% blocktrans %}Bitte kontaktieren Sie uns ggf.:{% endblocktrans %} info@covidtest-hd.de
-  </p>
-</div>
+{% block segment-title %}{% blocktrans %}Fehler{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p>
+  {% blocktrans %}Es ist ein Fehler eingetreten: {% endblocktrans %}
+  {{ error }}
+</p>
+<p>
+  {% blocktrans %}Bitte kontaktieren Sie uns ggf.:{% endblocktrans %} info@covidtest-hd.de
+</p>
 {% endblock %}

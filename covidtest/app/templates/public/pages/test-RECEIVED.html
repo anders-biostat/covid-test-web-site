@@ -1,12 +1,11 @@
-{% extends "public/base.html" %}
+{% extends "public/pages/result_ui_segment.html" %}
 {% load i18n %}
 
-{% block content %}
-<div class="ui segment content">
-    <h3 class="ui header">{% blocktrans %}Ihre Probe ist bei uns eingegangen{% endblocktrans %}</h3>
-    <p>
-        {% blocktrans %}Es liegt jedoch noch kein Ergebnis vor. Bitte
-        versuchen Sie es später oder morgen noch einmal.{% endblocktrans %}
-    </p>
-</div>
+{% block segment-title %}{% blocktrans %}Ihre Probe ist bei uns eingegangen{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p>
+    {% blocktrans %}Es liegt jedoch noch kein Ergebnis vor. Bitte
+    versuchen Sie es später oder morgen noch einmal.{% endblocktrans %}
+</p>
 {% endblock %}

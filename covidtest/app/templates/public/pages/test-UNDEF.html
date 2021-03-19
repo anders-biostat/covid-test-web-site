@@ -1,18 +1,14 @@
-{% extends "public/base.html" %}
+{% extends "public/pages/result_ui_segment.html" %}
 {% load i18n %}
 
-{% block content %}
-<div class="ui segment content">
-  <h3 class="ui header">{% blocktrans %}Technisches Problem{% endblocktrans %}</h3>
-  <p>
-    {% blocktrans %}Leider können wir Ihnen aufgrund eines technischen
-    Problems kein Ergebnis mitteilen.{% endblocktrans %}
-  </p>
-  <p>
-    {% blocktrans %}Bitte kontaktieren Sie uns unter:{% endblocktrans %} info@covidtest-hd.de
-  </p>
+{% block segment-title %}{% blocktrans %}Technisches Problem{% endblocktrans %}{% endblock %}
 
-
-
-</div>
+{% block segment-body %}
+<p>
+  {% blocktrans %}Leider können wir Ihnen aufgrund eines technischen
+  Problems kein Ergebnis mitteilen.{% endblocktrans %}
+</p>
+<p>
+  {% blocktrans %}Bitte kontaktieren Sie uns unter:{% endblocktrans %} info@covidtest-hd.de
+</p>
 {% endblock %}
