@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin, SingleTableView
-from django.db.models import Q, Max
+from django.db.models import Q, Max, F
 
 from .forms_lab import LabCheckInForm, LabGenerateBarcodeForm, LabProbeEditForm, LabQueryForm, LabRackResultsForm
 from .models import Event, Registration, RSAKey, Sample
@@ -139,10 +139,17 @@ def sample_detail(request):
                     # TODO this probably needs some sort of pagination in the future
                     #  to prevent sending too many samples in response
                     sample_pks = []
-                    events = Event.objects.filter(status__icontains=search)
+
+                    events = Event.objects.filter(
+                        status__icontains=search
+                    ).exclude(status=SampleStatus.INFO.value)
+
                     if events:
-                        event_list = events.values("sample").annotate(updated_on=Max("updated_on"))
-                        sample_pks = [event["sample"] for event in event_list]
+                        for event in events:
+                            sample_to_check = Sample.objects.get(events=event)
+                            latest_status = sample_to_check.get_status()
+                            if event == latest_status:
+                                sample_pks.append(sample_to_check.pk)
 
                     multi_sample = Sample.objects.filter(
                         Q(rack__icontains=search) |
