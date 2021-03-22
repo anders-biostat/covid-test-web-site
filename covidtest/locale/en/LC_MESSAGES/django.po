@@ -1932,6 +1932,37 @@ msgstr "As of"
 msgid "um"
 msgstr "at"
 
+#: app/templates/public/pages/test-LAMPREPEAT.html:4
+msgid "Technische Probleme"
+msgstr "Technical Problems"
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:8
+msgid ""
+"Leider ist es bei Ihrer Probe zu einem technischen Problem\n"
+"    gekommen, so dass wir die Analyse Ihrer Probe nochmals am nächsten Labortag\n"
+"    (Mo - Fr) wiederholen m&uuml;ssen."
+msgstr ""
+"Unfortunately, a technical problem occurred with your sample, so we have to repeat the analysis of your "
+"sample again on the next laboratory day (Mon - Fri)."
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:13
+msgid ""
+"Solche technischen Problem sind selten, kommen aber vor.\n"
+"    Es tut uns leid und wir bitten Sie am Nachmittag des n&auml;chsten Labortages noch einmal den Status zu pr&uuml;fen."
+msgstr ""
+"Such technical problems are rare, but do happen. We are sorry and ask you to check the status again in the "
+"afternoon of the next lab day."
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:17
+msgid "Wenn Sie Fragen dazu haben, schreiben Sie uns bitte: info@coronatest-hd.de"
+msgstr "If you have any questions about this, please write to us: info@coronatest-hd.de"
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:22
+msgid ""
+"Bleiben Sie dran, wir\n"
+"    tun unser Bestes."
+msgstr "Please stay tuned, we are doing our best."
+
 #~ msgid ""
 #~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
 #~ "\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg."
