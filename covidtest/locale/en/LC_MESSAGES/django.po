@@ -1850,6 +1850,88 @@ msgstr "The password you entered is not correct. Please try again."
 msgid "Erfolgreich registriert"
 msgstr "Registration successful"
 
+#: app/templates/public/pages/test-PCRWEAKPOS.html:4
+msgid "Grenzwertig Positiv"
+msgstr "Borderline Positive"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:8
+msgid "Resultat SARS- CoV-2-RNA (COVID- 19) Kernsäurenachweis (Coronatest): grenzwertig positiv"
+msgstr "Result SARS- CoV-2-RNA (COVID- 19) nuclear acid detection (coronatest): borderline positive"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:11
+msgid ""
+"Coronavirus 2019 (SARS-CoV-2) mittels RT-LAM und real-time RT-PCR (CE-IVD-markierter Test) in einem\n"
+"grenzwertigen Bereich nachgewiesen."
+msgstr "Coronavirus 2019 (SARS-CoV-2) detected in a borderline range by RT-LAM and real-time RT-PCR (CE-IVD labeled test)."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:15
+msgid ""
+"Die Analyse ergab eine grenzwertig positive Reaktion, sowohl mit dem RT-LAMP assay als auch mit einem\n"
+"  RT-PCR Test (CT-Wert 35-39). Das Ergebnis deutet sehr wahrscheinlich auf eine niedrige Viruslast bei beginnender oder\n"
+"  abklingender Infektion hin."
+msgstr ""
+"Analysis revealed a positive reaction by both RT-LAMP assay and RT-PCR assay"
+"(CT value 35-39). The result most likely indicates a low viral load at the onset "
+"or resolution of infection."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:20
+msgid ""
+"Die Bewertung von CT-Werten ist abhängig von Zeitpunkt und Qualität der Probennahme, von Materialart\n"
+"  bzw. Abstrichort sowie von testspezifischen Leistungsmerkmalen. Ein falsch-positives Ergebnis ist nicht völlig\n"
+"  auszuschließen."
+msgstr ""
+"The evaluation of CT values is dependent on the timing and quality of specimen "
+"collection, material type or smear location, and test-specific performance characteristics. "
+"A false positive result cannot be completely excluded."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:25
+msgid ""
+"Ein CT-Wert > 30 kann im Rahmen einer Kontrolluntersuchung als Entlasskriterium aus der Isolierung\n"
+"  eines Patienten nach einer COVID-Infektion herangezogen werden. Allerdings ist zu beachten, dass die Proben-Entnahme\n"
+"  für unseren Gurgeltest nicht von einer medizinisch ausgebildeten Fachperson durchgeführt wurde\n"
+"  (sondern von Ihnen selber), wodurch sich Unsicherheiten bei der genauen Bestimmung der Viruslast ergeben, je nach dem\n"
+"  wie genau Sie den Anweisungen folge geleistet haben."
+msgstr ""
+"A CT value > 30 can be used as a discharge criterion from isolation of a patient "
+"after COVID infection in the context of a control examination. However, it should "
+"be noted that the sample collection for our gargle test was not performed by a "
+"medically trained professional (but by yourself), which may result in uncertainties "
+"in the exact determination of the viral load, depending on how closely you followed "
+"the instructions."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:32
+msgid ""
+"Gemäß 87, Abs. 11fSG wird dieser Befund an das zuständige Gesundheitsamt gemeldet (Labormeldung).\n"
+"  Das Gesundheitsamt entscheidet nach klinischen und epidemiologischen Informationen über weitere Maßnahmen. Je nach\n"
+"  Situation kann es einige Tage dauern bis sich das Gesundheitsamt mit Ihnen in Verbindung setzt."
+msgstr ""
+"In accordance with 87, para. 11fSG, this finding is reported to the relevant health "
+"authority (laboratory report). The health office decides on further measures according "
+"to clinical and epidemiological information. Depending on the situation, it may take a "
+"few days for the Gesundheitsamt to contact you."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:37
+msgid ""
+"Für eine Kontroll-Untersuchung und Bestätigung des Resultates empfehlen wir die Abgabe einer weiteren\n"
+"  Gurgelprobe bei uns so schnell wie möglich, bei Rückfragen können Sie sich auch gerne (vertraulich) an die Hotline der\n"
+"  Teststation wenden:"
+msgstr ""
+"For a control examination and confirmation of the result, we recommend that you submit "
+"another gargle sample to us as soon as possible. If you have any queries, you are also "
+"welcome to contact (confidentially) the hotline of the testing station:"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:41
+msgid "oder"
+msgstr "or"
+
+#: app/templates/public/pages/result_ui_segment.html:41
+msgid "Stand"
+msgstr "As of"
+
+#: app/templates/public/pages/result_ui_segment.html:41
+msgid "um"
+msgstr "at"
+
 #~ msgid ""
 #~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
 #~ "\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg."

@@ -42,6 +42,8 @@ def render_status(request, event):
             return render(request, "public/pages/test-PCRPOS.html", {"updated_on": event_updated_on})
         if status == SampleStatus.PCRNEG:
             return render(request, "public/pages/test-PCRNEG.html", {"updated_on": event_updated_on})
+        if status == SampleStatus.PCRWEAKPOS:
+            return render(request, "public/pages/test-PCRWEAKPOS.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPPOS:
             return render(request, "public/pages/test-LAMPPOS.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPNEG:

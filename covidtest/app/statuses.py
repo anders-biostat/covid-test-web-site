@@ -10,6 +10,7 @@ class SampleStatus(Enum):
     LAMPINC = "LAMPINC"
     PCRPOS = "PCRPOS"
     PCRNEG = "PCRNEG"
+    PCRWEAKPOS = "PCRWEAKPOS"
     UNDEF = "UNDEF"
     INFO = "INFO"
     MESSAGE = "MESSAGE"

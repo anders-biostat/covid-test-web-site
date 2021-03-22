@@ -15,7 +15,7 @@
 
     {% if updated_on %}
     <p style="text-align: center; font-size: small; font-weight: bold">
-    Stand {{updated_on.date}} um {{updated_on.time}}
+    {% blocktrans %}Stand{% endblocktrans %} {{updated_on.date}} {% blocktrans %}um{% endblocktrans %} {{updated_on.time}}
     </p>
     {% endif %}
 
