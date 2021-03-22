@@ -11,6 +11,7 @@ class SampleStatus(Enum):
     PCRPOS = "PCRPOS"
     PCRNEG = "PCRNEG"
     PCRWEAKPOS = "PCRWEAKPOS"
+    PCRSENT = "PCRSENT"
     UNDEF = "UNDEF"
     INFO = "INFO"
     MESSAGE = "MESSAGE"

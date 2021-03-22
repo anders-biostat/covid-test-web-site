@@ -2,7 +2,7 @@
 {% load permissions %}
 
 
-<table class="ui selectable celled padded red table">
+<table class="ui striped selectable celled padded red table">
     <thead>
     <tr>
         <th>Barcode</th>
@@ -11,6 +11,7 @@
         <th>Bag ID</th>
         <th>Rack</th>
         <th>Status</th>
+        <th class="single line">Status gesetzt am</th>
         <th class="single line">Status Comment</th>
     </tr>
     </thead>
@@ -39,6 +40,9 @@
             </td>
             <td>
                 <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
+            </td>
+            <td>
+                {{ sample.get_status.updated_on|date:"Y-m-d H:i:s" }}
             </td>
             <td>
                 {{sample.get_status.comment}}
