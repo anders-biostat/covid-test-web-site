@@ -1719,8 +1719,8 @@ msgstr ""
 #: app/templates/public/pages/test-WAIT-LONG.html:12
 msgid ""
 "Falls Sie schon sehr lange auf ein Ergebnis warten, kontaktieren Sie\n"
-"        uns und fragen Sie nach:"
-msgstr "If you wait longer time for the result please contact us:"
+"    uns und fragen Sie nach: "
+msgstr "If you wait longer time for the result please contact us: "
 
 #: app/templates/public/register.html:10
 msgid "Bitte registrieren Sie ihr Testkit:"
@@ -1918,10 +1918,6 @@ msgstr ""
 "For a control examination and confirmation of the result, we recommend submitting another gargle sample "
 "to us as soon as possible."
 
-#: app/templates/public/pages/test-PCRWEAKPOS.html:41
-msgid "oder"
-msgstr "or"
-
 #: app/templates/public/pages/result_ui_segment.html:41
 msgid "Stand"
 msgstr "As of"
@@ -1957,9 +1953,13 @@ msgid ""
 "    tun unser Bestes."
 msgstr "Please stay tuned, we are doing our best."
 
-#: app/templates/public/pages/snippets/contact_information.html:3
-msgid "Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: 01525-7908378 oder"
-msgstr "If you have any questions about this, please contact us at: 01525-7908378 or"
+#: multi use clausel
+msgid "oder"
+msgstr "or"
+
+#: multi use clausel
+msgid "Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: "
+msgstr "If you have any questions about this, please contact us at: "
 
 #~ msgid ""
 #~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
