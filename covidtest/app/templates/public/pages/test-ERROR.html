@@ -8,7 +8,5 @@
   {% blocktrans %}Es ist ein Fehler eingetreten: {% endblocktrans %}
   {{ error }}
 </p>
-<p>
-  {% blocktrans %}Bitte kontaktieren Sie uns ggf.:{% endblocktrans %} info@covidtest-hd.de
-</p>
+{% include 'public/snippets/contact_information.html' %}
 {% endblock %}

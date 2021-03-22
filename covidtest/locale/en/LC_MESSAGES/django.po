@@ -1913,12 +1913,10 @@ msgstr ""
 #: app/templates/public/pages/test-PCRWEAKPOS.html:37
 msgid ""
 "Für eine Kontroll-Untersuchung und Bestätigung des Resultates empfehlen wir die Abgabe einer weiteren\n"
-"  Gurgelprobe bei uns so schnell wie möglich, bei Rückfragen können Sie sich auch gerne (vertraulich) an die Hotline der\n"
-"  Teststation wenden:"
+"  Gurgelprobe bei uns so schnell wie möglich."
 msgstr ""
-"For a control examination and confirmation of the result, we recommend that you submit "
-"another gargle sample to us as soon as possible. If you have any queries, you are also "
-"welcome to contact (confidentially) the hotline of the testing station:"
+"For a control examination and confirmation of the result, we recommend submitting another gargle sample "
+"to us as soon as possible."
 
 #: app/templates/public/pages/test-PCRWEAKPOS.html:41
 msgid "oder"
@@ -1953,15 +1951,15 @@ msgstr ""
 "Such technical problems are rare, but do happen. We are sorry and ask you to check the status again in the "
 "afternoon of the next lab day."
 
-#: app/templates/public/pages/test-LAMPREPEAT.html:17
-msgid "Wenn Sie Fragen dazu haben, schreiben Sie uns bitte: info@coronatest-hd.de"
-msgstr "If you have any questions about this, please write to us: info@coronatest-hd.de"
-
-#: app/templates/public/pages/test-LAMPREPEAT.html:22
+#: app/templates/public/pages/test-LAMPREPEAT.html:20
 msgid ""
 "Bleiben Sie dran, wir\n"
 "    tun unser Bestes."
 msgstr "Please stay tuned, we are doing our best."
+
+#: app/templates/public/pages/snippets/contact_information.html:3
+msgid "Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: 01525-7908378 oder"
+msgstr "If you have any questions about this, please contact us at: 01525-7908378 or"
 
 #~ msgid ""
 #~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
