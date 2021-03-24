@@ -177,7 +177,7 @@ def sample_detail(request):
                 comment = edit_form.cleaned_data["comment"].strip()
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
-                    messages.add_message(request, messages.ERROR, _("Sample nicht gefunde"))
+                    messages.add_message(request, messages.ERROR, _("Sample nicht gefunden"))
                 else:
                     rack_changed = sample.rack != rack
                     if rack_changed:
@@ -201,8 +201,18 @@ def sample_detail(request):
                         )
                         event.save()
                         messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
+                    else:
+                        messages.add_message(request, messages.ERROR, _("Der Probe bitte einen Status geben"))
                 return render(
                     request, sample_detail_template, {"form": form, "edit_form": edit_form, "sample": sample}
+                )
+            else:
+                sample = Sample.objects.filter(barcode=request.POST.get("barcode")).first()
+                messages.add_message(request, messages.ERROR, edit_form.errors)
+                return render(
+                    request,
+                    sample_detail_template,
+                    {"form": form, "edit_form": edit_form, "sample": sample}
                 )
 
     return render(request, sample_detail_template, {"form": form, "edit_form": edit_form})
