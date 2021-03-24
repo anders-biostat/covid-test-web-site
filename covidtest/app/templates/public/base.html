@@ -27,6 +27,14 @@
             type="text/css"
             href="{% static 'main_style.css' %}"
     />
+    <style>
+        .ui.checkbox input[type="checkbox"] + label::before{
+            border-width: 2px;
+            border-color: black;
+            border-radius: 4px;
+        }
+
+    </style>
 </head>
 <body class="page">
 
@@ -92,7 +100,7 @@
 
     <div class="ui center aligned container">
         <p>Bei <b>technischen Problemen</b> informieren Sie bitte Simon Anders:
-            <a href="email:s.anders@zmbh.uni-heidelberg.de">s.anders@zmbh.uni-heidelberg.de</a></p>
+            <a href="mailto:s.anders@zmbh.uni-heidelberg.de">s.anders@zmbh.uni-heidelberg.de</a></p>
     </div>
 
 

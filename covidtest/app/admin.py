@@ -27,7 +27,7 @@ class RSAKeyAdmin(admin.ModelAdmin):
 
 
 class BagAdmin(admin.ModelAdmin):
-    list_display = ("name", "rsa_key", "comment")
+    list_display = ("pk", "name", "rsa_key", "comment")
 
 class ConsentAdmin(admin.ModelAdmin):
     list_display = ("registration", "consent_type", "md5", "date" )

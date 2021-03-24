@@ -60,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "app.middleware.TimezoneMiddleware",
 ]
 
 ROOT_URLCONF = "covidtest.urls"
@@ -171,7 +172,7 @@ LOGIN_URL = '/lab/login'
 #LOGOUT_REDIRECT_URL = 'app:login'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Logout if browser is closed
-SESSION_COOKIE_AGE = 8 * 60  # Logout after 8 minutes of inactivity
+SESSION_COOKIE_AGE = 45 * 60  # Logout after 45 minutes of inactivity
 SESSION_SAVE_EVERY_REQUEST = True  # Refresh session timeout on every request
 
 # Logging

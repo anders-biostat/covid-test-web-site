@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin, SingleTableView
-from django.db.models import Q, Max
+from django.db.models import Q, Max, F
 
 from .forms_lab import LabCheckInForm, LabGenerateBarcodeForm, LabProbeEditForm, LabQueryForm, LabRackResultsForm
 from .models import Event, Registration, RSAKey, Sample
@@ -139,13 +139,21 @@ def sample_detail(request):
                     # TODO this probably needs some sort of pagination in the future
                     #  to prevent sending too many samples in response
                     sample_pks = []
-                    events = Event.objects.filter(status__icontains=search)
+
+                    events = Event.objects.filter(
+                        status__icontains=search
+                    ).exclude(status=SampleStatus.INFO.value)
+
                     if events:
-                        event_list = events.values("sample").annotate(updated_on=Max("updated_on"))
-                        sample_pks = [event["sample"] for event in event_list]
+                        for event in events:
+                            sample_to_check = Sample.objects.get(events=event)
+                            latest_status = sample_to_check.get_latest_internal_status()
+                            if event == latest_status:
+                                sample_pks.append(sample_to_check.pk)
+
                     multi_sample = Sample.objects.filter(
                         Q(rack__icontains=search) |
-                        Q(bag__name__icontains=search) |
+                        Q(bag__pk__iexact=search) |
                         Q(pk__in=sample_pks)
                     )
                     if multi_sample:
@@ -169,7 +177,7 @@ def sample_detail(request):
                 comment = edit_form.cleaned_data["comment"].strip()
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
-                    messages.add_message(request, messages.ERROR, _("Sample nicht gefunde"))
+                    messages.add_message(request, messages.ERROR, _("Sample nicht gefunden"))
                 else:
                     rack_changed = sample.rack != rack
                     if rack_changed:
@@ -193,8 +201,18 @@ def sample_detail(request):
                         )
                         event.save()
                         messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
+                    else:
+                        messages.add_message(request, messages.ERROR, _("Der Probe bitte einen Status geben"))
                 return render(
                     request, sample_detail_template, {"form": form, "edit_form": edit_form, "sample": sample}
+                )
+            else:
+                sample = Sample.objects.filter(barcode=request.POST.get("barcode")).first()
+                messages.add_message(request, messages.ERROR, edit_form.errors)
+                return render(
+                    request,
+                    sample_detail_template,
+                    {"form": form, "edit_form": edit_form, "sample": sample}
                 )
 
     return render(request, sample_detail_template, {"form": form, "edit_form": edit_form})

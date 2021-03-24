@@ -39,10 +39,21 @@ class Sample(models.Model):
         return status
 
     def get_statuses(self):
-        return self.events.order_by("updated_on").exclude(status=SampleStatus.INFO.value)
+        return self.events.order_by("updated_on")
 
-    def get_status(self):
-        return self.get_statuses().last()
+    def get_latest_external_status(self):
+        """External user facing status event"""
+        return self.get_statuses().exclude(
+            status=SampleStatus.INFO.value
+        ).exclude(
+            status=SampleStatus.PCRSENT.value
+        ).last()
+
+    def get_latest_internal_status(self):
+        """Internal staff facing events"""
+        return self.get_statuses().exclude(
+            status=SampleStatus.INFO.value
+        ).last()
 
     def __str__(self):
         return "%s" % self.barcode
@@ -65,6 +76,7 @@ class Event(models.Model):
     comment = models.TextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True)
     updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+
 
 class Consent(models.Model):
     consent_type = models.CharField(max_length=50)

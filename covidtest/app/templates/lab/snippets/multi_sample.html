@@ -2,14 +2,16 @@
 {% load permissions %}
 
 
-<table class="ui selectable celled padded red table">
+<table class="ui striped selectable celled padded red table">
     <thead>
     <tr>
         <th>Barcode</th>
         <th class="single line">Access code</th>
-        <th>Bag</th>
+        <th>Bag Name</th>
+        <th>Bag ID</th>
         <th>Rack</th>
         <th>Status</th>
+        <th class="single line">Status gesetzt am</th>
         <th class="single line">Status Comment</th>
     </tr>
     </thead>
@@ -31,13 +33,19 @@
                 {{sample.bag.name}}
             </td>
             <td class="single line">
+                {{sample.bag.pk}}
+            </td>
+            <td class="single line">
                 {{sample.rack}}
             </td>
             <td>
-                <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
+                <h4 class="ui center aligned header">{{sample.get_latest_internal_status.status}}</h4>
             </td>
             <td>
-                {{sample.get_status.comment}}
+                {{ sample.get_latest_internal_status.updated_on|date:"Y-m-d H:i:s" }}
+            </td>
+            <td>
+                {{sample.get_latest_internal_status.comment}}
             </td>
         </tr>
     </form>
