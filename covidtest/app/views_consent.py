@@ -84,7 +84,7 @@ class ConsentView(View):
             try:
                 if request.session["consent_forms_to_be_displayed"][0]["consent_type"] != form.cleaned_data["consent_type"]:
                     raise ValueError("Template mix-up")
-            except (IndexError, ValueError) as e:
+            except (IndexError, ValueError, KeyError) as e:
                 logger.warning(e)
                 messages.add_message(
                     request,

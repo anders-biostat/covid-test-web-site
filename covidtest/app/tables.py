@@ -12,13 +12,13 @@ class SampleTable(tables.Table):
         return value.name
 
     def render_status(self, record):
-        if record.get_status():
-            return record.get_status().status
+        if record.get_latest_external_status():
+            return record.get_latest_external_status().status
         else:
             return None
 
     def render_updated_on(self, record):
-        status = record.get_status()
+        status = record.get_latest_external_status()
         if status:
             return status.updated_on
         else:

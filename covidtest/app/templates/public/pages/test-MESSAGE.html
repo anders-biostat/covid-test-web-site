@@ -1,17 +1,14 @@
-{% extends "public/base.html" %}
+{% extends "public/pages/result_ui_segment.html" %}
 {% load i18n %}
 
-{% block content %}
-<div class="ui segment content">
-  <h3 class="ui header">{% blocktrans %}Nachricht{% endblocktrans %}</h3>
-  <p><i>
-    {% blocktrans %}Zu Ihrer Probe liegt folgende Nachricht vor:{% endblocktrans %}
-  </i></p>
-  <p>
-    {{msg|safe}}
-  </p>
-  <p><i>
-    {% blocktrans %}Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter:{% endblocktrans %} info@covidtest-hd.de
-  </i></p>
-</div>
+{% block segment-title %}{% blocktrans %}Nachricht{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p><i>
+  {% blocktrans %}Zu Ihrer Probe liegt folgende Nachricht vor:{% endblocktrans %}
+</i></p>
+<p>
+  {{msg|safe}}
+</p>
+<p>{% blocktrans %}Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: {% endblocktrans %}{% include 'public/snippets/contact_information.html' %}</p>
 {% endblock %}

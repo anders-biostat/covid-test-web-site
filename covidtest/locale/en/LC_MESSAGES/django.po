@@ -594,6 +594,10 @@ msgstr ""
 "For updates and news on our test programme, <a href=\"https://www.knoplab.de/"
 "blank\">please click here</a>."
 
+#: app/templates/public/index.html:42
+msgid "Hinweis, <strong>nur</strong> für teilnehmer vom <strong>EMBL</strong>: Bitte überprüfen Sie die Web-Adresse auf dem Zettel in Ihrem Testkit, um zu sehen ob Sie es hier registrieren sollen (alte Testkits) oder auf dem neuen EMBL-eigenen Server."
+msgstr "Note <strong>only</strong> for participants from <strong>EMBL</strong>: Please carefully check the web address on your paper slip to see whether you have an old kit (to be registered here) or a new kit (to be registered at EMBL's new server)."
+
 #: app/templates/public/information-text.html:3
 msgid "Informationen für Teilnehmer/innen"
 msgstr "Information for participants"
@@ -1715,8 +1719,8 @@ msgstr ""
 #: app/templates/public/pages/test-WAIT-LONG.html:12
 msgid ""
 "Falls Sie schon sehr lange auf ein Ergebnis warten, kontaktieren Sie\n"
-"        uns und fragen Sie nach:"
-msgstr "If you wait longer time for the result please contact us:"
+"    uns und fragen Sie nach: "
+msgstr "If you wait longer time for the result please contact us: "
 
 #: app/templates/public/register.html:10
 msgid "Bitte registrieren Sie ihr Testkit:"
@@ -1845,6 +1849,117 @@ msgstr "The password you entered is not correct. Please try again."
 #: app/views_public.py:183
 msgid "Erfolgreich registriert"
 msgstr "Registration successful"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:4
+msgid "Grenzwertig Positiv"
+msgstr "Borderline Positive"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:8
+msgid "Resultat SARS- CoV-2-RNA (COVID- 19) Kernsäurenachweis (Coronatest): grenzwertig positiv"
+msgstr "Result SARS- CoV-2-RNA (COVID- 19) nuclear acid detection (coronatest): borderline positive"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:11
+msgid ""
+"Coronavirus 2019 (SARS-CoV-2) mittels RT-LAM und real-time RT-PCR (CE-IVD-markierter Test) in einem\n"
+"grenzwertigen Bereich nachgewiesen."
+msgstr "Coronavirus 2019 (SARS-CoV-2) detected in a borderline range by RT-LAM and real-time RT-PCR (CE-IVD labeled test)."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:15
+msgid ""
+"Die Analyse ergab eine grenzwertig positive Reaktion, sowohl mit dem RT-LAMP assay als auch mit einem\n"
+"  RT-PCR Test (CT-Wert 35-39). Das Ergebnis deutet sehr wahrscheinlich auf eine niedrige Viruslast bei beginnender oder\n"
+"  abklingender Infektion hin."
+msgstr ""
+"Analysis revealed a positive reaction by both RT-LAMP assay and RT-PCR assay"
+"(CT value 35-39). The result most likely indicates a low viral load at the onset "
+"or resolution of infection."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:20
+msgid ""
+"Die Bewertung von CT-Werten ist abhängig von Zeitpunkt und Qualität der Probennahme, von Materialart\n"
+"  bzw. Abstrichort sowie von testspezifischen Leistungsmerkmalen. Ein falsch-positives Ergebnis ist nicht völlig\n"
+"  auszuschließen."
+msgstr ""
+"The evaluation of CT values is dependent on the timing and quality of specimen "
+"collection, material type or smear location, and test-specific performance characteristics. "
+"A false positive result cannot be completely excluded."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:25
+msgid ""
+"Ein CT-Wert > 30 kann im Rahmen einer Kontrolluntersuchung als Entlasskriterium aus der Isolierung\n"
+"  eines Patienten nach einer COVID-Infektion herangezogen werden. Allerdings ist zu beachten, dass die Proben-Entnahme\n"
+"  für unseren Gurgeltest nicht von einer medizinisch ausgebildeten Fachperson durchgeführt wurde\n"
+"  (sondern von Ihnen selber), wodurch sich Unsicherheiten bei der genauen Bestimmung der Viruslast ergeben, je nach dem\n"
+"  wie genau Sie den Anweisungen folge geleistet haben."
+msgstr ""
+"A CT value > 30 can be used as a discharge criterion from isolation of a patient "
+"after COVID infection in the context of a control examination. However, it should "
+"be noted that the sample collection for our gargle test was not performed by a "
+"medically trained professional (but by yourself), which may result in uncertainties "
+"in the exact determination of the viral load, depending on how closely you followed "
+"the instructions."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:32
+msgid ""
+"Gemäß 87, Abs. 11fSG wird dieser Befund an das zuständige Gesundheitsamt gemeldet (Labormeldung).\n"
+"  Das Gesundheitsamt entscheidet nach klinischen und epidemiologischen Informationen über weitere Maßnahmen. Je nach\n"
+"  Situation kann es einige Tage dauern bis sich das Gesundheitsamt mit Ihnen in Verbindung setzt."
+msgstr ""
+"In accordance with 87, para. 11fSG, this finding is reported to the relevant health "
+"authority (laboratory report). The health office decides on further measures according "
+"to clinical and epidemiological information. Depending on the situation, it may take a "
+"few days for the Gesundheitsamt to contact you."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:37
+msgid ""
+"Für eine Kontroll-Untersuchung und Bestätigung des Resultates empfehlen wir die Abgabe einer weiteren\n"
+"  Gurgelprobe bei uns so schnell wie möglich."
+msgstr ""
+"For a control examination and confirmation of the result, we recommend submitting another gargle sample "
+"to us as soon as possible."
+
+#: app/templates/public/pages/result_ui_segment.html:41
+msgid "Stand"
+msgstr "As of"
+
+#: app/templates/public/pages/result_ui_segment.html:41
+msgid "um"
+msgstr "at"
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:4
+msgid "Technische Probleme"
+msgstr "Technical Problems"
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:8
+msgid ""
+"Leider ist es bei Ihrer Probe zu einem technischen Problem\n"
+"    gekommen, so dass wir die Analyse Ihrer Probe nochmals am nächsten Labortag\n"
+"    (Mo - Fr) wiederholen m&uuml;ssen."
+msgstr ""
+"Unfortunately, a technical problem occurred with your sample, so we have to repeat the analysis of your "
+"sample again on the next laboratory day (Mon - Fri)."
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:13
+msgid ""
+"Solche technischen Problem sind selten, kommen aber vor.\n"
+"    Es tut uns leid und wir bitten Sie am Nachmittag des n&auml;chsten Labortages noch einmal den Status zu pr&uuml;fen."
+msgstr ""
+"Such technical problems are rare, but do happen. We are sorry and ask you to check the status again in the "
+"afternoon of the next lab day."
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:20
+msgid ""
+"Bleiben Sie dran, wir\n"
+"    tun unser Bestes."
+msgstr "Please stay tuned, we are doing our best."
+
+#: multi use clausel
+msgid "oder"
+msgstr "or"
+
+#: multi use clausel
+msgid "Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: "
+msgstr "If you have any questions about this, please contact us at: "
 
 #~ msgid ""
 #~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="

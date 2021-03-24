@@ -38,6 +38,6 @@ xkNg2AegGcT+ysU2uleSmkkSxs3VDYhRG8njYfzXchpVAgMBAAE=
     def test_sample_status(self):
         """Return None if no status set"""
         sample = Sample.objects.filter(barcode="123456789").first()
-        self.assertEqual(sample.get_status(), None)
+        self.assertEqual(sample.get_latest_external_status(), None)
         self.assertEqual(sample.get_statuses().count(), 0)
         pass

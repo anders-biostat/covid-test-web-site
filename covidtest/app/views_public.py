@@ -32,34 +32,37 @@ def instructions(request):
 
 def render_status(request, event):
     if event is not None:
+        event_updated_on = event.updated_on
         try:
             status = SampleStatus[event.status]
         except KeyError:
-            return render(request, "public/pages/test-ERROR.html", {"error": _("Status unbekannt")})
+            return render(request, "public/pages/test-ERROR.html", {"error": _("Status unbekannt"), "updated_on": event_updated_on})
 
         if status == SampleStatus.PCRPOS:
-            return render(request, "public/pages/test-PCRPOS.html")
+            return render(request, "public/pages/test-PCRPOS.html", {"updated_on": event_updated_on})
         if status == SampleStatus.PCRNEG:
-            return render(request, "public/pages/test-PCRNEG.html")
+            return render(request, "public/pages/test-PCRNEG.html", {"updated_on": event_updated_on})
+        if status == SampleStatus.PCRWEAKPOS:
+            return render(request, "public/pages/test-PCRWEAKPOS.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPPOS:
-            return render(request, "public/pages/test-LAMPPOS.html")
+            return render(request, "public/pages/test-LAMPPOS.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPNEG:
-            return render(request, "public/pages/test-LAMPNEG.html")
+            return render(request, "public/pages/test-LAMPNEG.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPINC:
-            return render(request, "public/pages/test-LAMPINC.html")
+            return render(request, "public/pages/test-LAMPINC.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPFAIL:
-            return render(request, "public/pages/test-LAMPFAIL.html")
+            return render(request, "public/pages/test-LAMPFAIL.html", {"updated_on": event_updated_on})
         if status == SampleStatus.RECEIVED:
-            return render(request, "public/pages/test-RECEIVED.html")
+            return render(request, "public/pages/test-RECEIVED.html", {"updated_on": event_updated_on})
         if status == SampleStatus.LAMPREPEAT:
-            return render(request, "public/pages/test-LAMPREPEAT.html")
+            return render(request, "public/pages/test-LAMPREPEAT.html", {"updated_on": event_updated_on})
         if status == SampleStatus.UNDEF:
-            return render(request, "public/pages/test-UNDEF.html")
+            return render(request, "public/pages/test-UNDEF.html", {"updated_on": event_updated_on})
         if status == SampleStatus.MESSAGE:
-            return render(request, "public/pages/test-MESSAGE.html", {'msg': event.comment})
-        if status == SampleStatus.WAIT or status == SampleStatus.PRINTED:
-            return render(request, "public/pages/test-WAIT.html")
-        return render(request, "public/pages/test-UNDEF.html")
+            return render(request, "public/pages/test-MESSAGE.html", {'msg': event.comment, "updated_on": event_updated_on})
+        if status == SampleStatus.WAIT or status == SampleStatus.PRINTED or status == SampleStatus.PCRSENT:
+            return render(request, "public/pages/test-WAIT.html", {"updated_on": event_updated_on})
+        return render(request, "public/pages/test-UNDEF.html", {"updated_on": event_updated_on})
     # return render(
     #     request, "public/pages/test-ERROR.html", {"error": _("Kein Status vorhanden (bitte später erneut abrufen)")}
     # )
@@ -123,7 +126,7 @@ def results_query(request):
                         return render(request, result_query_template, {"form": form})
 
             # Checking the status of the sample
-            event = sample.get_status()
+            event = sample.get_latest_external_status()
             if event is not None:
                 sample.events.create(status="INFO", comment="result queried; status: " + event.status)
             else:
