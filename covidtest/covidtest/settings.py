@@ -60,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "app.middleware.TimezoneMiddleware",
 ]
 
 ROOT_URLCONF = "covidtest.urls"
@@ -131,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "de"
 
-TIME_ZONE = "Europe/Berlin"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 

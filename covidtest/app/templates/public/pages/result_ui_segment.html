@@ -1,5 +1,6 @@
 {% extends "public/base.html" %}
 {% load i18n %}
+{% load tz %}
 
 {% block content %}
 <div class="ui segment content">
@@ -15,7 +16,10 @@
 
     {% if updated_on %}
     <p style="text-align: center; font-size: small; font-weight: bold">
-    {% blocktrans %}Stand{% endblocktrans %} {{updated_on.date}} {% blocktrans %}um{% endblocktrans %} {{updated_on.time}}
+    {% blocktrans %}Stand{% endblocktrans %}
+        {{updated_on|localtime|date}}
+        {% blocktrans %}um{% endblocktrans %}
+        {{updated_on|localtime|time}}
     </p>
     {% endif %}
 
