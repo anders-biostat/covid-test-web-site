@@ -39,7 +39,7 @@ def authorize_and_request_data(request):
             sample = Sample.objects.get(barcode=barcode)
             sample.events.create(
                 status="INFO",
-                comment=f"GA queried result - Account Name: {email}",
+                comment=f"GA queried result",
                 updated_by=account
             )
             context = RegistrationSerializer(registrations, many=True)
