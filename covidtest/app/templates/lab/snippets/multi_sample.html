@@ -39,13 +39,13 @@
                 {{sample.rack}}
             </td>
             <td>
-                <h4 class="ui center aligned header">{{sample.get_status.status}}</h4>
+                <h4 class="ui center aligned header">{{sample.get_latest_internal_status.status}}</h4>
             </td>
             <td>
-                {{ sample.get_status.updated_on|date:"Y-m-d H:i:s" }}
+                {{ sample.get_latest_internal_status.updated_on|date:"Y-m-d H:i:s" }}
             </td>
             <td>
-                {{sample.get_status.comment}}
+                {{sample.get_latest_internal_status.comment}}
             </td>
         </tr>
     </form>

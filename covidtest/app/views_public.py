@@ -126,7 +126,7 @@ def results_query(request):
                         return render(request, result_query_template, {"form": form})
 
             # Checking the status of the sample
-            event = sample.get_status()
+            event = sample.get_latest_external_status()
             if event is not None:
                 sample.events.create(status="INFO", comment="result queried; status: " + event.status)
             else:

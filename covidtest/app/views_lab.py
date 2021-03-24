@@ -147,7 +147,7 @@ def sample_detail(request):
                     if events:
                         for event in events:
                             sample_to_check = Sample.objects.get(events=event)
-                            latest_status = sample_to_check.get_status()
+                            latest_status = sample_to_check.get_latest_internal_status()
                             if event == latest_status:
                                 sample_pks.append(sample_to_check.pk)
 

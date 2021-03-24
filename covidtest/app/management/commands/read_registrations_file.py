@@ -83,7 +83,7 @@ class Command(BaseCommand):
 
             updated_status = []
             for sample in Sample.objects.all():
-                if sample.get_status() is None:
+                if sample.get_latest_external_status() is None:
                     sample.events.create(status="PRINTED", comment=comment)
                     updated_status.append(sample.barcode)
             print('Updated status "printed: " ', updated_status)
