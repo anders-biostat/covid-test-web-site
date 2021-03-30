@@ -19,37 +19,23 @@
         >{% blocktrans %}Mehr über den Test erfahren{% endblocktrans %}</a
         >
 
+        {% if news %}
         <h2>Aktuelles</h2>
         <div class="banner-news-body">
-
-
+            {% for article in news %}
             <div class="ui message">
                 <div class="header">
-                    Changes in Service
+                    {{article.title}}
                 </div>
-                <div class="meta" style="font-size: .9em">22. März 2021 um 10:20</div>
-                <p>We just updated our privacy policy here to better service our
-                    customers. We recommend reviewing the
-                    changes.drgedrg drfg dr gd grd gh dhrb d hbd fb df b df bdf bd bf df bdf </p>
+                <div class="meta" style="font-size: .9em; margin-top: 5px">{{article.created_on}}</div>
+                <p>{{article.comment|safe}}</p>
             </div>
-            <div class="ui message">
-                <div class="header">
-                    Changes in Service
-                </div>
-                <div class="meta" style="font-size: .9em">08. März 2021 um 10:20</div>
-                <p>We just updated our privacy policy here to better service our customers. We recommend reviewing the
-                    changes.</p>
-            </div>
-            <div class="ui message">
-                <div class="header">
-                    Changes in Service
-                </div>
-                <div class="meta" style="font-size: .9em">01. März 2021 um 10:20</div>
-                <p>We just updated our privacy policy here to better service our customers. We recommend reviewing the
-                    changes.</p>
-            </div>
+            {% endfor %}
         </div>
-        <p>Ältere Nachrichten finden Sie im <a>Archiv</a></p>
+        {% else %}
+        <h2>Keine aktuellen Nachrichten</h2>
+        {% endif %}
+        <p>Ältere Nachrichten finden Sie im <a href="{% url 'app:news_archive' %}">Archiv</a></p>
 
         <p>
             {% blocktrans %}Diese Seite ist verfügbar in:{% endblocktrans %}</br>

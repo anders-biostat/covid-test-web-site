@@ -270,6 +270,7 @@ div.ui.horizontal.small.divided.link.list > a{
     text-align: left;
     display: inline-block;
     max-width: 800px;
+    min-width: 80%;
 }
 
 .banner-news-body p{

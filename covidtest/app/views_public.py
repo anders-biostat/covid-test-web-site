@@ -6,14 +6,16 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
 from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy, AgeGroupForm
-from .models import Event, Registration, RSAKey, Sample
+from .models import Event, Registration, RSAKey, Sample, News
 from .statuses import SampleStatus
 from .views_consent import get_consent_md5
 
 log = logging.getLogger(__name__)
+
 
 def index(request):
     request.session.flush()
@@ -23,7 +25,22 @@ def index(request):
     if access_code is not None:
         request.session["access_code"] = access_code
         return redirect("app:consent_age")
-    return render(request, "public/index.html")
+    news = News.objects.filter(relevant=True)
+    return render(request, "public/index.html", {"news": news})
+
+
+def news_archive(request):
+    news_query = News.objects.filter(relevant=False)
+    page = request.GET.get("page", 1)
+    paginator = Paginator(news_query, 5)
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    return render(request, "public/news-archive.html", {"news": news})
 
 
 def instructions(request):
