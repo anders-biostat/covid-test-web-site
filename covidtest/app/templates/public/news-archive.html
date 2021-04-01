@@ -1,0 +1,61 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% if news %}
+<div class="ui segment content">
+    <h2 class="ui header">
+        {% blocktrans %}Nachrichten Archiv{% endblocktrans %}
+    </h2>
+
+    <div style="width: 100%">
+        {% for article in news %}
+        <div class="ui message">
+            <div class="header">
+                {{article.title}}
+            </div>
+            <div class="meta" style="font-size: .9em; margin-top: 5px">{{article.created_on}}</div>
+            <p>{{article.comment|safe}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 20px">
+        <div class="ui pagination menu">
+            {% if news.has_previous %}
+            <a href="?page={{ news.previous_page_number }}" class="item"><i class="angle left icon"></i></a>
+            {% else %}
+            <span class="disabled item"><i class="angle left icon"></i></span>
+            {% endif %}
+
+            {% for i in news.paginator.page_range %}
+
+            {% if news.number == i %}
+            <a class="active item">{{ i }}</a>
+            {% else %}
+            <a href="?page={{ i }}" class="item">{{ i }}</a>
+            {% endif %}
+
+            {% endfor %}
+
+
+            {% if news.has_next %}
+            <a href="?page={{ news.next_page_number }}" class="item"><i class="angle right icon"></i></a>
+            {% else %}
+            <span class="disabled item"><i class="angle right icon"></i></span>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% else %}
+<div class="ui placeholder segment">
+    <div class="ui icon header">
+        <i class="search icon"></i>
+        Bisher sind keine Nachrichten im Archiv.
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %} {% block footer %} {% include "public/footer.html" %} {% endblock %}

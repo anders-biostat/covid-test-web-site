@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Bag, Event, Registration, RSAKey, Sample, Consent
+from .models import Bag, Event, Registration, RSAKey, Sample, Consent, News
 
 admin.site.site_header = "COVID-19 LAB ADMIN"
 admin.site.site_title = "COVID-19 LAB ADMIN"
@@ -30,7 +30,11 @@ class BagAdmin(admin.ModelAdmin):
     list_display = ("pk", "name", "rsa_key", "comment")
 
 class ConsentAdmin(admin.ModelAdmin):
-    list_display = ("registration", "consent_type", "md5", "date" )
+    list_display = ("registration", "consent_type", "md5", "date")
+
+
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ("title", "created_on", "updated_on")
 
 
 admin.site.register(Sample, SampleAdmin)
@@ -39,3 +43,4 @@ admin.site.register(Event, EventAdmin)
 admin.site.register(RSAKey, RSAKeyAdmin)
 admin.site.register(Bag, BagAdmin)
 admin.site.register(Consent, ConsentAdmin)
+admin.site.register(News, NewsAdmin)
