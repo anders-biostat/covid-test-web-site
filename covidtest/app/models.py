@@ -1,7 +1,32 @@
+import uuid
+
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 from .statuses import SampleStatus
+
+
+class Timestamp(models.Model):
+    """
+    Abstract Model to give Models where it's used on extra
+    Functionality.
+    """
+
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    @property
+    def changed(self):
+        return True if self.updated_on else False
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            self.updated_on = timezone.now()
+        return super(Timestamp, self).save(*args, **kwargs)
 
 
 class RSAKey(models.Model):
@@ -83,3 +108,13 @@ class Consent(models.Model):
     md5 = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True,)
     registration = models.ForeignKey(Registration, on_delete=models.CASCADE, related_name="consents")
+
+
+class News(Timestamp, models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=255)
+    comment = models.TextField(blank=True, null=True)
+    relevant = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "News"

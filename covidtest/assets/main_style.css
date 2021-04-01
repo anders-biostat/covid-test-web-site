@@ -266,6 +266,17 @@ div.ui.horizontal.small.divided.link.list > a{
     width: 100%;
  }
 
+.banner-news-body{
+    text-align: left;
+    display: inline-block;
+    max-width: 800px;
+    min-width: 80%;
+}
+
+.banner-news-body p{
+    font-size: .92857143em;
+}
+
  a.ui.banner.button {
     margin: 10px;
     padding: 20px 25px;
