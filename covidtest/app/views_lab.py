@@ -1,27 +1,22 @@
+import json
 import os
 
 import django_filters
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView
 from django_filters.views import FilterView
-from django_tables2 import SingleTableMixin, SingleTableView
-from django.db.models import Q, Max, F
+from django_tables2 import SingleTableMixin
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
-from .forms_lab import LabCheckInForm, LabGenerateBarcodeForm, LabProbeEditForm, LabQueryForm, LabRackResultsForm
-from .models import Event, Registration, RSAKey, Sample
-from .serializers import SampleSerializer
+from .forms_lab import LabCheckInForm, LabProbeEditForm, LabQueryForm
+from .models import Event, Sample
 from .statuses import SampleStatus
 from .tables import SampleTable
-from django.views.decorators.csrf import csrf_exempt
-import json
-
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from .utils import find_samples
 
 
 @login_required
@@ -126,48 +121,15 @@ def sample_detail(request):
             form = LabQueryForm(request.POST)
             if form.is_valid():
                 search = form.cleaned_data["search"].upper().strip()
-                single_sample = Sample.objects.filter(Q(barcode=search) | Q(access_code=search)).first()
 
-                if single_sample:
-                    edit_form = LabProbeEditForm(initial={"rack": single_sample.rack, "comment": "Status changed in lab interface"})
-                    return render(
-                        request,
-                        sample_detail_template,
-                        {"form": form, "edit_form": edit_form, "sample": single_sample, "search": search},
-                    )
-                else:
-                    # TODO this probably needs some sort of pagination in the future
-                    #  to prevent sending too many samples in response
-                    sample_pks = []
+                template_obj = {"form": form, "edit_form": edit_form, "search": search}
+                template_obj.update(find_samples(search=search, search_category=request.POST.get("search_category")))
 
-                    events = Event.objects.filter(
-                        status__icontains=search
-                    ).exclude(status=SampleStatus.INFO.value)
-
-                    if events:
-                        for event in events:
-                            sample_to_check = Sample.objects.get(events=event)
-                            latest_status = sample_to_check.get_latest_internal_status()
-                            if event == latest_status:
-                                sample_pks.append(sample_to_check.pk)
-
-                    multi_sample = Sample.objects.filter(
-                        Q(rack__icontains=search) |
-                        Q(bag__pk__iexact=search) |
-                        Q(pk__in=sample_pks)
-                    )
-                    if multi_sample:
-                        return render(
-                            request,
-                            sample_detail_template,
-                            {"form": form, "multi_sample": multi_sample, "search": search},
-                        )
-                    else:
-                        return render(
-                            request,
-                            sample_detail_template,
-                            {"form": form, "edit_form": edit_form, "search": search},
-                        )
+                return render(
+                    request,
+                    sample_detail_template,
+                    template_obj
+                )
         if "edit" in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
             if edit_form.is_valid():
