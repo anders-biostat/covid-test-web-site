@@ -3,9 +3,9 @@
 {% block content %}
 <div>
     <h1 class="ui header">{% blocktrans %}Lab Interface - Beutel Management{% endblocktrans %}</h1>
-    <div class="ui menu">
+    <div class="ui three item menu" style="margin-top: 30px">
         <a class="item active">
-            Statistiken
+            Suchen/Statistiken
         </a>
         <a class="item">
             Ausgabe
@@ -14,145 +14,155 @@
             Verwaltung
         </a>
     </div>
-    <p>
-        {% blocktrans %}
-        Suche nach einer oder mehrerer Beutel IDs - Mehrere IDs mit Komma trennen (ID1, ID2, ID3):
-        {% endblocktrans %}
-    </p>
-    <form action="{% url 'app:bag_management' %}" method="post">
-        <div class="ui action input">
-            <input
-                    name="search"
-                    type="text"
-                    placeholder="{% blocktrans %}Beutel ID...{% endblocktrans %}"
-                    autofocus
-            >
-            <button class="ui button" type="submit">
-                Suchen
-            </button>
-        </div>
-        <div class="results"></div>
-    </form>
+    <div style="margin-top: 40px; margin-bottom: 40px">
+        <p>
+            {% blocktrans %}
+            Suche nach einer oder mehrerer Beutel IDs - Mehrere IDs mit Komma trennen (ID1, ID2, ID3):
+            {% endblocktrans %}
+        </p>
+        <form action="{% url 'app:bag_management' %}" method="post">
+            <div class="ui action input">
+                <input
+                        name="search"
+                        type="text"
+                        placeholder="{% blocktrans %}Beutel ID...{% endblocktrans %}"
+                        autofocus
+                >
+                <button class="ui button" type="submit">
+                    Suchen
+                </button>
+            </div>
+            <div class="results"></div>
+        </form>
+    </div>
 
-    <table class="ui celled red padded structured table">
+    <h3 class="ui header">
+        Ergebnisse für Beutel IDs: 22, 25, 26, 27
+    </h3>
+
+    <table class="ui red padded structured table">
         <thead>
         <tr>
-            <th colspan="9">
-                <div class="ui right floated small primary labeled icon button">
-                    <i class="download icon"></i>CSV Exportieren
-                </div>
-            </th>
-        </tr>
-        <tr>
-            <th rowspan="2">Institut</th>
+            <th rowspan="2">Abnehmer</th>
             <th rowspan="2">Kontaktperson</th>
             <th rowspan="2">EMail</th>
             <th rowspan="2">Telefon</th>
             <th rowspan="2">Bag ID</th>
             <th rowspan="2">Ausgegeben Von</th>
-            <th colspan="3">Status</th>
+            <th colspan="4">Status</th>
         </tr>
         <tr>
             <th>PRINTED</th>
             <th>PCRPOS</th>
             <th>PCRNEG</th>
+            <th>Gesamt</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td><h4 class="ui center aligned header">Institut A</h4></td>
+            <td class="collapsing"><h4 class="ui center aligned header">Abnehmer A</h4></td>
 
 
-            <td class="right aligned">Max Mustermann</td>
-            <td>
+            <td class="collapsing">Max Mustermann</td>
+            <td class="collapsing">
                 info@mail.com
             </td>
-            <td>
+            <td class="collapsing">
                 015254851475
             </td>
-            <td><h4 class="ui center aligned header">22</h4></td>
+            <td class="collapsing"><h4 class="ui center aligned header">22</h4></td>
             <td>
                 lab user 1
             </td>
-            <td class="center aligned">
+            <td class="center aligned collapsing">
                 7
             </td>
-            <td class="center aligned negative">
+            <td class="center aligned negative collapsing">
                 10
             </td>
-            <td class="center aligned positive">
+            <td class="center aligned positive collapsing">
                 14
+            </td>
+            <td class="center aligned collapsing">
+                31
             </td>
         </tr>
         <tr>
-            <td rowspan="3"><h4 class="ui center aligned header">Institut B</h4></td>
-            <td class="right aligned" rowspan="3">Max Mustermann</td>
+            <td rowspan="3" class="collapsing"><h4 class="ui center aligned header">Abnehmer B</h4></td>
+            <td class="collapsing" rowspan="3">Max Mustermann</td>
 
 
-            <td rowspan="3">
+            <td rowspan="3" class="collapsing">
                 info@mail.com
             </td>
-            <td rowspan="3">
+            <td rowspan="3" class="collapsing">
                 015254851475
             </td>
-            <td><h4 class="ui center aligned header">25</h4></td>
-            <td>
+            <td class="collapsing"><h4 class="ui center aligned header">25</h4></td>
+            <td class="collapsing">
                 lab user 2
             </td>
-            <td class="center aligned">
+            <td class="center aligned collapsing">
                 2
             </td>
-            <td class="center aligned negative">
+            <td class="center aligned negative collapsing">
                 8
             </td>
-            <td class="center aligned positive">
+            <td class="center aligned positive collapsing">
                 10
+            </td>
+            <td class="center aligned collapsing">
+                20
             </td>
         </tr>
         <tr>
-            <td><h4 class="ui center aligned header">26</h4></td>
-            <td>
+            <td class="collapsing"><h4 class="ui center aligned header">26</h4></td>
+            <td class="collapsing">
                 lab user 1
             </td>
-            <td class="center aligned">
+            <td class="center aligned collapsing">
                 1
             </td>
-            <td class="center aligned negative">
+            <td class="center aligned negative collapsing">
                 9
             </td>
-            <td class="center aligned positive">
+            <td class="center aligned positive collapsing">
                 14
+            </td>
+            <td class="center aligned collapsing">
+                24
             </td>
         </tr>
         <tr>
-            <td><h4 class="ui center aligned header">27</h4></td>
-            <td>
+            <td class="collapsing"><h4 class="ui center aligned header">27</h4></td>
+            <td class="collapsing">
                 lab user 3
             </td>
-            <td class="center aligned">
+            <td class="center aligned collapsing">
                 12
             </td>
-            <td class="center aligned negative">
+            <td class="center aligned negative collapsing">
                 4
             </td>
-            <td class="center aligned positive">
+            <td class="center aligned positive collapsing">
                 10
+            </td>
+            <td class="center aligned collapsing">
+                26
             </td>
         </tr>
         </tbody>
-        <tfoot class="full-width">
+        <tfoot>
         <tr>
-            <th>2 Institute</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th><strong>200 Proben</strong></th>
+            <th><strong>180 Registriert</strong></th>
+            <th><strong>100 In Analyse</strong></th>
+            <th colspan="7">
+                <div class="ui right floated small primary labeled icon button">
+                    <i class="download icon"></i>CSV Exportieren
+                </div>
+            </th>
         </tr>
-
         </tfoot>
     </table>
 </div>
