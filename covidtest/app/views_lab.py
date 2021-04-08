@@ -245,3 +245,8 @@ def sample_details_snippet(request):
        return render(request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample})
     else:
        return HttpResponse("<i>Access code %s not found</i>" % request.POST.get("access_code"))
+
+
+@login_required
+def bag_management(request):
+    return render(request, "lab/bag_management.html")

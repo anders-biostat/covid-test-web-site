@@ -33,6 +33,17 @@
             </p>
         </div>
     </a>
+    <a href="{% url 'app:bag_management'  %}" style="color: inherit">
+        <div class="ui segment" style="margin-top: 30px; padding: 30px">
+
+            <h3 class="ui header">
+                {% blocktrans %}Beutel Management{% endblocktrans %}
+            </h3>
+            <p>
+                Beutel analysieren, bearbeiten und verwalten.
+            </p>
+        </div>
+    </a>
     {% else %}
     <a href="{% url 'app:query'  %}" style="color: inherit">
         <div class="ui segment" style="margin-top: 30px; padding: 30px">
