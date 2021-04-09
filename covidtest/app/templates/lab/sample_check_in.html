@@ -63,7 +63,7 @@
     {{ form.errors }}
     {{ form.non_field_errors }}
 
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Mehrere Proben Bearbeiten{% endblocktrans %}</h1>
+    <h1 class="ui header">Lab Interface - Mehrere Proben Bearbeiten</h1>
 
     <p>
         Zunächst Barcodes der Proben eingeben um anschließend den Status, Rack Barcode oder ein Kommentar zu setzen.
@@ -93,26 +93,26 @@
                 {{ form.comment }}
             </div>
             <br>
-            <button class="ui button" type="submit">{% blocktrans %}Abschicken{% endblocktrans %}</button>
+            <button class="ui button" type="submit">Abschicken</button>
         </div>
     </form>
     {% if no_success %}
     <div class="ui segment">
 
-        {% blocktrans %}Probleme beim Eintragen folgender Proben:{% endblocktrans %}
+        Probleme beim Eintragen folgender Proben:
         <ul>
             <li>
-                {% blocktrans %}Barcode nicht in der Datenbank: {% endblocktrans %}{{ barcodes_not_in_db|join:", "}}
+                Barcode nicht in der Datenbank: {{ barcodes_not_in_db|join:", "}}
             </li>
             <li>
-                {% blocktrans %}Status konnte nicht gesetzt werden: {% endblocktrans %}{{ status_not_set|join:", " }}
+                Status konnte nicht gesetzt werden: {{ status_not_set|join:", " }}
             </li>
             <li>
-                {% blocktrans %}Rack konnte nicht gesetzt werden: {% endblocktrans %}{{ rack_not_set|join:", " }}
+                Rack konnte nicht gesetzt werden: {{ rack_not_set|join:", " }}
             </li>
         </ul>
 
-        {% blocktrans %} Folgende Proben wurden erfolgreich eingetragen:{% endblocktrans%}
+         Folgende Proben wurden erfolgreich eingetragen:
         <ul>
             <li>
                 {{ successful_barcodes|join:", "}}

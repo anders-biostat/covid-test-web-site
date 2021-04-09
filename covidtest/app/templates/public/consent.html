@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1 class="ui header centered">{% blocktrans %}Einverständnis zur Teilnahme{% endblocktrans %}</h1>
-<h3>Informationsschrift {{page_number}} von {{num_pages}}</h3>
+<h3>{% blocktrans %}Informationsschrift{% endblocktrans %} {{page_number}} {% blocktrans %}von{% endblocktrans %} {{num_pages}}</h3>
 
 <div>
     {% block preamble %} {% endblock %}

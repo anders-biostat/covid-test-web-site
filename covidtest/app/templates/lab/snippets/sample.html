@@ -2,7 +2,7 @@
 {% load permissions %}
 
 <div class="content">
-    <h2 class="ui header">{% blocktrans %}Barcode: {% endblocktrans %}{{ sample.barcode }}</h2>
+    <h2 class="ui header">Barcode: {{ sample.barcode }}</h2>
     <div class="meta">
         <h3 style="display: inline">Access code:</h3> {{sample.access_code}}</br>
         <h3 style="display: inline; margin-top: 15px">Rack:</h3> {{ sample.rack }}</br>
@@ -54,7 +54,7 @@
     </table>
 
 
-    <h3 class="ui header">{% blocktrans %}Registrierungen{% endblocktrans %}</h3>
+    <h3 class="ui header">Registrierungen</h3>
     <div style="margin-bottom: 10px;" class="extra content">
         <div class="ui small feed">
             {% for reg in sample.registrations.all %}
@@ -64,7 +64,7 @@
                         {{ reg.time|date:"Y-m-d H:i:s" }}
                     </div>
                     <div class="regInfo">
-                        {% blocktrans %}Schlüssel-Fingerprint:{% endblocktrans %}
+                        Schlüssel-Fingerprint:
                         <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
                     </div>
                 </div>
@@ -75,8 +75,8 @@
     </div>
     <button class="ui button" onclick="requestPrivateKey();">Registrierungen entschüsseln</button>
     <div class="ui negative hidden message prKeyMessage" id="encrypted">
-        {% blocktrans %}Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie
-        das Passwort für Ihren privaten Schlüssel an.{% endblocktrans %}
+        Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal und geben Sie
+        das Passwort für Ihren privaten Schlüssel an.
     </div>
     <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
         Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.{%
@@ -100,7 +100,7 @@
         <div class="content">
             <form class="ui form" id="prKeyInput">
                 <div class="required field">
-                    <label>{% blocktrans %}Geheimschlüssel-Datei (.pem){% endblocktrans %}</label>
+                    <label>Geheimschlüssel-Datei (.pem)</label>
                     <div class="ui icon input">
                         <input type="file" style="display: none;">
                         <input type="text" placeholder="PrivateKey.pem" readonly>
@@ -108,17 +108,17 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label>{% blocktrans %}Passwort für den Geheimschlüssel (optional){% endblocktrans %}</label>
+                    <label>Passwort für den Geheimschlüssel (optional)</label>
                     <input type="password">
                 </div>
             </form>
             <div class="ui negative hidden message">
-                <p>{% blocktrans %}Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.{% endblocktrans %}</p>
+                <p>Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel.</p>
             </div>
         </div>
         <div class="actions">
-            <div class="ui cancel button">{% blocktrans %}Abbrechen{% endblocktrans %}</div>
-            <div class="ui approve button">{% blocktrans %}Entschlüsseln{% endblocktrans %}</div>
+            <div class="ui cancel button">Abbrechen</div>
+            <div class="ui approve button">Entschlüsseln</div>
         </div>
     </div>
 
@@ -129,19 +129,19 @@
         <form action="{% url 'app:query' %}" class="ui form" method="post">
             {% csrf_token %}
             <div class="field">
-                <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>
+                <label>Status der Probe</label>
                 {{ edit_form.status }}
             </div>
             <div class="field">
-                <label>{% blocktrans %}Rack{% endblocktrans %}</label>
+                <label>Rack</label>
                 {{ edit_form.rack }}
             </div>
             <div class="field">
-                <label>{% blocktrans %}Kommentar{% endblocktrans %}</label>
+                <label>Kommentar</label>
                 {{ edit_form.comment }}
             </div>
             <input name="barcode" value="{{ sample.barcode }}" hidden>
-            <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
+            <button name="edit" class="ui button" type="submit">Speichern</button>
         </form>
     </div>
     {% endif %}
