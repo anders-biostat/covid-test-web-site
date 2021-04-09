@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 16:59+0200\n"
+"POT-Creation-Date: 2021-04-09 21:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,22 +207,20 @@ msgstr ""
 
 #: app/templates/public/instructions.html:28
 msgid ""
-"\n"
-"        Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten "
-"Sie uns das Röhrchen bitte zu.\n"
-"        "
+"Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten Sie uns "
+"das Röhrchen bitte zu."
 msgstr ""
 
-#: app/templates/public/instructions.html:35
+#: app/templates/public/instructions.html:33
 msgid "Vielen Dank für Ihre Teilnahme."
 msgstr ""
 
-#: app/templates/public/instructions.html:37
+#: app/templates/public/instructions.html:35
 msgid ""
 "Morgen oder übermorgen können Sie Ihr Ergebnis auf dieser Seite abfragen."
 msgstr ""
 
-#: app/templates/public/instructions.html:44
+#: app/templates/public/instructions.html:42
 msgid "Notieren Sie sich dazu Ihren Zugangscode."
 msgstr ""
 
@@ -239,15 +237,9 @@ msgstr ""
 msgid "Diese Studie wird organisert vom "
 msgstr ""
 
-#: app/templates/public/pages/contact.html:10
-#: app/templates/public/pages/impressum.html:10
-msgid ""
-"<strong\n"
-"        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) "
-"<br />\n"
-"        Im Neuenheimer Feld 282 <br />\n"
-"        69120 Heidelberg </strong\n"
-"      >"
+#: app/templates/public/pages/contact.html:11
+#: app/templates/public/pages/impressum.html:11
+msgid "Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH)"
 msgstr ""
 
 #: app/templates/public/pages/contact.html:17
@@ -255,14 +247,9 @@ msgstr ""
 msgid "in Zusammenarbeit mit dem"
 msgstr ""
 
-#: app/templates/public/pages/contact.html:20
-#: app/templates/public/pages/impressum.html:20
-msgid ""
-"<strong\n"
-"        >Gesundheitsamt Rhein-Neckar-Kreis <br />\n"
-"        Kurfürsten-Anlage 38-40 <br />\n"
-"        69115 Heidelberg </strong\n"
-"      >"
+#: app/templates/public/pages/contact.html:21
+#: app/templates/public/pages/impressum.html:21
+msgid "Gesundheitsamt Rhein-Neckar-Kreis"
 msgstr ""
 
 #: app/templates/public/pages/contact.html:27
@@ -359,7 +346,7 @@ msgstr ""
 #: app/templates/public/pages/multiple-registeration.html:8
 msgid ""
 "Für diesen Barcode wurde das Registrier-Formular mehrmals\n"
-"    ausgefüllt, mit verschiedenen Passwörtern. "
+"    ausgefüllt, mit verschiedenen Passwörtern."
 msgstr ""
 
 #: app/templates/public/pages/multiple-registeration.html:12
@@ -454,6 +441,7 @@ msgid ""
 msgstr ""
 
 #: app/templates/public/pages/test-LAMPFAIL.html:18
+#: app/templates/public/pages/test-LAMPREPEAT.html:20
 msgid "Bleiben Sie dran, wir tun unser Bestes."
 msgstr ""
 
@@ -548,20 +536,20 @@ msgid ""
 "dieses Ergebnis nun überprüft wird.\n"
 "  Wenn Sie am Abend des Tages nach der Probenabgabe nochmals hier Ihr "
 "Ergebnis abfragen (wieder mit Code),\n"
-"  werden Sie das endgültige Resultat erfahren. "
+"  werden Sie das endgültige Resultat erfahren."
 msgstr ""
 
 #: app/templates/public/pages/test-LAMPPOS.html:15
 msgid ""
-" Bis dahin seien Sie bitte sehr vorsichtig, denn möglicherweise sind Sie "
-"hoch ansteckend:\n"
+"Bis dahin seien Sie bitte sehr vorsichtig, denn möglicherweise sind Sie hoch "
+"ansteckend:\n"
 "  Bleiben Sie also bitte zu Hause und halten Sie viel Abstand zu anderen "
-"Menschen. "
+"Menschen."
 msgstr ""
 
 #: app/templates/public/pages/test-LAMPPOS.html:19
 msgid ""
-" Die Teilnahme für Universitätsangehörige an der Studie ist anonym, trotzdem "
+"Die Teilnahme für Universitätsangehörige an der Studie ist anonym, trotzdem "
 "wäre es gut,\n"
 "  wenn Sie sich bei uns melden würden, schon bevor das offizielle Resultat "
 "vorliegt, damit wir helfen können,\n"
@@ -588,12 +576,6 @@ msgid ""
 "Solche technischen Problem sind selten, kommen aber vor.\n"
 "    Es tut uns leid und wir bitten Sie am Nachmittag des n&auml;chsten "
 "Labortages noch einmal den Status zu pr&uuml;fen."
-msgstr ""
-
-#: app/templates/public/pages/test-LAMPREPEAT.html:20
-msgid ""
-"Bleiben Sie dran, wir\n"
-"    tun unser Bestes."
 msgstr ""
 
 #: app/templates/public/pages/test-MESSAGE.html:4
