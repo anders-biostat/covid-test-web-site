@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.fields import BLANK_CHOICE_DASH
+from django.core.exceptions import ValidationError
 
 from .models import RSAKey
 from .statuses import SampleStatus
@@ -51,3 +52,28 @@ class LabProbeEditForm(forms.Form):
 class LabGenerateBarcodeForm(forms.Form):
     count = forms.IntegerField(label=_("Anzahl der batches"))
     key = forms.ModelChoiceField(RSAKey.objects.all(), label=_("Schlüssel"))
+
+
+class BagManagementQueryForm(forms.Form):
+    search = forms.CharField(max_length=255)
+
+    def clean_search(self) -> list:
+        search_value = self.cleaned_data["search"]
+        if "," in search_value:
+            search_value = [value.strip() for value in search_value.split(",")]
+            for value in search_value:
+                try:
+                    int(value)
+                except ValueError:
+                    raise ValidationError(
+                        "Wrong format. Make sure all IDs are separated by comma (ID1, ID2)"
+                    )
+            return search_value
+        else:
+            try:
+                int(search_value)
+            except ValueError:
+                raise ValidationError(
+                    "Wrong format. Make sure to either search for a single ID or separate them by comma (ID1, ID2)"
+                )
+            return [search_value]

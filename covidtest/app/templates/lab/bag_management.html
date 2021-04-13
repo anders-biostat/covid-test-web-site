@@ -21,6 +21,7 @@
             {% endblocktrans %}
         </p>
         <form action="{% url 'app:bag_management' %}" method="post">
+            {% csrf_token %}
             <div class="ui action input">
                 <input
                         name="search"
@@ -35,10 +36,17 @@
             <div class="results"></div>
         </form>
     </div>
-
+    {% if statsArray %}
     <h3 class="ui header">
-        Ergebnisse für Beutel IDs: 22, 25, 26, 27
+        {{ statsArray|length }}
+        {% if statsArray|length == 1 %}
+        Ergebnis
+        {% else %}
+        Ergebnisse
+        {% endif %}
+        für Beutel ID(s): {% for bag_id in bag_ids %}{{bag_id}}, {% endfor %}
     </h3>
+    {% endif %}
     <div style="overflow-x: auto;">
         <table class="ui red padded structured table" style="margin: 0px">
 
@@ -50,121 +58,58 @@
                 <th rowspan="2">Telefon</th>
                 <th rowspan="2">Bag ID</th>
                 <th rowspan="2">Ausgegeben Von</th>
-                <th colspan="4">Status</th>
+                <!--                dynamically calculate length-->
+                <th colspan="17">Status</th>
             </tr>
 
             <tr>
-
-                <th>PRINTED</th>
-                <th>PCRPOS</th>
-                <th>PCRNEG</th>
-                <th>Gesamt</th>
+                {% for status in statusEnum %}
+                <th>{{status}}</th>
+                {% endfor %}
 
             </tr>
             </thead>
             <tbody>
+            {% for statsObj in statsArray %}
             <tr>
-                <td class="collapsing"><h4 class="ui center aligned header">Abnehmer A</h4></td>
-
-
-                <td class="collapsing">Max Mustermann</td>
+                <td class="collapsing"><h4 class="ui center aligned header">{{statsObj.recipient}}</h4></td>
+                <td class="collapsing">{{statsObj.contact_person}}</td>
                 <td class="collapsing">
-                    info@mail.com
+                    {{statsObj.email}}
                 </td>
                 <td class="collapsing">
-                    015254851475
+                    {{statsObj.telephone}}
                 </td>
-                <td class="collapsing"><h4 class="ui center aligned header">22</h4></td>
+                <td class="collapsing"><h4 class="ui center aligned header">{{statsObj.bagId}}</h4></td>
                 <td>
-                    lab user 1
+                    to be added
                 </td>
-                <td class="center aligned collapsing">
-                    7
-                </td>
+                {% for stats_key, status_count in statsObj.status.items %}
+                {% if "POS" in stats_key %}
                 <td class="center aligned negative collapsing">
-                    10
+                    {{status_count}}
                 </td>
+                {% elif "NEG" in stats_key %}
                 <td class="center aligned positive collapsing">
-                    14
+                    {{status_count}}
                 </td>
+                {% else %}
                 <td class="center aligned collapsing">
-                    31
+                    {{status_count}}
                 </td>
+                {% endif %}
+                {% endfor %}
             </tr>
-            <tr>
-                <td rowspan="3" class="collapsing"><h4 class="ui center aligned header">Abnehmer B</h4></td>
-                <td class="collapsing" rowspan="3">Max Mustermann</td>
-
-
-                <td rowspan="3" class="collapsing">
-                    info@mail.com
-                </td>
-                <td rowspan="3" class="collapsing">
-                    015254851475
-                </td>
-                <td class="collapsing"><h4 class="ui center aligned header">25</h4></td>
-                <td class="collapsing">
-                    lab user 2
-                </td>
-                <td class="center aligned collapsing">
-                    2
-                </td>
-                <td class="center aligned negative collapsing">
-                    8
-                </td>
-                <td class="center aligned positive collapsing">
-                    10
-                </td>
-                <td class="center aligned collapsing">
-                    20
-                </td>
-            </tr>
-            <tr>
-                <td class="collapsing"><h4 class="ui center aligned header">26</h4></td>
-                <td class="collapsing">
-                    lab user 1
-                </td>
-                <td class="center aligned collapsing">
-                    1
-                </td>
-                <td class="center aligned negative collapsing">
-                    9
-                </td>
-                <td class="center aligned positive collapsing">
-                    14
-                </td>
-                <td class="center aligned collapsing">
-                    24
-                </td>
-            </tr>
-            <tr>
-                <td class="collapsing"><h4 class="ui center aligned header">27</h4></td>
-                <td class="collapsing">
-                    lab user 3
-                </td>
-                <td class="center aligned collapsing">
-                    12
-                </td>
-                <td class="center aligned negative collapsing">
-                    4
-                </td>
-                <td class="center aligned positive collapsing">
-                    10
-                </td>
-                <td class="center aligned collapsing">
-                    26
-                </td>
-            </tr>
+            {% endfor %}
             </tbody>
-
         </table>
     </div>
     <table class="ui padded table" style="margin: 0px">
         <tfoot>
         <tr>
-            <th><strong>200 Proben</strong></th>
-            <th><strong>180 Registriert</strong></th>
-            <th><strong>100 In Analyse</strong></th>
+            <th><strong>{{footerStats.total_samples}} Proben</strong></th>
+            <th><strong>180 Registriert (to be added)</strong></th>
+            <th><strong>100 In Analyse (to be added)</strong></th>
             <th colspan="7">
                 <div class="ui right floated small primary labeled icon button">
                     <i class="download icon"></i>CSV Exportieren

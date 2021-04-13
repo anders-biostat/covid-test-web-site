@@ -38,10 +38,31 @@ class RSAKey(models.Model):
         return "RSAKey: %s" % self.key_name
 
 
+class SampleRecipient(Timestamp, models.Model):
+    class RecipientTypes(models.TextChoices):
+        INSTITUTION = "offers tests regularly to their staff", "Institution"
+        TEACHING_EVENT = "one-off or recurring event where students are tested", "Teaching Event"
+        ONE_OFF_EVENT = "invoice goes to the organizer of the event", "One-Off Event"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    recipient_name = models.CharField(max_length=255)
+    recipient_type = models.CharField(max_length=255, choices=RecipientTypes.choices, blank=True, null=True)
+    name_contact_person = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(max_length=255, null=True, blank=True)
+    telephone = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"NAME: {self.recipient_name} ,TYPE: {self.get_recipient_type_display()}"
+
+
 class Bag(models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField(null=True, blank=True)
     rsa_key = models.ForeignKey(RSAKey, on_delete=models.DO_NOTHING, related_name="bags")
+    recipient = models.ForeignKey(
+        SampleRecipient, on_delete=models.DO_NOTHING, related_name="bag_of_recipient", null=True, blank=True
+    )
+    # TODO add ausgegben von
     def __str__(self):
         return "Bag #%d ('%s')" % (self.pk, self.name)
 

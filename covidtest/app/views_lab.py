@@ -12,8 +12,8 @@ from django_tables2 import SingleTableMixin
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from .forms_lab import LabCheckInForm, LabProbeEditForm, LabQueryForm
-from .models import Event, Sample
+from .forms_lab import LabCheckInForm, LabProbeEditForm, LabQueryForm, BagManagementQueryForm
+from .models import Event, Sample, Bag, SampleRecipient
 from .statuses import SampleStatus
 from .tables import SampleTable
 from .utils import find_samples
@@ -249,4 +249,53 @@ def sample_details_snippet(request):
 
 @login_required
 def bag_management(request):
-    return render(request, "lab/bag_management.html")
+    # one or more bag ids separated by ,
+    # per bag id, sum status + each status with count + samples count with no status
+    event_keys = []
+    for stat in SampleStatus:
+        event_keys.append(stat.name)
+    event_keys.insert(0, "Gesamt")
+    event_keys.insert(1, "Ohne")
+
+    if request.method == "POST":
+        if "search" in request.POST.keys():
+            form = BagManagementQueryForm(request.POST)
+            if form.is_valid():
+                bag_ids = form.cleaned_data["search"]
+                stats_array = []
+                for bag_id in bag_ids:
+                    stats_obj = dict(status=dict.fromkeys(event_keys, 0))
+
+                    recipient = SampleRecipient.objects.get(bag_of_recipient__id=bag_id)
+
+                    stats_obj["recipient"] = recipient.recipient_name
+                    stats_obj["contact_person"] = recipient.name_contact_person
+                    stats_obj["email"] = recipient.email
+                    stats_obj["telephone"] = recipient.telephone
+
+                    bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
+                    stats_obj["bagId"] = bag.pk
+                    stats_obj["status"]["Gesamt"] = len(bag.samples.all())
+                    for sample in bag.samples.all():
+                        event = sample.get_latest_internal_status()
+                        try:
+                            stats_obj["status"][event.status] += 1
+                        except KeyError:
+                            stats_obj["status"][event.status] = 1
+                    stats_array.append(stats_obj)
+
+                samples = Sample.objects.filter(bag__pk__in=bag_ids)
+                total_samples = len(samples)
+
+                return render(
+                    request,
+                    "lab/bag_management.html",
+                    {"statusEnum": event_keys, "statsArray": stats_array, "bag_ids": bag_ids, "footerStats": {"total_samples": total_samples}}
+                )
+            else:
+                messages.add_message(request, messages.ERROR, form.errors)
+
+        elif "export" in request.POST.keys():
+            # TODO Later implemented for export purposes
+            pass
+    return render(request, "lab/bag_management.html", {"statusEnum": event_keys})
