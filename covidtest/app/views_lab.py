@@ -313,8 +313,6 @@ def sample_details_snippet(request):
 
 @login_required
 def bag_management(request):
-    # one or more bag ids separated by ,
-    # per bag id, sum status + each status with count + samples count with no status
     event_keys = []
     for stat in SampleStatus:
         event_keys.append(stat.name)
@@ -334,20 +332,22 @@ def bag_management(request):
                     recipient = SampleRecipient.objects.get(bag_of_recipient__id=bag_id)
 
                     stats_obj["recipient"] = recipient.recipient_name
-                    stats_obj["contact_person"] = recipient.name_contact_person
+                    stats_obj["contactPerson"] = recipient.name_contact_person
                     stats_obj["email"] = recipient.email
                     stats_obj["telephone"] = recipient.telephone
 
                     bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
                     stats_obj["bagId"] = bag.pk
+                    stats_obj["createdAt"] = bag.created_on
                     stats_obj["status"]["Gesamt"] = len(bag.samples.all())
-                    # TODO: Integrate case if samples don't have a status
                     for sample in bag.samples.all():
                         event = sample.get_latest_internal_status()
                         try:
                             stats_obj["status"][event.status] += 1
                         except KeyError:
                             stats_obj["status"][event.status] = 1
+                        except AttributeError:
+                            stats_obj["status"]["Ohne"] += 1
                     stats_array.append(stats_obj)
 
                 samples = Sample.objects.filter(bag__pk__in=bag_ids)
@@ -373,7 +373,14 @@ def bag_management(request):
             ] = f'attachment; filename={date.today().strftime("%Y-%m-%d")}_bagStatsExport.csv'
             bag_ids = ast.literal_eval(request.POST.get("export"))
 
-            columns = ["recipient", "contact_person", "email", "telephone", "bagId"]
+            columns = [
+                "recipient",
+                "contactPerson",
+                "email",
+                "telephone",
+                "bagId",
+                "createdAt",
+            ]
             columns.extend(event_keys)
 
             writer = csv.DictWriter(response, fieldnames=columns)
@@ -381,24 +388,23 @@ def bag_management(request):
 
             for bag_id in bag_ids:
                 stats_obj = dict.fromkeys(event_keys, 0)
-
                 recipient = SampleRecipient.objects.get(bag_of_recipient__id=bag_id)
 
                 stats_obj["recipient"] = recipient.recipient_name
-                stats_obj["contact_person"] = recipient.name_contact_person
+                stats_obj["contactPerson"] = recipient.name_contact_person
                 stats_obj["email"] = recipient.email
                 stats_obj["telephone"] = recipient.telephone
 
                 bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
                 stats_obj["bagId"] = bag.pk
+                stats_obj["createdAt"] = bag.created_on
                 stats_obj["Gesamt"] = len(bag.samples.all())
-                # TODO: Integrate case if samples don't have a status
                 for sample in bag.samples.all():
                     event = sample.get_latest_internal_status()
                     try:
                         stats_obj[event.status] += 1
-                    except KeyError:
-                        stats_obj[event.status] = 1
+                    except AttributeError:
+                        stats_obj["Ohne"] += 1
                 writer.writerow(stats_obj)
 
             return response

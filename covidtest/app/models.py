@@ -13,7 +13,7 @@ class Timestamp(models.Model):
     Functionality.
     """
 
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
     updated_on = models.DateTimeField(null=True, blank=True)
 
     class Meta:
@@ -41,12 +41,17 @@ class RSAKey(models.Model):
 class SampleRecipient(Timestamp, models.Model):
     class RecipientTypes(models.TextChoices):
         INSTITUTION = "offers tests regularly to their staff", "Institution"
-        TEACHING_EVENT = "one-off or recurring event where students are tested", "Teaching Event"
+        TEACHING_EVENT = (
+            "one-off or recurring event where students are tested",
+            "Teaching Event",
+        )
         ONE_OFF_EVENT = "invoice goes to the organizer of the event", "One-Off Event"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     recipient_name = models.CharField(max_length=255)
-    recipient_type = models.CharField(max_length=255, choices=RecipientTypes.choices, blank=True, null=True)
+    recipient_type = models.CharField(
+        max_length=255, choices=RecipientTypes.choices, blank=True, null=True
+    )
     name_contact_person = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
     telephone = models.CharField(max_length=255, null=True, blank=True)
@@ -55,12 +60,18 @@ class SampleRecipient(Timestamp, models.Model):
         return f"NAME: {self.recipient_name} ,TYPE: {self.get_recipient_type_display()}"
 
 
-class Bag(models.Model):
+class Bag(Timestamp, models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField(null=True, blank=True)
-    rsa_key = models.ForeignKey(RSAKey, on_delete=models.DO_NOTHING, related_name="bags")
+    rsa_key = models.ForeignKey(
+        RSAKey, on_delete=models.DO_NOTHING, related_name="bags"
+    )
     recipient = models.ForeignKey(
-        SampleRecipient, on_delete=models.DO_NOTHING, related_name="bag_of_recipient", null=True, blank=True
+        SampleRecipient,
+        on_delete=models.DO_NOTHING,
+        related_name="bag_of_recipient",
+        null=True,
+        blank=True,
     )
     # TODO add ausgegben von
     def __str__(self):
@@ -77,11 +88,7 @@ class Sample(models.Model):
     def set_status(self, status, comment=None, author=None):
         if type(status) == SampleStatus:
             status = status.value
-        self.events.create(
-            status=status,
-            updated_by=author,
-            comment=comment
-        )
+        self.events.create(status=status, updated_by=author, comment=comment)
         return status
 
     def get_statuses(self):
@@ -89,24 +96,25 @@ class Sample(models.Model):
 
     def get_latest_external_status(self):
         """External user facing status event"""
-        return self.get_statuses().exclude(
-            status=SampleStatus.INFO.value
-        ).exclude(
-            status=SampleStatus.PCRSENT.value
-        ).last()
+        return (
+            self.get_statuses()
+            .exclude(status=SampleStatus.INFO.value)
+            .exclude(status=SampleStatus.PCRSENT.value)
+            .last()
+        )
 
     def get_latest_internal_status(self):
         """Internal staff facing events"""
-        return self.get_statuses().exclude(
-            status=SampleStatus.INFO.value
-        ).last()
+        return self.get_statuses().exclude(status=SampleStatus.INFO.value).last()
 
     def __str__(self):
         return "%s" % self.barcode
 
 
 class Registration(models.Model):
-    sample = models.ForeignKey(Sample, on_delete=models.CASCADE, related_name="registrations")
+    sample = models.ForeignKey(
+        Sample, on_delete=models.CASCADE, related_name="registrations"
+    )
     time = models.DateTimeField(auto_now_add=True, blank=True)
     name_encrypted = models.CharField(max_length=200)
     address_encrypted = models.CharField(max_length=200)
@@ -121,14 +129,20 @@ class Event(models.Model):
     status = models.CharField(max_length=50)
     comment = models.TextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now_add=True, blank=True)
-    updated_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    updated_by = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL
+    )
 
 
 class Consent(models.Model):
     consent_type = models.CharField(max_length=50)
     md5 = models.CharField(max_length=200)
-    date = models.DateTimeField(auto_now_add=True,)
-    registration = models.ForeignKey(Registration, on_delete=models.CASCADE, related_name="consents")
+    date = models.DateTimeField(
+        auto_now_add=True,
+    )
+    registration = models.ForeignKey(
+        Registration, on_delete=models.CASCADE, related_name="consents"
+    )
 
 
 class News(Timestamp, models.Model):
