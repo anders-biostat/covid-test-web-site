@@ -3,11 +3,9 @@
 
 {% block content %}
 <div class="">
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Generate Barcodes{% endblocktrans %}</h1>
+    <h1 class="ui header">Lab Interface - Generate Barcodes</h1>
     <p>
-        {% blocktrans %}
         Hier können Barcodes generiert werden:
-        {% endblocktrans %}
     </p>
 
     <form style="margin-bottom: 20px;" action="{% url 'app:barcodes' %}" method="post" class="ui form">

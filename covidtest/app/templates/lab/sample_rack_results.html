@@ -32,12 +32,10 @@
 
 
 <div>
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Testergebnisse registrieren (Rack){% endblocktrans %}</h1>
+    <h1 class="ui header">Lab Interface - Testergebnisse registrieren (Rack)</h1>
     <p>
-        {% blocktrans %}
         Hier können die Testergebnisse registriert werden. Der Normalfall ist ein negatives Ergebnis. Positive
         und unklare Proben werden (zeilenweise) in die entsprechenden Felder eingegeben.
-        {% endblocktrans %}
     </p>
 
     <form style="margin-bottom: 20px;" action="{% url 'app:edit_rack' %}" method="post" class="ui form">
@@ -52,44 +50,43 @@
                     {% endfor %}
                 </div>
             </div>
-            <p>{% blocktrans %}Nachfolgend die Barcodes der jeweils positiven / unklaren Proben (zeilenweise separiert)
-                {% endblocktrans %}</p>
+            <p>Nachfolgend die Barcodes der jeweils positiven / unklaren Proben (zeilenweise separiert)</p>
             <div class="three fields">
 
                 <div class="field">
-                    <label>{% blocktrans %}Positive LAMP Proben (Barcodes){% endblocktrans %}</label>
+                    <label>Positive LAMP Proben (Barcodes)</label>
                     <textarea name="lamp_positive"
-                              placeholder="{% blocktrans %}Positive Proben (Barcodes){% endblocktrans %}" type="text"></textarea>
+                              placeholder="Positive Proben (Barcodes)" type="text"></textarea>
                     {% for error in form.lamp_positive.errors %}
                     <small style="color: red;">{{ error }}</small>
                     {% endfor %}
                 </div>
                 <div class="field">
-                    <label>{% blocktrans %}Unklare LAMP Proben (Barcodes){% endblocktrans %}</label>
+                    <label>Unklare LAMP Proben (Barcodes)</label>
                     <textarea name="lamp_inconclusive"
-                              placeholder="{% blocktrans %}Unklare Proben (Barcodes){% endblocktrans %}" type="text"></textarea>
+                              placeholder="Unklare Proben (Barcodes)" type="text"></textarea>
                     {% for error in form.lamp_inconclusive.errors %}
                     <small style="color: red;">{{ error }}</small>
                     {% endfor %}
                 </div>
                 <div class="field">
-                    <label>{% blocktrans %}Fehlerhafte LAMP Proben (Barcodes){% endblocktrans %}</label>
+                    <label>Fehlerhafte LAMP Proben (Barcodes)</label>
                     <textarea name="lamp_positive"
-                              placeholder="{% blocktrans %}Fehlerhafte Proben (Barcodes){% endblocktrans %}" type="text"></textarea>
+                              placeholder="Fehlerhafte Proben (Barcodes)" type="text"></textarea>
                     {% for error in form.lamp_failed.errors %}
                     <small style="color: red;">{{ error }}</small>
                     {% endfor %}
                 </div>
             </div>
-            <a class="ui button" href="{% url 'app:index' %}">{% blocktrans %}Zurück{% endblocktrans %}</a>
-            <button class="ui button" type="submit">{% blocktrans %}Abschicken{% endblocktrans %}</button>
+            <a class="ui button" href="{% url 'app:index' %}">Zurück</a>
+            <button class="ui button" type="submit">Abschicken</button>
         </div>
     </form>
 
     {% if wrong_status_sequence.count != 0 %}
     {% for barcode in wrong_status_sequence %}
     <div class="ui warning message">
-        <p>{% blocktrans %}Barcode nicht gefunden.{% endblocktrans %}</p>
+        <p>Barcode nicht gefunden.</p>
     </div>
     {% endfor %}
     {% endif %}
