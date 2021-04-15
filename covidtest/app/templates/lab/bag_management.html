@@ -46,7 +46,6 @@
         {% endif %}
         für Beutel ID(s): {% for bag_id in bag_ids %}{{bag_id}}, {% endfor %}
     </h3>
-    {% endif %}
     <div style="overflow-x: auto;">
         <table class="ui red padded structured table" style="margin: 0px">
 
@@ -111,13 +110,17 @@
             <th><strong>180 Registriert (to be added)</strong></th>
             <th><strong>100 In Analyse (to be added)</strong></th>
             <th colspan="7">
-                <div class="ui right floated small primary labeled icon button">
-                    <i class="download icon"></i>CSV Exportieren
-                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input value='{{bag_ids}}' type="hidden" name="export"/>
+                    <button class="ui right floated small primary labeled icon button" type="submit">
+                        <i class="download icon"></i>CSV Exportieren
+                    </button>
+                </form>
             </th>
         </tr>
         </tfoot>
     </table>
-
+    {% endif %}
 </div>
 {% endblock %}
