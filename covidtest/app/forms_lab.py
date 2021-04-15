@@ -12,20 +12,25 @@ class LabQueryForm(forms.Form):
 class LabCheckInForm(forms.Form):
     barcodes = forms.CharField(
         label="Barcodes",
-        widget=forms.Textarea(attrs={"autofocus": "autofocus", "placeholder": "Barcode ..."}),
+        widget=forms.Textarea(
+            attrs={"autofocus": "autofocus", "placeholder": "Barcode ..."}
+        ),
     )
     rack = forms.CharField(
-        label="Rack Barcode (Optional)", max_length=100, widget=forms.TextInput(attrs={"placeholder": "Rack ..."}),
-        required=False
+        label="Rack Barcode (Optional)",
+        max_length=100,
+        widget=forms.TextInput(attrs={"placeholder": "Rack ..."}),
+        required=False,
     )
     status = forms.ChoiceField(
         label="Status",
         choices=BLANK_CHOICE_DASH + [(s.name, s.name) for s in SampleStatus],
-        required=True
+        required=True,
     )
     comment = forms.CharField(
-        label="Kommentar (Optional)", widget=forms.TextInput(attrs={"placeholder": "Add a comment ..."}),
-        required=False
+        label="Kommentar (Optional)",
+        widget=forms.TextInput(attrs={"placeholder": "Add a comment ..."}),
+        required=False,
     )
 
 
@@ -37,14 +42,20 @@ class LabRackResultsForm(forms.Form):
     lamp_failed = forms.CharField(label="LAMP fehlgeschlagen", required=False)
 
 
-status_choices = [("-", "-")] + [(status.value, status.value) for status in SampleStatus]
+status_choices = [("-", "-")] + [
+    (status.value, status.value) for status in SampleStatus
+]
 
 
 class LabProbeEditForm(forms.Form):
     barcode = forms.CharField(label="Barcode")
     rack = forms.CharField(label="Rack")
-    status = forms.ChoiceField(label="Probenstatus", choices=status_choices, widget=forms.Select())
-    comment = forms.CharField(label="Kommentar", max_length=10000, required=False, widget=forms.Textarea())
+    status = forms.ChoiceField(
+        label="Probenstatus", choices=status_choices, widget=forms.Select()
+    )
+    comment = forms.CharField(
+        label="Kommentar", max_length=10000, required=False, widget=forms.Textarea()
+    )
 
 
 class LabGenerateBarcodeForm(forms.Form):
