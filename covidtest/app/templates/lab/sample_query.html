@@ -3,25 +3,34 @@
 
 {% block content %}
 <div class="">
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Suche{% endblocktrans %}</h1>
+    <h1 class="ui header">Lab Interface - Suche</h1>
     <p>
-        {% blocktrans %}
         Suche nach Barcodes, Access Codes, Bags, Racks oder Status:
-        {% endblocktrans %}
     </p>
 
-    <form style="margin-bottom: 20px;" action="{% url 'app:query' %}" method="post" class="ui form">
+    <form style="margin-bottom: 20px;" action="{% url 'app:query' %}" method="post">
         {% csrf_token %}
-        <div class="ui search">
-            <div class="ui icon input">
-                <input name="search" class="prompt" type="text"
-                       placeholder="{% blocktrans %}Enter barcode/access code/bag/rack...{% endblocktrans %}" autofocus>
-                <button class="ui button" style="margin-left: 5px;" type="submit">
+            <div class="ui action input">
+                <input
+                        name="search"
+                        type="text"
+                        placeholder="Enter barcode/access code/bag/rack..."
+                        autofocus
+                        style="min-width: 270px"
+                >
+                <select class="ui compact selection dropdown" name="search_category">
+                    <option value="all">All</option>
+                    <option value="barcode">Barcode</option>
+                    <option value="accessCode">Access code</option>
+                    <option value="bag">Bag</option>
+                    <option value="rack">Rack</option>
+                    <option value="status">Status</option>
+                </select>
+                <button class="ui button" type="submit">
                     Suchen
                 </button>
             </div>
             <div class="results"></div>
-        </div>
     </form>
 
     {% if search %}
@@ -45,7 +54,7 @@
     {% include 'lab/snippets/multi_sample.html' %}
     {% elif search %}
     <div class="ui warning message">
-        <p>{% blocktrans %}Keine Probe gefunden.{% endblocktrans %}</p>
+        <p>Keine Probe gefunden.</p>
     </div>
     {% endif %}
 </div>

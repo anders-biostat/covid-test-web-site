@@ -1,27 +1,21 @@
+import json
 import os
 
 import django_filters
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView
 from django_filters.views import FilterView
-from django_tables2 import SingleTableMixin, SingleTableView
-from django.db.models import Q, Max, F
+from django_tables2 import SingleTableMixin
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
-from .forms_lab import LabCheckInForm, LabGenerateBarcodeForm, LabProbeEditForm, LabQueryForm, LabRackResultsForm
-from .models import Event, Registration, RSAKey, Sample
-from .serializers import SampleSerializer
+from .forms_lab import LabCheckInForm, LabProbeEditForm, LabQueryForm
+from .models import Event, Sample
 from .statuses import SampleStatus
 from .tables import SampleTable
-from django.views.decorators.csrf import csrf_exempt
-import json
-
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from .utils import find_samples
 
 
 @login_required
@@ -87,15 +81,15 @@ def sample_check_in(request):
                         successful_barcodes.append(barcode)
 
             if len(barcodes_not_in_db) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige Barcodes waren nicht in der Datenbank"))
+                messages.add_message(request, messages.ERROR, "Einige Barcodes waren nicht in der Datenbank")
             if len(status_not_set) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige Status konnten nicht gesetzt werden"))
+                messages.add_message(request, messages.ERROR, "Einige Status konnten nicht gesetzt werden")
             if len(rack_not_set) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige Racks konnten nicht gesetzt werden"))
+                messages.add_message(request, messages.ERROR, "Einige Racks konnten nicht gesetzt werden")
             no_success = True
             if len(rack_not_set) == 0 and len(status_not_set) == 0 and len(barcodes_not_in_db) == 0:
                 no_success = False
-                messages.add_message(request, messages.SUCCESS, _("Proben erfolgreich eingetragen"))
+                messages.add_message(request, messages.SUCCESS, "Proben erfolgreich eingetragen")
 
             return render(
                 request,
@@ -126,48 +120,15 @@ def sample_detail(request):
             form = LabQueryForm(request.POST)
             if form.is_valid():
                 search = form.cleaned_data["search"].upper().strip()
-                single_sample = Sample.objects.filter(Q(barcode=search) | Q(access_code=search)).first()
 
-                if single_sample:
-                    edit_form = LabProbeEditForm(initial={"rack": single_sample.rack, "comment": "Status changed in lab interface"})
-                    return render(
-                        request,
-                        sample_detail_template,
-                        {"form": form, "edit_form": edit_form, "sample": single_sample, "search": search},
-                    )
-                else:
-                    # TODO this probably needs some sort of pagination in the future
-                    #  to prevent sending too many samples in response
-                    sample_pks = []
+                template_obj = {"form": form, "edit_form": edit_form, "search": search}
+                template_obj.update(find_samples(search=search, search_category=request.POST.get("search_category")))
 
-                    events = Event.objects.filter(
-                        status__icontains=search
-                    ).exclude(status=SampleStatus.INFO.value)
-
-                    if events:
-                        for event in events:
-                            sample_to_check = Sample.objects.get(events=event)
-                            latest_status = sample_to_check.get_latest_internal_status()
-                            if event == latest_status:
-                                sample_pks.append(sample_to_check.pk)
-
-                    multi_sample = Sample.objects.filter(
-                        Q(rack__icontains=search) |
-                        Q(bag__pk__iexact=search) |
-                        Q(pk__in=sample_pks)
-                    )
-                    if multi_sample:
-                        return render(
-                            request,
-                            sample_detail_template,
-                            {"form": form, "multi_sample": multi_sample, "search": search},
-                        )
-                    else:
-                        return render(
-                            request,
-                            sample_detail_template,
-                            {"form": form, "edit_form": edit_form, "search": search},
-                        )
+                return render(
+                    request,
+                    sample_detail_template,
+                    template_obj
+                )
         if "edit" in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
             if edit_form.is_valid():
@@ -177,7 +138,7 @@ def sample_detail(request):
                 comment = edit_form.cleaned_data["comment"].strip()
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
-                    messages.add_message(request, messages.ERROR, _("Sample nicht gefunden"))
+                    messages.add_message(request, messages.ERROR, "Sample nicht gefunden")
                 else:
                     rack_changed = sample.rack != rack
                     if rack_changed:
@@ -190,7 +151,7 @@ def sample_detail(request):
                         sample.rack = rack
                         sample.save()
                         event.save()
-                        messages.add_message(request, messages.SUCCESS, _("Sample rack geupdated"))
+                        messages.add_message(request, messages.SUCCESS, "Sample rack geupdated")
                     if status != "-":
                         status = SampleStatus[status]
                         event = Event(
@@ -200,9 +161,9 @@ def sample_detail(request):
                             updated_by=request.user
                         )
                         event.save()
-                        messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
+                        messages.add_message(request, messages.SUCCESS, "Status geupdated")
                     else:
-                        messages.add_message(request, messages.ERROR, _("Der Probe bitte einen Status geben"))
+                        messages.add_message(request, messages.ERROR, "Der Probe bitte einen Status geben")
                 return render(
                     request, sample_detail_template, {"form": form, "edit_form": edit_form, "sample": sample}
                 )

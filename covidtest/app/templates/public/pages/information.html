@@ -8,7 +8,7 @@
     SARS-CoV-2{% endblocktrans %}
   </h2>
 
-  <h3>Wie funktioniert die Probennahme?</h3>
+  <h3>{% blocktrans %}Wie funktioniert die Probennahme?{% endblocktrans %}</h3>
 
       <div class="video-responsive">
         <!-- <iframe width="560" height="315" src="media/sample.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
@@ -25,14 +25,14 @@
     </div>
 
 
-  <h3>Informationen zum Test</h3>
+  <h3>{% blocktrans %}Informationen zum Test{% endblocktrans %}</h3>
 
   <div class="ui tabular menu">
-    <div class="item" data-tab="tab-adults">für Erwachsene</div>
-    <div class="item" data-tab="tab-adolescents">für Jugendliche</div>
-    <div class="item" data-tab="tab-children">für Kinder</div>
-    <div class="item" data-tab="tab-parents">für Eltern/Sorgebrechtigte</div>
-    <div class="item" data-tab="tab-close">zuklappen</div>
+    <div class="item" data-tab="tab-adults">{% blocktrans %}für Erwachsene{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-adolescents">{% blocktrans %}für Jugendliche{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-children">{% blocktrans %}für Kinder{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-parents">{% blocktrans %}für Eltern/Sorgebrechtigte{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-close">{% blocktrans %}zuklappen{% endblocktrans %}</div>
   </div>
   <div class="ui tab" data-tab="tab-adults"> {% include "public/info_and_consent/adults.html" with bare="true" %} </div>
   <div class="ui tab" data-tab="tab-adolescents"> {% include "public/info_and_consent/adolescents.html" with bare="true" %} </div>
@@ -40,14 +40,14 @@
   <div class="ui tab" data-tab="tab-parents"> {% include "public/info_and_consent/parents.html" with bare="true" %} </div>
   <div class="ui tab" data-tab="tab-close"> </div>
   
-  <h3>Informationen zur Biobank</h3>
+  <h3>{% blocktrans %}Informationen zur Biobank{% endblocktrans %}</h3>
 
     <div class="ui tabular menu">
-    <div class="item" data-tab="tab-adults-bb">für Erwachsene</div>
-    <div class="item" data-tab="tab-adolescents-bb">für Jugendliche</div>
-    <div class="item" data-tab="tab-children-bb">für Kinder</div>
-    <div class="item" data-tab="tab-parents-bb">für Eltern/Sorgebrechtigte</div>
-    <div class="item" data-tab="tab-close">zuklappen</div>
+    <div class="item" data-tab="tab-adults-bb">{% blocktrans %}für Erwachsene{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-adolescents-bb">{% blocktrans %}für Jugendliche{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-children-bb">{% blocktrans %}für Kinder{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-parents-bb">{% blocktrans %}für Eltern/Sorgebrechtigte{% endblocktrans %}</div>
+    <div class="item" data-tab="tab-close">{% blocktrans %}zuklappen{% endblocktrans %}</div>
   </div>
   <div class="ui tab" data-tab="tab-adults-bb"> {% include "public/info_and_consent/adults_biobank.html" with bare="true" %} </div>
   <div class="ui tab" data-tab="tab-adolescents-bb"> {% include "public/info_and_consent/adolescents_biobank.html" with bare="true" %} </div>

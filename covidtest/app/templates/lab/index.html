@@ -3,18 +3,16 @@
 {% load permissions %}
 {% block content %}
 <div>
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans %}</h1>
+    <h1 class="ui header">Lab Interface - Home</h1>
     <p>
-        {% blocktrans %}
         Laborinterface, zur Bearbeitung und Erfassung von Proben. Folgende Prozesse stehen zur Verfügung:
-        {% endblocktrans %}
     </p>
 
     {% if user|is_in_group:"lab_user" %}
     <a href="{% url 'app:query'  %}" style="color: inherit">
         <div class="ui segment" style="margin-top: 30px; padding: 30px">
             <h3 class="ui header">
-                {% blocktrans %}Proben Suchen{% endblocktrans %}
+                Proben Suchen
             </h3>
 
             <p>
@@ -26,7 +24,7 @@
         <div class="ui segment" style="margin-top: 30px; padding: 30px">
 
             <h3 class="ui header">
-                {% blocktrans %}Mehrere Proben Bearbeiten{% endblocktrans %}
+                Mehrere Proben Bearbeiten
             </h3>
             <p>
                 Status, Rack und Kommentar einer oder mehrerer Proben gleichzeitig bearbeiten.
@@ -37,12 +35,10 @@
     <a href="{% url 'app:query'  %}" style="color: inherit">
         <div class="ui segment" style="margin-top: 30px; padding: 30px">
             <h3 class="ui header">
-                {% blocktrans %}Proben Suchen{% endblocktrans %}
+                Proben Suchen
             </h3>
             <p>
-                {% blocktrans %}
                 Hier können einzelne Proberöhrchen gesucht werden.
-                {% endblocktrans %}
             </p>
         </div>
     </a>
