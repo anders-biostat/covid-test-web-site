@@ -312,7 +312,7 @@ def sample_details_snippet(request):
 
 
 @login_required
-def bag_management(request):
+def bag_search_statistics(request):
     event_keys = []
     for stat in SampleStatus:
         event_keys.append(stat.name)
@@ -355,7 +355,7 @@ def bag_management(request):
 
                 return render(
                     request,
-                    "lab/bag_management.html",
+                    "lab/bag_search_statistics.html",
                     {
                         "statusEnum": event_keys,
                         "statsArray": stats_array,
@@ -408,4 +408,4 @@ def bag_management(request):
                 writer.writerow(stats_obj)
 
             return response
-    return render(request, "lab/bag_management.html", {"statusEnum": event_keys})
+    return render(request, "lab/bag_search_statistics.html", {"statusEnum": event_keys})

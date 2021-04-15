@@ -18,7 +18,8 @@
             </h3>
 
             <p>
-                Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen, sowie Status und Rack manuell setzen.
+                Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen, sowie Status und Rack manuell
+                setzen.
             </p>
         </div>
     </a>
@@ -33,31 +34,55 @@
             </p>
         </div>
     </a>
-    <a href="{% url 'app:bag_management'  %}" style="color: inherit">
-        <div class="ui segment" style="margin-top: 30px; padding: 30px">
-
-            <h3 class="ui header">
-                {% blocktrans %}Beutel Management{% endblocktrans %}
-            </h3>
-            <p>
-                Beutel analysieren, bearbeiten und verwalten.
-            </p>
-        </div>
-    </a>
-    {% else %}
-    <a href="{% url 'app:query'  %}" style="color: inherit">
-        <div class="ui segment" style="margin-top: 30px; padding: 30px">
-            <h3 class="ui header">
-                {% blocktrans %}Proben Suchen{% endblocktrans %}
-            </h3>
-            <p>
-                {% blocktrans %}
-                Hier können einzelne Proberöhrchen gesucht werden.
-                {% endblocktrans %}
-            </p>
-        </div>
-    </a>
-    {% endif %}
+    <h2>Beutel Management</h2>
+    <div class="ui divider"></div>
+    <div class="ui cards">
+        <a href="{% url 'app:bag_search'  %}" class="card">
+            <div class="content">
+                <h3 class="header">
+                    {% blocktrans %}Suchen und Statistik{% endblocktrans %}
+                </h3>
+                <div class="meta">
+                    Beutel suchen und Statistiken exportieren.
+                </div>
+            </div>
+        </a>
+        <a class="card">
+            <div class="content">
+                <h3 class="header">
+                    Ausgabe
+                </h3>
+                <div class="meta">
+                    Noch nicht integriert
+                </div>
+            </div>
+        </a>
+        <a class="card">
+            <div class="content">
+                <h3 class="header">
+                    Verwaltung
+                </h3>
+                <div class="meta">
+                    Noch nicht integriert
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+{% else %}
+<a href="{% url 'app:query'  %}" style="color: inherit">
+    <div class="ui segment" style="margin-top: 30px; padding: 30px">
+        <h3 class="ui header">
+            {% blocktrans %}Proben Suchen{% endblocktrans %}
+        </h3>
+        <p>
+            {% blocktrans %}
+            Hier können einzelne Proberöhrchen gesucht werden.
+            {% endblocktrans %}
+        </p>
+    </div>
+</a>
+{% endif %}
 
 </div>
 {% endblock %}

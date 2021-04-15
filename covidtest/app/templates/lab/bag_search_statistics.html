@@ -2,25 +2,14 @@
 {% load i18n %}
 {% block content %}
 <div>
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Beutel Management{% endblocktrans %}</h1>
-    <div class="ui three item menu" style="margin-top: 30px">
-        <a class="item active">
-            Suchen/Statistiken
-        </a>
-        <a class="item">
-            Ausgabe
-        </a>
-        <a class="item">
-            Verwaltung
-        </a>
-    </div>
-    <div style="margin-top: 40px; margin-bottom: 40px">
+    <h1 class="ui header">{% blocktrans %}Beutel Management - Suchen/Statistiken{% endblocktrans %}</h1>
+    <div style="margin-bottom: 40px">
         <p>
             {% blocktrans %}
             Suche nach einer oder mehrerer Beutel IDs - Mehrere IDs mit Komma trennen (ID1, ID2, ID3):
             {% endblocktrans %}
         </p>
-        <form action="{% url 'app:bag_management' %}" method="post">
+        <form action="{% url 'app:bag_search' %}" method="post">
             {% csrf_token %}
             <div class="ui action input">
                 <input
@@ -92,6 +81,10 @@
                 </td>
                 {% elif "NEG" in stats_key %}
                 <td class="center aligned positive collapsing">
+                    {{status_count}}
+                </td>
+                {% elif "Gesamt" in stats_key and status_count == 0 %}
+                <td class="center aligned warning collapsing">
                     {{status_count}}
                 </td>
                 {% else %}
