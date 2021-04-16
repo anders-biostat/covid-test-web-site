@@ -21,6 +21,8 @@ from .forms_lab import (
     LabProbeEditForm,
     LabQueryForm,
     BagManagementQueryForm,
+    BagHandoutForm,
+    BagHandoutModelFormSet,
 )
 from .models import Event, Sample, Bag, BagRecipient
 from .statuses import SampleStatus
@@ -432,3 +434,9 @@ def bag_search_statistics(request):
 
             return response
     return render(request, "lab/bag_search_statistics.html", {"statusEnum": event_keys})
+
+
+@login_required
+def bag_handout(request):
+    formset = BagHandoutModelFormSet(queryset=Bag.objects.all())
+    return render(request, "lab/bag_handout.html", {"formset": formset})

@@ -1,0 +1,50 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% block content %}
+<div>
+    <h1 class="ui header">{% blocktrans %}Beutel - Ausgabe{% endblocktrans %}</h1>
+    <div style="margin-bottom: 40px">
+        <p>
+            {% blocktrans %}
+            Suche nach einer oder mehrerer Beutel IDs - Mehrere IDs mit Komma trennen (ID1, ID2, ID3):
+            {% endblocktrans %}
+        </p>
+        <form action="{% url 'app:bag_handout' %}" method="post">
+            {% csrf_token %}
+            <div class="ui action input">
+                <input
+                        name="search"
+                        type="text"
+                        placeholder="{% blocktrans %}Beutel ID...{% endblocktrans %}"
+                        autofocus
+                        style="min-width: 270px"
+                >
+                <button class="ui button" type="submit">
+                    Suchen
+                </button>
+            </div>
+            <div class="results"></div>
+        </form>
+    </div>
+    <form action="{% url 'app:bag_handout' %}" class="ui form" method="post">
+        {% csrf_token %}
+        {% for form in formset %}
+        {{form.as_table}}
+        {% endfor %}
+<!--        <div class="field">-->
+<!--            <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>-->
+<!--            {{ edit_form.status }}-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--            <label>{% blocktrans %}Rack{% endblocktrans %}</label>-->
+<!--            {{ edit_form.rack }}-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--            <label>{% blocktrans %}Kommentar{% endblocktrans %}</label>-->
+<!--            {{ edit_form.comment }}-->
+<!--        </div>-->
+<!--        <input name="barcode" value="{{ sample.barcode }}" hidden>-->
+        <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
+    </form>
+</div>
+{% endblock %}

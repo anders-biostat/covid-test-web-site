@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django.core.exceptions import ValidationError
 
-from .models import RSAKey
+from .models import RSAKey, Bag
 from .statuses import SampleStatus
 
 
@@ -83,3 +83,12 @@ class BagManagementQueryForm(forms.Form):
                     )
             return search_value
         return [search_value]
+
+
+class BagHandoutForm(forms.ModelForm):
+    class Meta:
+        model = Bag
+        fields = "__all__"
+
+
+BagHandoutModelFormSet = forms.modelformset_factory(Bag, form=BagHandoutForm)
