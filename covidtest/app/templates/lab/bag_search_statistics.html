@@ -47,8 +47,9 @@
                 <th rowspan="2">Telefon</th>
                 <th rowspan="2">Bag ID</th>
                 <th rowspan="2">Erstellt Am</th>
-<!--                TODO: Add field-->
-<!--                <th rowspan="2">Ausgegeben Von</th>-->
+                <th rowspan="2">Ausgegeben Am</th>
+                <!--                TODO: Add field-->
+                <!--                <th rowspan="2">Ausgegeben Von</th>-->
                 <!-- TODO: dynamically calculate length-->
                 <th colspan="17">Status</th>
             </tr>
@@ -74,6 +75,9 @@
                 <td class="collapsing"><h4 class="ui center aligned header">{{statsObj.bagId}}</h4></td>
                 <td class="collapsing">
                     {{statsObj.createdAt}}
+                </td>
+                <td class="collapsing">
+                    {{statsObj.handedOutOn}}
                 </td>
                 {% for stats_key, status_count in statsObj.status.items %}
                 {% if "POS" in stats_key %}
@@ -103,9 +107,9 @@
         <tfoot>
         <tr>
             <th><strong>{{footerStats.total_samples}} Probe(n)</strong></th>
-<!--            TODO: Add both back in once delclared how to calculate them-->
-<!--            <th><strong>180 Registriert (to be added)</strong></th>-->
-<!--            <th><strong>100 In Analyse (to be added)</strong></th>-->
+            <!--            TODO: Add both back in once delclared how to calculate them-->
+            <!--            <th><strong>180 Registriert (to be added)</strong></th>-->
+            <!--            <th><strong>100 In Analyse (to be added)</strong></th>-->
             <th colspan="7">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}

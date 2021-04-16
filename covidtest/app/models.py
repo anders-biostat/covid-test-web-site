@@ -38,7 +38,7 @@ class RSAKey(models.Model):
         return "RSAKey: %s" % self.key_name
 
 
-class SampleRecipient(Timestamp, models.Model):
+class BagRecipient(Timestamp, models.Model):
     class RecipientTypes(models.TextChoices):
         INSTITUTION = "offers tests regularly to their staff", "Institution"
         TEACHING_EVENT = (
@@ -55,6 +55,8 @@ class SampleRecipient(Timestamp, models.Model):
     name_contact_person = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
     telephone = models.CharField(max_length=255, null=True, blank=True)
+    billing_address = models.TextField(null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"NAME: {self.recipient_name} ,TYPE: {self.get_recipient_type_display()}"
@@ -67,13 +69,15 @@ class Bag(Timestamp, models.Model):
         RSAKey, on_delete=models.DO_NOTHING, related_name="bags"
     )
     recipient = models.ForeignKey(
-        SampleRecipient,
+        BagRecipient,
         on_delete=models.DO_NOTHING,
         related_name="bag_of_recipient",
         null=True,
         blank=True,
     )
-    # TODO add ausgegben von
+    handed_out_on = models.DateTimeField(null=True, blank=True)
+    # TODO add ausgegben von if ausgabe integrated
+    # handed_out_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True)
     def __str__(self):
         return "Bag #%d ('%s')" % (self.pk, self.name)
 

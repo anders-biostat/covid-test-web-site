@@ -2,8 +2,9 @@ import json
 import csv
 import os
 import ast
-from datetime import date
+from datetime import date, datetime
 
+import pytz
 import django_filters
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -21,7 +22,7 @@ from .forms_lab import (
     LabQueryForm,
     BagManagementQueryForm,
 )
-from .models import Event, Sample, Bag, SampleRecipient
+from .models import Event, Sample, Bag, BagRecipient
 from .statuses import SampleStatus
 from .tables import SampleTable
 from .utils import find_samples
@@ -329,7 +330,7 @@ def bag_search_statistics(request):
                 for bag_id in bag_ids:
                     stats_obj = dict(status=dict.fromkeys(event_keys, 0))
 
-                    recipient = SampleRecipient.objects.get(bag_of_recipient__id=bag_id)
+                    recipient = BagRecipient.objects.get(bag_of_recipient__id=bag_id)
 
                     stats_obj["recipient"] = recipient.recipient_name
                     stats_obj["contactPerson"] = recipient.name_contact_person
@@ -339,6 +340,12 @@ def bag_search_statistics(request):
                     bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
                     stats_obj["bagId"] = bag.pk
                     stats_obj["createdAt"] = bag.created_on
+                    if bag.handed_out_on is not None:
+                        stats_obj["handedOutOn"] = bag.handed_out_on
+                    else:
+                        stats_obj["handedOutOn"] = datetime(
+                            1, 1, 1, 0, 0, 0, 0, pytz.UTC
+                        )
                     stats_obj["status"]["Gesamt"] = len(bag.samples.all())
                     for sample in bag.samples.all():
                         event = sample.get_latest_internal_status()
@@ -353,12 +360,21 @@ def bag_search_statistics(request):
                 samples = Sample.objects.filter(bag__pk__in=bag_ids)
                 total_samples = len(samples)
 
+                # Sort results by handed out time and refactor placeholder datetime to string
+                sorted_stats_array = sorted(stats_array, key=lambda k: k["handedOutOn"])
+                cleaned_sorted_stats_array = []
+                for obj in sorted_stats_array:
+                    handed_out_time = obj["handedOutOn"]
+                    if handed_out_time.year == 1:
+                        obj["handedOutOn"] = "0"
+                    cleaned_sorted_stats_array.append(obj)
+
                 return render(
                     request,
                     "lab/bag_search_statistics.html",
                     {
                         "statusEnum": event_keys,
-                        "statsArray": stats_array,
+                        "statsArray": cleaned_sorted_stats_array,
                         "bag_ids": bag_ids,
                         "footerStats": {"total_samples": total_samples},
                     },
@@ -380,6 +396,7 @@ def bag_search_statistics(request):
                 "telephone",
                 "bagId",
                 "createdAt",
+                "handedOutOn",
             ]
             columns.extend(event_keys)
 
@@ -388,7 +405,7 @@ def bag_search_statistics(request):
 
             for bag_id in bag_ids:
                 stats_obj = dict.fromkeys(event_keys, 0)
-                recipient = SampleRecipient.objects.get(bag_of_recipient__id=bag_id)
+                recipient = BagRecipient.objects.get(bag_of_recipient__id=bag_id)
 
                 stats_obj["recipient"] = recipient.recipient_name
                 stats_obj["contactPerson"] = recipient.name_contact_person
@@ -398,6 +415,10 @@ def bag_search_statistics(request):
                 bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
                 stats_obj["bagId"] = bag.pk
                 stats_obj["createdAt"] = bag.created_on
+                if bag.handed_out_on is not None:
+                    stats_obj["handedOutOn"] = bag.handed_out_on
+                else:
+                    stats_obj["handedOutOn"] = "0"
                 stats_obj["Gesamt"] = len(bag.samples.all())
                 for sample in bag.samples.all():
                     event = sample.get_latest_internal_status()
