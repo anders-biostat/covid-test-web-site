@@ -325,19 +325,21 @@ def bag_search_statistics(request):
         if "search" in request.POST.keys():
             form = BagManagementQueryForm(request.POST)
             if form.is_valid():
-                bag_ids = form.cleaned_data["search"]
+                search_keys = form.cleaned_data["search"]
                 stats_array = []
-                for bag_id in bag_ids:
+                for search_key in search_keys:
                     stats_obj = dict(status=dict.fromkeys(event_keys, 0))
 
-                    recipient = BagRecipient.objects.get(bag_of_recipient__id=bag_id)
+                    recipient = BagRecipient.objects.get(
+                        bag_of_recipient__id=search_key
+                    )
+                    bag = Bag.objects.prefetch_related("samples").get(pk=search_key)
 
                     stats_obj["recipient"] = recipient.recipient_name
                     stats_obj["contactPerson"] = recipient.name_contact_person
                     stats_obj["email"] = recipient.email
                     stats_obj["telephone"] = recipient.telephone
 
-                    bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
                     stats_obj["bagId"] = bag.pk
                     stats_obj["createdAt"] = bag.created_on
                     if bag.handed_out_on is not None:
@@ -357,7 +359,7 @@ def bag_search_statistics(request):
                             stats_obj["status"]["Ohne"] += 1
                     stats_array.append(stats_obj)
 
-                samples = Sample.objects.filter(bag__pk__in=bag_ids)
+                samples = Sample.objects.filter(bag__pk__in=search_keys)
                 total_samples = len(samples)
 
                 # Sort results by handed out time and refactor placeholder datetime to string
@@ -375,7 +377,7 @@ def bag_search_statistics(request):
                     {
                         "statusEnum": event_keys,
                         "statsArray": cleaned_sorted_stats_array,
-                        "bag_ids": bag_ids,
+                        "search_keys": search_keys,
                         "footerStats": {"total_samples": total_samples},
                     },
                 )
@@ -387,7 +389,7 @@ def bag_search_statistics(request):
             response[
                 "Content-Disposition"
             ] = f'attachment; filename={date.today().strftime("%Y-%m-%d")}_bagStatsExport.csv'
-            bag_ids = ast.literal_eval(request.POST.get("export"))
+            search_keys = ast.literal_eval(request.POST.get("export"))
 
             columns = [
                 "recipient",
@@ -403,16 +405,16 @@ def bag_search_statistics(request):
             writer = csv.DictWriter(response, fieldnames=columns)
             writer.writeheader()
 
-            for bag_id in bag_ids:
+            for search_key in search_keys:
                 stats_obj = dict.fromkeys(event_keys, 0)
-                recipient = BagRecipient.objects.get(bag_of_recipient__id=bag_id)
+                recipient = BagRecipient.objects.get(bag_of_recipient__id=search_key)
+                bag = Bag.objects.prefetch_related("samples").get(pk=search_key)
 
                 stats_obj["recipient"] = recipient.recipient_name
                 stats_obj["contactPerson"] = recipient.name_contact_person
                 stats_obj["email"] = recipient.email
                 stats_obj["telephone"] = recipient.telephone
 
-                bag = Bag.objects.prefetch_related("samples").get(pk=bag_id)
                 stats_obj["bagId"] = bag.pk
                 stats_obj["createdAt"] = bag.created_on
                 if bag.handed_out_on is not None:

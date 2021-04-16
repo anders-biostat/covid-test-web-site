@@ -82,11 +82,4 @@ class BagManagementQueryForm(forms.Form):
                         "Wrong format. Make sure all IDs are separated by comma (ID1, ID2)"
                     )
             return search_value
-        else:
-            try:
-                int(search_value)
-            except ValueError:
-                raise ValidationError(
-                    "Wrong format. Make sure to either search for a single ID or separate them by comma (ID1, ID2)"
-                )
-            return [search_value]
+        return [search_value]

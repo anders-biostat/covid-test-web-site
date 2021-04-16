@@ -34,7 +34,7 @@
         {% else %}
         Ergebnisse
         {% endif %}
-        für Beutel ID(s): {% for bag_id in bag_ids %}{{bag_id}}, {% endfor %}
+        für Beutel ID(s): {% for search_key in search_keys %}{{search_key}}, {% endfor %}
     </h3>
     <div style="overflow-x: auto;">
         <table class="ui red padded structured table" style="margin: 0px">
@@ -113,7 +113,7 @@
             <th colspan="7">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input value='{{bag_ids}}' type="hidden" name="export"/>
+                    <input value='{{search_keys}}' type="hidden" name="export"/>
                     <button class="ui right floated small primary labeled icon button" type="submit">
                         <i class="download icon"></i>CSV Exportieren
                     </button>
