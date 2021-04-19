@@ -86,9 +86,24 @@ class BagManagementQueryForm(forms.Form):
 
 
 class BagHandoutForm(forms.ModelForm):
+    comment = forms.CharField(max_length=1000, disabled=True, required=False)
+    name = forms.CharField(max_length=255, disabled=True, required=False)
+
     class Meta:
         model = Bag
-        fields = "__all__"
+        fields = ("id", "name", "comment", "recipient")
+
+    def clean(self):
+        # TODO add check if all samples have status PRINTED
+        if self.instance.samples.count() == 0:
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} enthält keine Proben!"
+            )
+        elif self.instance.recipient:
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} ist bereits einem Abnehmer zugeordnet!"
+            )
+        return self.cleaned_data
 
 
-BagHandoutModelFormSet = forms.modelformset_factory(Bag, form=BagHandoutForm)
+BagHandoutModelFormSet = forms.modelformset_factory(Bag, form=BagHandoutForm, extra=0)

@@ -438,5 +438,35 @@ def bag_search_statistics(request):
 
 @login_required
 def bag_handout(request):
-    formset = BagHandoutModelFormSet(queryset=Bag.objects.all())
-    return render(request, "lab/bag_handout.html", {"formset": formset})
+
+    if request.method == "POST":
+        if "search" in request.POST.keys():
+            form = BagManagementQueryForm(request.POST)
+            if form.is_valid():
+                search_keys = form.cleaned_data["search"]
+
+                formset = BagHandoutModelFormSet(
+                    queryset=Bag.objects.filter(pk__in=search_keys)
+                )
+
+                return render(
+                    request,
+                    "lab/bag_handout.html",
+                    {"formset": formset, "searchKeys": search_keys},
+                )
+            else:
+                messages.add_message(request, messages.ERROR, form.errors)
+        else:
+
+            formset = BagHandoutModelFormSet(request.POST)
+            if formset.is_valid():
+                formset.save()
+                messages.add_message(
+                    request, messages.SUCCESS, "Beutel erfolgreich ausgegeben"
+                )
+            else:
+                messages.add_message(
+                    request, messages.ERROR, f"Fehlgeschlagen: {formset.errors}"
+                )
+
+    return render(request, "lab/bag_handout.html")

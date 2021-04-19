@@ -26,25 +26,58 @@
             <div class="results"></div>
         </form>
     </div>
+    {% if formset %}
     <form action="{% url 'app:bag_handout' %}" class="ui form" method="post">
         {% csrf_token %}
-        {% for form in formset %}
-        {{form.as_table}}
-        {% endfor %}
-<!--        <div class="field">-->
-<!--            <label>{% blocktrans %}Status der Probe{% endblocktrans %}</label>-->
-<!--            {{ edit_form.status }}-->
-<!--        </div>-->
-<!--        <div class="field">-->
-<!--            <label>{% blocktrans %}Rack{% endblocktrans %}</label>-->
-<!--            {{ edit_form.rack }}-->
-<!--        </div>-->
-<!--        <div class="field">-->
-<!--            <label>{% blocktrans %}Kommentar{% endblocktrans %}</label>-->
-<!--            {{ edit_form.comment }}-->
-<!--        </div>-->
-<!--        <input name="barcode" value="{{ sample.barcode }}" hidden>-->
-        <button name="edit" class="ui button" type="submit">{% blocktrans %}Speichern{% endblocktrans %}</button>
+
+        <table class="ui red padded table">
+
+            <thead>
+            <tr>
+
+                <th class="center aligned">ID</th>
+                <th>Name Beutel</th>
+                <th class="center aligned">Anzahl Proben</th>
+                <th>Kommentar Beutel</th>
+                <th>Kommentar Abnehmer</th>
+                <th>Abnehmer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <tr>
+                {{form.id}}
+                <td class="collapsing"><h3 class="ui center aligned header">{{ form.id.value }}</h3></td>
+                <td class="collapsing">{{form.name.value}}</td>
+                <td class="collapsing {% if form.instance.samples.count == 0 %}negative{% endif %}">
+                    <h4 class="ui center aligned header">{{form.instance.samples.count}}</h4>
+                </td>
+                {% if form.comment.value %}
+                <td>{{form.comment.value}}</td>
+                {% else %}
+                <td>---</td>
+                {% endif %}
+                {% if form.instance.recipient.comment %}
+                <td>{{form.instance.recipient.comment}}</td>
+                {% else %}
+                <td>---</td>
+                {% endif %}
+                <td class="{% if form.instance.recipient %}negative{% endif %}">{{form.recipient}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="7">
+                    <button class="ui right floated small primary labeled icon button" type="submit">
+                        <i class="paper plane icon"></i>Ausgeben
+                    </button>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
     </form>
+    {% endif %}
 </div>
 {% endblock %}
