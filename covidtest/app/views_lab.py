@@ -445,15 +445,21 @@ def bag_handout(request):
             if form.is_valid():
                 search_keys = form.cleaned_data["search"]
 
-                formset = BagHandoutModelFormSet(
-                    queryset=Bag.objects.filter(pk__in=search_keys)
-                )
+                bags = Bag.objects.filter(pk__in=search_keys)
+                if bags.exists():
+                    formset = BagHandoutModelFormSet(queryset=bags)
 
-                return render(
-                    request,
-                    "lab/bag_handout.html",
-                    {"formset": formset, "searchKeys": search_keys},
-                )
+                    return render(
+                        request,
+                        "lab/bag_handout.html",
+                        {"formset": formset, "searchKeys": search_keys},
+                    )
+                else:
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        f"Keinen Beutel mit ID(s) {search_keys} gefunden",
+                    )
             else:
                 messages.add_message(request, messages.ERROR, form.errors)
         else:
