@@ -75,13 +75,6 @@ class BagManagementQueryForm(forms.Form):
         search_value = self.cleaned_data["search"]
         if "," in search_value:
             search_value = [value.strip() for value in search_value.split(",")]
-            for value in search_value:
-                try:
-                    int(value)
-                except ValueError:
-                    raise ValidationError(
-                        "Wrong format. Make sure all IDs are separated by comma (ID1, ID2)"
-                    )
             return search_value
         return [search_value]
 
@@ -111,7 +104,7 @@ class BagHandoutForm(forms.ModelForm):
         invalid_status = []
         for sample in self.instance.samples.all():
             event = sample.get_statuses().last()
-            if event.status != SampleStatus.PRINTED.value:
+            if event is None or event.status != SampleStatus.PRINTED.value:
                 invalid_status.append(sample.barcode)
         if len(invalid_status) > 0:
             raise ValidationError(

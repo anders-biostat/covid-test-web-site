@@ -6,7 +6,7 @@
     <div style="margin-bottom: 40px">
         <p>
             {% blocktrans %}
-            Suche nach einer oder mehrerer Beutel IDs - Mehrere IDs mit Komma trennen (ID1, ID2, ID3):
+            Suche nach einer oder mehrerer Beutel IDs oder Abnehmern - (ID1, ID2, ID3):
             {% endblocktrans %}
         </p>
         <form action="{% url 'app:bag_search' %}" method="post">
@@ -15,7 +15,7 @@
                 <input
                         name="search"
                         type="text"
-                        placeholder="{% blocktrans %}Beutel ID...{% endblocktrans %}"
+                        placeholder="{% blocktrans %}Abnehmer/ Beutel ID...{% endblocktrans %}"
                         autofocus
                         style="min-width: 270px"
                 >
@@ -34,7 +34,7 @@
         {% else %}
         Ergebnisse
         {% endif %}
-        für Beutel ID(s): {% for search_key in search_keys %}{{search_key}}, {% endfor %}
+        für: {% for search_key in search_keys %}{{search_key}}, {% endfor %}
     </h3>
     <div style="overflow-x: auto;">
         <table class="ui celled red padded table" style="margin: 0px">
