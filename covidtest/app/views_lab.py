@@ -9,7 +9,6 @@ import django_filters
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django_filters.views import FilterView
@@ -466,7 +465,6 @@ def bag_search_statistics(request):
 
 @login_required
 def bag_handout(request):
-
     if request.method == "POST":
         if "search" in request.POST.keys():
             form = BagManagementQueryForm(request.POST)

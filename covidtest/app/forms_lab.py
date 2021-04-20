@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 from .models import RSAKey, Bag
 from .statuses import SampleStatus
@@ -91,7 +92,7 @@ class BagHandoutForm(forms.ModelForm):
 
     class Meta:
         model = Bag
-        fields = ("id", "name", "comment", "recipient")
+        fields = ("id", "name", "comment", "recipient", "handed_out_on")
 
     def clean(self):
         # Check if bag has at least one sample
@@ -123,6 +124,8 @@ class BagHandoutForm(forms.ModelForm):
             raise ValidationError(
                 f"Beutel mit ID {self.instance.pk} wurde keinem Abnehmer zugeordnet"
             )
+
+        self.cleaned_data["handed_out_on"] = timezone.now()
 
         return self.cleaned_data
 
