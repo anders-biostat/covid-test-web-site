@@ -94,15 +94,36 @@ class BagHandoutForm(forms.ModelForm):
         fields = ("id", "name", "comment", "recipient")
 
     def clean(self):
-        # TODO add check if all samples have status PRINTED
+        # Check if bag has at least one sample
         if self.instance.samples.count() == 0:
             raise ValidationError(
                 f"Beutel mit ID {self.instance.pk} enthält keine Proben!"
             )
+
+        # Check if no prior recipient
         elif self.instance.recipient:
             raise ValidationError(
                 f"Beutel mit ID {self.instance.pk} ist bereits einem Abnehmer zugeordnet!"
             )
+
+        # Check if all samples have status PRINTED
+        invalid_status = []
+        for sample in self.instance.samples.all():
+            event = sample.get_statuses().last()
+            if event.status != SampleStatus.PRINTED.value:
+                invalid_status.append(sample.barcode)
+        if len(invalid_status) > 0:
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} enthält mindestens eine "
+                + f"Probe mit ungültigem Status -- Barcodes: {invalid_status}"
+            )
+
+        # Check if a new recipient was set
+        if not self.cleaned_data.get("recipient"):
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} wurde keinem Abnehmer zugeordnet"
+            )
+
         return self.cleaned_data
 
 
