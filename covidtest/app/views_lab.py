@@ -9,6 +9,7 @@ import django_filters
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django_filters.views import FilterView
@@ -331,16 +332,30 @@ def bag_search_statistics(request):
                 stats_array = []
                 for search_key in search_keys:
                     stats_obj = dict(status=dict.fromkeys(event_keys, 0))
+                    try:
+                        bag = (
+                            Bag.objects.prefetch_related("samples")
+                            .select_related("recipient")
+                            .get(pk=search_key)
+                        )
+                    except ObjectDoesNotExist:
+                        messages.add_message(
+                            request,
+                            messages.ERROR,
+                            f"Beutel mit ID {search_key} existiert nicht",
+                        )
+                        return render(request, "lab/bag_handout.html")
 
-                    recipient = BagRecipient.objects.get(
-                        bag_of_recipient__id=search_key
-                    )
-                    bag = Bag.objects.prefetch_related("samples").get(pk=search_key)
-
-                    stats_obj["recipient"] = recipient.recipient_name
-                    stats_obj["contactPerson"] = recipient.name_contact_person
-                    stats_obj["email"] = recipient.email
-                    stats_obj["telephone"] = recipient.telephone
+                    if bag.recipient:
+                        stats_obj["recipient"] = bag.recipient.recipient_name
+                        stats_obj["contactPerson"] = bag.recipient.name_contact_person
+                        stats_obj["email"] = bag.recipient.email
+                        stats_obj["telephone"] = bag.recipient.telephone
+                    else:
+                        stats_obj["recipient"] = "--"
+                        stats_obj["contactPerson"] = "--"
+                        stats_obj["email"] = "--"
+                        stats_obj["telephone"] = "--"
 
                     stats_obj["bagId"] = bag.pk
                     stats_obj["createdAt"] = bag.created_on
@@ -409,13 +424,31 @@ def bag_search_statistics(request):
 
             for search_key in search_keys:
                 stats_obj = dict.fromkeys(event_keys, 0)
-                recipient = BagRecipient.objects.get(bag_of_recipient__id=search_key)
-                bag = Bag.objects.prefetch_related("samples").get(pk=search_key)
 
-                stats_obj["recipient"] = recipient.recipient_name
-                stats_obj["contactPerson"] = recipient.name_contact_person
-                stats_obj["email"] = recipient.email
-                stats_obj["telephone"] = recipient.telephone
+                try:
+                    bag = (
+                        Bag.objects.prefetch_related("samples")
+                        .select_related("recipient")
+                        .get(pk=search_key)
+                    )
+                except ObjectDoesNotExist:
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        f"Beutel mit ID {search_key} existiert nicht",
+                    )
+                    return render(request, "lab/bag_handout.html")
+
+                if bag.recipient:
+                    stats_obj["recipient"] = bag.recipient.recipient_name
+                    stats_obj["contactPerson"] = bag.recipient.name_contact_person
+                    stats_obj["email"] = bag.recipient.email
+                    stats_obj["telephone"] = bag.recipient.telephone
+                else:
+                    stats_obj["recipient"] = "--"
+                    stats_obj["contactPerson"] = "--"
+                    stats_obj["email"] = "--"
+                    stats_obj["telephone"] = "--"
 
                 stats_obj["bagId"] = bag.pk
                 stats_obj["createdAt"] = bag.created_on
@@ -433,7 +466,7 @@ def bag_search_statistics(request):
                 writer.writerow(stats_obj)
 
             return response
-    return render(request, "lab/bag_search_statistics.html", {"statusEnum": event_keys})
+    return render(request, "lab/bag_search_statistics.html")
 
 
 @login_required
