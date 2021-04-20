@@ -28,7 +28,7 @@ from .forms_lab import (
 from .models import Event, Sample, Bag, BagRecipient
 from .statuses import SampleStatus
 from .tables import SampleTable
-from .utils import find_samples
+from .utils import find_samples, Search
 
 
 @login_required
@@ -330,21 +330,22 @@ def bag_search_statistics(request):
             if form.is_valid():
                 search_keys = form.cleaned_data["search"]
                 stats_array = []
-                for search_key in search_keys:
+                total_samples = 0
+
+                find = Search(search_keys)
+                bags = find.bags()
+
+                if not bags:
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        f"Beutel mit ID oder Abnehmer {search_keys} existieren nicht",
+                    )
+                    return render(request, "lab/bag_search_statistics.html")
+
+                for bag in bags:
                     stats_obj = dict(status=dict.fromkeys(event_keys, 0))
-                    try:
-                        bag = (
-                            Bag.objects.prefetch_related("samples")
-                            .select_related("recipient")
-                            .get(pk=search_key)
-                        )
-                    except ObjectDoesNotExist:
-                        messages.add_message(
-                            request,
-                            messages.ERROR,
-                            f"Beutel mit ID {search_key} existiert nicht",
-                        )
-                        return render(request, "lab/bag_handout.html")
+                    total_samples += bag.samples.count()
 
                     if bag.recipient:
                         stats_obj["recipient"] = bag.recipient.recipient_name
@@ -376,9 +377,6 @@ def bag_search_statistics(request):
                             stats_obj["status"]["Ohne"] += 1
                     stats_array.append(stats_obj)
 
-                samples = Sample.objects.filter(bag__pk__in=search_keys)
-                total_samples = len(samples)
-
                 # Sort results by handed out time and refactor placeholder datetime to string
                 sorted_stats_array = sorted(stats_array, key=lambda k: k["handedOutOn"])
                 cleaned_sorted_stats_array = []
@@ -408,6 +406,17 @@ def bag_search_statistics(request):
             ] = f'attachment; filename={date.today().strftime("%Y-%m-%d")}_bagStatsExport.csv'
             search_keys = ast.literal_eval(request.POST.get("export"))
 
+            find = Search(search_keys)
+            bags = find.bags()
+
+            if not bags:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    f"Beutel mit ID oder Abnehmer {search_keys} existieren nicht",
+                )
+                return render(request, "lab/bag_search_statistics.html")
+
             columns = [
                 "recipient",
                 "contactPerson",
@@ -422,22 +431,8 @@ def bag_search_statistics(request):
             writer = csv.DictWriter(response, fieldnames=columns)
             writer.writeheader()
 
-            for search_key in search_keys:
+            for bag in bags:
                 stats_obj = dict.fromkeys(event_keys, 0)
-
-                try:
-                    bag = (
-                        Bag.objects.prefetch_related("samples")
-                        .select_related("recipient")
-                        .get(pk=search_key)
-                    )
-                except ObjectDoesNotExist:
-                    messages.add_message(
-                        request,
-                        messages.ERROR,
-                        f"Beutel mit ID {search_key} existiert nicht",
-                    )
-                    return render(request, "lab/bag_handout.html")
 
                 if bag.recipient:
                     stats_obj["recipient"] = bag.recipient.recipient_name
