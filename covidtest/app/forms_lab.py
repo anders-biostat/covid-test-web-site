@@ -85,7 +85,14 @@ class BagHandoutForm(forms.ModelForm):
 
     class Meta:
         model = Bag
-        fields = ("id", "name", "comment", "recipient", "handed_out_on")
+        fields = (
+            "id",
+            "name",
+            "comment",
+            "recipient",
+            "handed_out_on",
+            "handed_out_by",
+        )
 
     def clean(self):
         # Check if bag has at least one sample

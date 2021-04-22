@@ -76,8 +76,10 @@ class Bag(Timestamp, models.Model):
         blank=True,
     )
     handed_out_on = models.DateTimeField(null=True, blank=True)
-    # TODO add ausgegben von if ausgabe integrated
-    # handed_out_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True)
+    handed_out_by = models.ForeignKey(
+        User, on_delete=models.DO_NOTHING, null=True, blank=True
+    )
+
     def __str__(self):
         return "Bag #%d ('%s')" % (self.pk, self.name)
 

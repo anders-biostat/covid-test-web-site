@@ -365,6 +365,10 @@ def bag_search_statistics(request):
                         stats_obj["handedOutOn"] = datetime(
                             1, 1, 1, 0, 0, 0, 0, pytz.UTC
                         )
+                    if bag.handed_out_by is not None:
+                        stats_obj["handedOutBy"] = bag.handed_out_by
+                    else:
+                        stats_obj["handedOutBy"] = "--"
                     stats_obj["status"]["Gesamt"] = len(bag.samples.all())
                     for sample in bag.samples.all():
                         event = sample.get_latest_internal_status()
@@ -424,6 +428,7 @@ def bag_search_statistics(request):
                 "bagId",
                 "createdAt",
                 "handedOutOn",
+                "handedOutBy",
             ]
             columns.extend(event_keys)
 
@@ -450,6 +455,10 @@ def bag_search_statistics(request):
                     stats_obj["handedOutOn"] = bag.handed_out_on
                 else:
                     stats_obj["handedOutOn"] = "0"
+                if bag.handed_out_by is not None:
+                    stats_obj["handedOutBy"] = bag.handed_out_by
+                else:
+                    stats_obj["handedOutBy"] = "--"
                 stats_obj["Gesamt"] = len(bag.samples.all())
                 for sample in bag.samples.all():
                     event = sample.get_latest_internal_status()
@@ -489,10 +498,12 @@ def bag_handout(request):
             else:
                 messages.add_message(request, messages.ERROR, form.errors)
         else:
-
             formset = BagHandoutModelFormSet(request.POST)
             if formset.is_valid():
-                formset.save()
+                instances = formset.save(commit=False)
+                for instance in instances:
+                    instance.handed_out_by = request.user
+                    instance.save()
                 messages.add_message(
                     request, messages.SUCCESS, "Beutel erfolgreich ausgegeben"
                 )

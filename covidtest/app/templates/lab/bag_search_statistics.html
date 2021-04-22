@@ -48,6 +48,7 @@
                 <th rowspan="2">Bag ID</th>
                 <th rowspan="2">Erstellt Am</th>
                 <th rowspan="2">Ausgegeben Am</th>
+                <th rowspan="2">Ausgegeben Von</th>
                 <!--                TODO: Add field-->
                 <!--                <th rowspan="2">Ausgegeben Von</th>-->
                 <!-- TODO: dynamically calculate length-->
@@ -78,6 +79,9 @@
                 </td>
                 <td class="collapsing">
                     {{statsObj.handedOutOn}}
+                </td>
+                <td class="collapsing">
+                    {{statsObj.handedOutBy}}
                 </td>
                 {% for stats_key, status_count in statsObj.status.items %}
                 {% if "POS" in stats_key %}
