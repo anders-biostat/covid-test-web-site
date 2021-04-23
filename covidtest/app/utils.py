@@ -8,9 +8,9 @@ from .statuses import SampleStatus
 
 def sample_pks_of_event(event_search_key):
     found_events_sample_pks = []
-    events = Event.objects.filter(
-        status__icontains=event_search_key
-    ).exclude(status=SampleStatus.INFO.value)
+    events = Event.objects.filter(status__icontains=event_search_key).exclude(
+        status=SampleStatus.INFO.value
+    )
     if events:
         for event in events:
             sample_to_check = Sample.objects.get(events=event)
@@ -23,17 +23,22 @@ def sample_pks_of_event(event_search_key):
 def find_samples(search, search_category=None):
     try:
         if search_category is None or search_category == "all":
-            found_single_sample = Sample.objects.filter(Q(barcode=search) | Q(access_code=search)).first()
+            found_single_sample = Sample.objects.filter(
+                Q(barcode=search) | Q(access_code=search)
+            ).first()
             if found_single_sample:
                 edit_form = LabProbeEditForm(
-                    initial={"rack": found_single_sample.rack, "comment": "Status changed in lab interface"}
+                    initial={
+                        "rack": found_single_sample.rack,
+                        "comment": "Status changed in lab interface",
+                    }
                 )
                 return {"sample": found_single_sample, "edit_form": edit_form}
 
             found_multiple_samples = Sample.objects.filter(
-                Q(rack__icontains=search) |
-                Q(bag__pk__iexact=search) |
-                Q(pk__in=sample_pks_of_event(event_search_key=search))
+                Q(rack__icontains=search)
+                | Q(bag__pk__iexact=search)
+                | Q(pk__in=sample_pks_of_event(event_search_key=search))
             )
             if found_multiple_samples:
                 return {"multi_sample": found_multiple_samples}

@@ -50,7 +50,10 @@ def version(request):
     Short: %s <br>
     </code>
     """
-    return HttpResponse(version_str % (branch_name, branch_name, commit_hash, commit_hash, commit_hash[:7]))
+    return HttpResponse(
+        version_str
+        % (branch_name, branch_name, commit_hash, commit_hash, commit_hash[:7])
+    )
 
 
 @login_required
@@ -75,22 +78,42 @@ def sample_check_in(request):
                 else:
                     sample.rack = rack
                     sample.save()
-                    set_status = sample.set_status(status, comment=comment, author=request.user)
+                    set_status = sample.set_status(
+                        status, comment=comment, author=request.user
+                    )
                     if not set_status:
                         status_not_set.append(barcode)
                     else:
                         successful_barcodes.append(barcode)
 
             if len(barcodes_not_in_db) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige Barcodes waren nicht in der Datenbank"))
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    _("Einige Barcodes waren nicht in der Datenbank"),
+                )
             if len(status_not_set) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige Status konnten nicht gesetzt werden"))
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    _("Einige Status konnten nicht gesetzt werden"),
+                )
             if len(rack_not_set) > 0:
-                messages.add_message(request, messages.ERROR, _("Einige Racks konnten nicht gesetzt werden"))
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    _("Einige Racks konnten nicht gesetzt werden"),
+                )
             no_success = True
-            if len(rack_not_set) == 0 and len(status_not_set) == 0 and len(barcodes_not_in_db) == 0:
+            if (
+                len(rack_not_set) == 0
+                and len(status_not_set) == 0
+                and len(barcodes_not_in_db) == 0
+            ):
                 no_success = False
-                messages.add_message(request, messages.SUCCESS, _("Proben erfolgreich eingetragen"))
+                messages.add_message(
+                    request, messages.SUCCESS, _("Proben erfolgreich eingetragen")
+                )
 
             return render(
                 request,
@@ -102,12 +125,14 @@ def sample_check_in(request):
                     "rack_not_set": rack_not_set,
                     "status_not_set": status_not_set,
                     "no_success": no_success,
-                    "successful_barcodes": successful_barcodes
+                    "successful_barcodes": successful_barcodes,
                 },
             )
     else:
         form = LabCheckInForm()
-    return render(request, "lab/sample_check_in.html", {"form": form, "display_sample": False})
+    return render(
+        request, "lab/sample_check_in.html", {"form": form, "display_sample": False}
+    )
 
 
 @login_required
@@ -123,13 +148,14 @@ def sample_detail(request):
                 search = form.cleaned_data["search"].upper().strip()
 
                 template_obj = {"form": form, "edit_form": edit_form, "search": search}
-                template_obj.update(find_samples(search=search, search_category=request.POST.get("search_category")))
-
-                return render(
-                    request,
-                    sample_detail_template,
-                    template_obj
+                template_obj.update(
+                    find_samples(
+                        search=search,
+                        search_category=request.POST.get("search_category"),
+                    )
                 )
+
+                return render(request, sample_detail_template, template_obj)
         if "edit" in request.POST.keys():
             edit_form = LabProbeEditForm(request.POST)
             if edit_form.is_valid():
@@ -139,53 +165,74 @@ def sample_detail(request):
                 comment = edit_form.cleaned_data["comment"].strip()
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
-                    messages.add_message(request, messages.ERROR, _("Sample nicht gefunden"))
+                    messages.add_message(
+                        request, messages.ERROR, _("Sample nicht gefunden")
+                    )
                 else:
                     rack_changed = sample.rack != rack
                     if rack_changed:
                         event = Event(
                             sample=sample,
                             status=SampleStatus.INFO,
-                            comment="Rack changed in lab interface from "+str(sample.rack)+" to "+str(rack)+".",
-                            updated_by=request.user
+                            comment="Rack changed in lab interface from "
+                            + str(sample.rack)
+                            + " to "
+                            + str(rack)
+                            + ".",
+                            updated_by=request.user,
                         )
                         sample.rack = rack
                         sample.save()
                         event.save()
-                        messages.add_message(request, messages.SUCCESS, _("Sample rack geupdated"))
+                        messages.add_message(
+                            request, messages.SUCCESS, _("Sample rack geupdated")
+                        )
                     if status != "-":
                         status = SampleStatus[status]
                         event = Event(
                             sample=sample,
                             status=status.value,
                             comment=comment,
-                            updated_by=request.user
+                            updated_by=request.user,
                         )
                         event.save()
-                        messages.add_message(request, messages.SUCCESS, _("Status geupdated"))
+                        messages.add_message(
+                            request, messages.SUCCESS, _("Status geupdated")
+                        )
                     else:
-                        messages.add_message(request, messages.ERROR, _("Der Probe bitte einen Status geben"))
+                        messages.add_message(
+                            request,
+                            messages.ERROR,
+                            _("Der Probe bitte einen Status geben"),
+                        )
                 return render(
-                    request, sample_detail_template, {"form": form, "edit_form": edit_form, "sample": sample}
+                    request,
+                    sample_detail_template,
+                    {"form": form, "edit_form": edit_form, "sample": sample},
                 )
             else:
-                sample = Sample.objects.filter(barcode=request.POST.get("barcode")).first()
+                sample = Sample.objects.filter(
+                    barcode=request.POST.get("barcode")
+                ).first()
                 messages.add_message(request, messages.ERROR, edit_form.errors)
                 return render(
                     request,
                     sample_detail_template,
-                    {"form": form, "edit_form": edit_form, "sample": sample}
+                    {"form": form, "edit_form": edit_form, "sample": sample},
                 )
 
-    return render(request, sample_detail_template, {"form": form, "edit_form": edit_form})
+    return render(
+        request, sample_detail_template, {"form": form, "edit_form": edit_form}
+    )
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def update_status(request):
     if request.method == "POST":
         body = json.loads(request.body)
 
-        bc = body['barcode'].strip().upper()
+        bc = body["barcode"].strip().upper()
         bc_ok = []
         bc_missing = []
         bc_duplicated = []
@@ -196,20 +243,22 @@ def update_status(request):
             return HttpResponseBadRequest("Barcode %s not found on the server." % bc)
         if len(qset) > 1:
             bc_duplicated.append(bc)
-            return HttpResponseBadRequest("Multiple samples with barcode %s found." % bc)
-        if 'status' not in body:
+            return HttpResponseBadRequest(
+                "Multiple samples with barcode %s found." % bc
+            )
+        if "status" not in body:
             return HttpResponseBadRequest("No sample status provided")
-        if 'comment' not in body:
+        if "comment" not in body:
             comment = ""
         else:
-            comment = body['comment']
+            comment = body["comment"]
 
         sample = qset.first()
-        if 'rack' in body:
-            sample.rack = body['rack']
+        if "rack" in body:
+            sample.rack = body["rack"]
             sample.save()
-            comment += ". Rack: " + str(body['rack'])
-        sample.events.create(status=body['status'], comment=comment)
+            comment += ". Rack: " + str(body["rack"])
+        sample.events.create(status=body["status"], comment=comment)
         bc_ok.append(bc)
         return HttpResponse("Event created successfully", status=201)
 
@@ -232,16 +281,23 @@ def dashboard(request):
 
     count_wait = Event.objects.filter(status="PRINTED").count()
 
-    dashboard_values = {"count_Samples": Sample.objects.filter().count(), "count_wait": count_wait}
+    dashboard_values = {
+        "count_Samples": Sample.objects.filter().count(),
+        "count_wait": count_wait,
+    }
 
     return render(request, "lab/dashboard.html", {"dashboard_values": dashboard_values})
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def sample_details_snippet(request):
-    sample = Sample.objects.filter(access_code = request.POST.get("access_code")).first()
+    sample = Sample.objects.filter(access_code=request.POST.get("access_code")).first()
     if sample is not None:
-       return render(request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample})
+        return render(
+            request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample}
+        )
     else:
-       return HttpResponse("<i>Access code %s not found</i>" % request.POST.get("access_code"))
+        return HttpResponse(
+            "<i>Access code %s not found</i>" % request.POST.get("access_code")
+        )
