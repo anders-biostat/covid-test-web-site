@@ -21,9 +21,9 @@ All fields must be sent.
     "username": "Testuser", 
     "password": "*******"
   },
-  "name": "",
-  "address": "",
-  "telephone": ""
+  "name": "Mustermann, Max",
+  "address": "Musterstraße 1, 12345 Musterstadt",
+  "telephone": "0123456789"
 }
 ```
 
@@ -35,7 +35,7 @@ All fields must be sent.
 
 ```json
 {
-    "access_code": 6546541685
+    "access_code": "123456789"
 }
 ```
 
