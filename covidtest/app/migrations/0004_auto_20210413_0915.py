@@ -8,29 +8,64 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0003_news'),
+        ("app", "0003_news"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SampleRecipient',
+            name="SampleRecipient",
             fields=[
-                ('created_on', models.DateTimeField(auto_now_add=True)),
-                ('updated_on', models.DateTimeField(blank=True, null=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('recipient_name', models.CharField(max_length=255)),
-                ('recipient_type', models.CharField(blank=True, choices=[('offers tests regularly to their staff', 'Institution'), ('one-off or recurring event where students are tested', 'Teaching Event'), ('invoice goes to the organizer of the event', 'One-Off Event')], max_length=255, null=True)),
-                ('name_contact_person', models.CharField(blank=True, max_length=255, null=True)),
-                ('email', models.EmailField(blank=True, max_length=255, null=True)),
-                ('telephone', models.CharField(blank=True, max_length=255, null=True)),
+                ("created_on", models.DateTimeField(auto_now_add=True)),
+                ("updated_on", models.DateTimeField(blank=True, null=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("recipient_name", models.CharField(max_length=255)),
+                (
+                    "recipient_type",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("offers tests regularly to their staff", "Institution"),
+                            (
+                                "one-off or recurring event where students are tested",
+                                "Teaching Event",
+                            ),
+                            (
+                                "invoice goes to the organizer of the event",
+                                "One-Off Event",
+                            ),
+                        ],
+                        max_length=255,
+                        null=True,
+                    ),
+                ),
+                (
+                    "name_contact_person",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                ("email", models.EmailField(blank=True, max_length=255, null=True)),
+                ("telephone", models.CharField(blank=True, max_length=255, null=True)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.AddField(
-            model_name='bag',
-            name='recipient',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='bag_of_recipient', to='app.samplerecipient'),
+            model_name="bag",
+            name="recipient",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                related_name="bag_of_recipient",
+                to="app.samplerecipient",
+            ),
         ),
     ]

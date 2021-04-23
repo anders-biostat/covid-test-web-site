@@ -4,7 +4,7 @@ from django.db.models.fields import BLANK_CHOICE_DASH
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 
-from .models import RSAKey, Bag
+from .models import RSAKey, Bag, Event
 from .statuses import SampleStatus
 
 
@@ -111,8 +111,19 @@ class BagHandoutForm(forms.ModelForm):
         invalid_status = []
         for sample in self.instance.samples.all():
             event = sample.get_statuses().last()
-            if event is None or event.status != SampleStatus.PRINTED.value:
+            if event is not None and event.status != SampleStatus.PRINTED.value:
                 invalid_status.append(sample.barcode)
+            if event is None:
+                event = Event(
+                    sample=sample,
+                    status=SampleStatus.PRINTED.value,
+                    comment="Sample had no status, therefore this has been set automatically on bag checkout.",
+                )
+                event.save()
+                self.cleaned_data["comment"] = (
+                    self.instance.comment
+                    + f" --- Sample with barcode {sample.barcode} had no status therefore status PRINTED was set."
+                )
         if len(invalid_status) > 0:
             raise ValidationError(
                 f"Beutel mit ID {self.instance.pk} enthält mindestens eine "
