@@ -9,7 +9,7 @@ from .statuses import SampleStatus
 
 
 class LabQueryForm(forms.Form):
-    search = forms.CharField(label=_("Barcode"), max_length=100)
+    search = forms.CharField(label="Barcode", max_length=100)
 
 
 class LabCheckInForm(forms.Form):
@@ -38,7 +38,7 @@ class LabCheckInForm(forms.Form):
 
 
 class LabRackResultsForm(forms.Form):
-    rack = forms.CharField(label=_("Rack (Barcode)"), max_length=100, required=False)
+    rack = forms.CharField(label="Rack (Barcode)", max_length=100, required=False)
 
     lamp_positive = forms.CharField(label=_("LAMP positiv"), required=False)
     lamp_inconclusive = forms.CharField(
@@ -64,8 +64,8 @@ class LabProbeEditForm(forms.Form):
 
 
 class LabGenerateBarcodeForm(forms.Form):
-    count = forms.IntegerField(label=_("Anzahl der batches"))
-    key = forms.ModelChoiceField(RSAKey.objects.all(), label=_("Schlüssel"))
+    count = forms.IntegerField(label="Anzahl der batches")
+    key = forms.ModelChoiceField(RSAKey.objects.all(), label="Schlüssel")
 
 
 class BagManagementQueryForm(forms.Form):

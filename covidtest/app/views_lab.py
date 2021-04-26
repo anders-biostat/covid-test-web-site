@@ -10,7 +10,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 from rest_framework.decorators import api_view, permission_classes
@@ -102,19 +101,19 @@ def sample_check_in(request):
                 messages.add_message(
                     request,
                     messages.ERROR,
-                    _("Einige Barcodes waren nicht in der Datenbank"),
+                    "Einige Barcodes waren nicht in der Datenbank",
                 )
             if len(status_not_set) > 0:
                 messages.add_message(
                     request,
                     messages.ERROR,
-                    _("Einige Status konnten nicht gesetzt werden"),
+                    "Einige Status konnten nicht gesetzt werden",
                 )
             if len(rack_not_set) > 0:
                 messages.add_message(
                     request,
                     messages.ERROR,
-                    _("Einige Racks konnten nicht gesetzt werden"),
+                    "Einige Racks konnten nicht gesetzt werden",
                 )
             no_success = True
             if (
@@ -124,7 +123,7 @@ def sample_check_in(request):
             ):
                 no_success = False
                 messages.add_message(
-                    request, messages.SUCCESS, _("Proben erfolgreich eingetragen")
+                    request, messages.SUCCESS, "Proben erfolgreich eingetragen"
                 )
 
             return render(
@@ -179,7 +178,7 @@ def sample_detail(request):
                 sample = Sample.objects.filter(barcode=barcode).first()
                 if sample is None:
                     messages.add_message(
-                        request, messages.ERROR, _("Sample nicht gefunden")
+                        request, messages.ERROR, "Sample nicht gefunden"
                     )
                 else:
                     rack_changed = sample.rack != rack
@@ -198,7 +197,7 @@ def sample_detail(request):
                         sample.save()
                         event.save()
                         messages.add_message(
-                            request, messages.SUCCESS, _("Sample rack geupdated")
+                            request, messages.SUCCESS, "Sample rack geupdated"
                         )
                     if status != "-":
                         status = SampleStatus[status]
@@ -210,13 +209,13 @@ def sample_detail(request):
                         )
                         event.save()
                         messages.add_message(
-                            request, messages.SUCCESS, _("Status geupdated")
+                            request, messages.SUCCESS, "Status geupdated"
                         )
                     else:
                         messages.add_message(
                             request,
                             messages.ERROR,
-                            _("Der Probe bitte einen Status geben"),
+                            "Der Probe bitte einen Status geben",
                         )
                 return render(
                     request,

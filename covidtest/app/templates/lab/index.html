@@ -3,13 +3,10 @@
 {% load permissions %}
 {% block content %}
     <div>
-        <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans %}</h1>
+        <h1 class="ui header">Lab Interface - Home</h1>
         <p>
-            {% blocktrans %}
-                Laborinterface, zur Bearbeitung und Erfassung von Proben. Folgende Prozesse stehen zur Verfügung:
-            {% endblocktrans %}
+            Laborinterface, zur Bearbeitung und Erfassung von Proben. Folgende Prozesse stehen zur Verfügung:
         </p>
-
         {% if user|is_in_group:"lab_user" or user|is_in_group:"bag_handler" %}
             {% if user|is_in_group:"lab_user" %}
                 <h2>Proben</h2>
@@ -18,7 +15,7 @@
                     <a href="{% url 'app:query' %}" class="red card">
                         <div class="content">
                             <h3 class="header">
-                                {% blocktrans %}Suchen{% endblocktrans %}
+                                Suchen
                             </h3>
                             <div class="meta">
                                 Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen, sowie Status und
@@ -31,7 +28,7 @@
                     <a href="{% url 'app:checkin' %}" class="red card">
                         <div class="content">
                             <h3 class="header">
-                                {% blocktrans %}Mehrere Bearbeiten{% endblocktrans %}
+                                Mehrere Bearbeiten
                             </h3>
                             <div class="meta">
                                 Status, Rack und Kommentar einer oder mehrerer Proben gleichzeitig bearbeiten.
@@ -47,7 +44,7 @@
                     <a href="{% url 'app:bag_search' %}" class="red card" style="min-height: 121px">
                         <div class="content">
                             <h3 class="header">
-                                {% blocktrans %}Suchen und Statistik{% endblocktrans %}
+                                Suchen und Statistik
                             </h3>
                             <div class="meta">
                                 Beutel suchen und Statistiken exportieren.
@@ -74,7 +71,7 @@
                 <a href="{% url 'app:query' %}" class="red card">
                     <div class="content">
                         <h3 class="header">
-                            {% blocktrans %}Suchen{% endblocktrans %}
+                            Suchen
                         </h3>
                         <div class="meta">
                             Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen.
