@@ -51,7 +51,7 @@ urlpatterns = [
     #     name="sample_details_snippet",
     # ),
     path("lab/samples/detail", views_lab.sample_detail, name="query"),
-    # path("lab/samples/update_status", views_lab.update_status, name="update_status"),
+    path("lab/samples/update_status", views_lab.update_status, name="update_status"),
     # path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
     path("lab/bag-search", views_lab.bag_search_statistics, name="bag_search"),
     path("lab/bag-handout", views_lab.bag_handout, name="bag_handout"),
