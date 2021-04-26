@@ -4,13 +4,15 @@
 <div class="content">
     <h2 class="ui header">Barcode: {{ sample.barcode }}</h2>
     <div class="meta">
-        <h3 style="display: inline">Access code:</h3> {{sample.access_code}}</br>
-        <h3 style="display: inline; margin-top: 15px">Rack:</h3> {{ sample.rack }}</br>
-        <h3 style="display: inline; margin-top: 15px">Bag:</h3></br>
+        <h3 style="display: inline">Access code:</h3> {{sample.access_code}}<br>
+        <h3 style="display: inline; margin-top: 15px">Rack:</h3> {{ sample.rack }}<br>
+        <h3 style="display: inline; margin-top: 15px">Bag:</h3><br>
         <div style="margin-left: 10px; margin-top: 5px">
-            <b>ID: </b>{{sample.bag.id}}</br>
-            <b>Name: </b>{{sample.bag.name}}</br>
-            <b>Kommentar: </b>{{sample.bag.comment}}</br>
+            <b>ID: </b>{{sample.bag.id}}<br>
+            <b>Name: </b>{{sample.bag.name}}<br>
+            <b>Kommentar: </b>{{sample.bag.comment}}<br>
+            <b>Ausgegeben Am: </b>{% if sample.bag.handed_out_on %}{{sample.bag.handed_out_on}}{% else %}--{% endif %}<br>
+            <b>Ausgegeben Von: </b>{% if sample.bag.handed_out_by %}{{sample.bag.handed_out_by}}{% else %}--{% endif %}<br>
         </div>
     </div>
 
@@ -79,7 +81,7 @@
         das Passwort für Ihren privaten Schlüssel an.
     </div>
     <div class="ui negative hidden message prKeyMessage" id="wrongPassword">
-        Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.{%
+        Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es noch einmal.
 
     </div>
     <div class="ui negative hidden message prKeyMessage" id="notPrivateKey">

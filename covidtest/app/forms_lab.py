@@ -1,7 +1,10 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 from django.db.models.fields import BLANK_CHOICE_DASH
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
-from .models import RSAKey
+from .models import RSAKey, Bag, Event
 from .statuses import SampleStatus
 
 
@@ -11,13 +14,13 @@ class LabQueryForm(forms.Form):
 
 class LabCheckInForm(forms.Form):
     barcodes = forms.CharField(
-        label="Barcodes",
+        label=_("Barcodes"),
         widget=forms.Textarea(
             attrs={"autofocus": "autofocus", "placeholder": "Barcode ..."}
         ),
     )
     rack = forms.CharField(
-        label="Rack Barcode (Optional)",
+        label=_("Rack Barcode (Optional)"),
         max_length=100,
         widget=forms.TextInput(attrs={"placeholder": "Rack ..."}),
         required=False,
@@ -37,9 +40,11 @@ class LabCheckInForm(forms.Form):
 class LabRackResultsForm(forms.Form):
     rack = forms.CharField(label="Rack (Barcode)", max_length=100, required=False)
 
-    lamp_positive = forms.CharField(label="LAMP positiv", required=False)
-    lamp_inconclusive = forms.CharField(label="LAMP unklares Ergebnis", required=False)
-    lamp_failed = forms.CharField(label="LAMP fehlgeschlagen", required=False)
+    lamp_positive = forms.CharField(label=_("LAMP positiv"), required=False)
+    lamp_inconclusive = forms.CharField(
+        label=_("LAMP unklares Ergebnis"), required=False
+    )
+    lamp_failed = forms.CharField(label=_("LAMP fehlgeschlagen"), required=False)
 
 
 status_choices = [("-", "-")] + [
@@ -48,16 +53,92 @@ status_choices = [("-", "-")] + [
 
 
 class LabProbeEditForm(forms.Form):
-    barcode = forms.CharField(label="Barcode")
-    rack = forms.CharField(label="Rack")
+    barcode = forms.CharField(label=_("Barcode"))
+    rack = forms.CharField(label=_("Rack"))
     status = forms.ChoiceField(
-        label="Probenstatus", choices=status_choices, widget=forms.Select()
+        label=_("Probenstatus"), choices=status_choices, widget=forms.Select()
     )
     comment = forms.CharField(
-        label="Kommentar", max_length=10000, required=False, widget=forms.Textarea()
+        label=_("Kommentar"), max_length=10000, required=False, widget=forms.Textarea()
     )
 
 
 class LabGenerateBarcodeForm(forms.Form):
     count = forms.IntegerField(label="Anzahl der batches")
     key = forms.ModelChoiceField(RSAKey.objects.all(), label="Schlüssel")
+
+
+class BagManagementQueryForm(forms.Form):
+    search = forms.CharField(max_length=255)
+
+    def clean_search(self) -> list:
+        search_value = self.cleaned_data["search"]
+        if "," in search_value:
+            search_value = [value.strip() for value in search_value.split(",")]
+            return search_value
+        return [search_value]
+
+
+class BagHandoutForm(forms.ModelForm):
+    comment = forms.CharField(max_length=1000, disabled=True, required=False)
+    name = forms.CharField(max_length=255, disabled=True, required=False)
+
+    class Meta:
+        model = Bag
+        fields = (
+            "id",
+            "name",
+            "comment",
+            "recipient",
+            "handed_out_on",
+            "handed_out_by",
+        )
+
+    def clean(self):
+        # Check if bag has at least one sample
+        if self.instance.samples.count() == 0:
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} enthält keine Proben!"
+            )
+
+        # Check if no prior recipient
+        elif self.instance.recipient:
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} ist bereits einem Abnehmer zugeordnet!"
+            )
+
+        # Check if all samples have status PRINTED
+        invalid_status = []
+        for sample in self.instance.samples.all():
+            event = sample.get_statuses().last()
+            if event is not None and event.status != SampleStatus.PRINTED.value:
+                invalid_status.append(sample.barcode)
+            if event is None:
+                event = Event(
+                    sample=sample,
+                    status=SampleStatus.PRINTED.value,
+                    comment="Sample had no status, therefore this has been set automatically on bag checkout.",
+                )
+                event.save()
+                self.cleaned_data["comment"] = (
+                    self.instance.comment
+                    + f" --- Sample with barcode {sample.barcode} had no status therefore status PRINTED was set."
+                )
+        if len(invalid_status) > 0:
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} enthält mindestens eine "
+                + f"Probe mit ungültigem Status -- Barcodes: {invalid_status}"
+            )
+
+        # Check if a new recipient was set
+        if not self.cleaned_data.get("recipient"):
+            raise ValidationError(
+                f"Beutel mit ID {self.instance.pk} wurde keinem Abnehmer zugeordnet"
+            )
+
+        self.cleaned_data["handed_out_on"] = timezone.now()
+
+        return self.cleaned_data
+
+
+BagHandoutModelFormSet = forms.modelformset_factory(Bag, form=BagHandoutForm, extra=0)

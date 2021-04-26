@@ -16,17 +16,17 @@ from .serializers import (
 def authorize_and_request_data(request):
     if request.is_ajax and request.method == "POST":
         context = {}
-        email = request.POST['username']
-        password = request.POST['password']
-        barcode = request.POST['sampleCode']
+        email = request.POST["username"]
+        password = request.POST["password"]
+        barcode = request.POST["sampleCode"]
 
         account = authenticate(request, username=email, password=password)
         if account is None:
-            context['message1'] = 'Invalid Login Credentials!'
+            context["message1"] = "Invalid Login Credentials!"
             return JsonResponse(context, status=401)
 
         elif account is not None and not account.is_active:
-            context['message'] = 'Account is in-Active'
+            context["message"] = "Account is in-Active"
             return JsonResponse(context, status=401)
 
         elif account:
@@ -38,15 +38,13 @@ def authorize_and_request_data(request):
 
             sample = Sample.objects.get(barcode=barcode)
             sample.events.create(
-                status="INFO",
-                comment=f"GA queried result",
-                updated_by=account
+                status="INFO", comment=f"GA queried result", updated_by=account
             )
             context = RegistrationSerializer(registrations, many=True)
             return JsonResponse(context.data, status=200, safe=False)
 
         else:
-            context['message'] = 'Invalid credentials'
+            context["message"] = "Invalid credentials"
             return JsonResponse(context, status=401)
 
     return JsonResponse({"message": "invalid request"}, status=400)
