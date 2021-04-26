@@ -27,7 +27,7 @@ from .forms_lab import (
 from .models import Event, Sample, Bag, BagRecipient
 from .statuses import SampleStatus
 from .tables import SampleTable
-from .utils import find_samples, Search
+from .utils import find_samples, Search, is_in_group
 
 
 @login_required
@@ -68,6 +68,7 @@ def version(request):
 
 
 @login_required
+@is_in_group("lab_user")
 def sample_check_in(request):
     if request.method == "POST":
         form = LabCheckInForm(request.POST)
@@ -147,6 +148,7 @@ def sample_check_in(request):
 
 
 @login_required
+@is_in_group("lab_user")
 def sample_detail(request):
     sample_detail_template = "lab/sample_query.html"
 
@@ -237,84 +239,85 @@ def sample_detail(request):
     )
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def update_status(request):
-    if request.method == "POST":
-        body = json.loads(request.body)
-
-        bc = body["barcode"].strip().upper()
-        bc_ok = []
-        bc_missing = []
-        bc_duplicated = []
-        qset = Sample.objects.filter(barcode=bc)
-
-        if len(qset) == 0:
-            bc_missing.append(bc)
-            return HttpResponseBadRequest("Barcode %s not found on the server." % bc)
-        if len(qset) > 1:
-            bc_duplicated.append(bc)
-            return HttpResponseBadRequest(
-                "Multiple samples with barcode %s found." % bc
-            )
-        if "status" not in body:
-            return HttpResponseBadRequest("No sample status provided")
-        if "comment" not in body:
-            comment = ""
-        else:
-            comment = body["comment"]
-
-        sample = qset.first()
-        if "rack" in body:
-            sample.rack = body["rack"]
-            sample.save()
-            comment += ". Rack: " + str(body["rack"])
-        sample.events.create(status=body["status"], comment=comment)
-        bc_ok.append(bc)
-        return HttpResponse("Event created successfully", status=201)
-
-
-class SampleFilter(django_filters.FilterSet):
-    class Meta:
-        model = Sample
-        fields = ["barcode", "access_code"]
+# @api_view(["POST"])
+# @permission_classes([IsAuthenticated])
+# def update_status(request):
+#     if request.method == "POST":
+#         body = json.loads(request.body)
+#
+#         bc = body["barcode"].strip().upper()
+#         bc_ok = []
+#         bc_missing = []
+#         bc_duplicated = []
+#         qset = Sample.objects.filter(barcode=bc)
+#
+#         if len(qset) == 0:
+#             bc_missing.append(bc)
+#             return HttpResponseBadRequest("Barcode %s not found on the server." % bc)
+#         if len(qset) > 1:
+#             bc_duplicated.append(bc)
+#             return HttpResponseBadRequest(
+#                 "Multiple samples with barcode %s found." % bc
+#             )
+#         if "status" not in body:
+#             return HttpResponseBadRequest("No sample status provided")
+#         if "comment" not in body:
+#             comment = ""
+#         else:
+#             comment = body["comment"]
+#
+#         sample = qset.first()
+#         if "rack" in body:
+#             sample.rack = body["rack"]
+#             sample.save()
+#             comment += ". Rack: " + str(body["rack"])
+#         sample.events.create(status=body["status"], comment=comment)
+#         bc_ok.append(bc)
+#         return HttpResponse("Event created successfully", status=201)
 
 
-class SampleListView(SingleTableMixin, FilterView):
-    model = Sample
-    table_class = SampleTable
-    template_name = "lab/sample_list.html"
-    filterset_class = SampleFilter
+# class SampleFilter(django_filters.FilterSet):
+#     class Meta:
+#         model = Sample
+#         fields = ["barcode", "access_code"]
+#
+
+# class SampleListView(SingleTableMixin, FilterView):
+#     model = Sample
+#     table_class = SampleTable
+#     template_name = "lab/sample_list.html"
+#     filterset_class = SampleFilter
+#
+#
+# @login_required
+# def dashboard(request):
+#
+#     count_wait = Event.objects.filter(status="PRINTED").count()
+#
+#     dashboard_values = {
+#         "count_Samples": Sample.objects.filter().count(),
+#         "count_wait": count_wait,
+#     }
+#
+#     return render(request, "lab/dashboard.html", {"dashboard_values": dashboard_values})
+#
+#
+# @api_view(["POST"])
+# @permission_classes([IsAuthenticated])
+# def sample_details_snippet(request):
+#     sample = Sample.objects.filter(access_code=request.POST.get("access_code")).first()
+#     if sample is not None:
+#         return render(
+#             request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample}
+#         )
+#     else:
+#         return HttpResponse(
+#             "<i>Access code %s not found</i>" % request.POST.get("access_code")
+#         )
 
 
 @login_required
-def dashboard(request):
-
-    count_wait = Event.objects.filter(status="PRINTED").count()
-
-    dashboard_values = {
-        "count_Samples": Sample.objects.filter().count(),
-        "count_wait": count_wait,
-    }
-
-    return render(request, "lab/dashboard.html", {"dashboard_values": dashboard_values})
-
-
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def sample_details_snippet(request):
-    sample = Sample.objects.filter(access_code=request.POST.get("access_code")).first()
-    if sample is not None:
-        return render(
-            request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample}
-        )
-    else:
-        return HttpResponse(
-            "<i>Access code %s not found</i>" % request.POST.get("access_code")
-        )
-
-
-@login_required
+@is_in_group("lab_user")
 def bag_search_statistics(request):
     event_keys = []
     for stat in SampleStatus:
@@ -473,6 +476,7 @@ def bag_search_statistics(request):
 
 
 @login_required
+@is_in_group("lab_user", "bag_handler")
 def bag_handout(request):
     if request.method == "POST":
         if "search" in request.POST.keys():

@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import user_passes_test
 
 from .forms_lab import LabProbeEditForm
 from .models import Event, Sample, Bag
@@ -63,6 +64,16 @@ def find_samples(search, search_category=None):
         pass
 
     return dict()
+
+
+def is_in_group(*group_names):
+    def in_groups(user):
+        if user.is_authenticated:
+            if bool(user.groups.filter(name__in=group_names)) | user.is_superuser:
+                return True
+        return False
+
+    return user_passes_test(in_groups, login_url="/lab/access-denied")
 
 
 class Search(object):
