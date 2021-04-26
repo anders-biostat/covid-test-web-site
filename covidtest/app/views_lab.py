@@ -238,41 +238,41 @@ def sample_detail(request):
     )
 
 
-# @api_view(["POST"])
-# @permission_classes([IsAuthenticated])
-# def update_status(request):
-#     if request.method == "POST":
-#         body = json.loads(request.body)
-#
-#         bc = body["barcode"].strip().upper()
-#         bc_ok = []
-#         bc_missing = []
-#         bc_duplicated = []
-#         qset = Sample.objects.filter(barcode=bc)
-#
-#         if len(qset) == 0:
-#             bc_missing.append(bc)
-#             return HttpResponseBadRequest("Barcode %s not found on the server." % bc)
-#         if len(qset) > 1:
-#             bc_duplicated.append(bc)
-#             return HttpResponseBadRequest(
-#                 "Multiple samples with barcode %s found." % bc
-#             )
-#         if "status" not in body:
-#             return HttpResponseBadRequest("No sample status provided")
-#         if "comment" not in body:
-#             comment = ""
-#         else:
-#             comment = body["comment"]
-#
-#         sample = qset.first()
-#         if "rack" in body:
-#             sample.rack = body["rack"]
-#             sample.save()
-#             comment += ". Rack: " + str(body["rack"])
-#         sample.events.create(status=body["status"], comment=comment)
-#         bc_ok.append(bc)
-#         return HttpResponse("Event created successfully", status=201)
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def update_status(request):
+    if request.method == "POST":
+        body = json.loads(request.body)
+
+        bc = body["barcode"].strip().upper()
+        bc_ok = []
+        bc_missing = []
+        bc_duplicated = []
+        qset = Sample.objects.filter(barcode=bc)
+
+        if len(qset) == 0:
+            bc_missing.append(bc)
+            return HttpResponseBadRequest("Barcode %s not found on the server." % bc)
+        if len(qset) > 1:
+            bc_duplicated.append(bc)
+            return HttpResponseBadRequest(
+                "Multiple samples with barcode %s found." % bc
+            )
+        if "status" not in body:
+            return HttpResponseBadRequest("No sample status provided")
+        if "comment" not in body:
+            comment = ""
+        else:
+            comment = body["comment"]
+
+        sample = qset.first()
+        if "rack" in body:
+            sample.rack = body["rack"]
+            sample.save()
+            comment += ". Rack: " + str(body["rack"])
+        sample.events.create(status=body["status"], comment=comment)
+        bc_ok.append(bc)
+        return HttpResponse("Event created successfully", status=201)
 
 
 # class SampleFilter(django_filters.FilterSet):
