@@ -5,25 +5,37 @@
         <i class="flask icon"></i> COVID19-LAB
     </a>
     {% if user.is_authenticated %}
-    <a href="{% url 'app:query'  %}" class="item">
-        Proben Suchen
-    </a>
-    {% if user|is_in_group:"lab_user" %}
-    <a href="{% url 'app:checkin'  %}" class="item">
-        Mehrere Proben Bearbeiten
-    </a>
-    {% endif %}
-    <div class="right menu">
-<!--        <div class="ui right simple dropdown item">-->
-<!--            Languages-->
-<!--            <i class="dropdown icon"></i>-->
-<!--            <div class="menu">-->
-<!--                <div class="item">Deutsch</div>-->
-<!--                <div class="item">English</div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="ui item">Momentan eingeloggt - {{ user.username }}</div>
-        <a class="ui item" href="{% url 'app:logout' %}">Log Out</a>
-    </div>
+        {% if user|is_in_group:"lab_user" %}
+            <div class="ui simple dropdown item">
+                Proben
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a href="{% url 'app:query' %}" class="item">
+                        Suchen
+                    </a>
+                    {% if user|is_in_group:"lab_user" %}
+                        <a href="{% url 'app:checkin' %}" class="item">
+                            Mehrere Bearbeiten
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        {% if user|is_in_group:"lab_user" or user|is_in_group:"bag_handler" %}
+            <div class="ui simple dropdown item">
+                {% trans 'Beutel' %}
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    {% if user|is_in_group:"lab_user" %}
+                        <a class="item" href="{% url 'app:bag_search' %}">Suchen/Statistiken</a>
+                    {% endif %}
+                    <a class="item" href="{% url 'app:bag_handout' %}">Ausgabe</a>
+                </div>
+            </div>
+        {% endif %}
+        <div class="right menu">
+            <div class="ui item">logged in as {{ user.username }}</div>
+            <a class="ui item" href="{% url 'app:logout' %}">Log Out</a>
+        </div>
     {% endif %}
 </div>

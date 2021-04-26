@@ -1,0 +1,131 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% block content %}
+<div>
+    <h1 class="ui header">{% blocktrans %}Beutel - Suchen/Statistiken{% endblocktrans %}</h1>
+    <div style="margin-bottom: 40px">
+        <p>
+            {% blocktrans %}
+            Suche nach einer oder mehrerer Beutel IDs oder Abnehmern - (ID1, ID2, ID3):
+            {% endblocktrans %}
+        </p>
+        <form action="{% url 'app:bag_search' %}" method="post">
+            {% csrf_token %}
+            <div class="ui action input">
+                <input
+                        name="search"
+                        type="text"
+                        placeholder="{% blocktrans %}Abnehmer/ Beutel ID...{% endblocktrans %}"
+                        autofocus
+                        style="min-width: 270px"
+                >
+                <button class="ui button" type="submit">
+                    Suchen
+                </button>
+            </div>
+            <div class="results"></div>
+        </form>
+    </div>
+    {% if statsArray %}
+    <h3 class="ui header">
+        {{ statsArray|length }}
+        {% if statsArray|length == 1 %}
+        Ergebnis
+        {% else %}
+        Ergebnisse
+        {% endif %}
+        für: {% for search_key in search_keys %}{{search_key}}, {% endfor %}
+    </h3>
+    <div style="overflow-x: auto;">
+        <table class="ui celled red padded table" style="margin: 0px">
+
+            <thead>
+            <tr>
+                <th rowspan="2">Abnehmer</th>
+                <th rowspan="2">Kontaktperson</th>
+                <th rowspan="2">EMail</th>
+                <th rowspan="2">Telefon</th>
+                <th rowspan="2">Bag ID</th>
+                <th rowspan="2">Erstellt Am</th>
+                <th rowspan="2">Ausgegeben Am</th>
+                <th rowspan="2">Ausgegeben Von</th>
+                <!--                TODO: Add field-->
+                <!--                <th rowspan="2">Ausgegeben Von</th>-->
+                <!-- TODO: dynamically calculate length-->
+                <th colspan="17">Status</th>
+            </tr>
+
+            <tr>
+                {% for status in statusEnum %}
+                <th>{{status}}</th>
+                {% endfor %}
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for statsObj in statsArray %}
+            <tr>
+                <td class="collapsing"><h4 class="ui center aligned header">{{statsObj.recipient}}</h4></td>
+                <td class="collapsing">{{statsObj.contactPerson}}</td>
+                <td class="collapsing">
+                    {{statsObj.email}}
+                </td>
+                <td class="collapsing">
+                    {{statsObj.telephone}}
+                </td>
+                <td class="collapsing"><h4 class="ui center aligned header">{{statsObj.bagId}}</h4></td>
+                <td class="collapsing">
+                    {{statsObj.createdAt}}
+                </td>
+                <td class="collapsing">
+                    {{statsObj.handedOutOn}}
+                </td>
+                <td class="collapsing">
+                    {{statsObj.handedOutBy}}
+                </td>
+                {% for stats_key, status_count in statsObj.status.items %}
+                {% if "POS" in stats_key %}
+                <td class="center aligned negative collapsing">
+                    {{status_count}}
+                </td>
+                {% elif "NEG" in stats_key %}
+                <td class="center aligned positive collapsing">
+                    {{status_count}}
+                </td>
+                {% elif "Gesamt" in stats_key and status_count == 0 %}
+                <td class="center aligned warning collapsing">
+                    {{status_count}}
+                </td>
+                {% else %}
+                <td class="center aligned collapsing">
+                    {{status_count}}
+                </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <table class="ui padded table" style="margin: 0px">
+        <tfoot>
+        <tr>
+            <th><strong>{{footerStats.total_samples}} Probe(n)</strong></th>
+            <!--            TODO: Add both back in once delclared how to calculate them-->
+            <!--            <th><strong>180 Registriert (to be added)</strong></th>-->
+            <!--            <th><strong>100 In Analyse (to be added)</strong></th>-->
+            <th colspan="7">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input value='{{search_keys}}' type="hidden" name="export"/>
+                    <button class="ui right floated small primary labeled icon button" type="submit">
+                        <i class="download icon"></i>CSV Exportieren
+                    </button>
+                </form>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
