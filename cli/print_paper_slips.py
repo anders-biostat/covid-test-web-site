@@ -171,6 +171,7 @@ def main_loop(auth, bag_id, key_id, printer):
     )
 
     while True:
+        barcode_valid = False
         print("\nScan barcode (or type 'quit'): ", end="")
         tube_barcode = input()
 
@@ -181,11 +182,27 @@ def main_loop(auth, bag_id, key_id, printer):
         if tube_barcode.lower() == "":
             continue
 
-        r = requests.post(
-            api_url + "samples/",
-            auth=auth,
-            data={"barcode": tube_barcode, "bag": bag_id},
+        correct_barcode_format = re.match(
+            r"^([A-Z][0-9]{5})$|^([0-9]{10})$", tube_barcode
         )
+        if correct_barcode_format:
+            barcode_valid = True
+        else:
+            print(
+                f"Wrong format! Are you sure you want to save the barcode? -> {tube_barcode}"
+            )
+            barcode_ok = input("Type 1 for YES and 2 for NO: ")
+            if barcode_ok == "1":
+                barcode_valid = True
+
+        if barcode_valid:
+            r = requests.post(
+                api_url + "samples/",
+                auth=auth,
+                data={"barcode": tube_barcode, "bag": bag_id},
+            )
+        else:
+            continue
 
         if (
             r.status_code == 400
