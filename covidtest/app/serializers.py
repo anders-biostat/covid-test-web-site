@@ -4,6 +4,7 @@ import string
 from rest_framework import serializers, validators
 
 from .models import Bag, Event, Registration, RSAKey, Sample
+from .statuses import SampleStatus
 
 """Damm algorithm decimal check digit
 
@@ -76,13 +77,19 @@ class SampleSerializer(serializers.ModelSerializer):
     get_status = EventSerializer(read_only=True)
 
     barcode = serializers.CharField(
-        validators=[validators.UniqueValidator(queryset=Sample.objects.all(), message="duplicate")]
+        validators=[
+            validators.UniqueValidator(
+                queryset=Sample.objects.all(), message="duplicate"
+            )
+        ]
     )
 
     def create(self, validated_data):
         if "access_code" not in validated_data:
             validated_data["access_code"] = generate_access_code()
-        return Sample.objects.create(**validated_data)
+        sample_obj = Sample.objects.create(**validated_data)
+        Event.objects.create(status=SampleStatus.PRINTED.value, sample=sample_obj)
+        return sample_obj
 
     def update(self, instance, validated_data):
         instance.email = validated_data.get("email", instance.email)
@@ -105,7 +112,14 @@ class SampleSerializer(serializers.ModelSerializer):
             "events",
             "get_status",
         ]
-        optional_fields = ["access_code", "bag", "rack", "password_hash", "registrations", "events"]
+        optional_fields = [
+            "access_code",
+            "bag",
+            "rack",
+            "password_hash",
+            "registrations",
+            "events",
+        ]
 
 
 class BagSerializer(serializers.ModelSerializer):
