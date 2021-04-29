@@ -4,15 +4,16 @@
 <div class="content">
     <h2 class="ui header">Barcode: {{ sample.barcode }}</h2>
     <div class="meta">
-        <h3 style="display: inline">Access code:</h3> {{sample.access_code}}<br>
+        <h3 style="display: inline">Access code:</h3> {{ sample.access_code }}<br>
         <h3 style="display: inline; margin-top: 15px">Rack:</h3> {{ sample.rack }}<br>
         <h3 style="display: inline; margin-top: 15px">Bag:</h3><br>
         <div style="margin-left: 10px; margin-top: 5px">
-            <b>ID: </b>{{sample.bag.id}}<br>
-            <b>Name: </b>{{sample.bag.name}}<br>
-            <b>Kommentar: </b>{{sample.bag.comment}}<br>
-            <b>Ausgegeben Am: </b>{% if sample.bag.handed_out_on %}{{sample.bag.handed_out_on}}{% else %}--{% endif %}<br>
-            <b>Ausgegeben Von: </b>{% if sample.bag.handed_out_by %}{{sample.bag.handed_out_by}}{% else %}--{% endif %}<br>
+            <b>ID: </b>{{ sample.bag.id }}<br>
+            <b>Name: </b>{{ sample.bag.name }}<br>
+            <b>Kommentar: </b>{{ sample.bag.comment }}<br>
+            <b>Ausgegeben Am: </b>{% if sample.bag.handed_out_on %}{{ sample.bag.handed_out_on }}{% else %}--{% endif %}<br>
+            <b>Ausgegeben Von: </b>{% if sample.bag.handed_out_by %}{{ sample.bag.handed_out_by }}{% else %}
+            --{% endif %}<br>
         </div>
     </div>
 
@@ -30,29 +31,38 @@
 
 
         {% for event in sample.events.all %}
-        <tr>
-            <td class="single line">
-                {{ event.updated_on|date:"Y-m-d H:i:s" }}
-            </td>
+            <tr>
+                <td class="single line">
+                    {{ event.updated_on|date:"Y-m-d H:i:s" }}
+                </td>
 
-            <td>
-                <h4 class="ui center aligned header">{{ event.status }}</h4>
-            </td>
-            <td>
-                {% if event.comment %}
-                {{event.comment}}
-                {% endif %}
-            </td>
-            <td class="single line">
-                {% if event.updated_by %}
-                {{event.updated_by}}
-                {% endif %}
-            </td>
+                <td>
+                    <h4 class="ui center aligned header">{{ event.status }}</h4>
+                </td>
+                <td>
+                    {% if event.comment %}
+                        {{ event.comment }}
+                    {% endif %}
+                </td>
+                <td class="single line">
+                    {% if event.updated_by %}
+                        {{ event.updated_by }}
+                    {% endif %}
+                </td>
 
-        </tr>
+            </tr>
         {% endfor %}
 
         </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="4">
+                <a href="{% url 'app:status_preview' %}?id={{ sample.barcode }}" class="ui right floated small primary labeled icon button" type="submit">
+                    <i class="eye icon"></i>Status Vorschau
+                </a>
+            </th>
+        </tr>
+        </tfoot>
     </table>
 
 
@@ -60,17 +70,17 @@
     <div style="margin-bottom: 10px;" class="extra content">
         <div class="ui small feed">
             {% for reg in sample.registrations.all %}
-            <div class="event">
-                <div class="content">
-                    <div class="summary">
-                        {{ reg.time|date:"Y-m-d H:i:s" }}
-                    </div>
-                    <div class="regInfo">
-                        Schlüssel-Fingerprint:
-                        <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
+                <div class="event">
+                    <div class="content">
+                        <div class="summary">
+                            {{ reg.time|date:"Y-m-d H:i:s" }}
+                        </div>
+                        <div class="regInfo">
+                            Schlüssel-Fingerprint:
+                            <span style="font-weight: bold;">{{ reg.public_key_fingerprint }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
 
         </div>
@@ -126,148 +136,148 @@
 
 
     {% if user|is_in_group:"lab_user" %}
-    <div class="ui bottom attached message" style="margin-top: 30px">
-        <h3>Status der Probe &auml;ndern</h3>
-        <form action="{% url 'app:query' %}" class="ui form" method="post">
-            {% csrf_token %}
-            <div class="field">
-                <label>Status der Probe</label>
-                {{ edit_form.status }}
-            </div>
-            <div class="field">
-                <label>Rack</label>
-                {{ edit_form.rack }}
-            </div>
-            <div class="field">
-                <label>Kommentar</label>
-                {{ edit_form.comment }}
-            </div>
-            <input name="barcode" value="{{ sample.barcode }}" hidden>
-            <button name="edit" class="ui button" type="submit">Speichern</button>
-        </form>
-    </div>
+        <div class="ui bottom attached message" style="margin-top: 30px">
+            <h3>Status der Probe &auml;ndern</h3>
+            <form action="{% url 'app:query' %}" class="ui form" method="post">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Status der Probe</label>
+                    {{ edit_form.status }}
+                </div>
+                <div class="field">
+                    <label>Rack</label>
+                    {{ edit_form.rack }}
+                </div>
+                <div class="field">
+                    <label>Kommentar</label>
+                    {{ edit_form.comment }}
+                </div>
+                <input name="barcode" value="{{ sample.barcode }}" hidden>
+                <button name="edit" class="ui button" type="submit">Speichern</button>
+            </form>
+        </div>
     {% endif %}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
 <script type="text/javascript">
-    $("#prKeyInput input:text").click(function() {
-        $(this).parent().find("input:file").click();
+  $("#prKeyInput input:text").click(function () {
+    $(this).parent().find("input:file").click();
+  });
+  $("#prKeyInput input:file").on("change", function (e) {
+    var name = e.target.files[0].name;
+    $(this).parent().find("input:text").val(name);
+  });
+
+  var registrations = [];
+  {% for reg in sample.registrations.all %}
+    registrations.push({
+      name_encrypted: '{{ reg.name_encrypted }}',
+      address_encrypted: '{{ reg.address_encrypted }}',
+      contact_encrypted: '{{ reg.contact_encrypted }}',
+      session_key_encrypted: '{{ reg.session_key_encrypted }}',
+      aes_instance_iv: '{{ reg.aes_instance_iv }}'
     });
-    $("#prKeyInput input:file").on("change", function(e) {
-        var name = e.target.files[0].name;
-        $(this).parent().find("input:text").val(name);
-    });
+  {% endfor %}
 
-    var registrations = [];
-    {% for reg in sample.registrations.all %}
-        registrations.push({
-            name_encrypted: '{{ reg.name_encrypted }}',
-            address_encrypted: '{{ reg.address_encrypted }}',
-            contact_encrypted: '{{ reg.contact_encrypted }}',
-            session_key_encrypted: '{{ reg.session_key_encrypted }}',
-            aes_instance_iv: '{{ reg.aes_instance_iv }}'
-        });
-    {% endfor %}
-
-    function requestPrivateKey() {
-        $(".ui.tiny.modal")
-            .modal({
-                onApprove: function() {
-                    var files = $(this).find("input:file").prop("files");
-                    $(".prKeyMessage").hide();
-                    if(files.length == 0) {
-                        $(this).find(".message").show();
-                        return false
-                    } else {
-                        $(this).find(".message").hide();
-                        loadKey(files[0], $(this).find("input:password").val());
-                        return true;
-                    }
-                }
-            })
-            .modal("show");
-    };
-
-    function loadKey(file, password) {
-        var decrypted = [];
-
-        var reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function (evt) {
-            registrations.forEach(data => {
-                var decryptedData;
-                try {
-                    decryptedData = decrypt(data, reader.result, password);
-                } catch(e) {
-                    if(e.message.indexOf("PEM is encrypted") > -1) {
-                        $("#encrypted").show();
-                    } else if(e.message.indexOf("privateKey is null") > -1) {
-                        $("#wrongPassword").show();
-                    } else if(e.message.indexOf("PEM header type is not") > -1) {
-                        $("#notPrivateKey").show();
-                    } else if(e.message.indexOf("Invalid PEM formatted message") > -1) {
-                        $("#notPem").show();
-                    } else if(e.message.indexOf("padding") > -1) {
-                        $("#wrongKey").show();
-                    } else {
-                        $("#somethingElse")
-                            .html(e.message)
-                            .show();
-                    }
-                    decryptedData = {};
-                }
-
-                decrypted.push(decryptedData);
-            });
-            addRegInfo(decrypted);
+  function requestPrivateKey() {
+    $(".ui.tiny.modal")
+      .modal({
+        onApprove: function () {
+          var files = $(this).find("input:file").prop("files");
+          $(".prKeyMessage").hide();
+          if (files.length == 0) {
+            $(this).find(".message").show();
+            return false
+          } else {
+            $(this).find(".message").hide();
+            loadKey(files[0], $(this).find("input:password").val());
+            return true;
+          }
         }
-        reader.onerror = function (evt) {
-            alert("Error reading private key file");
+      })
+      .modal("show");
+  };
+
+  function loadKey(file, password) {
+    var decrypted = [];
+
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function (evt) {
+      registrations.forEach(data => {
+        var decryptedData;
+        try {
+          decryptedData = decrypt(data, reader.result, password);
+        } catch (e) {
+          if (e.message.indexOf("PEM is encrypted") > -1) {
+            $("#encrypted").show();
+          } else if (e.message.indexOf("privateKey is null") > -1) {
+            $("#wrongPassword").show();
+          } else if (e.message.indexOf("PEM header type is not") > -1) {
+            $("#notPrivateKey").show();
+          } else if (e.message.indexOf("Invalid PEM formatted message") > -1) {
+            $("#notPem").show();
+          } else if (e.message.indexOf("padding") > -1) {
+            $("#wrongKey").show();
+          } else {
+            $("#somethingElse")
+              .html(e.message)
+              .show();
+          }
+          decryptedData = {};
         }
-    };
 
-    function addRegInfo(regInfo) {
-        $(".regInfo").each((i, el) => {
-            var inf = Object.keys(regInfo[i])
-                .reduce((str, key) => str + "<b>" + key + ":</b> " + regInfo[i][key] + "<br>", "");
-            if(inf) $(el).html(inf);
-        })
-    };
-
-    function decrypt(data, privateKeyPem, password) {
-        var privateKey;
-        if(password)
-            privateKey = forge.pki.decryptRsaPrivateKey(privateKeyPem, password)
-        else
-            privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
-
-        Object.keys(data).forEach(key => {
-            data[key + "_decoded"] = forge.util.decode64(data[key]);
-        });
-
-        var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP");
-
-        var encrypted_fields = ["name", "address", "contact"];
-
-        var decipher = forge.cipher.createDecipher('AES-CBC', session_key);
-        decipher.start({iv: data.aes_instance_iv_decoded});
-        encrypted_fields.forEach(el => {
-            decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
-        })
-
-        var output = decipher.output.data;
-
-        var result = {};
-        var i = 0;
-        encrypted_fields.forEach(el => {
-            result[el] = output
-                .slice(i, i + data[el + "_encrypted_decoded"].length)
-                .replace(/\0/g, '');
-            i += data[el + "_encrypted_decoded"].length;
-            result[el] = forge.util.decodeUtf8(result[el])
-        });
-
-        return result;
+        decrypted.push(decryptedData);
+      });
+      addRegInfo(decrypted);
     }
+    reader.onerror = function (evt) {
+      alert("Error reading private key file");
+    }
+  };
+
+  function addRegInfo(regInfo) {
+    $(".regInfo").each((i, el) => {
+      var inf = Object.keys(regInfo[i])
+        .reduce((str, key) => str + "<b>" + key + ":</b> " + regInfo[i][key] + "<br>", "");
+      if (inf) $(el).html(inf);
+    })
+  };
+
+  function decrypt(data, privateKeyPem, password) {
+    var privateKey;
+    if (password)
+      privateKey = forge.pki.decryptRsaPrivateKey(privateKeyPem, password)
+    else
+      privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
+
+    Object.keys(data).forEach(key => {
+      data[key + "_decoded"] = forge.util.decode64(data[key]);
+    });
+
+    var session_key = privateKey.decrypt(data.session_key_encrypted_decoded, "RSAES-OAEP");
+
+    var encrypted_fields = ["name", "address", "contact"];
+
+    var decipher = forge.cipher.createDecipher('AES-CBC', session_key);
+    decipher.start({iv: data.aes_instance_iv_decoded});
+    encrypted_fields.forEach(el => {
+      decipher.update(forge.util.createBuffer(data[el + "_encrypted_decoded"]));
+    })
+
+    var output = decipher.output.data;
+
+    var result = {};
+    var i = 0;
+    encrypted_fields.forEach(el => {
+      result[el] = output
+        .slice(i, i + data[el + "_encrypted_decoded"].length)
+        .replace(/\0/g, '');
+      i += data[el + "_encrypted_decoded"].length;
+      result[el] = forge.util.decodeUtf8(result[el])
+    });
+
+    return result;
+  }
 </script>

@@ -8,8 +8,9 @@ import pytz
 import django_filters
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 from rest_framework.decorators import api_view, permission_classes
@@ -27,6 +28,7 @@ from .models import Event, Sample, Bag, BagRecipient
 from .statuses import SampleStatus
 from .tables import SampleTable
 from .utils import find_samples, Search, is_in_group
+from .views_public import render_status
 
 
 @login_required
@@ -516,3 +518,14 @@ def bag_handout(request):
                 )
 
     return render(request, "lab/bag_handout.html")
+
+
+@login_required
+@is_in_group("lab_user")
+def status_preview(request):
+    try:
+        sample = Sample.objects.get(barcode=request.GET.get("id"))
+    except ObjectDoesNotExist:
+        return HttpResponseBadRequest("Something went wrong")
+    event = sample.get_latest_external_status()
+    return render_status(request, event)
