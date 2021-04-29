@@ -131,11 +131,7 @@ def render_status(request, event):
                 "public/pages/test-MESSAGE.html",
                 {"msg": event.comment, "updated_on": event_updated_on},
             )
-        if (
-            status == SampleStatus.WAIT
-            or status == SampleStatus.PRINTED
-            or status == SampleStatus.PCRSENT
-        ):
+        if status == SampleStatus.WAIT or status == SampleStatus.PRINTED:
             return render(
                 request, "public/pages/test-WAIT.html", {"updated_on": event_updated_on}
             )
