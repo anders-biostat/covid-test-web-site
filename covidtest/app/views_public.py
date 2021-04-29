@@ -9,7 +9,13 @@ from django.views import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
-from .forms_public import ConsentForm, RegistrationForm, ResultsQueryForm, ResultsQueryFormLegacy, AgeGroupForm
+from .forms_public import (
+    ConsentForm,
+    RegistrationForm,
+    ResultsQueryForm,
+    ResultsQueryFormLegacy,
+    AgeGroupForm,
+)
 from .models import Event, Registration, RSAKey, Sample, News
 from .statuses import SampleStatus
 from .views_consent import get_consent_md5
@@ -25,12 +31,12 @@ def index(request):
     if access_code is not None:
         request.session["access_code"] = access_code
         return redirect("app:consent_age")
-    news = News.objects.filter(relevant=True)
+    news = News.objects.filter(relevant=True).order_by("-created_on")
     return render(request, "public/index.html", {"news": news})
 
 
 def news_archive(request):
-    news_query = News.objects.filter(relevant=False)
+    news_query = News.objects.filter(relevant=False).order_by("-created_on")
     page = request.GET.get("page", 1)
     paginator = Paginator(news_query, 5)
     try:
@@ -53,33 +59,89 @@ def render_status(request, event):
         try:
             status = SampleStatus[event.status]
         except KeyError:
-            return render(request, "public/pages/test-ERROR.html", {"error": _("Status unbekannt"), "updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-ERROR.html",
+                {"error": _("Status unbekannt"), "updated_on": event_updated_on},
+            )
 
         if status == SampleStatus.PCRPOS:
-            return render(request, "public/pages/test-PCRPOS.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-PCRPOS.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.PCRNEG:
-            return render(request, "public/pages/test-PCRNEG.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-PCRNEG.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.PCRWEAKPOS:
-            return render(request, "public/pages/test-PCRWEAKPOS.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-PCRWEAKPOS.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.LAMPPOS:
-            return render(request, "public/pages/test-LAMPPOS.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-LAMPPOS.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.LAMPNEG:
-            return render(request, "public/pages/test-LAMPNEG.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-LAMPNEG.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.LAMPINC:
-            return render(request, "public/pages/test-LAMPINC.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-LAMPINC.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.LAMPFAIL:
-            return render(request, "public/pages/test-LAMPFAIL.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-LAMPFAIL.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.RECEIVED:
-            return render(request, "public/pages/test-RECEIVED.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-RECEIVED.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.LAMPREPEAT:
-            return render(request, "public/pages/test-LAMPREPEAT.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-LAMPREPEAT.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.UNDEF:
-            return render(request, "public/pages/test-UNDEF.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-UNDEF.html",
+                {"updated_on": event_updated_on},
+            )
         if status == SampleStatus.MESSAGE:
-            return render(request, "public/pages/test-MESSAGE.html", {'msg': event.comment, "updated_on": event_updated_on})
-        if status == SampleStatus.WAIT or status == SampleStatus.PRINTED or status == SampleStatus.PCRSENT:
-            return render(request, "public/pages/test-WAIT.html", {"updated_on": event_updated_on})
-        return render(request, "public/pages/test-UNDEF.html", {"updated_on": event_updated_on})
+            return render(
+                request,
+                "public/pages/test-MESSAGE.html",
+                {"msg": event.comment, "updated_on": event_updated_on},
+            )
+        if (
+            status == SampleStatus.WAIT
+            or status == SampleStatus.PRINTED
+            or status == SampleStatus.PCRSENT
+        ):
+            return render(
+                request, "public/pages/test-WAIT.html", {"updated_on": event_updated_on}
+            )
+        return render(
+            request, "public/pages/test-UNDEF.html", {"updated_on": event_updated_on}
+        )
     # return render(
     #     request, "public/pages/test-ERROR.html", {"error": _("Kein Status vorhanden (bitte später erneut abrufen)")}
     # )
@@ -101,7 +163,9 @@ def results_query(request):
             # No sample found for access_code
             if sample is None:
                 messages.add_message(
-                    request, messages.ERROR, _("Der Zugangscode ist unbekannt. Bitte erneut versuchen.")
+                    request,
+                    messages.ERROR,
+                    _("Der Zugangscode ist unbekannt. Bitte erneut versuchen."),
                 )
                 return redirect("app:results_query")
 
@@ -132,12 +196,16 @@ def results_query(request):
                     password = form.cleaned_data["password"]
                     sha_instance = hashlib.sha3_384()
                     sha_instance.update(password.encode("utf-8"))
-                    password_hashed = binascii.b2a_base64(sha_instance.digest(), newline=False).decode("ascii")
+                    password_hashed = binascii.b2a_base64(
+                        sha_instance.digest(), newline=False
+                    ).decode("ascii")
                     if password_hashed != sample.password_hash:
                         messages.add_message(
                             request,
                             messages.ERROR,
-                            _("Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."),
+                            _(
+                                "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
+                            ),
                         )
                         request.session["access_code"] = access_code
                         return render(request, result_query_template, {"form": form})
@@ -145,9 +213,13 @@ def results_query(request):
             # Checking the status of the sample
             event = sample.get_latest_external_status()
             if event is not None:
-                sample.events.create(status="INFO", comment="result queried; status: " + event.status)
+                sample.events.create(
+                    status="INFO", comment="result queried; status: " + event.status
+                )
             else:
-                sample.events.create(status="INFO", comment="result queried; status: None")
+                sample.events.create(
+                    status="INFO", comment="result queried; status: None"
+                )
             return render_status(request, event)
 
     return render(request, result_query_template, {"form": form})
@@ -165,7 +237,6 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-
     # TODO to further increase security, sessions could be made to expire
     if len(request.session.get("consents_obtained", list())) == 0:
         log.warning("Register page accessed without going through consent pages.")
@@ -182,7 +253,9 @@ def register(request):
 
             if sample is None:
                 messages.add_message(
-                    request, messages.ERROR, _("Der Zugangscode ist unbekannt. Bitte erneut versuchen.")
+                    request,
+                    messages.ERROR,
+                    _("Der Zugangscode ist unbekannt. Bitte erneut versuchen."),
                 )
                 return render(request, "public/register.html", {"form": form})
 
@@ -192,7 +265,9 @@ def register(request):
             save_consents(request, registration)
             sample.events.create(status="INFO", comment="sample registered")
             request.session.flush()
-            messages.add_message(request, messages.SUCCESS, _("Erfolgreich registriert"))
+            messages.add_message(
+                request, messages.SUCCESS, _("Erfolgreich registriert")
+            )
             return redirect("app:instructions")
     return render(request, "public/register.html", {"form": form})
 
