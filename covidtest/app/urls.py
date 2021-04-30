@@ -55,6 +55,7 @@ urlpatterns = [
     # path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
     path("lab/bag-search", views_lab.bag_search_statistics, name="bag_search"),
     path("lab/bag-handout", views_lab.bag_handout, name="bag_handout"),
+    path("lab/status-preview", views_lab.status_preview, name="status_preview"),
     # Unused, might be activated on future releases
     # path("lab/dashboard", views_lab.dashboard, name="dashboard"),
     path("version", views_lab.version, name="version"),
