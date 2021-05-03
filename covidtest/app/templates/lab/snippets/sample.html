@@ -14,6 +14,7 @@
             <b>Ausgegeben Am: </b>{% if sample.bag.handed_out_on %}{{ sample.bag.handed_out_on }}{% else %}--{% endif %}<br>
             <b>Ausgegeben Von: </b>{% if sample.bag.handed_out_by %}{{ sample.bag.handed_out_by }}{% else %}
             --{% endif %}<br>
+            <b>Abnehmer: </b>{% if sample.bag.recipient %}{{ sample.bag.recipient.recipient_name }}{% else %}--{% endif %}
         </div>
     </div>
 
@@ -57,7 +58,8 @@
         <tfoot>
         <tr>
             <th colspan="4">
-                <a href="{% url 'app:status_preview' %}?id={{ sample.barcode }}" class="ui right floated small primary labeled icon button" type="submit">
+                <a href="{% url 'app:status_preview' %}?id={{ sample.barcode }}"
+                   class="ui right floated small primary labeled icon button" type="submit">
                     <i class="eye icon"></i>Was sieht der Teilnehmer?
                 </a>
             </th>
