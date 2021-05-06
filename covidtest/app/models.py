@@ -68,6 +68,17 @@ class Bag(Timestamp, models.Model):
     rsa_key = models.ForeignKey(
         RSAKey, on_delete=models.DO_NOTHING, related_name="bags"
     )
+    recipient = models.ForeignKey(
+        BagRecipient,
+        on_delete=models.DO_NOTHING,
+        related_name="bag_of_recipient",
+        null=True,
+        blank=True,
+    )
+    handed_out_on = models.DateTimeField(null=True, blank=True)
+    handed_out_by = models.ForeignKey(
+        User, on_delete=models.DO_NOTHING, null=True, blank=True
+    )
 
     def __str__(self):
         return "Bag #%d ('%s')" % (self.pk, self.name)
