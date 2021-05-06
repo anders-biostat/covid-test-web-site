@@ -1,6 +1,8 @@
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, views, status
+from rest_framework.response import Response
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 from .models import Bag, Event, Registration, RSAKey, Sample
 from .serializers import (
@@ -11,6 +13,8 @@ from .serializers import (
     RegistrationEncryptSerializer,
     RSAKeySerializer,
     SampleSerializer,
+    VirusDetectiveSampleSerializer,
+    generate_access_code,
 )
 
 
@@ -100,3 +104,63 @@ class KeySamplesViewSet(viewsets.ModelViewSet):
     queryset = RSAKey.objects.all()
     serializer_class = KeySamplesSerializers
     permission_classes = [permissions.IsAuthenticated]
+
+
+class VirusDetectiveSampleView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            try:
+                bag = Bag.objects.get(name="virusdetektiv")
+            except ObjectDoesNotExist:
+                return Response(
+                    data={
+                        "error": "Bag for virusdetective does not exist. "
+                        + "Please ask an admin to create the bag before continuing"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            except MultipleObjectsReturned:
+                return Response(
+                    data={
+                        "error": "More than one generic virusdetective bag exists. "
+                        + "Please ask an admin to fix this bag issue before continuing."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
+            sample = Sample.objects.create(
+                bag=bag, access_code=generate_access_code(), barcode=""
+            )
+
+            return Response(
+                data={"access_code": sample.access_code}, status=status.HTTP_201_CREATED
+            )
+        except Exception as e:
+            return Response(
+                data={"error": e.__str__()}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+    def put(self, request):
+        try:
+            try:
+                sample = Sample.objects.get(access_code=request.data.get("access_code"))
+            except ObjectDoesNotExist:
+                return Response(
+                    data={
+                        "error": f"A Sample with access code - {request.data.get('access_code')} does not exist"
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            serializer = VirusDetectiveSampleSerializer(
+                data=request.data, instance=sample
+            )
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            raise Exception(serializer.errors)
+        except Exception as e:
+            return Response(
+                data={"error": e.__str__()}, status=status.HTTP_400_BAD_REQUEST
+            )

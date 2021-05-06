@@ -67,4 +67,9 @@ urlpatterns = [
         csrf_exempt(views_api.authorize_and_request_data),
         name="external_login",
     ),
+    path(
+        "api/vd/sample",
+        csrf_exempt(views_api.VirusDetectiveSampleView.as_view()),
+        name="create_update_sample",
+    ),
 ]
