@@ -120,10 +120,15 @@ class BagHandoutForm(forms.ModelForm):
                     comment="Sample had no status, therefore this has been set automatically on bag checkout.",
                 )
                 event.save()
-                self.cleaned_data["comment"] = (
-                    self.instance.comment
-                    + f" --- Sample with barcode {sample.barcode} had no status therefore status PRINTED was set."
-                )
+                try:
+                    self.cleaned_data["comment"] = (
+                        self.instance.comment
+                        + f" --- No status on Sample {sample.barcode} - PRINTED set automatically"
+                    )
+                except TypeError:
+                    self.cleaned_data[
+                        "comment"
+                    ] = f"No status on Sample {sample.barcode} - PRINTED set automatically"
         if len(invalid_status) > 0:
             raise ValidationError(
                 f"Beutel mit ID {self.instance.pk} enthält mindestens eine "

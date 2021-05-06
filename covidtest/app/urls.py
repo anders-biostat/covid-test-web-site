@@ -12,7 +12,8 @@ router = routers.DefaultRouter()
 router.register(r"samples", views_api.SampleViewSet, basename="samples")
 router.register(r"events", views_api.EventViewSet)
 router.register(r"rsakeys", views_api.RSAKeyViewSet)
-router.register(r"registrations", views_api.RegistrationViewSet)
+router.register(r"registrations", views_api.RegistrationViewSet, basename="registrations")
+router.register(r"register", views_api.RegistrationEncryptViewSet, basename="register")
 router.register(r"bags", views_api.BagViewSet)
 router.register(r"keysamples", views_api.KeySamplesViewSet)
 
@@ -55,6 +56,7 @@ urlpatterns = [
     # path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
     path("lab/bag-search", views_lab.bag_search_statistics, name="bag_search"),
     path("lab/bag-handout", views_lab.bag_handout, name="bag_handout"),
+    path("lab/status-preview", views_lab.status_preview, name="status_preview"),
     # Unused, might be activated on future releases
     # path("lab/dashboard", views_lab.dashboard, name="dashboard"),
     path("version", views_lab.version, name="version"),
