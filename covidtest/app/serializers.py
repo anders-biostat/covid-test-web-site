@@ -76,7 +76,11 @@ class SampleSerializer(serializers.ModelSerializer):
     get_status = EventSerializer(read_only=True)
 
     barcode = serializers.CharField(
-        validators=[validators.UniqueValidator(queryset=Sample.objects.all(), message="duplicate")]
+        validators=[
+            validators.UniqueValidator(
+                queryset=Sample.objects.all(), message="duplicate"
+            )
+        ]
     )
 
     def create(self, validated_data):
@@ -105,7 +109,14 @@ class SampleSerializer(serializers.ModelSerializer):
             "events",
             "get_status",
         ]
-        optional_fields = ["access_code", "bag", "rack", "password_hash", "registrations", "events"]
+        optional_fields = [
+            "access_code",
+            "bag",
+            "rack",
+            "password_hash",
+            "registrations",
+            "events",
+        ]
 
 
 class BagSerializer(serializers.ModelSerializer):
@@ -120,3 +131,19 @@ class KeySamplesSerializers(serializers.ModelSerializer):
     class Meta:
         model = RSAKey
         fields = ["id", "key_name", "samples"]
+
+
+class VirusDetectiveSampleSerializer(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        try:
+            instance.barcode = validated_data["barcode"]
+            instance.save()
+        except KeyError:
+            raise serializers.ValidationError(
+                "No access code provided or in wrong format"
+            )
+        return instance
+
+    class Meta:
+        model = Sample
+        fields = ["id", "barcode", "access_code"]

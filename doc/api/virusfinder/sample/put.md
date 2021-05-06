@@ -16,12 +16,16 @@ sample with its unique barcode.
 ### DTO:
 All fields must be sent.
 
+Auth
 ```json
 {
-  "auth": {
-    "username": "Testuser", 
-    "password": "*******"
-  },
+  "username": "Testuser", 
+  "password": "*******"
+}
+```
+Body
+```json
+{
   "access_code": "123456789",
   "barcode": "123456789"
 }

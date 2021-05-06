@@ -15,15 +15,19 @@ Creates a Sample, Recipient and associates it with a bag
 ### DTO:
 All fields must be sent.
 
+Auth
 ```json
 {
-  "auth": {
-    "username": "Testuser", 
-    "password": "*******"
-  },
-  "name": "Mustermann, Max",
-  "address": "Musterstraße 1, 12345 Musterstadt",
-  "telephone": "0123456789"
+  "username": "Testuser", 
+  "password": "*******"
+}
+```
+Body //  TODO Body ignored for now
+```json
+{
+//  "name": "Mustermann, Max",
+//  "address": "Musterstraße 1, 12345 Musterstadt",
+//  "telephone": "0123456789"
 }
 ```
 
