@@ -8,6 +8,7 @@ from .serializers import (
     EventSerializer,
     KeySamplesSerializers,
     RegistrationSerializer,
+    RegistrationEncryptSerializer,
     RSAKeySerializer,
     SampleSerializer,
 )
@@ -78,6 +79,10 @@ class RegistrationViewSet(viewsets.ModelViewSet):
     serializer_class = RegistrationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+class RegistrationEncryptViewSet(viewsets.ModelViewSet):
+    queryset = Registration.objects.all()
+    serializer_class = RegistrationEncryptSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
