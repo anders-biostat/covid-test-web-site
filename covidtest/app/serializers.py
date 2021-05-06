@@ -137,7 +137,7 @@ class SampleSerializer(serializers.ModelSerializer):
             validators.UniqueValidator(
                 queryset=Sample.objects.all(), message="duplicate"
             )
-        ]
+        ],
         required=False,
     )
 
