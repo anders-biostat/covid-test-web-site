@@ -42,8 +42,8 @@ $ cp example.env .env
 In order for permissions to work, add following groups 
 at the admin dashboard. (A superuser does not need to be part of a 
 group as he/she is allowed to do everything)
-1. Group - name = "lab_user" permissions = permissions type app | (bag, event, sample) and 
-sessions | Sitzung
+1. Group - name = "lab_user" (User can do everythin within lab interface)
+1. Group - name = "bag_handler" (User can only control the bag handout)
 
 
 ## Usage

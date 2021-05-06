@@ -1,4 +1,5 @@
 from django.contrib.auth import views as auth_views
+from django.views.generic.base import TemplateView
 from django.urls import include, path
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
@@ -26,6 +27,11 @@ urlpatterns = [
     path("information", views_public.information, name="information"),
     path("register", views_public.register, name="register"),
     path("pages/<str:page>", views_public.pages, name="pages"),
+    path(
+        "lab/access-denied",
+        TemplateView.as_view(template_name="lab/access-denied.html"),
+        name="access_denied",
+    ),
     path("lab", views_lab.index, name="lab_index"),
     path(
         "lab/login",
@@ -39,14 +45,17 @@ urlpatterns = [
         name="logout",
     ),
     path("lab/checkin", views_lab.sample_check_in, name="checkin"),
-    path(
-        "lab/samples/detail_snippet",
-        views_lab.sample_details_snippet,
-        name="sample_details_snippet",
-    ),
+    # path(
+    #     "lab/samples/detail_snippet",
+    #     views_lab.sample_details_snippet,
+    #     name="sample_details_snippet",
+    # ),
     path("lab/samples/detail", views_lab.sample_detail, name="query"),
     path("lab/samples/update_status", views_lab.update_status, name="update_status"),
-    path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
+    # path("lab/samples", views_lab.SampleListView.as_view(), name="sample_list"),
+    path("lab/bag-search", views_lab.bag_search_statistics, name="bag_search"),
+    path("lab/bag-handout", views_lab.bag_handout, name="bag_handout"),
+    path("lab/status-preview", views_lab.status_preview, name="status_preview"),
     # Unused, might be activated on future releases
     # path("lab/dashboard", views_lab.dashboard, name="dashboard"),
     path("version", views_lab.version, name="version"),

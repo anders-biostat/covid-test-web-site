@@ -2,51 +2,84 @@
 {% load i18n %}
 {% load permissions %}
 {% block content %}
-<div>
-    <h1 class="ui header">{% blocktrans %}Lab Interface - Home{% endblocktrans %}</h1>
-    <p>
-        {% blocktrans %}
-        Laborinterface, zur Bearbeitung und Erfassung von Proben. Folgende Prozesse stehen zur Verfügung:
-        {% endblocktrans %}
-    </p>
+    <div>
+        <h1 class="ui header">Lab Interface - Home</h1>
+        <p>
+            Laborinterface, zur Bearbeitung und Erfassung von Proben. Folgende Prozesse stehen zur Verfügung:
+        </p>
+        {% if user|is_in_group:"lab_user" or user|is_in_group:"bag_handler" %}
+            {% if user|is_in_group:"lab_user" %}
+                <h2>Proben</h2>
+                <div class="ui divider"></div>
+                <div class="ui cards">
+                    <a href="{% url 'app:query' %}" class="red card">
+                        <div class="content">
+                            <h3 class="header">
+                                Suchen
+                            </h3>
+                            <div class="meta">
+                                Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen, sowie Status und
+                                Rack
+                                manuell
+                                setzen.
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'app:checkin' %}" class="red card">
+                        <div class="content">
+                            <h3 class="header">
+                                Mehrere Bearbeiten
+                            </h3>
+                            <div class="meta">
+                                Status, Rack und Kommentar einer oder mehrerer Proben gleichzeitig bearbeiten.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+            <h2>Beutel</h2>
+            <div class="ui divider"></div>
+            <div class="ui cards">
+                {% if user|is_in_group:"lab_user" %}
+                    <a href="{% url 'app:bag_search' %}" class="red card" style="min-height: 121px">
+                        <div class="content">
+                            <h3 class="header">
+                                Suchen und Statistik
+                            </h3>
+                            <div class="meta">
+                                Beutel suchen und Statistiken exportieren.
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+                <a href="{% url 'app:bag_handout' %}" class="red card">
+                    <div class="content">
+                        <h3 class="header">
+                            Ausgabe
+                        </h3>
+                        <div class="meta">
+                            Beutel einem Abnehmer zuweisen und ausgeben.
+                        </div>
+                    </div>
+                </a>
+            </div>
+            </div>
+        {% else %}
+            <h2>Proben</h2>
+            <div class="ui divider"></div>
+            <div class="ui cards">
+                <a href="{% url 'app:query' %}" class="red card">
+                    <div class="content">
+                        <h3 class="header">
+                            Suchen
+                        </h3>
+                        <div class="meta">
+                            Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen.
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
 
-    {% if user|is_in_group:"lab_user" %}
-    <a href="{% url 'app:query'  %}" style="color: inherit">
-        <div class="ui segment" style="margin-top: 30px; padding: 30px">
-            <h3 class="ui header">
-                {% blocktrans %}Proben Suchen{% endblocktrans %}
-            </h3>
-
-            <p>
-                Proberöhrchen nach Barcode, Access Code, Bag, Rack oder Status suchen, sowie Status und Rack manuell setzen.
-            </p>
-        </div>
-    </a>
-    <a href="{% url 'app:checkin'  %}" style="color: inherit">
-        <div class="ui segment" style="margin-top: 30px; padding: 30px">
-
-            <h3 class="ui header">
-                {% blocktrans %}Mehrere Proben Bearbeiten{% endblocktrans %}
-            </h3>
-            <p>
-                Status, Rack und Kommentar einer oder mehrerer Proben gleichzeitig bearbeiten.
-            </p>
-        </div>
-    </a>
-    {% else %}
-    <a href="{% url 'app:query'  %}" style="color: inherit">
-        <div class="ui segment" style="margin-top: 30px; padding: 30px">
-            <h3 class="ui header">
-                {% blocktrans %}Proben Suchen{% endblocktrans %}
-            </h3>
-            <p>
-                {% blocktrans %}
-                Hier können einzelne Proberöhrchen gesucht werden.
-                {% endblocktrans %}
-            </p>
-        </div>
-    </a>
-    {% endif %}
-
-</div>
+    </div>
 {% endblock %}

@@ -3,554 +3,143 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-27 13:27+0000\n"
-"PO-Revision-Date: 2020-11-27 14:29+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en\n"
+"POT-Creation-Date: 2021-04-09 21:28+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
 
-#: app/forms_lab.py:9 app/forms_lab.py:35
-msgid "Barcode"
-msgstr "Barcode"
-
-#: app/forms_lab.py:14
-msgid "Barcodes"
-msgstr "Barcodes"
-
-#: app/forms_lab.py:19 app/forms_lab.py:24
-msgid "Rack (Barcode)"
-msgstr "Rack (barcode)"
-
-#: app/forms_lab.py:26
-msgid "LAMP positiv"
-msgstr "LAMP positive"
-
-#: app/forms_lab.py:27
-msgid "LAMP unklares Ergebnis"
-msgstr "LAMP inconclusive"
-
-#: app/forms_lab.py:28
-msgid "LAMP fehlgeschlagen"
-msgstr "LAMP test failed"
-
-#: app/forms_lab.py:36 app/templates/lab/snippets/sample.html:106
-msgid "Rack"
-msgstr "Rack"
-
-#: app/forms_lab.py:37
-msgid "Probenstatus"
-msgstr "Sample status"
-
-#: app/forms_lab.py:41
-msgid "Anzahl der batches"
-msgstr "Number of batches"
-
-#: app/forms_lab.py:42
-msgid "Schlüssel"
-msgstr "Key"
-
-#: app/forms_public.py:6
+#: app/forms_public.py:8
 msgid "Einverständnis"
 msgstr "Consent"
 
-#: app/forms_public.py:19
+#: app/forms_public.py:23
 msgid "Zugangscode (beiliegender Zettel):"
-msgstr "Access code (see paper slip):"
+msgstr "Access code (attached letter):"
 
-#: app/forms_public.py:20 app/forms_public.py:40 app/forms_public.py:50
+#: app/forms_public.py:24 app/forms_public.py:53 app/forms_public.py:63
 msgid "Zugangscode"
 msgstr "Access code"
 
-#: app/forms_public.py:23
-msgid "Name (Nachname, Vorname):"
-msgstr "Name (last name, first name):"
-
-#: app/forms_public.py:23
-msgid "Nachname, Vorname"
-msgstr "Last name, first name"
-
-#: app/forms_public.py:26
-msgid "Anschrift (Straße, Hausnummer, Postleitzahl, Wohnort):"
-msgstr "Address (street, street number, zip code, city):"
+#: app/forms_public.py:27
+msgid "Name:"
+msgstr "Name:"
 
 #: app/forms_public.py:27
+msgid "Nachname, Vorname"
+msgstr "Last Name, First Name"
+
+#: app/forms_public.py:30
+msgid "Anschrift:"
+msgstr "Address:"
+
+#: app/forms_public.py:31
 msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
-msgstr "City, street number, zip code, city"
+msgstr "Street, House Number, Postcode, City"
 
-#: app/forms_public.py:30
+#: app/forms_public.py:34
 msgid "Telefonnummer:"
-msgstr "Telephone number:"
+msgstr "Telephone Number:"
 
-#: app/forms_public.py:30
+#: app/forms_public.py:34
 msgid "Telefonnummer"
-msgstr "Telephone number"
+msgstr "Telephone Number:"
 
-#: app/forms_public.py:52
+#: app/forms_public.py:65
 msgid "Passwort"
 msgstr "Password"
 
-#: app/templates/lab/base.html:5
-msgid "COVID19-LAB"
-msgstr "COVID19-LAB"
+#: app/templates/public/age-group-form.html:7
+msgid " Alter der Teilnehmerin / des Teilnehmers? "
+msgstr " Age of the participant(s)?"
 
-#: app/templates/lab/dashboard.html:25
-msgid ""
-"\n"
-"                        Anzahl nicht registrierter Proben\n"
-"                        "
-msgstr ""
-"\n"
-"Number of unregistered samples "
+#: app/templates/public/age-group-form.html:11
+msgid "über 18 Jahre"
+msgstr "over 18 years"
 
-#: app/templates/lab/dashboard.html:37
-msgid ""
-"\n"
-"                        Anzahl Proben in Bearbeitung\n"
-"                        "
-msgstr ""
-"\n"
-"Number of samples being processed "
+#: app/templates/public/age-group-form.html:15
+msgid "12-17 Jahre"
+msgstr "12-17 years"
 
-#: app/templates/lab/dashboard.html:49
-msgid ""
-"\n"
-"                        Anzahl abgeschlossener Proben\n"
-"                        "
-msgstr ""
-"\n"
-"Number of processed samples "
+#: app/templates/public/age-group-form.html:19
+msgid "7-11 Jahre"
+msgstr "7-11 years"
 
-#: app/templates/lab/dashboard.html:59
-msgid ""
-"\n"
-"        Registriert in System\n"
-"        "
-msgstr ""
-"\n"
-"Registered with system "
+#: app/templates/public/age-group-form.html:23
+msgid "0-6 Jahre"
+msgstr "0-6 years"
 
-#: app/templates/lab/dashboard.html:71
-msgid ""
-"\n"
-"                        Anzahl noch nicht bearbeiteter Proben \"WAIT\"\n"
-"                        "
-msgstr ""
-"\n"
-"Number of samples that have not been processed yet “WAIT” "
-
-#: app/templates/lab/dashboard.html:81
-msgid ""
-"\n"
-"        LAMP Test\n"
-"        "
-msgstr ""
-"\n"
-"LAMP test "
-
-#: app/templates/lab/dashboard.html:93
-msgid ""
-"\n"
-"                        positiver LAMP Test \n"
-"                        "
-msgstr ""
-"\n"
-"positive LAMP test "
-
-#: app/templates/lab/dashboard.html:105
-msgid ""
-"\n"
-"                        unschlüssiger LAMP Test \n"
-"                        "
-msgstr ""
-"\n"
-"inconclusive LAMP test "
-
-#: app/templates/lab/dashboard.html:117
-msgid ""
-"\n"
-"                        negativer  LAMP Test \n"
-"                        "
-msgstr ""
-"\n"
-"negative LAMP test "
-
-#: app/templates/lab/dashboard.html:129
-msgid ""
-"\n"
-"                        fehlerhafter LAMP Test \n"
-"                        "
-msgstr ""
-"\n"
-"erroneous LAMP test "
-
-#: app/templates/lab/dashboard.html:139
-msgid ""
-"\n"
-"        PCR Test\n"
-"        "
-msgstr ""
-"\n"
-"PCR test "
-
-#: app/templates/lab/dashboard.html:151
-msgid ""
-"\n"
-"                        Positiver PCR Test\n"
-"                        "
-msgstr ""
-"\n"
-"positive PCR test "
-
-#: app/templates/lab/dashboard.html:163
-msgid ""
-"\n"
-"                        Negativer PCR Test\n"
-"                        "
-msgstr ""
-"\n"
-"negative PCR test "
-
-#: app/templates/lab/dashboard.html:177
-msgid ""
-"\n"
-"                        Undefiniert\n"
-"                        "
-msgstr ""
-"\n"
-"undefined "
-
-#: app/templates/lab/generate_barcodes.html:6
-msgid "Lab Interface - Generate Barcodes"
-msgstr "Lab interface - generate barcodes"
-
-#: app/templates/lab/generate_barcodes.html:8
-msgid ""
-"\n"
-"        Hier können Barcodes generiert werden:\n"
-"        "
-msgstr ""
-"\n"
-"        Barcodes can be generated here:\n"
-"        "
-
-#: app/templates/lab/index.html:5
-msgid "Lab Interface - Home"
-msgstr "Lab interface - home"
-
-#: app/templates/lab/index.html:7
-msgid ""
-"\n"
-"        Dies ist das Laborinterface, um Datensätze der Testungen zu "
-"editieren. Folgende Prozesse stehen zur Verfügung:\n"
-"        "
-msgstr ""
-"\n"
-"        This is the lab interface to edit the test data records. The "
-"following procedures are available:\n"
-"        "
-
-#: app/templates/lab/index.html:13 app/templates/lab/snippets/menubar.html:7
-msgid "Probeneingang"
-msgstr "Sample entry"
-
-#: app/templates/lab/index.html:16
-msgid ""
-"\n"
-"            Hier werden nach dem Empfang der Probe die Probenröhrchen den\n"
-"            jeweiligen Test-Racks/Plates zugeordnet. Hier muss zuerst der "
-"Barcode des Racks eingescannt werden\n"
-"            und nachfolgend alle Probenröhrchen dieses Racks eingescannt "
-"werden.\n"
-"        "
-msgstr ""
-"\n"
-"            Upon receiving the samples each sample tube needs to be assigned "
-"to a\n"
-"            test rack/plate. Please first scan the barcode of the rack and \n"
-"            after that the barcodes of all of the sample tubes that go into "
-"this rack.\n"
-"        "
-
-#: app/templates/lab/index.html:24 app/templates/lab/snippets/menubar.html:10
-msgid "Rack editieren"
-msgstr "Edit rack"
-
-#: app/templates/lab/index.html:27
-msgid ""
-"\n"
-"            Hier werden die Ergebnisse des LAMP-Tests eingetragen. Hierzu "
-"wird das Rack eingescannt und danach\n"
-"            jeweils die positiven und unklaren Probenröhrchen eingescannt. "
-"Alle nicht eingescannten Proben\n"
-"            des Racks werden automatisch als negativ gewertet. Die Listen "
-"der positiven/unklaren Proben werden\n"
-"            einfach zeilenweise eingefügt (Barcode-Scanner).\n"
-"        "
-msgstr ""
-"\n"
-"LAMP test results are recorded here. First, scan the rack and then all of "
-"the positive and inconclusive sample tubes. Samples that are not scanned are "
-"automatically recorded as negative. The lists containing positive/"
-"inconclusive samples are inserted row-wise using the barcode scanner. "
-
-#: app/templates/lab/index.html:36 app/templates/lab/snippets/menubar.html:13
-msgid "Probe suchen"
-msgstr "Look for sample"
-
-#: app/templates/lab/index.html:39
-msgid ""
-"\n"
-"            Hier können einzelne Proberöhrchen gesucht werden und der Status "
-"sowie das Rack manuell gesetzt werden.\n"
-"        "
-msgstr ""
-"\n"
-"Here you have the option to look for individual sample tubes as well as "
-"setting the status and the rack manually. "
-
-#: app/templates/lab/sample_check_in.html:71
-msgid "Lab Interface - Proben registrieren"
-msgstr "Lab interface - register samples"
-
-#: app/templates/lab/sample_check_in.html:73
-msgid ""
-"\n"
-"        Hier können Barcodes als eingegangen markiert werden:\n"
-"        "
-msgstr ""
-"\n"
-"        Mark barcodes as checked in here:\n"
-"        "
-
-#: app/templates/lab/sample_check_in.html:93
-#: app/templates/lab/sample_rack_results.html:85
-msgid "Abschicken"
-msgstr "Send"
-
-#: app/templates/lab/sample_check_in.html:99
-msgid "Proben nicht erfolgreich eingetragen:"
-msgstr "Samples not checked in successfully:"
-
-#: app/templates/lab/sample_check_in.html:102
-msgid "Barcode nicht in db: "
-msgstr "Barcode not in database: "
-
-#: app/templates/lab/sample_check_in.html:105 app/views_lab.py:135
-msgid "Status konnte nicht gesetzt werden: "
-msgstr "Could not set status: "
-
-#: app/templates/lab/sample_check_in.html:108
-msgid "Rack konnte nicht gesetzt werden: "
-msgstr "Could not set rack: "
-
-#: app/templates/lab/sample_list.html:8
-msgid "Lab Interface - Samples"
-msgstr "Lab interface - Samples"
-
-#: app/templates/lab/sample_list.html:12 app/templates/lab/sample_query.html:26
-msgid "Ergebnis für: "
-msgstr "Result for: "
-
-#: app/templates/lab/sample_query.html:6
-msgid "Lab Interface - Suche"
-msgstr "Lab interface - search"
-
-#: app/templates/lab/sample_query.html:8
-msgid ""
-"\n"
-"        Hier können Barcodes gesucht werden:\n"
-"        "
-msgstr ""
-"\n"
-"        Search barcodes here:\n"
-"        "
-
-#: app/templates/lab/sample_query.html:18
-msgid "Search Barcode..."
-msgstr "Search barcode …"
-
-#: app/templates/lab/sample_query.html:34
-msgid "Keine Probe mit diesem Barcode gefunden."
-msgstr "No sample found with this barcode."
-
-#: app/templates/lab/sample_rack_results.html:35
-msgid "Lab Interface - Testergebnisse registrieren (Rack)"
-msgstr "Lab interface - register test results (rack)"
-
-#: app/templates/lab/sample_rack_results.html:37
-msgid ""
-"\n"
-"        Hier können die Testergebnisse registriert werden. Der Normalfall "
-"ist ein negatives Ergebnis. Positive\n"
-"        und unklare Proben werden (zeilenweise) in die entsprechenden Felder "
-"eingegeben.\n"
-"        "
-msgstr ""
-"\n"
-"Here you can register test results. Usually, results are negative. Positive "
-"and inconclusive results are entered row-wise into the respective fields. "
-
-#: app/templates/lab/sample_rack_results.html:55
-msgid ""
-"Nachfolgend die Barcodes der jeweils positiven / unklaren Proben "
-"(zeilenweise separiert)\n"
-"                "
-msgstr "Barcodes of positive and inconclusive samples, separated by row. "
-
-#: app/templates/lab/sample_rack_results.html:60
-msgid "Positive LAMP Proben (Barcodes)"
-msgstr "Positive LAMP samples (barcodes)"
-
-#: app/templates/lab/sample_rack_results.html:62
-msgid "Positive Proben (Barcodes)"
-msgstr "Positive samples (barcodes)"
-
-#: app/templates/lab/sample_rack_results.html:68
-msgid "Unklare LAMP Proben (Barcodes)"
-msgstr "Inconclusive LAMP samples (barcodes)"
-
-#: app/templates/lab/sample_rack_results.html:70
-msgid "Unklare Proben (Barcodes)"
-msgstr "Inconclusive samples (barcodes)"
-
-#: app/templates/lab/sample_rack_results.html:76
-msgid "Fehlerhafte LAMP Proben (Barcodes)"
-msgstr "Failed LAMP samples (barcodes)"
-
-#: app/templates/lab/sample_rack_results.html:78
-msgid "Fehlerhafte Proben (Barcodes)"
-msgstr "Failed samples (barcodes)"
-
-#: app/templates/lab/sample_rack_results.html:84
-#: app/templates/public/consent.html:29
+#: app/templates/public/age-group-form.html:28
+#: app/templates/public/consent.html:36
+#: app/templates/public/pages/too_young.html:10
 #: app/templates/public/result-query.html:24
 msgid "Zurück"
-msgstr "Go back"
+msgstr "Go Back"
 
-#: app/templates/lab/sample_rack_results.html:92
-msgid "Barcode nicht gefunden."
-msgstr "Barcode not found."
-
-#: app/templates/lab/snippets/menubar.html:16
-msgid "Dashboard"
-msgstr "Dashboard"
-
-#: app/templates/lab/snippets/menubar.html:19
-msgid "Admin"
-msgstr "Admin"
-
-#: app/templates/lab/snippets/sample.html:4
-msgid "Barcode: "
-msgstr "Barcode: "
-
-#: app/templates/lab/snippets/sample.html:11
-msgid "Historie"
-msgstr "History"
-
-#: app/templates/lab/snippets/sample.html:33
-msgid "Registrierungen"
-msgstr "Registrations"
-
-#: app/templates/lab/snippets/sample.html:43
-msgid "Schlüssel-Fingerprint:"
-msgstr "Key fingerprint:"
-
-#: app/templates/lab/snippets/sample.html:52
-msgid "Registrierungen entschüsseln"
-msgstr "Decrypt registrations"
-
-#: app/templates/lab/snippets/sample.html:54
+#: app/templates/public/age-group-form.html:32
 msgid ""
-"Ihre geheimer Schlüssel is verschlüsselt. Bitte versuchen Sie es noch einmal "
-"und geben Sie das Passwort für Ihren privaten Schlüssel an."
+"Bevor wir Sie teilnehmen lassen dürfen, müssen wir Ihnen "
+"Informationsmaterial in altersgemäßer\n"
+"        Formulierung bereit stellen. Außerdem müssen wir bei Minderjährigen "
+"nach dem Einverständnis der\n"
+"        Eltern oder Sorgeberechtigten fragen. Daher fragen wir hier, ob Sie "
+"volljährig sind."
 msgstr ""
-"Your secret key is encrypted. Please try again, and provide the passcode for "
-"your private key."
-
-#: app/templates/lab/snippets/sample.html:57
-msgid ""
-"Das Passwort für Ihren privaten Schlüssel war falsch. Bitte versuchen Sie es "
-"noch einmal."
-msgstr "The password for your private key was wrong. Please try again."
-
-#: app/templates/lab/snippets/sample.html:60
-msgid "Die gewählte Datei enthält keinen RSA-Geheimschlüssel."
-msgstr "The selected file does not contain a private RSA key."
-
-#: app/templates/lab/snippets/sample.html:63
-msgid "Die gewählte Datei ist keine Schlüssel-Datei im PEM-Format."
-msgstr "The selected file is not a key file in PEM format."
-
-#: app/templates/lab/snippets/sample.html:66
-msgid "Der geheime Schlüssel passt nicht zu der verschlüsselten Information."
-msgstr "The private key does not match the encrypted information."
-
-#: app/templates/lab/snippets/sample.html:72
-#: app/templates/lab/snippets/sample.html:89
-msgid "Bitte wählen Sie die PEM-Datei mit Ihrem RSA-Geheimschlüssel."
-msgstr "Please select the PEM file with your private RSA key."
-
-#: app/templates/lab/snippets/sample.html:76
-msgid "Geheimschlüssel-Datei (.pem)"
-msgstr "Private key file (.pem)"
-
-#: app/templates/lab/snippets/sample.html:84
-msgid "Passwort für den Geheimschlüssel (optional)"
-msgstr "Passcode for the private key (optional)"
-
-#: app/templates/lab/snippets/sample.html:93
-#: app/templates/public/register.html:34
-msgid "Abbrechen"
-msgstr "Cancel"
-
-#: app/templates/lab/snippets/sample.html:94
-msgid "Entschlüsseln"
-msgstr "Decrypt"
-
-#: app/templates/lab/snippets/sample.html:102
-msgid "Status der Probe"
-msgstr "Sample status"
-
-#: app/templates/lab/snippets/sample.html:110
-msgid "Speichern"
-msgstr "Save"
+"Before we can permit you to participate, we must provide you with"
+"information materials in age-appropriate language. "
+"For minors we additionally ask for consent from parents or legal guardians. "
+"Therefore, we ask if you are of legal age."
 
 #: app/templates/public/base.html:7
 msgid ""
-"Schnelltest der Universität Heidelberg auf das\n"
+"Test der Universität Heidelberg auf das\n"
 "        Covid-19-Coronavirus (SARS-CoV-2)"
-msgstr ""
-"Rapid test of the University of Heidelberg for the \n"
-"        Covid-19-Coronavirus (SARS-CoV-2)"
+msgstr "Test from Heidelberg University for COVID-19 Coronavirus (SARS-CoV-2)"
 
-#: app/templates/public/base.html:43
-msgid "Schnelltest auf COVID-19"
-msgstr "Rapid test for COVID-19"
+#: app/templates/public/base.html:51
+msgid "Test auf COVID-19"
+msgstr "Test for COVID-19"
 
-#: app/templates/public/base.html:44
-msgid "LAMP basierter Schnelltest auf das Coronavirus SARS-CoV-2"
-msgstr "Rapid test for SARS-CoV-2 based on LAMP"
+#: app/templates/public/base.html:52
+msgid "LAMP basierter Test auf das Coronavirus SARS-CoV-2"
+msgstr "LAMP-based test for Coronavirus SARS-CoV-2"
+
+#: app/templates/public/base.html:102
+msgid "Bei "
+msgstr "For "
+
+#: app/templates/public/base.html:102
+msgid "technischen Problemen"
+msgstr "technical difficulties"
+
+#: app/templates/public/base.html:102
+msgid "informieren Sie bitte Simon Anders:"
+msgstr "please inform Simon Anders:"
+
+#: app/templates/public/consent.html:5
+msgid "Einverständnis zur Teilnahme"
+msgstr "Consent to participation"
 
 #: app/templates/public/consent.html:6
-msgid "Teilnahme am Coronavirus-Test"
-msgstr "Participation Coronavirus test"
+msgid "Informationsschrift"
+msgstr "Information brochure"
 
-#: app/templates/public/consent.html:23
-msgid "Ich bin einverstanden und möchte am Test teilnehmen."
-msgstr "I agree and want to participate."
+#: app/templates/public/consent.html:6
+msgid "von"
+msgstr "of"
 
-#: app/templates/public/consent.html:37
+#: app/templates/public/consent.html:44
 msgid "Weiter"
-msgstr "Next"
+msgstr "Continue"
 
 #: app/templates/public/footer.html:5 app/templates/public/pages/contact.html:6
 #: app/templates/public/pages/no-tube.html:24
@@ -562,13 +151,21 @@ msgstr "Contact"
 msgid "Impressum"
 msgstr "Legal notice"
 
+#: app/templates/public/header-index.html:15
+msgid "Zentrum für Molekulare Biologie"
+msgstr "Center for Molecular Biology"
+
+#: app/templates/public/header-index.html:16
+msgid "der Universität Heidelberg (ZMBH)"
+msgstr "of Heidelberg University (ZMBH)"
+
 #: app/templates/public/index.html:9
-msgid "Schnelltest der Universität Heidelberg auf das"
-msgstr "Rapid test of the University of Heidelberg for"
+msgid "Test der Universität Heidelberg auf das"
+msgstr "Test from Heidelberg University for"
 
 #: app/templates/public/index.html:10
 msgid "Covid-19-Coronavirus (SARS-CoV-2)"
-msgstr "SARS-CoV-2"
+msgstr "COVID-19 Coronavirus (SARS-CoV-2)"
 
 #: app/templates/public/index.html:13
 msgid "Ich habe ein Test-Kit erhalten"
@@ -576,784 +173,93 @@ msgstr "I have received a test kit"
 
 #: app/templates/public/index.html:16
 msgid "Mein Test-Ergebnis abfragen"
-msgstr "Check test result"
+msgstr "Get my test results"
 
 #: app/templates/public/index.html:19
 msgid "Mehr über den Test erfahren"
 msgstr "Learn more about the test"
 
-#: app/templates/public/index.html:22
+#: app/templates/public/index.html:23
+msgid "Aktuelles"
+msgstr "Latest news"
+
+#: app/templates/public/index.html:36
+msgid "Keine aktuellen Nachrichten"
+msgstr "No current news"
+
+#: app/templates/public/index.html:38
+msgid "Ältere Nachrichten finden Sie im"
+msgstr "Previous news can be found in the"
+
+#: app/templates/public/index.html:38
+msgid "Archiv"
+msgstr "archive"
+
+#: app/templates/public/index.html:41
 msgid "Diese Seite ist verfügbar in:"
 msgstr "This page is available in:"
 
-#: app/templates/public/index.html:39
-msgid ""
-"Aktuelle Informationen zu unserem Testprogramm <a href=\"https://www.knoplab."
-"de/blank\">finden Sie hier</a>."
-msgstr ""
-"For updates and news on our test programme, <a href=\"https://www.knoplab.de/"
-"blank\">please click here</a>."
-
-#: app/templates/public/index.html:42
-msgid "Hinweis, <strong>nur</strong> für teilnehmer vom <strong>EMBL</strong>: Bitte überprüfen Sie die Web-Adresse auf dem Zettel in Ihrem Testkit, um zu sehen ob Sie es hier registrieren sollen (alte Testkits) oder auf dem neuen EMBL-eigenen Server."
-msgstr "Note <strong>only</strong> for participants from <strong>EMBL</strong>: Please carefully check the web address on your paper slip to see whether you have an old kit (to be registered here) or a new kit (to be registered at EMBL's new server)."
-
-#: app/templates/public/information-text.html:3
-msgid "Informationen für Teilnehmer/innen"
-msgstr "Information for participants"
-
-#: app/templates/public/information-text.html:4
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Worum geht es bei dieser Studie? </h3>\n"
-"<p> Das neuartige Coronavirus, wissenschaftlich SARS-CoV-2 genannt, hält uns "
-"alle in Atem. Um die Covid19-Pandemie in\n"
-"    den Griff zu bekommen, mussten wir uns alle in den letzten Monaten stark "
-"einschränken. Nun wird das öffentliche\n"
-"    Leben wieder geöffnet. Damit wir das Virus dabei unter Kontrolle halten "
-"können, müssen wir rechtzeitig erkennen,\n"
-"    wenn irgendwo wieder gehäuft Infektionen auftreten. Dazu müssen wir "
-"möglichst viele Personen möglichst unkompliziert\n"
-"    auf das Virus testen zu können. Wir erproben ein Verfahren hierzu, und "
-"möchten Sie um Ihre Mithilfe bitten. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> What is this study about? </h5>\n"
-"          <p>The novel corona virus (SARS-CoV-2) is keeping us all on edge. "
-"In order to get this pandemic under control, we had to take strict measures "
-"in the last few months. Now life is gradually returning to its normal state. "
-"However, to keep the virus under control, we still need to detect any "
-"resurgence of the disease. For that we have to be able to test as many "
-"people as possible for the virus as easily as possible. We are testing a "
-"procedure for this, and would like to ask you for your help. </p>\n"
-
-#: app/templates/public/information-text.html:12
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Wie wird normalerweise auf das Virus getestet? </"
-"h3>\n"
-"<p> Personen, die sich mit dem Coronavirus infiziert haben könnten, werden "
-"üblicherweise vom Gesundheitsamt oder ihrem\n"
-"    Hausarzt zu einem Rachenabstrich gebeten. Dabei führt eine medizinische "
-"Fachkraft ein Abstrichstäbchens (eine Art\n"
-"    langes Wattestäbchen) durch den Mund oder die Nase zur Rückwand des "
-"Rachens und streicht dort Material (Sekret und\n"
-"    Zellen) ab. In einem medizinischen Labor wird die Probe dann auf "
-"Vorhandensein von RNA des SARS-Coronavirus 2\n"
-"    getestet. Die dabei verwendete Labortechnik nennt man \"qPCR\". </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> How does a regular test for the virus work? </h5>\n"
-"          <p>  Individuals who might have gotten infected with the novel "
-"coronavirus are usually asked by the public health office (Gesundheitsamt) "
-"or their physician, to take a oropharyngeal swab sample. For this, a health "
-"care specialist inserts a swab test stick (something like a long Q-tip) "
-"through mouth or nose into the throat to collect material (secretion and "
-"cells). In a medical laboratory, the sample will be tested for the presence "
-"of SARS-CoV-2 RNA. The laboratory method used for this is called “qPCR”.</"
-"p>\n"
-
-#: app/templates/public/information-text.html:20
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Was möchten wir anders machen? </h3>\n"
-"<p> Die Methode, die wir erproben möchten, unterscheidet sich in zwei "
-"Punkten:</p>\n"
-"<p>\n"
-"<ol class=\"ui list\">\n"
-"    <li> Wir möchten Speichel statt Rachenabstrich verwenden. Das hat "
-"mehrere Vorteile:\n"
-"        <ul>\n"
-"            <li> Ein Rachenabstrich ist ziemlich unangenehm. In ein kleines "
-"Gefäß zu spucken ist viel einfacher und\n"
-"                angenehmer.\n"
-"            </li>\n"
-"            <li> Den Rachenabstrich muss eine medizinische Fachkraft "
-"durchführen, und Sie müssen dazu in eine Arztpraxis\n"
-"                oder zu einer Teststation kommen. Eine Speichelprobe können "
-"Sie ganz einfach zu Hause selbst\n"
-"                durchführen. In einem Video erklären wir Ihnen, was Sie "
-"machen sollen.\n"
-"            </li>\n"
-"        </ul>\n"
-"    <li> Im Labor möchten wir ein anderes Analyse-Verfahren verwenden. Statt "
-"des üblichen \"qPCR\"-Verfahrens erproben wir\n"
-"        eine Alternative, die weniger technischen Aufwand erfordert, und "
-"\"LAMP\" genannt wird.\n"
-"    </li>\n"
-"</ol>\n"
-"</p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> What do we want to do differently? </h5>\n"
-"          <p> The method we want to test differs in two points:</p>\n"
-"            <ol>\n"
-"              <li> We want to use saliva instead of oropharyngeal swabs as "
-"it has several advantages:\n"
-"                <ul>\n"
-"                  <li> It is rather unpleasant to take an oropharyngeal "
-"swab. Spitting into a tube is much more easy and less unpleasant. </li>\n"
-"                  <li> Taking an oropharyngeal swab sample needs to be "
-"performed by medical professionals and you need to visit a medical office or "
-"a test station. Saliva samples on the other hand can be easily taken at "
-"home. We explain in a video, how to do it correctly. </li>\n"
-"                </ul>\n"
-"              <li> We want to implement a different analysis method in the "
-"laboratory. Instead of the regular “qPCR”-method, we want to test an "
-"alternative, requiring less technical effort, called “LAMP”. </li>\n"
-"            </ol>\n"
-
-#: app/templates/public/information-text.html:41
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Ist unser Test genauso so gut wie der \"offizielle"
-"\" Test? </h3>\n"
-"<p> Das können wir noch nicht abschließend sagen; daher wollen wir die "
-"Methode ja erproben. Bisher können wir folgendes\n"
-"    sagen:\n"
-"<ul class=\"ui list\">\n"
-"    <li> In den letzten Monaten haben Studien mehrere Forschungsgruppen "
-"ergeben, dass das Coronavirus in Speichel ebenso\n"
-"        gut nachweisbar ist wie in Rachenabstrich. Es spricht vieles dafür, "
-"dass der doch sehr unangenehme\n"
-"        Rachenabstrich durch eine Untersuchung von Speichel ersetzt werden "
-"kann. Wie genau man den Speichel am besten\n"
-"        sammeln sollte, ist aber noch nicht ganz klar (siehe unten).\n"
-"    </li>\n"
-"    <li> Beide Laborverfahren, qPCR und LAMP, sind nicht perfekt: Wenn die "
-"Probe nur wenige Viren enthalten, können sie\n"
-"        eine Infektion übersehen. Die etablierte qPCR-Methode ist aber ganz "
-"klar besser darin, Proben mit sehr wenigen\n"
-"        Viren als infiziert zu erkennen, als die LAMP-Methode, die wir "
-"erproben möchten. Wenn unser Test bei Ihnen keine\n"
-"        Viren findet, ist dies also ein weniger verlässliches Resultat als "
-"wenn der etablierte qPCR-Test keine Viren\n"
-"        findet.\n"
-"    </li>\n"
-"    <li> Andererseits ist der LAMP-Test aber technisch deutlich einfacher. "
-"Mit derselben Labor-Kapazität und derselben\n"
-"        Anzahl an Labortechniker/innen können wir sehr viel mehr Personen "
-"testen, als mit dem qPCR-Test möglich wäre.\n"
-"    </li>\n"
-"</ul>\n"
-"</p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> Is our test as good as the “official” test? </h5>\n"
-"          <p> We are not able to definitively answer this question yet. "
-"Hence, we want to test this method. So far, we can state the following: </"
-"p>\n"
-"              <ul>\n"
-"                <li> During the last months, it became evident in multiple "
-"studies, that SARS-CoV-2 can be detected in saliva samples comparably well "
-"as in the regular oropharyngeal swab samples. Numerous points are indicative "
-"that the unpleasant oropharyngeal swab can be replaced by saliva sample "
-"analysis. How exactly to collect your saliva ideally, is yet not fully clear "
-"(see below). </li>\n"
-"                <li> Neither laboratory methods, qPCR or LAMP, are perfect: "
-"If a sample contains only few virus particles, an infection can be "
-"overlooked. The well established qPCR method is clearly better in "
-"identifying samples with few virus particles as infected, compared to the "
-"LAMP method we want to test. If our test does not detect virus particles in "
-"your sample, it is less reliable than a negative qPCR result. </li>\n"
-"                <li>  On the other hand, the LAMP method is technically much "
-"simpler. By the same laboratory capacity and the same number of technical "
-"assistances, more people can be tested, compared to qPCR analysis. </li>\n"
-"              </ul>\n"
-
-#: app/templates/public/information-text.html:63
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Wie läuft die Teilnahme ab? </h3>\n"
-"<ol class=\"ui list\">\n"
-"    <li> Sie sollten ein Teströhrchen (kleiner Plastikbecher mit "
-"Schraubverschluss) erhalten haben. Es enthält etwas\n"
-"        salziges Wasser. (5 ml reines Wasser mit 0.9&#37; Kochsalz.)\n"
-"    </li>\n"
-"    <li> Zunächst sollten Sie nun diese Informationen hier lesen und, wenn "
-"Sie mit allem einverstanden sind, am Ende der\n"
-"        Seite mit einem Mausklick bestätigen, dass Sie teilnehmen möchten.\n"
-"    </li>\n"
-"    <li> Auf der nächsten Seite werden wir Sie dann bitten, Ihre "
-"Kontaktdaten anzugeben (damit das Gesundheitsamt Sie\n"
-"        erreichen kann, falls Sie infiziert sein sollten), sowie den Code, "
-"der auf Ihrem Teströhrchen aufgeklebt ist.\n"
-"        Ihr Name und Ihre Kontaktdaten werden verschlüsselt so "
-"abgespeichert, dass sie uns (dem Team der Universität\n"
-"        Heidelberg) nicht zugänglich sind, sondern nur dem Gesundheitsamt, "
-"das den Versuch mit betreut.\n"
-"    </li>\n"
-"    <li> Dann sehen Sie sich bitte <a href=\"https://player.vimeo.com/"
-"video/480702586\">ein kurzes Video</a> an, dass\n"
-"        Ihnen zeigt, wie genau sie die Speichelprobe abgeben sollen.\n"
-"    </li>\n"
-"    <li> Nun spucken Sie in das Teströhrchen, genau wie im Video gezeigt.</"
-"li>\n"
-"    <li> Schließlich senden Sie uns das Röhrchen per Post zu oder geben es "
-"an einer Sammelstelle ab. Instruktionen\n"
-"        finden Sie auf der Webseite.\n"
-"    </li>\n"
-"</ol>\n"
-"<p><b> Zeitaufwand: </b> Insgesamt sollte Sie das in etwa 15-25 Minuten "
-"Ihrer Zeit kosten. (Wenn Sie das Video schon\n"
-"    kennen, etwas weniger, und wenn ihr nächste Briefkasten ein weiter Weg "
-"ist, etwas mehr.) </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> How do I participate? </h5>\n"
-"\n"
-"            <ol class=“ui list”>\n"
-"              <li>  You should have received a little tube with a screw cap "
-"on it. It contains some salty water (5 mL clean water with 0.9&#37; salt). </"
-"li>\n"
-"              <li>  First, you should read the information here and, if you "
-"agree with everything, confirm at the end of this page by a mouse click that "
-"you are willing to participate. </li>\n"
-"              <li> We will ask you on the next page to enter your contact "
-"data (so that the public health office (Gesundheitsamt) can contact you, in "
-"case of detecting an infection), as well as you barcode on your test tube. "
-"Your name and contact information will be encrypted and stored in a way that "
-"we (the Heidelberg University team) cannot access or read them. Only "
-"employees of the public health office, who supervises this study, have "
-"access to your contact information. </li>\n"
-"              <li> Thereafter, please watch a short <a href=“https://www."
-"youtube.com/watch?v=hVniPRMuCjo&feature=emb_title”>video clip</a> that will "
-"show you how to take your saliva sample. </li>\n"
-"              <li> Now please prepare your sample as shown in the video. </"
-"li>\n"
-"              <li> Either post the sample or deliver it to a collection "
-"point. You find the instructions on the web page. </li>\n"
-"            </ol>\n"
-"\n"
-"        <p> <b> Required time: </b> The whole procedure should take 15 to 25 "
-"minutes. It might take less time, if you know the video already, or more "
-"time, if your next drop-off point is farther away. </p>\n"
-
-#: app/templates/public/information-text.html:88
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Was geschieht, wenn wir in Ihrer Probe das "
-"Coronavirus nachweisen können? </h3>\n"
-"<p> Wenn wir mit unserem LAMP-Verfahren das Virus in einer Probe nachweisen "
-"können (positives Resultat), dann teilen wir\n"
-"    dem Gesundheitsamt den Code auf dem Aufkleber des Teströhrchens mit. "
-"Außerdem werden wir das Resultat auch mit der\n"
-"    etablierten qPCR-Methode nochmals überprüfen, damit wir keinen falschen "
-"Alarm schlagen. </p>\n"
-"<p> Das Gesundheitsamt kontaktiert Sie dann, und informiert Sie. "
-"Typischerweise wird das Gesundheitsamt Sie auffordern,\n"
-"    sich in häusliche Quarantäne zu begeben, Sie beraten, und versuchen, mit "
-"Ihnen zusammen die Personen zu ermitteln,\n"
-"    die Sie angesteckt haben könnten, damit die Übertragung des Virus "
-"gestoppt werden kann. </p>\n"
-"<p> Wir (das Team der Universität) werden Ihre Identität nicht erfahren: nur "
-"das Gesundheitsamt hat Zugriff auf die\n"
-"    Zuordnung von Codes zu Namen und Kontaktdaten. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> What happens if SARS-CoV-2 is detected in your "
-"sample? </h5>\n"
-"          <p> If we can detect SARS-CoV-2 by our LAMP method (positive "
-"result), we inform the public health office about the result and the "
-"respective barcode on the test tube. Furthermore, we will double check the "
-"result by the established qPCR method, to not give a false alarm. </p>\n"
-"          <p> The public health office will then contact and inform you. "
-"Typically, you will be asked tp quarantine yourself. They will counsel you "
-"and try to identify people you might have infected with your assistance to "
-"contain further spread of the virus. </p>\n"
-"          <p> We, the Heidelberg University team, will not learn you "
-"identity. Only the public health office will be able to associate the test "
-"results and their corresponding barcodes to the personal information. </p>\n"
-
-#: app/templates/public/information-text.html:99
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Was bedeutet es, wenn wir in Ihrer Probe kein Virus "
-"finden? </h3>\n"
-"<p> Sie können das Ergebnis auch selbst auf nachfolgender Webseite abfragen. "
-"Auch wenn es negativ sein sollte (kein\n"
-"    Virus nachgewiesen), ist das aber keine völlige Entwarnung! Bedenken Sie "
-"bitte, dass unser Test nicht perfekt ist\n"
-"    und vielleicht (grob geschätzt) nur 60-80&#37; der Infektionen erkennt. "
-"Außerdem: auch wenn Sie im Moment der\n"
-"    Speichelprobe nicht infiziert waren, heißt das nicht, dass Sie sich "
-"nicht vielleicht schon kurze Zeit später\n"
-"    infiziert haben könnten. Oder Sie hatten sich bereits kurz vorher "
-"infiziert, aber das Virus hatte sich noch nicht\n"
-"    hinreichend vermehrt, um in ihrem Speichel nachweisbar zu sein. </p>\n"
-"<p> Solange das Virus im Umlauf ist, müssen wir alle stets vorsichtig sein, "
-"und alle Hygiene- und Abstandsregeln\n"
-"    beachten. Ein negatives Testergebnis ändert nichts daran! </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> What does it mean if we do not find the virus in your "
-"sample? </h5>\n"
-"          <p> You can inquire your test result yourself <a href=“result-"
-"query.html”>here</a>. Even if it is negative (the virus has not been "
-"detected), it does not mean an all-clear signal! Please keep in mind that "
-"our test is not perfect and may only detect about 60-80&#37; of all "
-"infections. Moreover, even if the virus is not be detected in your saliva "
-"sample, you might have gotten infected soon after taking the sample. Or you "
-"might have been infected just before taking the sample and there were not "
-"enough virus particles produced to be detected in your saliva. </p>\n"
-"          <p> As long as the virus is in circulation, we must stay cautious "
-"and observe all hygiene and distance regulations. A negative test result "
-"does not change this! </p>\n"
-
-#: app/templates/public/information-text.html:110
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Wenn die Studie erfolgreich ist, was nutzt das uns "
-"allen? </h3>\n"
-"<p> Sicherlich haben Sie in den Nachrichten über Stadtviertel, Regionen oder "
-"Betriebe gehört, in denen das Virus\n"
-"    unerwartet wieder aufgeflammt ist. Nachdem einige Personen Symptome "
-"zeigten, wurde ihr Umfeld getestet (mit qPCR),\n"
-"    und dann festgestellt, dass bereits sehr viele Personen infiziert sind. "
-"Daher mussten sich dann eine große Anzahl\n"
-"    Personen in Quarantäne begeben, und in ganzen Orten oder Landkreisen "
-"wurden die Kontaktbeschränkungen wieder\n"
-"    verschärft. Um dies zu verhindern, müssen wir engmaschiger testen: Zum "
-"Beispiel könnten man in einem Ort regelmäßig\n"
-"    einen Teil der Bewohner (jede Woche einen anderen Teil) bitten, eine "
-"Speichelprobe abzugeben, und je öfter dies\n"
-"    gemacht wird, und je mehr Personen teilnehmen, desto größer ist die "
-"Chance, einen Ausbruch zu entdecken, solange nur\n"
-"    sehr wenige Personen betroffen sind. Ein solches Vorgehen möchten wir "
-"hier erproben. </p>\n"
-"<p> Hier müssen wir abwägen: Sollte man möglichst viele Tests durchführen, "
-"auch wenn die einzelnen Tests nicht so genau\n"
-"    wie möglich sind, oder sollte man die genauest-möglichen Tests "
-"verwenden, auch wenn man dann deutlich weniger Tests\n"
-"    machen kann? Falls ersteres die bessere Strategie ist, wird unsere "
-"Studie erproben, wie man dies in großem Stil,\n"
-"    vielleicht gar für ganz Deutschland, bewerkstelligen könnte. </p>\n"
-msgstr ""
-"\n"
-"<h3 class=“ui header”> If the study was successful, what would be the "
-"benefit for all of us? </h3>\n"
-" <p> Certainly, you have heard in the news about city districts, regions or "
-"businesses, where an outbreak had unexpectedly occurred. After some people "
-"had shown symptoms, their surroundings were tested (with qPCR) just to "
-"uncover that a great number of people had been already infected. As a "
-"result, many people were needed to go into quarantine and contact "
-"restrictions were tightened again in entire towns or districts. To prevent "
-"this, we need to test in closer networks, for example: in one town or city "
-"we could regularly ask a group of the residents (a different group every "
-"week) to give a saliva sample. The more often this is done, the higher is "
-"the chance, to detect an outbreak early on, when only a few people are "
-"infected. We would like to try out such an approach here. </p>\n"
-"<p> We have to ponder whether we should run as many tests as possible, even "
-"if the individual tests are not as accurate as possible, or we should use "
-"the most accurate tests, even if we can then run significantly fewer tests? "
-"If the former is the better strategy, our study will show, how to test on "
-"large scale, potentially throughout Germany. </p>\n"
-
-#: app/templates/public/information-text.html:125
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Wer führt die Studie durch und wer finanziert sie? "
-"</h3>\n"
-"<p> Die Studie wird von einem Team der Universität Heidelberg durchgeführt. "
-"Eine Liste der beteiligten Wissenschaftler\n"
-"    finden Sie hier: [Link einfügen]. Außerdem werden wir von den örtlichen "
-"Gesundheitsämtern unterstützt. Diese\n"
-"    erhalten die Kontaktdaten und die Ergebnisse und informieren Personen "
-"mit positivem Testergebnis.</p>\n"
-"<p> Die Studie wird finanziert aus Mitteln des baden-württembergischen "
-"Ministeriums für Wissenschaft und Kunst, und aus\n"
-"    Mitteln der Universität Heidelberg (also somit indirekt von Ihnen allen, "
-"den steuerzahlenden Bürgern des Landes\n"
-"    Baden-Württemberg. Vielen Dank.) </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> Who conducts the study and how is it financed? </h5>\n"
-"          <p> This study is being conducted by a team from Heidelberg "
-"University. A list of the participating scientists can be found here: "
-"[INSERT LINK].  We are also supported by the local health authorities who "
-"receive the contact details and the results and inform people with positive "
-"test results for SARS-CoV-2.</p>\n"
-"          <p> This study is financed by the Ministry of Science and Arts "
-"Baden-Württemberg (Ministerium für Wissenschaft und Kunst Baden-Württemberg) "
-"and receives funding from Heidelberg University (in that way by all of you, "
-"the tax-paying citizens of the state Baden-Württemberg. Thank you very "
-"much.) </p>\n"
-
-#: app/templates/public/information-text.html:134
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Was nutzt die Teilnahme Ihnen selbst? </h3>\n"
-"<p> Falls Sie tatsächlich mit dem Coronavirus infiziert sind, besteht eine "
-"gute Chance (aber leider keine Sicherheit),\n"
-"    dass der Test dies auch feststellt. Wenn Sie wissen, dass Sie infiziert "
-"sind, können Sie sich in häusliche\n"
-"    Quarantäne begeben, und so Ihre Familie, ihre Freunde, Kollegen und "
-"Mitmenschen vor Ansteckung schützen. Außerdem\n"
-"    wissen Sie vielleicht etwas früher als sonst, was Ihnen fehlt, falls die "
-"Krankheit schwerer verlaufen sollte. </p>\n"
-"<p> Wenn das Testergebnis negativ ist, kann Ihnen dies aber leider keinen "
-"\"Freibrief\" geben, die Abstands- und\n"
-"    Hygieneregeln nun weniger ernst zu nehmen, denn der Test kann eine "
-"Infektion nicht sicher ausschließen. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> How do you benefit from participating in this study? "
-"</h5>\n"
-"          <p> If you are actually infected with SARS-CoV-2, there is a high "
-"chance (yet not for sure) that our test will detect this. Once you know you "
-"are infected, you can quarantine and, by doing so, protect your family, "
-"friends, fellows and colleagues from getting infected. Additionally, you "
-"would learn earlier the cause of your symptoms, in case of severe illness. </"
-"p>\n"
-"          <p> If you test negative for SARS-CoV-2, however, it must not be "
-"interpreted as a “carte blanche” to neglect hygiene and distance "
-"regulations. Because the test cannot reliably rule out the infection. </p>\n"
-
-#: app/templates/public/information-text.html:143
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Birgt die Teilnahme Risiken für Sie? </h3>\n"
-"<p> Die Abgabe eine Speichelprobe birgt keinerlei körperliche Risiken für "
-"sie. Das Probengefäß ist mit steriler\n"
-"    Kochsalzlösung gefüllt, sein Inhalt ist also ungefährlich. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> Does taking part bear risks for the participant? </"
-"h5>\n"
-"          <p> Taking a saliva sample does not bear any physical risks for "
-"you. The big tube contains sterile salty water and its content is completely "
-"harmless. </p>\n"
-
-#: app/templates/public/information-text.html:148
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Wer soll teilnehmen? </h3>\n"
-"<p> Jeder, dem ein Teströhrchen ausgehändigt wird, ist gebeten, an der "
-"Studie teilzunehmen. Die Verteilung der\n"
-"    Teströhrchen wird typischerweise durch das Gesundheitsamt organisiert, "
-"bzw. an eine Abgabestelle delegiert.\n"
-"    Voraussetzung für die Teilnahme ist auch, dass Sie erklären, dass Sie "
-"sich durch die hier vorliegenden Erläuterungen\n"
-"    ausreichend informiert fühlen, und mit dem beschriebenen Vorgehen "
-"einverstanden sind. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> Who should participate? </h5>\n"
-"          <p> Everyone who received a test kit is asked to take part in the "
-"study. Distribution of the test kits is typically organized by the public "
-"health office (Gesundheitsamt) or delegated to another office. One further "
-"prerequisite for taking part is for you to declare, that you feel "
-"sufficiently informed by the information available here and that you agree "
-"to the explained method. </p>\n"
-
-#: app/templates/public/information-text.html:155
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Wie gewährleisten wir den Schutz Ihrer Daten? </"
-"h3>\n"
-"<p> Wir (das Team der Universität Heidelberg) arbeiten nur mit den "
-"Teströhrchen und identifizieren Sie, die Probanden,\n"
-"    nur über die auf den Teströhrchen aufgeklebten Codes. Das nennt man "
-"Pseudonymisieren. Pseudonymisierung bedeutet,\n"
-"    dass die erhobenen Daten anstatt des Namens/Geburtsdatums etc. mit einem "
-"Nummern-/Buchstabencode gekennzeichnet\n"
-"    werden. Das Gesundheitsamt hingegen hat Zugriff auf die Daten, die Sie "
-"auf der Webseite eingeben (Ihr Name, Ihre\n"
-"    Adresse, Ihre Telefonnummer und/oder Ihre eMail-Adresse), und kann diese "
-"Daten dem Code ihres Teströhrchens\n"
-"    zuordnen. Das ist erforderlich, da Covid19 eine meldepflichtige "
-"Krankheit ist: das Gesundheitsamt muss über die\n"
-"    Identität Infizierter informiert werden. Daher teilen wir dem "
-"Gesundheitsamt die Codes aller positiven Proben mit,\n"
-"    so dass es dann die Infizierten kontaktieren und weitere Maßnahmen "
-"einleiten kann. </p>\n"
-"<p> Der Webserver, auf dem Sie Ihre Daten eingeben, ist so aufgesetzt, dass "
-"nur klar bestimmte Mitarbeiter des\n"
-"    Gesundheitsamtes, nicht aber wir (die Wissenschaftler der Universität "
-"Heidelberg) Zugriff auf Namen und Kontaktdaten\n"
-"    der Probanden haben. </p>\n"
-"<p> Die Stelle, die Teströhrchen ausgibt, darf nicht nach ihrem Namen fragen "
-"und darf keine Aufzeichnungen anfertigen,\n"
-"    die die Codes auf den Teströhrchen mit den Namen der Probanden "
-"verknüpft. Wenn Sie den Verdacht haben, dass sich die\n"
-"    ausgebende Stelle den Code Ihres Teströhrchens und Ihren Namen notiert "
-"haben, informieren Sie uns bitte\n"
-"    unbedingt. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> How do we guarantee the safety of your data? </h5>\n"
-"          <p> We, the Heidelberg University team, only work with your "
-"barcoded test tubes. This is called pseudonymization, meaning that instead "
-"of your name, your address, etc, we exclusively work with a numeric / "
-"alphanumeric code. The public health office, on the other hand, has access "
-"to the data you enter on the website (your name, address, phone numer and / "
-"or email address) and can link this information to the code on your test "
-"tube. This is necessary, since Covid-19 is by law subject to registration. "
-"The public health office must be informed of the identity of infected "
-"people. Therefore, we forward all sample codes with positive test results to "
-"the public health office, allowing them to contact infected people and take "
-"further action. </p>\n"
-"          <p> The web server on which you enter your data is set up in such "
-"a way that only designated employees of the Health office and not us (the "
-"scientists at Heidelberg University) have access to the names and contact "
-"details of the registered people.</p>\n"
-"          <p> The office that issues test tubes may not ask for their name "
-"and may not make any records that link the codes on the test tubes with the "
-"names of the test persons. If you suspect that the issuing office has noted "
-"down the code of your test tube and your name, please inform us.</p>\n"
-
-#: app/templates/public/information-text.html:173
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Weitere Informationen zum Datenschutz </h3>\n"
-"<p> Alle datenschutzrechtlichen Bestimmungen werden eingehalten, ebenso die "
-"Regelungen zur medizinischen\n"
-"    Schweigepflicht, im Kontext des Infektionsschutzgesetzes. Während der "
-"Studie werden keine medizinischen Befunde und\n"
-"    nur der Code Ihres Teströhrchens sowie die Angabe der Kontaktanschrift "
-"von Ihnen erhoben. Diese werden in einer\n"
-"    Datenbank, die nur dem Gesundheitsamt zugänglich ist, gespeichert. "
-"Zusätzlich werden Informationen erhoben, die mit\n"
-"    dem ausgegebenen Code auf dem Teströhrchen verknüpft sind. Diese sind: "
-"Ausgabeort des Teströhrchens und Ausgabedatum\n"
-"    des Teströhrchens. </p>\n"
-"<p> Für die Studie wichtigen statistischen Daten werden vom Gesundheitsamt "
-"anonymisiert und an die Organisatoren der\n"
-"    Studie weitergegeben. Die Studienleitung wird alle angemessenen Schritte "
-"unternehmen, um den Schutz Ihrer Daten\n"
-"    gemäß den Datenschutzstandards der Europäischen Union zu gewährleisten. "
-"Die Daten sind gegen unbefugten Zugriff\n"
-"    gesichert. Eine Entschlüsselung erfolgt nur durch das Gesundheitsamt. "
-"Die während der Studie erhobenen Daten werden\n"
-"    nach Studienabschluss vernichtet. </p>\n"
-"<p> Sie haben das Recht, vom Verantwortlichen (s.u.) Auskunft über die von "
-"Ihnen gespeicherten personenbezogenen Daten\n"
-"    zu verlangen. Ebenfalls können Sie die Berichtigung unzutreffender Daten "
-"sowie die Löschung der Daten oder\n"
-"    Einschränkung deren Verarbeitung verlangen. </p>\n"
-"<p> Verantwortlich für die studienbedingte Erhebung personenbezogener Daten "
-"ist das Gesundheitsamt, sowie wir,\n"
-"    das Team der Universität Heidelberg; hier spezifisch Dr. Simon Anders.</"
-"p>\n"
-"<p> Bei Anliegen zur Datenverarbeitung und zur Einhaltung der "
-"datenschutzrechtlichen Anforderungen können Sie sich an\n"
-"    den Datenschutzbeauftragten des Gesundheits- oder Landratsamts wenden. "
-"Für Test-Aktionen, die über das\n"
-"    Gesundheitsamt des Rhein-Neckar-Kreises organisiert werden, ist dies: </"
-"p>\n"
-"<ul style=\"list-style-type:none;\">\n"
-"    <li> Der behördliche Datenschutzbeauftragter <br>\n"
-"        des Landratsamtes Rhein-Neckar-Kreis <br>\n"
-"        Kurfürsten-Anlage 38-40, 69115 Heidelberg <br>\n"
-"        Tel. 06221 522-1314 <br>\n"
-"        E-Mail: behoerdlicherdatenschutzbeauftragter@rhein-neckar-kreis.de\n"
-"    </li>\n"
-"</ul>\n"
-"<p> Im Falle einer rechtswidrigen Datenverarbeitung haben Sie das Recht, "
-"sich bei folgender Aufsichtsbehörde zu\n"
-"    beschweren:</p>\n"
-"<ul style=\"list-style-type:none;\">\n"
-"    <li> Der Landesbeauftragte für den Datenschutz und die "
-"Informationsfreiheit Baden-Württemberg <br>\n"
-"        Postfach 10 29 32, 70025 Stuttgart <br>\n"
-"        Königstraße 10a, 70173 Stuttgart <br>\n"
-"        Tel.: 0711 61 55 41 - 0 <br>\n"
-"        Fax: 0711 61 55 41 - 15 <br>\n"
-"        E-Mail: poststelle@lfdi.bwl.de <br>\n"
-"        Internet: http://www.baden-wuerttemberg.datenschutz.de\n"
-"    </li>\n"
-"</ul>\n"
-msgstr ""
-"\n"
-"        <h5 class=“ui header”> Further information regarding data protection "
-"</h5>\n"
-"          <p> We follow all data protection regulations as well as medical "
-"confidentiality regulations as required by the infection prevention law "
-"(Infektionsschutzgesetz). No cllinical report will be produced during the "
-"study and only the code on your test tube as well as your contact "
-"information will be recorded. These data will be stored in a data base "
-"exclusively accessible to employees of the public health office. "
-"Additionally, information in the context of distribution of the sample tubes "
-"will be stored, i.e. location and date of distribution. </p>\n"
-"          <p> Statistical data, important for this study, will be anonymized "
-"by the public health office and forwarded to the organizers of the study. "
-"The study coordinator will implement all measures necessary to protect your "
-"data according to the data protection standards of the European Union. The "
-"data are protected against unauthorized access. Data can only be decrypted "
-"by the public health office. Data collected during this study will be "
-"deleted after the completion of the study.</p>\n"
-"          <p> You have the right to request information about your personal "
-"data from the study coordinator. Additionally, you may demand correction of "
-"faulty data, as well as deletion of all data, or limit their processing.</"
-"p>\n"
-"          <p> Responsible for the study-related personal data collection is "
-"the public health office, as well as we,\n"
-"\t\tthe Heidelberg University team, here specifically: Dr. Simon Anders.</"
-"p>\n"
-"\n"
-"          <p> In case of concerns about the compliance with data protection "
-"requirements, you can contact the data protection officer of the public "
-"health office or the administrative district office.\n"
-"\t\tFor test actions organized by the public health office Rhein-Neckar "
-"Kreis this is:</p>\n"
-"\n"
-"          <ul style=“list-style-type:none;”>\n"
-"            <li> Der behördliche Datenschutzbeauftragte <br>\n"
-"              des Landratsamtes Rhein-Neckar-Kreis <br>\n"
-"              Kurfürsten-Anlage 38-40, 69115 Heidelberg <br>\n"
-"              Tel. 06221 522-1314 <br>\n"
-"              E-Mail: behoerdlicherdatenschutzbeauftragter@rhein-neckar-"
-"kreis.de </li>\n"
-"          </ul>\n"
-"\n"
-"          <p> In case of illegal data processing, you have the right to file "
-"a complaint to the following regulatory authority:</p>\n"
-"          <ul style=“list-style-type:none;”>\n"
-"            <li> Der Landesbeauftragte für den Datenschutz und die "
-"Informationsfreiheit Baden-Württemberg <br>\n"
-"                          Postfach 10 29 32, 70025 Stuttgart <br>\n"
-"                          Königstraße 10a, 70173 Stuttgart <br>\n"
-"                          Tel.: 0711 61 55 41 - 0 <br>\n"
-"                          Fax: 0711 61 55 41 - 15 <br>\n"
-"                          E-Mail: poststelle@lfdi.bwl.de <br>\n"
-"                          Internet: http://www.baden-wuerttemberg."
-"datenschutz.de\n"
-"            </li>\n"
-"          </ul>\n"
-
-#: app/templates/public/information-text.html:215
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Ist die Teilnahme freiwillig? Können Sie Ihre "
-"Zustimmung widerrufen? </h3>\n"
-"<p> Die Teilnahme ist freiwillig. Wenn Sie nicht teilnehmen möchten, füllen "
-"Sie einfach das Webformular nicht aus und\n"
-"    werfen Sie das Teströhrchen weg oder geben Sie es jemand anderem der "
-"sich testen lassen möchte. Eine Teilnahme ist\n"
-"    gratis. Wenn Sie bereits Ihre Einwilligung gegeben haben und auch das "
-"Teströhrchen abgegeben haben und jetzt Ihre\n"
-"    widerrufen möchten, wenden Sie sich bitte an die Studienleitung. Eine "
-"Kontaktemail finden Sie auf der Webseite. Bei\n"
-"    einem Widerruf werden Ihre persönlichen Daten gelöscht, so dass das "
-"Ergebnis Ihrer Probe Ihnen nicht mehr zugeordnet\n"
-"    werden kann. Bei Rücktritt von der Studie kann auf Wunsch bereits "
-"gewonnenes Material vernichtet werden. Sollte Ihre\n"
-"    Probe aber bereits analysiert worden sein, z.B. weil Sie sich zu spät "
-"gemeldet haben, und der Test sollte sich als\n"
-"    positiv erweisen, werden wir den Code der Probe dennoch an das "
-"Gesundheitsamt übermitteln, da wir aufgrund der\n"
-"    Meldepflicht dazu verpflichtet sind. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> Is participation voluntary? Can you retract your "
-"consent? </h5>\n"
-"            <p> Participation is voluntary. If you do not wish to "
-"participate, simply do not fill in the online form and discard your test "
-"tube or give it to someone else who wants to participate and get tested. "
-"Participation is free of charge. If you already gave your consent and also "
-"already handed in your test tube, please contact the study coordinator. You "
-"find the contact information on the webpage. Upon retraction of your consent "
-"your personal data will be deleted so that your result cannot be traced back "
-"to you. In addition, already generated material can be destroyed, if you "
-"wish so. If your sample was already analyzed, for example because you "
-"contacted us too late, and your sample was already tested positive for SARS-"
-"CoV-2, we will still forward the information about the positive test result "
-"including the respective barcode to the public health office, as legally "
-"required by the Infektionsschutzgesetz. </p>\n"
-
-#: app/templates/public/information-text.html:227
-msgid ""
-"\n"
-"<h3 class=\"ui header\"> Haben Sie noch Fragen? </h3>\n"
-"<p> Für weitere Informationen sowie für Auskünfte über allgemeine Ergebnisse "
-"und den Ausgang der Studie steht Ihnen als\n"
-"    Leiter der Studie Herr Prof. Michael Knop (m.knop@zmbh.uni-heidelberg."
-"de, Tel. 06221 54-6800) oder auch Herr Dr.\n"
-"    Simon Anders (s.anders@zmbh.uni-heidelberg.de, Tel. 06221 54-6800) zur "
-"Verfügung. </p>\n"
-msgstr ""
-"\n"
-"<h5 class=“ui header”> Do you have further questions? </h5>\n"
-"            <p> If you have more questions or would like to know more about "
-"the overall results and the final outcome of the study please contact the "
-"study coordinator, Prof. Michael Knop (m.knop@zmbh.uni-heidelberg.de, Tel. "
-"06221 54-6800) or Dr. Simon Anders (s.anders@zmbh.uni-heidelberg.de, Tel. "
-"06221 54-6800). </p>\n"
-
 #: app/templates/public/instructions.html:7
 msgid "Anleitung Probennahme"
-msgstr "How to take a sample"
+msgstr "Sampling Procedures"
 
 #: app/templates/public/instructions.html:10
 msgid ""
 "Bitte sehen Sie sich das folgende kurze Video an, um zu erfahren,\n"
 "        was Sie nun machen müssen."
-msgstr "Please watch the following video that shows you what you need to do."
+msgstr ""
+"Please watch the following short video to learn"
+" the next steps."
 
 #: app/templates/public/instructions.html:28
 msgid ""
-"\n"
-"        Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten "
-"Sie uns das Röhrchen bitte zu.\n"
-"        "
+"Wenn Sie das Röhrchen befüllt haben, wie im Video gezeigt, leiten Sie uns "
+"das Röhrchen bitte zu."
 msgstr ""
-"\n"
-"After the filling the tube as shown please mail us the sample. "
+"After you have filled the tube, as shown in the video, please"
+" send us the tube."
+
+#: app/templates/public/instructions.html:33
+msgid "Vielen Dank für Ihre Teilnahme."
+msgstr "Thank you very much for your participation."
 
 #: app/templates/public/instructions.html:35
-msgid "Vielen Dank für Ihre Teilnahme."
-msgstr "Thank you for your participation."
-
-#: app/templates/public/instructions.html:37
 msgid ""
 "Morgen oder übermorgen können Sie Ihr Ergebnis auf dieser Seite abfragen."
-msgstr "In one or two days you can retrieve your test result on this website."
+msgstr ""
+"You will be able to retrieve your results tomorrow or the day after tomorrow on this page."
 
-#: app/templates/public/instructions.html:44
+#: app/templates/public/instructions.html:42
 msgid "Notieren Sie sich dazu Ihren Zugangscode."
-msgstr "Please note your access code."
+msgstr "Please write down your access code"
+
+#: app/templates/public/news-archive.html:8
+msgid "Nachrichten Archiv"
+msgstr "News Archive"
+
+#: app/templates/public/news-archive.html:55
+msgid "Bisher sind keine Nachrichten im Archiv."
+msgstr "There are no news in the archive yet."
 
 #: app/templates/public/pages/contact.html:7
 #: app/templates/public/pages/impressum.html:7
 msgid "Diese Studie wird organisert vom "
-msgstr "This study is organised by "
+msgstr "This study is organized by the "
 
-#: app/templates/public/pages/contact.html:10
-#: app/templates/public/pages/impressum.html:10
-msgid ""
-"<strong\n"
-"        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) "
-"<br />\n"
-"        Im Neuenheimer Feld 282 <br />\n"
-"        69120 Heidelberg </strong\n"
-"      >"
-msgstr ""
-"<strong\n"
-"        >Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH) "
-"<br />\n"
-"        Im Neuenheimer Feld 282 <br />\n"
-"        69120 Heidelberg </strong\n"
-"      >"
+#: app/templates/public/pages/contact.html:11
+#: app/templates/public/pages/impressum.html:11
+msgid "Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH)"
+msgstr "Center for Molecular Biology of Heidelberg University (ZMBH)"
 
 #: app/templates/public/pages/contact.html:17
 #: app/templates/public/pages/impressum.html:17
 msgid "in Zusammenarbeit mit dem"
-msgstr "in collaboration with"
+msgstr "in collaboration with the"
 
-#: app/templates/public/pages/contact.html:20
-#: app/templates/public/pages/impressum.html:20
-msgid ""
-"<strong\n"
-"        >Gesundheitsamt Rhein-Neckar-Kreis <br />\n"
-"        Kurfürsten-Anlage 38-40 <br />\n"
-"        69115 Heidelberg </strong\n"
-"      >"
-msgstr ""
-"<strong\n"
-"        >Gesundheitsamt Rhein-Neckar-Kreis <br />\n"
-"        Kurfürsten-Anlage 38-40 <br />\n"
-"        69115 Heidelberg </strong\n"
-"      >"
+#: app/templates/public/pages/contact.html:21
+#: app/templates/public/pages/impressum.html:21
+msgid "Gesundheitsamt Rhein-Neckar-Kreis"
+msgstr "Health Department of the Rhein-Neckar district"
 
 #: app/templates/public/pages/contact.html:27
 #: app/templates/public/pages/impressum.html:27
@@ -1365,24 +271,21 @@ msgstr "For questions please contact"
 msgid ""
 ",\n"
 "      oder "
-msgstr ""
-",\n"
-"      oder "
+msgstr ", or"
 
 #: app/templates/public/pages/contact.html:36
 #: app/templates/public/pages/impressum.html:36
 msgid ""
 ",\n"
 "      beide am ZMBH "
-msgstr ""
-",\n"
-"      both at ZMBH "
+msgstr ", both at the ZMBH"
 
 #: app/templates/public/pages/impressum.html:41
 msgid ""
 "Für detaillierte Informationen zur Studie, lesen Sie bitte\n"
 "    unseren Informationstext."
-msgstr "For more details about the study please read our information text."
+msgstr ""
+"For more detailed information about the study, please refer to our information text"
 
 #: app/templates/public/pages/impressum.html:46
 #: app/templates/public/pages/impressum.html:57
@@ -1398,20 +301,61 @@ msgid ""
 "finden\n"
 "    Sie im nachfolgenden Informationstext."
 msgstr ""
-"The responsible person for the study and the website are Prof. Knop and Dr. "
-"Anders, respectively. The study has been approved by ethics commission of "
-"the University of Heidelberg. For notes regarding <b> data protection </b> "
-"please consult the following information text."
+"The responsible person for the study and the website are Prof. Knop and Dr. Anders, respectively."
+" This study was approved by the ethics committee"
+" of"
+" Heidelberg Univeristy. For notes regarding data protection,"
+" please consult the"
+" following information text."
 
 #: app/templates/public/pages/information.html:7
 msgid ""
 "Erprobung eines LAMP-basierten Tests auf das Coronavirus\n"
 "    SARS-CoV-2"
-msgstr "Assessment of a LAMP-based text for the SARS-CoV-2 coronavirus"
+msgstr ""
+"Testing a LAMP-based test for Coronavirus(es)"
+" SARS-CoV-2"
+
+#: app/templates/public/pages/information.html:11
+msgid "Wie funktioniert die Probennahme?"
+msgstr "How does sampling work?"
+
+#: app/templates/public/pages/information.html:28
+msgid "Informationen zum Test"
+msgstr "Test Information"
+
+#: app/templates/public/pages/information.html:31
+#: app/templates/public/pages/information.html:46
+msgid "für Erwachsene"
+msgstr "for adults"
+
+#: app/templates/public/pages/information.html:32
+#: app/templates/public/pages/information.html:47
+msgid "für Jugendliche"
+msgstr "for teenagers"
+
+#: app/templates/public/pages/information.html:33
+#: app/templates/public/pages/information.html:48
+msgid "für Kinder"
+msgstr "for children"
+
+#: app/templates/public/pages/information.html:34
+#: app/templates/public/pages/information.html:49
+msgid "für Eltern/Sorgebrechtigte"
+msgstr "for parents/legal guardians"
+
+#: app/templates/public/pages/information.html:35
+#: app/templates/public/pages/information.html:50
+msgid "zuklappen"
+msgstr "close"
+
+#: app/templates/public/pages/information.html:43
+msgid "Informationen zur Biobank"
+msgstr "Information about the biobank"
 
 #: app/templates/public/pages/internal-error.html:6
 msgid "Überschrift"
-msgstr "Heading"
+msgstr "Caption"
 
 #: app/templates/public/pages/multiple-registeration.html:6
 msgid "Mehrfach registrierter Barcode"
@@ -1420,10 +364,10 @@ msgstr "Barcode registered multiple times"
 #: app/templates/public/pages/multiple-registeration.html:8
 msgid ""
 "Für diesen Barcode wurde das Registrier-Formular mehrmals\n"
-"    ausgefüllt, mit verschiedenen Passwörtten. "
+"    ausgefüllt, mit verschiedenen Passwörtern."
 msgstr ""
-"For this barcode the registration form has been filled out multiple times "
-"with different passwords. "
+"A registration form for this barcode has been"
+" completed multiple times with different passwords."
 
 #: app/templates/public/pages/multiple-registeration.html:12
 msgid "Bitte kontaktieren Sie uns:"
@@ -1431,7 +375,7 @@ msgstr "Please contact us:"
 
 #: app/templates/public/pages/multiple-registeration.html:14
 msgid "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
-msgstr "E-mail (s.anders@zmbh.uni-heidelberg.de)"
+msgstr "E-Mail (s.anders@zmbh.uni-heidelberg.de)"
 
 #: app/templates/public/pages/no-tube.html:7
 msgid ""
@@ -1440,8 +384,10 @@ msgid ""
 "einer\n"
 "        Plastik-Pipette."
 msgstr ""
-"Our test kits consist of a large test tube containing salt water, a small "
-"tube with a barcode, and a plastic pipette."
+"Our test kits include a large tube with"
+" saline water, a small tube with a printed barcode, and"
+" a"
+" plastic pipette"
 
 #: app/templates/public/pages/no-tube.html:12
 msgid ""
@@ -1450,9 +396,9 @@ msgid ""
 "Test-Kit\n"
 "        erhalten hat, kann teilnehmen."
 msgstr ""
-"We distribute these kits in the course of testing programmes, for example to "
-"all employees of an institution. Only those who received a test kit as part "
-"of such a programme may participate."
+"We distribute these kits during testing campaigns, for example to"
+" all employees at an institute. Only people who have received test kits through such campaigns"
+" may participate."
 
 #: app/templates/public/pages/no-tube.html:17
 msgid ""
@@ -1467,11 +413,12 @@ msgid ""
 "uns.\n"
 "        "
 msgstr ""
-"Please understand that going through the effort of setting up a testing "
-"procedure only pays off if we can test a larger number of people. We can "
-"therefore not offer the test to individual people at the moment. However, "
-"you can help our efforts by distributing test kits to a selected larger "
-"group of people. If you have a suggestion please contact us. "
+"Please understand that the effort to implement a testing campaign is only"
+" worthwhile if we can test a larger number of people."
+" Unfortunately, we cannot offer the tests to individuals. However, if"
+" you"
+" would like to help us and would like to organize the distribution of test kits to a larger group,"
+" please contact us with a proposal."
 
 #: app/templates/public/pages/password-not-matched.html:6
 msgid "Passwörter stimmen nicht überein"
@@ -1481,145 +428,165 @@ msgstr "Passwords do not match"
 msgid ""
 "Bitte gehen Sie zurück zur vorigen Seite und versuchen Sie es\n"
 "    noch einmal."
-msgstr "Please go back to the previous page and try again."
+msgstr "Please return to the previous page and try again"
 
-#: app/templates/public/pages/test-ERROR.html:6
+#: app/templates/public/pages/result_ui_segment.html:19
+msgid "Stand"
+msgstr "Status"
+
+#: app/templates/public/pages/result_ui_segment.html:21
+msgid "um"
+msgstr "at"
+
+#: app/templates/public/pages/test-ERROR.html:4
 msgid "Fehler"
 msgstr "Error"
 
 #: app/templates/public/pages/test-ERROR.html:8
 msgid "Es ist ein Fehler eingetreten: "
-msgstr "An error has occurred: "
+msgstr "An error has occurred:"
 
-#: app/templates/public/pages/test-ERROR.html:12
-#: app/templates/public/pages/test-UNDEF.html:12
-msgid "Bitte kontaktieren Sie uns ggf.:"
-msgstr "Please contact us:"
+#: app/templates/public/pages/test-ERROR.html:11
+#: app/templates/public/pages/test-LAMPFAIL.html:16
+#: app/templates/public/pages/test-LAMPREPEAT.html:17
+#: app/templates/public/pages/test-MESSAGE.html:13
+#: app/templates/public/pages/test-PCRWEAKPOS.html:40
+#: app/templates/public/pages/test-UNDEF.html:11
+msgid "Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: "
+msgstr "In case you have questions regarding this, please contact us at: "
 
-#: app/templates/public/pages/test-LAMPFAIL.html:6
+#: app/templates/public/pages/test-LAMPFAIL.html:4
 msgid "Test fehlgeschlagen"
-msgstr "Test failed"
+msgstr "Test was unsuccessful"
 
 #: app/templates/public/pages/test-LAMPFAIL.html:8
 msgid ""
-"Leider ist es bei Ihrer Probe zu einem technsichen Problem\n"
-"    gekommen, so dass wir Ihre Probe nicht auswerten konnten."
+"Leider ist es bei Ihrer Probe zu einem technischen Problem\n"
+"gekommen, so dass wir Ihre Probe nicht auswerten konnten."
 msgstr ""
-"When analyzing the sample a technical problem occurred. We were therefore "
-"not able to analyze your sample and cannot provide you with a test result. "
-"We are very sorry about that."
+"Unfortunately a technical problem occurred with your sample."
+" We were therefore unable to evaluate your sample."
 
 #: app/templates/public/pages/test-LAMPFAIL.html:12
 msgid ""
 "Solche technischen Problem sind selten, kommen aber vor.\n"
-"    Es tut uns leid, dass wir Ihnen deshalb kein Ergebnis mitteilen können. "
+"Es tut uns leid, dass wir Ihnen deshalb kein Ergebnis mitteilen können. "
 "Geben Sie\n"
-"    bitte bei nächster Gelegenheit eine neue Probe ab."
+"bitte bei nächster Gelegenheit eine neue Probe ab."
 msgstr ""
-"These technical problems are rare but occur sometimes. Please understand "
-"that we cannot give a result.\n"
-"Please submit a new sample when possible."
+"Such technical problems are rare, but they do happen."
+" We apologize that we are unable to give you a result at this time"
+"Please provide"
+" a new sample at the next opportunity."
 
-#: app/templates/public/pages/test-LAMPFAIL.html:17
+#: app/templates/public/pages/test-LAMPFAIL.html:18
+#: app/templates/public/pages/test-LAMPREPEAT.html:20
 msgid "Bleiben Sie dran, wir tun unser Bestes."
-msgstr "Please stay tuned, we are doing our best."
+msgstr "Stay tuned, we are doing our best."
 
-#: app/templates/public/pages/test-LAMPINC.html:6
-#: app/templates/public/pages/test-WAIT-LONG.html:6
-#: app/templates/public/pages/test-WAIT.html:6
+#: app/templates/public/pages/test-LAMPINC.html:4
+#: app/templates/public/pages/test-WAIT-LONG.html:4
+#: app/templates/public/pages/test-WAIT.html:4
 msgid "Ergebnis liegt noch nicht vor"
-msgstr "Result pending"
+msgstr "Result is not yet available"
 
 #: app/templates/public/pages/test-LAMPINC.html:8
 msgid ""
 "In unserer ersten Analyse haben wir für hre Probe kein klares\n"
-"    Ergebnis ablesen können. Solche nicht-eindeutigen Ergebnisse kommen "
+"  Ergebnis ablesen können. Solche nicht eindeutigen Ergebnisse kommen "
 "leider\n"
-"    bei unserem LAMP-Verfahren stets bei einem kleinen Bruchteil der Proben "
+"  bei unserem LAMP-Verfahren stets bei einem kleinen Bruchteil der Proben "
 "vor."
 msgstr ""
-"In our first analysis of the sample we could not find a definite result. "
-"Those inconclusive results rarely happen at our LAMP-tests."
+"In our first analysis, we did not get a clear result for your sample."
+" Unfortunately,"
+" such inconclusive results occur in a small fraction of our samples using the LAMP procedure."
 
 #: app/templates/public/pages/test-LAMPINC.html:13
 msgid ""
 "Wir überprüfen Ihre Probe daher nun erneut, diesmal mit einem\n"
-"    anderen Labor-Verfahren, der Standard-Methode RT-PCR. Dies dauert "
-"höchsten\n"
-"    24 Stunden. Fragen Sie also bitte Ihr Ergebnis morgen (d.h., am Abend "
-"des Tages\n"
-"    nach der Abgabe der Probe) nochmals hier ab; bis dann sollte diese "
+"  anderen Laborverfahren, der Standardmethode RT-PCR. Dies dauert höchsten\n"
+"  24 Stunden. Fragen Sie also bitte Ihr Ergebnis morgen (d.h., am Abend des "
+"Tages\n"
+"  nach der Abgabe der Probe) nochmals hier ab; bis dann sollte diese "
 "Meldung\n"
-"    durch das endgültige Ergebnis ersetzt worden sein."
+"  durch das endgültige Ergebnis ersetzt worden sein."
 msgstr ""
-"We verify the sample again with a different test method (standard PCR-"
-"testing). This could take another 24 hours until the result for the "
-"validation could be received here (may check here again in the evening of "
-"the following day after the sample was handed in). After verification this "
-"message should be replaced with a definite result."
+"Therefore, we will now check your sample again, this time using a"
+" different laboratory procedure, the standard RT-PCR method. This will take a maximum of"
+" 24 hours. Please check your result here again tomorrow (i.e., the following"
+" evening after the sample was submitted);by then, this message should have"
+" been replaced by the final result."
 
-#: app/templates/public/pages/test-LAMPNEG.html:7
-#: app/templates/public/pages/test-PCRNEG.html:7
+#: app/templates/public/pages/test-LAMPNEG.html:4
+#: app/templates/public/pages/test-PCRNEG.html:4
+msgid "Negativ"
+msgstr "Negative"
+
+#: app/templates/public/pages/test-LAMPNEG.html:8
+#: app/templates/public/pages/test-PCRNEG.html:8
 msgid ""
 "In Ihrer Probe konnte das Coronavirus SARS-CoV-2\n"
-"    <strong> nicht </strong> nachgewiesen werden. Vermutlich sind Sie also "
+"  <strong> nicht </strong> nachgewiesen werden. Vermutlich sind Sie also "
 "nicht\n"
-"    mit Covid-19 infiziert."
+"  mit Covid-19 infiziert."
 msgstr ""
-"The SARS-CoV-2 coronavirus could \n"
-"    <strong> not </strong> be detected in your sample. You are probably not "
-"infected with Covid-19."
+"The Coronavirus SARS-CoV-2"
+" was <strong> not </strong> detected in your sample. You are presumably"
+" not"
+" infected with Covid-19."
 
-#: app/templates/public/pages/test-LAMPNEG.html:11
-#: app/templates/public/pages/test-PCRNEG.html:11
+#: app/templates/public/pages/test-LAMPNEG.html:12
+#: app/templates/public/pages/test-PCRNEG.html:12
 msgid "Bedenken Sie aber:"
-msgstr "However, please consider:"
+msgstr "Please be aware however:"
 
-#: app/templates/public/pages/test-LAMPNEG.html:14
+#: app/templates/public/pages/test-LAMPNEG.html:15
 msgid ""
 "Unser Test ist nicht perfekt und nicht so genau wie der\n"
-"      \"offizielle\" PCR-Test. Daher kommt es vor, dass der Test "
-"Infektionen\n"
-"      übersieht."
+"    \"offizielle\" PCR-Test. Daher kommt es vor, dass der Test Infektionen\n"
+"    übersieht."
 msgstr ""
-"Our test is not as accurate as the conventional PCR test. It may happen that "
-"infections go undetected."
+"Our tests are not perfect and are not as accurate as an"
+" \"official\" PCR-test. Thus, it may happen that the test misses an infection."
 
-#: app/templates/public/pages/test-LAMPNEG.html:20
-#: app/templates/public/pages/test-PCRNEG.html:14
+#: app/templates/public/pages/test-LAMPNEG.html:21
 msgid ""
-"Selbst, wenn Ihre Probe wirklich keinen Virus enthielt:\n"
-"      Vielleicht war das Virus nicht in Ihrem Speichel, aber anderswo im "
+"Selbst wenn Ihre Probe wirklich kein Virus enthielt:\n"
+"    Vielleicht war das Virus nicht in Ihrem Speichel, aber anderswo im "
 "Körper.\n"
-"      Oder Sie haben sich in den letzten Tagen angesteckt, erst nachdem Sie "
+"    Oder Sie haben sich in den letzten Tagen angesteckt, erst nachdem Sie "
 "die\n"
-"      Probe abgegeben haben. Oder Sie treffen morgen jemanden, der Sie\n"
-"      ansteckt."
+"    Probe abgegeben haben. Oder Sie treffen morgen jemanden, der Sie\n"
+"    ansteckt."
 msgstr ""
-"In case the saliva sample did not contain any virus it is still possible "
-"that the virus was present in another location in your body. Alternatively, "
-"it is possible that you contracted or will contract the virus after handing "
-"in the sample."
+"Although your sample did not contain the virus:"
+" the virus may not have been in your saliva, but elsewhere in your"
+" body."
+" Or you may have been infected in the last few days, only after you"
+" submitted the sample. Or you may meet someone tomorrow who may"
+" infect you."
 
-#: app/templates/public/pages/test-LAMPNEG.html:28
-#: app/templates/public/pages/test-PCRNEG.html:22
+#: app/templates/public/pages/test-LAMPNEG.html:29
+#: app/templates/public/pages/test-PCRNEG.html:21
 msgid ""
 "<b>Daher:</b> Seien Sie weiterhin vorsichtig. Halten Sie Abstand\n"
-"    zu anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten "
-"Sie\n"
-"    weiterhin alle Regelungen zur vermeidung von Ansteckungen."
+"  zu anderen, tragen Sie in der Öffentlichkeit eine Maske, und beachten Sie\n"
+"  weiterhin alle Regelungen zur vermeidung von Ansteckungen."
 msgstr ""
-"<b>Therefore:</b> Please continue to be cautious. Keep distance, wear a mask "
-"in public spaces and follow general hygiene measures and safety procedures "
-"to minimise the risk of infection."
+"<b>Therefore:</b> please continue to be careful. Keep your distance"
+" to others, wear a mask in public, and follow"
+" all regulations to avoid infection."
 
-#: app/templates/public/pages/test-LAMPNEG.html:32
+#: app/templates/public/pages/test-LAMPNEG.html:33
 msgid ""
 "Wir weisen auch darauf hin, dass unser Test nicht\n"
-"    zertifiziert ist."
-msgstr "We inform that our LAMP-test is not certified."
+"  zertifiziert ist."
+msgstr ""
+"We would also like to make you aware that our test"
+" is not certified."
 
-#: app/templates/public/pages/test-LAMPPOS.html:6
+#: app/templates/public/pages/test-LAMPPOS.html:4
 msgid "Möglicherweise positiv"
 msgstr "Possibly positive"
 
@@ -1627,100 +594,283 @@ msgstr "Possibly positive"
 msgid ""
 "Ihre Probe ist möglicherweise positiv: Unsere erste Analyse hat das "
 "Vorhandensein\n"
-"    des Covid19-Coronavirus angezeigt. Da unser Test-Verfahren aber noch "
-"experimentell, haben wir Ihre Probe\n"
-"    nun an der virologische Labor der Universitätsklinik weiter gegeben, wo "
+"  des Covid19 Coronavirus angezeigt. Da unser Testverfahren aber noch "
+"experimentell ist, haben wir Ihre Probe\n"
+"  nun an das virologische Labor der Universitätsklinik weiter gegeben, wo "
 "dieses Ergebnis nun überprüft wird.\n"
-"    Wenn Sie am Abend des Tages nach der Probenabgabe nochmals hier Ihr "
+"  Wenn Sie am Abend des Tages nach der Probenabgabe nochmals hier Ihr "
 "Ergebnis abfragen (wieder mit Code),\n"
-"    werden Sie das endgültige Resultat erfahren. "
+"  werden Sie das endgültige Resultat erfahren."
 msgstr ""
-"Your sample was possibly positive: Our first tests have shown that the "
-"sample could contain the COVID-19 corona virus. Our LAMP-test is still "
-"experimental and we will verify the test result with the standard PCR-test "
-"at the university hospital. You may check the result page again in the "
-"evening on the next day after submitting the test to receive the definite "
-"result. "
+"Your sample may be positive: our initial analysis"
+" indicated"
+" the presence of Covid 19 (coronavirus). However, since our testing procedure is still"
+" experimental, we have forwarded your sample to"
+" the virology laboratory at the University Hospital, where"
+" this result is now being verified."
+" You will be informed of your final result if you check here again the following evening after you submitted your"
+" sample (with the code)."
 
 #: app/templates/public/pages/test-LAMPPOS.html:15
+msgid ""
+"Bis dahin seien Sie bitte sehr vorsichtig, denn möglicherweise sind Sie hoch "
+"ansteckend:\n"
+"  Bleiben Sie also bitte zu Hause und halten Sie viel Abstand zu anderen "
+"Menschen."
+msgstr ""
+"Until then, please be very careful because you may be highly"
+" contagious."
+" Please stay at home and keep a lot of distance from other"
+" people."
+
 #: app/templates/public/pages/test-LAMPPOS.html:19
 msgid ""
-" Bis dahin seien Sie bitte sehr vorsichtig, denn möglicherweise sind Sie "
-"hoch ansteckend:\n"
-"    Bleiben Sie also bitte zu Hause und halten Sie viel Abstand zu anderen "
-"Menschen. "
+"Die Teilnahme für Universitätsangehörige an der Studie ist anonym, trotzdem "
+"wäre es gut,\n"
+"  wenn Sie sich bei uns melden würden, schon bevor das offizielle Resultat "
+"vorliegt, damit wir helfen können,\n"
+"  die Infektionskette zu stoppen. Eine Meldung ist vertraulich und wird "
+"vertraulich behandelt. Bitte wenden\n"
+"  Sie sich dazu an den Studienleiter Prof. Michael Knop (0152-54756440) oder "
+"an Dr. Simon Anders (0176-59535777)."
 msgstr ""
-" Until then please be patient because you may be highly infectious:\n"
-"Please stay at home and keep distance to others. "
+"University employee participation in this study is anonymous. Nevertheless,"
+" it would be appreciated if you could contact us before the official result"
+" is available, so we can help"
+" to stop the chain of infection. Reporting is confidential and will"
+" be handled confidentially. Please contact"
+" the study director Prof. Michael Knop (0152-54756440) or"
+" Dr. Simon Anders (0176-59535777)."
 
-#: app/templates/public/pages/test-LAMPPOS.html:23
+#: app/templates/public/pages/test-LAMPREPEAT.html:4
+msgid "Technische Probleme"
+msgstr "Technical Problems"
+
+#: app/templates/public/pages/test-LAMPREPEAT.html:8
 msgid ""
-" Wenn Sie möchten, können Sie sich mit dem Studienleiter, Michael Knop "
-"(0152-54756440)\n"
-"    oder Simon Anders (0176-59535777), in Verbindung setzten."
+"Leider ist es bei Ihrer Probe zu einem technischen Problem\n"
+"    gekommen, so dass wir die Analyse Ihrer Probe nochmals am nächsten "
+"Labortag\n"
+"    (Mo - Fr) wiederholen m&uuml;ssen."
 msgstr ""
-" If you like you can contact the director of studies Michael Knop "
-"(0152-54756440), or Simon Anders (0176-59535777)"
+"Unfortunately, there was a technical problem with your sample."
+" Thus, we must repeat the analysis of your sample during the next"
+" laboratory day."
+" (Mon - Fri)"
 
-#: app/templates/public/pages/test-PCRPOS.html:7
+#: app/templates/public/pages/test-LAMPREPEAT.html:13
+msgid ""
+"Solche technischen Problem sind selten, kommen aber vor.\n"
+"    Es tut uns leid und wir bitten Sie am Nachmittag des n&auml;chsten "
+"Labortages noch einmal den Status zu pr&uuml;fen."
+msgstr ""
+"Such technical problems are rare, but they do happen."
+" We apologize and ask you to check your status"
+" again during the afternoon of the next laboratory day."
+
+#: app/templates/public/pages/test-MESSAGE.html:4
+msgid "Nachricht"
+msgstr "Message"
+
+#: app/templates/public/pages/test-MESSAGE.html:8
+msgid "Zu Ihrer Probe liegt folgende Nachricht vor:"
+msgstr "The following message is available for your sample:"
+
+#: app/templates/public/pages/test-PCRNEG.html:15
+msgid ""
+"Selbst wenn Ihre Probe kein Virus enthielt: Vielleicht war das Virus nicht "
+"in Ihrem Speichel,\n"
+"    aber anderswo im Körper. Oder Sie haben sich in den letzten Tagen "
+"angesteckt, erst nachdem Sie die Probe abgegeben\n"
+"    haben. Oder Sie treffen morgen jemanden, der Sie ansteckt."
+msgstr ""
+"Although your sample did not contain the virus:"
+" the virus may not have been in your saliva,"
+" but elsewhere in your body. Or you may have been infected in the last few days,"
+" only after you submitted the sample."
+" Or you may meet someone tomorrow who may infect you."
+
+#: app/templates/public/pages/test-PCRPOS.html:4
+msgid "Positiv"
+msgstr "Positive"
+
+#: app/templates/public/pages/test-PCRPOS.html:8
 msgid ""
 "\n"
-"    <strong>Ihre Probe war <span>positiv</span>. Das heisst, das in Ihrer "
-"Probe das\n"
-"      Coronavirus SARS-CoV-2 nachgewiesen wurde und Sie sich wahrscheinlich "
+"  <strong>Ihre Probe war <span>positiv</span>. Das Resultat wurde mit einem "
+"anerkannten qPCR Test in der virologischen Diagnstik der\n"
+"    Universität Heidelberg bestätigt. Das heißt, dass in Ihrer Probe das\n"
+"    Coronavirus SARS-CoV-2 nachgewiesen wurde und Sie sich wahrscheinlich "
 "mit\n"
-"      Covid-19 angesteckt haben.</strong>"
+"    Covid-19 angesteckt haben.</strong>"
 msgstr ""
 "\n"
-"<strong>Your sample was tested <span>positive</span>. This means that the "
-"SARS-CoV-2 coronavirus was detected in your sample and that you most likely "
-"have contracted Covid-19.</strong>"
+"<strong>Your sample was <span>positive</span>. The result was confirmed by a"
+" recognized qPCR test using virologic diagnostics at Heidelberg University.This means that the coronavirus"
+" (SARS-CoV-2) was detected in your sample and you have likely"
+" been infected with Covid-19.</strong>"
 
-#: app/templates/public/pages/test-PCRPOS.html:13
+#: app/templates/public/pages/test-PCRPOS.html:15
 msgid ""
 "Bitte bleiben Sie zu Hause und vermeiden Sie jeglichen Kontakt zu\n"
-"    anderen. Wenn Sie ärztlichen Rat wünschen, wenden Sie sich bitte (per\n"
-"    Telefon!) an Ihren Hausarzt. "
+"  anderen. Wenn Sie ärztlichen Rat wünschen, wenden Sie sich bitte (per\n"
+"  Telefon!) an Ihren Hausarzt. "
 msgstr ""
-"Please stay at home and avoid any contact with other people. If you wish to "
-"speak to a doctor please contact your GP via telephone. "
+"Please stay at home and avoid any contact with"
+" others. If you need medical advice, please contact (via"
+" phone!) your family doctor (GP)."
 
-#: app/templates/public/pages/test-PCRPOS.html:18
+#: app/templates/public/pages/test-PCRPOS.html:20
 msgid ""
-"Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit\n"
-"    Ihnen in Verbindung setzen und das weitere Vorgehen mit Ihnen "
-"besprechen.\n"
-"    Falls Sie innerhalb der nächsten 24 Stunden nichts vom Gesundheitsamt "
-"hören,\n"
-"    können Sie  auch selbst deren Corona-Hotline anrufen: 06221 522-1881. "
+"Ein Mitarbeiter des Gesundheitsamtes wird sich baldmöglichst mit Ihnen in "
+"Verbindung setzen und das\n"
+"  weitere Vorgehen mit Ihnen besprechen. Falls Sie innerhalb der nächsten 24 "
+"Stunden nichts vom Gesundheitsamt hören,\n"
+"  können Sie auch deren Corona-Hotline kontaktieren: 06221 522-1881. Das "
+"Team des ZMBH-LAMP-Tests erreichen Sie\n"
+"  über info@coronatest-hd.de, die Studienleitung unter 0152 5475 6440 (Prof. "
+"Michael Knop) oder\n"
+"  0176 5953 5777 (Dr. Simon Anders)."
 msgstr ""
-"An employee of the public health office will contact you as soon as possible "
-"and discuss the following steps with you. You can also call the Corona "
-"hotline of the public health office: 06221 522-1881. "
+"A health department representative will contact you as soon as possible"
+" to discuss how to proceed.If you do not hear from the health department within the next 24 hours,"
+" you can also contact their Corona hotline: 06221 522-1881. You"
+" can reach the ZMBH LAMP test team"
+" at info@coronatest-hd.de, the study management at 0152 5475 6440 (Prof. Michael Knop) or"
+" 0176 5953 5777 (Dr. Simon Anders)."
 
-#: app/templates/public/pages/test-UNDEF.html:6
+#: app/templates/public/pages/test-PCRWEAKPOS.html:4
+msgid "Grenzwertig Positiv"
+msgstr "Marginally positive"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:8
+msgid ""
+"Resultat SARS- CoV-2-RNA (COVID- 19) Kernsäurenachweis (Coronatest): "
+"grenzwertig positiv"
+msgstr ""
+"Result of the SARS-CoV-2 (COVID-19) core acid detection (corona test):"
+" marginally positive"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:11
+msgid ""
+"Coronavirus 2019 (SARS-CoV-2) mittels RT-LAM und real-time RT-PCR (CE-IVD-"
+"markierter Test) in einem\n"
+"grenzwertigen Bereich nachgewiesen."
+msgstr ""
+"Coronavirus 2019 (SARS-CoV-2) was detected in a marginal range by the RT-LAM and real-time RT-PCR"
+" (CE-IVD labelled test)"
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:15
+msgid ""
+"Die Analyse ergab eine grenzwertig positive Reaktion, sowohl mit dem RT-LAMP "
+"assay als auch mit einem\n"
+"  RT-PCR Test (CT-Wert 35-39). Das Ergebnis deutet sehr wahrscheinlich auf "
+"eine niedrige Viruslast bei beginnender oder\n"
+"  abklingender Infektion hin."
+msgstr ""
+"Analysis revealed a marginally positive reaction by both RT-LAMP"
+" assay and RT-PCR assay (CT value 35-39).The result most likely indicates"
+" a low viral load at the onset or end of an infection."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:20
+msgid ""
+"Die Bewertung von CT-Werten ist abhängig von Zeitpunkt und Qualität der "
+"Probennahme, von Materialart\n"
+"  bzw. Abstrichort sowie von testspezifischen Leistungsmerkmalen. Ein falsch-"
+"positives Ergebnis ist nicht völlig\n"
+"  auszuschließen."
+msgstr ""
+"The evaluation of CT values depends on the time and quality of"
+" the sample, from the sample material (i.e., location of sampling) to the test-specific performance characteristics. A false-"
+"positive cannot be completely ruled out."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:25
+msgid ""
+"Ein CT-Wert > 30 kann im Rahmen einer Kontrolluntersuchung als "
+"Entlasskriterium aus der Isolierung\n"
+"  eines Patienten nach einer COVID-Infektion herangezogen werden. Allerdings "
+"ist zu beachten, dass die Proben-Entnahme\n"
+"  für unseren Gurgeltest nicht von einer medizinisch ausgebildeten "
+"Fachperson durchgeführt wurde\n"
+"  (sondern von Ihnen selber), wodurch sich Unsicherheiten bei der genauen "
+"Bestimmung der Viruslast ergeben, je nach dem\n"
+"  wie genau Sie den Anweisungen folge geleistet haben."
+msgstr ""
+"During a follow-up visit, a CT value of >30 may be used as a"
+" discharge criterion for COVID-19 patients in isolation. However,"
+" it should be noted that the sample collection for our gargle test was not performed"
+" by a medically-trained professional (but by yourself), which may result in uncertainties"
+" in the exact determination of viral load, depending"
+" on how closely you have followed the instructions."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:32
+msgid ""
+"Gemäß 87, Abs. 11fSG wird dieser Befund an das zuständige Gesundheitsamt "
+"gemeldet (Labormeldung).\n"
+"  Das Gesundheitsamt entscheidet nach klinischen und epidemiologischen "
+"Informationen über weitere Maßnahmen. Je nach\n"
+"  Situation kann es einige Tage dauern bis sich das Gesundheitsamt mit Ihnen "
+"in Verbindung setzt."
+msgstr ""
+"According to 87, paragraph 11fSG, this finding will be reported to the responsible health department"
+" (laboratory report). The health department will decide further measures according to clinical and epidemiological"
+" information. Depending on the situation, it may take a few days for the health department to"
+" contact you."
+
+#: app/templates/public/pages/test-PCRWEAKPOS.html:37
+msgid ""
+"Für eine Kontroll-Untersuchung und Bestätigung des Resultates empfehlen wir "
+"die Abgabe einer weiteren\n"
+"  Gurgelprobe bei uns so schnell wie möglich."
+msgstr ""
+"For a control examination and confirmation of the result, we recommend"
+" submitting another gargle sample"
+" to us as soon as possible."
+
+#: app/templates/public/pages/test-RECEIVED.html:4
+msgid "Ihre Probe ist bei uns eingegangen"
+msgstr "Your sample has been received"
+
+#: app/templates/public/pages/test-RECEIVED.html:8
+msgid ""
+"Es liegt jedoch noch kein Ergebnis vor. Bitte\n"
+"    versuchen Sie es später oder morgen noch einmal."
+msgstr ""
+"No result is available yet. Please"
+" try again later today or tomorrow."
+
+#: app/templates/public/pages/test-UNDEF.html:4
 msgid "Technisches Problem"
-msgstr "Technical problem"
+msgstr "Technical Problem"
 
 #: app/templates/public/pages/test-UNDEF.html:8
 msgid ""
 "Leider können wir Ihnen aufgrund eines technischen\n"
-"    Problems kein Ergebnis mitteilen."
-msgstr "Unfortunately because of a technical problem we can not give a result."
+"  Problems kein Ergebnis mitteilen."
+msgstr ""
+"Unfortunately due to a technical"
+" problem, we are unable to provide you with a result."
 
 #: app/templates/public/pages/test-WAIT-LONG.html:8
 #: app/templates/public/pages/test-WAIT.html:8
 msgid ""
 "Für Ihre Probe liegt leider noch kein Ergebnis vor. Bitte\n"
-"        versuchen Sie es später oder morgen noch einmal."
+"    versuchen Sie es später oder morgen noch einmal."
 msgstr ""
-"There is no result available yet for your sample. Please try again later."
+"No result is available yet. Please"
+" try again later today or tomorrow."
 
 #: app/templates/public/pages/test-WAIT-LONG.html:12
 msgid ""
 "Falls Sie schon sehr lange auf ein Ergebnis warten, kontaktieren Sie\n"
 "    uns und fragen Sie nach: "
-msgstr "If you wait longer time for the result please contact us: "
+msgstr ""
+"If you have been waiting for your result for a very long time, please contact us"
+" and ask about it:"
+
+#: app/templates/public/pages/too_young.html:7
+msgid "Kinder unter 7 Jahren dürfen leider nicht teilnehmen."
+msgstr "Unfortunately, children under the age of 7 are not eligible to participate."
 
 #: app/templates/public/register.html:10
 msgid "Bitte registrieren Sie ihr Testkit:"
@@ -1735,8 +885,8 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"The registration is necessary to contact you in case of a positive test "
-"result. "
+"Registration is necessary so we can contact you"
+" should your result be positive."
 
 #: app/templates/public/register.html:18
 msgid ""
@@ -1744,25 +894,31 @@ msgid ""
 "        das Gesundheitsamt Sie erreichen können. Geben Sie daher bitte Ihre\n"
 "        Kontakt-Daten an: "
 msgstr ""
-"If the virus is detected in your sample the public health office needs to be "
-"able to contact you. We therefore ask you to provide your contact data: "
+"Should the virus be detected in your sample,"
+" the health department must be able to reach you. Therefore, please provide"
+" your contact details to: "
 
 #: app/templates/public/register.html:23
 msgid ""
-"<p>Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
+"Datenschutz-Hinweis: Ihr Name und Ihre Kontaktdaten werden streng "
 "vertraulich behandelt. Nur die Mitarbeiter des Gesundheitsamts haben darauf "
-"Zugriff.</p>"
+"Zugriff."
 msgstr ""
-"<p>Data protection notice: Your name and contact data will be treated "
-"confidentially. Only employees of the health authority will have access. </p>"
+"Privacy Notice: Your name and contact details will be handled strictly"
+" confidential. Only employees of the health department will have"
+" access to it."
+
+#: app/templates/public/register.html:34
+msgid "Abbrechen"
+msgstr "Cancel"
 
 #: app/templates/public/register.html:37
 msgid "Daten abschicken"
-msgstr "Send data"
+msgstr "Send contact details"
 
 #: app/templates/public/result-query.html:9
 msgid "Ergebnis Ihres COVID-19 Tests abfragen:"
-msgstr "Retrieve COVID-19 test result:"
+msgstr "Check your COVID-19 test results:"
 
 #: app/templates/public/result-query.html:13
 msgid ""
@@ -1773,8 +929,8 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"To retrieve your test result the test has to be registered first. You can "
-"register the test kit under the following link: "
+"To retrieve your results, your test must be registered first."
+"The test kit can be registered under the following link: "
 
 #: app/templates/public/result-query.html:17
 msgid "Registrieren"
@@ -1784,231 +940,36 @@ msgstr "Register"
 msgid "Ergebnis anzeigen"
 msgstr "Show result"
 
-#: app/views_lab.py:79
-msgid "Einige Barcodes waren nicht in der Datenbank"
-msgstr "A number of barcodes were not found in the database"
-
-#: app/views_lab.py:81
-msgid "Einige status konnten nicht gesetzt werden"
-msgstr "Could not set several statuses"
-
-#: app/views_lab.py:83
-msgid "Einige racks konnten nicht gesetzt werden"
-msgstr "Could not set several racks"
-
-#: app/views_lab.py:87
-msgid "Proben erfolgreich eingetragen"
-msgstr "Samples added successfully"
-
-#: app/views_lab.py:140
-msgid "Ergebnisse hinzugefügt: "
-msgstr "Results added: "
-
-#: app/views_lab.py:143
-msgid "Keine Proben zu Rack gefunden"
-msgstr "No samples found in rack"
-
-#: app/views_lab.py:173
-msgid "Sample nicht gefunde"
-msgstr "Sample not found"
-
-#: app/views_lab.py:177
-msgid "Sample rack geupdated"
-msgstr "Sample rack updated"
-
-#: app/views_lab.py:185
-msgid "Status geupdated"
-msgstr "Status updated"
-
-#: app/views_public.py:37
-msgid "Sie müssen erst der Teilnahme zustimmen, um fortzufahren"
-msgstr "Please agree to the participation to continue"
-
-#: app/views_public.py:48
-msgid "Status unbekannt"
-msgstr "Status unknown"
-
-#: app/views_public.py:68
-msgid "Kein Status vorhanden (bitte später erneut abrufen)"
-msgstr "Status not available, please try again later"
-
-#: app/views_public.py:85 app/views_public.py:164
-msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
-msgstr "Unknown access code. Please try again."
-
-#: app/views_public.py:96
-msgid ""
-"Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte "
-"registrieren Sie sich vorher."
-msgstr "The access code has not been registered yet. Please register it."
-
-#: app/views_public.py:121
-msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
-msgstr "The password you entered is not correct. Please try again."
-
-#: app/views_public.py:183
-msgid "Erfolgreich registriert"
-msgstr "Registration successful"
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:4
-msgid "Grenzwertig Positiv"
-msgstr "Borderline Positive"
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:8
-msgid "Resultat SARS- CoV-2-RNA (COVID- 19) Kernsäurenachweis (Coronatest): grenzwertig positiv"
-msgstr "Result SARS- CoV-2-RNA (COVID- 19) nuclear acid detection (coronatest): borderline positive"
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:11
-msgid ""
-"Coronavirus 2019 (SARS-CoV-2) mittels RT-LAM und real-time RT-PCR (CE-IVD-markierter Test) in einem\n"
-"grenzwertigen Bereich nachgewiesen."
-msgstr "Coronavirus 2019 (SARS-CoV-2) detected in a borderline range by RT-LAM and real-time RT-PCR (CE-IVD labeled test)."
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:15
-msgid ""
-"Die Analyse ergab eine grenzwertig positive Reaktion, sowohl mit dem RT-LAMP assay als auch mit einem\n"
-"  RT-PCR Test (CT-Wert 35-39). Das Ergebnis deutet sehr wahrscheinlich auf eine niedrige Viruslast bei beginnender oder\n"
-"  abklingender Infektion hin."
-msgstr ""
-"Analysis revealed a positive reaction by both RT-LAMP assay and RT-PCR assay"
-"(CT value 35-39). The result most likely indicates a low viral load at the onset "
-"or resolution of infection."
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:20
-msgid ""
-"Die Bewertung von CT-Werten ist abhängig von Zeitpunkt und Qualität der Probennahme, von Materialart\n"
-"  bzw. Abstrichort sowie von testspezifischen Leistungsmerkmalen. Ein falsch-positives Ergebnis ist nicht völlig\n"
-"  auszuschließen."
-msgstr ""
-"The evaluation of CT values is dependent on the timing and quality of specimen "
-"collection, material type or smear location, and test-specific performance characteristics. "
-"A false positive result cannot be completely excluded."
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:25
-msgid ""
-"Ein CT-Wert > 30 kann im Rahmen einer Kontrolluntersuchung als Entlasskriterium aus der Isolierung\n"
-"  eines Patienten nach einer COVID-Infektion herangezogen werden. Allerdings ist zu beachten, dass die Proben-Entnahme\n"
-"  für unseren Gurgeltest nicht von einer medizinisch ausgebildeten Fachperson durchgeführt wurde\n"
-"  (sondern von Ihnen selber), wodurch sich Unsicherheiten bei der genauen Bestimmung der Viruslast ergeben, je nach dem\n"
-"  wie genau Sie den Anweisungen folge geleistet haben."
-msgstr ""
-"A CT value > 30 can be used as a discharge criterion from isolation of a patient "
-"after COVID infection in the context of a control examination. However, it should "
-"be noted that the sample collection for our gargle test was not performed by a "
-"medically trained professional (but by yourself), which may result in uncertainties "
-"in the exact determination of the viral load, depending on how closely you followed "
-"the instructions."
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:32
-msgid ""
-"Gemäß 87, Abs. 11fSG wird dieser Befund an das zuständige Gesundheitsamt gemeldet (Labormeldung).\n"
-"  Das Gesundheitsamt entscheidet nach klinischen und epidemiologischen Informationen über weitere Maßnahmen. Je nach\n"
-"  Situation kann es einige Tage dauern bis sich das Gesundheitsamt mit Ihnen in Verbindung setzt."
-msgstr ""
-"In accordance with 87, para. 11fSG, this finding is reported to the relevant health "
-"authority (laboratory report). The health office decides on further measures according "
-"to clinical and epidemiological information. Depending on the situation, it may take a "
-"few days for the Gesundheitsamt to contact you."
-
-#: app/templates/public/pages/test-PCRWEAKPOS.html:37
-msgid ""
-"Für eine Kontroll-Untersuchung und Bestätigung des Resultates empfehlen wir die Abgabe einer weiteren\n"
-"  Gurgelprobe bei uns so schnell wie möglich."
-msgstr ""
-"For a control examination and confirmation of the result, we recommend submitting another gargle sample "
-"to us as soon as possible."
-
-#: app/templates/public/pages/result_ui_segment.html:41
-msgid "Stand"
-msgstr "As of"
-
-#: app/templates/public/pages/result_ui_segment.html:41
-msgid "um"
-msgstr "at"
-
-#: app/templates/public/pages/test-LAMPREPEAT.html:4
-msgid "Technische Probleme"
-msgstr "Technical Problems"
-
-#: app/templates/public/pages/test-LAMPREPEAT.html:8
-msgid ""
-"Leider ist es bei Ihrer Probe zu einem technischen Problem\n"
-"    gekommen, so dass wir die Analyse Ihrer Probe nochmals am nächsten Labortag\n"
-"    (Mo - Fr) wiederholen m&uuml;ssen."
-msgstr ""
-"Unfortunately, a technical problem occurred with your sample, so we have to repeat the analysis of your "
-"sample again on the next laboratory day (Mon - Fri)."
-
-#: app/templates/public/pages/test-LAMPREPEAT.html:13
-msgid ""
-"Solche technischen Problem sind selten, kommen aber vor.\n"
-"    Es tut uns leid und wir bitten Sie am Nachmittag des n&auml;chsten Labortages noch einmal den Status zu pr&uuml;fen."
-msgstr ""
-"Such technical problems are rare, but do happen. We are sorry and ask you to check the status again in the "
-"afternoon of the next lab day."
-
-#: app/templates/public/pages/test-LAMPREPEAT.html:20
-msgid ""
-"Bleiben Sie dran, wir\n"
-"    tun unser Bestes."
-msgstr "Please stay tuned, we are doing our best."
-
-#: multi use clausel
+#: app/templates/public/snippets/contact_information.html:3
 msgid "oder"
 msgstr "or"
 
-#: multi use clausel
-msgid "Falls Sie hierzu Fragen haben, kontaktieren Sie uns bitte unter: "
-msgstr "If you have any questions about this, please contact us at: "
+#: app/views_consent.py:92
+msgid ""
+"Ein technischer Fehler ist aufgetreten. Bitte die Registrierung nochmals "
+"versuchen."
+msgstr "A technical problem has occurred. Please try to register again."
 
-#~ msgid ""
-#~ "Bei technischen Problemen kontaktieren Sie bitte Simon Anders (<a href="
-#~ "\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg."
-#~ "de</a>)"
-#~ msgstr ""
-#~ "In case of technical problems, please contact Simon Anders (<a href="
-#~ "\"mailto:s.anders@zmbh.uni-heidelberg.de\">s.anders@zmbh.uni-heidelberg."
-#~ "de</a>)"
+#: app/views_public.py:56
+msgid "Status unbekannt"
+msgstr "Unknown status"
 
-#~ msgid "<h3 class=\"ui dividing header\">Persönliche Daten</h3>"
-#~ msgstr "h3 class=“ui dividing header”>Personal data</h3>"
+#: app/views_public.py:104 app/views_public.py:185
+msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
+msgstr "The access code is unknown. Please try again."
 
-#~ msgid "Ooops, das Ergebnis liegt noch nicht vor... "
-#~ msgstr "Result not available yet "
+#: app/views_public.py:115
+msgid ""
+"Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte "
+"registrieren Sie sich vorher."
+msgstr ""
+"The test kit with this access code has not yet been registered. Please"
+" register the kit first."
 
-#~ msgid ""
-#~ "Das tut uns sehr leid! Leider haben wir immer einen kleinen\n"
-#~ "    Bruchteil der Proben mit nicht eindeutigen Ergebnissen."
-#~ msgstr ""
-#~ "We are sorry about that. Unfortunately, there is always a small fraction "
-#~ "of samples yielding unclear test results."
+#: app/views_public.py:140
+msgid "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
+msgstr "The entered password is incorrect. Please try it again."
 
-#~ msgid ""
-#~ "Dies sind meist falsch-positive Ergebnisse. Um dies zu\n"
-#~ "    überprüfen, analysieren wir diese Proben erneut mittels RT-qPCR, um "
-#~ "ein\n"
-#~ "    eindeutiges Ergebnis zu erhalten. Das dauert maximal 24 Stunden. "
-#~ "Falls Sie\n"
-#~ "    die Ergebnisse nicht am Abend des Testtages (dem Tag, an dem Sie die "
-#~ "Probe\n"
-#~ "    abgegeben haben) erhalten haben, bedeutet dies, dass Ihre Probe zu\n"
-#~ "    denjenigen gehört, die erneut getestet werden, um ein schlüssiges "
-#~ "Ergebnis\n"
-#~ "    zu erhalten."
-#~ msgstr ""
-#~ "These are usually false positive results. To ensure that this is the case "
-#~ "we re-test these samples using RT-qPCR to get a clear result. This takes "
-#~ "not more than 24 hours. If you have not received your test result by the "
-#~ "evening of taking and handing in the sample then this means that your "
-#~ "sample is being re-tested to ensure a conclusive test result."
-
-#~ msgid ""
-#~ "Bitte geben Sie bei nächster Gelegenheit eine neue Probe ab.\n"
-#~ "    Derartige Probleme sind die Ausnahme, und das nächste Mal klappt es\n"
-#~ "    bestimmt."
-#~ msgstr ""
-#~ "Please hand in another sample when it is possible again. Such problems "
-#~ "are the exception and next time it will work for sure."
-
-#~ msgid "Generate barcodes"
-#~ msgstr "Generate barcodes"
+#: app/views_public.py:195
+msgid "Erfolgreich registriert"
+msgstr "Successfully registered"

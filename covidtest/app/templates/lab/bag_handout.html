@@ -1,0 +1,83 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% block content %}
+<div>
+    <h1 class="ui header">{% blocktrans %}Beutel - Ausgabe{% endblocktrans %}</h1>
+    <div style="margin-bottom: 40px">
+        <p>
+            {% blocktrans %}
+            Suche nach einer oder mehrerer Beutel IDs - (ID1, ID2, ID3):
+            {% endblocktrans %}
+        </p>
+        <form action="{% url 'app:bag_handout' %}" method="post">
+            {% csrf_token %}
+            <div class="ui action input">
+                <input
+                        name="search"
+                        type="text"
+                        placeholder="{% blocktrans %}Beutel ID...{% endblocktrans %}"
+                        autofocus
+                        style="min-width: 270px"
+                >
+                <button class="ui button" type="submit">
+                    Suchen
+                </button>
+            </div>
+            <div class="results"></div>
+        </form>
+    </div>
+    {% if formset %}
+    <form action="{% url 'app:bag_handout' %}" class="ui form" method="post">
+        {% csrf_token %}
+
+        <table class="ui red padded table">
+
+            <thead>
+            <tr>
+
+                <th class="center aligned">ID</th>
+                <th>Name Beutel</th>
+                <th class="center aligned">Anzahl Proben</th>
+                <th>Kommentar Beutel</th>
+                <th>Kommentar Abnehmer</th>
+                <th>Abnehmer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <tr>
+                {{form.id}}
+                <td class="collapsing"><h3 class="ui center aligned header">{{ form.id.value }}</h3></td>
+                <td class="collapsing">{{form.name.value}}</td>
+                <td class="collapsing {% if form.instance.samples.count == 0 %}negative{% endif %}">
+                    <h4 class="ui center aligned header">{{form.instance.samples.count}}</h4>
+                </td>
+                {% if form.comment.value %}
+                <td>{{form.comment.value}}</td>
+                {% else %}
+                <td>---</td>
+                {% endif %}
+                {% if form.instance.recipient.comment %}
+                <td>{{form.instance.recipient.comment}}</td>
+                {% else %}
+                <td>---</td>
+                {% endif %}
+                <td class="{% if form.instance.recipient %}negative{% endif %}">{{form.recipient}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="7">
+                    <button class="ui right floated small primary labeled icon button" type="submit">
+                        <i class="paper plane icon"></i>Ausgeben
+                    </button>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -20,7 +20,7 @@
         >
 
         {% if news %}
-        <h2>Aktuelles</h2>
+        <h2>{% blocktrans %}Aktuelles{% endblocktrans %}</h2>
         <div class="banner-news-body">
             {% for article in news %}
             <div class="ui message">
@@ -33,12 +33,12 @@
             {% endfor %}
         </div>
         {% else %}
-        <h2>Keine aktuellen Nachrichten</h2>
+        <h2>{% blocktrans %}Keine aktuellen Nachrichten{% endblocktrans %}</h2>
         {% endif %}
-        <p>Ältere Nachrichten finden Sie im <a href="{% url 'app:news_archive' %}">Archiv</a></p>
+        <p>{% blocktrans %}Ältere Nachrichten finden Sie im{% endblocktrans %} <a href="{% url 'app:news_archive' %}">{% blocktrans %}Archiv{% endblocktrans %}</a></p>
 
         <p>
-            {% blocktrans %}Diese Seite ist verfügbar in:{% endblocktrans %}</br>
+            {% blocktrans %}Diese Seite ist verfügbar in:{% endblocktrans %}<br>
             <a href="/">Deutsch</a>&nbsp;
 
             {% get_language_info_list for LANGUAGES as languages %}
