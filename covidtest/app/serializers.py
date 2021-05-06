@@ -133,7 +133,8 @@ class SampleSerializer(serializers.ModelSerializer):
     get_status = EventSerializer(read_only=True)
 
     barcode = serializers.CharField(
-        validators=[validators.UniqueValidator(queryset=Sample.objects.all(), message="duplicate")]
+        validators=[validators.UniqueValidator(queryset=Sample.objects.all(), message="duplicate")],
+        required=False,
     )
 
     def create(self, validated_data):
@@ -150,7 +151,10 @@ class SampleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sample
-        extra_kwargs = {"access_code": {"required": False}}
+        extra_kwargs = {
+            "access_code": {"required": False},
+            "barcode": {"required": False},
+        }
         fields = [
             "id",
             "barcode",
@@ -162,7 +166,7 @@ class SampleSerializer(serializers.ModelSerializer):
             "events",
             "get_status",
         ]
-        optional_fields = ["access_code", "bag", "rack", "password_hash", "registrations", "events"]
+        optional_fields = ["access_code", "barcode", "bag", "rack", "password_hash", "registrations", "events"]
 
 
 class BagSerializer(serializers.ModelSerializer):
