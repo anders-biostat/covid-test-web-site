@@ -114,11 +114,11 @@ class VirusDetectiveSampleView(views.APIView):
     def post(self, request):
         try:
             try:
-                bag = Bag.objects.get(name="virusdetektiv")
+                bag = Bag.objects.get(name="VIRUSDETEKTIV")
             except ObjectDoesNotExist:
                 return Response(
                     data={
-                        "error": "Bag for virusdetective does not exist. "
+                        "error": "Bag with name 'VIRUSDETEKTIV' does not exist. "
                         + "Please ask an admin to create the bag before continuing"
                     },
                     status=status.HTTP_400_BAD_REQUEST,
@@ -126,7 +126,7 @@ class VirusDetectiveSampleView(views.APIView):
             except MultipleObjectsReturned:
                 return Response(
                     data={
-                        "error": "More than one generic virusdetective bag exists. "
+                        "error": "More than one VIRUSDETEKTIV bag exists. "
                         + "Please ask an admin to fix this bag issue before continuing."
                     },
                     status=status.HTTP_400_BAD_REQUEST,

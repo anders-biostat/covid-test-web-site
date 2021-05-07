@@ -216,7 +216,7 @@ class VirusDetectiveSampleSerializer(serializers.ModelSerializer):
                 status=SampleStatus.PRINTED.value,
                 sample=instance,
                 updated_by=self.context["user"],
-                comment="Sample send out to probant. (Event set with virusdetektiv api)",
+                comment="Test kit made ready for posting. (Event set with Virusdetektiv API).",
             )
             instance.save()
         except KeyError:
