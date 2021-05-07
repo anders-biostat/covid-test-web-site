@@ -2,6 +2,7 @@ import random
 import string
 
 from rest_framework import serializers, validators
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Bag, Event, Registration, RSAKey, Sample
 
@@ -135,7 +136,16 @@ class KeySamplesSerializers(serializers.ModelSerializer):
 
 class VirusDetectiveSampleSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
+        sample = Sample.objects.filter(barcode=validated_data.get("barcode"))
+        if sample:
+            raise serializers.ValidationError(
+                "Sample with the same barcode already exists."
+            )
         try:
+            if instance.barcode != "" and instance.barcode is not None:
+                raise serializers.ValidationError(
+                    "Sample already has a barcode assigned to it."
+                )
             instance.barcode = validated_data["barcode"]
             instance.save()
         except KeyError:
