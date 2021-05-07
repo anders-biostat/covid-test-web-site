@@ -16,6 +16,7 @@ sample.
 
 ## Documentation
 
+- [API](/doc/api)
 - [Status](/doc/status/README.md)
 - [Translation](/doc/translation/README.md)
 - [Virtual Environment](/doc/virtualenv/README.md)

@@ -4,6 +4,7 @@ import string
 from rest_framework import serializers, validators
 
 from .models import Bag, Event, Registration, RSAKey, Sample
+from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
 from .statuses import SampleStatus
 
 """Damm algorithm decimal check digit
@@ -71,6 +72,58 @@ class RegistrationSerializer(serializers.ModelSerializer):
         ]
 
 
+class RegistrationEncryptSerializer(serializers.ModelSerializer):
+    name_unencrypted = serializers.CharField(write_only=True)
+    name_encrypted = serializers.CharField(read_only=True)
+
+    address_unencrypted = serializers.CharField(write_only=True)
+    address_encrypted = serializers.CharField(read_only=True)
+
+    contact_unencrypted = serializers.CharField(write_only=True)
+    contact_encrypted = serializers.CharField(read_only=True)
+
+    public_key_fingerprint = serializers.CharField(read_only=True)
+    session_key_encrypted = serializers.CharField(read_only=True)
+    aes_instance_iv = serializers.CharField(read_only=True)
+
+    def create(self, validated_data):
+        sample = validated_data["sample"]
+        bag = sample.bag
+        rsa_key = bag.rsa_key.public_key
+        rsa_instance = rsa_instance_from_key(rsa_key)
+
+        subject_data = encrypt_subject_data(
+            rsa_instance=rsa_instance,
+            name=validated_data["name_unencrypted"],
+            address=validated_data["address_unencrypted"],
+            contact=validated_data["contact_unencrypted"],
+        )
+
+        return Registration.objects.create(sample=sample, **subject_data)
+
+    class Meta:
+        model = Registration
+        extra_kwargs = {
+            "name_unencrypted": {"required": False},
+            "address_unencrypted": {"required": False},
+            "contact_unencrypted": {"required": False},
+        }
+        fields = [
+            "id",
+            "sample",
+            "name_unencrypted",
+            "name_encrypted",
+            "address_unencrypted",
+            "address_encrypted",
+            "contact_unencrypted",
+            "contact_encrypted",
+            "public_key_fingerprint",
+            "session_key_encrypted",
+            "aes_instance_iv",
+        ]
+        optional_fields = ["name_encrypted", "contact_encrypted", "address_encrypted"]
+
+
 class SampleSerializer(serializers.ModelSerializer):
     registrations = RegistrationSerializer(many=True, read_only=True)
     events = EventSerializer(many=True, read_only=True)
@@ -81,7 +134,8 @@ class SampleSerializer(serializers.ModelSerializer):
             validators.UniqueValidator(
                 queryset=Sample.objects.all(), message="duplicate"
             )
-        ]
+        ],
+        required=False,
     )
 
     def create(self, validated_data):
@@ -100,7 +154,10 @@ class SampleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sample
-        extra_kwargs = {"access_code": {"required": False}}
+        extra_kwargs = {
+            "access_code": {"required": False},
+            "barcode": {"required": False},
+        }
         fields = [
             "id",
             "barcode",
@@ -114,6 +171,7 @@ class SampleSerializer(serializers.ModelSerializer):
         ]
         optional_fields = [
             "access_code",
+            "barcode",
             "bag",
             "rack",
             "password_hash",
@@ -134,3 +192,19 @@ class KeySamplesSerializers(serializers.ModelSerializer):
     class Meta:
         model = RSAKey
         fields = ["id", "key_name", "samples"]
+
+
+class VirusDetectiveSampleSerializer(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        try:
+            instance.barcode = validated_data["barcode"]
+            instance.save()
+        except KeyError:
+            raise serializers.ValidationError(
+                "No access code provided or in wrong format"
+            )
+        return instance
+
+    class Meta:
+        model = Sample
+        fields = ["id", "barcode", "access_code"]
