@@ -142,7 +142,11 @@ class SampleSerializer(serializers.ModelSerializer):
         if "access_code" not in validated_data:
             validated_data["access_code"] = generate_access_code()
         sample_obj = Sample.objects.create(**validated_data)
-        Event.objects.create(status=SampleStatus.PRINTED.value, sample=sample_obj)
+        Event.objects.create(
+            status=SampleStatus.PRINTED.value,
+            sample=sample_obj,
+            updated_by=self.context["request"].user,
+        )
         return sample_obj
 
     def update(self, instance, validated_data):
