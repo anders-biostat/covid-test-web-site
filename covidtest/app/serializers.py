@@ -2,6 +2,7 @@ import random
 import string
 
 from rest_framework import serializers, validators
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Bag, Event, Registration, RSAKey, Sample
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
@@ -200,13 +201,26 @@ class KeySamplesSerializers(serializers.ModelSerializer):
 
 class VirusDetectiveSampleSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
+        sample = Sample.objects.filter(barcode=validated_data.get("barcode"))
+        if sample:
+            raise serializers.ValidationError(
+                "Sample with the same barcode already exists."
+            )
         try:
+            if instance.barcode != "" and instance.barcode is not None:
+                raise serializers.ValidationError(
+                    "Sample already has a barcode assigned to it."
+                )
             instance.barcode = validated_data["barcode"]
+            Event.objects.create(
+                status=SampleStatus.PRINTED.value,
+                sample=instance,
+                updated_by=self.context["user"],
+                comment="Sample send out to probant. (Event set with virusdetektiv api)",
+            )
             instance.save()
         except KeyError:
-            raise serializers.ValidationError(
-                "No access code provided or in wrong format"
-            )
+            raise serializers.ValidationError("No barcode provided or in wrong format")
         return instance
 
     class Meta:
