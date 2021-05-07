@@ -212,11 +212,15 @@ class VirusDetectiveSampleSerializer(serializers.ModelSerializer):
                     "Sample already has a barcode assigned to it."
                 )
             instance.barcode = validated_data["barcode"]
+            Event.objects.create(
+                status=SampleStatus.PRINTED.value,
+                sample=instance,
+                updated_by=self.context["user"],
+                comment="Sample send out to probant. (Event set with virusdetektiv api)",
+            )
             instance.save()
         except KeyError:
-            raise serializers.ValidationError(
-                "No access code provided or in wrong format"
-            )
+            raise serializers.ValidationError("No barcode provided or in wrong format")
         return instance
 
     class Meta:

@@ -1,6 +1,9 @@
 # Create Sample
 
-Creates a Sample, Recipient and associates it with a bag
+Creates a Sample, Recipient and associates it with a bag.
+For it to work there needs to be one Bag with name "virusdetektiv" 
+in the database as every sample created this way will be assigned 
+to this generic bag.
 
 ## Request
 

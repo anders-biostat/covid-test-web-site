@@ -156,7 +156,7 @@ class VirusDetectiveSampleView(views.APIView):
                     status=status.HTTP_400_BAD_REQUEST,
                 )
             serializer = VirusDetectiveSampleSerializer(
-                data=request.data, instance=sample
+                data=request.data, instance=sample, context={"user": self.request.user}
             )
             if serializer.is_valid():
                 serializer.save()
