@@ -46,6 +46,7 @@ class BagRecipient(Timestamp, models.Model):
             "Teaching Event",
         )
         ONE_OFF_EVENT = "invoice goes to the organizer of the event", "One-Off Event"
+        INTERNAL = "bag goes to internal", "Internal"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     recipient_name = models.CharField(max_length=255)
