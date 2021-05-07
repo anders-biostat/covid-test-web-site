@@ -10,6 +10,7 @@ from .serializers import (
     EventSerializer,
     KeySamplesSerializers,
     RegistrationSerializer,
+    RegistrationEncryptSerializer,
     RSAKeySerializer,
     SampleSerializer,
     VirusDetectiveSampleSerializer,
@@ -80,6 +81,12 @@ class RSAKeyViewSet(viewsets.ModelViewSet):
 class RegistrationViewSet(viewsets.ModelViewSet):
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class RegistrationEncryptViewSet(viewsets.ModelViewSet):
+    queryset = Registration.objects.all()
+    serializer_class = RegistrationEncryptSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 
