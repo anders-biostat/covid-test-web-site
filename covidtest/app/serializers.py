@@ -5,6 +5,7 @@ from rest_framework import serializers, validators
 
 from .models import Bag, Event, Registration, RSAKey, Sample
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
+from .statuses import SampleStatus
 
 """Damm algorithm decimal check digit
 
@@ -86,16 +87,16 @@ class RegistrationEncryptSerializer(serializers.ModelSerializer):
     aes_instance_iv = serializers.CharField(read_only=True)
 
     def create(self, validated_data):
-        sample = validated_data['sample']
+        sample = validated_data["sample"]
         bag = sample.bag
         rsa_key = bag.rsa_key.public_key
         rsa_instance = rsa_instance_from_key(rsa_key)
 
         subject_data = encrypt_subject_data(
-            rsa_instance = rsa_instance,
-            name = validated_data['name_unencrypted'],
-            address = validated_data['address_unencrypted'],
-            contact = validated_data['contact_unencrypted'],
+            rsa_instance=rsa_instance,
+            name=validated_data["name_unencrypted"],
+            address=validated_data["address_unencrypted"],
+            contact=validated_data["contact_unencrypted"],
         )
 
         return Registration.objects.create(sample=sample, **subject_data)
@@ -105,21 +106,17 @@ class RegistrationEncryptSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "name_unencrypted": {"required": False},
             "address_unencrypted": {"required": False},
-            "contact_unencrypted": {"required": False}
+            "contact_unencrypted": {"required": False},
         }
         fields = [
             "id",
             "sample",
-
             "name_unencrypted",
             "name_encrypted",
-
             "address_unencrypted",
             "address_encrypted",
-
             "contact_unencrypted",
             "contact_encrypted",
-
             "public_key_fingerprint",
             "session_key_encrypted",
             "aes_instance_iv",
@@ -144,7 +141,13 @@ class SampleSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         if "access_code" not in validated_data:
             validated_data["access_code"] = generate_access_code()
-        return Sample.objects.create(**validated_data)
+        sample_obj = Sample.objects.create(**validated_data)
+        Event.objects.create(
+            status=SampleStatus.PRINTED.value,
+            sample=sample_obj,
+            updated_by=self.context["request"].user,
+        )
+        return sample_obj
 
     def update(self, instance, validated_data):
         instance.email = validated_data.get("email", instance.email)
@@ -170,7 +173,15 @@ class SampleSerializer(serializers.ModelSerializer):
             "events",
             "get_status",
         ]
-        optional_fields = ["access_code", "barcode", "bag", "rack", "password_hash", "registrations", "events"]
+        optional_fields = [
+            "access_code",
+            "barcode",
+            "bag",
+            "rack",
+            "password_hash",
+            "registrations",
+            "events",
+        ]
 
 
 class BagSerializer(serializers.ModelSerializer):
