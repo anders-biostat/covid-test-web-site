@@ -14,5 +14,5 @@ Closed endpoints require to send login credentials with each call.
 
 Endpoints used by the external application "Virusfinder":
 
-* [Create Sample](virusfinder/sample/post.md) : `POST /api/virusfinder/sample`
-* [Update Sample](virusfinder/sample/put.md) : `PUT /api/virusfinder/sample`
+* [Create Sample](vd/sample/post.md) : `POST /api/virusfinder/sample`
+* [Update Sample](vd/sample/put.md) : `PUT /api/virusfinder/sample`

@@ -5,7 +5,7 @@ sample with its unique barcode.
 
 ## Request
 
-**URL** : `/api/virusfinder/sample`
+**URL** : `/api/vd/sample`
 
 **Method** : `PUT`
 
