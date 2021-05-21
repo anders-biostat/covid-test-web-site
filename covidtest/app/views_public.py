@@ -237,7 +237,6 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    # TODO to further increase security, sessions could be made to expire
     if len(request.session.get("consents_obtained", list())) == 0:
         log.warning("Register page accessed without going through consent pages.")
         return redirect("app:consent_age")
@@ -259,6 +258,10 @@ def register(request):
                 )
                 return render(request, "public/register.html", {"form": form})
 
+            name = form.cleaned_data["name"]
+            address = form.cleaned_data["address"]
+            contact = form.cleaned_data["contact"]
+
             request.session["access_code"] = access_code
             # ! A registration can be created without ensuring a corresponding consent is created with it
             registration = create_registration(sample, form.cleaned_data)
@@ -268,7 +271,17 @@ def register(request):
             messages.add_message(
                 request, messages.SUCCESS, _("Erfolgreich registriert")
             )
-            return redirect("app:instructions")
+
+            return render(
+                request,
+                "public/instructions.html",
+                {
+                    "name": name,
+                    "address": address,
+                    "contact": contact,
+                    "access_code": access_code,
+                },
+            )
     return render(request, "public/register.html", {"form": form})
 
 
@@ -307,13 +320,14 @@ def pages(request, page):
 
 
 def get_certificate(request):
-    access_code = request.GET.get("ac")
-    if access_code:
+
+    if request.method == "POST":
+        access_code = request.POST.get("access_code")
         try:
             sample = Sample.objects.get(access_code=access_code)
             registration = sample.registrations.last()
 
-            qr = qrcode.QRCode(version=4, box_size=5, border=4)
+            qr = qrcode.QRCode(version=4, box_size=10, border=4)
             qr.add_data(f"https://covidtest-hd.de/test-results?ac={access_code}")
             qr.make(fit=True)
             img = qr.make_image(fill_color="#C81528", back_color="white")
@@ -329,6 +343,9 @@ def get_certificate(request):
                     "qr_img": img_str,
                     "barcode": sample.barcode,
                     "registered_on": registration.time,
+                    "name": request.POST.get("name"),
+                    "address": request.POST.get("address"),
+                    "contact": request.POST.get("contact"),
                 },
             )
         except ObjectDoesNotExist:

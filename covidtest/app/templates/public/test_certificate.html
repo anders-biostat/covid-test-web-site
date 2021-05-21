@@ -36,28 +36,30 @@
       <p style="text-decoration: underline; font-weight: bold">LAMP-Test auf Covid-19</p>
     </div>
     <p>Hiermit wird bestätigt, dass Herr/Frau</p>
-    <p class="attention" style="text-align: center; padding-top: 10px; padding-bottom: 10px">{{ name }} Max
-      Mustermann (EXCLUDE)</p>
+    <p class="attention" style="text-align: center; padding-top: 10px; padding-bottom: 10px">{{ name }}</p>
     <p>eine Rachenspülwasser-Probe ("Gurgelprobe") eingereicht hat zur Untersuchung auf SARS-Cov-2 ("Covid19-Virus")
       durch Nukleinsäurenachweis im LAMP-Verfahren.</p>
     <div style="text-align: left">
       <span style="padding-bottom: 10px">Der folgende QR-Code zeigt das Ergebnis der Untersuchung:</span>
     </div>
-    <div style="padding-top: 30px; margin-left: 100px">
+    <div style="padding-top: 30px; margin-left: 70px">
       <div style=" width: 30%">
-        <img src="data:image/png;base64,{{ qr_img|safe }}" style="float: left; height: 130px">
+        <img src="data:image/png;base64,{{ qr_img|safe }}" style="float: left; height: 150px">
       </div>
-      <p class="attention" style="float:right; width: 70%; justify-content: center; padding-top: 40px">← Code scannen,
+      <p class="attention" style="float:right; width: 70%; justify-content: center; padding-top: 50px">← Code scannen,
         um Ergebnis zu prüfen</p>
     </div>
     <div style="clear: both; padding-top: 30px">
       <span style="text-decoration: underline">weitere Angaben:</span>
       <ul>
         <li>Barcode der Probe: <span class="attention">{{ barcode }}</span></li>
-        <li>Adresse und Telefonnummer der getesteten Person (laut Eigenauskunft): {{ address }}</li>
+        <li>Adresse und Telefonnummer der getesteten Person (laut Eigenauskunft):<br>
+          Adresse: <span class="attention">{{ address }}</span><br>
+          Telefon: <span class="attention">{{ contact }}</span>
+        </li>
         <li>Datum und Uhrzeit der Proben-Registrierung: <span class="attention">{{ registered_on }}</span></li>
       </ul>
-      <div style="padding-top: 40px">
+      <div style="padding-top: 20px">
         <span style="text-decoration: underline">Hinweise:</span>
         <ul>
           <li>Die Analyse erfolgt mit dem LAMP-Verfahren, einer Variante der PCR, und ist daher deutlich sensitiver als
