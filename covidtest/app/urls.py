@@ -29,6 +29,12 @@ urlpatterns = [
     path("instructions", views_public.instructions, name="instructions"),
     path("information", views_public.information, name="information"),
     path("register", views_public.register, name="register"),
+    path("certificate", views_public.get_certificate, name="get_certificate"),
+    path(
+        "test-results",
+        views_public.get_result_from_certificate,
+        name="results_from_certificate",
+    ),
     path("pages/<str:page>", views_public.pages, name="pages"),
     path(
         "lab/access-denied",

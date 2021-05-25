@@ -1,12 +1,16 @@
 import binascii
 import hashlib
 import logging
+from io import BytesIO
+import base64
 
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import qrcode
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
 from .forms_public import (
@@ -233,7 +237,6 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    # TODO to further increase security, sessions could be made to expire
     if len(request.session.get("consents_obtained", list())) == 0:
         log.warning("Register page accessed without going through consent pages.")
         return redirect("app:consent_age")
@@ -255,6 +258,10 @@ def register(request):
                 )
                 return render(request, "public/register.html", {"form": form})
 
+            name = form.cleaned_data["name"]
+            address = form.cleaned_data["address"]
+            contact = form.cleaned_data["contact"]
+
             request.session["access_code"] = access_code
             # ! A registration can be created without ensuring a corresponding consent is created with it
             registration = create_registration(sample, form.cleaned_data)
@@ -264,7 +271,17 @@ def register(request):
             messages.add_message(
                 request, messages.SUCCESS, _("Erfolgreich registriert")
             )
-            return redirect("app:instructions")
+
+            return render(
+                request,
+                "public/instructions.html",
+                {
+                    "name": name,
+                    "address": address,
+                    "contact": contact,
+                    "access_code": access_code,
+                },
+            )
     return render(request, "public/register.html", {"form": form})
 
 
@@ -300,3 +317,62 @@ def create_registration(sample, cleaned_data):
 
 def pages(request, page):
     return render(request, "public/pages/" + page)
+
+
+def get_certificate(request):
+
+    if request.method == "POST":
+        access_code = request.POST.get("access_code")
+        try:
+            sample = Sample.objects.get(access_code=access_code)
+            registration = sample.registrations.last()
+
+            qr = qrcode.QRCode(version=4, box_size=10, border=4)
+            qr.add_data(f"https://covidtest-hd.de/test-results?ac={access_code}")
+            qr.make(fit=True)
+            img = qr.make_image(fill_color="#C81528", back_color="white")
+
+            buffer = BytesIO()
+            img.save(buffer, format="PNG")
+            img_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+            return render(
+                request,
+                "public/test_certificate.html",
+                {
+                    "qr_img": img_str,
+                    "barcode": sample.barcode,
+                    "registered_on": registration.time,
+                    "name": request.POST.get("name"),
+                    "address": request.POST.get("address"),
+                    "contact": request.POST.get("contact"),
+                },
+            )
+        except ObjectDoesNotExist:
+            pass
+    result_query_template = "public/result-query.html"
+    form = ResultsQueryForm()
+    return render(request, result_query_template, {"form": form})
+
+
+def get_result_from_certificate(request):
+    access_code = request.GET.get("ac")
+    if access_code:
+        try:
+            sample = Sample.objects.get(access_code=access_code)
+            event = sample.get_latest_external_status()
+            if event is not None:
+                sample.events.create(
+                    status="INFO", comment="result queried; status: " + event.status
+                )
+            else:
+                sample.events.create(
+                    status="INFO", comment="result queried; status: None"
+                )
+            return render_status(request, event)
+        except ObjectDoesNotExist:
+            pass
+
+    result_query_template = "public/result-query.html"
+    form = ResultsQueryForm()
+    return render(request, result_query_template, {"form": form})
