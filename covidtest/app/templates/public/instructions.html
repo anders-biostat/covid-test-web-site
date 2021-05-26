@@ -41,7 +41,7 @@
     <p>
         {% blocktrans %}Notieren Sie sich dazu Ihren Zugangscode.{% endblocktrans %}
     </p>
-    {% if name and address and contact and access_code %}
+    {% if name and address and contact and access_code and offer_certificate %}
     <h3>{% blocktrans %}NEU: Bitte auf folgenden Button klicken um ein Zertifikat des Tests runterzuladen{% endblocktrans %}</h3>
     <span>{% blocktrans %}Nach dem verlassen dieser Seite ist dies nicht mehr möglich{% endblocktrans %}</span>
     <form action="{% url 'app:get_certificate' %}" method="post">
