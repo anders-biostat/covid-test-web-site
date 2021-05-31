@@ -14,7 +14,10 @@ RUN apk update && \
     apk add --virtual build-deps gcc python3-dev musl-dev && \
     apk add postgresql-dev && \
     apk add netcat-openbsd && \
-    apk add gettext
+    apk add gettext 
+
+# Install dependencies for Pillow
+RUN apk add zlib-dev jpeg-dev
 
 # Install packages
 RUN pip3 install -U pip

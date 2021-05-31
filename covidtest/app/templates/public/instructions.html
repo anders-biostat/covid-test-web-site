@@ -41,5 +41,17 @@
     <p>
         {% blocktrans %}Notieren Sie sich dazu Ihren Zugangscode.{% endblocktrans %}
     </p>
+    {% if name and address and contact and access_code and offer_certificate %}
+    <h3>{% blocktrans %}NEU: Bitte auf folgenden Button klicken um ein Zertifikat des Tests runterzuladen{% endblocktrans %}</h3>
+    <span>{% blocktrans %}Nach dem verlassen dieser Seite ist dies nicht mehr möglich{% endblocktrans %}</span>
+    <form action="{% url 'app:get_certificate' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="name" value="{{ name }}">
+      <input type="hidden" name="address" value="{{ address }}">
+      <input type="hidden" name="contact" value="{{ contact }}">
+      <input type="hidden" name="access_code" value="{{ access_code }}">
+      <button class="ui button red" style="margin-top: 20px">{% blocktrans %}Testzertifikat Herunterladen{% endblocktrans %}</button>
+    </form>
+    {% endif %}
 </div>
 {% endblock %}
