@@ -137,7 +137,8 @@ class VirusDetectiveSampleView(views.APIView):
             )
 
             return Response(
-                data={"access_code": sample.access_code}, status=status.HTTP_201_CREATED
+                data={"id": sample.pk, "access_code": sample.access_code},
+                status=status.HTTP_201_CREATED,
             )
         except Exception as e:
             return Response(

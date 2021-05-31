@@ -7,7 +7,7 @@ to this generic bag.
 
 ## Request
 
-**URL** : `/api/virusfinder/sample`
+**URL** : `/api/vd/sample`
 
 **Method** : `POST`
 

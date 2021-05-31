@@ -17,7 +17,7 @@ admin.site.index_title = "Admin"
 
 
 class SampleAdmin(admin.ModelAdmin):
-    list_display = ("barcode", "access_code", "rack", "bag", "password_hash")
+    list_display = ("pk", "barcode", "access_code", "rack", "bag", "password_hash")
     search_fields = ("barcode", "access_code", "rack", "bag__name")
 
 
