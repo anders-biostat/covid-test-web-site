@@ -13,6 +13,7 @@ jobs:
       - name: Build the stack
         run: |
           cp example.env .env
+          cp example.env .env-docker
           docker-compose up -d
       - name: Test
         run: |
