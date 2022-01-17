@@ -5,7 +5,6 @@ import pytest
 
 from ..models import Bag, Event, Registration, RSAKey, Sample, Consent
 
-
 class TestRegistration(TestCase):
     def setUp(self):
         key = RSAKey.objects.create(

@@ -1,11 +1,15 @@
 from .forms_public import AgeGroupForm, ConsentForm
+from .views_public import create_registration, save_consents
 from django.views import View
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 from django.template.loader import get_template
+from django.conf import settings
 from django.http import HttpResponse
 import hashlib
+
+from .models import Event, Registration, RSAKey, Sample, News
 
 import logging
 logger = logging.getLogger(__name__)
@@ -47,7 +51,7 @@ def get_template_file_for_consent_type(consent_type):
 class ConsentView(View):
 
     def render_info_and_consent(self, request):
-
+        request.session["passed_consent_pages"] = True
         if "consent_forms_to_be_displayed" not in request.session:
             logger.warning("Consent page accessed bypassing age query")
             return redirect("app:consent_age")
@@ -55,24 +59,26 @@ class ConsentView(View):
         # Is there still work to do?
         if len(request.session["consent_forms_to_be_displayed"]) == 0:
             print( "Consents obtained:", request.session["consents_obtained"] )
+            if settings.WITHOUT_REGISTRATION:
+                sample = Sample.objects.filter(access_code=request.session["access_code"]).first()
+                registration = create_registration(sample, cleaned_data=None, clear_fields=True)
+                save_consents(request, registration)
+                return redirect("app:results_query")
             return redirect("app:register")
-
         data = request.session["consent_forms_to_be_displayed"][0].copy()
         if not data["required"]:
             raise Exception("Non-required consent is not yet implemented.")
         data["num_pages"] = request.session["num_pages"]
         data["page_number"] = data["num_pages"] - len(request.session["consent_forms_to_be_displayed"]) + 1
-
+        data["requires_consent"] = settings.REQUIRE_CONSENT
         return render(request, get_template_file_for_consent_type(data["consent_type"]), data)
 
     def get(self, request):
-
         if "agegroup" in request.GET:
             consents = consent_pages_to_be_displayed( request.GET["agegroup"] )
             request.session["consent_forms_to_be_displayed"] = consents
             request.session["num_pages"] = len(consents)
             request.session["consents_obtained"] = []
-
         return self.render_info_and_consent(request)
 
     def post(self, request):
@@ -99,14 +105,10 @@ class ConsentView(View):
             request.session["consent_forms_to_be_displayed"] = request.session["consent_forms_to_be_displayed"][1:]
             # Finally, go back to start
             return self.render_info_and_consent(request)
+        if not settings.REQUIRE_CONSENT:
+            request.session["consent_forms_to_be_displayed"] = request.session["consent_forms_to_be_displayed"][1:]
+            return self.render_info_and_consent(request)
         raise "Invalid form"  # shouldn't happen
 
 
 
-def get_consent_md5(consent_type):
-    # get full path of HTML file with info and consent text
-    filepath = get_template(get_template_file_for_consent_type(consent_type)).origin.name
-    # calculate its MD5 hash
-    with open(filepath, 'rb' ) as f:
-        hashsum = hashlib.md5(f.read())
-    return hashsum.hexdigest()

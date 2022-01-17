@@ -4,29 +4,41 @@
 {% block content %}
 
 
-    <h3>{% blocktrans %} Alter der Teilnehmerin / des Teilnehmers? {% endblocktrans %}</h3>
+    <h3 style="text-align: center; font-weight: bold">{% blocktrans %} Alter der Teilnehmerin / des Teilnehmers? {% endblocktrans %}</h3>
 
-        <div class="ui four item menu stackable">
+        <div class="ui stackable centered grid container">
+            <div style="text-align: center" class="three wide column">
             <a href="{% url 'app:consent' %}?agegroup=adult"><div class="ui primary button">
                 {% blocktrans %}über 18 Jahre{% endblocktrans %}
             </div></a>
+            </div>
 
+            <div style="text-align: center" class="three wide column">
             <a href="{% url 'app:consent' %}?agegroup=adolescent"><div class="ui primary button">
                 {% blocktrans %}12-17 Jahre{% endblocktrans %}
             </div></a>
+            </div>
 
+            <div style="text-align: center" class="three wide column">
             <a href="{% url 'app:consent' %}?agegroup=child"><div class="ui primary button">
                 {% blocktrans %}7-11 Jahre{% endblocktrans %}
             </div></a>
+            </div>
 
+            <div style="text-align: center" class="three wide column">
             <a href="{% url 'app:pages' page='too_young.html' %}"><div class="ui primary button">
                 {% blocktrans %}0-6 Jahre{% endblocktrans %}
             </div></a>
+            </div>
         </div>
 
+        <div class="ui stackable centered grid container">
+        <div style="text-align: center" class="three wide column">
         <a href="{% url 'app:index' %}"><div class="ui basic button">
             {% blocktrans %}Zurück{% endblocktrans %}
         </div></a>
+        </div>
+        </div>
 
     <div class="ui basic segment">
         {% blocktrans %}Bevor wir Sie teilnehmen lassen dürfen, müssen wir Ihnen Informationsmaterial in altersgemäßer

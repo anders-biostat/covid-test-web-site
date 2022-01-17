@@ -8,8 +8,10 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
+from django.template.loader import get_template
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.conf import settings
 import qrcode
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
@@ -22,7 +24,6 @@ from .forms_public import (
 )
 from .models import Event, Registration, RSAKey, Sample, News
 from .statuses import SampleStatus
-from .views_consent import get_consent_md5
 
 log = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ def index(request):
         request.session["access_code"] = access_code
         return redirect("app:consent_age")
     news = News.objects.filter(relevant=True).order_by("-created_on")
-    return render(request, "public/index.html", {"news": news})
+    return render(request, "public/index.html", {"news": news, "without_registration": settings.WITHOUT_REGISTRATION})
 
 
 def news_archive(request):
@@ -171,13 +172,21 @@ def results_query(request):
 
             # No registration -> redirection to registration
             registration_count = sample.registrations.count()
-            if registration_count < 1:
+
+            registration_warning = _(
+                        "Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte registrieren Sie sich vorher."
+            )
+
+            if settings.WITHOUT_REGISTRATION:
+                registration_warning = _(
+                    "Zum Abrufen des Testergebnisses benötigen wir Ihr Einvertändnis."
+                )
+
+            if registration_count < 1 and settings.DISPLAY_CONSENT_PAGES:
                 messages.add_message(
                     request,
                     messages.WARNING,
-                    _(
-                        "Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte registrieren Sie sich vorher."
-                    ),
+                    registration_warning,
                 )
                 request.session["access_code"] = access_code
                 return redirect("app:register")
@@ -212,17 +221,32 @@ def results_query(request):
 
             # Checking the status of the sample
             event = sample.get_latest_external_status()
-            if event is not None:
+            if event is not None and not settings.PRIVACY_MODE:
                 sample.events.create(
                     status="INFO", comment="result queried; status: " + event.status
                 )
-            else:
+            elif not settings.PRIVACY_MODE:
                 sample.events.create(
                     status="INFO", comment="result queried; status: None"
                 )
             return render_status(request, event)
 
-    return render(request, result_query_template, {"form": form})
+    if settings.WITHOUT_REGISTRATION and "access_code" in request.session:
+        access_code = request.session["access_code"]
+        sample = Sample.objects.filter(access_code=access_code).first()
+        if sample.registrations.count() < 1 and settings.DISPLAY_CONSENT_PAGES:
+            messages.add_message(
+                request,
+                messages.WARNING,
+                _(
+                    "Zum Abrufen des Testergebnisses benötigen wir Ihr Einvertändnis."
+                ),
+            )
+            return redirect("app:register")
+        event = sample.get_latest_external_status()
+        return render_status(request, event)
+
+    return render(request, result_query_template, {"form": form, "without_registration": settings.WITHOUT_REGISTRATION})
 
 
 def information(request):
@@ -237,7 +261,7 @@ def register(request):
     if "code" in request.GET:
         access_code = request.GET["code"]
 
-    if len(request.session.get("consents_obtained", list())) == 0:
+    if (len(request.session.get("consents_obtained", list())) == 0 and settings.REQUIRE_CONSENT) or ("passed_consent_pages" not in request.session):
         log.warning("Register page accessed without going through consent pages.")
         return redirect("app:consent_age")
 
@@ -266,7 +290,8 @@ def register(request):
             # ! A registration can be created without ensuring a corresponding consent is created with it
             registration = create_registration(sample, form.cleaned_data)
             save_consents(request, registration)
-            sample.events.create(status="INFO", comment="sample registered")
+            if not settings.PRIVACY_MODE:
+                sample.events.create(status="INFO", comment="sample registered")
             request.session.flush()
             messages.add_message(
                 request, messages.SUCCESS, _("Erfolgreich registriert")
@@ -298,19 +323,21 @@ def save_consents(request, registration):
         registration.consents.create(consent_type=consent_type, md5=md5)
 
 
-def create_registration(sample, cleaned_data):
-    name = cleaned_data["name"]
-    address = cleaned_data["address"]
-    contact = cleaned_data["contact"]
-    rsa_inst = rsa_instance_from_key(sample.bag.rsa_key.public_key)
-    doc = encrypt_subject_data(rsa_inst, name, address, contact)
+def create_registration(sample, cleaned_data, clear_fields=False):
+    if not clear_fields:
+        name = cleaned_data["name"]
+        address = cleaned_data["address"]
+        contact = cleaned_data["contact"]
+        rsa_inst = rsa_instance_from_key(sample.bag.rsa_key.public_key)
+        doc = encrypt_subject_data(rsa_inst, name, address, contact)
+
     registration = sample.registrations.create(
-        name_encrypted=doc["name_encrypted"],
-        address_encrypted=doc["address_encrypted"],
-        contact_encrypted=doc["contact_encrypted"],
-        public_key_fingerprint=doc["public_key_fingerprint"],
-        session_key_encrypted=doc["session_key_encrypted"],
-        aes_instance_iv=doc["aes_instance_iv"],
+        name_encrypted=doc["name_encrypted"] if not clear_fields else "",
+        address_encrypted=doc["address_encrypted"] if not clear_fields else "",
+        contact_encrypted=doc["contact_encrypted"] if not clear_fields else "",
+        public_key_fingerprint=doc["public_key_fingerprint"] if not clear_fields else "",
+        session_key_encrypted=doc["session_key_encrypted"] if not clear_fields else "",
+        aes_instance_iv=doc["aes_instance_iv"] if not clear_fields else "",
     )
     return registration
 
@@ -354,6 +381,17 @@ def get_certificate(request):
     form = ResultsQueryForm()
     return render(request, result_query_template, {"form": form})
 
+def get_template_file_for_consent_type(consent_type):
+    return "public/info_and_consent/" + consent_type + ".html"
+
+def get_consent_md5(consent_type):
+    # get full path of HTML file with info and consent text
+    filepath = get_template(get_template_file_for_consent_type(consent_type)).origin.name
+    # calculate its MD5 hash
+    with open(filepath, 'rb' ) as f:
+        hashsum = hashlib.md5(f.read())
+    return hashsum.hexdigest()
+
 
 def get_result_from_certificate(request):
     access_code = request.GET.get("ac")
@@ -361,11 +399,11 @@ def get_result_from_certificate(request):
         try:
             sample = Sample.objects.get(access_code=access_code)
             event = sample.get_latest_external_status()
-            if event is not None:
+            if event is not None and not settings.PRIVACY_MODE:
                 sample.events.create(
                     status="INFO", comment="result queried; status: " + event.status
                 )
-            else:
+            elif not settings.PRIVACY_MODE:
                 sample.events.create(
                     status="INFO", comment="result queried; status: None"
                 )
