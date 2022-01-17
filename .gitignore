@@ -1,5 +1,6 @@
 # Environemt-Variables
 .env
+.env-docker
 
 # MacOS
 .DS_Store
