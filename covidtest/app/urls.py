@@ -23,18 +23,18 @@ router.register(r"keysamples", views_api.KeySamplesViewSet)
 urlpatterns = [
     path("", views_public.index, name="index"),
     path("news/archive", views_public.news_archive, name="news_archive"),
-    path("consent/age/", views_consent.AgeGroupFormView.as_view(), name="consent_age"),
-    path("consent/", views_consent.ConsentView.as_view(), name="consent"),
+    #path("consent/age/", views_consent.AgeGroupFormView.as_view(), name="consent_age"),
+    #path("consent/", views_consent.ConsentView.as_view(), name="consent"),
     path("results", views_public.results_query, name="results_query"),
     path("instructions", views_public.instructions, name="instructions"),
     path("information", views_public.information, name="information"),
-    path("register", views_public.register, name="register"),
-    path("certificate", views_public.get_certificate, name="get_certificate"),
-    path(
-        "test-results",
-        views_public.get_result_from_certificate,
-        name="results_from_certificate",
-    ),
+    #path("register", views_public.register, name="register"),
+    #path("certificate", views_public.get_certificate, name="get_certificate"),
+    #path(
+    #    "test-results",
+    #    views_public.get_result_from_certificate,
+    #    name="results_from_certificate",
+    #),
     path("pages/<str:page>", views_public.pages, name="pages"),
     path(
         "lab/access-denied",

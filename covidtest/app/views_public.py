@@ -29,12 +29,12 @@ log = logging.getLogger(__name__)
 
 def index(request):
     request.session.flush()
-    access_code = None
-    if "code" in request.GET:
-        access_code = request.GET["code"]
-    if access_code is not None:
-        request.session["access_code"] = access_code
-        return redirect("app:consent_age")
+    #access_code = None
+    #if "code" in request.GET:
+    #    access_code = request.GET["code"]
+    #if access_code is not None:
+    #    request.session["access_code"] = access_code
+    #    return redirect("app:results_query")
     news = News.objects.filter(relevant=True).order_by("-created_on")
     return render(request, "public/index.html", {"news": news})
 
@@ -69,24 +69,6 @@ def render_status(request, event):
                 {"error": _("Status unbekannt"), "updated_on": event_updated_on},
             )
 
-        if status == SampleStatus.PCRPOS:
-            return render(
-                request,
-                "public/pages/test-PCRPOS.html",
-                {"updated_on": event_updated_on},
-            )
-        if status == SampleStatus.PCRNEG:
-            return render(
-                request,
-                "public/pages/test-PCRNEG.html",
-                {"updated_on": event_updated_on},
-            )
-        if status == SampleStatus.PCRWEAKPOS:
-            return render(
-                request,
-                "public/pages/test-PCRWEAKPOS.html",
-                {"updated_on": event_updated_on},
-            )
         if status == SampleStatus.LAMPPOS:
             return render(
                 request,
@@ -168,47 +150,6 @@ def results_query(request):
                     _("Der Zugangscode ist unbekannt. Bitte erneut versuchen."),
                 )
                 return redirect("app:results_query")
-
-            # No registration -> redirection to registration
-            registration_count = sample.registrations.count()
-            if registration_count < 1:
-                messages.add_message(
-                    request,
-                    messages.WARNING,
-                    _(
-                        "Das Testkit mit diesem Zugangscode wurde noch nicht registriert. Bitte registrieren Sie sich vorher."
-                    ),
-                )
-                request.session["access_code"] = access_code
-                return redirect("app:register")
-
-            # Legacy code for old samples with password registrations
-
-            # Registered and password exists
-            if sample.password_hash is not None and sample.password_hash != "":
-                form = ResultsQueryFormLegacy(request.POST)
-
-                # Check if form is legacy
-                if "password" not in request.POST.keys():
-                    return render(request, result_query_template, {"form": form})
-
-                if form.is_valid():
-                    password = form.cleaned_data["password"]
-                    sha_instance = hashlib.sha3_384()
-                    sha_instance.update(password.encode("utf-8"))
-                    password_hashed = binascii.b2a_base64(
-                        sha_instance.digest(), newline=False
-                    ).decode("ascii")
-                    if password_hashed != sample.password_hash:
-                        messages.add_message(
-                            request,
-                            messages.ERROR,
-                            _(
-                                "Das eingegebene Passwort ist falsch. Bitte probieren sie es nochmal."
-                            ),
-                        )
-                        request.session["access_code"] = access_code
-                        return render(request, result_query_template, {"form": form})
 
             # Checking the status of the sample
             event = sample.get_latest_external_status()
