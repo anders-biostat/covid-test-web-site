@@ -18,7 +18,7 @@ jobs:
       - name: Test
         run: |
           docker container ls
-          docker exec covidtest_app pytest --cov=.
+          docker exec covidtest_app pytest --cov=. -m "not with_registration"
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/production'
