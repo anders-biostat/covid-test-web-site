@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from django.test import Client, TestCase
+from django.test import Client, TestCase, tag
 from django.urls import reverse
+import pytest
 
 from ..models import Bag, Event, Registration, RSAKey, Sample, Consent
 
@@ -52,15 +53,21 @@ class TestRegistration(TestCase):
             "contact": "+49 0123 123 123",
         }
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_registration_form_no_consent(self):
         response = self.client.post(reverse("app:register"), self.valid_form_input)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:consent_age"), target_status_code=200)
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_redirects_to_age_if_no_age(self):
         response = self.client.get(reverse("app:consent"))
         self.assertRedirects(response, reverse("app:consent_age"), target_status_code=200)
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_age_selection_displayed(self):
         response = self.client.get(reverse("app:consent_age"))
         self.assertEqual(response.status_code, 200)
@@ -69,6 +76,8 @@ class TestRegistration(TestCase):
         self.assertContains(response, f'<a href="{reverse("app:consent")}?agegroup=child">')
         self.assertContains(response, f'<a href="{reverse("app:pages", kwargs={"page": "too_young.html"})}">')
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_adult_template_displayed(self):
         # Step 1
         response = self.client.get(f'{reverse("app:consent")}?agegroup=adult')
@@ -84,6 +93,8 @@ class TestRegistration(TestCase):
             response.templates[0].name, "public/info_and_consent/adults_biobank.html"
         )
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_adolescent_template_displayed(self):
         # Step 1
         response = self.client.get(f'{reverse("app:consent")}?agegroup=adolescent')
@@ -117,6 +128,8 @@ class TestRegistration(TestCase):
             response.templates[0].name, "public/info_and_consent/adolescents_biobank.html"
         )
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_children_template_displayed(self):
         # Step 1
         response = self.client.get(f'{reverse("app:consent")}?agegroup=child')
@@ -150,15 +163,21 @@ class TestRegistration(TestCase):
             response.templates[0].name, "public/info_and_consent/children_biobank.html"
         )
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_invalid_age_group_entered(self):
         # TODO first something needs to be implemented to handle this exception
         pass
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_register_without_consent_redirect(self):
         response = self.client.get(reverse("app:register"))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:consent_age"), target_status_code=200)
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_register_with_empty_consent_redirect(self):
         session = self.client.session
         session["consents_obtained"] = list()
@@ -167,6 +186,8 @@ class TestRegistration(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse("app:consent_age"), target_status_code=200)
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_register_displayed(self):
         session = self.client.session
         session["consents_obtained"] = ['adults', 'adults_biobank']
@@ -174,6 +195,8 @@ class TestRegistration(TestCase):
         response = self.client.get(reverse("app:register"))
         self.assertEqual(response.status_code, 200)
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_register_submit_invalid_access_code(self):
         session = self.client.session
         session["consents_obtained"] = ['adults', 'adults_biobank']
@@ -181,6 +204,8 @@ class TestRegistration(TestCase):
         response = self.client.post(reverse("app:register"), self.invalid_form_input)
         self.assertEqual(response.status_code, 200)
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_register_submit_valid(self):
         session = self.client.session
         session["consents_obtained"] = ['adults', 'adults_biobank']
