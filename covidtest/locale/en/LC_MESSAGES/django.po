@@ -944,7 +944,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Ihre Probe ist bei uns eingegangen"
 msgid "Probe noch nicht eingegangen"
-msgstr "Your sample has been received"
+msgstr "Your sample has not been received"
 
 #: app/templates/public/pages/test-WAIT.html:8
 #, fuzzy
@@ -954,7 +954,9 @@ msgstr "Your sample has been received"
 msgid ""
 "Ihre Probe ist noch nicht in unserem Labor eingegangen. Bitte\n"
 "    versuchen Sie es später oder morgen noch einmal."
-msgstr "No result is available yet. Please try again later today or tomorrow."
+msgstr ""
+"No result is available yet. Please \n"
+"try again later today or tomorrow."
 
 #: app/templates/public/pages/too_young.html:7
 msgid "Kinder unter 7 Jahren dürfen leider nicht teilnehmen."

@@ -168,7 +168,8 @@ def results_query(request):
                     messages.ERROR,
                     _("Der Zugangscode ist unbekannt. Bitte erneut versuchen."),
                 )
-                return redirect("app:results_query")
+                form = ResultsQueryForm()
+                return render(request, result_query_template, {"form": form}, status=404)
 
             # No registration -> redirection to registration
             registration_count = sample.registrations.count()
