@@ -3,25 +3,78 @@
 {% load tz %}
 
 {% block content %}
-<div class="ui segment content">
-    <h2 class="ui header" style="text-align: center">
-        {% block segment-title %}
-        {% endblock %}
-    </h2>
+    <p style="color: rgba(0,0,0,0.4); margin: -20px 0 20px 0;">
+                  <i style="float: left; margin: 0 20px 20px 0; padding: 10px; font-size: 20px;" class="info circle icon"></i>
+                   Das LAMP-Verfahren weist das Coronavirus mit ähnlich hoher Sensitivität nach wie ein PCR-Test, und ist sehr viel sensitiver als ein Antigen-Schnelltest.
+    </p>
 
-    <div style="margin-top: 30px; margin-bottom: 30px">
-    {% block segment-body %}
-    {% endblock %}
+    <div style="margin: 0 0 0 0;" class="ui message">
+        <h2 class="ui header" style="text-align: left">
+            {% block segment-title %}
+            {% endblock %}
+        </h2>
+
+        <div style="margin-top: 10px; margin-bottom: 5px">
+            {% block segment-body %}
+            {% endblock %}
+        </div>
+
+        {% if updated_on %}
+            <p style="text-align: center; font-size: small; font-weight: bold">
+                {% blocktrans %}Stand{% endblocktrans %}
+                {{ updated_on|localtime|date }}
+                {% blocktrans %}um{% endblocktrans %}
+                {{ updated_on|localtime|time }}
+            </p>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block additional_content %}
+
+    <div style="margin: 30px 0 0 0;" class="ui segment content">
+
+        <div class="ui grid">
+            <div class="four wide column">
+                <div class="ui secondary vertical menu">
+                    <a data-tab="tab-1" class="active item">
+                        <strong>Anleitung zur Probennahme</strong>
+                    </a>
+                    <a data-tab="tab-2" class="item">
+                        <strong>Was ist LAMP?</strong>
+                    </a>
+                    <a data-tab="tab-3" class="item">
+                        <strong>Weitere Infos</strong>
+                    </a>
+                    <a data-tab="tab-4" class="item">
+                        <strong>FAQ</strong>
+                    </a>
+                </div>
+            </div>
+
+            <div class="twelve wide column">
+                <div style="padding-top: 0;" class="ui basic segment">
+                    <div class="ui tab active" data-tab="tab-1">
+                        <h2 class="ui header">Anleitung zur Probennahme</h2>
+                        {% include "public/snippets/instructions.html" %}
+                    </div>
+                    <div class="ui tab" data-tab="tab-2">
+                        <h2 class="ui header">Was ist LAMP?</h2>
+                    </div>
+                    <div class="ui tab" data-tab="tab-3">
+                        <h2 class="ui header">Weitere Infos</h2>
+                    </div>
+                    <div class="ui tab" data-tab="tab-4">
+                        <h2 class="ui header">FAQ</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    {% if updated_on %}
-    <p style="text-align: center; font-size: small; font-weight: bold">
-    {% blocktrans %}Stand{% endblocktrans %}
-        {{updated_on|localtime|date}}
-        {% blocktrans %}um{% endblocktrans %}
-        {{updated_on|localtime|time}}
-    </p>
-    {% endif %}
+<script>
+    $('.vertical.menu .item').tab()
+</script>
 
-</div>
 {% endblock %}
