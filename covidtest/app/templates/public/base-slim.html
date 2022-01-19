@@ -1,0 +1,112 @@
+{% load i18n %}
+{% load static %}
+
+<html lang="de">
+<head>
+    <title>
+        {% blocktrans %}Test der Universität Heidelberg auf das
+        Covid-19-Coronavirus (SARS-CoV-2){% endblocktrans %}
+    </title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {% if LANGUAGE == '--' %}
+    {% else %}
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'style/semantic-ui/semantic.min.css' %}"
+    />
+    <script src="{% static 'style/js/jquery.min.js' %}"></script>
+    <script src="{% static 'style/semantic-ui/semantic.min.js' %}"></script>
+    <link rel='stylesheet prefetch'
+          href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css'>
+    {% endif %}
+
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'main_style.css' %}"
+    />
+    <style>
+        .ui.checkbox input[type="checkbox"] + label::before{
+            border-width: 2px;
+            border-color: black;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body class="page">
+
+{% block header %}
+
+<div style="background-color: #ecf0f1; color: #000; box-shadow: none; -webkit-box-shadow: none;" class="ui top stackable menu page">
+
+
+    <div class="header item">
+        <a href="{% url 'app:index' %}">
+            <h2 class="ui header menubar">
+                <!--{% blocktrans %}Test auf COVID-19{% endblocktrans %}-->
+                <!--<div class="sub header">{% blocktrans %}LAMP basierter Test auf das Coronavirus SARS-CoV-2{% endblocktrans %}
+                </div>-->
+            </h2>
+        </a>
+    </div>
+
+    <div class="right menu">
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% if languages|length > 1 %}
+        <form style="color: #000" action="{% url 'set_language' %}" method="post" class="ui simple dropdown item language">
+            {% csrf_token %}
+            <i style="color: #000;" class="globe icon"></i>
+            Language <i class="dropdown icon"></i>
+            <div class="menu">
+                {% for language in languages %}
+                    <button name="language" value="{{ language.code }}" class="item">
+                        {% if language.code == LANGUAGE_CODE %}
+                            <b>{{ language.name_local }}</b>
+                        {% else %}
+                            {{ language.name_local }}
+                        {% endif %}
+                    </button>
+                {% endfor %}
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+{% if messages %}
+{% for message in messages %}
+<div style="margin: 10px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="ui centered stackable grid">
+    <div style="min-height: 60vh;" class="twelve wide column">
+        <div class="ui content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+
+    <div class="ui center aligned container">
+        <p>{% blocktrans %}Bei {% endblocktrans %}<b>{% blocktrans %}technischen Problemen{% endblocktrans %}</b> {% blocktrans %}informieren Sie bitte Simon Anders:{% endblocktrans %}
+            <a href="mailto:s.anders@zmbh.uni-heidelberg.de">s.anders@zmbh.uni-heidelberg.de</a></p>
+    </div>
+
+
+    <div style="" class="four column centered footer row">
+        {% block footer %} {% include 'public/footer.html' %} {% endblock%}
+    </div>
+</div>
+
+
+</body>
+</html>

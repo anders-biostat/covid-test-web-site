@@ -3,6 +3,7 @@ import hashlib
 import logging
 from io import BytesIO
 import base64
+import datetime
 
 from django.contrib import messages
 from django.shortcuts import redirect, render
@@ -39,7 +40,6 @@ def index(request):
     news = News.objects.filter(relevant=True).order_by("-created_on")
     return render(request, "public/index.html", {"news": news, "without_registration": settings.WITHOUT_REGISTRATION})
 
-
 def news_archive(request):
     news_query = News.objects.filter(relevant=False).order_by("-created_on")
     page = request.GET.get("page", 1)
@@ -69,6 +69,10 @@ def render_status(request, event):
                 "public/pages/test-ERROR.html",
                 {"error": _("Status unbekannt"), "updated_on": event_updated_on},
             )
+
+        status_age = (datetime.datetime.now() - event_updated_on).days # Last status age in days
+        if (status_age > 5) and (status not in [SampleStatus.WAIT, SampleStatus.PRINTED]):
+            status = "expired"
 
         if status == SampleStatus.PCRPOS:
             return render(
@@ -140,6 +144,10 @@ def render_status(request, event):
             return render(
                 request, "public/pages/test-WAIT.html", {"updated_on": event_updated_on}
             )
+        if status == "expired":
+            return render(
+                request, "public/pages/access-expired.html"
+            )
         return render(
             request, "public/pages/test-UNDEF.html", {"updated_on": event_updated_on}
         )
@@ -148,9 +156,10 @@ def render_status(request, event):
     # )
     return render(request, "public/pages/test-WAIT.html")
 
-
-def results_query(request):
+def results_query(request, slim_version=False):
     result_query_template = "public/result-query.html"
+    if slim_version:
+        result_query_template = "public/result-query-slim.html"
 
     form = ResultsQueryForm()
     if request.method == "POST":
@@ -249,6 +258,7 @@ def results_query(request):
 
     return render(request, result_query_template, {"form": form, "without_registration": settings.WITHOUT_REGISTRATION})
 
+results_query_slim = lambda request: results_query(request, slim_version=True)
 
 def information(request):
     return render(request, "public/pages/information.html")

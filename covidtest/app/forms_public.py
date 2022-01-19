@@ -50,7 +50,7 @@ class RegistrationForm(forms.Form):
 
 class ResultsQueryForm(forms.Form):
     access_code = forms.CharField(
-        label=_("Zugangscode"), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")})
+        label=_("Zugangscode / Access-Code"), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode / Access-Code")})
     )
 
     def clean(self):
