@@ -158,7 +158,7 @@ def render_status(request, event):
 
 def results_query(request, slim_version=False):
     result_query_template = "public/result-query.html"
-    if slim_version:
+    if slim_version or True:
         result_query_template = "public/result-query-slim.html"
 
     form = ResultsQueryForm()
