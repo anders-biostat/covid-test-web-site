@@ -5,22 +5,7 @@
 {% block content %}
 <form class="ui form" action="{% url 'app:results_query' %}" method="post">
     {% csrf_token %}
-    <h2 class="ui header">
-        {% blocktrans %}Ergebnis Ihres COVID-19 Tests abfragen:{% endblocktrans %}
-    </h2>
-
-    {% if not without_registration %}
-    <p>
-        {% blocktrans %}
-        Um das Ergebnis abrufen zu können, muss der Test vorher registriert worden sein. <br>
-        Das Testkit können Sie unter folgendem Link registrieren:
-        {% endblocktrans %}
-        <a href="{% url 'app:consent_age' %}">{% blocktrans %}Registrieren{% endblocktrans %}</a>
-    </p>
-    {% endif %}
-
     {% render_form form %}
-
     <div>
         <button type="submit" class="ui primary button">
             {% blocktrans %}Weiter{% endblocktrans %}

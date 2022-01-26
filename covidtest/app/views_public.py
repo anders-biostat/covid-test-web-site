@@ -13,6 +13,7 @@ from django.template.loader import get_template
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.conf import settings
+from django.http import HttpResponseNotFound
 import qrcode
 
 from .encryption_helper import encrypt_subject_data, rsa_instance_from_key
@@ -354,11 +355,12 @@ def create_registration(sample, cleaned_data, clear_fields=False):
 
 
 def pages(request, page):
-    return render(request, "public/pages/" + page)
+    if page in ["contact.html", "impressum.html"]:
+        return render(request, "public/pages/" + page)
+    return HttpResponseNotFound("<h1>404: Page not found</h1>")
 
 
 def get_certificate(request):
-
     if request.method == "POST":
         access_code = request.POST.get("access_code")
         try:
@@ -388,7 +390,7 @@ def get_certificate(request):
             )
         except ObjectDoesNotExist:
             pass
-    result_query_template = "public/result-query.html"
+    result_query_template = "public/result-query-slim.html"
     form = ResultsQueryForm()
     return render(request, result_query_template, {"form": form})
 
@@ -422,6 +424,6 @@ def get_result_from_certificate(request):
         except ObjectDoesNotExist:
             pass
 
-    result_query_template = "public/result-query.html"
+    result_query_template = "public/result-query-slim.html"
     form = ResultsQueryForm()
     return render(request, result_query_template, {"form": form})
