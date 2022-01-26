@@ -1,0 +1,27 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load tz %}
+
+{% block content %}
+    <div style="margin: 14px auto; max-width: 1000px;" class="ui message">
+        <h2 class="ui header" style="text-align: left">
+            {% block segment-title %}
+            {% endblock %}
+        </h2>
+
+        <div style="margin-top: 10px; margin-bottom: 5px">
+            {% block segment-body %}
+            {% endblock %}
+        </div>
+
+        {% if updated_on %}
+            <p style="text-align: center; font-size: small; font-weight: bold">
+                {% blocktrans %}Stand{% endblocktrans %}
+                {{ updated_on|localtime|date }}
+                {% blocktrans %}um{% endblocktrans %}
+                {{ updated_on|localtime|time }}
+            </p>
+        {% endif %}
+
+    </div>
+{% endblock %}

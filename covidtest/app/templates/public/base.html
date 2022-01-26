@@ -91,7 +91,7 @@
 
 <div class="ui centered stackable grid">
     <div style="min-height: 60vh;" class="twelve wide column">
-        <div class="ui content">
+        <div style="max-width: 1000px; margin: 0 auto;" class="ui content">
             {% with request.resolver_match.view_name as view_name %}
                 {% if view_name == "app:home" %}
                     <a href="{% url 'app:access_check' %}"><i class="left arrow icon divider"></i>{% blocktrans %}Zurück: Zugangscode eingeben{% endblocktrans %}</a>

@@ -17,3 +17,4 @@ class SampleStatus(Enum):
     MESSAGE = "MESSAGE"
     PRINTED = "PRINTED"
     WAIT = "WAIT"
+    EXPIRED = "EXPIRED"
