@@ -73,7 +73,7 @@ class TestRegistration(TestCase):
         self.assertContains(response, f'<a href="{reverse("app:consent")}?agegroup=adult">')
         self.assertContains(response, f'<a href="{reverse("app:consent")}?agegroup=adolescent">')
         self.assertContains(response, f'<a href="{reverse("app:consent")}?agegroup=child">')
-        self.assertContains(response, f'<a href="{reverse("app:pages", kwargs={"page": "too_young.html"})}">')
+        self.assertContains(response, f'<a href="{reverse("app:result_pages", kwargs={"page": "too_young.html"})}">')
 
     @tag("with_registration")
     @pytest.mark.with_registration

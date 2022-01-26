@@ -1,0 +1,14 @@
+{% extends "public/base-slim.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="ui segment content">
+  <h2>{% blocktrans %}Datenschutz und Erklärung zum Schutz der Privatsphäre{% endblocktrans %}</h2>
+  <p>
+      {% blocktrans %}Wenn Sie diese Website besuchen und einen Zugangscode eingeben, erfassen wir keine personenbezogenen Daten, es werden keine Cookies verwendet und keine Tracker sind auf unserer Seite installiert. Wir speichern nur den eingegebenen Zugangscode, den Zeitpunkt der Eingabe des Zugangscodes und das Ergebnis, das bei jeder Eingabe eines Zugangscodes angezeigt wird. Wir können die Probe keiner Person zuordnen und ohne Zugangscode können Sie das Resultat nicht erfahren. Die Resultate werden nicht weitergeleitet oder auf irgendeiner Plattform bekannt gegeben und könne nur hier mittels des Zugangscodes erfahren werden.{% endblocktrans %}
+  </p>
+  <p>
+      {% blocktrans %}Wenn Sie eine Gurgelprobe einreichen, analysieren wir die Probe nur auf das Vorhandensein von SARS-CoV-2 Virus-RNA unter Verwendung isothermer Nukleinsäureamplifikation und einer Fluoreszenzanzeige, um das Vorhandensein der Virus-RNA zu bestimmen. Es wird kein weiterer Test durchgeführt. Die Probe wird nur zum Zweck der Analyse aufbewahrt, bis das Ergebnis bestätigt ist. Die Probe wird innerhalb von 2 Wochen nach der Analyse vollständig vernichtet. Wenn Sie die Resultate abfragen wird Ihnen die Bedeutung der Resultate erklärt und eine Handlungsanweisung gegeben. Sollten Sie diesen Instruktionen nicht folgen, unterliegt das Ihrer Verantwortung.{% endblocktrans %}
+  </p>
+</div>
+{% endblock %}

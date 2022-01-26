@@ -1,0 +1,72 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load semanticui %}
+
+{% block content %}
+
+    <div style="margin: 40px auto 10px auto; max-width: 1000px;">
+    <h2 class="ui header">
+        {% blocktrans %}Willkommen!{% endblocktrans %}
+    </h2>
+    <p>
+        {% blocktrans %}Dies ist die Webseite der LAMP-Teststation des ZMBH und der Virologie der Universität Heidelberg. Sie sind hier gelandet, weil Sie den Access Code eines Testkits für einen Corona-Gurgeltest eingegeben haben und einen Test machen möchten oder vielleicht schon eine Gurgelprobe abgegeben haben. Wie der Ablauf funktioniert, erfahren Sie weiter unten.{% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans %}Wichtig: Dieser Test ist vollständig anonym und hat deshalb den Stellenwert eines Antigentest den man selbst zu Hause durchführt. Der einzige Unterschied ist, dass die Analyse der Probe in einem Labor durchgeführt wird und genauer ist als die meisten Antigentests. Das heißt, das Resultat, ob negativ oder positiv, hat keine offizielle Gültigkeit. Wir garantieren nicht für die Richtigkeit des Resultates und wir stellen kein Zertifikat aus. Um eine SARS-CoV-2 Infektion sicher zu bestätigen bzw. auszuschließen, muss ein offizieller PCR-Test erfolgen.{% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans %}Für Fragen wenden Sie sich bitte an uns unter: 0152 - 579 083 78.{% endblocktrans %}
+    </p>
+    </div>
+
+    <div class="ui placeholder segment">
+        <div class="ui four column stackable center aligned grid">
+            <div style="padding: 20px;" class="middle aligned row">
+                <div class="twelve wide column">
+                    <div class="ui icon header">
+                        <i class="search icon"></i>
+                        {% blocktrans %}Ergebnis abfragen{% endblocktrans %}
+                    </div>
+                    <p style="font-size: 10pt">
+                        {% blocktrans %}Mit der Abfrage eines Testresultats mittels Access code über diesen Link erkläre ich, dass ich über das Testverfahren informiert bin und die Erklärung zum Datenschutz und Privatsphäre sowie die weiteren Information gelesen und verstanden habe und damit einverstanden bin.{% endblocktrans %}
+                    </p>
+                    <a style="margin-top: 10px;" class="ui primary button" href="{% url 'app:result' %}">
+                        {% blocktrans %}Ergebnis abfragen{% endblocktrans %}
+                    </a>
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            <div style="padding: 30px 0;" class="middle aligned row">
+                <div class="column">
+                    <div class="ui icon header">
+                        <i class="clipboard outline icon"></i>
+                        {% blocktrans %}Wie man den Corona-Test durchführt?{% endblocktrans %}
+                    </div>
+                    <a href="{% url 'app:instructions' %}" style="margin-top: 10px;" class="ui primary button">
+                        {% blocktrans %}Zur Anleitung{% endblocktrans %}
+                    </a>
+                </div>
+                <div class="column">
+                    <div class="ui icon header">
+                        <i class="info icon circle"></i>
+                        {% blocktrans %}Weiterführende Informationen{% endblocktrans %}
+                    </div>
+                    <a href="{% url 'app:information' %}" style="margin-top: 10px;" class="ui primary button">
+                        {% blocktrans %}Informationen{% endblocktrans %}
+                    </a>
+                </div>
+                <div class="column">
+                    <div class="ui icon header">
+                        <i class="newspaper icon"></i>
+                        {% blocktrans %}Aktuelles von der Teststation{% endblocktrans %}
+                    </div>
+                    <a style="margin-top: 10px;" class="ui primary button"
+                       href="{% url 'app:news_archive' %}">
+                        {% blocktrans %}Aktuelles{% endblocktrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

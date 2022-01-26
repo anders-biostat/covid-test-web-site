@@ -31,7 +31,7 @@ DEBUG = env("DJANGO_DEBUG", cast=bool)
 ADD_HOSTS = env("HOSTS", cast=str, default="")
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"] + [host.strip() for host in ADD_HOSTS.split(",") if host.strip() != ""]
 
-# Remove registration pages and user-flow (for privacy reasons)
+# Remove registration result_pages and user-flow (for privacy reasons)
 WITHOUT_REGISTRATION = env("WITHOUT_REGISTRATION", cast=bool, default=True)
 
 # Disable logging of events (e.g. querying results)

@@ -1,0 +1,10 @@
+{% extends "public/result_pages/result.html" %}
+{% load i18n %}
+
+{% block segment-title %}{% blocktrans %}Ihre Probe ist bei uns eingegangen{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p>
+    {% blocktrans %}Ihre Probe ist bei uns eingegangen. Es liegt jedoch noch kein Ergebnis vor. Bitte versuchen Sie es später oder morgen noch einmal.{% endblocktrans %}
+</p>
+{% endblock %}

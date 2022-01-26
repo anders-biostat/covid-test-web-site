@@ -1,0 +1,10 @@
+{% extends "public/result_pages/result.html" %}
+{% load i18n %}
+
+{% block segment-title %}{% blocktrans %}Test fehlgeschlagen{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p class="lead">
+{% blocktrans %}Leider ist bei Ihrer Probe ein technisches Problem aufgetreten, und Ihre Probe konnte nicht ausgewertet werden. Das kommt bei ca. 1 von 200 Proben vor. Es tut uns leid, dass wir Ihnen deshalb diesmal kein Ergebnis mitteilen können. Bitte senden Sie uns bei nächster Gelegenheit eine neue Probe zu. Falls der Verdacht auf eine Corona Infektion besteht, wenden Sie sich an einen Arzt für einen PCR Test.{% endblocktrans %}
+</p>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "public/result_pages/result.html" %}
+{% load i18n %}
+
+{% block segment-title %}{% blocktrans %}Ergebnis: Positiv{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p>
+    {% blocktrans %}Die Analyse Ihrer Probe ergab ein positives Resultat in allen drei Replikaten. Es konnte SARS-CoV-2 virale RNA nachgewiesen werden. Sie sind sehr wahrscheinlich mit dem SARS-CoV-2 Virus (Covid-19, Coronavirus) infiziert. Sie sind vermutlich infektiös und können weitere Personen anstecken. Bitte informieren Sie sich umgehend über die aktuell gültigen Richtlinien zum Verhalten von Personen die positive getestet wurden und kontaktieren das Gesundheitsamt oder einen Arzt um einen PCR Test für eine Bestätigung zu erhalten. Eine Überprüfung mit einem Antigentest bei einem Testzentrum kann negativ ausfallen, weil manche Antigentests sehr unempfindlich sind. Bitte veranlassen Sie trotzdem einen PCR Test.{% endblocktrans %}
+</p>
+{% endblock %}

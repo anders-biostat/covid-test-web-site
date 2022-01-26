@@ -24,9 +24,9 @@ urlpatterns = [
     path("", views_public.access_check, name="access_check"),
     path("result/", views_public.result, name="result"),
     path("home/", views_public.home, name="home"),
-    path("news/archive", views_public.news_archive, name="news_archive"),
-    path("instructions", views_public.instructions, name="instructions"),
-    path("information", views_public.information, name="information"),
+    path("news/", views_public.news, name="news_archive"),
+    path("instructions/", views_public.instructions, name="instructions"),
+    path("information/", views_public.information, name="information"),
     path("pages/<str:page>", views_public.pages, name="pages"),
     path(
         "lab/access-denied",

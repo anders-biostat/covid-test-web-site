@@ -44,7 +44,7 @@ def access_check(request):
                     _("Der Zugangscode ist unbekannt. Bitte erneut versuchen."),
                 )
                 form = ResultsQueryForm()
-                return render(request, "public/access-check.html", {"form": form}, status=404)
+                return render(request, "public/pages/access-check.html", {"form": form}, status=404)
             # If sample found
             sample.events.create(
                 status="INFO", comment="accessed page"
@@ -52,9 +52,9 @@ def access_check(request):
             request.session["access_checked"] = True
             request.session["access_code"] = access_code
             return redirect("app:home")
-    return render(request, "public/access-check.html", {"form": form})
+    return render(request, "public/pages/access-check.html", {"form": form})
 
-def news_archive(request):
+def news(request):
     access_check, access_code = check_access_allowed(request)
     news_query = News.objects.filter(relevant=True).order_by("-created_on")
     page = request.GET.get("page", 1)
@@ -65,37 +65,36 @@ def news_archive(request):
         news = paginator.page(1)
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
-
-    return render(request, "public/news-archive.html", {"news": news})
+    return render(request, "public/pages/news.html", {"news": news})
 
 result_page_dict = {
-    SampleStatus.WAIT: "public/pages/test-WAIT",
-    SampleStatus.PRINTED: "public/pages/test-WAIT",
-    SampleStatus.UNDEF: "public/pages/test-UNDEF",
-    SampleStatus.LAMPPOS: "public/pages/test-LAMPPOS",
-    SampleStatus.LAMPNEG: "public/pages/test-LAMPNEG",
-    SampleStatus.LAMPFAIL: "public/pages/test-LAMPFAIL",
-    SampleStatus.LAMPINC: "public/pages/test-LAMPINC",
-    SampleStatus.LAMPREPEAT: "public/pages/test-LAMPREPEAT",
-    SampleStatus.RECEIVED: "public/pages/test-RECEIVED",
-    SampleStatus.MESSAGE: "public/pages/test-MESSAGE",
+    SampleStatus.WAIT: "public/result_pages/test-WAIT",
+    SampleStatus.PRINTED: "public/result_pages/test-WAIT",
+    SampleStatus.UNDEF: "public/result_pages/test-UNDEF",
+    SampleStatus.LAMPPOS1: "public/result_pages/test-LAMPPOS-1",
+    SampleStatus.LAMPPOS2: "public/result_pages/test-LAMPPOS-2",
+    SampleStatus.LAMPPOS3: "public/result_pages/test-LAMPPOS-3",
+    SampleStatus.LAMPNEG: "public/result_pages/test-LAMPNEG",
+    SampleStatus.LAMPFAIL: "public/result_pages/test-LAMPFAIL",
+    SampleStatus.RECEIVED: "public/result_pages/test-RECEIVED",
+    SampleStatus.MESSAGE: "public/result_pages/test-MESSAGE",
 }
 
 def render_status_page(request, sample, external=True):
     last_external_status = sample.get_latest_external_status()
     if last_external_status is None:
-        return render(request, "public/pages/test-WAIT.html")
+        return render(request, "public/result_pages/test-WAIT.html")
     last_external_status_updated = last_external_status.updated_on
     data = {"updated_on": last_external_status_updated}
     try:
         status = SampleStatus[last_external_status.status]
     except KeyError:
         data["error"] = _("Status unbekannt")
-        return render(request, "public/pages/test-ERROR.html", data)
+        return render(request, "public/result_pages/test-ERROR.html", data)
 
     status_age = (datetime.datetime.now() - last_external_status_updated).days  # Last status age in days
     if (status_age > 5) and (status not in [SampleStatus.WAIT, SampleStatus.PRINTED]) and external:
-        return render(request, "public/pages/test-EXPIRED.html")
+        return render(request, "public/result_pages/test-EXPIRED.html")
     if status in [SampleStatus.MESSAGE]:
         data["msg"] = last_external_status.comment
     return render(request, result_page_dict[status], data)
@@ -110,17 +109,17 @@ def render_status(request, event, external=True):
     return render_status_page(request, sample, external=external)
 
 def home(request):
-    return render(request, "public/home.html")
+    return render(request, "public/pages/home.html")
 
 def instructions(request):
     access_check, access_code = check_access_allowed(request)
-    return render(request, "public/instructions.html")
+    return render(request, "public/pages/instructions.html")
 
 def information(request):
     access_check, access_code = check_access_allowed(request)
     return render(request, "public/pages/information.html")
 
 def pages(request, page):
-    if page in ["contact.html", "impressum.html"]:
+    if page in ["contact.html", "impressum.html", "data-protection.html"]:
         return render(request, "public/pages/" + page)
     return HttpResponseNotFound("<h1>404: Page not found</h1>")

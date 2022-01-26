@@ -1,10 +1,16 @@
 {% load i18n %}
 {% load static %}
 
-<html lang="de">
+<html>
 <head>
     <title>
-        {% blocktrans %}Zugangscode{% endblocktrans %}
+        {% with request.resolver_match.view_name as view_name %}
+                {% if view_name == "app:access_check" %}
+                    {% blocktrans %}Zugangscode{% endblocktrans %}
+                {% else %}
+                    {% blocktrans %}Seite{% endblocktrans %}
+                {% endif %}
+        {% endwith %}
     </title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -66,7 +72,7 @@
 
 
     <div style="" class="four column centered footer row">
-        {% block footer %} {% include 'public/footer-slim.html' %} {% endblock%}
+        {% block footer %} {% include 'public/snippets/footer.html' %} {% endblock%}
     </div>
 </div>
 

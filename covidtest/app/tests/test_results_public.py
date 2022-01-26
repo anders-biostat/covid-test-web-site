@@ -88,7 +88,7 @@ class TestRegistration(TestCase):
     #     self.register_access_code()
     #     response = self.query_access_code()
     #     self.assertContains(response, "nicht </strong> nachgewiesen")
-    #     self.assertTemplateUsed(response, "public/pages/test-PCRNEG.html")
+    #     self.assertTemplateUsed(response, "public/result_pages/test-PCRNEG.html")
     #
     # def test_result_positive(self):
     #     self.sample.set_status(SampleStatus.LAMPPOS)
@@ -96,7 +96,7 @@ class TestRegistration(TestCase):
     #
     #     self.register_access_code()
     #     response = self.query_access_code()
-    #     self.assertTemplateUsed(response, "public/pages/test-PCRPOS.html")
+    #     self.assertTemplateUsed(response, "public/result_pages/test-PCRPOS.html")
     #
     # def test_consent_md5_saved(self):
     #     session = self.client.session
