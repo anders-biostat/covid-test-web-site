@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 
 from .forms_public import ResultsQueryForm
 from .models import Sample, News
@@ -23,7 +23,7 @@ def check_access_allowed(request):
             _("Bitte einen Zugangscode / Access Code angeben"),
         )
         return redirect("app:access_check")
-    return access_check, access_code
+    return access_code
 
 def access_check(request):
     request.session.flush()
@@ -55,7 +55,9 @@ def access_check(request):
     return render(request, "public/pages/access-check.html", {"form": form})
 
 def news(request):
-    access_check, access_code = check_access_allowed(request)
+    check = check_access_allowed(request)
+    if type(check) is HttpResponseRedirect: return check
+
     news_query = News.objects.filter(relevant=True).order_by("-created_on")
     page = request.GET.get("page", 1)
     paginator = Paginator(news_query, 5)
@@ -100,7 +102,10 @@ def render_status_page(request, sample, external=True):
     return render(request, result_page_dict[status], data)
 
 def result(request):
-    access_check, access_code = check_access_allowed(request)
+    check = check_access_allowed(request)
+    if type(check) is HttpResponseRedirect: return check
+    access_code = check
+
     sample = Sample.objects.filter(access_code=access_code).first()
     return render_status_page(request, sample, external=True)
 
@@ -111,14 +116,18 @@ def render_status(request, event, external=True):
     return render(request, "public/result_pages/test-WAIT.html")
 
 def home(request):
+    check = check_access_allowed(request)
+    if type(check) is HttpResponseRedirect: return check
     return render(request, "public/pages/home.html")
 
 def instructions(request):
-    access_check, access_code = check_access_allowed(request)
+    check = check_access_allowed(request)
+    if type(check) is HttpResponseRedirect: return check
     return render(request, "public/pages/instructions.html")
 
 def information(request):
-    access_check, access_code = check_access_allowed(request)
+    check = check_access_allowed(request)
+    if type(check) is HttpResponseRedirect: return check
     return render(request, "public/pages/information.html")
 
 def pages(request, page):
