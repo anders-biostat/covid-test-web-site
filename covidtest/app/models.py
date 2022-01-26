@@ -107,7 +107,6 @@ class Sample(models.Model):
         return (
             self.get_statuses()
             .exclude(status=SampleStatus.INFO.value)
-            .exclude(status=SampleStatus.PCRSENT.value)
             .last()
         )
 
