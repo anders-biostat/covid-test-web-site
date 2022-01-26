@@ -8,7 +8,6 @@ import sys
 import csv
 import random
 import string
-
 import requests
 
 # from cli.tools.label_template import label_template
@@ -234,7 +233,7 @@ def main_loop(config):
                 data={"barcode": tube_barcode, "bag": config[1]},
             )
         else:
-            continue
+            pass
 
         if (
                 online and
@@ -278,7 +277,7 @@ def main_loop(config):
                 + access_code[9:]
         )
         print('Printing paper slip with access code "%s".' % access_code)
-        print_paper_slip(tube_barcode, access_code, "", config[3] if online else config[0])
+        #print_paper_slip(tube_barcode, access_code, "", config[3] if online else config[0])
 
 label_template = """
 CT~~CD,~CC^~CT~
@@ -411,5 +410,5 @@ CT~~CD,~CC^~CT~
 ^FS^PQ1,1,0,Y^XZ
 """
 
-config = startup()
-main_loop()
+config = startup(online=False)
+main_loop(config)
