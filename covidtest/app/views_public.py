@@ -68,16 +68,16 @@ def news(request):
     return render(request, "public/pages/news.html", {"news": news})
 
 result_page_dict = {
-    SampleStatus.WAIT: "public/result_pages/test-WAIT",
-    SampleStatus.PRINTED: "public/result_pages/test-WAIT",
-    SampleStatus.UNDEF: "public/result_pages/test-UNDEF",
-    SampleStatus.LAMPPOS1: "public/result_pages/test-LAMPPOS-1",
-    SampleStatus.LAMPPOS2: "public/result_pages/test-LAMPPOS-2",
-    SampleStatus.LAMPPOS3: "public/result_pages/test-LAMPPOS-3",
-    SampleStatus.LAMPNEG: "public/result_pages/test-LAMPNEG",
-    SampleStatus.LAMPFAIL: "public/result_pages/test-LAMPFAIL",
-    SampleStatus.RECEIVED: "public/result_pages/test-RECEIVED",
-    SampleStatus.MESSAGE: "public/result_pages/test-MESSAGE",
+    SampleStatus.WAIT: "public/result_pages/test-WAIT.html",
+    SampleStatus.PRINTED: "public/result_pages/test-WAIT.html",
+    SampleStatus.UNDEF: "public/result_pages/test-UNDEF.html",
+    SampleStatus.LAMPPOS1: "public/result_pages/test-LAMPPOS-1.html",
+    SampleStatus.LAMPPOS2: "public/result_pages/test-LAMPPOS-2.html",
+    SampleStatus.LAMPPOS3: "public/result_pages/test-LAMPPOS-3.html",
+    SampleStatus.LAMPNEG: "public/result_pages/test-LAMPNEG.html",
+    SampleStatus.LAMPFAIL: "public/result_pages/test-LAMPFAIL.html",
+    SampleStatus.RECEIVED: "public/result_pages/test-RECEIVED.html",
+    SampleStatus.MESSAGE: "public/result_pages/test-MESSAGE.html",
 }
 
 def render_status_page(request, sample, external=True):
@@ -92,7 +92,7 @@ def render_status_page(request, sample, external=True):
         data["error"] = _("Status unbekannt")
         return render(request, "public/result_pages/test-ERROR.html", data)
 
-    status_age = (datetime.datetime.now() - last_external_status_updated).days  # Last status age in days
+    status_age = (datetime.datetime.now(datetime.timezone.utc) - last_external_status_updated).days  # Last status age in days
     if (status_age > 5) and (status not in [SampleStatus.WAIT, SampleStatus.PRINTED]) and external:
         return render(request, "public/result_pages/test-EXPIRED.html")
     if status in [SampleStatus.MESSAGE]:
@@ -105,8 +105,10 @@ def result(request):
     return render_status_page(request, sample, external=True)
 
 def render_status(request, event, external=True):
-    sample = event.sample
-    return render_status_page(request, sample, external=external)
+    if event is not None:
+        sample = event.sample
+        return render_status_page(request, sample, external=external)
+    return render(request, "public/result_pages/test-WAIT.html")
 
 def home(request):
     return render(request, "public/pages/home.html")
