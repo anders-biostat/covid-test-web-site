@@ -3,12 +3,17 @@
 {% load tz %}
 
 {% block content %}
-    <p style="color: rgba(0,0,0,0.4); margin: -20px 0 20px 0;">
-                  <i style="float: left; margin: 0 20px 20px 0; padding: 10px; font-size: 20px;" class="info circle icon"></i>
-                   Das LAMP-Verfahren weist das Coronavirus mit ähnlich hoher Sensitivität nach wie ein PCR-Test, und ist sehr viel sensitiver als ein Antigen-Schnelltest (näheres unter „Weitere Infos“).
-    </p>
 
-    <div style="margin: 0 0 0 0;" class="ui message">
+    <div style="margin: 0 auto; max-width: 1000px;">
+    <i style="color: rgba(0,0,0,0.4); float: left; margin: 3px 0px 20px 0; padding: 0px; font-size: 20px;" class="info circle icon"></i>
+    <p style="color: rgba(0,0,0,0.4); margin: -20px 0 0px 0; padding-left: 35px;">
+    {% blocktrans %}Willkommen!{% endblocktrans %}</p>
+        <p style="color: rgba(0,0,0,0.4); margin: 5px 0 20px 0; padding-left: 35px;">
+            {% blocktrans %}Dies ist die Webseite der LAMP-Teststation des ZMBH und der Virologie der Universität Heidelberg. Sie sind hier gelandet, weil Sie den Access Code eines Testkits für einen Corona-Gurgeltest eingegeben haben und einen Test machen möchten oder vielleicht schon eine Gurgelprobe abgegeben haben. Wie der Ablauf funktioniert, erfahren Sie weiter unten.{% endblocktrans %}
+        </p>
+    </div>
+
+    <div style="margin: 0 auto; max-width: 1000px;" class="ui message">
         <h2 class="ui header" style="text-align: left">
             {% block segment-title %}
             {% endblock %}
@@ -33,22 +38,22 @@
 
 {% block additional_content %}
 
-    <div style="margin: 30px 0 0 0;" class="ui segment content">
+    <div style="margin: 20px auto; max-width: 1000px;" class="ui segment content">
 
         <div class="ui stackable grid">
             <div style="min-width: 210px;" class="four wide column">
                 <div class="ui secondary vertical menu">
                     <a data-tab="tab-1" class="active item">
-                        <strong>Anleitung zur Probennahme</strong>
+                        <strong>{% blocktrans %}Wie man den Corona-Test durchführt{% endblocktrans %}</strong>
                     </a>
                     <a data-tab="tab-2" class="item">
-                        <strong>Was ist LAMP?</strong>
+                        <strong>{% blocktrans %}Resultat-Abfrage{% endblocktrans %}</strong>
                     </a>
                     <a data-tab="tab-3" class="item">
-                        <strong>Weitere Infos</strong>
+                        <strong>{% blocktrans %}Weiterführende Informationen{% endblocktrans %}</strong>
                     </a>
                     <a data-tab="tab-4" class="item">
-                        <strong>FAQ</strong>
+                        <strong>{% blocktrans %}Aktuelles von der Teststation{% endblocktrans %}</strong>
                     </a>
                 </div>
             </div>
@@ -56,17 +61,17 @@
             <div class="twelve wide column">
                 <div style="padding-top: 0;" class="ui basic segment">
                     <div class="ui tab active" data-tab="tab-1">
-                        <h2 class="ui header">Anleitung zur Probennahme</h2>
-                        {% include "public/snippets/instructions.html" %}
+                        <h2 class="ui header">{% blocktrans %}Wie man den Corona-Test durchführt{% endblocktrans %}</h2>
+                        {% include "public/pages/results_subpages/instructions.html" %}
                     </div>
                     <div class="ui tab" data-tab="tab-2">
-                        <h2 class="ui header">Was ist LAMP?</h2>
+                        <h2 class="ui header">{% blocktrans %}Resultat-Abfrage{% endblocktrans %}</h2>
                     </div>
                     <div class="ui tab" data-tab="tab-3">
-                        <h2 class="ui header">Weitere Infos</h2>
+                        <h2 class="ui header">{% blocktrans %}Weiterführende Informationen{% endblocktrans %}</h2>
                     </div>
                     <div class="ui tab" data-tab="tab-4">
-                        <h2 class="ui header">FAQ</h2>
+                        <h2 class="ui header">{% blocktrans %}Aktuelles von der Teststation{% endblocktrans %}</h2>
                     </div>
                 </div>
             </div>

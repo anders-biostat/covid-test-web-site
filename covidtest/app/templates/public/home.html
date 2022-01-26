@@ -1,0 +1,53 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load semanticui %}
+
+{% block content %}
+
+<div class="ui placeholder segment">
+  <div class="ui four column stackable center aligned grid">
+      <div style="padding: 20px;" class="middle aligned row">
+          <div class="twelve wide column">
+            <div class="ui icon header">
+              <i class="search icon"></i>
+              Resultat Abfrage
+            </div>
+              <p style="font-size: 10pt">Mit der Abfrage eines Testresultats mittels Access code über diesen Link erkläre ich, dass ich über das Testverfahren informiert bin und die Erklärung zum Datenschutz und Privatsphäre sowie die weiteren Information gelesen und verstanden habe und damit einverstanden bin.</p>
+              <a style="margin-top: 10px;" class="ui primary button">Ergebnis abfragen</a>
+            </div>
+      </div>
+    <div class="ui divider"></div>
+    <div style="padding: 30px 0;" class="middle aligned row">
+
+        <div class="column">
+        <div class="ui icon header">
+          <i class="clipboard outline icon"></i>
+          Wie man den Corona-Test durchführt?
+        </div>
+            <a style="margin-top: 10px;" class="ui primary button">Zur Anleitung</a>
+        </div>
+
+
+
+
+        <div class="column">
+        <div class="ui icon header">
+          <i class="info icon circle"></i>
+          Weiterführende Informationen
+        </div>
+            <a style="margin-top: 10px;" class="ui primary button">Informationen</a>
+      </div>
+
+      <div class="column">
+        <div class="ui icon header">
+          <i class="newspaper icon"></i>
+          Aktuelles von der Teststation
+        </div>
+          <a style="margin-top: 10px;" class="ui primary button" href="{% url 'app:news_archive' %}">Aktuelles</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
