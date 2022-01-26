@@ -3,14 +3,14 @@
 
 {% block content %}
 {% if news %}
-<div class="ui segment content">
+<div style="padding-left: 0; padding-right: 0;" class="ui content">
     <h2 class="ui header">
-        {% blocktrans %}Nachrichten Archiv{% endblocktrans %}
+        {% blocktrans %}Aktuelles von der Teststation{% endblocktrans %}
     </h2>
 
     <div style="width: 100%">
         {% for article in news %}
-        <div class="ui message">
+        <div style="margin: 10px 0;" class="ui message">
             <div class="header">
                 {{article.title}}
             </div>

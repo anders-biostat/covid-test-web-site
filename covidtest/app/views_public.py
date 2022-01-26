@@ -62,7 +62,7 @@ def home(request):
     return render(request, "public/home.html")
 
 def news_archive(request):
-    news_query = News.objects.get(relevant=True).order_by("-created_on")
+    news_query = News.objects.filter(relevant=True).order_by("-created_on")
     page = request.GET.get("page", 1)
     paginator = Paginator(news_query, 5)
     try:

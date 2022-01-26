@@ -3,11 +3,9 @@ on:
   push:
     branches:
       - '*'
-      - '!master'
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/production' && github.ref != 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
@@ -19,11 +17,3 @@ jobs:
         run: |
           docker container ls
           docker exec covidtest_app pytest --cov=. -m "not with_registration"
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/production'
-    steps:
-      - name: Triggering webhook
-        uses: wei/curl@v1
-        with:
-          args: "https://webhooks.covidtest-hd.de/hooks/deployment?token=${{ secrets.WEBHOOK_KEY }}"
