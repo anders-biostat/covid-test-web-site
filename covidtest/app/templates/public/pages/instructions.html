@@ -1,0 +1,46 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <div style="margin-top: 14px;" class="ui segment content">
+        <h2 class="ui header">
+            {% blocktrans %}Anleitung Probennahme{% endblocktrans %}
+        </h2>
+
+<p>
+    {% blocktrans %}Die Teststation analysiert Gurgelproben auf das Vorhandensein des Corona-Virusgenoms. Zur Entnahme der Gurgelprobe benutzen Sie bitte das Testkit, bestehend aus einer Plastikflasche mit steriler Kochsalzlösung, einem Strohhalm, einem Teströhrchen mit Barcode sowie einem kleinen Beleg.{% endblocktrans %}
+</p>
+
+<h3>{% blocktrans %}So funktioniert die Gurgelprobe:{% endblocktrans %}</h3>
+
+<img style="" src="https://via.placeholder.com/600x400/"><br>
+
+<style>
+    ul.content > li {
+        margin-bottom: 10px;
+    }
+</style>
+
+<p>
+    <ul class="content">
+        <li>{% blocktrans %}Bitte noch VOR dem Frühstück oder erst mindestens 30 Minuten nach dem Essen/Zähneputzen die Gurgelprobe abnehmen. Halten Sie eine Schere bereit.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Schrauben Sie die Plastikflasche auf und verwenden Sie die gesamte 5ml-Kochsalzlösung zum Gurgeln tief in der Kehle (nicht schlucken!).{% endblocktrans %}</li>
+        <li>{% blocktrans %}Gurgeln Sie mit der Kochsalzlösung für 30s und spülen Sie sich auch den Mund damit aus.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Füllen Sie die Gurgelflüssigkeit mit dem Strohhalm in die Plastikflasche.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Schütteln Sie die Plastikflasche 30s lang, um die Probe zu gut zu durchmischen.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Schneiden Sie die Spitze der Plastikflasche mit der Schere ab und füllen Sie das mitgelieferte Röhrchen mit Barcode nahezu voll. Achten Sie darauf, dass Sie das Röhrchen richtig verschließen.{% endblocktrans %}</li>
+    </ul>
+</p>
+
+<h3>{% blocktrans %}Probenabgabe:{% endblocktrans %}</h3>
+<p>
+    <ul>
+        <li>{% blocktrans %}Überprüfen Sie sorgfältig, ob der Tube code auf dem Beleg mit dem Barcode auf den Teströhrchen mit Ihrer Probe übereinstimmt.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Werfen Sie das Teströhrchen mit Ihrer Probe in einen der Sammelbriefkästen auf dem Campus.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Bewahren Sie den Beleg mit dem Zugangscode an einem sicheren Ort auf und fragen Sie das Ergebnis am Abend oder am nächsten Tag auf dieser Webseite ab.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Zur Erinnerung können Sie Ihren Namen und das Datum auf dem Beleg vermerken.{% endblocktrans %}</li>
+    </ul>
+</p>
+
+    </div>
+{% endblock %}

@@ -57,7 +57,6 @@ class ResultsQueryForm(forms.Form):
         cleaned_data = super(ResultsQueryForm, self).clean()
         cleaned_data["access_code"] = cleaned_data.get("access_code").upper().replace(" ", "").strip()
 
-
 class ResultsQueryFormLegacy(forms.Form):
     access_code = forms.CharField(
         label=_("Zugangscode"), widget=forms.TextInput(attrs={"placeholder": _("Zugangscode")})

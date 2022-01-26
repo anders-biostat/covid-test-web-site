@@ -1,10 +1,16 @@
 {% load i18n %}
 {% load static %}
 
-<html lang="de">
+<html>
 <head>
     <title>
-        {% blocktrans %}Zugangscode{% endblocktrans %}
+        {% with request.resolver_match.view_name as view_name %}
+                {% if view_name == "app:access_check" %}
+                    {% blocktrans %}Zugangscode{% endblocktrans %}
+                {% else %}
+                    {% blocktrans %}Seite{% endblocktrans %}
+                {% endif %}
+        {% endwith %}
     </title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -35,67 +41,38 @@
 
     </style>
 </head>
-<body class="page">
+<body style="padding-top: 20px;" class="page">
 
 {% block header %}
-
-<div style="background-color: #ecf0f1; color: #000; box-shadow: none; -webkit-box-shadow: none; border: none;" class="ui top stackable menu page">
-    <div class="header item">
-        <a href="{% url 'app:index' %}">
-            <h2 class="ui header menubar">
-            </h2>
-        </a>
-    </div>
-
-    <div class="right menu">
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% if languages|length > 1 %}
-        <form style="color: #000" action="{% url 'set_language' %}" method="post" class="ui simple dropdown item language">
-            {% csrf_token %}
-            <i style="color: #000;" class="globe icon"></i>
-            Language <i class="dropdown icon"></i>
-            <div class="menu">
-                {% for language in languages %}
-                    <button name="language" value="{{ language.code }}" class="item">
-                        {% if language.code == LANGUAGE_CODE %}
-                            <b>{{ language.name_local }}</b>
-                        {% else %}
-                            {{ language.name_local }}
-                        {% endif %}
-                    </button>
-                {% endfor %}
-            </div>
-        </form>
-        {% endif %}
-    </div>
-</div>
-
-
 {% endblock %}
 
 {% if messages %}
 {% for message in messages %}
-<div style="margin: 10px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
+<div style="margin: 10px auto; max-width: 1000px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
     {{ message }}
 </div>
 {% endfor %}
 {% endif %}
 
-<div class="ui centered stackable grid">
-    <div style="min-height: 60vh;" class="twelve wide column">
+
+<div style="max-width: 1000px; margin: 0 auto;" class="ui centered stackable grid">
+    <div style="min-height: 30vh;" class="sixteen wide column">
         <div class="ui content">
+            <div style="margin-bottom: 10px;">
+            {% with request.resolver_match.view_name as view_name %}
+                {% if view_name != "app:access_check" %}
+                    <a href="{% url 'app:access_check' %}"><i class="left arrow icon divider"></i>{% blocktrans %}Zurück: Zugangscode eingeben{% endblocktrans %}</a>
+                {% endif %}
+            {% endwith %}
+            </div>
+
             {% block content %} {% endblock %}
         </div>
     </div>
 
-    <div class="ui center aligned container">
-        <p>{% blocktrans %}Bei {% endblocktrans %}<b>{% blocktrans %}technischen Problemen{% endblocktrans %}</b> {% blocktrans %}informieren Sie bitte Simon Anders:{% endblocktrans %}
-            <a href="mailto:s.anders@zmbh.uni-heidelberg.de">s.anders@zmbh.uni-heidelberg.de</a></p>
-    </div>
-
 
     <div style="" class="four column centered footer row">
-        {% block footer %} {% include 'public/footer.html' %} {% endblock%}
+        {% block footer %} {% include 'public/snippets/footer.html' %} {% endblock%}
     </div>
 </div>
 

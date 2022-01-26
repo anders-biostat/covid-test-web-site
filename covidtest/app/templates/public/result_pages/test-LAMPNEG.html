@@ -1,0 +1,12 @@
+{% extends "public/result_pages/result.html" %}
+{% load i18n %}
+
+{% block segment-title %}{% blocktrans %}Ergebnis: Negativ{% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p>
+    {% blocktrans %}In Ihrer Probe konnte das Coronavirus SARS-CoV-2 mittels des LAMP-Assays <strong>nicht</strong> nachgewiesen werden. Vermutlich sind Sie also nicht mit Covid-19 infiziert.{% endblocktrans %}
+</p>
+<p><strong>{% blocktrans %}Bedenken Sie aber:{% endblocktrans %}</strong></p>
+<p>{% blocktrans %}Bitte verhalten Sie sich weiterhin entsprechend den gültigen Richtlinien zur Corona-Verordnung.{% endblocktrans %}</p>
+{% endblock %}

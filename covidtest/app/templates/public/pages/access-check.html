@@ -3,7 +3,7 @@
 {% load semanticui %}
 
 {% block content %}
-<form class="ui form" action="{% url 'app:results_query' %}" method="post">
+<form class="ui form" action="{% url 'app:access_check' %}" method="post">
     {% csrf_token %}
     {% render_form form %}
     <div>
