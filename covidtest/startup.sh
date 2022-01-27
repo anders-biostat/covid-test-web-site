@@ -5,7 +5,7 @@ done;
 
 python manage.py makemigrations
 python manage.py migrate --noinput
-python manage.py compilemessages --use-fuzzy
+python manage.py compilemessages
 ./superuser.sh &&
 python manage.py collectstatic --noinput
 gunicorn covidtest.wsgi:application -w 2 -b :8000 --capture-output --log-level=info
