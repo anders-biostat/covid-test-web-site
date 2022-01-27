@@ -1,0 +1,40 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<div style="margin: 0;" class="ui icon message">
+  <div style="color: rgba(0,0,0,0.6)" class="content">
+    <div class="header">
+      <i class="info icon circle"></i> Info
+    </div>
+      {% if LANGUAGE_CODE == "de" %}
+          <p>
+            Die Proben können Montags und Donnerstags bis 10:00 Uhr abgegeben werden. Die Ergebnisse können hier am selben Tag ab ca. 14:00-15:00 Uhr abgerufen werden.
+          </p>
+          <p>
+              Die Proben werden in zwei Briefkästen am Campus Neuenheimer Feld eingesammelt:<br>
+
+              1. Im Theoretikum, eine Box hängt an der blauen Wand gegenüber des Unishops.<br>
+              2. Im Eingangsbereich des COS, INF 230 (am Südeingang, der zu den Seminarräumen führt).<br>
+          </p>
+
+          <p>
+            Bei Fragen können Sie gerne anrufen unter: 0152 - 5790 8378.
+          </p>
+      {% else %}
+          <p>
+            For analysis, samples can be returned on Mondays and Thursdays until 10 am, results will be available online at around 2-3 pm on the same day.
+          </p>
+          <p>
+              Samples are collected in letterboxes placed at two locations on the Neuenheimer campus:<br>
+
+              1. Inside Theoretikum, a box is hanging at the blue wall facing the entrance of the Unishop.<br>
+              2. In the entrance area of the COS, INF230, take the entrance that leads to the seminar rooms (south entrance)<br>
+          </p>
+          <p>
+                If you have questions, please call 0152 - 5790 8378.
+          </p>
+      {% endif %}
+
+  </div>
+</div>

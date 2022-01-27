@@ -4,8 +4,7 @@
 <html lang="de">
 <head>
     <title>
-        {% blocktrans %}Test der Universität Heidelberg auf das
-        Covid-19-Coronavirus (SARS-CoV-2){% endblocktrans %}
+        {% blocktrans %}Test auf COVID-19{% endblocktrans %}
     </title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -41,14 +40,10 @@
 {% block header %}
 
 <div class="ui top stackable menu page">
-    <div class="logo item">
-        <img class="logo" src="{% static 'media/logo_uni_mono_text.svg' %}">
-    </div>
-
     <div class="header item">
         <h2 class="ui header menubar">
             {% blocktrans %}Test auf COVID-19{% endblocktrans %}
-            <div class="sub header">{% blocktrans %}LAMP basierter Test auf das Coronavirus SARS-CoV-2{% endblocktrans %}
+            <div style="font-size: 80%;" class="sub header">{% blocktrans %}Gurgeltest der Corona LAMP Test Facility des Zentrum für Molekularbiologie der Universität Heidelberg,<br>durchgeführt in der Virologie der Uniklinik Heidelberg{% endblocktrans %}
             </div>
         </h2>
     </div>

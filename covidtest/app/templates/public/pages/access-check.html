@@ -3,10 +3,11 @@
 {% load semanticui %}
 
 {% block content %}
-<form class="ui form" action="{% url 'app:access_check' %}" method="post">
+<form id="access_check" class="ui form" action="{% url 'app:access_check' %}" method="post">
     {% csrf_token %}
     {% render_form form %}
-    <div>
+    <label style="color: rgba(0,0,0,0.6); padding-left: 0px;">{% blocktrans %}Der Access-Code (12 stelliger Code beginnend mit A ...)  befindet sich am unteren Ende des Zettels, welches dem Testkit beiliegt.{% endblocktrans %}</label>
+    <div style="margin-top: 15px;">
         <button type="submit" class="ui primary button">
             {% blocktrans %}Weiter{% endblocktrans %}
         </button>
@@ -29,7 +30,37 @@
             crossorigin="anonymous"
     ></script>
     <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+
+    <script>
+        function format_input(value) {
+            var v = value.toUpperCase().replace(/\s+/g, '').replace(/\W/gi, '');
+            return v.match(/.{1,3}/gi).join(" ");
+        }
+
+
+
+        $("#id_access_code").on("input", function (e) {
+            var input = $("#id_access_code").val()
+            $("#id_access_code").val(format_input(input))
+        });
+
+    </script>
+
+
     <style>
+    #access_check > div.required.field {
+        margin-bottom: 3px!important;
+    }
+
+    #access_check > div.required.field > label {
+        padding-left: 0px;
+    }
+
+    #access_check > div.required.field > input {
+        font-size: 15pt;
+        padding: 7px 15px;
+    }
+
   #interactive.viewport {
     position: relative;
     width: 100%;
