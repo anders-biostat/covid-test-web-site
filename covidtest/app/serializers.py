@@ -34,11 +34,11 @@ def damm_check_digit(number):
     return interim
 
 
-def generate_access_code(size=12):
+def generate_access_code(size=12, prefix="A"):
     exists = True
     while exists:
-        access_code = "".join(random.choice(string.digits) for _ in range(size - 1))
-        access_code = access_code + str(damm_check_digit(access_code))
+        access_code = "".join(random.choice(string.digits) for _ in range(size - 2))
+        access_code = prefix + access_code + str(damm_check_digit(access_code))
 
         if Sample.objects.filter(access_code=access_code).count() == 0:
             exists = False

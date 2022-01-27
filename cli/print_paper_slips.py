@@ -1,41 +1,14 @@
 #!/usr/bin/python3
 
 import getpass
-import os
 import re
 import subprocess
 import sys
-import csv
-import random
-import string
 import requests
 
 # from cli.tools.label_template import label_template
 
-# api_url = "http://127.0.0.1:8000/api/"
-# api_url = "http://129.206.245.42:8000/api/"
-api_url = "https://covidtest-hd.de/api/"
-
-matrix = (
-    (0, 3, 1, 7, 5, 9, 8, 6, 4, 2),
-    (7, 0, 9, 2, 1, 5, 4, 8, 6, 3),
-    (4, 2, 0, 6, 8, 7, 1, 3, 5, 9),
-    (1, 7, 5, 0, 9, 8, 3, 4, 2, 6),
-    (6, 1, 2, 3, 0, 4, 5, 9, 7, 8),
-    (3, 6, 7, 4, 2, 0, 9, 5, 8, 1),
-    (5, 8, 6, 9, 7, 2, 0, 1, 3, 4),
-    (8, 9, 4, 5, 3, 6, 2, 0, 1, 7),
-    (9, 4, 3, 8, 6, 1, 7, 2, 0, 5),
-    (2, 5, 8, 1, 4, 3, 6, 7, 9, 0),
-)
-
-
-def damm_check_digit(number):
-    number = str(number)
-    interim = 0
-    for digit in number:
-        interim = matrix[interim][int(digit)]
-    return interim
+api_url = "https://coronatest-hd.de/api/"
 
 
 def render_label_template(template, context):
@@ -87,7 +60,7 @@ def check_response_status(response, expected_status, error_message):
         sys.exit(1)
 
 
-def startup(online=True):
+def startup():
     print(
         """
 Covid-19 LAMP Test Station
@@ -111,81 +84,74 @@ Paper slip printing for test kit assembly
     printer = availible_printers[printer_id_input - 1]
     print("You selected the printer: ", printer, "\n\n")
 
-    if online:
-        print("Enter your username for the Covid-19 lab server: ", end="")
-        username = input()
-        password = getpass.getpass("Enter your password: ")
-        auth = (username, password)
+    print("Enter your username for the Covid-19 lab server: ", end="")
+    username = input()
+    password = getpass.getpass("Enter your password: ")
+    auth = (username, password)
 
-        r = requests.get(api_url + "rsakeys/", auth=auth)
-        check_response_status(r, 200, "Could not get key list from server.")
-        key_list = r.json()
+    r = requests.get(api_url + "rsakeys/", auth=auth)
+    check_response_status(r, 200, "Could not get key list from server.")
+    key_list = r.json()
+
+    print(
+        "\nDo you want (1) start a new bag of test kits or (2) continue with an existing bag?"
+    )
+    while True:
+        print("Type 1 or 2: ", end="")
+        r = input().strip()
+        if r in ["1", "2"]:
+            break
+
+    if r == "2":
+        # Continue existing bag
+        print("Please enter the bag ID (a number): ", end="")
+        bag_id = input()
+        r = requests.get(api_url + "bags/" + bag_id + "/", auth=auth)
+        check_response_status(r, 200, "Could not find bag ID.")
+        print("\nContinuing with bag %s (bag name: %s)." % (bag_id, r.json()["name"]))
+        print("Press Enter to confirm that you will fill Bag %s. " % bag_id, end="")
+        input()
+        key_id = r.json()["rsa_key"]
+
+    else:
+        # Start new bag
+
+        print("\nList of all available encryption keys:")
+        for item in key_list:
+            print("%2d: %s" % (item["id"], item["key_name"]), end="")
+            if item["comment"] != "":
+                print("[%s]" % item["comment"], end="")
+            print()
 
         print(
-            "\nDo you want (1) start a new bag of test kits or (2) continue with an existing bag?"
+            "\nWhich of these keys should be used to encrypt registration data for samples in the new bag?"
         )
-        while True:
-            print("Type 1 or 2: ", end="")
-            r = input().strip()
-            if r in ["1", "2"]:
-                break
+        print("(Note: This can be changed later.)")
+        print("Enter the number of a key: ", end="")
+        key_id = input()
 
-        if r == "2":
-            # Continue existing bag
-            print("Please enter the bag ID (a number): ", end="")
-            bag_id = input()
-            r = requests.get(api_url + "bags/" + bag_id + "/", auth=auth)
-            check_response_status(r, 200, "Could not find bag ID.")
-            print("\nContinuing with bag %s (bag name: %s)." % (bag_id, r.json()["name"]))
-            print("Press Enter to confirm that you will fill Bag %s. " % bag_id, end="")
-            input()
-            key_id = r.json()["rsa_key"]
+        r = requests.get(api_url + "rsakeys/" + key_id + "/", auth=auth)
+        check_response_status(r, 200, "Could not access the selected key.")
 
-        else:
-            # Start new bag
+        r = requests.post(
+            api_url + "bags/",
+            auth=auth,
+            data={"rsa_key": key_id, "name": "unnamed bag"},
+        )
+        check_response_status(r, 201, "Could not start new bag.")
+        bag_id = r.json()["id"]
 
-            print("\nList of all available encryption keys:")
-            for item in key_list:
-                print("%2d: %s" % (item["id"], item["key_name"]), end="")
-                if item["comment"] != "":
-                    print("[%s]" % item["comment"], end="")
-                print()
+        print(
+            '\nPlease prepare a new large plastic bag for the test kits and label it as "Bag %s".'
+            % bag_id
+        )
+        print("Then press Enter. ", end="")
+        input()
 
-            print(
-                "\nWhich of these keys should be used to encrypt registration data for samples in the new bag?"
-            )
-            print("(Note: This can be changed later.)")
-            print("Enter the number of a key: ", end="")
-            key_id = input()
-
-            r = requests.get(api_url + "rsakeys/" + key_id + "/", auth=auth)
-            check_response_status(r, 200, "Could not access the selected key.")
-
-            r = requests.post(
-                api_url + "bags/",
-                auth=auth,
-                data={"rsa_key": key_id, "name": "unnamed bag"},
-            )
-            check_response_status(r, 201, "Could not start new bag.")
-            bag_id = r.json()["id"]
-
-            print(
-                '\nPlease prepare a new large plastic bag for the test kits and label it as "Bag %s".'
-                % bag_id
-            )
-            print("Then press Enter. ", end="")
-            input()
-
-        return auth, bag_id, key_id, printer
-    return (printer,)
+    return auth, bag_id, key_id, printer
 
 
-def main_loop(config):
-    online = True
-    if len(config) == 1:
-        online = False
-
-    # config: (auth, bag_id, key_id, printer) if online else (printer,)
+def main_loop(auth, bag_id, key_id, printer):
     print(
         "\nLoad thermal paper (width 79.2 mm) into the label printer. Then, you can start"
     )
@@ -195,11 +161,10 @@ def main_loop(config):
     print(
         "code will be printed. Fold it and put it together with the tube in a test-kit bag."
     )
-    if online:
-        print(
-            '\nPlace all test kits into the big bag that has been labelled as "Bag %s".'
-            % config[1]
-        )
+    print(
+        '\nPlace all test kits into the big bag that has been labelled as "Bag %s".'
+        % bag_id
+    )
 
     while True:
         barcode_valid = False
@@ -226,20 +191,19 @@ def main_loop(config):
             if barcode_ok == "1":
                 barcode_valid = True
 
-        if barcode_valid and online:
+        if barcode_valid:
             r = requests.post(
                 api_url + "samples/",
-                auth=config[0],
-                data={"barcode": tube_barcode, "bag": config[1]},
+                auth=auth,
+                data={"barcode": tube_barcode, "bag": bag_id},
             )
         else:
-            pass
+            continue
 
         if (
-                online and
-                r.status_code == 400
-                and "barcode" in r.json()
-                and "duplicate" in r.json()["barcode"]
+            r.status_code == 400
+            and "barcode" in r.json()
+            and "duplicate" in r.json()["barcode"]
         ):
             print("This barcode has already been registered!")
             print("Do you want to reprint the paper slip for it? (y/n) ", end="")
@@ -247,7 +211,7 @@ def main_loop(config):
 
             if yn.lower().strip() == "y":
                 r = requests.get(
-                    api_url + "samples/?barcode=" + tube_barcode, auth=config[0]
+                    api_url + "samples/?barcode=" + tube_barcode, auth=auth
                 )
                 check_response_status(r, 200, "Could not access existing sample tube.")
                 access_code = r.json()[0]["access_code"]
@@ -255,29 +219,22 @@ def main_loop(config):
                 print("Skipping barcode %s." % tube_barcode)
                 continue
 
-        elif online:
+        else:
             check_response_status(r, 201, "Could not register tube.")
             access_code = r.json()["access_code"]
-        else:
-            access_code = "".join(random.choice(string.digits) for _ in range(10))
-            access_code = "A" + access_code + str(damm_check_digit(access_code))
-            with open(r"access_codes.csv", "a") as csvfile:
-                fieldnames = ['barcode', 'accesscode']
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-                writer.writerow({'barcode': tube_barcode, 'accesscode': access_code})
 
         access_code = (
-                access_code[0:3]
-                + " "
-                + access_code[3:6]
-                + " "
-                + access_code[6:9]
-                + " "
-                + access_code[9:]
+            access_code[0:3]
+            + " "
+            + access_code[3:6]
+            + " "
+            + access_code[6:9]
+            + " "
+            + access_code[9:]
         )
         print('Printing paper slip with access code "%s".' % access_code)
-        #print_paper_slip(tube_barcode, access_code, "", config[3] if online else config[0])
+        print_paper_slip(tube_barcode, access_code, bag_id, printer)
+
 
 label_template = """
 CT~~CD,~CC^~CT~
@@ -410,5 +367,5 @@ CT~~CD,~CC^~CT~
 ^FS^PQ1,1,0,Y^XZ
 """
 
-config = startup(online=False)
-main_loop(config)
+auth, bag_id, key_id, printer = startup()
+main_loop(auth, bag_id, key_id, printer)
