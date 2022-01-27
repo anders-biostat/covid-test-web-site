@@ -106,13 +106,13 @@ class Sample(models.Model):
         """External user facing status event"""
         return (
             self.get_statuses()
-            .exclude(status="SampleStatus.INFO")
+            .exclude(status=SampleStatus.INFO.value)
             .last()
         )
 
     def get_latest_internal_status(self):
         """Internal staff facing events"""
-        return self.get_statuses().exclude(status="SampleStatus.INFO").last()
+        return self.get_statuses().exclude(status=SampleStatus.INFO.value).last()
 
     def __str__(self):
         return "%s" % self.barcode

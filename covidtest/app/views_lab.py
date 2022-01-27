@@ -187,7 +187,7 @@ def sample_detail(request):
                     if rack_changed:
                         event = Event(
                             sample=sample,
-                            status=SampleStatus.INFO,
+                            status=SampleStatus.INFO.value,
                             comment="Rack changed in lab interface from "
                             + str(sample.rack)
                             + " to "
