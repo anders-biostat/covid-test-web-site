@@ -51,7 +51,7 @@ urlpatterns = [
     path("lab/bag-search", views_lab.bag_search_statistics, name="bag_search"),
     path("lab/bag-handout", views_lab.bag_handout, name="bag_handout"),
     path("lab/status-preview", views_lab.status_preview, name="status_preview"),
-    path("version", views_lab.version, name="version"),
+    path("version/", views_lab.version, name="version"),
     path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path(

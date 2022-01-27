@@ -107,6 +107,12 @@ def result(request):
     access_code = check
 
     sample = Sample.objects.filter(access_code=access_code).first()
+    try:
+        sample.events.create(
+            status="INFO", comment="accessed result: " + sample.get_latest_external_status().status.value
+        )
+    except:
+        pass
     return render_status_page(request, sample, external=True)
 
 def render_status(request, event, external=True):
