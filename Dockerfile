@@ -1,5 +1,5 @@
-# Select Python 3.6 Base-Image
-FROM python:3.6-alpine
+# Select Python 3.8.12 Base-Image
+FROM python:3.8.12-alpine
 ENV PYTHONUNBUFFERED 1
 
 # Select workdir
