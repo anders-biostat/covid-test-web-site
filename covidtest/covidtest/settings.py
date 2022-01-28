@@ -31,6 +31,8 @@ DEBUG = env("DJANGO_DEBUG", cast=bool)
 ADD_HOSTS = env("HOSTS", cast=str, default="")
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"] + [host.strip() for host in ADD_HOSTS.split(",") if host.strip() != ""]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Application definition
 
 INSTALLED_APPS = [

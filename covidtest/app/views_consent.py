@@ -1,7 +1,7 @@
 from .forms_public import AgeGroupForm, ConsentForm
 from django.views import View
 from django.shortcuts import render, redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 from django.template.loader import get_template
 from django.http import HttpResponse
