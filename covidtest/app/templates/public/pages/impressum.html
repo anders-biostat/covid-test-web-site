@@ -1,61 +1,13 @@
 {% extends "public/base-slim.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="ui segment content">
   <h2>{% blocktrans %}Impressum{% endblocktrans %}</h2>
-  <p>{% blocktrans %}Diese Studie wird organisert vom {% endblocktrans %}</p>
-  <ul style="list-style-type: none">
-    <li>
-      <strong>
-        {% blocktrans %}Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH){% endblocktrans %}<br />
-        Im Neuenheimer Feld 282 <br />
-        69120 Heidelberg
-      </strong>
-    </li>
-  </ul>
-  <p>{% blocktrans %}in Zusammenarbeit mit dem{% endblocktrans %}</p>
-  <ul style="list-style-type: none">
-    <li>
-      <strong>
-        {% blocktrans %}Gesundheitsamt Rhein-Neckar-Kreis{% endblocktrans %}<br />
-        Kurfürsten-Anlage 38-40 <br />
-        69115 Heidelberg
-      </strong>
-    </li>
-  </ul>
-  <p>{% blocktrans %}Für Anfragen wenden Sie sich bitte an{% endblocktrans %}</p>
-  <ul>
-    <li>
-      Prof. Michael Knop
-      <a href="mailto:m.knop@zmbh.uni-heidelberg.de">[Email]</a>{% blocktrans %},
-      oder {% endblocktrans %}
-    </li>
-    <li>
-      Dr. Simon Anders
-      <a href="mailto:s.anders@zmbh.uni-heidelberg.de">[Email]</a>{% blocktrans %},
-      beide am ZMBH {% endblocktrans %}
-    </li>
-  </ul>
-  <p>
-    {% blocktrans %}Für detaillierte Informationen zur Studie, lesen Sie bitte
-    unseren Informationstext.{% endblocktrans %}
-  </p>
-  <p>
-    <a title="Informationen" href="{% url 'app:information' %}"
-      >{% blocktrans %}Informationstext{% endblocktrans %}</a
-    >
-  </p>
-  <p>
-    {% blocktrans %}Verantwortlicher Leiter der Studie ist Prof. Knop. Verantwortlich
-    für die Webseite ist Dr. Anders. Die Studie wurde von der Ethikkomission der
-    Universität Heidelberg befürwortet. Hinweise zum <b>Datenschutz</b> finden
-    Sie im nachfolgenden Informationstext.{% endblocktrans %}
-  </p>
-  <p>
-    <a title="Informationen" href="{% url 'app:information' %}"
-      >{% blocktrans %}Informationstext{% endblocktrans %}</a
-    >
-  </p>
+
+  <img class="impressum" src="{% static 'media/Impressum.png' %}">
+
+
 </div>
 {% endblock %}
