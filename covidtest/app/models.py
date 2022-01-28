@@ -122,7 +122,7 @@ class Registration(models.Model):
     sample = models.ForeignKey(
         Sample, on_delete=models.CASCADE, related_name="registrations"
     )
-    time = models.DateTimeField(auto_now_add=True if not settings.PRIVACY_MODE else False, blank=True, null=True)
+    time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     name_encrypted = models.CharField(max_length=200)
     address_encrypted = models.CharField(max_length=200)
     contact_encrypted = models.CharField(max_length=200)

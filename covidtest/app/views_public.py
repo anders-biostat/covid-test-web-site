@@ -3,7 +3,7 @@ import datetime
 
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 
