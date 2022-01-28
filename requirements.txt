@@ -27,7 +27,6 @@ lazy-object-proxy==1.7.1
 Markdown==3.3.6
 mccabe==0.6.1
 packaging==21.3
-pep8-naming==0.12.1
 Pillow==9.0.0
 platformdirs==2.4.1
 pluggy==1.0.0
