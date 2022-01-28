@@ -1,0 +1,9 @@
+django
+envparse
+django-filter
+django-cors-headers
+django-semanticui-forms
+django-tables2
+djangorestframework
+markdown
+pycryptodome
