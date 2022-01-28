@@ -277,46 +277,6 @@ def update_status(request):
         return HttpResponse("Event created successfully", status=201)
 
 
-# class SampleFilter(django_filters.FilterSet):
-#     class Meta:
-#         model = Sample
-#         fields = ["barcode", "access_code"]
-#
-
-# class SampleListView(SingleTableMixin, FilterView):
-#     model = Sample
-#     table_class = SampleTable
-#     template_name = "lab/sample_list.html"
-#     filterset_class = SampleFilter
-#
-#
-# @login_required
-# def dashboard(request):
-#
-#     count_wait = Event.objects.filter(status="PRINTED").count()
-#
-#     dashboard_values = {
-#         "count_Samples": Sample.objects.filter().count(),
-#         "count_wait": count_wait,
-#     }
-#
-#     return render(request, "lab/dashboard.html", {"dashboard_values": dashboard_values})
-#
-#
-# @api_view(["POST"])
-# @permission_classes([IsAuthenticated])
-# def sample_details_snippet(request):
-#     sample = Sample.objects.filter(access_code=request.POST.get("access_code")).first()
-#     if sample is not None:
-#         return render(
-#             request, "lab/sample_snippet_for_virusfinder.html", {"sample": sample}
-#         )
-#     else:
-#         return HttpResponse(
-#             "<i>Access code %s not found</i>" % request.POST.get("access_code")
-#         )
-
-
 @login_required
 @is_in_group("lab_user")
 def bag_search_statistics(request):
