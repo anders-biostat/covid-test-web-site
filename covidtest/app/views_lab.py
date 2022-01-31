@@ -74,7 +74,7 @@ def sample_check_in(request):
     if request.method == "POST":
         form = LabCheckInForm(request.POST)
         if form.is_valid():
-            barcodes = [x.strip().upper() for x in form.data["barcodes"].split()]
+            barcodes = [str(x).strip().upper() for x in form.data["barcodes"].split()]
             rack = form.cleaned_data["rack"].strip().upper()
             status = form.data["status"]
             comment = form.data["comment"]
@@ -246,7 +246,7 @@ def update_status(request):
     if request.method == "POST":
         body = json.loads(request.body)
 
-        bc = body["barcode"].strip().upper()
+        bc = str(body["barcode"]).strip().upper()
         bc_ok = []
         bc_missing = []
         bc_duplicated = []

@@ -82,6 +82,7 @@ class BagManagementQueryForm(forms.Form):
 class BagHandoutForm(forms.ModelForm):
     comment = forms.CharField(max_length=1000, disabled=True, required=False)
     name = forms.CharField(max_length=255, disabled=True, required=False)
+    message = None
 
     class Meta:
         model = Bag
@@ -130,10 +131,13 @@ class BagHandoutForm(forms.ModelForm):
                         "comment"
                     ] = f"No status on Sample {sample.barcode} - PRINTED set automatically"
         if len(invalid_status) > 0:
+            pass
+            """
             raise ValidationError(
                 f"Beutel mit ID {self.instance.pk} enthält mindestens eine "
                 + f"Probe mit ungültigem Status -- Barcodes: {invalid_status}"
             )
+            """
 
         # Check if a new recipient was set
         if not self.cleaned_data.get("recipient"):
