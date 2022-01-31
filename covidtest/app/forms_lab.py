@@ -110,7 +110,7 @@ class BagHandoutForm(forms.ModelForm):
         # Check if all samples have status PRINTED
         invalid_status = []
         for sample in self.instance.samples.all():
-            event = sample.get_statuses().last()
+            event = sample.get_latest_external_status()
             if event is not None and event.status != SampleStatus.PRINTED.value:
                 invalid_status.append(sample.barcode)
             if event is None:
