@@ -9,4 +9,4 @@ markdown
 pycryptodome
 simplepush
 gunicorn
-pytest
+pytest-cov
