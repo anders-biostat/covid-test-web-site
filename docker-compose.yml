@@ -35,7 +35,7 @@ services:
     ports:
         - "8000:8000"
     depends_on:
-      - postgres
+      - db
     volumes:
       - static_volume:/project/static
       - media_volume:/project/media
