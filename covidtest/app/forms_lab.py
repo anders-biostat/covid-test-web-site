@@ -151,3 +151,7 @@ class BagHandoutForm(forms.ModelForm):
 
 
 BagHandoutModelFormSet = forms.modelformset_factory(Bag, form=BagHandoutForm, extra=0)
+
+class SendNotificationForm(forms.Form):
+    title = forms.CharField(widget=forms.TextInput())
+    message = forms.CharField(widget=forms.Textarea())

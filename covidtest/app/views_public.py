@@ -7,8 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 
-from .forms_public import ResultsQueryForm
-from .models import Sample, News
+from .forms_public import ResultsQueryForm, AbonnementForm
+from .models import Sample, News, PushAbonnement
 from .statuses import SampleStatus
 
 log = logging.getLogger(__name__)
@@ -114,6 +114,60 @@ def result(request):
     except:
         pass
     return render_status_page(request, sample, external=True)
+
+
+def abonnement(request):
+    if request.method == "GET":
+        if request.GET.get("uuid") is not None:
+            uuid = request.GET.get("uuid")
+            abonnement = PushAbonnement.objects.filter(id=uuid).first()
+            if abonnement is not None:
+                form = AbonnementForm(initial={"key": abonnement.key, "action": "2"})
+                return render(request, "public/pages/abonnement.html", {"form": form, "selected": "Deabonnieren"})
+    if request.method == "POST":
+        form = AbonnementForm(request.POST)
+        if form.is_valid():
+            # Action: "1" for subscription, "2" for unsubscribing
+            action = form.cleaned_data["action"]
+            key = form.cleaned_data["key"]
+
+            # Check if abonnement exists
+            abonnement = PushAbonnement.objects.filter(key=key).first()
+
+            # Case subscription:
+            if action == "1":
+                if abonnement is None:
+                    PushAbonnement.objects.create(key=key)
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        _("Mitteilungen erfolgreich abonniert")
+                    )
+                    return redirect("app:home")
+                else:
+                    messages.add_message(
+                        request,
+                        messages.WARNING,
+                        _("Mitteilungen bereits abonniert")
+                    )
+                    return redirect("app:home")
+            if action == "2":
+                if abonnement is None:
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        _("Key nicht gefunden")
+                    )
+                else:
+                    PushAbonnement.objects.filter(key=key).delete()
+                    messages.add_message(
+                        request,
+                        messages.SUCCESS,
+                        _("Mitteilungen erfolgreich deabonniert")
+                    )
+                    return redirect("app:home")
+    form = AbonnementForm()
+    return render(request, "public/pages/abonnement.html", {"form": form, "selected": "Abonnieren"})
 
 def render_status(request, event, external=True):
     if event is not None:

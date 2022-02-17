@@ -2,7 +2,7 @@ import json
 import csv
 import os
 import ast
-from datetime import date, datetime
+from datetime import date, datetime, time
 
 import pytz
 import django_filters
@@ -15,6 +15,8 @@ from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from simplepush import send, send_encrypted
+
 
 from .forms_lab import (
     LabCheckInForm,
@@ -23,8 +25,9 @@ from .forms_lab import (
     BagManagementQueryForm,
     BagHandoutForm,
     BagHandoutModelFormSet,
+    SendNotificationForm
 )
-from .models import Event, Sample, Bag, BagRecipient
+from .models import Event, Sample, Bag, BagRecipient, PushAbonnement
 from .statuses import SampleStatus
 from .tables import SampleTable
 from .utils import find_samples, Search, is_in_group
@@ -489,3 +492,36 @@ def status_preview(request):
         return HttpResponseBadRequest("Something went wrong")
     event = sample.get_latest_external_status()
     return render_status(request, event)
+
+
+def send_message_to_all(title, message):
+    users = PushAbonnement.objects.all()
+    for user in users:
+        key = user.key
+        message_end = f"\n\nZum Deabonnieren öffnen Sie bitte:\nhttps://covidtest-hd.de/abonnement/?uuid={user.id}"
+        send(key, title, message + message_end)
+
+@login_required
+@is_in_group("notification")
+def notify(request):
+    if request.method == "POST":
+        form = SendNotificationForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            message = form.cleaned_data["message"]
+            if time(7,0,0) <= datetime.utcnow().time() <= time(19,0,0):
+                print("Sending message to all:", repr(message))
+                send_message_to_all(title, message)
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    "Successfully send message",
+                )
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "Notifications are deactivated between 20:00 and 07:00",
+                )
+    form = SendNotificationForm()
+    return render(request, "lab/notify.html", {"form": form})

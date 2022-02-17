@@ -1,0 +1,68 @@
+{% extends "public/base.html" %}
+{% load i18n %}
+{% load semanticui %}
+
+{% block content %}
+
+    <div style="margin: 30px auto 30px auto; max-width: 1000px; color: rgba(0,0,0,0.6); padding: 0 0px;">
+    <h2 style="color: rgba(0,0,0,0.6)" class="ui header">{% blocktrans %}Benachrichtigungen Abonnieren/Deabonnieren{% endblocktrans %}</h2>
+    <p style="margin-top: 20px;">
+        {% blocktrans %}Um benachrichtigt zu werden, wenn neue Probenergebnisse verfügbar sind, können Sie unsere Benachrichtigungen mit Hilfe der App Simplepush abonnieren (Drittanbieter, verfügbar für Android und iOS):{% endblocktrans %}
+        <a href="https://simplepush.io">https://simplepush.io</a>
+    </p>
+     <p style="margin-top: 20px;">
+        {% blocktrans %}Direkt nach der Installation dieser App wird ihnen ihr persönlicher Key angezeigt, den Sie hier eintragen können, um Benachrichtigungen von uns zu erhalten. Wenn Sie keine weiteren Benachrichtigungen erhalten wollen, können Sie diese hier wieder Deabonnieren.{% endblocktrans %}
+    </p>
+    </div>
+
+<form id="access_check" class="ui form" action="{% url 'app:abonnement' %}" method="post">
+    {% csrf_token %}
+    {% render_form form %}
+    <div style="margin-top: 15px;">
+        <button type="submit" class="ui primary button">
+            {% blocktrans %}Weiter{% endblocktrans %}
+        </button>
+    </div>
+</form>
+
+    <script>
+        $('.ui.dropdown').dropdown(
+            'set selected', ['{{ selected }}']
+        );
+    </script>
+
+    <style>
+    #access_check > div.required.field {
+        margin-bottom: 3px!important;
+    }
+
+    #access_check > div.required.field > label {
+        padding-left: 0px;
+    }
+
+    #access_check > div.required.field > input {
+        font-size: 15pt;
+        padding: 7px 15px;
+    }
+
+  #interactive.viewport {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    text-align: center;
+  }
+  #interactive.viewport > canvas,
+  #interactive.viewport > video {
+    max-width: 100%;
+    width: 100%;
+  }
+  canvas.drawing,
+  canvas.drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+    </style>
+    {% endblock %}

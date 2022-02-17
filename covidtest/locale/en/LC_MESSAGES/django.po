@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-27 12:24+0000\n"
-"PO-Revision-Date: 2022-01-27 13:32+0100\n"
+"POT-Creation-Date: 2022-02-17 11:49+0000\n"
+"PO-Revision-Date: 2022-02-17 12:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -54,50 +54,35 @@ msgstr "Sample-Status"
 msgid "Kommentar"
 msgstr "Comment"
 
-#: app/forms_public.py:8
-msgid "Einverständnis"
-msgstr "Consent"
-
-#: app/forms_public.py:23
-msgid "Zugangscode (beiliegender Zettel):"
-msgstr "Access code (attached letter):"
-
-#: app/forms_public.py:24 app/forms_public.py:62
-#: app/templates/public/base-slim.html:9
-msgid "Zugangscode"
+#: app/forms_public.py:6
+#, fuzzy
+#| msgid "Zugangscode"
+msgid "Access-Code / Zugangscode"
 msgstr "Access code"
 
-#: app/forms_public.py:27
-msgid "Name:"
-msgstr "Name:"
+#: app/forms_public.py:6
+msgid "Access-Code (z.B. A12 345 678 910)"
+msgstr "Access-Code (i.e. A12 345 678 910)"
 
-#: app/forms_public.py:27
-msgid "Nachname, Vorname"
-msgstr "Last Name, First Name"
+#: app/forms_public.py:15
+msgid "Simplepush.io Key"
+msgstr "Simplepush.io Key"
 
-#: app/forms_public.py:30
-msgid "Anschrift:"
-msgstr "Address:"
+#: app/forms_public.py:15
+msgid "key"
+msgstr "key"
 
-#: app/forms_public.py:31
-msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
-msgstr "Street, House Number, Postcode, City"
+#: app/forms_public.py:19 app/templates/public/base.html:109
+msgid "Abonnieren"
+msgstr "Subscribe"
 
-#: app/forms_public.py:34
-msgid "Telefonnummer:"
-msgstr "Telephone Number:"
+#: app/forms_public.py:20
+msgid "Deabonnieren"
+msgstr "Unsubscribe"
 
-#: app/forms_public.py:34
-msgid "Telefonnummer"
-msgstr "Telephone Number"
-
-#: app/forms_public.py:53
-msgid "Zugangscode / Access-Code"
-msgstr "Access code"
-
-#: app/forms_public.py:64
-msgid "Passwort"
-msgstr "Password"
+#: app/forms_public.py:22
+msgid "Abonnieren/Deabonnieren"
+msgstr "Subscribe/Unsubscribe"
 
 #: app/templates/lab/bag_handout.html:5
 msgid "Beutel - Ausgabe"
@@ -136,37 +121,42 @@ msgstr ""
 msgid "Abnehmer/ Beutel ID..."
 msgstr "Recipient/ Bag id …"
 
+#: app/templates/lab/notify.html:5
+msgid "Notify"
+msgstr "Notify"
+
 #: app/templates/lab/snippets/menubar.html:26
 msgid "Beutel"
 msgstr "Bag"
+
+#: app/templates/public/base-slim.html:9
+msgid "Zugangscode"
+msgstr "Access code"
 
 #: app/templates/public/base-slim.html:11
 msgid "Seite"
 msgstr "Page"
 
-#: app/templates/public/base-slim.html:64 app/templates/public/base.html:97
+#: app/templates/public/base-slim.html:64 app/templates/public/base.html:92
 msgid "Zurück: Zugangscode eingeben"
 msgstr "Go back: Input access code"
 
-#: app/templates/public/base.html:7
-msgid ""
-"Test der Universität Heidelberg auf das\n"
-"        Covid-19-Coronavirus (SARS-CoV-2)"
-msgstr "Test from Heidelberg University for COVID-19 Coronavirus (SARS-CoV-2)"
-
-#: app/templates/public/base.html:50
+#: app/templates/public/base.html:7 app/templates/public/base.html:45
 msgid "Test auf COVID-19"
 msgstr "Test for COVID-19"
 
-#: app/templates/public/base.html:51
-msgid "LAMP basierter Test auf das Coronavirus SARS-CoV-2"
-msgstr "LAMP-based test for Coronavirus SARS-CoV-2"
+#: app/templates/public/base.html:46
+msgid ""
+"Gurgeltest der Corona LAMP Test Facility des Zentrum für Molekularbiologie "
+"der Universität Heidelberg,<br>durchgeführt in der Virologie der Uniklinik "
+"Heidelberg"
+msgstr ""
 
-#: app/templates/public/base.html:99
+#: app/templates/public/base.html:94
 msgid "Zurück: Home"
 msgstr "Go Back: Home"
 
-#: app/templates/public/base.html:110
+#: app/templates/public/base.html:105
 msgid ""
 "Corona-Tests werden jeden Montag und Donnerstag durchgeführt. Die Proben "
 "können bis Montag-/ Donnerstagmorgen 10Uhr in den Briefkästen für die "
@@ -176,41 +166,78 @@ msgstr ""
 "submitted in the sample collection mail boxes until Monday/ Thursday morning "
 "10am."
 
-#: app/templates/public/pages/access-check.html:11
+#: app/templates/public/base.html:108
+msgid ""
+"Unter folgendem Link können Sie unsere Benachrichtigungen abonnieren, um "
+"benachrichtigt zu werden, wenn neue Ergebnisse online sind:"
+msgstr ""
+"You can subscribe to our notifications to get notified, when new results are "
+"available:"
+
+#: app/templates/public/pages/abonnement.html:8
+msgid "Benachrichtigungen Abonnieren/Deabonnieren"
+msgstr "Subscribe/Unsubscribe to Notifications"
+
+#: app/templates/public/pages/abonnement.html:10
+msgid ""
+"Um benachrichtigt zu werden, wenn neue Probenergebnisse verfügbar sind, "
+"können Sie unsere Benachrichtigungen mit Hilfe der App Simplepush abonnieren "
+"(Drittanbieter, verfügbar für Android und iOS):"
+msgstr ""
+"To get notifications, when new results are available, you can subscribe to "
+"our notifications using the app Simplepush (Third-party app, available for "
+"Android and iOS):"
+
+#: app/templates/public/pages/abonnement.html:14
+msgid ""
+"Direkt nach der Installation dieser App wird ihnen ihr persönlicher Key "
+"angezeigt, den Sie hier eintragen können, um Benachrichtigungen von uns zu "
+"erhalten. Wenn Sie keine weiteren Benachrichtigungen erhalten wollen, können "
+"Sie diese hier wieder Deabonnieren."
+msgstr ""
+"Directly after installation of the app a personal code is shown. To "
+"subscribe to our notifications please submit this code on this page. If you "
+"like to unsubscribe form further notifications you can unsubscribe on this "
+"page."
+
+#: app/templates/public/pages/abonnement.html:23
+#: app/templates/public/pages/access-check.html:12
 msgid "Weiter"
 msgstr "Continue"
+
+#: app/templates/public/pages/access-check.html:9
+msgid ""
+"Der Access-Code (12 stelliger Code beginnend mit A ...)  befindet sich am "
+"unteren Ende des Zettels, welches dem Testkit beiliegt."
+msgstr ""
+"The access-code (12 digit code starting with A …) is placed on the bottom "
+"side of the paper slip which is in the test kit."
 
 #: app/templates/public/pages/contact.html:6
 msgid "Kontakt"
 msgstr "Contact"
 
 #: app/templates/public/pages/contact.html:7
-#: app/templates/public/pages/impressum.html:7
 msgid "Diese Studie wird organisert vom "
 msgstr "This study is organized by the "
 
 #: app/templates/public/pages/contact.html:11
-#: app/templates/public/pages/impressum.html:11
 msgid "Zentrum für Molekularbiologie der Universität Heidelberg (ZMBH)"
 msgstr "Center for Molecular Biology of Heidelberg University (ZMBH)"
 
 #: app/templates/public/pages/contact.html:17
-#: app/templates/public/pages/impressum.html:17
 msgid "in Zusammenarbeit mit dem"
 msgstr "in collaboration with the"
 
 #: app/templates/public/pages/contact.html:21
-#: app/templates/public/pages/impressum.html:21
 msgid "Gesundheitsamt Rhein-Neckar-Kreis"
 msgstr "Health Department of the Rhein-Neckar district"
 
 #: app/templates/public/pages/contact.html:27
-#: app/templates/public/pages/impressum.html:27
 msgid "Für Anfragen wenden Sie sich bitte an"
 msgstr "For questions please contact"
 
 #: app/templates/public/pages/contact.html:31
-#: app/templates/public/pages/impressum.html:31
 msgid ""
 ",\n"
 "      oder "
@@ -219,7 +246,6 @@ msgstr ""
 "     or "
 
 #: app/templates/public/pages/contact.html:36
-#: app/templates/public/pages/impressum.html:36
 msgid ""
 ",\n"
 "      beide am ZMBH "
@@ -313,16 +339,12 @@ msgstr ""
 "rule out a SARS-CoV-2 infection with certainty, an official PCR test must be "
 "performed."
 
-#: app/templates/public/pages/home.html:18
-msgid "Für Fragen wenden Sie sich bitte an uns unter: 0152 - 579 083 78."
-msgstr "For questions please contact: 0152 - 579 083 78."
-
-#: app/templates/public/pages/home.html:28
-#: app/templates/public/pages/home.html:34
+#: app/templates/public/pages/home.html:27
+#: app/templates/public/pages/home.html:33
 msgid "Ergebnis abfragen"
 msgstr "Result query"
 
-#: app/templates/public/pages/home.html:31
+#: app/templates/public/pages/home.html:30
 msgid ""
 "Mit der Abfrage eines Testresultats mittels Access code über diesen Link "
 "erkläre ich, dass ich über das Testverfahren informiert bin und die "
@@ -334,62 +356,35 @@ msgstr ""
 "data and privacy declaration nad the other information provided and that I "
 "agree with it."
 
-#: app/templates/public/pages/home.html:43
+#: app/templates/public/pages/home.html:42
 msgid "Wie man den Corona-Test durchführt?"
 msgstr "How to perform the Corona test?"
 
-#: app/templates/public/pages/home.html:46
+#: app/templates/public/pages/home.html:45
 msgid "Zur Anleitung"
 msgstr "Instructions"
 
-#: app/templates/public/pages/home.html:52
+#: app/templates/public/pages/home.html:51
 msgid "Weiterführende Informationen"
 msgstr "Further information"
 
-#: app/templates/public/pages/home.html:55
+#: app/templates/public/pages/home.html:54
 msgid "Informationen"
 msgstr "Information text"
 
-#: app/templates/public/pages/home.html:61
+#: app/templates/public/pages/home.html:60
 #: app/templates/public/pages/news.html:8
 msgid "Aktuelles von der Teststation"
 msgstr "News from the test station"
 
-#: app/templates/public/pages/home.html:65
+#: app/templates/public/pages/home.html:64
 msgid "Aktuelles"
 msgstr "Latest news"
 
-#: app/templates/public/pages/impressum.html:6
+#: app/templates/public/pages/impressum.html:7
 #: app/templates/public/snippets/footer.html:7
 msgid "Impressum"
 msgstr "Legal notice"
-
-#: app/templates/public/pages/impressum.html:41
-msgid ""
-"Für detaillierte Informationen zur Studie, lesen Sie bitte\n"
-"    unseren Informationstext."
-msgstr ""
-"For more detailed information about the study, please\n"
-"   refer to our information text."
-
-#: app/templates/public/pages/impressum.html:46
-#: app/templates/public/pages/impressum.html:57
-msgid "Informationstext"
-msgstr "Information text"
-
-#: app/templates/public/pages/impressum.html:50
-msgid ""
-"Verantwortlicher Leiter der Studie ist Prof. Knop. Verantwortlich\n"
-"    für die Webseite ist Dr. Anders. Die Studie wurde von der Ethikkomission "
-"der\n"
-"    Universität Heidelberg befürwortet. Hinweise zum <b>Datenschutz</b> "
-"finden\n"
-"    Sie im nachfolgenden Informationstext."
-msgstr ""
-"The responsible person for the study and the website are Prof. Knop and Dr. "
-"Anders, respectively. This study was approved by the ethics committee of "
-"Heidelberg Univeristy. For notes regarding data protection, please consult "
-"the following information text."
 
 #: app/templates/public/pages/information.html:7
 msgid "Weitere Informationen"
@@ -456,11 +451,11 @@ msgstr ""
 "sensitive than antigen tests that directly detect viral proteins (without "
 "amplification)."
 
-#: app/templates/public/pages/instructions.html:7
+#: app/templates/public/pages/instructions.html:8
 msgid "Anleitung Probennahme"
 msgstr "Sampling Procedures"
 
-#: app/templates/public/pages/instructions.html:11
+#: app/templates/public/pages/instructions.html:12
 msgid ""
 "Die Teststation analysiert Gurgelproben auf das Vorhandensein des Corona-"
 "Virusgenoms. Zur Entnahme der Gurgelprobe benutzen Sie bitte das Testkit, "
@@ -472,11 +467,11 @@ msgstr ""
 "consisting of a plastic bottle with sterile saline, a straw, a barcoded test "
 "tube as well as a small receipt."
 
-#: app/templates/public/pages/instructions.html:14
+#: app/templates/public/pages/instructions.html:15
 msgid "So funktioniert die Gurgelprobe:"
 msgstr "How does sampling work:"
 
-#: app/templates/public/pages/instructions.html:26
+#: app/templates/public/pages/instructions.html:27
 msgid ""
 "Bitte noch VOR dem Frühstück oder erst mindestens 30 Minuten nach dem Essen/"
 "Zähneputzen die Gurgelprobe abnehmen. Halten Sie eine Schere bereit."
@@ -484,7 +479,7 @@ msgstr ""
 "Please take the gargle sample BEFORE breakfast or at least 30 minutes after "
 "eating/brushing teeth. Keep a pair of scissors handy."
 
-#: app/templates/public/pages/instructions.html:27
+#: app/templates/public/pages/instructions.html:28
 msgid ""
 "Schrauben Sie die Plastikflasche auf und verwenden Sie die gesamte 5ml-"
 "Kochsalzlösung zum Gurgeln tief in der Kehle (nicht schlucken!)."
@@ -492,24 +487,24 @@ msgstr ""
 "Unscrew the plastic bottle and use all of the 5ml saline solution for deep-"
 "throat gargling (do not swallow!)."
 
-#: app/templates/public/pages/instructions.html:28
+#: app/templates/public/pages/instructions.html:29
 msgid ""
 "Gurgeln Sie mit der Kochsalzlösung für 30s und spülen Sie sich auch den Mund "
 "damit aus."
 msgstr "Gargle with the saline for 30s and rinse your mouth with it as well."
 
-#: app/templates/public/pages/instructions.html:29
+#: app/templates/public/pages/instructions.html:30
 msgid ""
 "Füllen Sie die Gurgelflüssigkeit mit dem Strohhalm in die Plastikflasche."
 msgstr "Transfer the gargle fluid into the plastic bottle using the straw."
 
-#: app/templates/public/pages/instructions.html:30
+#: app/templates/public/pages/instructions.html:31
 msgid ""
 "Schütteln Sie die Plastikflasche 30s lang, um die Probe zu gut zu "
 "durchmischen."
 msgstr "Shake the plastic bottle for 30s to homogenize the sample."
 
-#: app/templates/public/pages/instructions.html:31
+#: app/templates/public/pages/instructions.html:32
 msgid ""
 "Schneiden Sie die Spitze der Plastikflasche mit der Schere ab und füllen Sie "
 "das mitgelieferte Röhrchen mit Barcode nahezu voll. Achten Sie darauf, dass "
@@ -518,11 +513,11 @@ msgstr ""
 "Cut the tip of the plastic bottle with scissors and fill the provided "
 "barcoded tube almost completely. Make sure to properly close the tube."
 
-#: app/templates/public/pages/instructions.html:35
+#: app/templates/public/pages/instructions.html:36
 msgid "Probenabgabe:"
 msgstr "Sample submission:"
 
-#: app/templates/public/pages/instructions.html:38
+#: app/templates/public/pages/instructions.html:39
 msgid ""
 "Überprüfen Sie sorgfältig, ob der Tube code auf dem Beleg mit dem Barcode "
 "auf den Teströhrchen mit Ihrer Probe übereinstimmt."
@@ -530,7 +525,7 @@ msgstr ""
 "Carefully check that the tube code on the receipt matches the barcode on the "
 "test tube with your sample."
 
-#: app/templates/public/pages/instructions.html:39
+#: app/templates/public/pages/instructions.html:40
 msgid ""
 "Werfen Sie das Teströhrchen mit Ihrer Probe in einen der Sammelbriefkästen "
 "auf dem Campus."
@@ -538,7 +533,7 @@ msgstr ""
 "Drop the test tube with your sample into one of the collection mailboxes on "
 "the campus."
 
-#: app/templates/public/pages/instructions.html:40
+#: app/templates/public/pages/instructions.html:41
 msgid ""
 "Bewahren Sie den Beleg mit dem Zugangscode an einem sicheren Ort auf und "
 "fragen Sie das Ergebnis am Abend oder am nächsten Tag auf dieser Webseite ab."
@@ -546,7 +541,7 @@ msgstr ""
 "Keep the receipt with the access code in a safe place and query the result "
 "in the evening or the next day (on this page)."
 
-#: app/templates/public/pages/instructions.html:41
+#: app/templates/public/pages/instructions.html:42
 msgid ""
 "Zur Erinnerung können Sie Ihren Namen und das Datum auf dem Beleg vermerken."
 msgstr "As a reminder, you can write your name and the date on the receipt."
@@ -786,10 +781,6 @@ msgstr ""
 "No result is available yet. Please \n"
 "             try again later today or tomorrow."
 
-#: app/templates/public/snippets/contact_information.html:3
-msgid "oder"
-msgstr "or"
-
 #: app/templates/public/snippets/footer.html:5
 msgid "Datenschutz"
 msgstr "Data protection"
@@ -802,12 +793,6 @@ msgstr "Center for Molecular Biology"
 msgid "der Universität Heidelberg (ZMBH)"
 msgstr "of Heidelberg University (ZMBH)"
 
-#: app/views_consent.py:98
-msgid ""
-"Ein technischer Fehler ist aufgetreten. Bitte die Registrierung nochmals "
-"versuchen."
-msgstr "A technical problem has occurred. Please try to register again."
-
 #: app/views_public.py:23
 msgid "Bitte einen Zugangscode / Access Code angeben"
 msgstr "Please provide an access code"
@@ -819,6 +804,95 @@ msgstr "The access code is unknown. Please try again."
 #: app/views_public.py:94
 msgid "Status unbekannt"
 msgstr "Unknown status"
+
+#: app/views_public.py:144
+msgid "Mitteilungen erfolgreich abonniert"
+msgstr "Notifications subscribed successfully"
+
+#: app/views_public.py:151
+msgid "Mitteilungen bereits abonniert"
+msgstr "Already subscribed to subscriptions"
+
+#: app/views_public.py:159
+msgid "Key nicht gefunden"
+msgstr "Key not found"
+
+#: app/views_public.py:166
+msgid "Mitteilungen erfolgreich deabonniert"
+msgstr "Notifications unsubscribed successfully"
+
+#~ msgid "Einverständnis"
+#~ msgstr "Consent"
+
+#~ msgid "Zugangscode (beiliegender Zettel):"
+#~ msgstr "Access code (attached letter):"
+
+#~ msgid "Name:"
+#~ msgstr "Name:"
+
+#~ msgid "Nachname, Vorname"
+#~ msgstr "Last Name, First Name"
+
+#~ msgid "Anschrift:"
+#~ msgstr "Address:"
+
+#~ msgid "Straße, Hausnummer, Postleitzahl, Wohnort"
+#~ msgstr "Street, House Number, Postcode, City"
+
+#~ msgid "Telefonnummer:"
+#~ msgstr "Telephone Number:"
+
+#~ msgid "Telefonnummer"
+#~ msgstr "Telephone Number"
+
+#~ msgid "Zugangscode / Access-Code"
+#~ msgstr "Access code"
+
+#~ msgid "Passwort"
+#~ msgstr "Password"
+
+#~ msgid ""
+#~ "Test der Universität Heidelberg auf das\n"
+#~ "        Covid-19-Coronavirus (SARS-CoV-2)"
+#~ msgstr ""
+#~ "Test from Heidelberg University for COVID-19 Coronavirus (SARS-CoV-2)"
+
+#~ msgid "LAMP basierter Test auf das Coronavirus SARS-CoV-2"
+#~ msgstr "LAMP-based test for Coronavirus SARS-CoV-2"
+
+#~ msgid "Für Fragen wenden Sie sich bitte an uns unter: 0152 - 579 083 78."
+#~ msgstr "For questions please contact: 0152 - 579 083 78."
+
+#~ msgid ""
+#~ "Für detaillierte Informationen zur Studie, lesen Sie bitte\n"
+#~ "    unseren Informationstext."
+#~ msgstr ""
+#~ "For more detailed information about the study, please\n"
+#~ "   refer to our information text."
+
+#~ msgid "Informationstext"
+#~ msgstr "Information text"
+
+#~ msgid ""
+#~ "Verantwortlicher Leiter der Studie ist Prof. Knop. Verantwortlich\n"
+#~ "    für die Webseite ist Dr. Anders. Die Studie wurde von der "
+#~ "Ethikkomission der\n"
+#~ "    Universität Heidelberg befürwortet. Hinweise zum <b>Datenschutz</b> "
+#~ "finden\n"
+#~ "    Sie im nachfolgenden Informationstext."
+#~ msgstr ""
+#~ "The responsible person for the study and the website are Prof. Knop and "
+#~ "Dr. Anders, respectively. This study was approved by the ethics committee "
+#~ "of Heidelberg Univeristy. For notes regarding data protection, please "
+#~ "consult the following information text."
+
+#~ msgid "oder"
+#~ msgstr "or"
+
+#~ msgid ""
+#~ "Ein technischer Fehler ist aufgetreten. Bitte die Registrierung nochmals "
+#~ "versuchen."
+#~ msgstr "A technical problem has occurred. Please try to register again."
 
 #~ msgid " Alter der Teilnehmerin / des Teilnehmers? "
 #~ msgstr " Age of the participant(s)?"

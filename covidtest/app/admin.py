@@ -9,6 +9,7 @@ from .models import (
     Consent,
     News,
     BagRecipient,
+    PushAbonnement
 )
 
 admin.site.site_header = "COVID-19 LAB ADMIN"
@@ -46,6 +47,8 @@ class ConsentAdmin(admin.ModelAdmin):
 class NewsAdmin(admin.ModelAdmin):
     list_display = ("title", "created_on", "updated_on")
 
+class PushAbonnementAdmin(admin.ModelAdmin):
+    list_display = ("id", "key")
 
 #
 class SampleRecipientAdmin(admin.ModelAdmin):
@@ -65,4 +68,5 @@ admin.site.register(RSAKey, RSAKeyAdmin)
 admin.site.register(Bag, BagAdmin)
 admin.site.register(Consent, ConsentAdmin)
 admin.site.register(News, NewsAdmin)
+admin.site.register(PushAbonnement, PushAbonnementAdmin)
 admin.site.register(BagRecipient, SampleRecipientAdmin)

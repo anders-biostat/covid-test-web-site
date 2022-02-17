@@ -80,6 +80,22 @@
                 </a>
             </div>
         {% endif %}
+        {% if user|is_in_group:"notification" %}
+        <h2>Benachrichtigungen</h2>
+        <div class="ui divider"></div>
+        <div class="ui cards">
+            <a href="{% url 'app:notify' %}" class="red card">
+                <div class="content">
+                    <h3 class="header">
+                        Benachrichtigung senden
+                    </h3>
+                    <div class="meta">
+                        Push-Benachrichtigung an alle Abonnenten senden
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
 
     </div>
 {% endblock %}

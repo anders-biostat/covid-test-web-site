@@ -160,3 +160,8 @@ class News(Timestamp, models.Model):
 
     class Meta:
         verbose_name_plural = "News"
+
+
+class PushAbonnement(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    key = models.CharField(max_length=50)

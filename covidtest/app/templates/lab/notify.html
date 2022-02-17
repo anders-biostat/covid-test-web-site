@@ -1,0 +1,15 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% block content %}
+<div>
+    <h1 class="ui header">{% blocktrans %}Notify{% endblocktrans %}</h1>
+    <div class="ui form" style="margin-bottom: 40px">
+        <form action="{% url 'app:notify' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input style="margin-top: 20px;" class="ui button" type="submit" value="Send" />
+        </form>
+    </div>
+
+</div>
+{% endblock %}

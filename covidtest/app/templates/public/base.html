@@ -103,7 +103,12 @@
     <div style="margin: 0 auto; max-width: 900px; padding: 20px;">
     <div style="color: rgba(0,0,0,.6)" class="ui center aligned container">
         {% blocktrans %}Corona-Tests werden jeden Montag und Donnerstag durchgeführt. Die Proben können bis Montag-/ Donnerstagmorgen 10Uhr in den Briefkästen für die Probensammlung abgegeben werden.{% endblocktrans %}
+        <br>
+        <br>
+        {% blocktrans %}Unter folgendem Link können Sie unsere Benachrichtigungen abonnieren, um benachrichtigt zu werden, wenn neue Ergebnisse online sind:{% endblocktrans %}
+        <a href="{% url "app:abonnement" %}">{% blocktrans %}Abonnieren{% endblocktrans %}</a>
     </div>
+
     </div>
 
     <div style="" class="four column centered footer row">
