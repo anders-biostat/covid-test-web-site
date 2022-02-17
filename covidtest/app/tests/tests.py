@@ -1,5 +1,7 @@
+import django
+django.setup()
 from django.test import TestCase
-
+from django.test import Client, TestCase, tag
 from ..models import Bag, Event, RSAKey, Sample
 
 
