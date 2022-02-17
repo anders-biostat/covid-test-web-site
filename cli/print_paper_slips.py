@@ -43,7 +43,7 @@ def print_paper_slip(barcode, access_code, bag_id, printer):
             "access_code_url": access_code.replace(" ", ""),
         },
     )
-    lp = subprocess.Popen(["lp", "-s" "-d", printer, "-o raw"], stdin=subprocess.PIPE)
+    lp = subprocess.Popen(["lp", "-s", "-d", printer, "-o raw"], stdin=subprocess.PIPE)
     lp.stdin.write(label.encode("utf-8"))
     lp.stdin.close()
     pass
