@@ -33,7 +33,8 @@ RUN apk update && \
     pip3 install -U pip && \
     pip3 install -r ${APP_ROOT}/requirements.txt && \
     pip3 install psycopg2 && \
-    chmod 775 -R ${APP_ROOT}
+    chmod 775 -R ${APP_ROOT} && \
+    python3 ./manage.py migrate
 
 # Command for testing the server
 CMD python ./manage.py collectstatic --noinput
