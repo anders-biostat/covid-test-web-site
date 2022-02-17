@@ -91,7 +91,7 @@ WSGI_APPLICATION = "covidtest.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": env("POSTGRES_DB", cast=str),
         "USER": env("POSTGRES_USER", cast=str),
         "PASSWORD": env("POSTGRES_PASSWORD", cast=str),

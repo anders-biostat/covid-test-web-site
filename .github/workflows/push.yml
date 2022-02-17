@@ -13,7 +13,3 @@ jobs:
           cp example.env .env
           cp example.env .env-docker
           docker-compose up -d
-      - name: Test
-        run: |
-          docker container ls
-          docker exec covidtest_app pytest --cov=. -m "not with_registration"
