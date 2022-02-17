@@ -2,6 +2,7 @@ import django
 django.setup()
 from django.test import TestCase
 from django.test import Client, TestCase, tag
+import pytest
 from ..models import Bag, Event, RSAKey, Sample
 
 
@@ -37,6 +38,8 @@ xkNg2AegGcT+ysU2uleSmkkSxs3VDYhRG8njYfzXchpVAgMBAAE=
             bag=bag,
         )
 
+    @tag("with_registration")
+    @pytest.mark.with_registration
     def test_sample_status(self):
         """Return None if no status set"""
         sample = Sample.objects.filter(barcode="123456789").first()
