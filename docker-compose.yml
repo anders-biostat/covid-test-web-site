@@ -44,8 +44,6 @@ services:
       - ./logs_django:/project/logs
       - .env-docker:/project/.env
     env_file: .env
-    links:
-      - "postgres:db"
     networks:
       - djangonetwork
 
