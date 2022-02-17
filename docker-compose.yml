@@ -16,7 +16,7 @@ services:
     depends_on:
       - web
 
-  postgres:
+  db:
     restart: always
     image: postgres:10
     container_name: covidtest_postgres
