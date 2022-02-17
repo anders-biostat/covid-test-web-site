@@ -15,8 +15,6 @@ services:
       - ./logs/:/var/log/nginx
     depends_on:
       - web
-    networks:
-      - djangonetwork
 
   postgres:
     restart: always
@@ -25,8 +23,8 @@ services:
     env_file: .env
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
-    networks:
-      - djangonetwork
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
 
   web:
     build:
@@ -44,12 +42,6 @@ services:
       - ./logs_django:/project/logs
       - .env-docker:/project/.env
     env_file: .env
-    networks:
-      - djangonetwork
-
-networks:
-  djangonetwork:
-    driver: bridge
 
 volumes:
   static_volume:
