@@ -48,7 +48,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ("title", "created_on", "updated_on")
 
 class PushAbonnementAdmin(admin.ModelAdmin):
-    list_display = ("id", "key")
+    list_display = ("uuid", "key")
 
 #
 class SampleRecipientAdmin(admin.ModelAdmin):

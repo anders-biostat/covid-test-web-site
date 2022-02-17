@@ -120,7 +120,7 @@ def abonnement(request):
     if request.method == "GET":
         if request.GET.get("uuid") is not None:
             uuid = request.GET.get("uuid")
-            abonnement = PushAbonnement.objects.filter(id=uuid).first()
+            abonnement = PushAbonnement.objects.filter(uuid=uuid).first()
             if abonnement is not None:
                 form = AbonnementForm(initial={"key": abonnement.key, "action": "2"})
                 return render(request, "public/pages/abonnement.html", {"form": form, "selected": "Deabonnieren"})
