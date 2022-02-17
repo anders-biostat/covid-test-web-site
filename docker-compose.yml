@@ -15,16 +15,22 @@ services:
       - ./logs/:/var/log/nginx
     depends_on:
       - web
+    networks:
+      main:
+          aliases:
+              - nginx
 
-  db:
+  postgres:
     restart: always
     image: postgres:10
     container_name: covidtest_postgres
     env_file: .env
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      main:
+        aliases:
+          - postgres
 
   web:
     build:
@@ -35,13 +41,22 @@ services:
     ports:
         - "8000:8000"
     depends_on:
-      - db
+      - postgres
     volumes:
       - static_volume:/project/static
       - media_volume:/project/media
       - ./logs_django:/project/logs
       - .env-docker:/project/.env
     env_file: .env
+    links:
+      - postgres
+    networks:
+        main:
+            aliases:
+                - web
+
+networks:
+  main:
 
 volumes:
   static_volume:
