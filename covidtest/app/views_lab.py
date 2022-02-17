@@ -497,9 +497,8 @@ def status_preview(request):
 def send_message_to_all(title, message):
     users = PushAbonnement.objects.all()
     for user in users:
-        key = user.key
-        message_end = f"\n\nZum Deabonnieren öffnen Sie bitte:\nhttps://covidtest-hd.de/abonnement/?uuid={user.id}"
-        send(key, title, message + message_end)
+        message_end = f"\n\nZum Deabonnieren öffnen Sie bitte:\nhttps://covidtest-hd.de/abonnement/?key={user.key}"
+        send(user.key, title, message + message_end)
 
 @login_required
 @is_in_group("notification")
