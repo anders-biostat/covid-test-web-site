@@ -1,3 +1,6 @@
+import django
+django.setup()
+
 import binascii
 
 from Crypto.Cipher import AES, PKCS1_OAEP
