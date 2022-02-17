@@ -25,7 +25,7 @@ ADD .git ${APP_ROOT}/.git
 COPY requirements.txt ${APP_ROOT}/requirements.txt
 
 RUN apk update && \
-    apk add --virtual build-deps gcc python3-dev musl-dev && \
+    apk add --virtual build-deps gcc python3-dev musl-dev libffi6 libffi-dev && \
     apk add postgresql-dev && \
     apk add netcat-openbsd && \
     apk add gettext && \
