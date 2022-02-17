@@ -16,9 +16,7 @@ services:
     depends_on:
       - web
     networks:
-      main:
-          aliases:
-              - nginx
+      - djangonetwork
 
   postgres:
     restart: always
@@ -28,9 +26,7 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
-      main:
-        aliases:
-          - postgres
+      - djangonetwork
 
   web:
     build:
@@ -51,12 +47,11 @@ services:
     links:
       - postgres
     networks:
-        main:
-            aliases:
-                - web
+      - djangonetwork
 
 networks:
-  main:
+  djangonetwork:
+    driver: bridge
 
 volumes:
   static_volume:
