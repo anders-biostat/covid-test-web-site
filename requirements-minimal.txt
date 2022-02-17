@@ -8,3 +8,4 @@ djangorestframework
 markdown
 pycryptodome
 simplepush
+gunicorn
