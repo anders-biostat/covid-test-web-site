@@ -45,7 +45,7 @@ services:
       - .env-docker:/project/.env
     env_file: .env
     links:
-      - "db:postgres"
+      - "postgres:db"
     networks:
       - djangonetwork
 
