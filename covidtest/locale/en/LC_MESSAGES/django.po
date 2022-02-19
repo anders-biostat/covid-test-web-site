@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-17 11:49+0000\n"
-"PO-Revision-Date: 2022-02-17 12:58+0100\n"
+"POT-Creation-Date: 2022-02-19 21:22+0000\n"
+"PO-Revision-Date: 2022-02-19 22:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -55,8 +55,6 @@ msgid "Kommentar"
 msgstr "Comment"
 
 #: app/forms_public.py:6
-#, fuzzy
-#| msgid "Zugangscode"
 msgid "Access-Code / Zugangscode"
 msgstr "Access code"
 
@@ -185,20 +183,20 @@ msgid ""
 "(Drittanbieter, verfügbar für Android und iOS):"
 msgstr ""
 "To get notifications, when new results are available, you can subscribe to "
-"our notifications using the app Simplepush (Third-party app, available for "
+"our notifications using the app Simplepush (third-party app, available for "
 "Android and iOS):"
 
 #: app/templates/public/pages/abonnement.html:14
 msgid ""
-"Direkt nach der Installation dieser App wird ihnen ihr persönlicher Key "
+"Direkt nach der Installation dieser App wird ihnen Ihr persönlicher Key "
 "angezeigt, den Sie hier eintragen können, um Benachrichtigungen von uns zu "
 "erhalten. Wenn Sie keine weiteren Benachrichtigungen erhalten wollen, können "
-"Sie diese hier wieder Deabonnieren."
+"Sie diese hier wieder deabonnieren."
 msgstr ""
 "Directly after installation of the app a personal code is shown. To "
 "subscribe to our notifications please submit this code on this page. If you "
 "like to unsubscribe form further notifications you can unsubscribe on this "
-"page."
+"page (for this select unsubscribe)."
 
 #: app/templates/public/pages/abonnement.html:23
 #: app/templates/public/pages/access-check.html:12
