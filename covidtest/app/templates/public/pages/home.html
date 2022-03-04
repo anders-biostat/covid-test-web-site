@@ -18,6 +18,13 @@
 
     {% include 'public/snippets/info-message.html' %}
 
+<!--    <div style="margin: 0 auto; max-width: 900px; padding: 20px;"> -->
+    <div style="color: rgba(0,0,0,.6)" class="ui center aligned container">
+        {% blocktrans %}Unter folgendem Link können Sie unsere Benachrichtigungen abonnieren, um benachrichtigt zu werden, wenn neue Ergebnisse online sind:{% endblocktrans %}
+        <a href="{% url "app:abonnement" %}">{% blocktrans %}Abonnieren{% endblocktrans %}</a>
+    </div>
+
+    
     <div class="ui placeholder segment">
         <div class="ui four column stackable center aligned grid">
             <div style="padding: 20px;" class="middle aligned row">
