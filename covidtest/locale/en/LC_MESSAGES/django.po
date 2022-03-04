@@ -796,8 +796,8 @@ msgid "Bitte einen Zugangscode / Access Code angeben"
 msgstr "Please provide an access code"
 
 #: app/views_public.py:44
-msgid "Der Zugangscode ist unbekannt. Bitte erneut versuchen."
-msgstr "The access code is unknown. Please try again."
+msgid "Sie haben einen ungültigen Access Code eingegeben - bitte erneut versuchen. Es ist möglich, dass dieser von einem alten Testkit stammt. Ist dies der Fall, geben Sie den Barcode Ihres Teströhrchens anstelle des Access Codes ein, um Ihr Resultat abzurufen. Diesen  finden Sie ganz unten auf dem Ausdruck in kleiner Schrift (BC = barcode)."
+msgstr "The access code is unknown - please try again. It is possible that this originates from an old test kit. If this is the case, enter the barcode of your test tube instead of the access code to retrieve your result. You will find this at the bottom of the printout in small numbers (BC = barcode)."
 
 #: app/views_public.py:94
 msgid "Status unbekannt"
