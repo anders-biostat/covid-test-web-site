@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-19 21:22+0000\n"
-"PO-Revision-Date: 2022-02-19 22:22+0100\n"
+"POT-Creation-Date: 2022-03-22 20:19+0000\n"
+"PO-Revision-Date: 2022-03-22 21:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.3\n"
 
 #: app/forms_lab.py:17
 msgid "Barcodes"
@@ -71,6 +71,7 @@ msgid "key"
 msgstr "key"
 
 #: app/forms_public.py:19 app/templates/public/base.html:109
+#: app/templates/public/pages/home.html:24
 msgid "Abonnieren"
 msgstr "Subscribe"
 
@@ -164,7 +165,7 @@ msgstr ""
 "submitted in the sample collection mail boxes until Monday/ Thursday morning "
 "10am."
 
-#: app/templates/public/base.html:108
+#: app/templates/public/base.html:108 app/templates/public/pages/home.html:23
 msgid ""
 "Unter folgendem Link können Sie unsere Benachrichtigungen abonnieren, um "
 "benachrichtigt zu werden, wenn neue Ergebnisse online sind:"
@@ -337,12 +338,12 @@ msgstr ""
 "rule out a SARS-CoV-2 infection with certainty, an official PCR test must be "
 "performed."
 
-#: app/templates/public/pages/home.html:27
-#: app/templates/public/pages/home.html:33
+#: app/templates/public/pages/home.html:34
+#: app/templates/public/pages/home.html:40
 msgid "Ergebnis abfragen"
 msgstr "Result query"
 
-#: app/templates/public/pages/home.html:30
+#: app/templates/public/pages/home.html:37
 msgid ""
 "Mit der Abfrage eines Testresultats mittels Access code über diesen Link "
 "erkläre ich, dass ich über das Testverfahren informiert bin und die "
@@ -354,28 +355,28 @@ msgstr ""
 "data and privacy declaration nad the other information provided and that I "
 "agree with it."
 
-#: app/templates/public/pages/home.html:42
+#: app/templates/public/pages/home.html:49
 msgid "Wie man den Corona-Test durchführt?"
 msgstr "How to perform the Corona test?"
 
-#: app/templates/public/pages/home.html:45
+#: app/templates/public/pages/home.html:52
 msgid "Zur Anleitung"
 msgstr "Instructions"
 
-#: app/templates/public/pages/home.html:51
+#: app/templates/public/pages/home.html:58
 msgid "Weiterführende Informationen"
 msgstr "Further information"
 
-#: app/templates/public/pages/home.html:54
+#: app/templates/public/pages/home.html:61
 msgid "Informationen"
 msgstr "Information text"
 
-#: app/templates/public/pages/home.html:60
+#: app/templates/public/pages/home.html:67
 #: app/templates/public/pages/news.html:8
 msgid "Aktuelles von der Teststation"
 msgstr "News from the test station"
 
-#: app/templates/public/pages/home.html:64
+#: app/templates/public/pages/home.html:71
 msgid "Aktuelles"
 msgstr "Latest news"
 
@@ -609,31 +610,11 @@ msgstr "Result is not yet available"
 
 #: app/templates/public/result_pages/test-LAMPINC.html:8
 msgid ""
-"In unserer ersten Analyse haben wir für Ihre Probe kein klares\n"
-"  Ergebnis ablesen können. Solche nicht eindeutigen Ergebnisse kommen "
-"leider\n"
-"  bei unserem LAMP-Verfahren stets bei einem kleinen Bruchteil der Proben "
-"vor."
+" Das LAMP-Resultat Ihrer Probe war unschlüssig. Die Analyse Ihrer Probe wird "
+"wiederholt. Bitte rufen Sie Ihr Resultat später oder morgen noch einmal ab."
 msgstr ""
-"In our first analysis, we did not get a clear result for your sample. \n"
-"  Unfortunately, such inconclusive results occur in a small fraction\n"
-"   of our samples using the LAMP procedure."
-
-#: app/templates/public/result_pages/test-LAMPINC.html:13
-msgid ""
-"Wir überprüfen Ihre Probe daher nun erneut, diesmal mit einem\n"
-"  anderen Laborverfahren, der Standardmethode RT-PCR. Dies dauert höchsten\n"
-"  24 Stunden. Fragen Sie also bitte Ihr Ergebnis morgen (d.h., am Abend des "
-"Tages\n"
-"  nach der Abgabe der Probe) nochmals hier ab; bis dann sollte diese "
-"Meldung\n"
-"  durch das endgültige Ergebnis ersetzt worden sein."
-msgstr ""
-"Therefore, we will now check your sample again, this time using a different "
-"laboratory procedure, the standard RT-PCR method. This will take a maximum "
-"of 24 hours. Please check your result here again tomorrow (i.e., the "
-"following evening after the sample was submitted);by then, this message "
-"should have been replaced by the final result."
+" The LAMP result of your sample was inconclusive. The analysis of your "
+"sample will be repeated. Please retrieve your result again later or tomorrow."
 
 #: app/templates/public/result_pages/test-LAMPNEG.html:4
 msgid "Ergebnis: Negativ"
@@ -669,45 +650,44 @@ msgid "Ergebnis: Positiv"
 msgstr "Result: Positive"
 
 #: app/templates/public/result_pages/test-LAMPPOS-1.html:8
+#, python-format
 msgid ""
-"Die Analyse Ihrer Probe ergab ein positives Resultat in einem von drei "
+" Die LAMP-Analyse Ihrer Probe ergab ein positives Resultat in einem von drei "
 "Replikaten. Es besteht die begründete Möglichkeit dass Sie mit dem SARS-"
-"CoV-2 Virus (Covid-19, Coronavirus) infiziert sind. Sie können infektiös "
-"sein und weitere Personen anstecken. Bitte informieren Sie sich umgehend "
-"über die aktuell gültigen Richtlinien zum Verhalten von Personen, die "
-"positive getestet wurden und kontaktieren das Gesundheitsamt oder einen Arzt "
-"um einen PCR Test für eine Bestätigung zu erhalten. Eine Überprüfung mit "
-"einem Antigentest in einem Testzentrum wird vermutlich negativ ausfallen, "
-"weil unser Test viel sensitiver ist. Bitte veranlassen Sie einen PCR Test."
+"CoV-2 Virus (Covid-19, Coronavirus) infiziert sind.Sie können infektiös sein "
+"und weitere Personen anstecken. Bitte informieren Sie sich umgehend über die "
+"aktuell gültigen Richtlinien zum Verhalten von Personen, die positive "
+"getestet wurden. Bei schwach positiven Resultaten haben wir eine falsch-"
+"positiv Rate von ca 1%%. Deshalb wird dieses Ergebnis noch mit einer qPCR "
+"überprüft. Rufen Sie Ihr Resultat daher später oder morgen nochmals ab. "
 msgstr ""
-"The analysis of your sample showed a positive result in one out of three "
+" The LAMP analysis of your sample showed a positive result in one of three "
 "replicates. There is a reasonable possibility that you are infected with the "
-"SARS-CoV-2 virus (Covid-19, Coronavirus). You may be infectious and may "
-"infect others. Please immediately check the current guidelines for what to "
-"do if you test positive and contact the health department or a physician to "
-"obtain a PCR test for confirmation. A check with an antigen test in a test "
-"center will likely come back negative because our test is much more "
-"sensitive. Please arrange for a PCR test."
+"SARS-CoV-2 virus (Covid-19, Coronavirus) and you may be infectious and may "
+"infect others. Please check immediately for the current guidelines on what "
+"to do if you test positive. We have a false positive rate of about 1%% for "
+"weak positive results. Therefore, this result will still be checked with a "
+"qPCR. Therefore, please retrieve your result again later or tomorrow. "
 
 #: app/templates/public/result_pages/test-LAMPPOS-2.html:8
+#, python-format
 msgid ""
-"Die Analyse Ihrer Probe ergab ein positives Resultat in zwei von drei "
-"Replikaten. Sie sind vermutlich mit dem SARS-CoV-2 Virus (Covid-19, "
-"Coronavirus) infiziert sind. Sie können infektiös sein und weitere Personen "
-"anstecken. Bitte informieren Sie sich umgehend über die aktuell gültigen "
-"Richtlinien zum Verhalten von Personen die positive getestet wurden und "
-"kontaktieren das Gesundheitsamt oder einen Arzt um einen PCR Test für eine "
-"Bestätigung zu erhalten. Eine Überprüfung mit einem Antigentest in einem "
-"Testzentrum wird vermutlich negativ ausfallen, weil unser Test viel "
-"sensitiver ist. Bitte veranlassen Sie einen PCR Test."
+" Die LAMP-Analyse Ihrer Probe ergab ein positives Resultat in zwei von drei "
+"Replikaten. Es besteht die begründete Möglichkeit dass Sie mit dem SARS-"
+"CoV-2 Virus (Covid-19, Coronavirus) infiziert sind.Sie können infektiös sein "
+"und weitere Personen anstecken. Bitte informieren Sie sich umgehend über die "
+"aktuell gültigen Richtlinien zum Verhalten von Personen, die positive "
+"getestet wurden. Bei schwach positiven Resultaten haben wir eine falsch-"
+"positiv Rate von ca 1%%. Deshalb wird dieses Ergebnis noch mit einer qPCR "
+"überprüft. Rufen Sie Ihr Resultat daher später oder morgen nochmals ab. "
 msgstr ""
-"The analysis of your sample showed a positive result in two out of three "
-"replicates. You are probably infected with the SARS-CoV-2 virus (Covid-19, "
-"Coronavirus). You may be infectious and may infect others. Please "
-"immediately check the current guidelines on what to do if you test positive "
-"and contact the health department or a physician to obtain a PCR test for "
-"confirmation. A check with an antigen test will probably be negative because "
-"our test is much more sensitive. Please arrange for a PCR test."
+" The LAMP analysis of your sample showed a positive result in two of three "
+"replicates. There is a reasonable possibility that you are infected with the "
+"SARS-CoV-2 virus (Covid-19, Coronavirus) and you may be infectious and may "
+"infect others. Please check immediately for the current guidelines on what "
+"to do if you test positive. We have a false positive rate of about 1%% for "
+"weak positive results. Therefore, this result will still be checked with a "
+"qPCR. Therefore, please retrieve your result again later or tomorrow "
 
 #: app/templates/public/result_pages/test-LAMPPOS-3.html:8
 msgid ""
@@ -795,29 +775,85 @@ msgstr "of Heidelberg University (ZMBH)"
 msgid "Bitte einen Zugangscode / Access Code angeben"
 msgstr "Please provide an access code"
 
-#: app/views_public.py:44
-msgid "Sie haben einen ungültigen Access Code eingegeben - bitte erneut versuchen. Es ist möglich, dass dieser von einem alten Testkit stammt. Ist dies der Fall, geben Sie den Barcode Ihres Teströhrchens anstelle des Access Codes ein, um Ihr Resultat abzurufen. Diesen  finden Sie ganz unten auf dem Ausdruck in kleiner Schrift (BC = barcode)."
-msgstr "The access code is unknown - please try again. It is possible that this originates from an old test kit. If this is the case, enter the barcode of your test tube instead of the access code to retrieve your result. You will find this at the bottom of the printout in small numbers (BC = barcode)."
+#: app/views_public.py:51
+msgid ""
+"Sie haben einen ungültigen Access Code eingegeben - bitte erneut versuchen. "
+"Es ist möglich, dass dieser von einem alten Testkit stammt. Ist dies der "
+"Fall, geben Sie den Barcode Ihres Teströhrchens anstelle des Access Codes "
+"ein, um Ihr Resultat abzurufen. Diesen  finden Sie ganz unten auf dem "
+"Ausdruck in kleiner Schrift (BC = barcode)."
+msgstr ""
+"The access code is unknown - please try again. It is possible that this "
+"originates from an old test kit. If this is the case, enter the barcode of "
+"your test tube instead of the access code to retrieve your result. You will "
+"find this at the bottom of the printout in small numbers (BC = barcode)."
 
-#: app/views_public.py:94
+#: app/views_public.py:102
 msgid "Status unbekannt"
 msgstr "Unknown status"
 
-#: app/views_public.py:144
+#: app/views_public.py:152
 msgid "Mitteilungen erfolgreich abonniert"
 msgstr "Notifications subscribed successfully"
 
-#: app/views_public.py:151
+#: app/views_public.py:159
 msgid "Mitteilungen bereits abonniert"
 msgstr "Already subscribed to subscriptions"
 
-#: app/views_public.py:159
+#: app/views_public.py:167
 msgid "Key nicht gefunden"
 msgstr "Key not found"
 
-#: app/views_public.py:166
+#: app/views_public.py:174
 msgid "Mitteilungen erfolgreich deabonniert"
 msgstr "Notifications unsubscribed successfully"
+
+#~ msgid ""
+#~ "In unserer ersten Analyse haben wir für Ihre Probe kein klares\n"
+#~ "  Ergebnis ablesen können. Solche nicht eindeutigen Ergebnisse kommen "
+#~ "leider\n"
+#~ "  bei unserem LAMP-Verfahren stets bei einem kleinen Bruchteil der Proben "
+#~ "vor."
+#~ msgstr ""
+#~ "In our first analysis, we did not get a clear result for your sample. \n"
+#~ "  Unfortunately, such inconclusive results occur in a small fraction\n"
+#~ "   of our samples using the LAMP procedure."
+
+#~ msgid ""
+#~ "Wir überprüfen Ihre Probe daher nun erneut, diesmal mit einem\n"
+#~ "  anderen Laborverfahren, der Standardmethode RT-PCR. Dies dauert "
+#~ "höchsten\n"
+#~ "  24 Stunden. Fragen Sie also bitte Ihr Ergebnis morgen (d.h., am Abend "
+#~ "des Tages\n"
+#~ "  nach der Abgabe der Probe) nochmals hier ab; bis dann sollte diese "
+#~ "Meldung\n"
+#~ "  durch das endgültige Ergebnis ersetzt worden sein."
+#~ msgstr ""
+#~ "Therefore, we will now check your sample again, this time using a "
+#~ "different laboratory procedure, the standard RT-PCR method. This will "
+#~ "take a maximum of 24 hours. Please check your result here again tomorrow "
+#~ "(i.e., the following evening after the sample was submitted);by then, "
+#~ "this message should have been replaced by the final result."
+
+#~ msgid ""
+#~ "Die Analyse Ihrer Probe ergab ein positives Resultat in zwei von drei "
+#~ "Replikaten. Sie sind vermutlich mit dem SARS-CoV-2 Virus (Covid-19, "
+#~ "Coronavirus) infiziert sind. Sie können infektiös sein und weitere "
+#~ "Personen anstecken. Bitte informieren Sie sich umgehend über die aktuell "
+#~ "gültigen Richtlinien zum Verhalten von Personen die positive getestet "
+#~ "wurden und kontaktieren das Gesundheitsamt oder einen Arzt um einen PCR "
+#~ "Test für eine Bestätigung zu erhalten. Eine Überprüfung mit einem "
+#~ "Antigentest in einem Testzentrum wird vermutlich negativ ausfallen, weil "
+#~ "unser Test viel sensitiver ist. Bitte veranlassen Sie einen PCR Test."
+#~ msgstr ""
+#~ "The analysis of your sample showed a positive result in two out of three "
+#~ "replicates. You are probably infected with the SARS-CoV-2 virus "
+#~ "(Covid-19, Coronavirus). You may be infectious and may infect others. "
+#~ "Please immediately check the current guidelines on what to do if you test "
+#~ "positive and contact the health department or a physician to obtain a PCR "
+#~ "test for confirmation. A check with an antigen test will probably be "
+#~ "negative because our test is much more sensitive. Please arrange for a "
+#~ "PCR test."
 
 #~ msgid "Einverständnis"
 #~ msgstr "Consent"
