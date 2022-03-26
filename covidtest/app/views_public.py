@@ -41,15 +41,7 @@ def access_check(request):
                 messages.add_message(
                     request,
                     messages.ERROR,
-
-
-                    # -bm 2022-03-04
-#                    _("Der Zugangscode ist unbekannt. Bitte erneut versuchen."),
-
-                    # +bm 2022-03-04
-
-                    _("Sie haben einen ungültigen Access Code eingegeben - bitte erneut versuchen. Es ist möglich, dass dieser von einem alten Testkit stammt. Ist dies der Fall, geben Sie den Barcode Ihres Teströhrchens anstelle des Access Codes ein, um Ihr Resultat abzurufen. Diesen  finden Sie ganz unten auf dem Ausdruck in kleiner Schrift (BC = barcode)."), 
-
+                    _("Sie haben einen ungültigen Access Code eingegeben - bitte erneut versuchen. Es ist möglich, dass dieser von einem alten Testkit stammt. Ist dies der Fall, geben Sie den Barcode Ihres Teströhrchens anstelle des Access Codes ein, um Ihr Resultat abzurufen. Diesen  finden Sie ganz unten auf dem Ausdruck in kleiner Schrift (BC = barcode)."),
                 )
                 form = ResultsQueryForm()
                 return render(request, "public/pages/access-check.html", {"form": form}, status=404)

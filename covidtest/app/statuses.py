@@ -8,6 +8,8 @@ class SampleStatus(Enum):
     LAMPPOS3 = "LAMPPOS3"
     LAMPNEG = "LAMPNEG"
     LAMPFAIL = "LAMPFAIL"
+    PCRPOS = "PCRPOS"
+    PCRNEG = "PCRNEG"
     UNDEF = "UNDEF"
     INFO = "INFO"
     MESSAGE = "MESSAGE"

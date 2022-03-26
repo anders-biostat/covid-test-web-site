@@ -1,0 +1,14 @@
+{% extends "public/result_pages/result.html" %}
+{% load i18n %}
+
+{% block segment-title %}{% blocktrans %}Ergebnis: Negativ (nach qPCR){% endblocktrans %}{% endblock %}
+
+{% block segment-body %}
+<p>
+    {% if LANGUAGE_CODE == "de" %}
+          Die LAMP-Analyse Ihrer Probe ergab ein positives Resultat in mindestens einem von drei Replikaten. Eine nachfolgende qPCR konnte das Ergebnis nicht bestätigen. Es handelt sich daher vermutlich um ein falsch-positives LAMP-Resultat. Wir empfehlen dennoch, sich in den nächsten Tagen regelmäßig zu testen.
+    {% else %}
+          LAMP analysis of your sample showed a positive result in at least one of three replicates. A subsequent qPCR could not confirm the result. Therefore, it is probably a false-positive LAMP result. Nevertheless, we recommend testing regularly in the next few days.
+    {% endif %}
+</p>
+{% endblock %}
