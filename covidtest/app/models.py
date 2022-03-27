@@ -5,6 +5,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from djangoql.queryset import DjangoQLQuerySet
+
 from .statuses import SampleStatus
 
 
@@ -60,6 +62,8 @@ class BagRecipient(Timestamp, models.Model):
     billing_address = models.TextField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
 
+    objects = DjangoQLQuerySet.as_manager()
+
     def __str__(self):
         return f"NAME: {self.recipient_name} ,TYPE: {self.get_recipient_type_display()}"
 
@@ -84,6 +88,8 @@ class Bag(Timestamp, models.Model):
 
     def __str__(self):
         return "Bag #%d ('%s')" % (self.pk, self.name)
+
+    objects = DjangoQLQuerySet.as_manager()
 
 
 class Sample(models.Model):
@@ -117,6 +123,8 @@ class Sample(models.Model):
     def __str__(self):
         return "%s" % self.barcode
 
+    objects = DjangoQLQuerySet.as_manager()
+
 
 class Registration(models.Model):
     sample = models.ForeignKey(
@@ -140,6 +148,7 @@ class Event(models.Model):
         User, null=True, blank=True, on_delete=models.SET_NULL
     )
 
+    objects = DjangoQLQuerySet.as_manager()
 
 class Consent(models.Model):
     consent_type = models.CharField(max_length=50)

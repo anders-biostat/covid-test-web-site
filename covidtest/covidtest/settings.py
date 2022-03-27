@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "semanticuiforms",
     "django_tables2",
     "rest_framework",
+    "djangoql",
     "app",
 ]
 

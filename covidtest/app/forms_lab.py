@@ -11,6 +11,8 @@ from .statuses import SampleStatus
 class LabQueryForm(forms.Form):
     search = forms.CharField(label="Barcode", max_length=100)
 
+class LabQueryFormQL(forms.Form):
+    searchql = forms.CharField(label="Query", max_length=300)
 
 class LabCheckInForm(forms.Form):
     barcodes = forms.CharField(

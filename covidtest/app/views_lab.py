@@ -17,11 +17,16 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from simplepush import send, send_encrypted
 
+from djangoql.exceptions import DjangoQLError
+from djangoql.queryset import apply_search
+from djangoql.schema import DjangoQLSchema
+from djangoql.serializers import DjangoQLSchemaSerializer
 
 from .forms_lab import (
     LabCheckInForm,
     LabProbeEditForm,
     LabQueryForm,
+    LabQueryFormQL,
     BagManagementQueryForm,
     BagHandoutForm,
     BagHandoutModelFormSet,
@@ -30,7 +35,7 @@ from .forms_lab import (
 from .models import Event, Sample, Bag, BagRecipient, PushAbonnement
 from .statuses import SampleStatus
 from .tables import SampleTable
-from .utils import find_samples, Search, is_in_group
+from .utils import find_samples, find_samples_ql, Search, is_in_group
 from .views_public import render_status
 
 
@@ -150,15 +155,33 @@ def sample_check_in(request):
         request, "lab/sample_check_in.html", {"form": form, "display_sample": False}
     )
 
-
 @login_required
 @is_in_group("lab_user")
-def sample_detail(request):
+def sample_detail(request, ql=False):
     sample_detail_template = "lab/sample_query.html"
-
     form = LabQueryForm()
+
+    if ql:
+        sample_detail_template = "lab/sample_query_ql.html"
+        form = LabQueryFormQL()
+
     edit_form = LabProbeEditForm()
     if request.method == "POST":
+        if "searchql" in request.POST.keys():
+            form = LabQueryFormQL(request.POST)
+            if form.is_valid():
+                search = form.cleaned_data["searchql"].strip()
+
+                template_obj = {"form": form, "edit_form": edit_form, "search": search}
+                query_results, query_error = find_samples_ql(query_string=search)
+                if query_error != "":
+                    messages.add_message(
+                        request, messages.ERROR, query_error
+                    )
+                template_obj.update(
+                    query_results
+                )
+                return render(request, sample_detail_template, template_obj)
         if "search" in request.POST.keys():
             form = LabQueryForm(request.POST)
             if form.is_valid():

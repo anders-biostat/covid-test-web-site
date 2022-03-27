@@ -2,6 +2,11 @@ from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import user_passes_test
 
+from djangoql.exceptions import DjangoQLError
+from djangoql.queryset import apply_search
+from djangoql.schema import DjangoQLSchema
+from djangoql.serializers import DjangoQLSchemaSerializer
+
 from .forms_lab import LabProbeEditForm
 from .models import Event, Sample, Bag
 from .statuses import SampleStatus
@@ -20,6 +25,21 @@ def sample_pks_of_event(event_search_key):
                 found_events_sample_pks.append(sample_to_check.pk)
     return found_events_sample_pks
 
+def find_samples_ql(query_string):
+    query = Sample.objects.all()
+    error = ""
+    try:
+        query = apply_search(query, query_string)
+    except DjangoQLError as e:
+        query = query.none()
+        error = str(e)
+        print(error)
+    if query.count() == 0:
+        return dict(), error
+    if query.count() == 1:
+        return {"sample": query.first()}, error
+    if query.count() > 1:
+        return {"sample": query}, error
 
 def find_samples(search, search_category=None):
     try:

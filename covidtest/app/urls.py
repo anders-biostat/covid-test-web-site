@@ -48,6 +48,7 @@ urlpatterns = [
     ),
     path("lab/checkin", views_lab.sample_check_in, name="checkin"),
     path("lab/samples/detail", views_lab.sample_detail, name="query"),
+    path("lab/samples/detail-ql", views_lab.sample_detail, {"ql": True}, name="query_ql"),
     path("lab/samples/update_status", views_lab.update_status, name="update_status"),
     path("lab/bag-search", views_lab.bag_search_statistics, name="bag_search"),
     path("lab/bag-handout", views_lab.bag_handout, name="bag_handout"),

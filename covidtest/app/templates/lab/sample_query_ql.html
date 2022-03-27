@@ -1,0 +1,58 @@
+{% extends 'lab/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'djangoql/css/completion.css' %}" />
+    <script src="{% static 'djangoql/js/completion.js' %}"></script>
+
+    <div class="">
+    <h1 class="ui header">Proben - Suche (Query Language)</h1>
+    <p>
+        Fortgeschrittene Suche (Beispiel-Eingabe: barcode="123" and access_code="321")
+    </p>
+
+    <form style="margin-bottom: 20px;" action="{% url 'app:query_ql' %}" method="post">
+        {% csrf_token %}
+            <div class="ui action input">
+                <textarea
+                        name="searchql"
+                        type="text"
+                        placeholder="Input query string ..."
+                        autofocus
+                        style="min-width: 370px"
+                >{{ search }}</textarea>
+                <button class="ui button" type="submit">
+                    Suchen
+                </button>
+            </div>
+            <div class="results"></div>
+    </form>
+
+    {% if search %}
+    {% if not sample %}
+    <h3 class="ui header">
+        {{ multi_sample|length }}
+        {% if multi_sample|length == 1 %}
+        Ergebnis
+        {% else %}
+        Ergebnisse
+        {% endif %}
+        für: {{search}}
+    </h3>
+    {% endif %}
+    {% endif %}
+
+
+    {% if sample %}
+    {% include 'lab/snippets/sample.html' %}
+    {% elif multi_sample %}
+    {% include 'lab/snippets/multi_sample.html' %}
+    {% elif search %}
+    <div class="ui warning message">
+        <p>Keine Probe gefunden.</p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
