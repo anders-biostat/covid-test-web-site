@@ -135,7 +135,7 @@
         {% endif %}
     </div>
     <script type="text/javascript">
-      $("table").on('click', 'tr', function (e) {
+      $("table.selectable").on('click', 'tr', function (e) {
         e.preventDefault();
         const searchQ = $(this).attr('value');
         const $form = $('#bagForm');
