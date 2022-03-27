@@ -39,7 +39,7 @@ def find_samples_ql(query_string):
     if query.count() == 1:
         return {"sample": query.first()}, error
     if query.count() > 1:
-        return {"sample": query}, error
+        return {"multi_sample": query}, error
 
 def find_samples(search, search_category=None):
     try:
