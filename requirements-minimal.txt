@@ -10,3 +10,4 @@ pycryptodome
 simplepush
 gunicorn
 pytest-cov
+djangoql
