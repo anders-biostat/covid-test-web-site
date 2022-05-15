@@ -78,6 +78,7 @@ result_page_dict = {
     SampleStatus.LAMPPOS3: "public/result_pages/test-LAMPPOS-3.html",
     SampleStatus.LAMPNEG: "public/result_pages/test-LAMPNEG.html",
     SampleStatus.LAMPFAIL: "public/result_pages/test-LAMPFAIL.html",
+    SampleStatus.LAMPINC: "public/result_pages/test-LAMPINC.html",
     SampleStatus.PCRPOS: "public/result_pages/test-PCRPOS.html",
     SampleStatus.PCRNEG: "public/result_pages/test-PCRNEG.html",
     SampleStatus.RECEIVED: "public/result_pages/test-RECEIVED.html",

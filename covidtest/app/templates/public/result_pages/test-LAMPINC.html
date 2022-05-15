@@ -1,10 +1,17 @@
 {% extends "public/result_pages/result.html" %}
 {% load i18n %}
 
-{% block segment-title %}{% blocktrans %}Ergebnis liegt noch nicht vor{% endblocktrans %}{% endblock %}
+{% block segment-title %}
+    {% if LANGUAGE_CODE == "de" %}
+    {% else %}
+    {% endif %}
+{% endblock %}
 
 {% block segment-body %}
-<p class="lead">
-  {% blocktrans %} Das LAMP-Resultat Ihrer Probe war unschlüssig. Die Analyse Ihrer Probe wird wiederholt. Bitte rufen Sie Ihr Resultat später oder morgen noch einmal ab.{% endblocktrans %}
+<p>
+{% if LANGUAGE_CODE == "de" %}
+Das LAMP-Resultat Ihrer Probe war unschlüssig. Die Analyse Ihrer Probe wird wiederholt. Bitte rufen Sie Ihr Resultat später oder morgen noch einmal ab.
+{% else %}
+The LAMP result of your sample was inconclusive. The analysis of your sample will be repeated. Please retrieve your result again later or tomorrow.{% endif %}
 </p>
 {% endblock %}

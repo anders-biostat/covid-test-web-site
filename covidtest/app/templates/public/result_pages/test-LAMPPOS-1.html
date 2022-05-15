@@ -1,10 +1,20 @@
 {% extends "public/result_pages/result.html" %}
 {% load i18n %}
 
-{% block segment-title %}{% blocktrans %}Ergebnis: Positiv{% endblocktrans %}{% endblock %}
+{% block segment-title %}
+    {% if LANGUAGE_CODE == "de" %}
+        Ergebnis: Schwach positiv
+    {% else %}
+        Result: Weak positive
+    {% endif %}
+{% endblock %}
 
 {% block segment-body %}
 <p>
-  {% blocktrans %} Die LAMP-Analyse Ihrer Probe ergab ein positives Resultat in einem von drei Replikaten. Es besteht die begründete Möglichkeit dass Sie mit dem SARS-CoV-2 Virus (Covid-19, Coronavirus) infiziert sind.Sie können infektiös sein und weitere Personen anstecken. Bitte informieren Sie sich umgehend über die aktuell gültigen Richtlinien zum Verhalten von Personen, die positive getestet wurden. Bei schwach positiven Resultaten haben wir eine falsch-positiv Rate von ca 1%. Deshalb wird dieses Ergebnis noch mit einer qPCR überprüft. Rufen Sie Ihr Resultat daher später oder morgen nochmals ab. {% endblocktrans %}
+{% if LANGUAGE_CODE == "de" %}
+Die LAMP-Analyse Ihrer Probe ergab ein positives Resultat in einem von drei Replikaten. Es besteht die begründete Möglichkeit dass Sie mit dem SARS-CoV-2 Virus (Covid-19, Coronavirus) infiziert sind.Sie können infektiös sein und weitere Personen anstecken. Bitte informieren Sie sich umgehend über die aktuell gültigen Richtlinien zum Verhalten von Personen, die positiv getestet wurden.
+{% else %}
+LAMP analysis of your sample showed a positive result in one of three replicates. There is a reasonable possibility that you are infected with the SARS-CoV-2 virus (Covid-19, Coronavirus).You may be infectious and may infect others. Please inform yourself immediately about the currently valid guidelines for the behavior of persons who have been tested positive.
+{% endif %}
 </p>
 {% endblock %}
