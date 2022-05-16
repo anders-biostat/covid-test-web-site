@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0018_delete_pushabonnement'),
+        ('app', '0013_auto_20220117_2314'),
     ]
 
     operations = [
