@@ -16,6 +16,16 @@
     </p>
     </div>
 
+    {% if warning %}
+        <div style="margin: 10px 0;" class="ui icon warning message">
+          <div style="color: rgba(0,0,0,0.6)" class="content">
+            <div style="margin-bottom: 8px;" class="header">
+              <i class="bullhorn icon"></i> {{ warning.title }}
+            </div>
+              {{ warning.comment }}
+          </div>
+        </div>
+    {% endif %}
     {% include 'public/snippets/info-message.html' %}
 
 <!--    <div style="margin: 0 auto; max-width: 900px; padding: 20px;"> -->

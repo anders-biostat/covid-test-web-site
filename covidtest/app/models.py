@@ -166,6 +166,7 @@ class News(Timestamp, models.Model):
     title = models.CharField(max_length=255)
     comment = models.TextField(blank=True, null=True)
     relevant = models.BooleanField(default=True)
+    front_page = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = "News"

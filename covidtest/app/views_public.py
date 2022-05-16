@@ -181,7 +181,8 @@ def render_status(request, event, external=True):
 def home(request):
     check = check_access_allowed(request)
     if type(check) is HttpResponseRedirect: return check
-    return render(request, "public/pages/home.html")
+    warning = News.objects.filter(front_page=True).order_by("-created_on").first()
+    return render(request, "public/pages/home.html", {"warning": warning})
 
 def instructions(request):
     check = check_access_allowed(request)
