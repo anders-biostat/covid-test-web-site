@@ -22,7 +22,7 @@
             <div style="margin-bottom: 8px;" class="header">
               <i class="bullhorn icon"></i> {{ warning.title }}
             </div>
-              {{ warning.comment }}
+              {{ warning.comment|safe }}
           </div>
         </div>
     {% endif %}
