@@ -52,7 +52,8 @@ def access_check(request):
             request.session["access_checked"] = True
             request.session["access_code"] = access_code
             return redirect("app:home")
-    return render(request, "public/pages/access-check.html", {"form": form})
+    news = News.objects.filter(access_page=True).order_by("-created_on").first()
+    return render(request, "public/pages/access-check.html", {"form": form, "news": news})
 
 def news(request):
     check = check_access_allowed(request)

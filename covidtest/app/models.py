@@ -166,7 +166,8 @@ class News(Timestamp, models.Model):
     title = models.CharField(max_length=255)
     comment = models.TextField(blank=True, null=True)
     relevant = models.BooleanField(default=True)
-    front_page = models.BooleanField(default=False)
+    front_page = models.BooleanField(default=False, verbose_name="Visible on Home-Page (after entering access code)")
+    access_page = models.BooleanField(default=False, verbose_name="Visible on Access-Checking page (page to enter access code)")
 
     class Meta:
         verbose_name_plural = "News"

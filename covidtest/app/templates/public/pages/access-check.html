@@ -14,6 +14,18 @@
     </div>
 </form>
 
+    {% if news %}
+        <div style="margin: 40px 0;" class="ui segment">
+          <div style="color: rgba(0,0,0,0.6)" class="content">
+            <div style="margin-bottom: 8px; font-size: 15pt" class="header">
+              <i class="bullhorn icon"></i> {{ news.title }}
+            </div>
+              {{ news.comment|safe }}
+                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FBerlin&src=MG5vdjg1bDVoMnRuMWk5cDFpM2c3YTUyZ3NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%237986CB" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+          </div>
+        </div>
+    {% endif %}
+
     <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
