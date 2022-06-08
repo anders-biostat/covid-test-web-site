@@ -14,6 +14,17 @@
     </div>
 </form>
 
+    {% if news %}
+        <div style="margin: 40px 0;" class="ui segment">
+          <div style="color: rgba(0,0,0,0.6)" class="content">
+            <div style="margin-bottom: 8px; font-size: 15pt" class="header">
+              <i class="bullhorn icon"></i> {{ news.title }}
+            </div>
+              {{ news.comment|safe }}
+          </div>
+        </div>
+    {% endif %}
+
     <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
