@@ -157,13 +157,13 @@ msgstr "Go Back: Home"
 
 #: app/templates/public/base.html:105
 msgid ""
-"Corona-Tests werden jeden Montag und Donnerstag durchgeführt. Die Proben "
+"Corona-Tests werden an Testtagen durchgeführt. Die Proben "
 "können bis Montag-/ Donnerstagmorgen 10Uhr in den Briefkästen für die "
 "Probensammlung abgegeben werden."
 msgstr ""
-"Corona tests are performed every Monday and Thursday. Samples can be "
-"submitted in the sample collection mail boxes until Monday/ Thursday morning "
-"10am."
+"Corona tests are performed on 'test days'. Samples can be "
+"submitted in the sample collection mail boxes until 10am  at the same "
+"day."
 
 #: app/templates/public/base.html:108 app/templates/public/pages/home.html:23
 msgid ""
