@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 class ResultsQueryForm(forms.Form):
     access_code = forms.CharField(
-        label=_("Access-Code / Zugangscode"), widget=forms.TextInput(attrs={"placeholder": _("Access-Code (z.B. A12 345 678 910)")})
+        label=_("TEST\n Access-Code / Zugangscode"), widget=forms.TextInput(attrs={"placeholder": _("Access-Code (z.B. A12 345 678 910)")})
     )
 
     def clean(self):
