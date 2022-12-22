@@ -43,21 +43,30 @@
 </head>
 <body style="padding-top: 20px;" class="page">
 
+
+
+{% block header %}
+{% endblock %}
+
+
 <!-- bm 2022-12-22 -->
 
 
+<div style="margin: 30px auto -30px auto; max-width: 912px;" class="ui message {% if message.tags %}{{ message.tags }}{% endif %}">
 <h2>
 Dear colleagues, 
 
-The year is coming to an end, and with it our Corona tests. Next year we will most likely not test again. Thank you for taking part in our tests! 
+The year is coming to an end, and with it our Corona tests. Next year
+we will most likely not test again. Thank you for taking part in our
+tests!
 
 We wish you a happy new year and good health!
 
 The Corona Test Team
 </h2>
 
-{% block header %}
-{% endblock %}
+</div>
+
 
 {% if messages %}
 {% for message in messages %}
